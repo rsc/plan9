@@ -10,6 +10,14 @@ case "$1" in
 	shift
 esac
 
+case "$#" in
+0)
+	;;
+*)
+	echo 'usage: boot/qemu [-pxenew]' >&2
+	exit 1
+esac
+
 if [ ! -x ../sys/src/cmd/unix/u9fs/u9fs ]; then
 	echo '# building u9fs' >&2
 	make -C ../sys/src/cmd/unix/u9fs
