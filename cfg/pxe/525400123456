@@ -1,9 +1,17 @@
 [menu]
 menuitem=default, Plan 9 Default
+menuitem=smp, Plan 9 SMP (broken for 386)
 menuitem=safe, Plan 9 Safe Mode
 menuitem=text, Plan 9 Text Mode
 
 [default]
+mouseport=ps2intellimouse
+monitor=vesa
+vgasize=1920x1080x32
+nobootprompt=tcp
+*nomp=1
+
+[smp]
 mouseport=ps2intellimouse
 monitor=vesa
 vgasize=1920x1080x32
@@ -14,12 +22,14 @@ mouseport=ps2
 monitor=xga
 vgasize=1280x1024x8
 debugboot=1
+*nomp=1
 
 [text]
 mouseport=none
 monitor=none
 vgasize=none
 debugboot=1
+*nomp=1
 
 [common]
 bootfile=ether0!/386/9pc
@@ -28,7 +38,6 @@ fs=10.0.2.1
 auth=10.0.2.1
 sysname=gnot
 *nobiosload=1
-*nomp=1
 partition=new
 factotumopts=-n
 user=glenda
