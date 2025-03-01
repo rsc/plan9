@@ -2,7 +2,7 @@
 # inherit KTZERO, START, CONF, BASE and SFX from mkfile
 x=`{bindpc $BASE $SFX}
 CONFLIST=$CONF
-EXTRACOPIES=piestand lookout bovril boundary 
+EXTRACOPIES=
 
 objtype=386
 </$objtype/mkfile
