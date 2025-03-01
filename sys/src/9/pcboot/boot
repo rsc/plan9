@@ -15,8 +15,6 @@ link
 # order of ethernet drivers should match that in ../pc/pc so that
 # devices are detected in the same order by bootstraps and kernels
 # and thus given the same controller numbers.
-	etherigbe	pci ethermii
-	ethervgbe	pci ethermii
 	ethervirtio	pci
 	ethervirtio10	pci
 	ethermedium
