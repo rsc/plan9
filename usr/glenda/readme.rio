@@ -98,7 +98,7 @@ characters).  In text editors, the current selection is
 known as "dot".
 
 In the shell window button 2 will invoke a pop-up menu.
-Most of it's commands operate on dot.
+Most of its commands operate on dot.
 
  * cut - moves the contents of the dot to the clipboard
    if dot is non-empty 

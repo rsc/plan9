@@ -67,7 +67,7 @@ click (button-2) on it.
 These are some commands understood by Acme:
  *	Newcol: create a new column of windows
  *	Delcol: delete a column
- *	New: create a new window (edit it's tag to be a file name and you
+ *	New: create a new window (edit its tag to be a file name and you
 	would be creating a new file; you would need to click on "Put" to
 	put the file in the file system).
  *	Put: write the body to disk. The file is the one named in the tag.
