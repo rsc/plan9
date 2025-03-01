@@ -24,12 +24,16 @@ static char*
 rhostsattach(Fcall *rx, Fcall *tx)
 {
 	USED(tx);
+	USED(rx);
+	return nil;
 
+/*
 	if(ruserok(remotehostname, 0, rx->uname, rx->uname) < 0){
 		fprint(2, "ruserok(%s, %s) not okay\n", remotehostname, rx->uname);
 		return "u9fs: rhosts authentication failed";
 	}
 	return 0;
+*/
 }
 
 Auth authrhosts = {
