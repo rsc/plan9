@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+cd $(dirname $0)
+
+pxe=pxeboot.raw
+case "$1" in
+-pxenew)
+	pxe=pxeboot.raw.new
+	shift
+esac
+
+if [ ! -x ../sys/src/cmd/unix/u9fs/u9fs ]; then
+	echo '# building u9fs' >&2
+	make -C ../sys/src/cmd/unix/u9fs
+fi
+
+u9fs="guestfwd=tcp:10.0.2.1:564-cmd:../sys/src/cmd/unix/u9fs/u9fs -a none -u $USER .."
+tftp='tftp=..'
+mac=mac=52:54:00:12:34:56
+
+qemu-system-x86_64 -m 1G -smp 2 -serial stdio \
+	-drive file=$pxe,format=raw -snapshot \
+	-device virtio-net-pci,netdev=net0,$mac \
+	-netdev "user,id=net0,$u9fs,$tftp"

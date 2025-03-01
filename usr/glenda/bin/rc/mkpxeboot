@@ -1,0 +1,18 @@
+#!/bin/rc
+
+rfork en
+mount /srv/boot /n/boot
+file=/n/boot/boot/pxeboot.raw.new
+dd -bs 1000000 -if /dev/zero -of $file -count 4
+disk/partfs $file
+cd /dev/sdXX
+disk/mbr -m /386/mbr data
+echo 'a p1 0 1
+t p1 fat32
+A p1
+w
+' | disk/fdisk data
+# prompt=('mkbootdisk: ' '	') rc
+ramfs
+cp /386/9bootpbs /tmp/9load
+disk/format -b /386/pbslba -d -r 2 dos /tmp/9load

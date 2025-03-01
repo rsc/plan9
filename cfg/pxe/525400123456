@@ -1,0 +1,34 @@
+[menu]
+menuitem=default, Plan 9 Default
+menuitem=safe, Plan 9 Safe Mode
+menuitem=text, Plan 9 Text Mode
+
+[default]
+mouseport=ps2intellimouse
+monitor=vesa
+vgasize=1920x1080x32
+
+[safe]
+mouseport=ps2
+monitor=xga
+vgasize=1280x1024x8
+debugboot=1
+
+[text]
+mouseport=none
+monitor=none
+vgasize=none
+debugboot=1
+
+[common]
+bootfile=ether0!/386/9pc
+bootfile=ether0!/386/9pc
+bootargs=tcp
+fs=10.0.2.1
+auth=10.0.2.1
+sysname=gnot
+*nobiosload=1
+*nomp=1
+partition=new
+factotumopts=-n
+user=glenda
