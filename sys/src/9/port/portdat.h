@@ -753,6 +753,7 @@ struct Proc
 	short	notified;	/* sysnoted is due */
 	Note	lastnote;
 	int	(*notify)(void*, char*);
+	FPsave	notefpsave;
 
 	Lock	*lockwait;
 	Lock	*lastlock;	/* debugging */
@@ -960,7 +961,7 @@ struct Uart
 	int	modem;			/* hardware flow control on */
 	int	xonoff;			/* software flow control on */
 	int	blocked;
-	int	cts, dsr, dcd;	/* keep track of modem status */ 
+	int	cts, dsr, dcd;	/* keep track of modem status */
 	int	ctsbackoff;
 	int	hup_dsr, hup_dcd;	/* send hangup upstream? */
 	int	dohup;

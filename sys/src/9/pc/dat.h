@@ -57,6 +57,10 @@ struct Label
 
 /*
  * FPsave.status
+ *
+ * FPinit: never used
+ * FPactive: in use, registers are live
+ * FPinactive: not in use, registers are saved
  */
 enum
 {
@@ -64,9 +68,11 @@ enum
 	FPinit=		0,
 	FPactive=	1,
 	FPinactive=	2,
+	FPnotestart = 3,
 
-	/* the following is a bit that can be or'd into the state */
-	FPillegal=	0x100,
+	/* state repeated 3 bits up for note handler */
+	FPnoteshift = 3,
+	FPnotemask = 7<<3,
 };
 
 struct	FPstate			/* x87 fpu state */
@@ -357,7 +363,7 @@ extern PCArch	*arch;			/* PC architecture */
  * the clock which is only maintained by the bootstrap processor (0).
  */
 Mach* machp[MAXMACH];
-	
+
 #define	MACHP(n)	(machp[n])
 
 extern Mach	*m;
@@ -367,7 +373,7 @@ extern Mach	*m;
  *  hardware info about a device
  */
 typedef struct {
-	ulong	port;	
+	ulong	port;
 	int	size;
 } Devport;
 

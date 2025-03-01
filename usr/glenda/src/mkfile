@@ -1,0 +1,9 @@
+</$objtype/mkfile
+
+TARG=\
+	fpnote\
+
+</sys/src/cmd/mkmany
+
+%.run: $O.%
+	./$O.$stem

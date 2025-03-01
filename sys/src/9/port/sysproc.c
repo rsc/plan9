@@ -181,7 +181,10 @@ sysrfork(ulong *arg)
 		p->noteid = up->noteid;
 
 	/* don't penalize the child, it hasn't done FP in a note handler. */
-	p->fpstate = up->fpstate & ~FPillegal;
+	if((up->fpstate>>FPnoteshift) != 0){
+		fpoff();
+		p->fpstate &= ~FPnotemask;
+	}
 	pid = p->pid;
 	memset(p->time, 0, sizeof(p->time));
 	p->time[TReal] = MACHP(0)->ticks;
@@ -843,33 +846,33 @@ sysrendezvous(ulong *arg)
  * to avoid rescheduling in syssemrelease, so that it is safe
  * to call from real-time processes.  This means syssemrelease
  * cannot acquire any qlocks, only spin locks.
- * 
+ *
  * Semacquire and semrelease must both manipulate the semaphore
  * wait list.  Lock-free linked lists only exist in theory, not
  * in practice, so the wait list is protected by a spin lock.
- * 
+ *
  * The semaphore value *addr is stored in user memory, so it
  * cannot be read or written while holding spin locks.
- * 
+ *
  * Thus, we can access the list only when holding the lock, and
  * we can access the semaphore only when not holding the lock.
  * This makes things interesting.  Note that sleep's condition function
  * is called while holding two locks - r and up->rlock - so it cannot
  * access the semaphore value either.
- * 
+ *
  * An acquirer announces its intention to try for the semaphore
  * by putting a Sema structure onto the wait list and then
  * setting Sema.waiting.  After one last check of semaphore,
  * the acquirer sleeps until Sema.waiting==0.  A releaser of n
  * must wake up n acquirers who have Sema.waiting set.  It does
  * this by clearing Sema.waiting and then calling wakeup.
- * 
- * There are three interesting races here.  
- 
+ *
+ * There are three interesting races here.
+
  * The first is that in this particular sleep/wakeup usage, a single
- * wakeup can rouse a process from two consecutive sleeps!  
+ * wakeup can rouse a process from two consecutive sleeps!
  * The ordering is:
- * 
+ *
  * 	(a) set Sema.waiting = 1
  * 	(a) call sleep
  * 	(b) set Sema.waiting = 0
@@ -879,17 +882,17 @@ sysrendezvous(ulong *arg)
  * 	(a) call sleep
  * 	(b) call wakeup(a)
  * 	(a) wake up again
- * 
+ *
  * This is okay - semacquire will just go around the loop
  * again.  It does mean that at the top of the for(;;) loop in
  * semacquire, phore.waiting might already be set to 1.
- * 
+ *
  * The second is that a releaser might wake an acquirer who is
  * interrupted before he can acquire the lock.  Since
  * release(n) issues only n wakeup calls -- only n can be used
  * anyway -- if the interrupted process is not going to use his
  * wakeup call he must pass it on to another acquirer.
- * 
+ *
  * The third race is similar to the second but more subtle.  An
  * acquirer sets waiting=1 and then does a final canacquire()
  * before going to sleep.  The opposite order would result in
@@ -901,7 +904,7 @@ sysrendezvous(ulong *arg)
  * not useful to the acquirer, since he has already acquired
  * the semaphore.  Like in the previous case, though, the
  * acquirer must pass the wakeup call along.
- * 
+ *
  * This is all rather subtle.  The code below has been verified
  * with the spin model /sys/src/9/port/semaphore.p.  The
  * original code anticipated the second race but not the first
@@ -911,7 +914,7 @@ sysrendezvous(ulong *arg)
  * to preserve that behavior.
  *
  * I remain slightly concerned about memory coherence
- * outside of locks.  The spin model does not take 
+ * outside of locks.  The spin model does not take
  * queued processor writes into account so we have to
  * think hard.  The only variables accessed outside locks
  * are the semaphore value itself and the boolean flag
@@ -951,7 +954,7 @@ static void
 semwakeup(Segment *s, long *a, long n)
 {
 	Sema *p;
-	
+
 	lock(&s->sema);
 	for(p=s->sema.next; p!=&s->sema && n>0; p=p->next){
 		if(p->addr == a && p->waiting){
@@ -982,12 +985,12 @@ static int
 canacquire(long *addr)
 {
 	long value;
-	
+
 	while((value=*addr) > 0)
 		if(cmpswap(addr, value, value-1))
 			return 1;
 	return 0;
-}		
+}
 
 /* Should we wake up? */
 static int
@@ -1087,7 +1090,7 @@ syssemacquire(ulong *arg)
 	validalign(arg[0], sizeof(long));
 	addr = (long*)arg[0];
 	block = arg[1];
-	
+
 	if((s = seg(up, (ulong)addr, 0)) == nil)
 		error(Ebadarg);
 	if(*addr < 0)

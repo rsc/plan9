@@ -2,7 +2,7 @@ CONF=pc
 CONFLIST=pc pccpu pcf pccpuf pcdisk pcfs pccpudisk
 CRAPLIST=pccd pcflop pcinst pcauth pcall
 VENTILIST=pccpuf pcf pcfs pcauth
-EXTRACOPIES=piestand pxe0 lookout bovril boundary
+EXTRACOPIES=
 
 objtype=386
 </$objtype/mkfile
