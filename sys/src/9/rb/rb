@@ -1,0 +1,55 @@
+# routerboard rb450g
+dev
+	root
+	cons
+	arch
+	env
+	pipe
+	proc
+	mnt
+	srv
+	dup
+#	rtc		# no hardware tod clock
+	ssl
+	tls
+	cap
+	kprof
+#	fs
+
+	ether		ethermii netif
+	ip		arp chandial inferno ip ipv6 ipaux iproute netlog nullmedium pktmedium ptclbsum
+
+	uart
+link
+	loopbackmedium
+	ethermedium
+
+misc
+	uarti8250
+# emulated fp
+	fpi
+	fpimips
+	fpimem
+
+ip
+	tcp
+	udp
+	ipifc
+	icmp
+	icmp6
+# only used by mobile ip code
+#	gre
+	ipmux
+	esp
+
+port
+	int cpuserver = 1;
+
+boot cpu
+	tcp
+
+bootdir
+	boot$CONF.out boot
+	/mips/bin/ip/ipconfig
+	/mips/bin/auth/factotum
+	nvram

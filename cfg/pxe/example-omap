@@ -1,0 +1,18 @@
+# overo water
+ether0=type=9221 ea=0015c928d562
+console=0 b115200
+
+# 256 MB at phys 0x80000000
+*maxmem=0x90000000
+# 720 MHz (vs 500 MHz on beagle)
+*cpumhz=720
+
+# beagle/igep configuration
+nvram=/boot/nvram
+nvroff=0
+nvrlen=512
+nobootprompt=tcp
+readparts=1
+
+# aoeif=ether0
+# aoedev=e!#æ/aoe/1.0

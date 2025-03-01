@@ -1,0 +1,12 @@
+objtype=386
+</$objtype/mkfile
+BIN=/$objtype/bin/aux
+
+TARG=vmwarefs isvmware
+OFILES=\
+	asmbackdoor.$O\
+	backdoor.$O\
+	inout.$O\
+	msgchan.$O\
+
+</sys/src/cmd/mkmany

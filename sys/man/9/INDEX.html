@@ -1,0 +1,117 @@
+<HEAD>
+<TITLE>plan 9 man section 9</TITLE>
+</HEAD>
+<BODY>
+<B>[<A HREF="/sys/man/index.html">manual index</A>]</B>
+<H2>Plan 9 from Bell Labs - Section 9 - Kernel Functions</H2>
+<HR>
+<DL>
+<DT><A HREF="/magic/man2html/9/0intro">0intro</A>
+-  introduction to kernel functions
+<DD><TT> intro</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/allocb">allocb</A>
+-  data block management
+<DD><TT> allocb, iallocb, freeb, freeblist, BLEN, blocklen, concatblock, copyblock, trimblock, packblock, padblock, pullblock, pullupblock, adjustblock, checkb</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/conf">conf</A>
+-  native and hosted kernel configuration file
+<DD><TT> conf</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/delay">delay</A>
+-  small delays, clock interrupts
+<DD><TT> delay, microdelay, addclock0link</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/devattach">devattach</A>
+-  common device driver support
+<DD><TT> devattach, devclone, devdir, devgen, devwalk, devdirread, devstat, devopen, devbread, devbwrite, devcreate, devremove, devwstat, devreset, devinit, devshutdown, openmode</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/dmainit">dmainit</A>
+-  platform-specific DMA support
+<DD><TT> dmainit, dmasetup, dmadone, dmaend, dmacount</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/error">error</A>
+-  error handling functions
+<DD><TT> error, nexterror, poperror, waserror</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/eve">eve</A>
+-  privileged user
+<DD><TT> eve, iseve</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/inb">inb</A>
+-  programmed I/O
+<DD><TT> inb, ins, inl, outb, outs, outl, insb, inss, insl, outsb, outss, outsl</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/intrenable">intrenable</A>
+-  enable (disable) an interrupt handler
+<DD><TT> intrenable, intrdisable</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/kbdputc">kbdputc</A>
+-  keyboard interface to \fIcons\fP(3)
+<DD><TT> kbdputc, kbdq</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/kproc">kproc</A>
+-  kernel process creation, termination and interrupt
+<DD><TT> kproc, pexit, postnote</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/lib">lib</A>
+-  C library functions used by the kernel
+<DD><TT> lib</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/lock">lock</A>
+-  spin locks
+<DD><TT> lock, canlock, ilock, iunlock, unlock</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/malloc">malloc</A>
+-  kernel memory allocator
+<DD><TT> malloc, mallocz, smalloc, realloc, calloc, free, msize, setmalloctag, setrealloctag, getmalloctag, getrealloctag, malloctopoolblock</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/newchan">newchan</A>
+-  channel operations
+<DD><TT> newchan, chanfree, cclose, eqqid, eqchan, isdir, fdtochan, namec</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/panic">panic</A>
+-  abandon hope
+<DD><TT> panic</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/parsecmd">parsecmd</A>
+-  parse device commands
+<DD><TT> parsecmd, cmderror, lookupcmd</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/qio">qio</A>
+-  queued I/O for devices
+<DD><TT> qio: qget, qdiscard, qconsume, qpass, qproduce, qcopy, qopen, qbread, qread, qbwrite, qwrite, qiwrite, qfree, qclose, qhangup, qreopen, qlen, qwindow, qcanread, qsetlimit, qnoblock, qflush, qfull</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/qlock">qlock</A>
+-  serial synchronisation
+<DD><TT> qlock, qunlock, canqlock, rlock, runlock, wlock, wunlock</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/readnum">readnum</A>
+-  return values from read from device
+<DD><TT> readnum, readstr</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/ref">ref</A>
+-  reference counts
+<DD><TT> Ref, incref, decref</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/seconds">seconds</A>
+-  kernel times and time conversions
+<DD><TT> seconds, ticks, fastticks, HZ, MS2HZ, MS2TK, TK2MS, TK2SEC</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/sleep">sleep</A>
+-  process synchronisation
+<DD><TT> sleep, wakeup, tsleep, return0</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/splhi">splhi</A>
+-  enable and disable interrupts
+<DD><TT> splhi, spllo, splx, islo</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/uartp8250">uartp8250</A>
+-  portable 8250-style uarts
+<DD><TT> uartp8250</TT>
+</DT>
+<DT><A HREF="/magic/man2html/9/xalloc">xalloc</A>
+-  basic memory management
+<DD><TT> xalloc, xspanalloc, xfree</TT>
+</DT>
+</DL>
