@@ -12,6 +12,7 @@
 #include <errno.h>	/* for errno */
 #include <stdio.h>	/* for remove [sic] */
 #include <fcntl.h>	/* for O_RDONLY, etc. */
+#include <limits.h>	/* for PATH_MAX */
 
 #include <sys/socket.h>	/* various networking crud */
 #include <netinet/in.h>
@@ -168,8 +169,18 @@ char isfrog[256]={
 	/*BKS*/	1, 1, 1, 1, 1, 1, 1, 1,
 	/*DLE*/	1, 1, 1, 1, 1, 1, 1, 1,
 	/*CAN*/	1, 1, 1, 1, 1, 1, 1, 1,
-	['/']	1,
-	[0x7f]	1,
+	/*' '*/	0, 0, 0, 0, 0, 0, 0, 0,
+	/*'('*/	0, 0, 0, 0, 0, 0, 0, 1,	/*'/'*/
+	/*'0'*/	0, 0, 0, 0, 0, 0, 0, 0,
+	/*'8'*/	0, 0, 0, 0, 0, 0, 0, 0,
+	/*'@'*/	0, 0, 0, 0, 0, 0, 0, 0,
+	/*'H'*/	0, 0, 0, 0, 0, 0, 0, 0,
+	/*'P'*/	0, 0, 0, 0, 0, 0, 0, 0,
+	/*'X'*/	0, 0, 0, 0, 0, 0, 0, 0,
+	/*'`'*/	0, 0, 0, 0, 0, 0, 0, 0,
+	/*'h'*/	0, 0, 0, 0, 0, 0, 0, 0,
+	/*'p'*/	0, 0, 0, 0, 0, 0, 0, 0,
+	/*'x'*/	0, 0, 0, 0, 0, 0, 0, 1,	/*DEL*/
 };
 
 char*
@@ -413,7 +424,7 @@ rattach(Fcall *rx, Fcall *tx)
 			seterror(tx, Eauth);
 			return;
 		}
-		if (none != nil)
+		if(none != nil)
 			rx->uname = none->name;
 	} else {
 		if((e = auth->attach(rx, tx)) != nil){
@@ -786,8 +797,6 @@ rread(Fcall *rx, Fcall *tx)
 				continue;
 			}
 			free(path);
-			if(S_ISDIR(st.st_mode))
-				st.st_size = 0;
 			stat2dir(fid->dirent->d_name, &st, &d);
 			if((n=(old9p ? convD2Mold : convD2M)(&d, p, ep-p)) <= BIT16SZ)
 				break;
@@ -1422,7 +1431,9 @@ groupchange(User *u, User *g, char **ep)
 		return -1;
 	}
 
-	setreuid(0,0);
+	if(setreuid(0, 0) < 0){
+		/* can't get super-user, other calls will fail */
+	}
 	if(setregid(-1, g->id) < 0){
 		fprint(2, "setegid(%s/%d) failed in groupchange\n", g->name, g->id);
 		*ep = strerror(errno);
@@ -1520,7 +1531,7 @@ userwalk(User *u, char **path, char *elem, Qid *qid, char **ep)
 	rpath = rootpath(npath);
 	if(stat(rpath, &st) < 0){
 		free(npath);
-		*ep = errno == ENOENT? "file does not exist" : strerror(errno);
+		*ep = strerror(errno);
 		return -1;
 	}
 	*qid = stat2qid(&st);
@@ -1607,6 +1618,7 @@ usercreate(Fid *fid, char *elem, int omode, long perm, char **ep)
 	int o, m;
 	char *opath, *npath, *rpath;
 	struct stat st, parent;
+	User *u;
 
 	rpath = rootpath(fid->path);
 	if(stat(rpath, &parent) < 0){
@@ -1639,7 +1651,7 @@ usercreate(Fid *fid, char *elem, int omode, long perm, char **ep)
 			return -1;
 		}
 		/* race */
-		if(mkdir(npath, (perm|0400)&0777) < 0){
+		if(mkdir(npath, perm&0777) < 0){
 			*ep = strerror(errno);
 			free(npath);
 			return -1;
@@ -1676,6 +1688,26 @@ usercreate(Fid *fid, char *elem, int omode, long perm, char **ep)
 			free(npath);
 			return -1;
 		}
+	}
+
+	/*
+	 * Change ownership if a default user is specified.
+	 */
+	if(defaultuser)
+	if((u = uname2user(defaultuser)) == nil
+	|| chown(npath, u->id, -1) < 0){
+		fprint(2, "chown after create on %s failed\n", npath);
+		remove(npath);	/* race */
+		free(npath);
+		fid->path = opath;
+		if(fid->fd >= 0){
+			close(fid->fd);
+			fid->fd = -1;
+		}else{
+			closedir(fid->dir);
+			fid->dir = nil;
+		}
+		return -1;
 	}
 
 	opath = fid->path;
@@ -1768,8 +1800,11 @@ main(int argc, char **argv)
 	if(fd < 0)
 		sysfatal("cannot open log '%s'", logfile);
 
-	if(dup2(fd, 2) < 0)
-		sysfatal("cannot dup fd onto stderr");
+	if(fd != 2){
+		if(dup2(fd, 2) < 0)
+			sysfatal("cannot dup fd onto stderr");
+		close(fd);
+	}
 	fprint(2, "u9fs\nkill %d\n", (int)getpid());
 
 	fmtinstall('F', fcallconv);

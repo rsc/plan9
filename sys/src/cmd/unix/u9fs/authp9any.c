@@ -306,6 +306,7 @@ p9anyinit(void)
 
 	if((n = readn(fd, abuf, sizeof(abuf)-1)) < 0)
 		sysfatal("can't read key file '%s'", af);
+	close(fd);
 	if (n > 0 && abuf[n - 1] == '\n')
 		n--;
 	abuf[n] = '\0';
@@ -316,10 +317,10 @@ p9anyinit(void)
 	passtokey(authkey, f[0]);
 	authid = strdup(f[1]);
 	authdom = strdup(f[2]);
-	haveprotosmsg = malloc(strlen("p9sk1") + 1 + strlen(authdom) + 1);
-	sprint(haveprotosmsg, "p9sk1@%s", authdom);
-	needprotomsg = malloc(strlen("p9sk1") + 1 + strlen(authdom) + 1);
-	sprint(needprotomsg, "p9sk1 %s", authdom);
+	haveprotosmsg = smprint("p9sk1@%s", authdom);
+	needprotomsg = smprint("p9sk1 %s", authdom);
+	if(haveprotosmsg == nil || needprotomsg == nil)
+		sysfatal("out of memory");
 }
 
 typedef struct AuthSession {
@@ -368,8 +369,10 @@ p9anyattach(Fcall *rx, Fcall *tx)
 	if (chatty9p)
 		fprint(2, "p9anyattach: afid %d state %d\n", rx->afid, sp->state);
 	if (sp->state == Established && strcmp(rx->uname, sp->uname) == 0
-		&& strcmp(rx->aname, sp->aname) == 0)
+		&& strcmp(rx->aname, sp->aname) == 0){
+		rx->uname = sp->t.suid;
 		return nil;
+	}
 	return "authentication failed";
 }
 
@@ -392,7 +395,7 @@ p9anyread(Fcall *rx, Fcall *tx)
 	char *ep;
 
 	Fid *f;
-	f = oldauthfid(rx->afid, (void **)&sp, &ep);
+	f = oldauthfid(rx->fid, (void **)&sp, &ep);
 	if (f == nil)
 		return ep;
 	if (chatty9p)
@@ -437,7 +440,7 @@ p9anywrite(Fcall *rx, Fcall *tx)
 
 	Fid *f;
 
-	f = oldauthfid(rx->afid, (void **)&sp, &ep);
+	f = oldauthfid(rx->fid, (void **)&sp, &ep);
 	if (f == nil)
 		return ep;
 	if (chatty9p)
@@ -515,14 +518,14 @@ p9anyclunk(Fcall *rx, Fcall *tx)
 	AuthSession *sp;
 	char *ep;
 
-	f = oldauthfid(rx->afid, (void **)&sp, &ep);
+	f = oldauthfid(rx->fid, (void **)&sp, &ep);
 	if (f == nil)
 		return ep;
 	if (chatty9p)
 		fprint(2, "p9anyclunk: afid %d\n", rx->fid);
 	safefree(sp->uname);
 	safefree(sp->aname);
-	memset(sp, 0, sizeof(sp));
+	memset(sp, 0, sizeof(*sp));
 	free(sp);
 	return nil;
 }

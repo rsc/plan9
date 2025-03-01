@@ -85,3 +85,20 @@ seprint(char *buf, char *e, char *fmt, ...)
 	printcol = scol;
 	return out;
 }
+
+char*
+smprint(char *fmt, ...)
+{
+	char buf[SIZE], *out;
+	va_list arg, temp;
+	int scol;
+
+	scol = printcol;
+	va_start(arg, fmt);
+	va_copy(temp, arg);
+	out = doprint(buf, buf+sizeof(buf), fmt, &temp);
+	va_end(temp);
+	va_end(arg);
+	printcol = scol;
+	return strdup(buf);
+}

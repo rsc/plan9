@@ -28,4 +28,4 @@ Fid *newauthfid(int fid, void *magic, char **ep);
 Fid *oldauthfid(int fid, void **magic, char **ep);
 
 void safecpy(char *to, char *from, int len);
-void getremotehostname(char*, int);
+void	getremotehostname(char*, int);

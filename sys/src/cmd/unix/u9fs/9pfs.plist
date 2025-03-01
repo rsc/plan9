@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"> 
+<dict> 
+	<key>Label</key> 
+	<string>com.bell-labs.plan9.u9fs</string> 
+	<key>Program</key> 
+	<string>/bin/9/u9fs</string> 
+	<key>ProgramArguments</key> 
+	<array> 
+		<string>u9fs</string> 
+		<string>-l</string> 
+		<string>/var/log/u9fs.log</string> 
+		<string>-a</string> 
+		<string>p9any</string> 
+	</array> 
+	<key>Sockets</key> 
+	<dict> 
+		<key>Listeners</key> 
+		<dict> 
+			<key>SockServiceName</key> 
+			<string>9pfs</string> 
+		</dict> 
+	</dict> 
+	<key>inetdCompatibility</key> 
+	<dict> 
+		<key>Wait</key> 
+		<false/> 
+	</dict> 
+</dict> 
+</plist>

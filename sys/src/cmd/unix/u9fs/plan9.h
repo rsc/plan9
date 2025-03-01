@@ -1,5 +1,9 @@
+#ifdef __APPLE__
+#define	_DARWIN_C_SOURCE
+#else
 /* magic to get SUSV2 standard, including pread, pwrite*/
 #define _XOPEN_SOURCE 500
+#endif
 /* magic to get 64-bit pread/pwrite */
 #define _LARGEFILE64_SOURCE
 /* magic to get 64-bit stat on Linux, maybe others */
@@ -43,8 +47,8 @@ typedef unsigned long long int  uint64_t;
 #endif /* va_copy */
 #include <sys/types.h>
 #include <string.h>		/* for memmove */
+#include <fcntl.h>	/* for O_RDONLY, etc. */
 #include <unistd.h>		/* for write */
-#include <fcntl.h>
 
 #define ulong p9ulong		/* because sys/types.h has some of these sometimes */
 #define ushort p9ushort
@@ -129,6 +133,7 @@ struct	Fconv
 extern	char*	doprint(char*, char*, char*, va_list *argp);
 extern	int	print(char*, ...);
 extern	char*	seprint(char*, char*, char*, ...);
+extern	char*	smprint(char*, ...);
 extern	int	snprint(char*, int, char*, ...);
 extern	int	sprint(char*, char*, ...);
 extern	int	fprint(int, char*, ...);
@@ -202,3 +207,4 @@ enum {
 #define DESKEYLEN 7
 void	key_setup(char key[DESKEYLEN], char expandedkey[128]);
 void	block_cipher(char expandedkey[128], char buf[8], int decrypting);
+
