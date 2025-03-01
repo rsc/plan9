@@ -1,7 +1,7 @@
 ARCH=k10
-CONF=${ARCH}cpu
-CONFLIST=${ARCH}aoe ${ARCH}cpu ${ARCH}root ${ARCH}time
-EXTRACOPIES=piestand lookout bovril boundary
+CONF=${ARCH}
+CONFLIST=${ARCH} ${ARCH}f ${ARCH}aoe ${ARCH}cpu ${ARCH}root ${ARCH}time
+EXTRACOPIES=
 
 objtype=amd64
 </$objtype/mkfile

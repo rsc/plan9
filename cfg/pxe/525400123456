@@ -7,6 +7,7 @@ menuitem=text, Plan 9 Text Mode
 mouseport=ps2intellimouse
 monitor=vesa
 vgasize=1920x1080x32
+nobootprompt=tcp
 
 [safe]
 mouseport=ps2
@@ -22,8 +23,7 @@ debugboot=1
 
 [common]
 bootfile=ether0!/386/9pc
-bootfile=ether0!/386/9pc
-bootargs=tcp
+bootfile=ether0!/amd64/9k10
 fs=10.0.2.1
 auth=10.0.2.1
 sysname=gnot
