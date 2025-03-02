@@ -74,7 +74,6 @@ struct Fxsave {
 struct PFPU {
 	int	fpustate;
 	uchar	fxsave[sizeof(Fxsave)+15];
-	void*	fpusave;
 };
 
 /*
