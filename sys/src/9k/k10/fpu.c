@@ -163,7 +163,7 @@ fpusysrforkchild(Proc* child, Proc* parent)
 	 * Copy the parent FPU state to the child.
 	 */
 	child->fpustate = parent->fpustate;
-	child->fpusave = (void*)((PTR2UINT(up->fxsave) + 15) & ~15);
+	child->fpusave = (void*)((PTR2UINT(child->fxsave) + 15) & ~15);
 	if(child->fpustate == Init)
 		return;
 
