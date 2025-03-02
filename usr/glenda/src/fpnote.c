@@ -35,6 +35,7 @@ floatnote(void*, char *msg)
 {
 	print("floatnote %s\n", msg);
 	float0("handler");
+	print("floatnote done\n");
 	noted(NCONT);
 }
 
@@ -72,6 +73,7 @@ simul(void)
 {
 	int pid;
 	double d;
+	vlong v;
 	int i;
 
 	notify(floatnote);
@@ -89,10 +91,15 @@ simul(void)
 
 	print("start counting\n");
 	d = 1.0;
+	v = 1;
 	for(i=0; i<10000000; i++) {
+		if(i%100000 == 0) print(".");
 		d += (double)i;
+		v += i;
+		if(d != (vlong)v)
+			sysfatal("out of sync %.17g %lld", d, v);
 	}
-	print("%g\n", d);
+	print("%.17g %lld\n", d, v);
 
 }
 
@@ -125,7 +132,7 @@ main(int argc, char **argv)
 	for(i=0; i<nelem(tests); i++) {
 		if(argc > 0){
 			for(j=0; j<argc; j++)
-				if(strcmp(argv[i], tests[i].name) == 0)
+				if(strcmp(argv[j], tests[i].name) == 0)
 					goto Found;
 			continue;
 		}
