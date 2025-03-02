@@ -1122,6 +1122,7 @@ i82563rim(void* ctlr)
 static void
 ckcksums(Ctlr *ctlr, Rd *rd, Block *bp)
 {
+	USED(ctlr);
 if (0) {
 	if(rd->status & Ixsm)
 		return;
@@ -1470,6 +1471,7 @@ i82563tproc(void *v)
 static void
 restart(Ctlr *ctlr)
 {
+	USED(ctlr);
 if (0) {
 	static Lock rstlock;
 
