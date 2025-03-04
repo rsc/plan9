@@ -174,6 +174,7 @@ void	touser(uintptr);
 void	syscallentry(void);
 void	syscallreturn(void);
 void	sysrforkret(void);
+void	trapreturn(Ureg*);
 
 #define	waserror()	(up->nerrlab++, setlabel(&up->errlab[up->nerrlab-1]))
 

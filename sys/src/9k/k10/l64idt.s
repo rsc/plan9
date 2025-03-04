@@ -49,9 +49,12 @@ _intrnested:
 	MOVQ	SP, RARG
 	PUSHQ	SP
 	CALL	trap(SB)
-
-TEXT _intrr<>(SB), 1, $-4			/* so ktrace can pop frame */
 	POPQ	AX
+	MOVQ	SP, RARG
+	CALL	trapreturn(SB)
+
+TEXT trapreturn(SB), 1, $-4			/* so ktrace can pop frame */
+	MOVQ	RARG, SP
 
 	POPQ	AX
 	POPQ	BX

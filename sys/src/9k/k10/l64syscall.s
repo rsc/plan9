@@ -35,8 +35,10 @@ TEXT syscallentry(SB), 1, $-4
 	PUSHQ	R11				/* old flags */
 	PUSHQ	$SSEL(SiUCS, SsRPL3)		/* old code segment */
 	PUSHQ	CX				/* old ip */
+	PUSHQ	$-1				/* error code */
+	PUSHQ	$-1				/* type */
 
-	SUBQ	$(18*8), SP			/* unsaved registers */
+	SUBQ	$(16*8), SP			/* unsaved registers */
 
 	MOVW	$SSEL(SiUDS, SsRPL3), (15*8+0)(SP)
 	MOVW	ES, (15*8+2)(SP)

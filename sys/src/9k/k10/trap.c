@@ -19,6 +19,7 @@ static void faultamd64(Ureg*, void*);
 static void doublefault(Ureg*, void*);
 static void unexpected(Ureg*, void*);
 static void dumpstackwithureg(Ureg*);
+static void dumpgpr(Ureg*);
 
 static Lock vctllock;
 static Vctl *vctl[IdtMAX+1];
@@ -258,7 +259,7 @@ intrtime(Mach*, int vno)
 
 /* go to user space */
 void
-kexit(Ureg*)
+kexit(Ureg *ureg)
 {
 	uvlong t;
 	Tos *tos;
@@ -273,6 +274,18 @@ kexit(Ureg*)
 	tos->kcycles += t - up->kentry;
 	tos->pcycles = up->pcycles;
 	tos->pid = up->pid;
+
+	/*
+	 * system calls set type == ~(uvlong)0.
+	 * If this Ureg is not from a system call, call trapreturn explicitly
+	 * to make sure we use IRET and not SYSRET.
+	 * Otherwise, if a process is interrupted by a trap and ends up
+	 * calling a note handler, the noted(NCONT) system call will use
+	 * SYSRET to return to the trap context, smashing some of the
+	 * registers that were live at the time of the trap.
+	 */
+	if(ureg->type != ~(uvlong)0)
+		trapreturn(ureg);
 }
 
 /*
