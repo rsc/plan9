@@ -27,7 +27,7 @@ u9fs="guestfwd=tcp:10.0.2.1:564-cmd:../sys/src/cmd/unix/u9fs/u9fs -a none -u $US
 tftp='tftp=..'
 mac=mac=52:54:00:12:34:56
 
-qemu-system-x86_64 -m 1G -smp 2 -serial stdio \
+qemu-system-x86_64 -m 1G -smp 1 -serial stdio \
 	-drive file=$pxe,format=raw -snapshot \
 	-device virtio-net-pci,netdev=net0,$mac \
 	-netdev "user,id=net0,$u9fs,$tftp"
