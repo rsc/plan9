@@ -271,7 +271,7 @@ i386trace(uvlong pc, uvlong sp, uvlong link)
 static int
 amd64trace(uvlong pc, uvlong sp, uvlong link)
 {
-	int i, isintrr;
+	int i, istrap;
 	uvlong osp;
 	Symbol s, f;
 	char buf[128];
@@ -284,25 +284,21 @@ amd64trace(uvlong pc, uvlong sp, uvlong link)
 		symoff(buf, sizeof buf, pc, CANY);
 		fmt(buf, pc);
 
-		if(strcmp(s.name, "_intrr") == 0)
-			isintrr = 1;
-		else
-			isintrr = 0;
-		if(pc != s.value) {	/* not at first instruction */
-			if(findlocal(&s, FRAMENAME, &f) == 0)
-				break;
-			sp += f.value-mach->szaddr;
-		}
-		else if(isintrr){
+		istrap = strcmp(s.name, "_intrp") == 0 || strcmp(s.name, "_intre") == 0;
+		if(istrap){
 			print("//passing interrupt frame; last pc found at sp=%#llux\n", osp);
 			/*
 			 * Pop interrupt frame (ureg.h) up to the IP value.
 			 */
 			sp += 19 * mach->szaddr;
+		} else if(pc != s.value) {	/* not at first instruction */
+			if(findlocal(&s, FRAMENAME, &f) == 0)
+				break;
+			sp += f.value-mach->szaddr;
 		}
 
 		pc = getval(sp);
-		if(pc == 0 && isintrr){
+		if(pc == 0 && istrap){
 			/*
 			 * Pop IP, CS and FLAGS to get to the SP.
 			 * The AMD64 aligns the interrupt stack on
@@ -321,7 +317,7 @@ amd64trace(uvlong pc, uvlong sp, uvlong link)
 		}
 		osp = sp;
 
-		if(!isintrr)
+		if(!istrap)
 			sp += mach->szaddr;
 
 		if(++i > 40)
