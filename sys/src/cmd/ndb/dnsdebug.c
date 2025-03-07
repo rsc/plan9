@@ -283,12 +283,12 @@ logsend(int id, int subid, uchar *addr, char *sname, char *rname, int type)
 }
 
 RR*
-getdnsservers(int class)
+getdnsservers(char *name, int class)
 {
 	RR *rr;
 
 	if(servername == nil)
-		return dnsservers(class);
+		return dnsservers(name, class);
 
 	rr = rralloc(Tns);
 	rr->owner = dnlookup("local#dns#servers", class, 1);
@@ -311,7 +311,7 @@ squirrelserveraddrs(void)
 	if(serveraddrs)
 		rrfreelist(serveraddrs);
 	serveraddrs = nil;
-	rr = getdnsservers(Cin);
+	rr = getdnsservers("", Cin);
 	l = &serveraddrs;
 	for(rp = rr; rp != nil; rp = rp->next){
 		attr = ipattr(rp->host->name);

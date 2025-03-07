@@ -278,6 +278,7 @@ struct RR
 	ulong	magic;
 	DN	*owner;		/* domain that owns this resource record */
 	uintptr	pc;		/* for tracking memory allocation */
+	char	*suffix;		/* domain suffix to use this DNS resolver for */
 	ulong	ttl;		/* time to live to be passed on */
 	ulong	expire;		/* time this entry expires locally */
 	ulong	marker;		/* used locally when scanning rrlists */
@@ -520,7 +521,7 @@ int	baddelegation(RR*, RR*, uchar*);
 RR*	dbinaddr(DN*, int);
 RR*	dblookup(char*, int, int, int, int);
 void	dnforceage(void);
-RR*	dnsservers(int);
+RR*	dnsservers(char*, int);
 RR*	domainlist(int);
 int	insideaddr(char *dom);
 int	insidens(uchar *ip);
@@ -530,7 +531,7 @@ uchar*	outsidens(int);
 
 /* dns.c */
 char*	walkup(char*);
-RR*	getdnsservers(int);
+RR*	getdnsservers(char*, int);
 void	logreply(int, uchar*, DNSmsg*);
 void	logsend(int, int, uchar*, char*, char*, int);
 void	procsetname(char *fmt, ...);

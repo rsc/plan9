@@ -44,7 +44,7 @@ database=
 declares the database to be composed of the three files
 .BR /lib/ndb/common ,
 .BR /lib/ndb/local ,
-and 
+and
 .BR /lib/ndb/global .
 By default,
 .B /lib/ndb/local
@@ -115,7 +115,7 @@ and
 servers.
 The search starts by looking for an entry with
 .BR sys=anna .
-We find the anna entry.  Since it has an 
+We find the anna entry.  Since it has an
 .B smtp=smtp2.cs.bell-labs.com
 pair,
 we're done looking for that attribute.
@@ -246,6 +246,11 @@ pairs.
 .TP
 .B dns
 a DNS server to use (for DNS and DHCP)
+.TP
+.B suffix
+on the same line as a
+.B dns
+pair, indicates that the server should be used for names with that suffix
 .TP
 .B ntp
 an NTP server to use (for DHCP)

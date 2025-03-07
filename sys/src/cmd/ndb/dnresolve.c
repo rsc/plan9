@@ -354,7 +354,7 @@ issuequery(Query *qp, char *name, int class, int depth, int recurse)
 	 *  designated name servers
 	 */
 	if(cfg.resolver){
-		nsrp = randomize(getdnsservers(class));
+		nsrp = randomize(getdnsservers(name, class));
 		if(nsrp != nil)
 			if(netqueryns(qp, depth+1, nsrp) > Answnone)
 				return rrlookup(qp->dp, qp->type, OKneg);

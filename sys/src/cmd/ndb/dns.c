@@ -1051,7 +1051,18 @@ logsend(int id, int subid, uchar *addr, char *sname, char *rname, int type)
 }
 
 RR*
-getdnsservers(int class)
+getdnsservers(char *name, int class)
 {
-	return dnsservers(class);
+	RR *rr, *rp;
+
+	rp = nil;
+	USED(rp);
+
+	rr = dnsservers(name, class);
+	if(0){
+		print("dnsservers %s\n", name);
+		for(rp = rr; rp; rp = rp->next)
+			print("\t%R\n", rp);
+	}
+	return rr;
 }

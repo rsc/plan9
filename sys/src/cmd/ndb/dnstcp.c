@@ -376,7 +376,7 @@ logsend(int id, int subid, uchar *addr, char *sname, char *rname, int type)
 }
 
 RR*
-getdnsservers(int class)
+getdnsservers(char *name, int class)
 {
-	return dnsservers(class);
+	return dnsservers(name, class);
 }

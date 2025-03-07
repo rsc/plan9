@@ -768,18 +768,19 @@ Ndbtuple*
 lookupinfo(char *attr)
 {
 	char buf[64];
-	char *a[2];
+	char *a[3];
 	Ndbtuple *t;
 
 	snprint(buf, sizeof buf, "%I", ipaddr);
 	a[0] = attr;
+	a[1] = "suffix";
 
 	lock(&dblock);
 	if(opendatabase() < 0){
 		unlock(&dblock);
 		return nil;
 	}
-	t = ndbipinfo(db, "ip", buf, a, 1);
+	t = ndbipinfo(db, "ip", buf, a, 2);
 	unlock(&dblock);
 	return t;
 }
@@ -871,7 +872,7 @@ static char *locdns[20];
 static QLock locdnslck;
 
 static void
-addlocaldnsserver(DN *dp, int class, char *ipaddr, int i)
+addlocaldnsserver(DN *dp, int class, char *ipaddr, char *suffix, int i)
 {
 	int n;
 	DN *nsdp;
@@ -906,6 +907,8 @@ addlocaldnsserver(DN *dp, int class, char *ipaddr, int i)
 	rp->db = 1;
 //	rp->ttl = 10*Min;		/* seems too short */
 	rp->ttl = (1UL<<31)-1;
+	if(suffix != nil)
+		rp->suffix = strdup(suffix);
 	rrattach(rp, Authoritative);	/* will not attach rrs in my area */
 
 	/* A or AAAA record */
@@ -919,9 +922,58 @@ addlocaldnsserver(DN *dp, int class, char *ipaddr, int i)
 	rp->db = 1;
 //	rp->ttl = 10*Min;		/* seems too short */
 	rp->ttl = (1UL<<31)-1;
+	if(suffix != nil)
+		rp->suffix = strdup(suffix);
 	rrattach(rp, Authoritative);	/* will not attach rrs in my area */
 
 	dnslog("added local dns server %s at %s", buf, ipaddr);
+}
+
+static int
+dnssuffix(char *name, char *suffix)
+{
+	int i, j;
+
+	if(suffix == nil)
+		return 0;
+
+	i = strlen(name);
+	if(i > 0 && name[i-1] == '.')
+		i--;
+	j = strlen(suffix);
+	if(j > 0 && suffix[j-1] == '.')
+		j--;
+	if(j > i || (j < i && name[i-j-1] != '.') || cistrncmp(name+i-j, suffix, j) != 0)
+		return -1; // no match for suffix
+	return j; // suffix length
+}
+
+static RR*
+dnsfilter(char *name, RR *rr)
+{
+	int best, n;
+	RR *rp, **tail;
+
+	// Find the most specific suffix match.
+	best = 0;
+	for(rp = rr; rp; rp = rp->next)
+		if((n = dnssuffix(name, rp->suffix)) > best)
+			best = n;
+
+	// Remove all the entries with worse matches.
+	tail = &rr;
+	for(rp = *tail; rp; rp = *tail){
+		n = dnssuffix(name, rp->suffix);
+		if(n < best){
+			*tail = rp->next;
+			rp->next = nil;
+			rrfree(rp);
+		} else {
+			*tail = rp;
+			tail = &rp->next;
+		}
+	}
+	return rr;
 }
 
 /*
@@ -929,25 +981,28 @@ addlocaldnsserver(DN *dp, int class, char *ipaddr, int i)
  *  acting just as a resolver.
  */
 RR*
-dnsservers(int class)
+dnsservers(char *name, int class)
 {
 	int i, n;
-	char *p;
+	char *p, *suffix;
 	char *args[5];
-	Ndbtuple *t, *nt;
+	Ndbtuple *t, *nt, *lt;
 	RR *nsrp;
 	DN *dp;
 
 	dp = dnlookup(localservers, class, 1);
 	nsrp = rrlookup(dp, Tns, NOneg);
 	if(nsrp != nil)
-		return nsrp;
+		return dnsfilter(name, nsrp);
 
 	p = getenv("DNSSERVER");		/* list of ip addresses */
 	if(p != nil){
 		n = tokenize(p, args, nelem(args));
-		for(i = 0; i < n; i++)
-			addlocaldnsserver(dp, class, args[i], i);
+		for(i = 0; i < n; i++){
+			if((suffix = strchr(args[i], '@')) != nil)
+				*suffix++ = '\0';
+			addlocaldnsserver(dp, class, args[i], suffix, i);
+		}
 		free(p);
 	} else {
 		t = lookupinfo("@dns");		/* @dns=ip1 @dns=ip2 ... */
@@ -955,13 +1010,22 @@ dnsservers(int class)
 			return nil;
 		i = 0;
 		for(nt = t; nt != nil; nt = nt->entry){
-			addlocaldnsserver(dp, class, nt->val, i);
+			if(strcmp(nt->attr, "dns") != 0)
+				continue;
+			suffix = nil;
+			for(lt = nt->line; lt != nil && lt != nt; lt = lt->line){
+				if(strcmp(lt->attr, "suffix") == 0){
+					suffix = strdup(lt->val);
+					break;
+				}
+			}
+			addlocaldnsserver(dp, class, nt->val, suffix, i);
 			i++;
 		}
 		ndbfree(t);
 	}
 
-	return rrlookup(dp, Tns, NOneg);
+	return dnsfilter(name, rrlookup(dp, Tns, NOneg));
 }
 
 static void

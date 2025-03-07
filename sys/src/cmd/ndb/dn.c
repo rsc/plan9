@@ -815,7 +815,7 @@ rrattach1(RR *new, int auth)
 			if(rp->negative != new->negative) {
 				/* rp == *l before; *l == rp->next after */
 				rrdelhead(l);
-				continue;	
+				continue;
 			}
 			/* all things equal, pick the newer one */
 			else if(rp->arg0 == new->arg0 && rp->arg1 == new->arg1){
@@ -973,6 +973,8 @@ rrcopy(RR *rp, RR **last)
 		*nrp = *rp;
 		break;
 	}
+	if(rp->suffix != nil)
+		nrp->suffix = estrdup(rp->suffix);
 	nrp->cached = 0;
 	nrp->next = 0;
 	*last = nrp;
@@ -1316,6 +1318,8 @@ rrfmt(Fmt *f)
 				rp->cert->type, rp->cert->tag, rp->cert->alg);
 		break;
 	}
+	if(rp->suffix != nil)
+		fmtprint(&fstr, " suffix=%s", rp->suffix);
 out:
 	strp = fmtstrflush(&fstr);
 	rv = fmtstrcpy(f, strp);
@@ -2078,6 +2082,7 @@ rrfree(RR *rp)
 		break;
 	}
 
+	free(rp->suffix);
 	rp->magic = ~rp->magic;
 	memset(rp, 0, sizeof *rp);		/* cause trouble */
 	free(rp);
