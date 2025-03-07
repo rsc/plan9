@@ -201,8 +201,12 @@ see
 .IR rio (4)
 for details.
 .PP
-To cope with pointing devices with only two buttons, when the
-shift key is pressed, the right mouse button generates middle-button events.
+To cope with pointing devices with only two buttons,
+shift-right-click generates a middle button event.
+.PP
+To cope with pointing devices with only one button,
+alt-click generates a middle button event
+and alt-shift-click or command-click generate a right button event.
 .SH SOURCE
 .B /sys/src/9/port/devmouse.c
 .SH "SEE ALSO

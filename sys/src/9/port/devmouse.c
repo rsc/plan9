@@ -70,9 +70,10 @@ static Cmdtab mousectlmsg[] =
 
 Mouseinfo	mouse;
 Cursorinfo	cursor;
-int		mouseshifted;
+int		mousekeys;
 int		kbdbuttons;
 void		(*kbdmouse)(int);
+int		(*mouseshift)(int);
 Cursor		curs;
 
 void	Cursortocursor(Cursor*);
@@ -127,6 +128,27 @@ mousefromkbd(int buttons)
 }
 
 static int
+mousefromshift(int old)
+{
+	int b;
+
+	b = mouse.buttons;
+	if(b == 0)
+		return 0;
+	if(mousekeys & ~old & MouseCtrl)
+		b |= 1;
+	if(mousekeys & ~old & MouseAlt){
+		if(kbdnocollect)
+			kbdnocollect();
+		b |= 2;
+	}
+	if(mousekeys & ~old & MouseCmd)
+		b |= 4;
+	mousetrack(0, 0, b, TK2MS(MACHP(0)->ticks));
+	return 1;
+}
+
+static int
 mousedevgen(Chan *c, char *name, Dirtab *tab, int ntab, int i, Dir *dp)
 {
 	int rc;
@@ -147,6 +169,7 @@ mouseinit(void)
 	Cursortocursor(&arrow);
 	cursoron(1);
 	kbdmouse = mousefromkbd;
+	mouseshift = mousefromshift;
 	mousetime = seconds();
 }
 
@@ -572,6 +595,19 @@ mousetrack(int dx, int dy, int b, int msec)
 	if(gscreen==nil)
 		return;
 
+	if(b == 1){
+		if(mousekeys & MouseAlt){
+			b = 2;
+			if(kbdnocollect)
+				kbdnocollect();
+		}
+		else if(mousekeys & MouseCmd)
+			b = 4;
+	}
+	// Shift swaps middle and right buttons.
+	if(mousekeys & MouseShift)
+		b = (b&~6) | ((b&4)>>1) | ((b&2)<<1);
+
 	if(mouse.acceleration){
 		dx = scale(dx);
 		dy = scale(dy);
@@ -625,7 +661,7 @@ m3mouseputc(Queue*, int c)
 	static uchar msg[3];
 	static int nb;
 	static int middle;
-	static uchar b[] = { 0, 4, 1, 5, 0, 2, 1, 3 };
+	static uchar b[] = { 0, 4, 1, 5 };
 	short x;
 	int dx, dy, newbuttons;
 	static ulong lasttick;
@@ -653,7 +689,7 @@ m3mouseputc(Queue*, int c)
 	msg[nb] = c;
 	if(++nb == 3){
 		nb = 0;
-		newbuttons = middle | b[(msg[0]>>4)&3 | (mouseshifted ? 4 : 0)];
+		newbuttons = middle | b[(msg[0]>>4)&3];
 		x = (msg[0]&0x3)<<14;
 		dx = (x>>8) | msg[1];
 		x = (msg[0]&0xc)<<12;
@@ -697,7 +733,7 @@ m5mouseputc(Queue*, int c)
 		dx = msg[1] | (msg[0] & 0x3) << 6;
 		dy = msg[2] | (msg[0] & 0xc) << 4;
 		newbuttons =
-			(msg[0] & 0x10) >> (mouseshifted ? 3 : 2)
+			(msg[0] & 0x10) >> 2
 			| (msg[0] & 0x20) >> 5
 			| ( msg[3] == 0x10 ? 0x02 :
 			    msg[3] == 0x0f ? ScrollUp :
@@ -718,7 +754,7 @@ mouseputc(Queue*, int c)
 {
 	static short msg[5];
 	static int nb;
-	static uchar b[] = {0, 4, 2, 6, 1, 5, 3, 7, 0, 2, 2, 6, 1, 3, 3, 7};
+	static uchar b[] = {0, 4, 2, 6, 1, 5, 3, 7};
 	int dx, dy, newbuttons;
 	static ulong lasttick;
 	ulong m;
@@ -735,7 +771,7 @@ mouseputc(Queue*, int c)
 	if(c & 0x80)
 		msg[nb] |= ~0xFF;	/* sign extend */
 	if(++nb == 5){
-		newbuttons = b[((msg[0]&7)^7) | (mouseshifted ? 8 : 0)];
+		newbuttons = b[(msg[0]&7)^7];
 		dx = msg[1]+msg[3];
 		dy = -(msg[2]+msg[4]);
 		mousetrack(dx, dy, newbuttons, TK2MS(MACHP(0)->ticks));

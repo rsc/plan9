@@ -802,6 +802,14 @@ enum
 	READSTR =	4000,		/* temporary buffer size for device reads */
 };
 
+enum	/* mousekeys bits */
+{
+	MouseShift = 1<<0,
+	MouseCtrl = 1<<1,
+	MouseAlt = 1<<2,
+	MouseCmd = 1<<3,
+};
+
 struct Execvals {
 	uvlong	entry;
 	ulong	textsize;
@@ -818,6 +826,9 @@ extern	uchar	initcode[];
 extern	int	kbdbuttons;
 extern	Queue*	kbdq;
 extern	Queue*	kprintoq;
+	void	(*kbdnocollect)(void);
+	int	(*mouseshift)(int);
+extern	int	mousekeys;
 extern 	Ref	noteidalloc;
 extern	int	nsyscall;
 extern	Palloc	palloc;

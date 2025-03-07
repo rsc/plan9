@@ -36,6 +36,7 @@ enum {
 	Num=		Spec|0x65,
 	Middle=		Spec|0x66,
 	Altgr=		Spec|0x67,
+	MacCmd=		Spec|0x68,
 	Kmouse=		Spec|0x100,
 	No=		0x00,		/* peter */
 
@@ -63,7 +64,7 @@ enum {
  * The codes at 0x79 and 0x7b are produced by the PFU Happy Hacking keyboard.
  * A 'standard' keyboard doesn't produce anything above 0x58.
  */
-Rune kbtab[Nscan] = 
+Rune kbtab[Nscan] =
 {
 [0x00]	No,	0x1b,	'1',	'2',	'3',	'4',	'5',	'6',
 [0x08]	'7',	'8',	'9',	'0',	'-',	'=',	'\b',	'\t',
@@ -116,7 +117,7 @@ Rune kbtabesc1[Nscan] =
 [0x40]	No,	No,	No,	No,	No,	No,	Break,	Home,
 [0x48]	Up,	Pgup,	No,	Left,	No,	Right,	No,	End,
 [0x50]	Down,	Pgdown,	Ins,	Del,	No,	No,	No,	No,
-[0x58]	No,	No,	No,	No,	No,	No,	No,	No,
+[0x58]	No,	No,	No,	MacCmd,	No,	No,	No,	No,
 [0x60]	No,	No,	No,	No,	No,	No,	No,	No,
 [0x68]	No,	No,	No,	No,	No,	No,	No,	No,
 [0x70]	No,	No,	No,	No,	No,	No,	No,	No,
@@ -145,17 +146,17 @@ Rune kbtabaltgr[Nscan] =
 
 Rune kbtabctrl[Nscan] =
 {
-[0x00]	No,	'', 	'', 	'', 	'', 	'', 	'', 	'', 
+[0x00]	No,	'', 	'', 	'', 	'', 	'', 	'', 	'',
 [0x08]	'', 	'', 	'', 	'', 	'', 	'', 	'\b',	'\t',
 [0x10]	'', 	'', 	'', 	'', 	'', 	'', 	'', 	'\t',
-[0x18]	'', 	'', 	'', 	'', 	'\n',	Ctrl,	'', 	'', 
-[0x20]	'', 	'', 	'', 	'\b',	'\n',	'', 	'', 	'', 
-[0x28]	'', 	No, 	Shift,	'', 	'', 	'', 	'', 	'', 
+[0x18]	'', 	'', 	'', 	'', 	'\n',	Ctrl,	'', 	'',
+[0x20]	'', 	'', 	'', 	'\b',	'\n',	'', 	'', 	'',
+[0x28]	'', 	No, 	Shift,	'', 	'', 	'', 	'', 	'',
 [0x30]	'', 	'', 	'', 	'', 	'', 	'', 	Shift,	'\n',
-[0x38]	Latin,	No, 	Ctrl,	'', 	'', 	'', 	'', 	'', 
-[0x40]	'', 	'', 	'', 	'', 	'', 	'', 	'', 	'', 
-[0x48]	'', 	'', 	'', 	'', 	'', 	'', 	'', 	'', 
-[0x50]	'', 	'', 	'', 	'', 	No,	No,	No,	'', 
+[0x38]	Latin,	No, 	Ctrl,	'', 	'', 	'', 	'', 	'',
+[0x40]	'', 	'', 	'', 	'', 	'', 	'', 	'', 	'',
+[0x48]	'', 	'', 	'', 	'', 	'', 	'', 	'', 	'',
+[0x50]	'', 	'', 	'', 	'', 	No,	No,	No,	'',
 [0x58]	'', 	No,	No,	No,	No,	No,	No,	No,
 [0x60]	No,	No,	No,	No,	No,	No,	No,	No,
 [0x68]	No,	No,	No,	No,	No,	No,	No,	No,
@@ -174,7 +175,7 @@ enum
 	Ckbdint=	(1<<0),		/* kbd interrupt enable */
 };
 
-int mouseshifted;
+int mousekeys;
 void (*kbdmouse)(int);
 
 static Lock i8042lock;
@@ -335,6 +336,19 @@ struct Kbscan {
 
 Kbscan kbscans[Nscans];	/* kernel and external scan code state */
 
+static void
+xkbdnocollect(void)
+{
+	int i;
+	Kbscan *k;
+
+	for(i=0; i<nelem(kbscans); i++) {
+		k = &kbscans[i];
+		k->collecting = 0;
+		k->nk = 0;
+	}
+}
+
 static int kdebug;
 
 /*
@@ -390,7 +404,7 @@ kbdputsc(int c, int external)
 		kbscan = &kbscans[Int];
 
 	if(kdebug)
-		print("sc %x ms %d\n", c, mouseshifted);
+		print("sc %x ms %d\n", c, mousekeys);
 	/*
 	 *  e0's is the first of a 2 character sequence, e1 the first
 	 *  of a 3 character sequence (on the safari)
@@ -437,15 +451,28 @@ kbdputsc(int c, int external)
 		switch(c){
 		case Latin:
 			kbscan->alt = 0;
+			mousekeys &= ~MouseAlt;
+			if(mouseshift)
+				mouseshift(mousekeys|MouseAlt);
 			break;
 		case Shift:
 			kbscan->shift = 0;
-			mouseshifted = 0;
+			mousekeys &= ~MouseShift;
+			if(mouseshift)
+				mouseshift(mousekeys|MouseShift);
 			if(kdebug)
 				print("shiftclr\n");
 			break;
 		case Ctrl:
 			kbscan->ctl = 0;
+			mousekeys &= ~MouseCtrl;
+			if(mouseshift)
+				mouseshift(mousekeys|MouseCtrl);
+			break;
+		case MacCmd:
+			mousekeys &= ~MouseCmd;
+			if(mouseshift)
+				mouseshift(mousekeys|MouseCmd);
 			break;
 		case Altgr:
 			kbscan->altgr = 0;
@@ -474,15 +501,19 @@ kbdputsc(int c, int external)
 			kbdputc(kbdq, c);
 			return;
 		}
-		kbscan->kc[kbscan->nk++] = c;
-		c = latin1(kbscan->kc, kbscan->nk);
-		if(c < -1)	/* need more keystrokes */
-			return;
-		if(c != -1)	/* valid sequence */
-			kbdputc(kbdq, c);
-		else	/* dump characters */
-			for(i=0; i<kbscan->nk; i++)
-				kbdputc(kbdq, kbscan->kc[i]);
+		if(kbscan->nk < nelem(kbscan->kc)) {
+			kbscan->kc[kbscan->nk++] = c;
+			c = latin1(kbscan->kc, kbscan->nk);
+			if(c < -1)	/* need more keystrokes */
+				return;
+			if(c != -1){	/* valid sequence */
+				kbdputc(kbdq, c);
+				return;
+			}
+		}
+		/* dump characters */
+		for(i=0; i<kbscan->nk; i++)
+			kbdputc(kbdq, kbscan->kc[i]);
 		kbscan->nk = 0;
 		kbscan->collecting = 0;
 		return;
@@ -500,16 +531,21 @@ kbdputsc(int c, int external)
 			kbscan->shift = 1;
 			if(kdebug)
 				print("shift\n");
-			mouseshifted = 1;
+			mousekeys |= MouseShift;
+			if(mouseshift)
+				mouseshift(mousekeys&~MouseShift);
 			return;
 		case Latin:
+			mousekeys |= MouseAlt;
+			if(mouseshift && mouseshift(mousekeys&~MouseAlt))
+				return;
 			kbscan->alt = 1;
 			/*
 			 * VMware and Qemu use Ctl-Alt as the key combination
 			 * to make the VM give up keyboard and mouse focus.
 			 * This has the unfortunate side effect that when you
 			 * come back into focus, Plan 9 thinks you want to type
-			 * a compose sequence (you just typed alt). 
+			 * a compose sequence (you just typed alt).
 			 *
 			 * As a clumsy hack around this, we look for ctl-alt
 			 * and don't treat it as the start of a compose sequence.
@@ -521,7 +557,14 @@ kbdputsc(int c, int external)
 			return;
 		case Ctrl:
 			kbscan->ctl = 1;
+			mousekeys |= MouseCtrl;
+			if(mouseshift)
+				mouseshift(mousekeys&~MouseCtrl);
 			return;
+		case MacCmd:
+			mousekeys |= MouseCmd;
+			if(mouseshift)
+				mouseshift(mousekeys&~MouseCmd);
 		case Altgr:
 			kbscan->altgr = 1;
 			return;
@@ -684,6 +727,8 @@ kbdenable(void)
 
 	kbscans[Int].num = 0;
 	setleds(&kbscans[Int]);
+
+	kbdnocollect = xkbdnocollect;
 }
 
 void
@@ -706,7 +751,7 @@ kbdputmap(ushort m, ushort scanc, Rune r)
 	case 3:
 		kbtabaltgr[scanc] = r;
 		break;
-	case 4:	
+	case 4:
 		kbtabctrl[scanc] = r;
 		break;
 	}

@@ -22,7 +22,7 @@ enum
 	MousePS2=	2,
 };
 
-extern int mouseshifted;
+extern int mousekeys;
 
 static QLock mousectlqlock;
 static int mousetype;
@@ -86,20 +86,15 @@ static Cmdtab mousectlmsg[] =
  * after the previous byte, we assume it's the first in a packet.
  */
 static void
-ps2mouseputc(int c, int shift)
+ps2mouseputc(int c, int)
 {
 	static short msg[4];
 	static int nb;
-	static uchar b[] = {0, 1, 4, 5, 2, 3, 6, 7, 0, 1, 2, 3, 2, 3, 6, 7 };
+	static uchar b[] = {0, 1, 4, 5, 2, 3, 6, 7};
 	static ulong lasttick;
 	ulong m;
 	int buttons, dx, dy;
 
-	/*
-	 * non-ps2 keyboards might not set shift
-	 * but still set mouseshifted.
-	 */
-	shift |= mouseshifted;
 	/*
 	 * Resynchronize in stream with timing; see comment above.
 	 */
@@ -108,7 +103,7 @@ ps2mouseputc(int c, int shift)
 		nb = 0;
 	lasttick = m;
 
-	/* 
+	/*
 	 *  check byte 0 for consistency
 	 */
 	if(nb==0 && (c&0xc8)!=0x08)
@@ -126,7 +121,7 @@ ps2mouseputc(int c, int shift)
 		if(msg[0] & 0x20)
 			msg[2] |= 0xFF00;
 
-		buttons = b[(msg[0]&7) | (shift ? 8 : 0)];
+		buttons = b[msg[0]&7];
 		if(intellimouse && packetsize==4){
 			if((msg[3]&0xc8) == 0x08){
 				/* first byte of 3-byte packet */
@@ -148,9 +143,9 @@ ps2mouseputc(int c, int shift)
 				 * and generate a single button 4 or 5 click
 				 * accordingly.
 				 */
-				if((msg[3] >> 3) & 1) 
+				if((msg[3] >> 3) & 1)
 					buttons |= 1<<3;
-				else if(msg[3] & 0x7) 
+				else if(msg[3] & 0x7)
 					buttons |= 1<<4;
 			}
 		}
