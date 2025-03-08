@@ -565,6 +565,7 @@ kbdputsc(int c, int external)
 			mousekeys |= MouseCmd;
 			if(mouseshift)
 				mouseshift(mousekeys&~MouseCmd);
+			return;
 		case Altgr:
 			kbscan->altgr = 1;
 			return;
