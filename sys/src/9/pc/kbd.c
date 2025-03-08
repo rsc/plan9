@@ -349,7 +349,7 @@ xkbdnocollect(void)
 	}
 }
 
-static int kdebug;
+int kdebug;
 
 /*
  * set keyboard's leds for lock states (scroll, numeric, caps).
@@ -404,7 +404,7 @@ kbdputsc(int c, int external)
 		kbscan = &kbscans[Int];
 
 	if(kdebug)
-		print("sc %x ms %d\n", c, mousekeys);
+		print("sc %x ms %d esc1=%d esc2=%d shift=%d altgr=%d ctl=%d\n", c, mousekeys, kbscan->esc1, kbscan->esc2, kbscan->shift, kbscan->altgr, kbscan->ctl);
 	/*
 	 *  e0's is the first of a 2 character sequence, e1 the first
 	 *  of a 3 character sequence (on the safari)
@@ -443,6 +443,9 @@ kbdputsc(int c, int external)
 
 	if(kbscan->caps && c<='z' && c>='a')
 		c += 'A' - 'a';
+
+	if(kdebug)
+		print("kbd %d %c%x\n", mousekeys, !keyup?'+':'-', c);
 
 	/*
 	 *  keyup only important for shifts
@@ -497,6 +500,11 @@ kbdputsc(int c, int external)
 		if(kbscan->ctl)
 			if(kbscan->alt && c == Del)
 				exit(0);
+		if(c == 'Z'-'@'){
+			kdebug ^= 1;
+			if(kdebug)
+				print("kbd debug on, ^Z toggles it\n");
+		}
 		if(!kbscan->collecting){
 			kbdputc(kbdq, c);
 			return;

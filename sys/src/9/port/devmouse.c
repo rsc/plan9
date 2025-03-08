@@ -18,6 +18,8 @@ enum {
 	ScrollRight = 0x40,
 };
 
+int kdebug;
+
 typedef struct Mouseinfo	Mouseinfo;
 typedef struct Mousestate	Mousestate;
 
@@ -337,6 +339,8 @@ mouseread(Chan *c, void *va, long n, vlong off)
 			mouse.lastresize = mouse.resize;
 			buf[0] = 'r';
 		}
+		if(kdebug)
+			print("M %s\n", buf);
 		memmove(va, buf, n);
 		return n;
 	}
@@ -591,9 +595,12 @@ void
 mousetrack(int dx, int dy, int b, int msec)
 {
 	int x, y, lastb;
+int ob;
 
 	if(gscreen==nil)
 		return;
+
+	ob = b;
 
 	if(b == 1){
 		if(mousekeys & MouseAlt){
@@ -607,6 +614,8 @@ mousetrack(int dx, int dy, int b, int msec)
 	// Shift swaps middle and right buttons.
 	if(mousekeys & MouseShift)
 		b = (b&~6) | ((b&4)>>1) | ((b&2)<<1);
+	if(kdebug)
+		print("mousetrack %d %d %d->%d %d [%d]\n", dx, dy, ob, b, msec, kbdbuttons);
 
 	if(mouse.acceleration){
 		dx = scale(dx);
@@ -635,6 +644,8 @@ mousetrack(int dx, int dy, int b, int msec)
 	 * queue any more events until a reader polls the mouse.
 	 */
 	if(!mouse.qfull && lastb != b) {	/* add to ring */
+		if(kdebug)
+			print("mousequeue %d %d %d %d\n", mouse.xy.x, mouse.xy.y, mouse.buttons, mouse.msec);
 		mouse.queue[mouse.wi] = mouse.Mousestate;
 		if(++mouse.wi == nelem(mouse.queue))
 			mouse.wi = 0;

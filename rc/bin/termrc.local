@@ -1,4 +1,6 @@
 #!/bin/rc
 
+facedom=FACEDOM
+
 for (i in dns)
 	touch /sys/log/$i
