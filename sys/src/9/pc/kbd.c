@@ -137,7 +137,7 @@ Rune kbtabaltgr[Nscan] =
 [0x40]	No,	No,	No,	No,	No,	No,	Break,	Home,
 [0x48]	Up,	Pgup,	No,	Left,	No,	Right,	No,	End,
 [0x50]	Down,	Pgdown,	Ins,	Del,	No,	No,	No,	No,
-[0x58]	No,	No,	No,	No,	No,	No,	No,	No,
+[0x58]	No,	No,	No,	MacCmd,	No,	No,	No,	No,
 [0x60]	No,	No,	No,	No,	No,	No,	No,	No,
 [0x68]	No,	No,	No,	No,	No,	No,	No,	No,
 [0x70]	No,	No,	No,	No,	No,	No,	No,	No,
@@ -157,7 +157,7 @@ Rune kbtabctrl[Nscan] =
 [0x40]	'', 	'', 	'', 	'', 	'', 	'', 	'', 	'',
 [0x48]	'', 	'', 	'', 	'', 	'', 	'', 	'', 	'',
 [0x50]	'', 	'', 	'', 	'', 	No,	No,	No,	'',
-[0x58]	'', 	No,	No,	No,	No,	No,	No,	No,
+[0x58]	'', 	No,	No,	MacCmd,	No,	No,	No,	No,
 [0x60]	No,	No,	No,	No,	No,	No,	No,	No,
 [0x68]	No,	No,	No,	No,	No,	No,	No,	No,
 [0x70]	No,	No,	No,	No,	No,	No,	No,	No,
