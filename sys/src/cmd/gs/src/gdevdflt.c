@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -356,7 +356,7 @@ set_linear_color_bits_mask_shift(gx_device * dev)
 #define comp_shift (dev->color_info.comp_shift)
     comp_shift[num_components - 1] = 0;
     for ( i = num_components - 1 - 1; i >= 0; i-- ) {
-        comp_shift[i] = comp_shift[i + 1] + 
+        comp_shift[i] = comp_shift[i + 1] +
             ( i == gray_index ? ilog2(max_gray + 1) : ilog2(max_color + 1) );
     }
     for ( i = 0; i < num_components; i++ ) {
@@ -436,7 +436,7 @@ check_device_separable(gx_device * dev)
     /*
      * Use the encode_color routine to try to verify that the device is
      * separable and to determine the shift count, etc. for each colorant.
-     */ 
+     */
     color_index = dev_proc(dev, encode_color)(dev, colorants);
     if (color_index != 0)
 	return;		/* Exit if zero colorants produce a non zero index */
@@ -658,7 +658,7 @@ gx_device_fill_in_procs(register gx_device * dev)
      * explicit check until this information is explicitly required.
      */
     if ( dev->color_info.opmode == GX_CINFO_OPMODE_UNKNOWN          &&
-         (dev->color_info.num_components < 4                     || 
+         (dev->color_info.num_components < 4                     ||
           dev->color_info.polarity == GX_CINFO_POLARITY_ADDITIVE ||
           dev->color_info.gray_index == GX_CINFO_COMP_NO_INDEX     )  )
 	dev->color_info.opmode = GX_CINFO_OPMODE_NOT;
@@ -844,8 +844,8 @@ gx_default_pattern_manage(gx_device *pdev, gx_bitmap_id id,
 }
 
 int
-gx_default_fill_rectangle_hl_color(gx_device *pdev, 
-    const gs_fixed_rect *rect, 
+gx_default_fill_rectangle_hl_color(gx_device *pdev,
+    const gs_fixed_rect *rect,
     const gs_imager_state *pis, const gx_drawing_color *pdcolor,
     const gx_clip_path *pcpath)
 {
@@ -853,7 +853,7 @@ gx_default_fill_rectangle_hl_color(gx_device *pdev,
 }
 
 int
-gx_default_include_color_space(gx_device *pdev, gs_color_space *cspace, 
+gx_default_include_color_space(gx_device *pdev, gs_color_space *cspace,
 	const byte *res_name, int name_length)
 {
     return 0;

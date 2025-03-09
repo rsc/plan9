@@ -102,7 +102,7 @@ cd /
 # that can only be done if running as '#c/hostowner'.
 #
 sysname=cpu-$ip(1)
-prompt=($sysname'# ' '	') 
+prompt=($sysname'# ' '	')
 bind /boot/rc/bin/service /bin/service
 if(test -d /mnt/factotum)
 	aux/listen -q tcp

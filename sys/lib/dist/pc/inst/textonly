@@ -12,4 +12,3 @@ while(! test -f /srv/log)
 	sleep 1
 log `{date} Installation process started
 inst/mainloop
-

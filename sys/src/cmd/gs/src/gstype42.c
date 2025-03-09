@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -42,7 +42,7 @@ public_st_gs_font_type42();
 
 /* Forward references */
 private int append_outline_fitted(uint glyph_index, const gs_matrix * pmat,
-	       gx_path * ppath, cached_fm_pair * pair, 
+	       gx_path * ppath, cached_fm_pair * pair,
 	       const gs_log2_scale_point * pscale, bool design_grid);
 private uint default_get_glyph_index(gs_font_type42 *pfont, gs_glyph glyph);
 private int default_get_outline(gs_font_type42 *pfont, uint glyph_index,
@@ -70,7 +70,7 @@ GS_NOTIFY_PROC(gs_len_glyphs_release);
 
 /* Get the offset to a glyph using the loca table */
 private inline ulong
-get_glyph_offset(gs_font_type42 *pfont, uint glyph_index) 
+get_glyph_offset(gs_font_type42 *pfont, uint glyph_index)
 {
     int (*string_proc)(gs_font_type42 *, ulong, uint, const byte **) =
 	pfont->data.string_proc;
@@ -175,7 +175,7 @@ gs_type42_font_init(gs_font_type42 * pfont)
     if (pfont->data.len_glyphs == 0)
 	return_error(gs_error_VMerror);
     gs_font_notify_register((gs_font *)pfont, gs_len_glyphs_release, (void *)pfont);
- 
+
     /* The 'loca' may not be in order, so we construct a glyph length array */
     /* Since 'loca' is usually sorted, first try the simple linear scan to  */
     /* avoid the need to perform the more expensive process. */
@@ -192,8 +192,8 @@ gs_type42_font_init(gs_font_type42 * pfont)
         uint j;
 	ulong trial_glyph_length;
         /*
-         * loca was out of order, build the len_glyphs the hard way      
-	 * Assume that some of the len_glyphs built so far may be wrong 
+         * loca was out of order, build the len_glyphs the hard way
+	 * Assume that some of the len_glyphs built so far may be wrong
 	 * For each starting offset, find the next higher ending offset
 	 * Note that doing this means that there can only be zero length
 	 * glyphs that have loca table offset equal to the last 'dummy'
@@ -243,7 +243,7 @@ gs_type42_font_init(gs_font_type42 * pfont)
 
 int
 gs_len_glyphs_release(void *data, void *event)
-{   
+{
     gs_font_type42 *pfont = (gs_font_type42 *)data;
 
     gs_font_notify_unregister((gs_font *)pfont, gs_len_glyphs_release, (void *)data);
@@ -420,13 +420,13 @@ default_get_outline(gs_font_type42 * pfont, uint glyph_index,
 
 	code = (*string_proc)(pfont, (ulong)(pfont->data.glyf + glyph_start),
 			      glyph_length, &data);
-	if (code < 0) 
+	if (code < 0)
 	    return code;
 	if (code == 0)
 	    gs_glyph_data_from_string(pgd, data, glyph_length, NULL);
 	else {
 	    /*
-	     * The glyph is segmented in sfnts. 
+	     * The glyph is segmented in sfnts.
 	     * It is not allowed with Type 42 specification.
 	     * Perhaps we can handle it (with a low performance),
 	     * making a contiguous copy.
@@ -442,11 +442,11 @@ default_get_outline(gs_font_type42 * pfont, uint glyph_index,
 		memcpy(buf + glyph_length - left, data, code);
 		if (!(left -= code))
 		    return 0;
-		code = (*string_proc)(pfont, (ulong)(pfont->data.glyf + glyph_start + 
+		code = (*string_proc)(pfont, (ulong)(pfont->data.glyf + glyph_start +
 		              glyph_length - left), left, &data);
-		if (code < 0) 
+		if (code < 0)
 		    return code;
-		if (code == 0) 
+		if (code == 0)
 		    code = left;
 	    }
 	}
@@ -503,8 +503,8 @@ private int
 parse_pieces(gs_font_type42 *pfont, gs_glyph glyph, gs_glyph *pieces,
 	     int *pnum_pieces)
 {
-    uint glyph_index = (glyph >= GS_MIN_GLYPH_INDEX 
-			? glyph - GS_MIN_GLYPH_INDEX 
+    uint glyph_index = (glyph >= GS_MIN_GLYPH_INDEX
+			? glyph - GS_MIN_GLYPH_INDEX
 			: pfont->data.get_glyph_index(pfont, glyph));
     gs_glyph_data_t glyph_data;
     int code;
@@ -539,15 +539,15 @@ gs_type42_glyph_outline(gs_font *font, int WMode, gs_glyph glyph, const gs_matri
 			gx_path *ppath, double sbw[4])
 {
     gs_font_type42 *const pfont = (gs_font_type42 *)font;
-    uint glyph_index = (glyph >= GS_MIN_GLYPH_INDEX 
-		? glyph - GS_MIN_GLYPH_INDEX 
+    uint glyph_index = (glyph >= GS_MIN_GLYPH_INDEX
+		? glyph - GS_MIN_GLYPH_INDEX
 		: pfont->data.get_glyph_index(pfont, glyph));
     gs_fixed_point origin;
     int code;
     gs_glyph_info_t info;
     static const gs_matrix imat = { identity_matrix_body };
     bool design_grid = true;
-    const gs_log2_scale_point log2_scale = {0, 0}; 
+    const gs_log2_scale_point log2_scale = {0, 0};
     /* fixme : The subpixel numbers doesn't pass through the font_proc_glyph_outline interface.
        High level devices can't get a proper grid fitting with AlignToPixels = 1.
        Currently font_proc_glyph_outline is only used by pdfwrite for computing a
@@ -562,7 +562,7 @@ gs_type42_glyph_outline(gs_font *font, int WMode, gs_glyph glyph, const gs_matri
     if (pmat == 0)
 	pmat = &imat;
     if ((code = gx_path_current_point(ppath, &origin)) < 0 ||
-	(code = append_outline_fitted(glyph_index, pmat, ppath, pair, 
+	(code = append_outline_fitted(glyph_index, pmat, ppath, pair,
 					&log2_scale, design_grid)) < 0 ||
 	(code = font->procs.glyph_info(font, glyph, pmat,
 				       GLYPH_INFO_WIDTH0 << WMode, &info)) < 0
@@ -623,7 +623,7 @@ gs_type42_glyph_info_by_gid(gs_font *font, gs_glyph glyph, const gs_matrix *pmat
 		info->members |= (GLYPH_INFO_VVECTOR0 << i);
 		info->members |= (GLYPH_INFO_WIDTH << i);
 	    }
-	
+
     }
     if (members & (GLYPH_INFO_NUM_PIECES | GLYPH_INFO_PIECES)) {
 	gs_glyph *pieces =
@@ -642,7 +642,7 @@ gs_type42_glyph_info(gs_font *font, gs_glyph glyph, const gs_matrix *pmat,
 {
     gs_font_type42 *const pfont = (gs_font_type42 *)font;
     uint glyph_index;
-    
+
     if (glyph >= GS_MIN_GLYPH_INDEX)
 	glyph_index = glyph - GS_MIN_GLYPH_INDEX;
     else {
@@ -792,7 +792,7 @@ gs_type42_append(uint glyph_index, gs_imager_state * pis,
 		 gx_path * ppath, const gs_log2_scale_point * pscale,
 		 bool charpath_flag, int paint_type, cached_fm_pair *pair)
 {
-    int code = append_outline_fitted(glyph_index, &ctm_only(pis), ppath, 
+    int code = append_outline_fitted(glyph_index, &ctm_only(pis), ppath,
 			pair, pscale, charpath_flag);
 
     if (code < 0)
@@ -888,7 +888,7 @@ append_simple(const byte *gdata, float sbw[4], const gs_matrix_fixed *pmat,
 	    gs_fixed_point cpoints[2];
 
             if_debug1('1', "[1t]start %d\n", i);
-            
+
             for (; np <= last_point; --reps, ++np) {
 		gs_fixed_point dpt;
 
@@ -923,20 +923,20 @@ append_simple(const byte *gdata, float sbw[4], const gs_matrix_fixed *pmat,
 		if (code < 0)
 		    return code;
 		pt.x += dpt.x, pt.y += dpt.y;
-		
+
                 if (ppts)	/* return the points */
 		    ppts[np] = pt;
-		
+
                 if (ppath) {
                     /* append to a path */
 		    if_debug3('1', "[1t]%s (%g %g)\n",
 		    	(flags & gf_OnCurve ? "on " : "off"), fixed2float(pt.x), fixed2float(pt.y));
-                    
+
                     if (move) {
                         if(is_start_off) {
                             if(flags & gf_OnCurve)
                                 start = pt;
-                            else { 
+                            else {
                                 start.x = (pt_start_off.x + pt.x)/2;
 			        start.y = (pt_start_off.y + pt.y)/2;
                                 cpoints[1]=pt;
@@ -945,12 +945,12 @@ append_simple(const byte *gdata, float sbw[4], const gs_matrix_fixed *pmat,
                             move = false;
                             cpoints[0] = start;
                             code = gx_path_add_point(ppath, start.x, start.y);
-                        } else { 
-                            if(flags & gf_OnCurve) { 
+                        } else {
+                            if(flags & gf_OnCurve) {
                                 cpoints[0] = start = pt;
 			        code = gx_path_add_point(ppath, pt.x, pt.y);
 			        move = false;
-                            } else { 
+                            } else {
                                 is_start_off = true;
                                 pt_start_off = pt;
                             }
@@ -978,8 +978,8 @@ append_simple(const byte *gdata, float sbw[4], const gs_matrix_fixed *pmat,
 		}
 	    }
 	    if (ppath) {
-		if (is_start_off) { 
-                    if (off_curve) { 
+		if (is_start_off) {
+                    if (off_curve) {
                         gs_fixed_point p;
                         p.x = (cpoints[1].x + pt_start_off.x)/2;
 	                p.y = (cpoints[1].y + pt_start_off.y)/2;
@@ -989,13 +989,13 @@ append_simple(const byte *gdata, float sbw[4], const gs_matrix_fixed *pmat,
                         code = add_quadratic_curve(ppath, &p, &pt_start_off, &start);
 		        if (code < 0)
 		            return code;
-                    } else { 
+                    } else {
                         code = add_quadratic_curve(ppath, cpoints, &pt_start_off, &start);
 		        if (code < 0)
 		            return code;
                     }
-                } else { 
-                    if (off_curve) { 
+                } else {
+                    if (off_curve) {
                         code = add_quadratic_curve(ppath, cpoints, cpoints+1, &start);
 		        if (code < 0)
 		            return code;
@@ -1103,16 +1103,15 @@ append_component(uint glyph_index, const gs_matrix_fixed * pmat,
 
 private int
 append_outline_fitted(uint glyph_index, const gs_matrix * pmat,
-	       gx_path * ppath, cached_fm_pair * pair, 
+	       gx_path * ppath, cached_fm_pair * pair,
 	       const gs_log2_scale_point * pscale, bool design_grid)
 {
     gs_font_type42 *pfont = (gs_font_type42 *)pair->font;
     int code;
 
     gx_ttfReader__set_font(pair->ttr, pfont);
-    code = gx_ttf_outline(pair->ttf, pair->ttr, pfont, (uint)glyph_index, 
+    code = gx_ttf_outline(pair->ttf, pair->ttr, pfont, (uint)glyph_index,
 	pmat, pscale, ppath, design_grid);
     gx_ttfReader__set_font(pair->ttr, NULL);
     return code;
 }
-

@@ -115,7 +115,7 @@ t4693d_print_page(gx_device_printer *dev, FILE *ps_stream)
 
 	for (checksum = 0, i = 0; &header[i] != p; i++)
 		checksum += header[i];
-		
+
 	*p++ = ((checksum%128)&0x7f) | 0x80;
 	*p = 0x02; /* end of line. */
 	/* write header */

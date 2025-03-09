@@ -15,7 +15,7 @@ enum {
 
 	Seconds=	0x00,
 	Minutes=	0x02,
-	Hours=		0x04, 
+	Hours=		0x04,
 	Mday=		0x07,
 	Month=		0x08,
 	Year=		0x09,
@@ -67,13 +67,13 @@ rtcattach(char* spec)
 	return devattach('r', spec);
 }
 
-static Walkqid*	 
+static Walkqid*
 rtcwalk(Chan* c, Chan *nc, char** name, int nname)
 {
 	return devwalk(c, nc, name, nname, rtcdir, nelem(rtcdir), devgen);
 }
 
-static int	 
+static int
 rtcstat(Chan* c, uchar* dp, int n)
 {
 	return devstat(c, dp, n, rtcdir, nelem(rtcdir), devgen);
@@ -95,14 +95,14 @@ rtcopen(Chan* c, int omode)
 	return devopen(c, omode, rtcdir, nelem(rtcdir), devgen);
 }
 
-static void	 
+static void
 rtcclose(Chan*)
 {
 }
 
 #define GETBCD(o) ((bcdclock[o]&0xf) + 10*(bcdclock[o]>>4))
 
-static long	 
+static long
 _rtctime(void)
 {
 	uchar bcdclock[Nbcd];
@@ -173,7 +173,7 @@ rtctime(void)
 	return t;
 }
 
-static long	 
+static long
 rtcread(Chan* c, void* buf, long n, vlong off)
 {
 	ulong t;
@@ -220,7 +220,7 @@ rtcread(Chan* c, void* buf, long n, vlong off)
 
 #define PUTBCD(n,o) bcdclock[o] = (n % 10) | (((n / 10) % 10)<<4)
 
-static long	 
+static long
 rtcwrite(Chan* c, void* buf, long n, vlong off)
 {
 	int t;
@@ -248,7 +248,7 @@ rtcwrite(Chan* c, void* buf, long n, vlong off)
 			cp++;
 		}
 		secs = strtoul(cp, 0, 0);
-	
+
 		/*
 		 *  convert to bcd
 		 */
@@ -277,7 +277,7 @@ rtcwrite(Chan* c, void* buf, long n, vlong off)
 			return 0;
 		if(n > Nvsize)
 			n = Nvsize;
-	
+
 		start = a = smalloc(n);
 		if(waserror()){
 			free(start);

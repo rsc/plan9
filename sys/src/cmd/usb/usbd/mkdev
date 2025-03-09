@@ -4,7 +4,7 @@ rfork e
 DB=usbdb
 HDR=../lib/usb.h
 
-subs=`{	grep '^	Cl.*' $HDR | 
+subs=`{	grep '^	Cl.*' $HDR |
 		sed -e 's/.*Cl([a-z]+)[ 	]+=[ 	]+([0-9]+).*/-e s.\1,.\2,./' |
 		tr A-Z a-z
 }

@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 Artifex Software Inc, artofcode llc.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -51,7 +51,7 @@
  * The functions below are desiged to assist the high level device in the
  * saving, comparing, and getting high level color information.
  */
- 
+
 
 #ifndef gs_imager_state_DEFINED
 #  define gs_imager_state_DEFINED
@@ -95,7 +95,7 @@ const gs_state * gx_hld_get_gstate_ptr(const gs_imager_state * pis);
  * color.  Otherwise 'false' is returned.  Thus the return does both
  * a save and test on the given color.
  *
- * If the device can't handle high level colors, it must pass NULL to 
+ * If the device can't handle high level colors, it must pass NULL to
  * the 'pis' argument.
  */
 bool gx_hld_save_color(const gs_imager_state * pis,
@@ -193,4 +193,3 @@ gx_hld_get_color_component_status gx_hld_get_color_component(
 		int comp_numi, float * output);
 
 #endif
-

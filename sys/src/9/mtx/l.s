@@ -408,7 +408,7 @@ TEXT	gotopc(SB), $0
  * vector location
  *	MOVW R0, SPR(SAVER0)
  *	MOVW LR, R0
- *	MOVW R0, SPR(SAVELR) 
+ *	MOVW R0, SPR(SAVELR)
  *	bl	trapvec(SB)
  */
 TEXT	trapvec(SB), $-4
@@ -421,7 +421,7 @@ TEXT	trapvec(SB), $-4
 	MOVW	CR, R1
 	MOVW	R0, CR
 	BC	4,17,ktrap
-	
+
 	/* switch to kernel stack */
 	MOVW	R1, CR
 	MOVW	R2, R0

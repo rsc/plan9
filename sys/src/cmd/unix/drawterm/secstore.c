@@ -108,7 +108,7 @@ extern SConn* newSConn(int);	// arg is open file descriptor
 struct SConn{
 	void *chan;
 	int secretlen;
-	int (*secret)(SConn*, uchar*, int);// 
+	int (*secret)(SConn*, uchar*, int);//
 	int (*read)(SConn*, uchar*, int); // <0 if error;  errmess in buffer
 	int (*write)(SConn*, uchar*, int);
 	void (*free)(SConn*);		// also closes file descriptor
@@ -664,4 +664,3 @@ Out:
 		free(sta);
 	return rv;
 }
-

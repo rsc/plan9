@@ -17,9 +17,9 @@ Pressing and holding down button 3 on the desktop or
 shell window will give you a menu with the following
 options:
 
- * New - create a new window 
- * Resize - reshape a window 
- * Move - move a window without reshaping it 
+ * New - create a new window
+ * Resize - reshape a window
+ * Move - move a window without reshaping it
  * Delete - close a window
  * Hide - hides a window from display (it will appear
    in this menu)
@@ -101,7 +101,7 @@ In the shell window button 2 will invoke a pop-up menu.
 Most of its commands operate on dot.
 
  * cut - moves the contents of the dot to the clipboard
-   if dot is non-empty 
+   if dot is non-empty
  * paste - replaces dot with the contents of the clipboard
  * snarf - copies dot to the clipboard
  * plumb - sends dot (or text surrounding dot, if dot is
@@ -175,4 +175,3 @@ FURTHER INFORMATION
 For further information, try the rio(1) manual page.
 Type "man rio" or click on rio(1) in either of these
 sentences and select plumb from the button 2 menu.
-

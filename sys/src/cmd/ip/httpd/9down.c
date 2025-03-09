@@ -323,5 +323,3 @@ out:
 	hprint(hout, "\r\n");
 	return rv;
 }
-
-

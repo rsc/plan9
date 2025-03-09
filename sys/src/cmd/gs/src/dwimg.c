@@ -1,12 +1,12 @@
 /* Copyright (C) 1996-2004 Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -26,7 +26,7 @@
  *   image_find()
  *   image_new()
  *   image_delete()
- *   image_size()  
+ *   image_size()
  * Main thread must acquire mutex on display_presize() and release
  * in display_size() after image_size() is called.
  * Main thread must acquire mutex on display_preclose().
@@ -53,7 +53,7 @@ static const char szTrcName2[] = "Ghostscript Graphical Trace";
 LRESULT CALLBACK WndImg2Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 static void register_class(void);
-static void draw(IMAGE *img, HDC hdc, int dx, int dy, int wx, int wy, 
+static void draw(IMAGE *img, HDC hdc, int dx, int dy, int wx, int wy,
     int sx, int sy);
 static HGLOBAL copy_dib(IMAGE *img);
 static HPALETTE create_palette(IMAGE *img);
@@ -76,22 +76,22 @@ static void create_window(IMAGE *img);
 
 
 /* GUI thread only */
-void image_color(unsigned int format, int index, 
+void image_color(unsigned int format, int index,
     unsigned char *r, unsigned char *g, unsigned char *b);
 void image_convert_line(IMAGE *img, unsigned char *dest, unsigned char *source);
-void image_16BGR555_to_24BGR(int width, unsigned char *dest, 
+void image_16BGR555_to_24BGR(int width, unsigned char *dest,
     unsigned char *source);
-void image_16BGR565_to_24BGR(int width, unsigned char *dest, 
+void image_16BGR565_to_24BGR(int width, unsigned char *dest,
     unsigned char *source);
-void image_16RGB555_to_24BGR(int width, unsigned char *dest, 
+void image_16RGB555_to_24BGR(int width, unsigned char *dest,
     unsigned char *source);
-void image_16RGB565_to_24BGR(int width, unsigned char *dest, 
+void image_16RGB565_to_24BGR(int width, unsigned char *dest,
     unsigned char *source);
-void image_4CMYK_to_24BGR(int width, unsigned char *dest, 
+void image_4CMYK_to_24BGR(int width, unsigned char *dest,
     unsigned char *source, IMAGE_DEVICEN *devicen, int devicen_gray);
-void image_32CMYK_to_24BGR(int width, unsigned char *dest, 
+void image_32CMYK_to_24BGR(int width, unsigned char *dest,
     unsigned char *source, IMAGE_DEVICEN *devicen, int devicen_gray);
-void image_devicen_to_24BGR(int width, unsigned char *dest, 
+void image_devicen_to_24BGR(int width, unsigned char *dest,
     unsigned char *source, IMAGE_DEVICEN *devicen, int devicen_gray);
 
 
@@ -161,7 +161,7 @@ image_delete(IMAGE *img)
 /* resize image */
 /* valid for main thread */
 int
-image_size(IMAGE *img, int new_width, int new_height, int new_raster, 
+image_size(IMAGE *img, int new_width, int new_height, int new_raster,
     unsigned int new_format, void *pimage)
 {
     int i;
@@ -283,19 +283,19 @@ image_size(IMAGE *img, int new_width, int new_height, int new_raster,
 	    img->devicen[0].used = 1;
 	    img->devicen[0].cyan = 65535;
 	    /* We already know about the CMYK components */
-	    strncpy(img->devicen[0].name, "Cyan", 
+	    strncpy(img->devicen[0].name, "Cyan",
 		sizeof(img->devicen[0].name));
 	    img->devicen[1].used = 1;
 	    img->devicen[1].magenta = 65535;
-	    strncpy(img->devicen[1].name, "Magenta", 
+	    strncpy(img->devicen[1].name, "Magenta",
 		sizeof(img->devicen[1].name));
 	    img->devicen[2].used = 1;
 	    img->devicen[2].yellow = 65535;
-	    strncpy(img->devicen[2].name, "Yellow", 
+	    strncpy(img->devicen[2].name, "Yellow",
 		sizeof(img->devicen[2].name));
 	    img->devicen[3].used = 1;
 	    img->devicen[3].black = 65535;
-	    strncpy(img->devicen[3].name, "Black", 
+	    strncpy(img->devicen[3].name, "Black",
 		sizeof(img->devicen[3].name));
 	    break;
 	case DISPLAY_COLORS_SEPARATION:
@@ -320,7 +320,7 @@ image_size(IMAGE *img, int new_width, int new_height, int new_raster,
     return 0;
 }
 
-int 
+int
 image_separation(IMAGE *img,
     int comp_num, const char *name,
     unsigned short c, unsigned short m,
@@ -343,12 +343,12 @@ image_separation(IMAGE *img,
 /* These functions are only accessed by the GUI thread */
 
 /* open window for device and add to list */
-void 
+void
 image_open(IMAGE *img)
 {
     /* register class */
     register_class();
-   
+
     /* open window */
     create_window(img);
 }
@@ -405,7 +405,7 @@ void image_separations(IMAGE *img)
 	for (i=0; i<IMAGE_DEVICEN_MAX; i++) {
 	    exist = 0;
 	    if (img->devicen[i].menu)
-		exist = GetMenuString(sysmenu, M_SEPARATION+i, 
+		exist = GetMenuString(sysmenu, M_SEPARATION+i,
 			buf, sizeof(buf)-1, MF_BYCOMMAND) != 0;
 	    if (exist && (strcmp(img->devicen[i].name, buf) != 0)) {
 		/* remove it because name changed */
@@ -413,14 +413,14 @@ void image_separations(IMAGE *img)
 	       img->devicen[i].menu = 0;
 	    }
 	    if (img->devicen[i].name[0] && !img->devicen[i].menu) {
-		AppendMenu(sysmenu, MF_STRING | MF_CHECKED, 
+		AppendMenu(sysmenu, MF_STRING | MF_CHECKED,
 		    M_SEPARATION+i, img->devicen[i].name);
 		img->devicen[i].menu = 1;
 	    }
 	    if (img->devicen[i].used && img->devicen[i].visible)
 		num_visible++;
 	}
-	EnableMenuItem(sysmenu, M_DEVICEN_GRAY, 
+	EnableMenuItem(sysmenu, M_DEVICEN_GRAY,
 	    MF_BYCOMMAND | ((num_visible <= 1) ? MF_ENABLED : MF_GRAYED));
     }
     else {
@@ -439,13 +439,13 @@ void sep_menu(IMAGE *img, int component)
     int i;
     int num_visible = 0;
     img->devicen[component].visible = !img->devicen[component].visible;
-    CheckMenuItem(GetSystemMenu(img->hwnd, FALSE), 
-	M_SEPARATION+component, 
+    CheckMenuItem(GetSystemMenu(img->hwnd, FALSE),
+	M_SEPARATION+component,
 	(img->devicen[component].visible ? MF_CHECKED : MF_UNCHECKED));
     for (i=0; i<IMAGE_DEVICEN_MAX; i++)
         if (img->devicen[i].used && img->devicen[i].visible)
 	    num_visible++;
-    EnableMenuItem(GetSystemMenu(img->hwnd, FALSE), M_DEVICEN_GRAY, 
+    EnableMenuItem(GetSystemMenu(img->hwnd, FALSE), M_DEVICEN_GRAY,
 	MF_BYCOMMAND | ((num_visible <= 1) ? MF_ENABLED : MF_GRAYED));
     InvalidateRect(img->hwnd, NULL, 0);
     UpdateWindow(img->hwnd);
@@ -479,7 +479,7 @@ create_window(IMAGE *img)
     img->x = img->y = img->cx = img->cy = CW_USEDEFAULT;
     if (win_get_reg_value((img->device != NULL ? "Image" : "Tracer"), winposbuf, &len) == 0) {
 	int x, y, cx, cy;
-	
+
 	if (sscanf(winposbuf, "%d %d %d %d", &x, &y, &cx, &cy) == 4) {
 	    img->x = x;
 	    img->y = y;
@@ -511,8 +511,8 @@ create_window(IMAGE *img)
 		    break;
 	    if (i < sizeof(ini_path) - 4) {
 		strcpy(ini_path + i, ".ini");
-		GetPrivateProfileString("Window", "Title", 
-			(img->device != NULL ? (LPSTR)szImgName2 : (LPSTR)szTrcName2), 
+		GetPrivateProfileString("Window", "Title",
+			(img->device != NULL ? (LPSTR)szImgName2 : (LPSTR)szTrcName2),
  			window_title, sizeof(window_title), ini_path);
 	    }
 	}
@@ -520,7 +520,7 @@ create_window(IMAGE *img)
     /* create window */
     img->hwnd = CreateWindow(szImgName2, window_title,
 	      WS_OVERLAPPEDWINDOW,
-	      img->x, img->y, img->cx, img->cy, 
+	      img->x, img->y, img->cx, img->cy,
 	      NULL, NULL, GetModuleHandle(NULL), (void *)img);
     if (img->device == NULL && img->x != CW_USEDEFAULT &&
 			       img->y != CW_USEDEFAULT &&
@@ -539,7 +539,7 @@ create_window(IMAGE *img)
     image_separations(img);
 }
 
-	
+
 void
 image_poll(IMAGE *img)
 {
@@ -571,7 +571,7 @@ image_update_now(IMAGE *img)
 	/* Make sure the update interval is at least 10 times
 	 * what it takes to paint the window
 	 */
-	delta = (t2.wSecond - t1.wSecond)*1000 + 
+	delta = (t2.wSecond - t1.wSecond)*1000 +
 		(t2.wMilliseconds - t1.wMilliseconds);
 	if (delta < 0)
 	    delta += 60000;
@@ -626,13 +626,13 @@ image_updatesize(IMAGE *img)
 	else
 	    nSizeType = SIZE_RESTORED;
 	GetClientRect(img->hwnd, &rect);
-	SendMessage(img->hwnd, WM_SIZE, nSizeType, 
+	SendMessage(img->hwnd, WM_SIZE, nSizeType,
 	    MAKELONG(rect.right, rect.bottom));
     }
 }
 
 void
-image_color(unsigned int format, int index, 
+image_color(unsigned int format, int index,
     unsigned char *r, unsigned char *g, unsigned char *b)
 {
     switch (format & DISPLAY_COLORS_MASK) {
@@ -847,7 +847,7 @@ image_32CMYK_to_24BGR(int width, unsigned char *dest, unsigned char *source,
 }
 
 void
-image_devicen_to_24BGR(int width, unsigned char *dest, unsigned char *source, 
+image_devicen_to_24BGR(int width, unsigned char *dest, unsigned char *source,
     IMAGE_DEVICEN *devicen, int devicen_gray)
 {
     int i, j;
@@ -901,7 +901,7 @@ image_convert_line(IMAGE *img, unsigned char *dest, unsigned char *source)
 {
     unsigned char *d = dest;
     unsigned char *s = source;
-    int width = img->bmih.biWidth; 
+    int width = img->bmih.biWidth;
     unsigned int alpha = img->format & DISPLAY_ALPHA_MASK;
     BOOL bigendian = (img->format & DISPLAY_ENDIAN_MASK) == DISPLAY_BIGENDIAN;
     int i;
@@ -912,20 +912,20 @@ image_convert_line(IMAGE *img, unsigned char *dest, unsigned char *source)
 		if (bigendian) {
 		    if ((img->format & DISPLAY_555_MASK)
 			== DISPLAY_NATIVE_555)
-			image_16RGB555_to_24BGR(img->bmih.biWidth, 
+			image_16RGB555_to_24BGR(img->bmih.biWidth,
 			    dest, source);
 		    else
-			image_16RGB565_to_24BGR(img->bmih.biWidth, 
+			image_16RGB565_to_24BGR(img->bmih.biWidth,
 			    dest, source);
 		}
 		else {
 		    if ((img->format & DISPLAY_555_MASK)
 			== DISPLAY_NATIVE_555) {
-			image_16BGR555_to_24BGR(img->bmih.biWidth, 
+			image_16BGR555_to_24BGR(img->bmih.biWidth,
 			    dest, source);
 		    }
 		    else
-			image_16BGR565_to_24BGR(img->bmih.biWidth, 
+			image_16BGR565_to_24BGR(img->bmih.biWidth,
 			    dest, source);
 		}
 	    }
@@ -934,7 +934,7 @@ image_convert_line(IMAGE *img, unsigned char *dest, unsigned char *source)
 	    if ((img->format & DISPLAY_DEPTH_MASK) != DISPLAY_DEPTH_8)
 		return;
 	    for (i=0; i<width; i++) {
-		if ((alpha == DISPLAY_ALPHA_FIRST) || 
+		if ((alpha == DISPLAY_ALPHA_FIRST) ||
 		    (alpha == DISPLAY_UNUSED_FIRST))
 		    s++;
 		if (bigendian) {
@@ -948,7 +948,7 @@ image_convert_line(IMAGE *img, unsigned char *dest, unsigned char *source)
 		    *d++ = *s++;
 		    *d++ = *s++;
 		}
-		if ((alpha == DISPLAY_ALPHA_LAST) || 
+		if ((alpha == DISPLAY_ALPHA_LAST) ||
 		    (alpha == DISPLAY_UNUSED_LAST))
 		    s++;
 	    }
@@ -959,10 +959,10 @@ printf("   d=0x%x s=0x%x\n", (int)d, (int)s);
 	    break;
 	case DISPLAY_COLORS_CMYK:
 	    if ((img->format & DISPLAY_DEPTH_MASK) == DISPLAY_DEPTH_8)
-		image_32CMYK_to_24BGR(width, dest, source, 
+		image_32CMYK_to_24BGR(width, dest, source,
 		    img->devicen, img->devicen_gray);
 	    else if ((img->format & DISPLAY_DEPTH_MASK) == DISPLAY_DEPTH_1) {
-		image_4CMYK_to_24BGR(width, dest, source, 
+		image_4CMYK_to_24BGR(width, dest, source,
 		    img->devicen, img->devicen_gray);
 	    }
 	    else
@@ -971,7 +971,7 @@ printf("   d=0x%x s=0x%x\n", (int)d, (int)s);
 	case DISPLAY_COLORS_SEPARATION:
 	    if ((img->format & DISPLAY_DEPTH_MASK) != DISPLAY_DEPTH_8)
 		return;
-	    image_devicen_to_24BGR(width, dest, source, 
+	    image_devicen_to_24BGR(width, dest, source,
 		img->devicen, img->devicen_gray);
 	    break;
     }
@@ -980,7 +980,7 @@ printf("   d=0x%x s=0x%x\n", (int)d, (int)s);
 /* This makes a copy of the bitmap in global memory, suitable for clipboard */
 /* Do not put 16 or 32-bit per pixels on the clipboard because */
 /* ClipBook Viewer (NT4) can't display them */
-static HGLOBAL 
+static HGLOBAL
 copy_dib(IMAGE *img)
 {
     int bitsperpixel;
@@ -1038,7 +1038,7 @@ copy_dib(IMAGE *img)
     pbmih->biClrImportant = palcount;
 
     for (i = 0; i < palcount; i++) {
-	image_color(img->format, i, &pColors[i].rgbRed, 
+	image_color(img->format, i, &pColors[i].rgbRed,
 	    &pColors[i].rgbGreen, &pColors[i].rgbBlue);
 	pColors[i].rgbReserved = 0;
     }
@@ -1088,7 +1088,7 @@ copy_dib(IMAGE *img)
     return hglobal;
 }
 
-static HPALETTE 
+static HPALETTE
 create_palette(IMAGE *img)
 {
     int i;
@@ -1098,7 +1098,7 @@ create_palette(IMAGE *img)
     nColors = img->bmih.biClrUsed;
     if (nColors) {
 	LPLOGPALETTE logpalette;
-	logpalette = (LPLOGPALETTE) malloc(sizeof(LOGPALETTE) + 
+	logpalette = (LPLOGPALETTE) malloc(sizeof(LOGPALETTE) +
 	    nColors * sizeof(PALETTEENTRY));
 	if (logpalette == (LPLOGPALETTE) NULL)
 	    return (HPALETTE)0;
@@ -1151,7 +1151,7 @@ WndImg2Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		if (hglobal == (HGLOBAL)NULL) {
 		    if (img->hmutex != INVALID_HANDLE_VALUE)
 			ReleaseMutex(img->hmutex);
-		    MessageBox(hwnd, "Not enough memory to Copy to Clipboard", 
+		    MessageBox(hwnd, "Not enough memory to Copy to Clipboard",
 			szImgName2, MB_OK | MB_ICONEXCLAMATION);
 		    return 0;
 		}
@@ -1172,7 +1172,7 @@ WndImg2Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	    }
 	    else if (LOWORD(wParam) == M_DEVICEN_GRAY) {
 		img->devicen_gray = !img->devicen_gray;
-		CheckMenuItem(GetSystemMenu(img->hwnd, FALSE), M_DEVICEN_GRAY, 
+		CheckMenuItem(GetSystemMenu(img->hwnd, FALSE), M_DEVICEN_GRAY,
 		    (img->devicen_gray ? MF_CHECKED : MF_UNCHECKED));
 		InvalidateRect(img->hwnd, NULL, 0);
 		UpdateWindow(img->hwnd);
@@ -1225,7 +1225,7 @@ WndImg2Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	    SetScrollRange(hwnd, SB_HORZ, 0, img->nHscrollMax, FALSE);
 	    SetScrollPos(hwnd, SB_HORZ, img->nHscrollPos, TRUE);
 
-	    if ((wParam==SIZENORMAL) 
+	    if ((wParam==SIZENORMAL)
 		&& (img->cxAdjust!=0 || img->cyAdjust!=0)) {
 		GetWindowRect(GetParent(hwnd),&rect);
 		MoveWindow(GetParent(hwnd),rect.left,rect.top,
@@ -1263,7 +1263,7 @@ WndImg2Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		default:
 		    nVscrollInc = 0;
 	    }
-	    if ((nVscrollInc = max(-img->nVscrollPos, 
+	    if ((nVscrollInc = max(-img->nVscrollPos,
 		min(nVscrollInc, img->nVscrollMax - img->nVscrollPos)))!=0) {
 		img->nVscrollPos += nVscrollInc;
 		ScrollWindow(hwnd,0,-nVscrollInc,NULL,NULL);
@@ -1292,7 +1292,7 @@ WndImg2Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		default:
 		    nHscrollInc = 0;
 	    }
-	    if ((nHscrollInc = max(-img->nHscrollPos, 
+	    if ((nHscrollInc = max(-img->nHscrollPos,
 		min(nHscrollInc, img->nHscrollMax - img->nHscrollPos)))!=0) {
 		img->nHscrollPos += nHscrollInc;
 		ScrollWindow(hwnd,-nHscrollInc,0,NULL,NULL);
@@ -1346,7 +1346,7 @@ WndImg2Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		ir.Event.KeyEvent.bKeyDown = TRUE;
 		ir.Event.KeyEvent.wRepeatCount = lParam & 0xffff;
 		ir.Event.KeyEvent.wVirtualKeyCode = VkKeyScan((TCHAR)wParam) & 0xff;
-		ir.Event.KeyEvent.wVirtualScanCode = 
+		ir.Event.KeyEvent.wVirtualScanCode =
 		    (lParam >> 16) & 0xff;
 		ir.Event.KeyEvent.uChar.AsciiChar = wParam;
 		if (GetKeyState(VK_CAPITAL))
@@ -1370,7 +1370,7 @@ WndImg2Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		if (ir.Event.KeyEvent.uChar.AsciiChar == 3)
 		    GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0L);
 		else if (hStdin != INVALID_HANDLE_VALUE)
-		    WriteConsoleInput(hStdin, &ir, 1, &dwWritten); 
+		    WriteConsoleInput(hStdin, &ir, 1, &dwWritten);
 	    }
 	    return 0;
 	case WM_TIMER:
@@ -1395,7 +1395,7 @@ WndImg2Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	    sx = rect.left;	/* source */
 	    sy = rect.top;
 	    sx += img->nHscrollPos; /* scrollbars */
-	    sy += img->nVscrollPos;	
+	    sy += img->nVscrollPos;
 	    if (sx+wx > img->bmih.biWidth)
 		    wx = img->bmih.biWidth - sx;
 	    if (sy+wy > img->bmih.biHeight)
@@ -1403,7 +1403,7 @@ WndImg2Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	    draw(img, hdc, dx, dy, wx, wy, sx, sy);
 
-	    /* fill areas around page */ 
+	    /* fill areas around page */
 	    if (rect.right > img->bmih.biWidth) {
 		fillrect.top = rect.top;
 		fillrect.left = img->bmih.biWidth;
@@ -1442,7 +1442,7 @@ WndImg2Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		    for (p=szFile; *p; p++) {
 			if (*p == '\\')
 			    SendMessage(hwnd,WM_CHAR,'/',1L);
-			else 
+			else
 			    SendMessage(hwnd,WM_CHAR,*p,1L);
 		    }
 		    for (p=szDragPost; *p; p++)
@@ -1454,7 +1454,7 @@ WndImg2Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 	    {   /* Save the text window size */
 		char winposbuf[64];
-		sprintf(winposbuf, "%d %d %d %d", img->x, img->y, 
+		sprintf(winposbuf, "%d %d %d %d", img->x, img->y,
 		    img->cx, img->cy);
 		win_set_reg_value((img->device != NULL ? "Image" : "Tracer"), winposbuf);
 	    }
@@ -1488,7 +1488,7 @@ draw(IMAGE *img, HDC hdc, int dx, int dy, int wx, int wy,
         return;
 
     memset(&bmi.h, 0, sizeof(bmi.h));
-    
+
     bmi.h.biSize = sizeof(bmi.h);
     bmi.h.biWidth = img->bmih.biWidth;
     bmi.h.biHeight = wy;
@@ -1500,13 +1500,13 @@ draw(IMAGE *img, HDC hdc, int dx, int dy, int wx, int wy,
     bmi.h.biYPelsPerMeter = 0;	/* default */
     bmi.h.biClrUsed = img->bmih.biClrUsed;
     bmi.h.biClrImportant = img->bmih.biClrImportant;
-    
+
     if (img->bmih.biClrUsed) {
 	/* palette colors */
 	for (i = 0; i < img->bmih.biClrUsed; i++)
 	    bmi.pal_index[i] = i;
 	which_colors = DIB_PAL_COLORS;
-    } 
+    }
     else if (bmi.h.biBitCount == 16) {
 	DWORD* bmi_colors = (DWORD*)(&bmi.pal_index[0]);
 	bmi.h.biCompression = BI_BITFIELDS;
@@ -1530,7 +1530,7 @@ draw(IMAGE *img, HDC hdc, int dx, int dy, int wx, int wy,
 	bmi.h.biCompression = BI_BITFIELDS;
 	which_colors = DIB_RGB_COLORS;
 	if ((img->format & DISPLAY_ENDIAN_MASK) == DISPLAY_BIGENDIAN) {
-	    if ((alpha == DISPLAY_ALPHA_FIRST) || 
+	    if ((alpha == DISPLAY_ALPHA_FIRST) ||
 		(alpha == DISPLAY_UNUSED_FIRST)) {
 		/* Mac mode */
 		bmi_colors[0] = 0x0000ff00;
@@ -1544,7 +1544,7 @@ draw(IMAGE *img, HDC hdc, int dx, int dy, int wx, int wy,
 	    }
 	}
 	else {
-	    if ((alpha == DISPLAY_ALPHA_FIRST) || 
+	    if ((alpha == DISPLAY_ALPHA_FIRST) ||
 		(alpha == DISPLAY_UNUSED_FIRST)) {
 		/* ignore alpha */
 		bmi_colors[0] = 0xff000000;
@@ -1644,11 +1644,10 @@ draw(IMAGE *img, HDC hdc, int dx, int dy, int wx, int wy,
 	SetDIBitsToDevice(hdc, dx, dy, wx, ny, sx, 0, 0, ny, bits,
 		  (BITMAPINFO *) & bmi, which_colors);
     }
-    
+
     if (which_colors == DIB_PAL_COLORS)
 	SelectPalette(hdc, oldpalette, FALSE);
 
     if (line)
 	free(line);
 }
-

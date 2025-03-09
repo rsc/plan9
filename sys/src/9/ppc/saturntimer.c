@@ -13,7 +13,7 @@ enum {
 	Timer0_cnt = Saturn + 0x0204,
 	Timer1_load = Saturn + 0x0300,
 	Timer1_cnt = Saturn + 0x0304,
-	
+
 	T0_event = RBIT(13, ushort),
 	T0_ie = RBIT(14, ushort),
 	T0_cen = RBIT(15, ushort),
@@ -50,7 +50,7 @@ saturntimerintr(Ureg *u, void*)
 		v = T1_event;
 		ticks++;
 	}
-		
+
 	*(ushort*)Timer_ctrl = timer_ctl|T0_event|v;
 	intack();
 	timerintr(u, 0);
@@ -79,7 +79,7 @@ fastticks(uvlong *hz)
 		*(ushort*)Timer_ctrl = timer_ctl|T1_event;
 		ticks++;
 	}
-		
+
 	if (hz)
 		*hz = m->bushz;
 
@@ -107,4 +107,3 @@ timerset(Tval next)
 	assert(*(ushort*)Timer_ctrl & T1_cen);
 	iunlock(&tlock);
 }
-

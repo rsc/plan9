@@ -35,4 +35,3 @@ in
 .IR intro (2),
 .IR getwd (2),
 .IR fd2path (2)
-

@@ -883,7 +883,7 @@ tlbmissval(Machine *m, uvlong *v, uvlong *vmax, int init)
 	if(init)
 		*vmax = (sleeptime/1000)*10;
 	if (mycputype && strcmp(mycputype, "mips") == 0)
-		*vmax *= 50000;		/* mainly for 16-entry tlbs (rb) */	
+		*vmax *= 50000;		/* mainly for 16-entry tlbs (rb) */
 }
 
 void

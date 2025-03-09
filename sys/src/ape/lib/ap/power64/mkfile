@@ -7,4 +7,3 @@ OFILES=\
 </sys/src/cmd/mksyslib
 
 CFLAGS=-c -D_POSIX_SOURCE -D_PLAN9_SOURCE
-

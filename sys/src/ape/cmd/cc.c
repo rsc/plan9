@@ -7,7 +7,7 @@
    standard options: -c, -D name[=val], -E (preprocess to stdout),
        -g, -L dir, -o outfile, -O, -s, -U name
        (and operands can have -l lib interspersed)
-   
+
     nonstandard but specified options: -S (assembly language left in .s),
        -Wx,arg1[,arg2...] (pass arg(s) to phase x, where x is p (cpp)
    			 0 (compiler), or l (loader)

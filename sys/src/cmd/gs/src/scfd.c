@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -283,7 +283,7 @@ s_CFD_process(stream_state * st, stream_cursor_read * pr,
 		goto out;
 	}
 	ss->row++;
-	if (rows_left > 0 && --rows_left == 0) 
+	if (rows_left > 0 && --rows_left == 0)
 	    goto ck_eol;	/* handle EOD if it is present */
 	if (ss->K != 0) {
 	    byte *prev_bits = ss->lprev;

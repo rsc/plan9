@@ -92,4 +92,3 @@ extern	void		pipectl(void*);
 
 extern	Window	*win;
 extern	Channel	*fschan, *writechan;
-

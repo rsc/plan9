@@ -289,7 +289,7 @@ enum	as
 	AFSQRTSCC,
 
 	/* 64-bit */
-	
+
 	ACNTLZD,
 	ACNTLZDCC,
 	ACMPW,	/* CMP with L=0 */

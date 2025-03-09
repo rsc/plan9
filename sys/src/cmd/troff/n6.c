@@ -138,7 +138,7 @@ void n_setfont(int a)
 
 	if (a)
 		i = getrq();
-	else 
+	else
 		i = getsn();
 	if (!i || i == 'P') {
 		j = font1;
@@ -187,7 +187,7 @@ void n_setwd(void)
 				k = -k;
 			base -= k;
 			emsz = 0;
-		} else 
+		} else
 			continue;
 		if (base < numtabp[SB].val)
 			numtabp[SB].val = base;
@@ -299,7 +299,7 @@ bd0:
 	if (skip() || !(i = getrq()) || (j = findft(i)) == -1) {
 		if (k)
 			goto bd1;
-		else 
+		else
 			return;
 	}
 	if (j == smnt) {

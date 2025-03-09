@@ -465,7 +465,7 @@ end_labs(Symbol *s, int i)
 				Fname  = l->e->n->fn;
 				printf("spin: %3d:%s, warning, %s - is invisible\n",
 					lineno, Fname?Fname->name:"-", foo);
-	}	}	}	
+	}	}	}
 	/* visible states -- through remote refs: */
 	for (l = labtab; l; l = l->nxt)
 		if (l->visible
@@ -966,7 +966,7 @@ do_var(FILE *ofd, int dowhat, char *s, Symbol *sp,
 
 static void
 do_init(FILE *ofd, Symbol *sp)
-{	int i; 
+{	int i;
 
 	if (sp->ini
 	&&  sp->type == CHAN
@@ -1089,7 +1089,7 @@ multi_init(void)
 			fprintf(fd_tc, "\t\treached%d[%d]=1;\n", p->tn, ini);
 
 			/* the default initial claim is first one in model */
-			if (--nrc == 0)	
+			if (--nrc == 0)
 			{ fprintf(fd_tc, "\t\t((P%d *)pptr(h))->_t = %d;\n", i, p->tn);
 			  fprintf(fd_tc, "\t\t((P%d *)pptr(h))->_p = %d;\n", i, ini);
 			  fprintf(fd_tc, "\t\t((P%d *)pptr(h))->_n = %d; /* %s */\n",
@@ -1291,7 +1291,7 @@ typ2c(Symbol *sp)
 	case BIT:
 		if (sp->nel == 1 && sp->isarray == 0 && !(sp->hidden&1))
 		{	fprintf(fd_th, "\tunsigned %s : 1", sp->name);
-			LstSet = sp; 
+			LstSet = sp;
 			nBits++;
 			break;
 		} /* else fall through */

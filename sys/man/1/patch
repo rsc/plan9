@@ -7,7 +7,7 @@ patch \- simple patch creation and tracking system
 .I email
 .I files ...
 [
-.B < 
+.B <
 .I description
 ]
 .PP
@@ -26,7 +26,7 @@ patch \- simple patch creation and tracking system
 .I name
 .PP
 .B patch/note
-.I name 
+.I name
 [
 .B <
 .I note
@@ -36,7 +36,7 @@ These scripts are a simple patch submission and tracking system
 used to propose additions or changes to Plan 9.
 There is no guarantee that any patch will be accepted, nor
 that it will be accepted verbatim.
-Each patch has a 
+Each patch has a
 .I name
 (lowercase letters, numbers, dash, dot, and underscore only)
 and is stored in
@@ -108,7 +108,7 @@ will copy the backups saved by
 back into the source tree.
 It will not restore a backup if the file
 being replaced is not byte-identical to the one
-created by 
+created by
 .I patch/apply.
 .SH EXAMPLES
 Propose a change to
@@ -119,7 +119,7 @@ which you have modified locally:
 % patch/create pwd-errors user@host.dom /sys/src/cmd/pwd.c
 Fix pwd to print errors to fd 2 rather than 1.
 ^D
-% 
+%
 .EE
 .PP
 Then the developers at Bell Labs run
@@ -143,10 +143,10 @@ Otherwise they run
 % patch/note pwd-errors
 Pwd should definitely print errors to fd 1 because ...
 ^D
-% 
+%
 .EE
 .PP
-to add a note to the 
+to add a note to the
 .B /n/sources/pwd-errors/notes
 file.
 .SH FILES

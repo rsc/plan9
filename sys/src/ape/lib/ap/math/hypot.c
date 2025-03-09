@@ -18,7 +18,7 @@ hypot(double a, double b)
 		a = b;
 		b = t;
 	}
-	if(b == 0) 
+	if(b == 0)
 		return 0;
 	a /= b;
 	/*

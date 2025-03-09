@@ -201,4 +201,3 @@ needkeyqueue(Req *r, Fsstate *fss)
 	needlast = &r->aux;
 	return 0;
 }
-

@@ -53,10 +53,10 @@ enum	as
 	AB,
 	ABL,
 
-/* 
- * Do not reorder or fragment the conditional branch 
- * opcodes, or the predication code will break 
- */ 
+/*
+ * Do not reorder or fragment the conditional branch
+ * opcodes, or the predication code will break
+ */
 	ABEQ,
 	ABNE,
 	ABCS,
@@ -149,7 +149,7 @@ enum	as
 
 	ALDREX,
 	ASTREX,
-	
+
 	ALDREXD,
 	ASTREXD,
 

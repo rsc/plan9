@@ -31,4 +31,3 @@ fmtvprint(Fmt *f, char *fmt, va_list args)
 		return 0;
 	return n;
 }
-

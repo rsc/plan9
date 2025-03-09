@@ -1,5 +1,5 @@
 This directory contains only the fonts in a
-standard GS font distribution, e.g. 
+standard GS font distribution, e.g.
 gnu-gs-fonts-std-6.0.tar.gz.  It does not,
 for example, contain the Utopia or Hershey fonts.
 See the Ghostscript documentation for information

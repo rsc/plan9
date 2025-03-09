@@ -294,7 +294,7 @@ serves repositories using the
 .I git://
 protocol over stdin.
 By default, it serves them read-only.
-The 
+The
 .I -w
 flag, it allows pushing into repositories.
 The
@@ -304,7 +304,7 @@ flag serves repositories relative to
 .BR path .
 
 .PP
-.B Git/fs 
+.B Git/fs
 serves a file system on $repo/.git/fs.
 For full documentation, see
 .IR gitfs (4)

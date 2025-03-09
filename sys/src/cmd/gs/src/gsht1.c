@@ -1,12 +1,12 @@
 /* Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -51,7 +51,7 @@ public_st_ht_component_element();
 
 /* GC procedures */
 
-private 
+private
 ENUM_PTRS_WITH(halftone_component_enum_ptrs, gs_halftone_component *hptr) return 0;
 case 0:
 switch (hptr->type)
@@ -259,7 +259,7 @@ gs_sethalftone_prepare(gs_state * pgs, gs_halftone * pht,
 		    return_error(gs_error_VMerror);
 		poc_next = pocs + 1;
 		for (i = 0; i < count; i++, phc++) {
-		    gx_ht_order_component *poc = poc_next;		    
+		    gx_ht_order_component *poc = poc_next;
 
 		    if (phc->comp_number == GX_DEVICE_COLOR_MAX_COMPONENTS) {
 			if (have_Default) {
@@ -591,7 +591,7 @@ gs_sethalftone_try_wts(gs_halftone *pht, gs_state *pgs,
         if (depth >= 2 * num_comps)
 	    return 1;
         if (dev->color_info.gray_index != GX_CINFO_COMP_NO_INDEX &&
-            (dev->color_info.max_gray > 1 || 
+            (dev->color_info.max_gray > 1 ||
 	    (num_comps > 1 && dev->color_info.max_color > 1)))
             return 1;
     }

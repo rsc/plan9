@@ -26,7 +26,7 @@ checkSize(int n)
 	}
 	return 1;
 }
-		
+
 
 void
 vtRootPack(VtRoot *r, uchar *p)
@@ -135,7 +135,7 @@ vtEntryUnpack(VtEntry *e, uchar *p, int index)
 	p += VtScoreSize;
 
 	assert(p-op == VtEntrySize);
-	
+
 	if(!(e->flags & VtEntryActive))
 		return 1;
 
@@ -144,4 +144,3 @@ vtEntryUnpack(VtEntry *e, uchar *p, int index)
 
 	return 1;
 }
-

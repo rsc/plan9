@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -453,7 +453,7 @@ device_is_true_color(gx_device * dev)
 		const int ys = depth / 4, ms = ys * 2, cs = ys * 3;
 
 		for (i = 0; i <= max_v; ++i) {
-                    
+
 		    gx_color_value cyan[4];
                     gx_color_value magenta[4];
                     gx_color_value yellow[4];

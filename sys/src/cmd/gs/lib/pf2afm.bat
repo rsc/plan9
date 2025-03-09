@@ -1,4 +1,4 @@
-@echo off 
+@echo off
 @rem $Id: pf2afm.bat,v 1.5 2002/02/21 21:49:28 giles Exp $
 @rem Make an AFM file from PFB / PFA and (optionally) PFM files.
 
@@ -13,5 +13,3 @@ goto end
 echo "Usage: pf2afm disk_font_name"
 
 :end
-
-

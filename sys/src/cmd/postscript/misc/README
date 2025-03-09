@@ -12,4 +12,3 @@ Use make to compile C programs. For example,
 	make macfont
 
 compiles macfont.c.
-

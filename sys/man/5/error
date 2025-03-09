@@ -1,4 +1,4 @@
-.TH ERROR 5 
+.TH ERROR 5
 .SH NAME
 error \- return an error
 .SH SYNOPSIS

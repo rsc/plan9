@@ -4,17 +4,17 @@
 .xx "" "" "0l, 1l, 2l, 5l, 6l, 7l, 8l, kl, ql, vl \- loaders" "" "2l(1)" 8
 .xx "" "mp3dec \- decode audio MPEG files (layers" "1, 2 and 3)" "" "mp3dec(1)" 138
 .xx "" "vt \- emulate a" "100 or VT-220 terminal" "" "vt(1)" 260
-.xx "" "172.31.204.64/27," "10.12.0.0/24 \- Antwerp Plan 9 Networks" "" 
+.xx "" "172.31.204.64/27," "10.12.0.0/24 \- Antwerp Plan 9 Networks" ""
 .xx "" "apm \- Advanced Power Management" "1.2 BIOS interface" "" "apm(3)" 583
 .xx "" "apm \- Advanced Power Management" "1.2 BIOS interface" "" "apm(8)" 830
-.xx "Plan 9 Networks" "" "172.31.204.64/27, 10.12.0.0/24 \- Antwerp" "" 
+.xx "Plan 9 Networks" "" "172.31.204.64/27, 10.12.0.0/24 \- Antwerp" ""
 .xx "" "0a," "1a, 2a, 5a, 6a, 7a, 8a, ka, qa, va \- assemblers" "" "2a(1)" 4
 .xx "" "0c," "1c, 2c, 5c, 6c, 7c, 8c, kc, qc, vc \- C compilers" "" "2c(1)" 5
 .xx "" "0l," "1l, 2l, 5l, 6l, 7l, 8l, kl, ql, vl \- loaders" "" "2l(1)" 8
 .xx "" "mp3dec \- decode audio MPEG files (layers 1," "2 and 3)" "" "mp3dec(1)" 138
 .xx "" "pushssl \- attach SSL version" "2 encryption to a communication channel" "" "pushssl(2)" 493
 .xx "" "vt \- emulate a VT-100 or" "220 terminal" "" "vt(1)" 260
-.xx "" "" "27, 10.12.0.0/24 \- Antwerp Plan 9 Networks" "" 
+.xx "" "" "27, 10.12.0.0/24 \- Antwerp Plan 9 Networks" ""
 .xx "" "0a, 1a," "2a, 5a, 6a, 7a, 8a, ka, qa, va \- assemblers" "" "2a(1)" 4
 .xx "" "0c, 1c," "2c, 5c, 6c, 7c, 8c, kc, qc, vc \- C compilers" "" "2c(1)" 5
 .xx "" "0l, 1l," "2l, 5l, 6l, 7l, 8l, kl, ql, vl \- loaders" "" "2l(1)" 8
@@ -87,7 +87,7 @@
 .xx "" "ident, matmul, matmulr, determinant," "adjoint, invertmat, xformpoint, xformpointd,/" "" "matrix(2)" 450
 .xx "" "inflatezlibblock, flateerr, mkcrctab, blockcrc," "adler32 \- deflate compression" "/inflateblock," "flate(2)" 382
 .xx "" "intro \- introduction to system" "administration" "" "intro(8)" 821
-.xx "" "intro \- introduction to local hardware" "administration" "" 
+.xx "" "intro \- introduction to local hardware" "administration" ""
 .xx "" "kfscmd, ksync \- kfs" "administration" "" "kfscmd(8)" 880
 .xx "" "/setup.9fat, setup.disk, setup.kfs, update \-" "administration for local file systems" "" "update(8)" 955
 .xx "" "/setupAESXCBCstate, aesXCBCmac -" "advanced encryption standard (rijndael)" "" "aes(2)" 288
@@ -98,7 +98,7 @@
 .xx "" "" "aescbc, ipso, secstore \- secstore commands" "" "secstore(1)" 203
 .xx "aesCTRencrypt,/" "setupAESstate," "aesCBCencrypt, aesCBCdecrypt," "" "aes(2)" 288
 .xx "aesXCBCmac/" "/aesCBCdecrypt, aesCTRencrypt," "aesCTRdecrypt, setupAESXCBCstate," "" "aes(2)" 288
-.xx "kapellen \- Antwerp/" "delirium, duvel, leffe," "affligem, arend, koninck, kijkuit, doom," "" 
+.xx "kapellen \- Antwerp/" "delirium, duvel, leffe," "affligem, arend, koninck, kijkuit, doom," ""
 .xx "font utilities" "cachechars," "agefont, loadchar, Subfont, Fontchar, Font \-" "" "cachechars(2)" 314
 .xx "" "factotum, fgui \- authentication" "agent" "" "factotum(4)" 673
 .xx "SATA (Serial AT) storage device/" "sdahci \-" "AHCI (Advanced Host Controller Interface)" "" "sdahci(3)" 633
@@ -133,8 +133,8 @@
 .xx "" "lex \- generator of lexical" "analysis programs" "" "lex(1)" 119
 .xx "setnetmtpt, getnetconninfo,/" "dial, hangup," "announce, listen, accept, reject, netmkaddr," "" "dial(2)" 345
 .xx "" "" "ansitize \- translate Plan 9 C to ANSI C" "" "ansitize(1)" 20
-.xx "" "172.31.204.64/27, 10.12.0.0/24 \-" "Antwerp Plan 9 Networks" "" 
-.xx "" "arend, koninck, kijkuit, doom, kapellen \-" "Antwerp Plan 9 servers" "/leffe, affligem," 
+.xx "" "172.31.204.64/27, 10.12.0.0/24 \-" "Antwerp Plan 9 Networks" ""
+.xx "" "arend, koninck, kijkuit, doom, kapellen \-" "Antwerp Plan 9 servers" "/leffe, affligem,"
 .xx "the system" "fshalt, reboot \- halt" "any local file systems and optionally reboot" "" "fshalt(8)" 866
 .xx "" "aoesrv - serve data via ATA-over-Ethernet" "Ao)" "" "aoesrv(8)" 829
 .xx "" "sdaoe \- ATA-over-Ethernet" "Ao) storage device interface" "" "sdaoe(3)" 635
@@ -168,7 +168,7 @@
 .xx "" "tar, dircp \-" "archiver" "" "tar(1)" 229
 .xx "" "rdarena, wrarena \- copy" "arenas between venti servers" "" "venti-backup(8)" 960
 .xx "" "/tobackup, dumparenas, restore \- backup venti" "arenas to blu-ray discs or restore from them" "" "backup(8)" 835
-.xx "Antwerp Plan/" "delirium, duvel, leffe, affligem," "arend, koninck, kijkuit, doom, kapellen \-" "" 
+.xx "Antwerp Plan/" "delirium, duvel, leffe, affligem," "arend, koninck, kijkuit, doom, kapellen \-" ""
 .xx "from argv" "ARGBEGIN, ARGEND," "ARGC, ARGF, EARGF \- process option letters" "" "arg(2)" 292
 .xx "" "echo \- print" "arguments" "" "echo(1)" 72
 .xx "" "crtprefree, crtresfree \- extended precision" "arithmetic" "/mpmagsub, crtpre, crtin, crtout," "mp(2)" 463
@@ -697,7 +697,7 @@
 .xx "" "delkey \-" "delete keys from factotum" "" "delkey(1)" 66
 .xx "AVL tree/" "mkavltree, insertavl, lookupavl," "deleteavl, avlwalk, avlnext, avlprev, endwalk -" "" "avl(2)" 304
 .xx "" "/freemap, insertkey, caninsertkey, lookupkey," "deletekey \- integer to data structure maps" "" "intmap(2)" 433
-.xx "koninck, kijkuit, doom, kapellen \- Antwerp/" "" "delirium, duvel, leffe, affligem, arend," "" 
+.xx "koninck, kijkuit, doom, kapellen \- Antwerp/" "" "delirium, duvel, leffe, affligem, arend," ""
 .xx "" "tail \-" "deliver the last part of a file" "" "tail(1)" 228
 .xx "" "filter, list," "deliver, token, vf \- filtering mail" "" "filter(1)" 87
 .xx "" "send \- mail routing and" "delivery" "" "send(8)" 941
@@ -798,7 +798,7 @@
 .xx "mswordstrings, msexceltables \- extract/" "" "doc2txt, doc2ps, wdoc2txt, xls2txt, olefs," "" "doc2txt(1)" 69
 .xx "a document" "" "doctype \- intuit command line for formatting" "" "doctype(1)" 70
 .xx "fmtstrcpy, fmtrunestrcpy,/" "fmtinstall," "dofmt, dorfmt, fmtprint, fmtvprint, fmtrune," "" "fmtinstall(2)" 385
-.xx "" "/duvel, leffe, affligem, arend, koninck, kijkuit," "doom, kapellen \- Antwerp Plan 9 servers" "" 
+.xx "" "/duvel, leffe, affligem, arend, koninck, kijkuit," "doom, kapellen \- Antwerp Plan 9 servers" ""
 .xx "" "/quotestrfmt, quoterunestrfmt, quotefmtinstall," "doquote, needsrcquote \- quoted character/" "" "quote(2)" 501
 .xx "fmtstrcpy, fmtrunestrcpy,/" "fmtinstall, dofmt," "dorfmt, fmtprint, fmtvprint, fmtrune," "" "fmtinstall(2)" 385
 .xx "" "dossrv, 9660srv, a:, b:, c:, d:, 9fat:," "dosmnt, eject \- DOS and ISO9660 file systems" "" "dossrv(4)" 667
@@ -841,7 +841,7 @@
 .xx "" "ktrace \- interpret kernel stack" "dumps" "" "ktrace(1)" 115
 .xx "" "" "dup \- duplicate an open file descriptor" "" "dup(2)" 358
 .xx "" "" "dup \- dups of open files" "" "dup(3)" 597
-.xx "doom, kapellen \- Antwerp Plan 9/" "delirium," "duvel, leffe, affligem, arend, koninck, kijkuit," "" 
+.xx "doom, kapellen \- Antwerp Plan 9/" "delirium," "duvel, leffe, affligem, arend, koninck, kijkuit," ""
 .xx "" "cdfs, cddb \- optical disc (CD," "DVD, B) track reader and writer file system" "" "cdfs(4)" 656
 .xx "" "/rectinrect, rectXrect, rectclip, combinerect, Dx," "Dy, Pt, Rect, Rpt \- arithmetic on points and/" "" "addpt(2)" 286
 .xx "dynloadgen, dynobjfree, dyntabsize \- load/" "" "dynfindsym, dynfreeimport, dynloadfd," "" "dynld(2)" 359
@@ -1331,7 +1331,7 @@
 .xx "" "ecp \- fast copy," "handling errors" "" "ecp(1)" 73
 .xx "" "error, fmterror, silenterror \- exception" "handling for threaded programs" "/nexterror," "error(2)" 365
 .xx "netmkaddr, setnetmtpt, getnetconninfo,/" "dial," "hangup, announce, listen, accept, reject," "" "dial(2)" 345
-.xx "" "intro \- introduction to local" "hardware administration" "" 
+.xx "" "intro \- introduction to local" "hardware administration" ""
 .xx "" "uptime \- show how long the system" "has been running" "" "uptime(1)" 251
 .xx "" "sha1unpickle \- cryptographically secure" "hashes" "/md5unpickle, sha1pickle," "sechash(2)" 521
 .xx "" "/walkfile, opendirfile, readdirfile, closedirfile," "hasperm \- in-memory file hierarchy" "" "9pfile(2)" 281
@@ -1482,7 +1482,7 @@
 .xx "" "intro \-" "introduction to file formats" "" "intro(6)" 751
 .xx "" "intro \-" "introduction to file servers" "" "intro(4)" 651
 .xx "" "intro \-" "introduction to library functions" "" "intro(2)" 270
-.xx "" "intro \-" "introduction to local hardware administration" "" 
+.xx "" "intro \-" "introduction to local hardware administration" ""
 .xx "" "intro \-" "introduction to Plan 9" "" "intro(1)" 1
 .xx "" "intro \-" "introduction to system administration" "" "intro(8)" 821
 .xx "" "intro \-" "introduction to the Plan 9 devices" "" "intro(3)" 579
@@ -1545,7 +1545,7 @@
 .xx "" "" "juke \- music jukebox" "" "juke(7)" 809
 .xx "" "audio \- digital audio" "jukebox" "" "audio(7)" 807
 .xx "" "0a, 1a, 2a, 5a, 6a, 7a, 8a," "ka, qa, va \- assemblers" "" "2a(1)" 4
-.xx "" "leffe, affligem, arend, koninck, kijkuit, doom," "kapellen \- Antwerp Plan 9 servers" "/duvel," 
+.xx "" "leffe, affligem, arend, koninck, kijkuit, doom," "kapellen \- Antwerp Plan 9 servers" "/duvel,"
 .xx "Universal Serial Bus/" "audio, ccid, disk, ether," "kb, print, probe, serial, usbeject, usbfat: \-" "" "usb(4)" 722
 .xx "" "" "kbin \- external keyboard input" "" "kbin(3)" 614
 .xx "" "" "kbmap \- keyboard map" "" "kbmap(3)" 615
@@ -1573,11 +1573,11 @@
 .xx "" "" "kfs \- disk file system" "" "kfs(4)" 694
 .xx "" "" "kfscmd, ksync \- kfs administration" "" "kfscmd(8)" 880
 .xx "" "5i," "ki, vi, qi \- instruction simulators" "" "vi(1)" 256
-.xx "" "delirium, duvel, leffe, affligem, arend, koninck," "kijkuit, doom, kapellen \- Antwerp Plan 9/" "" 
+.xx "" "delirium, duvel, leffe, affligem, arend, koninck," "kijkuit, doom, kapellen \- Antwerp Plan 9/" ""
 .xx "processes" "" "kill, slay, broke \- print commands to kill" "" "kill(1)" 114
 .xx "" "0l, 1l, 2l, 5l, 6l, 7l, 8l," "kl, ql, vl \- loaders" "" "2l(1)" 8
 .xx "" "leak," "kmem, umem \- help find memory leaks" "" "leak(1)" 116
-.xx "Plan 9/" "delirium, duvel, leffe, affligem, arend," "koninck, kijkuit, doom, kapellen \- Antwerp" "" 
+.xx "Plan 9/" "delirium, duvel, leffe, affligem, arend," "koninck, kijkuit, doom, kapellen \- Antwerp" ""
 .xx "" "prof, tprof," "kprof \- display profiling data" "" "prof(1)" 173
 .xx "" "" "kprof \- kernel profiling" "" "kprof(3)" 616
 .xx "" "kfscmd," "ksync \- kfs administration" "" "kfscmd(8)" 880
@@ -1599,7 +1599,7 @@
 .xx "" "9load, 9pxeload, 9loadusb, 9loadask," "ld \- PC bootstrap program" "" "9load(8)" 823
 .xx "exponent" "frexp," "ldexp, modf \- split into mantissa and" "" "frexp(2)" 399
 .xx "" "" "leak, kmem, umem \- help find memory leaks" "" "leak(1)" 116
-.xx "kapellen \- Antwerp Plan 9/" "delirium, duvel," "leffe, affligem, arend, koninck, kijkuit, doom," "" 
+.xx "kapellen \- Antwerp Plan 9/" "delirium, duvel," "leffe, affligem, arend, koninck, kijkuit, doom," ""
 .xx "" "/beieeedftos, leieee80ftos, leieeesftos," "leieeedftos, ieeesftos, ieeedftos \-/" "" "debugger(2)" 340
 .xx "" "" "lens \- interactive screen magnifier" "" "lens(1)" 118
 .xx "" "/dot3, cross3, len3, dist3, unit3, midpt3," "lerp3, reflect3, nearseg3, pldist3, vdiv3,/" "" "arith3(2)" 294
@@ -1988,7 +1988,7 @@
 .xx "system" "nntpfs \-" "network news transport protocol (NNT) file" "" "nntpfs(4)" 702
 .xx "" "snoopy \- spy on" "network packets" "" "snoopy(8)" 944
 .xx "" "gre, icmp, icmpv6, ipmux, rudp, tcp, udp \-" "network protocols over IP" "ip, esp," "ip(3)" 606
-.xx "" "10.12.0.0/24 \- Antwerp Plan 9" "Networks" "172.31.204.64/27," 
+.xx "" "10.12.0.0/24 \- Antwerp Plan 9" "Networks" "172.31.204.64/27,"
 .xx "" "create \- prepare a fid for I/O on an existing or" "new file" "open," "open(5)" 743
 .xx "" "newuser \- adding a" "new user" "" "newuser(8)" 898
 .xx "" "/initcontrols, namectlfont, namectlimage," "newcontrolset, resizecontrolset \- interactive/" "" "control(2)" 321
@@ -2156,8 +2156,8 @@
 .xx "" "intro \- introduction to the" "Plan 9 devices" "" "intro(3)" 579
 .xx "" "statcheck, sizeS2M, sizeD2M \- interface to" "Plan 9 File protocol" "/read9pmsg," "fcall(2)" 376
 .xx "" "intro \- introduction to the" "Plan 9 File Protocol, 9P" "" "intro(5)" 735
-.xx "" "172.31.204.64/27, 10.12.0.0/24 \- Antwerp" "Plan 9 Networks" "" 
-.xx "" "koninck, kijkuit, doom, kapellen \- Antwerp" "Plan 9 servers" "/duvel, leffe, affligem, arend," 
+.xx "" "172.31.204.64/27, 10.12.0.0/24 \- Antwerp" "Plan 9 Networks" ""
+.xx "" "koninck, kijkuit, doom, kapellen \- Antwerp" "Plan 9 servers" "/duvel, leffe, affligem, arend,"
 .xx "" "" "plan9.ini \- configuration file for PCs" "" "plan9.ini(8)" 908
 .xx "" "add4, sub4 \- operations on 3-d points and" "planes" "/vrem3, pn2f3, ppp2f3, fff2p3, pdiv4," "arith3(2)" 294
 .xx "" "pnp \- Plug 'n'" "Play ISA and PCI Interfaces" "" "pnp(3)" 623
@@ -2661,7 +2661,7 @@
 .xx "" "intro \- introduction to file" "servers" "" "intro(4)" 651
 .xx "" "mnt \- attach to 9P" "servers" "" "mnt(3)" 619
 .xx "" "pop3, imap4d \- Internet mail" "servers" "" "pop3(8)" 917
-.xx "" "kijkuit, doom, kapellen \- Antwerp Plan 9" "servers" "/leffe, affligem, arend, koninck," 
+.xx "" "kijkuit, doom, kapellen \- Antwerp Plan 9" "servers" "/leffe, affligem, arend, koninck,"
 .xx "" "rdarena, wrarena \- copy arenas between venti" "servers" "" "venti-backup(8)" 960
 .xx "" "drawterm \- connect to Plan 9 CPU" "servers from other operating systems" "" "drawterm(8)" 849
 .xx "" "threadpostmountsrv, srv \- 9P file" "service" "/responderror, threadlistensrv," "9p(2)" 273

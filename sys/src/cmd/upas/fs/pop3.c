@@ -381,7 +381,7 @@ pop3download(Pop *pop, Message *m)
 
 //
 // check for new messages on pop server
-// UIDL is not required by RFC 1939, but 
+// UIDL is not required by RFC 1939, but
 // netscape requires it, so almost every server supports it.
 // we'll use it to make our lives easier.
 //
@@ -508,7 +508,7 @@ pop3read(Pop *pop, Mailbox *mb, int doplumb)
 			(Qid){PATH(mb->id, Qmbox), mb->vers, QTDIR}, nil, mb);
 	}
 
-	return nil;	
+	return nil;
 }
 
 //
@@ -688,4 +688,3 @@ pop3mbox(Mailbox *mb, char *path)
 
 	return nil;
 }
-

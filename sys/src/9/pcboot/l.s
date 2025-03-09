@@ -233,7 +233,7 @@ l:								 ;\
 	MOVL	CR0, AX						 ;\
 	ANDL	$~0xC, AX			/* EM=0, TS=0 */ ;\
 	MOVL	AX, CR0
-	
+
 TEXT fpoff(SB), $0				/* disable */
 	FPOFF(l1)
 	RET

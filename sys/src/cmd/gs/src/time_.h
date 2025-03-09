@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 1995, 1997, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -39,7 +39,7 @@
 #  if defined(Plan9) || defined(M_UNIX) || defined(_IBMR2) || defined(_SEQUENT_) || defined(__GNUC__) || defined(__INTEL_COMPILER)
      /* Plan 9, SCO, AIX and Sequent's DYNIX/ptx need both time.h and
       * sys/time.h! As of version 2.2, at least some glibc
-      * installations also require both files. 
+      * installations also require both files.
       * Following Duraid Madina's request we also do it on Intel compiler.
       */
 #    include <time.h>
@@ -92,4 +92,3 @@ struct timezone {
 #endif
 
 #endif /* time__INCLUDED */
-

@@ -1,6 +1,6 @@
 </$objtype/mkfile
 
-TARG=mapd 
+TARG=mapd
 LIB=libmap/libmap.a$O
 OFILES=map.$O\
 	symbol.$O\

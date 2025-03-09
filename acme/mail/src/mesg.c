@@ -220,7 +220,7 @@ mesgadd(Message *mbox, char *dir, Dir *d, char *digest)
 
 	if (m->level != 1){
 		m->recursed = 1;
-		readmbox(m, dir, m->name); 
+		readmbox(m, dir, m->name);
 	}
 	return 1;
 }
@@ -324,13 +324,13 @@ info(Message *m, int ind, int ogf)
 		i = estrdup(s);
 
 		return i;
-	} 
+	}
 
 	i = estrdup("");
 	i = eappend(i, "\t", p);
 	i = egrow(i, "\t", stripdate(m->date));
 	if(ind == 0){
-		if(strcmp(m->type, "text")!=0 && strncmp(m->type, "text/", 5)!=0 && 
+		if(strcmp(m->type, "text")!=0 && strncmp(m->type, "text/", 5)!=0 &&
 		   strncmp(m->type, "multipart/", 10)!=0)
 			i = egrow(i, "\t(", estrstrdup(m->type, ")"));
 	}else if(strncmp(m->type, "multipart/", 10) != 0)
@@ -1124,7 +1124,7 @@ tokenizec(char *str, char **args, int max, char *splitc)
 	int intok = 0;
 
 	if(max <= 0)
-		return 0;	
+		return 0;
 	for(na=0; *str != '\0';str++){
 		if(strchr(splitc, *str) == nil){
 			if(intok)

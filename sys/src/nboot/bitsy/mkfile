@@ -41,5 +41,4 @@ inflate: $INFLATE $CORE
 %.$O:	$HFILES
 
 clean:
-	rm -f *.[$OS] [$OS].out y.tab.? y.debug y.output $TARG _$TARG  
-
+	rm -f *.[$OS] [$OS].out y.tab.? y.debug y.output $TARG _$TARG

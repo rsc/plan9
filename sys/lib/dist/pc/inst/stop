@@ -1,8 +1,8 @@
 #!/bin/rc
 
 # desc: save the current installation state, to be resumed later
-# prereq: 
-# mustdo: 
+# prereq:
+# mustdo:
 
 switch($1) {
 case checkdone

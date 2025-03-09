@@ -121,7 +121,7 @@ enum {
 	TR_IOC		= 1<<5,
 	TR_IDT		= 1<<6,
 	TR_BEI		= 1<<9,
-	
+
 	/* TRB types */
 	TR_RESERVED	= 0<<10,
 	TR_NORMAL	= 1<<10,
@@ -250,7 +250,7 @@ struct Ctlr
 	QLock	slotlock;
 	Slot	**slot;		/* slots by slot id */
 	Port	*port;
-	
+
 	u32int	hccparams;
 
 	int	csz;
@@ -259,7 +259,7 @@ struct Ctlr
 	int	nintrs;
 	int	nslots;
 
-	Rendez	recover;	
+	Rendez	recover;
 	void	*active;
 	uintptr	base;
 };
@@ -606,7 +606,7 @@ static int
 needrecover(void *arg)
 {
 	Ctlr *ctlr = arg;
-	return 	ctlr->er->stopped || 
+	return 	ctlr->er->stopped ||
 		(ctlr->opr[USBSTS] & (HCH|HCE|HSE)) != 0;
 }
 
@@ -907,7 +907,7 @@ interrupt(Ureg*, void *arg)
 			completering(&slot->epr[(td[3]>>16)-1&31], td);
 			break;
 		case ER_MFINDEXWRAP:
-			ctlr->µframe = (ctlr->rts[MFINDEX] & (1<<14)-1) | 
+			ctlr->µframe = (ctlr->rts[MFINDEX] & (1<<14)-1) |
 				(ctlr->µframe+(1<<14) & ~((1<<14)-1));
 			break;
 		case ER_HCE:
@@ -1257,7 +1257,7 @@ epopen(Ep *ep)
 	w = slot->ibase;
 	memset(w, 0, 3*32<<ctlr->csz);
 	w[1] = 3;	/* A0, A1 */
-		
+
 	/* (input) slot context */
 	w += 8<<ctlr->csz;
 	w[2] = w[3] = 0;
@@ -1526,7 +1526,7 @@ epwrite(Ep *ep, void *va, long n)
 		len = GET2(&p[6]);
 		dir = (p[0] & Rd2h) != 0;
 		if(len > 0){
-			io->b = allocb(len);		
+			io->b = allocb(len);
 			if(dir == 0){	/* out */
 				assert(len >= n-8);
 				memmove(io->b->wp, p+8, n-8);
@@ -1679,7 +1679,7 @@ portstatus(Hci *hp, int port)
 
 	return ps;
 }
-	
+
 static int
 portenable(Hci*, int, int)
 {
@@ -1712,7 +1712,7 @@ scanpci(void)
 	uintpci io;
 	Ctlr *ctlr;
 	Pcidev *p;
-	u32int *mmio; 
+	u32int *mmio;
 
 	if(already)
 		return;

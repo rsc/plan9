@@ -116,7 +116,7 @@ static OSStatus ApplicationQuitEventHandler(EventHandlerCallRef nextHandler, Eve
 static OSStatus MainWindowEventHandler(EventHandlerCallRef nextHandler, EventRef event, void *userData);
 static OSStatus MainWindowCommandHandler(EventHandlerCallRef nextHandler, EventRef event, void *userData);
 
-void 
+void
 window_resized()
 {
 	GetWindowBounds(theWindow, kWindowContentRgn, &winRect );
@@ -344,7 +344,7 @@ static OSStatus ApplicationQuitEventHandler(EventHandlerCallRef nextHandler, Eve
 //	QuitApplicationEventLoop();
 	return noErr;
 }
- 
+
 static OSStatus MainWindowEventHandler(EventHandlerCallRef nextHandler, EventRef event, void *userData)
 {
 	OSStatus result = noErr;
@@ -352,8 +352,8 @@ static OSStatus MainWindowEventHandler(EventHandlerCallRef nextHandler, EventRef
 	UInt32 class = GetEventClass (event);
 	UInt32 kind = GetEventKind (event);
 	static uint32_t mousebuttons = 0; // bitmask of buttons currently down
-	static uint32_t mouseX = 0; 
-	static uint32_t mouseY = 0; 
+	static uint32_t mouseX = 0;
+	static uint32_t mouseY = 0;
 
 	if(class == kEventClassKeyboard) {
 		char macCharCodes;
@@ -373,7 +373,7 @@ static OSStatus MainWindowEventHandler(EventHandlerCallRef nextHandler, EventRef
 			switch(macKeyModifiers & (optionKey | cmdKey)) {
 			case (optionKey | cmdKey):
 				/* due to chording we need to handle the case when both
-				 * modifier keys are pressed at the same time. 
+				 * modifier keys are pressed at the same time.
 				 * currently it's only 2-3 snarf and the 3-2 noop
 				 */
 				altPressed = true;
@@ -383,7 +383,7 @@ static OSStatus MainWindowEventHandler(EventHandlerCallRef nextHandler, EventRef
 					button2 = true;
 					button3 = true;
 					sendbuttons(mousebuttons, mouseX, mouseY);
-				} 
+				}
 				break;
 			case optionKey:
 				altPressed = true;
@@ -391,7 +391,7 @@ static OSStatus MainWindowEventHandler(EventHandlerCallRef nextHandler, EventRef
 					mousebuttons |= 2;	/* set button 2 */
 					button2 = true;
 					sendbuttons(mousebuttons, mouseX, mouseY);
-				} 
+				}
 				break;
 			case cmdKey:
 				if(mousebuttons & 1 || mousebuttons & 2) {
@@ -407,7 +407,7 @@ static OSStatus MainWindowEventHandler(EventHandlerCallRef nextHandler, EventRef
 						mousebuttons &= ~2;	/* clear button 2 */
 						button2 = false;
 						altPressed = false;
-					} 
+					}
 					if(button3) {
 						mousebuttons &= ~4;	/* clear button 3 */
 						button3 = false;
@@ -417,7 +417,7 @@ static OSStatus MainWindowEventHandler(EventHandlerCallRef nextHandler, EventRef
 				if(altPressed) {
 					kbdputc(kbdq, Kalt);
 					altPressed = false;
-				} 
+				}
 				break;
 			}
 			break;
@@ -438,7 +438,7 @@ static OSStatus MainWindowEventHandler(EventHandlerCallRef nextHandler, EventRef
 
 		GetEventParameter(event, kEventParamMouseLocation, typeQDPoint,
 							0, sizeof mousePos, 0, &mousePos);
-		
+
 		switch (kind) {
 			case kEventMouseWheelMoved:
 			{
@@ -455,9 +455,9 @@ static OSStatus MainWindowEventHandler(EventHandlerCallRef nextHandler, EventRef
 			{
 				uint32_t buttons;
 				uint32_t modifiers;
-				GetEventParameter(event, kEventParamKeyModifiers, typeUInt32, 
+				GetEventParameter(event, kEventParamKeyModifiers, typeUInt32,
 									0, sizeof(modifiers), 0, &modifiers);
-				GetEventParameter(event, kEventParamMouseChord, typeUInt32, 
+				GetEventParameter(event, kEventParamMouseChord, typeUInt32,
 									0, sizeof buttons, 0, &buttons);
 				/* simulate other buttons via alt/apple key. like x11 */
 				if(modifiers & optionKey) {
@@ -534,7 +534,7 @@ static OSStatus MainWindowCommandHandler(EventHandlerCallRef nextHandler,
 		switch (kind)
 		{
 			case kEventWindowClosed:
-				// send a quit carbon event instead of directly calling cleanexit 
+				// send a quit carbon event instead of directly calling cleanexit
 				// so that all quits are done in ApplicationQuitEventHandler
 				{
 				EventRef quitEvent;
@@ -575,7 +575,7 @@ flushmemscreen(Rectangle r)
 {
 	// sanity check.  Trips from the initial "terminal"
     if (r.max.x < r.min.x || r.max.y < r.min.y) return;
-    
+
 	screenload(r, gscreen->depth, byteaddr(gscreen, ZP), ZP,
 		gscreen->width*sizeof(ulong));
 }
@@ -688,7 +688,7 @@ clipwrite(char *snarf)
 		fprint(2, "apple pasteboard cannot assert ownership\n");
 		return 0;
 	}
-	cfdata = CFDataCreate(kCFAllocatorDefault, 
+	cfdata = CFDataCreate(kCFAllocatorDefault,
 		(uchar*)rsnarf, runestrlen(rsnarf)*2);
 	if(cfdata == nil){
 		fprint(2, "apple pasteboard cfdatacreate failed\n");
@@ -722,15 +722,15 @@ screenload(Rectangle r, int depth, uchar *p, Point pt, int step)
 	rbounds.size.height = r.max.y - r.min.y;
 	rbounds.origin.x = r.min.x;
 	rbounds.origin.y = r.min.y;
-		
+
 	if(depth != gscreen->depth)
 		panic("screenload: bad ldepth");
-		
+
 	QDBeginCGContext( GetWindowPort(theWindow), &context);
-	
+
 	// The sub-image is relative to our whole screen image.
 	CGImageRef subimg = CGImageCreateWithImageInRect(fullScreenImage, rbounds);
-	
+
 	// Drawing the sub-image is relative to the window.
 	rbounds.origin.y = winRect.bottom - winRect.top - r.min.y - rbounds.size.height;
 	CGContextDrawImage(context, rbounds, subimg);
@@ -748,7 +748,7 @@ setcursor(void)
 {
     Cursor crsr;
     int i;
-    
+
 	for(i=0; i<16; i++){
 		crsr.data[i] = ((ushort*)cursor.set)[i];
 		crsr.mask[i] = crsr.data[i] | ((ushort*)cursor.clr)[i];

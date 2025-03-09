@@ -50,7 +50,7 @@ The line
 .BR invis ,
 .BR solid
 (default))
-of the 
+of the
 .I sides
 .RB ( top ,
 .BR bot ,
@@ -212,7 +212,7 @@ but disconnect from previous.
 .PP
 A list of numbers
 .I "x y1 y2 y3 ...
-is treated as 
+is treated as
 .B plot
 .B bullet
 .B at
@@ -406,7 +406,7 @@ definitions of standard plotting characters, e.g., bullet
 .SH SOURCE
 .B /sys/src/cmd/grap
 .SH "SEE ALSO"
-.IR pic (1), 
+.IR pic (1),
 .IR troff (1)
 .br
 J. L. Bentley and B. W. Kernighan,

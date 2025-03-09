@@ -123,4 +123,3 @@ findkey(char **puser, char *dom)
 	}
 	return nil;
 }
-

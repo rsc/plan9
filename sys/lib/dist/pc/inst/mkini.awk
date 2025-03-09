@@ -39,14 +39,14 @@ BEGIN{
 		print a["menu"]
 		print ""
 		delete a["menu"]
-	
+
 		print "[4e]"
 		print a["4e"]
 		print ""
 		delete a["4e"]
-	
+
 		for(i in a){
-			# BUG: if rootdir is already there we should rewrite it 
+			# BUG: if rootdir is already there we should rewrite it
 			# sometimes into /3e/whatwasthere
 			if(a[i] ~ bootdisk4e && !(a[i] ~ /rootdir=/))
 				a[i] = "rootdir=/root/3e\n" a[i]

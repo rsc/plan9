@@ -4,7 +4,7 @@
 #include <auth.h>
 #include "authlocal.h"
 
-enum { 
+enum {
 	ARgiveup = 100,
 };
 
@@ -210,4 +210,3 @@ auth_proxy(int fd, AuthGetkey *getkey, char *fmt, ...)
 	close(afd);
 	return ai;
 }
-

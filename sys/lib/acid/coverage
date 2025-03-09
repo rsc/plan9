@@ -97,7 +97,7 @@ defn analyse(fnaddr)
 
 		if addr >= tfn[0] && addr < tfn[1] then
 			basic(pcline(addr), eblock(addr), pcfile(addr));
-		
+
 		l = tail l;
 	}
 	kill(pid);
@@ -114,7 +114,7 @@ defn report()
 		addr = head l;
 
 		basic(pcline(addr), eblock(addr), pcfile(addr));
-		
+
 		l = tail l;
 	}
 	kill(pid);

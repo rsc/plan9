@@ -1,12 +1,12 @@
 /* Copyright (C) 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -113,7 +113,7 @@ s_A85D_process(stream_state * st, stream_cursor_read * pr,
 	     * And any other characters should raise an ioerror.
 	     * But Adobe Acrobat allows CR/LF between ~ and >.
 	     * So we allow CR/LF between them. */
-	    while ((p[i] == 13 || p[i] == 10) && (p+i <= rlimit)) 
+	    while ((p[i] == 13 || p[i] == 10) && (p+i <= rlimit))
 		i++;
 	    if (p[i] != '>') {
 		if (p+i == rlimit) {

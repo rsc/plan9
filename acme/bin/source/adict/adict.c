@@ -216,10 +216,10 @@ dispdicts(Win *cwin)
 		i = 0;
 		if (strncmp("Usage", buf, 5) == 0) {	/* Remove first line. */
 			while (t[0] != '\n') {
-				t++; 
+				t++;
 				i++;
 			}
-			t++; 
+			t++;
 			i++;
 		}
 		wwritebody(cwin, t, nb-i);
@@ -286,7 +286,7 @@ format(char *s)
 	strcpy(t, s);
 	h = t;
 	while (*t != 0) {
-		if (!(((*t >= 'a') && (*t <= 'z')) || 
+		if (!(((*t >= 'a') && (*t <= 'z')) ||
 		    ((*t >= 'A') && (*t <= 'Z')) ||
 		    ((*t >= '0') && (*t <= '9'))))
 			*t = '_';
@@ -346,7 +346,7 @@ vopenwin(void *v)
 	openwin(name, buttons, twin, wintype);
 	threadexits(nil);
 }
-	
+
 void
 procopenwin(char *name, char *buttons, Win *twin, int wintype)
 {

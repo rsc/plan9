@@ -13,17 +13,17 @@
  *
  *	Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice is duplicated in all such 
- * forms and that any documentation, advertising materials, and other 
- * materials related to such distribution and use acknowledge that the 
- * software was developed by Mark H. Colburn and sponsored by The 
- * USENIX Association. 
+ * provided that the above copyright notice is duplicated in all such
+ * forms and that any documentation, advertising materials, and other
+ * materials related to such distribution and use acknowledge that the
+ * software was developed by Mark H. Colburn and sponsored by The
+ * USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -32,10 +32,10 @@
  * $Log:	tar.c,v $
  * Revision 1.2  89/02/12  10:06:05  mark
  * 1.2 release fixes
- * 
+ *
  * Revision 1.1  88/12/23  18:02:38  mark
  * Initial revision
- * 
+ *
  */
 
 #ifndef lint
@@ -68,7 +68,7 @@ static void usage();
 #endif /* __STDC__ */
 
 
-/* do_tar - main routine for tar. 
+/* do_tar - main routine for tar.
  *
  * DESCRIPTION
  *
@@ -77,8 +77,8 @@ static void usage();
  *
  * PARAMETERS
  *
- *	int argc	- argument count (argc from main) 
- *	char **argv	- argument list (argv from main) 
+ *	int argc	- argument count (argc from main)
+ *	char **argv	- argument list (argv from main)
  *
  * RETURNS
  *
@@ -123,7 +123,7 @@ char          **argv;		/* argument list (argv from main) */
     while ((c = taropt(argc, argv, "b:cf:hlmortuvwx")) != EOF) {
 	switch (c) {
 	case 'b':		/* specify blocking factor */
-	    /* 
+	    /*
 	     * FIXME - we should use a conversion routine that does
 	     * some kind of reasonable error checking, but...
 	     */
@@ -209,11 +209,11 @@ char          **argv;		/* argument list (argv from main) */
 	open_archive(AR_APPEND);
 	append_archive();	/* append files to archive */
     }
-    
-    if (f_linksleft) {		
-	linkleft(); 		/* report any unresolved links */ 
+
+    if (f_linksleft) {
+	linkleft(); 		/* report any unresolved links */
     }
-    
+
     return (0);
 }
 
@@ -228,8 +228,8 @@ char          **argv;		/* argument list (argv from main) */
  *
  * PARAMETERS
  *
- *	int argc	- argument count (argc from main) 
- *	char **argv	- argument list (argv from main) 
+ *	int argc	- argument count (argc from main)
+ *	char **argv	- argument list (argv from main)
  *	char *optstring	- sring which describes allowable options
  *
  * RETURNS

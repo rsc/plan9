@@ -54,4 +54,3 @@ _subloop2:
 	BDNZ	_subloop2
 _subend:
 	RETURN
-

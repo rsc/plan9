@@ -306,7 +306,7 @@ _adecreturn:
 	RET
 
 TEXT aadd(SB), 1, $-4				/* int aadd(int*, int); */
-	MOVL	addend+8(FP), AX	
+	MOVL	addend+8(FP), AX
 	MOVL	AX, BX
 	LOCK; XADDL BX, (RARG)
 	ADDL	BX, AX

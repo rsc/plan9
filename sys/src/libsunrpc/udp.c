@@ -94,8 +94,8 @@ sunSrvUdp(SunSrv *srv, char *address)
 		close(acfd);
 		return -1;
 	}
-	close(acfd); 
-	
+	close(acfd);
+
 	arg = emalloc(sizeof(Arg));
 	arg->fd = fd;
 	arg->srv = srv;

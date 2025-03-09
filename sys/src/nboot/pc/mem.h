@@ -43,4 +43,3 @@
 #define SEGW	(1<<9)		/* writable (for data/stack) */
 #define	SEGR	(1<<9)		/* readable (for code) */
 #define SEGD	(1<<22)		/* default 1==32bit (for code) */
-

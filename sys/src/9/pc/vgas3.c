@@ -94,14 +94,14 @@ s3linear(VGAscr* scr, int, int)
 	int id, j;
 	ulong mmiobase, mmiosize;
 	Pcidev *p;
-	
+
 	vgalinearpciid(scr, PCIS3, 0);
 	p = scr->pci;
 	if(scr->paddr == 0 || p == nil)
 		return;
-		
+
 	addvgaseg("s3screen", scr->paddr, scr->apsize);
-	
+
 	id = (vgaxi(Crtx, 0x2D)<<8)|vgaxi(Crtx, 0x2E);
 	switch(id){			/* find mmio */
 	case SAVAGE4:
@@ -179,7 +179,7 @@ s3load(VGAscr* scr, Cursor* curs)
 	case VIRGE:
 	case VIRGEDXGX:
 	case VIRGEGX2:
-	case VIRGEVX:	
+	case VIRGEVX:
 	case SAVAGEMXMV:
 	case SAVAGEIXMV:
 	case SAVAGE4:
@@ -534,7 +534,7 @@ s3drawinit(VGAscr *scr)
 	case SAVAGEMXMV:
 	case SAVAGEIXMV:
 		scr->mmio = (ulong*)((char*)scr->vaddr+0x1000000);
-		savageinit(scr);	
+		savageinit(scr);
 		break;
 	case SUPERSAVAGEIXC16:
 	case SAVAGE4:
@@ -565,4 +565,3 @@ VGAcur vgas3cur = {
 	s3load,
 	s3move,
 };
-

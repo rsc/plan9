@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, Russell Lang.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -19,11 +19,11 @@
 /* by Russell Lang */
 /* 1995-11-23 */
 
-/* 
+/*
  * Ghostscript produces printer specific output
  * which must be given to the print spooler.
  * Under Win16, the APIs OpenJob, WriteSpool etc. are used
- * Under Win32 and Windows 95/NT, the APIs OpenPrinter, WritePrinter etc.  
+ * Under Win32 and Windows 95/NT, the APIs OpenPrinter, WritePrinter etc.
  * are used.
  * Under Win32s, the 16-bit spooler APIs are not available, and the
  * 32-bit spooler APIs are not implemented.

@@ -1,12 +1,12 @@
 /* Copyright (C) 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -99,7 +99,7 @@ int pdf_color_space_named(gx_device_pdf *pdev, cos_value_t *pvalue,
 /* Create colored and uncolored Pattern color spaces. */
 int pdf_cs_Pattern_colored(gx_device_pdf *pdev, cos_value_t *pvalue);
 int pdf_cs_Pattern_uncolored(gx_device_pdf *pdev, cos_value_t *pvalue);
-int pdf_cs_Pattern_uncolored_hl(gx_device_pdf *pdev, 
+int pdf_cs_Pattern_uncolored_hl(gx_device_pdf *pdev,
 	const gs_color_space *pcs, cos_value_t *pvalue);
 
 /* Set the ProcSets bits corresponding to an image color space. */
@@ -109,7 +109,7 @@ void pdf_color_space_procsets(gx_device_pdf *pdev,
 /* ---------------- Exported by gdevpdfg.c ---------------- */
 
 /* Copy viewer state from images state. */
-void pdf_viewer_state_from_imager_state(gx_device_pdf * pdev, 
+void pdf_viewer_state_from_imager_state(gx_device_pdf * pdev,
 	const gs_imager_state *pis, const gx_device_color *pdevc);
 
 /* Prepare intitial values for viewer's graphics state parameters. */
@@ -153,7 +153,7 @@ int pdf_end_gstate(gx_device_pdf *pdev, pdf_resource_t *pres);
 /*
  * Convert a string into cos name.
  */
-int pdf_string_to_cos_name(gx_device_pdf *pdev, const byte *str, uint len, 
+int pdf_string_to_cos_name(gx_device_pdf *pdev, const byte *str, uint len,
 		       cos_value_t *pvalue);
 
 /* ---------------- Exported by gdevpdfi.c ---------------- */
@@ -264,7 +264,7 @@ int pdf_begin_write_image(gx_device_pdf * pdev, pdf_image_writer * piw,
 /* Begin writing the image data, setting up the dictionary and filters. */
 int pdf_begin_image_data(gx_device_pdf * pdev, pdf_image_writer * piw,
 			 const gs_pixel_image_t * pim,
-			 const cos_value_t *pcsvalue, 
+			 const cos_value_t *pcsvalue,
 			 int alt_writer_index);
 
 /* Copy the data for a mask or monobit bitmap. */
@@ -295,8 +295,8 @@ int pdf_end_write_image(gx_device_pdf * pdev, pdf_image_writer * piw);
  */
 int pdf_make_alt_stream(gx_device_pdf * pdev, psdf_binary_writer * piw);
 
-/* 
- * End binary with choosing image compression. 
+/*
+ * End binary with choosing image compression.
  */
 int pdf_choose_compression(pdf_image_writer * piw, bool end_binary);
 
@@ -306,7 +306,7 @@ int pdf_register_charproc_resource(gx_device_pdf *pdev, gs_id id, pdf_resource_t
 /* ---------------- Exported by gdevpdfv.c ---------------- */
 
 /* Store pattern 1 parameters to cos dictionary. */
-int pdf_store_pattern1_params(gx_device_pdf *pdev, pdf_resource_t *pres, 
+int pdf_store_pattern1_params(gx_device_pdf *pdev, pdf_resource_t *pres,
 			gs_pattern1_instance_t *pinst);
 
 /* Write a colored Pattern color. */

@@ -1,6 +1,6 @@
 /*
  * t6.c
- * 
+ *
  * width functions, sizes and fonts
  */
 
@@ -45,7 +45,7 @@ t_width(Tchar j)
 	if (sfbits(j) == oldbits) {
 		xfont = pfont;
 		xpts = ppts;
-	} else 
+	} else
 		xbits(j, 0);
 	if (i < nchnames + ALPHABET && widcache[i].fontpts == (xfont<<8) + xpts && !setwdf)
 		k = widcache[i].width;
@@ -126,7 +126,7 @@ getcw(int i)
 		if (setwdf)
 			numtabp[CT].val |= fp->wp[n].kern;
 	} else if (n == -2) {		/* \N with default width */
-		
+
 		k = fp->defaultwidth;
 	} else {			/* not on current font */
 		nocache = 1;
@@ -150,8 +150,8 @@ getcw(int i)
 	if (cs = cstab[xfont]) {
 		nocache = 1;
 		if (ccs = ccstab[xfont])
-			x = ccs; 
-		else 
+			x = ccs;
+		else
 			x = xpts;
 		cs = (cs * EMPTS(x)) / 36;
 	}
@@ -240,7 +240,7 @@ Tchar t_setch(int c)
 			return j | chbits;
 	} else
 		return chadd(temp, Troffchar, Install) | chbits; /* add name even if haven't seen it */
-		
+
 #endif /*UNICODE*/
 }
 
@@ -481,7 +481,7 @@ void t_setfont(int a)
 
 	if (a)
 		i = getrq();
-	else 
+	else
 		i = getsn();
 	if (!i || i == 'P') {
 		j = font1;
@@ -531,7 +531,7 @@ void t_setwd(void)
 				k = -k;
 			base -= k;
 			emsz = 0;
-		} else 
+		} else
 			continue;
 		if (base < numtabp[SB].val)
 			numtabp[SB].val = base;
@@ -647,7 +647,7 @@ Tchar getlg(Tchar i)
 				*pbp++ = k;
 				j = LIG_FF;
 			}
-		} else 
+		} else
 			j = LIG_FF;
 	} else {
 		*pbp++ = j;
@@ -687,7 +687,7 @@ void casefp(void)
 	if (i <= 0 || i > nfonts)
 		ERROR "fp: bad font position %d", i WARN;
 	else if (skip() || !(j = getrq()))
-		ERROR "fp: no font name" WARN; 
+		ERROR "fp: no font name" WARN;
 	else if (skip() || !getname())
 		setfp(i, j, (char*) 0, 1);
 	else		/* 3rd argument = filename */
@@ -737,8 +737,8 @@ setfp(int pos, int f, char *truename, int print)	/* mount font f at position pos
 		ptfont();
 	}
 	if (pos == smnt) {
-		smnt = 0; 
-		sbold = 0; 
+		smnt = 0;
+		sbold = 0;
 	}
 	fontlab[pos] = f;
 	if (smnt == 0 && fonts[pos].specfont)
@@ -792,7 +792,7 @@ bd0:
 	if (skip() || !(i = getrq()) || (j = findft(i)) == -1) {
 		if (k)
 			goto bd1;
-		else 
+		else
 			return;
 	}
 	if (j == smnt) {
@@ -827,7 +827,7 @@ void casevs(void)
 	i = inumb(&lss);
 	if (nonumb)
 		i = lss1;
-	if (i < VERT) 
+	if (i < VERT)
 		i = VERT;
 	lss1 = lss;
 	lss = i;

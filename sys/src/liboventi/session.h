@@ -71,4 +71,3 @@ struct VtSession {
 	int crypto;
 	int codec;
 };
-

@@ -100,7 +100,7 @@ i8253init(void)
 	x = inb(T2ctl);
 	x |= T2gate;
 	outb(T2ctl, x);
-	
+
 	/*
 	 * Introduce a little delay to make sure the count is
 	 * latched and the timer is counting down; with a fast
@@ -157,7 +157,7 @@ guesscpuhz(int aalcycles)
 	incr = 16000000/(aalcycles*HZ*2);
 	x = 2000;
 	for(loops = incr; loops < 64*1024; loops += incr) {
-	
+
 		/*
 		 *  measure time for the loop
 		 *
@@ -180,7 +180,7 @@ guesscpuhz(int aalcycles)
 		y = inb(T0cntr);
 		y |= inb(T0cntr)<<8;
 		x -= y;
-	
+
 		if(x < 0)
 			x += Freq/HZ;
 
@@ -348,7 +348,7 @@ microdelay(int microsecs)
 	aamloop(microsecs);
 }
 
-/*  
+/*
  *  performance measurement ticks.  must be low overhead.
  *  doesn't have to count over a second.
  */

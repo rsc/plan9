@@ -4,7 +4,7 @@ changes since initial alpha release
 	add -v flag to flfmt as documented
 	add "con /srv/fscons" to fossilcons(8) synopsis
 	add -AWP to the initialization example in fossil(4).
-	change users to print "no file" if the user table is 
+	change users to print "no file" if the user table is
 		not backed by a file.
 	change snapClose not to die when s==nil
 	correct handling of file truncation to specific size
@@ -45,5 +45,3 @@ changes since initial alpha release
 	read config out of fossil disk (-f option)
 	fossil/conf
 	automatic deletion of snapshots
-
-

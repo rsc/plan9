@@ -1,12 +1,12 @@
 /* Copyright (C) 2004 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -40,15 +40,15 @@
 /* The OS/2 printer IODevice */
 
 /*
- * This allows an OS/2 printer to be specified as an 
+ * This allows an OS/2 printer to be specified as an
  * output using
  *  -sOutputFile="%printer%AppleLas"
  * where "AppleLas" is the physical name of the queue.
  *
  * If you don't supply a printer name you will get
- *  Error: /undefinedfilename in --.outputpage-- 
+ *  Error: /undefinedfilename in --.outputpage--
  * If the printer name is invalid you will get
- *  Error: /invalidfileaccess in --.outputpage-- 
+ *  Error: /invalidfileaccess in --.outputpage--
  *
  * This is implemented by writing to a temporary file
  * then copying it to the spooler.
@@ -83,7 +83,7 @@ private int
 os2_printer_init(gx_io_device * iodev, gs_memory_t * mem)
 {
     /* state -> structure containing thread handle */
-    iodev->state = gs_alloc_bytes(mem, sizeof(os2_printer_t), 
+    iodev->state = gs_alloc_bytes(mem, sizeof(os2_printer_t),
 	"os2_printer_init");
     if (iodev->state == NULL)
         return_error(gs_error_VMerror);
@@ -122,8 +122,7 @@ os2_printer_fclose(gx_io_device * iodev, FILE * file)
 {
     os2_printer_t *pr = (os2_printer_t *)iodev->state;
     fclose(file);
-    pm_spool(pr->filename, pr->queue); 
+    pm_spool(pr->filename, pr->queue);
     unlink(pr->filename);
     return 0;
 }
-

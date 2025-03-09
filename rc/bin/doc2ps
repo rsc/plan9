@@ -17,5 +17,5 @@ case 1
 case *
 	usage
 }
-aux/antiword -i0 -p letter $file 
+aux/antiword -i0 -p letter $file
 s=$status

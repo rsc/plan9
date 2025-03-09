@@ -8,4 +8,3 @@ hwdraw(Memdrawparam*)
 {
 	return 0;	/* could not satisfy request */
 }
-

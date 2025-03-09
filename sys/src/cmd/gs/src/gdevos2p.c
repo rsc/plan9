@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -594,17 +594,17 @@ os2prn_set_bpp(gx_device * dev, int depth)
 	dci = os2prn_dci_rgb;
 	dev->procs.get_color_mapping_procs = gx_default_DevRGB_get_color_mapping_procs;
 	dev->procs.get_color_comp_index = gx_default_DevRGB_get_color_comp_index;
-	dev->procs.map_rgb_color = dev->procs.encode_color = 
+	dev->procs.map_rgb_color = dev->procs.encode_color =
 		os2prn_map_rgb_color;
-	dev->procs.map_color_rgb = dev->procs.decode_color = 
+	dev->procs.map_color_rgb = dev->procs.decode_color =
 		os2prn_map_color_rgb;
     } else {	/* default is black and white */
 	dci = os2prn_dci_mono;
 	dev->procs.get_color_mapping_procs = gx_default_DevGray_get_color_mapping_procs;
 	dev->procs.get_color_comp_index = gx_default_DevGray_get_color_comp_index;
-	dev->procs.map_rgb_color = dev->procs.encode_color = 
+	dev->procs.map_rgb_color = dev->procs.encode_color =
 		gx_default_b_w_map_rgb_color;
-	dev->procs.map_color_rgb = dev->procs.decode_color = 
+	dev->procs.map_color_rgb = dev->procs.decode_color =
 		gx_default_b_w_map_color_rgb;
     }
     /* restore old anti_alias info */

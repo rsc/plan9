@@ -131,7 +131,7 @@ mapmga(Vga* vga, Ctlr* ctlr)
 		error("%s: can't open vgactl\n", ctlr->name);
 	if(write(f, "type mga2164w", 13) != 13)
 		error("%s: can't set mga type\n", ctlr->name);
-	
+
 	m = segattach(0, "mga2164wmmio", 0, 16*1024);
 	if(m == (void*)-1)
 		error("%s: can't attach mga2164wmmio segment\n", ctlr->name);

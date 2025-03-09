@@ -7,7 +7,7 @@
 #include "../port/error.h"
 
 /*
- * 
+ *
  * mcc.c
  *
  * This is the driver for the Multi-Channel Communications Controller
@@ -23,7 +23,7 @@
  */
 
 #define	PKT_LEN			40
-#define MPC82XX_INIT_DELAY      0x10000   
+#define MPC82XX_INIT_DELAY      0x10000
 
 #define HPIC		0xFC000000
 #define HPIA		0xFC000010
@@ -90,7 +90,7 @@ int	remove( FIFO *, char ** );
 void	AppInit( void );
 
 #define physaddr(ADDR)	(0x60020000 | ((ADDR) << 23) | (2 << 18))
-  
+
 mcc_iorw_t mcc_iorw;
 
 #if 0
@@ -207,9 +207,9 @@ mcc2_ioctl( struct inode *inode, struct file *file,
 						printk("mcc2_ioctl: Failed during  read from hpi.\n");
 						return -EFAULT;
 					}
-					break; 
-					
-								    	  
+					break;
+
+
 				case HPI_WR:
 					lng = (long)(((mcc_iorw_t *)param)->address);
 					lptr =  ((unsigned long *)lng);
@@ -218,8 +218,8 @@ mcc2_ioctl( struct inode *inode, struct file *file,
 						printk("mcc2_ioctl: Failed during  write to hpi\n");
 						return -EFAULT;
 					}
-					break; 
-					
+					break;
+
 
 
                                 case FPGA_RD:
@@ -246,7 +246,7 @@ mcc2_ioctl( struct inode *inode, struct file *file,
 
 
 
-			   
+
 				case MEM_MODR:
 					cptr = (char *)Mmap;
 					cptr += ((mcc_iorw_t *)param)->address;
@@ -348,4 +348,3 @@ mcc2_init( long mem_start, long mem_end )
 }
 
 #else
-

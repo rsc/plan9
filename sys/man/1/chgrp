@@ -1,4 +1,4 @@
-.TH CHGRP 1 
+.TH CHGRP 1
 .SH NAME
 chgrp \- change file group
 .SH SYNOPSIS

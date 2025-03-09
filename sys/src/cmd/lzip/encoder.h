@@ -294,7 +294,7 @@ LZe_init(struct LZ_encoder *e, int dict_size, int len_limit, int ifd, int outfd)
 		after_size = (2 *max_match_len) + 1,
 		dict_factor = 2,
 		Nprevpos23 = Nprevpos2 + Nprevpos3,
-		pos_array_factor = 2 	
+		pos_array_factor = 2
 	};
 
 	if (!LZeb_init(&e->eb, before, dict_size, after_size, dict_factor,

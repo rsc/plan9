@@ -21,5 +21,3 @@ $(LIB): $(OFILES)
 
 %.s: %.spp
 	cpp $*.spp >$*.s
-
-

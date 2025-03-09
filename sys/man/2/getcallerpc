@@ -33,6 +33,6 @@ main(int argc, char *argv[])
 .SH SOURCE
 .B /sys/src/libc/$objtype/getcallerpc.[cs]
 .SH BUGS
-The 
+The
 .I firstarg
 parameter should not be necessary.

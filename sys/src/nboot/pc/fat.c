@@ -277,7 +277,7 @@ conffat(Fat *fat, void *buf)
 		return -1;
 	if(memcmp(p->type, "FAT", 3) && memcmp(((Pbs32*)buf)->type, "FAT", 3))
 		return -1;
-	
+
 	/* load values from fat */
 	ver = 0;
 	fatsize = GETSHORT(p->fatsize);
@@ -298,7 +298,7 @@ conffat(Fat *fat, void *buf)
 			ver = Fat12;
 		else
 			ver = Fat16;
-	
+
 	/* fill FAT descriptor */
 	fat->ver = ver;
 	fat->dirents = dirents;
@@ -402,4 +402,3 @@ start(void *sp)
 		print("\n");
 	}
 }
-

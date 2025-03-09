@@ -40,7 +40,7 @@ kill(pid_t pid, int sig)
 		if(msg == 0) {
 			errno = EINVAL;
 			return -1;
-		} 
+		}
 	}
 
 	if(pid < 0) {

@@ -1,4 +1,4 @@
-.TH VGA 3 
+.TH VGA 3
 .SH NAME
 vga \- VGA controller device
 .SH SYNOPSIS
@@ -27,21 +27,21 @@ This is usually performed by
 provides read-only access to the low 640kB of memory,
 where the VGA and other BIOS ROMs are located.
 .PP
-Writing strings to 
+Writing strings to
 .B vgactl
 configures the VGA device.
 The following are valid commands.
 .TP
 .BI size " X" x Y x "Z chan"
 Set the size of the screen image to be
-.I X 
+.I X
 pixels wide
 and
-.I Y 
+.I Y
 pixels high.
-Each pixel is 
-.I Z 
-bits as specified by 
+Each pixel is
+.I Z
+bits as specified by
 .IR chan ,
 whose format is described in
 .IR image (6).
@@ -50,14 +50,14 @@ whose format is described in
 Set the physical size of the display to be
 .I X
 pixels wide by
-.I Y 
+.I Y
 pixels high.
 This message is optional;
 it is used to implement panning and to accommodate
 displays that require the in-memory screen image
 to have certain alignment properties.
 For example, a 1400x1050 screen with a 1408x1050 in-memory image
-will use 
+will use
 .B "size 1408x1050
 but
 .BR "actualsize 1400x1050" .
@@ -65,7 +65,7 @@ but
 .BI panning " mode"
 Depending on whether
 .I mode
-is 
+is
 .B on
 or
 .BR off ,
@@ -82,7 +82,7 @@ driver has no effect.
 .BI type " ctlr"
 Set the type of VGA controller being used.
 .I Ctlr
-is one of 
+is one of
 .BR ark200pv ,
 .BR clgd542x ,
 .BR clgd546x ,
@@ -133,10 +133,10 @@ disables the cursor.
 There is no software cursor.
 .TP
 .BI palettedepth " d"
-Set the number of bits of precision used by the 
-VGA palette to 
+Set the number of bits of precision used by the
+VGA palette to
 .IR d ,
-which must be either 
+which must be either
 .B 6
 or
 .BR 8 .
@@ -160,7 +160,7 @@ is zero, blanking is disabled.
 .BI hwaccel " mode"
 Depending on whether
 .I mode
-is 
+is
 .B on
 or
 .BR off ,

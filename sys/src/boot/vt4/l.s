@@ -12,7 +12,7 @@
 
 #define	TLBIA		WORD	$((31<<26)|(370<<1))
 #define	TLBSYNC		WORD	$((31<<26)|(566<<1))
-	
+
 /* 400 models; perhaps others */
 #define	ICCCI(a,b)	WORD	$((31<<26)|((a)<<16)|((b)<<11)|(966<<1))
 #define	DCCCI(a,b)	WORD	$((31<<26)|((a)<<16)|((b)<<11)|(454<<1))
@@ -42,7 +42,7 @@
 #define MTCCR0(r) WORD $((31<<26) | ((r)<<21) | (0x1d<<11) | (0x13<<16) | (467<<1))
 
 /* print progress character.  steps on R7 and R8, needs SB set. */
-#define PROG(c)	MOVW $(Uartlite+4), R7; MOVW $(c), R8; MOVW R8, 0(R7); SYNC	
+#define PROG(c)	MOVW $(Uartlite+4), R7; MOVW $(c), R8; MOVW R8, 0(R7); SYNC
 
 	NOSCHED
 
@@ -428,7 +428,7 @@ xdecloop:
  *	MOVW	R0, SPR(SAVER0)
  *	(critical interrupts disabled in MSR, using R0)
  *	MOVW	LR, R0
- *	MOVW	R0, SPR(SAVELR) 
+ *	MOVW	R0, SPR(SAVELR)
  *	BL	trapvec(SB)
  */
 TEXT	trapvec(SB), 1, $-4
@@ -641,13 +641,13 @@ cintrcomm:
 	MOVW	R0, SPR(SPR_CSRR0)
 	MOVW	(168+8)(R1), R0
 	RLWNM	$0, R0, $~MSR_WE, R0	/* remove wait state */
-	MOVW	R0, SPR(SPR_CSRR1)	
+	MOVW	R0, SPR(SPR_CSRR1)
 
 	/* cause, skip */
 	MOVW	(160+8)(R1), R0		/* critical interrupt's saved R0 */
 	MOVW	44(R1), R1		/* old SP */
 	RFCI
-	
+
 /*
  * enter with stack set and mapped.
  * on return, SB (R2) has been set, and R3 has the Ureg*,

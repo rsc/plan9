@@ -14,5 +14,5 @@ _assert(char *f, unsigned line)
 	do *--s = line%10 + '0'; while (line /= 10);
 	write(2, s, &buf[20] - s);
 	abort();
-	
+
 }

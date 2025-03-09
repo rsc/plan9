@@ -25,7 +25,7 @@ trailing zeros (for data blocks) or trailing zero scores
 storing them to Venti.
 .PP
 .I Vtzerotruncate
-returns the size of the 
+returns the size of the
 .IR size -byte
 buffer pointed to by
 .I buf

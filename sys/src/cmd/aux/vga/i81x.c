@@ -9,7 +9,7 @@
  * Intel 81x chipset family.
  *   mem[0]: AGP aperture memory, 64MB for 810-DC100, from 0xF4000000
  *   mem[1]: GC Register mmio space, 512KB for 810-DC100, from 0xFF000000
- *   For the memory of David Hogan, died April 9, 2003,  who wrote this driver 
+ *   For the memory of David Hogan, died April 9, 2003,  who wrote this driver
  *   first for LCD.
  *                   August 28, 2003 Kenji Okamoto
  */
@@ -62,7 +62,7 @@ snarf(Vga* vga, Ctlr* ctlr)
 		mmio = segattach(0, "i81xmmio", 0, p->mem[1].size);
 		if(mmio == (void*)-1)
 			error("%s: can't attach mmio segment\n", ctlr->name);
-	
+
 		i81x = vga->private;
 		i81x->pci = p;
 		i81x->mmio = mmio;
@@ -185,7 +185,7 @@ init(Vga* vga, Ctlr* ctlr)
 	         i81x->lcd[8]: 0
 	*/
 	/*
-	 * Pixel pipeline control register 0x70008: 
+	 * Pixel pipeline control register 0x70008:
 	 *    16/24bp bypasses palette,
 	 *    hw cursor enabled(1<<12), hi-res mode(1<<0), depth(16-19 bit)
 	 *    8bit DAC enable (1<<15), don't wrap to 256kM memory of VGA(1<<1).

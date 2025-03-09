@@ -15,7 +15,7 @@ pemdecode, pemencode \- encode files in Privacy Enhanced Mail (PEM) format
 .I file
 ]
 .SH DESCRIPTION
-PEM is a textual encoding for binary data originally used by the 
+PEM is a textual encoding for binary data originally used by the
 Privacy Enhanced Mail program but now commonly used for
 other applications, notably TLS.
 PEM encodes data in base 64
@@ -57,7 +57,7 @@ aGVsbG8gd29ybGQK
 	auth/pemencode GREETING |
 	auth/pemdecode GREETING
 hello world
-% 
+%
 .EE
 .SH SOURCE
 .B /sys/src/cmd/auth

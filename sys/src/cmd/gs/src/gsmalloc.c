@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 2000, 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -470,7 +470,7 @@ gs_malloc_wrapped_contents(gs_memory_t *wrapped)
     gs_memory_retrying_t *rmem = (gs_memory_retrying_t *)wrapped;
     gs_memory_locked_t *lmem =
 	(gs_memory_locked_t *)gs_memory_retrying_target(rmem);
-    if (lmem) 
+    if (lmem)
 	return (gs_malloc_memory_t *)gs_memory_locked_target(lmem);
     return (gs_malloc_memory_t *) wrapped;
 }
@@ -500,7 +500,7 @@ gs_malloc_init(const gs_memory_t *parent)
 
     if (parent)
 	malloc_memory_default->gs_lib_ctx = parent->gs_lib_ctx;
-    else 
+    else
         gs_lib_ctx_init((gs_memory_t *)malloc_memory_default);
 
     gs_malloc_wrap(&memory_t_default, malloc_memory_default);

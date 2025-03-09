@@ -23,7 +23,7 @@
 #define	RFCI	WORD	$((19<<26)|(51<<1)); BR 0(PC)
 
 /* print progress character.  steps on R7 and R8, needs SB set. */
-#define PROG(c)	MOVW $(Uartlite+4), R7; MOVW $(c), R8; MOVW	R8, 0(R7); SYNC	
+#define PROG(c)	MOVW $(Uartlite+4), R7; MOVW $(c), R8; MOVW	R8, 0(R7); SYNC
 
 /*
  * copied to REBOOTADDR and executed there.

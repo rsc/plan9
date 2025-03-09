@@ -1,4 +1,4 @@
-@echo off 
+@echo off
 @rem $Id: ps2ps.bat,v 1.8 2003/03/20 22:10:30 alexcher Exp $
 @rem "Distill" PostScript.
 

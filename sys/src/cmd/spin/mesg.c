@@ -157,7 +157,7 @@ qsend(Lextok *n)
  peek_ch_init(void)
  {
 	tcgetattr(0,&initial_settings);
- 
+
 	new_settings = initial_settings;
 	new_settings.c_lflag &= ~ICANON;
 	new_settings.c_lflag &= ~ECHO;
@@ -794,7 +794,7 @@ nochan_manip(Lextok *p, Lextok *n, int d)	/* p=lhs n=rhs */
 		if (n && n->sym && n->sym->type == CHAN)
 		{	setaccess(n->sym, ZS, 0, 'V');
 			return;
-		}	
+		}
 	}
 
 	if (!d && n && n->ismtyp)	/* rhs is an mtype value (a constant) */
@@ -830,7 +830,7 @@ nochan_manip(Lextok *p, Lextok *n, int d)	/* p=lhs n=rhs */
 	{	if (d == 1)
 			fatal("invalid use of chan name", (char *) 0);
 		else
-			setaccess(n->sym, ZS, 0, 'V');	
+			setaccess(n->sym, ZS, 0, 'V');
 	}
 
 	if (n->ntyp == NAME

@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -42,7 +42,7 @@
    enumerated and will not be garbage collected. We use
    a finalize method to deallocate it when the reference
    is no longer in use. */
-   
+
 typedef struct jbig2_global_data_s {
 	Jbig2GlobalCtx *global_ctx;
 } jbig2_global_data_t;
@@ -64,7 +64,7 @@ z_jbig2decode(i_ctx_t * i_ctx_p)
 
     /* Extract the global context reference, if any, from the parameter
        dictionary. The original object ref is under the JBIG2Globals key.
-       We expect the postscript code to resolve this and call 
+       We expect the postscript code to resolve this and call
        z_jbig2makeglobalctx() below to create an astruct wrapping the
        global decoder context and store it under the .jbig2globalctx key
      */
@@ -76,7 +76,7 @@ z_jbig2decode(i_ctx_t * i_ctx_p)
 	    s_jbig2decode_set_global_ctx((stream_state*)&state, gref->global_ctx);
         }
     }
-    	
+
     /* we pass npop=0, since we've no arguments left to consume */
     /* we pass 0 instead of the usual rspace(sop) which will allocate storage
        for filter state from the same memory pool as the stream it's coding.
@@ -112,15 +112,15 @@ z_jbig2makeglobalctx(i_ctx_t * i_ctx_p)
 	    dlprintf("failed to create parsed JBIG2GLOBALS object.");
 	    return_error(e_unknownerror);
 	}
-	
-	st = ialloc_struct(jbig2_global_data_t, 
+
+	st = ialloc_struct(jbig2_global_data_t,
 		&st_jbig2_global_data_t,
 		"jbig2decode parsed global context");
 	if (st == NULL) return_error(e_VMerror);
-	
+
 	st->global_ctx = global_ctx;
 	make_astruct(op, a_readonly | icurrent_space, (byte*)st);
-	
+
 	return code;
 }
 
@@ -128,11 +128,11 @@ z_jbig2makeglobalctx(i_ctx_t * i_ctx_p)
 private void jbig2_global_data_finalize(void *vptr)
 {
 	jbig2_global_data_t *st = vptr;
-	
+
 	if (st->global_ctx) jbig2_global_ctx_free(st->global_ctx);
 	st->global_ctx = NULL;
 }
-   
+
 /* match the above routine to the corresponding filter name
    this is how our 'private' routines get called externally */
 const op_def zfjbig2_op_defs[] = {

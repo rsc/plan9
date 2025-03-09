@@ -12,7 +12,7 @@ if(! test -f $2) {
 
 disk=$1
 ini=$2
-shift 
+shift
 shift
 
 mkdir /tmp/bootfloppy.$pid

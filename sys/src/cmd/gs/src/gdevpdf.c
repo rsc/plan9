@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -51,7 +51,7 @@ private_st_pdf_substream_save();
 private_st_pdf_substream_save_element();
 
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(device_pdfwrite_enum_ptrs, gx_device_pdf *pdev)
 {
     index -= gx_device_pdf_num_ptrs + gx_device_pdf_num_param_strings;
@@ -303,7 +303,7 @@ pdf_compute_fileID(gx_device_pdf * pdev)
     /* We compute a file identifier when beginning a document
        to allow its usage with PDF encryption. Due to that,
        in contradiction to the Adobe recommendation, our
-       ID doesn't depend on the document size. 
+       ID doesn't depend on the document size.
     */
     gs_memory_t *mem = pdev->pdf_memory;
     stream *strm = pdev->strm;
@@ -333,7 +333,7 @@ pdf_compute_fileID(gx_device_pdf * pdev)
     return 0;
 }
 
-private const byte pad[32] = { 0x28, 0xBF, 0x4E, 0x5E, 0x4E, 0x75, 0x8A, 0x41, 
+private const byte pad[32] = { 0x28, 0xBF, 0x4E, 0x5E, 0x4E, 0x75, 0x8A, 0x41,
 			       0x64, 0x00, 0x4E, 0x56, 0xFF, 0xFA, 0x01, 0x08,
 			       0x2E, 0x2E, 0x00, 0xB6, 0xD0, 0x68, 0x3E, 0x80,
 			       0x2F, 0x0C, 0xA9, 0xFE, 0x64, 0x53, 0x69, 0x7A};
@@ -388,9 +388,9 @@ pdf_compute_encryption_data(gx_device_pdf * pdev)
     if (pdev->KeyLength == 0)
 	pdev->KeyLength = 40;
     if (pdev->EncryptionV == 0 && pdev->KeyLength == 40)
-	pdev->EncryptionV = 1;	
+	pdev->EncryptionV = 1;
     if (pdev->EncryptionV == 0 && pdev->KeyLength > 40)
-	pdev->EncryptionV = 2;	
+	pdev->EncryptionV = 2;
     if (pdev->EncryptionV > 1 && pdev->CompatibilityLevel < 1.4) {
 	eprintf("PDF 1.3 only supports 40 bits keys.\n");
 	return_error(gs_error_rangecheck);
@@ -465,7 +465,7 @@ pdf_compute_encryption_data(gx_device_pdf * pdev)
 	s_arcfour_process_buffer(&sarc4, digest, sizeof(digest));
 	Adobe_magic_loop_19(digest, sizeof(digest), pdev->EncryptionKey, pdev->KeyLength / 8);
 	memcpy(pdev->EncryptionU, digest, sizeof(digest));
-	memcpy(pdev->EncryptionU + sizeof(digest), pad, 
+	memcpy(pdev->EncryptionU + sizeof(digest), pad,
 		sizeof(pdev->EncryptionU) - sizeof(digest));
     } else {
 	memcpy(pdev->EncryptionU, pad, sizeof(pdev->EncryptionU));
@@ -512,7 +512,7 @@ pdf_set_process_color_model(gx_device_pdf * pdev, int index)
      * Particularly it should not change representation of colors.
      * Perhaps due to historical reasons the source color information
      * sometimes isn't accessible from device methods, and
-     * therefore they perform a mapping of colors to 
+     * therefore they perform a mapping of colors to
      * an output color model. Here we handle some color models,
      * which were selected almost due to antique reasons.
      */
@@ -717,7 +717,7 @@ pdf_print_orientation(gx_device_pdf * pdev, pdf_page_t *page)
     if ((page == NULL && pdev->params.AutoRotatePages == arp_All) || /* document */
         (page != NULL && page->text_rotation.Rotate >= 0) || /* page */
 	dsc_orientation >= 0 /* have DSC */) {
-        const pdf_text_rotation_t *ptr = 
+        const pdf_text_rotation_t *ptr =
 	    (page != NULL ? &page->text_rotation : &pdev->text_rotation);
 	int angle = -1;
 
@@ -738,7 +738,7 @@ pdf_print_orientation(gx_device_pdf * pdev, pdf_page_t *page)
 	} else if (dsc_orientation == 1) {
 	    if (ptr->Rotate == 90 || ptr->Rotate == 270)
 		angle = ptr->Rotate;
-	    else 
+	    else
 		angle = 90;
 	}
 
@@ -816,7 +816,7 @@ pdf_close_page(gx_device_pdf * pdev)
 
 	if (pdev->ForOPDFRead) {
 	    pdf_resource_t *pres = pdf_find_resource_by_resource_id(pdev, resourcePage, pdev->contents_id);
-	    
+
 	    if (pres != NULL) {
 		code = cos_dict_put_c_strings((cos_dict_t *)pres->object, "/.CleanResources", "/All");
 		if (code < 0)
@@ -1126,7 +1126,7 @@ pdf_close(gx_device * dev)
     if (pdev->Dests)
 	pprintld1(s, "/Dests %ld 0 R\n", pdev->Dests->id);
     if (pdev->PageLabels)
-	pprintld1(s, "/PageLabels << /Nums  %ld 0 R >>\n", 
+	pprintld1(s, "/PageLabels << /Nums  %ld 0 R >>\n",
                   pdev->PageLabels->id);
     cos_dict_elements_write(pdev->Catalog, pdev);
     stream_puts(s, ">>\n");
@@ -1272,7 +1272,7 @@ pdf_close(gx_device * dev)
         /* pdf_open_dcument could set up filters for entire document.
            Removing them now. */
 	int status;
-    
+
 	stream_putc(s, 0x04);
 	while (s->strm) {
 	    s = s->strm;
@@ -1285,7 +1285,7 @@ pdf_close(gx_device * dev)
     if (code >= 0)
 	code = code1;
     if (pdev->max_referred_page >= pdev->next_page + 1) {
-        /* Note : pdev->max_referred_page counts from 1, 
+        /* Note : pdev->max_referred_page counts from 1,
 	   and pdev->next_page counts from 0. */
 	eprintf2("ERROR: A pdfmark destination page %d points beyond the last page %d.\n",
 		pdev->max_referred_page, pdev->next_page);

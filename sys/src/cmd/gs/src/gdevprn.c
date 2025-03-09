@@ -1,12 +1,12 @@
 /* Copyright (C) 1990, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -55,7 +55,7 @@ const gx_device_procs prn_std_procs =
     prn_procs(gdev_prn_open, gdev_prn_output_page, gdev_prn_close);
 
 /* Forward references */
-int gdev_prn_maybe_realloc_memory(gx_device_printer *pdev, 
+int gdev_prn_maybe_realloc_memory(gx_device_printer *pdev,
 				  gdev_prn_space_params *old_space,
 			          int old_width, int old_height,
 			          bool old_page_uses_transparency);
@@ -158,7 +158,7 @@ open_c:
 	     ) {
 	    space <<= 1;
 	    if (reallocate) {
-		base = gs_resize_object(buffer_memory, 
+		base = gs_resize_object(buffer_memory,
 					*the_memory, space,
 					"cmd list buf(retry open)");
 		if (base != 0)
@@ -1239,7 +1239,7 @@ gdev_prn_close_printer(gx_device * pdev)
 
 /* If necessary, free and reallocate the printer memory after changing params */
 int
-gdev_prn_maybe_realloc_memory(gx_device_printer *prdev, 
+gdev_prn_maybe_realloc_memory(gx_device_printer *prdev,
 			      gdev_prn_space_params *old_sp,
 			      int old_width, int old_height,
 			      bool old_page_uses_transparency)
@@ -1247,7 +1247,7 @@ gdev_prn_maybe_realloc_memory(gx_device_printer *prdev,
     int code = 0;
     gx_device *const pdev = (gx_device *)prdev;
     /*gx_device_memory * const mdev = (gx_device_memory *)prdev;*/
-	
+
     /*
      * The first test was changed to mdev->base != 0 in 5.50 (per Artifex).
      * Not only was this test wrong logically, it was incorrect in that

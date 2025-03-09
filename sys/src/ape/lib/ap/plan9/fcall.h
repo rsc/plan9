@@ -43,7 +43,7 @@ struct	Fcall
 		};
 		struct
 		{
-			long	perm;		/* T-Create */ 
+			long	perm;		/* T-Create */
 			short	newfid;		/* T-Clone, T-Clwalk */
 			char	name[NAMELEN];	/* T-Walk, T-Clwalk, T-Create */
 			char	mode;		/* T-Create, T-Open */

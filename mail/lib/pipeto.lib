@@ -105,7 +105,7 @@ fn qualify {
 	upas/fs -pf $TMP.msg || exit $status
 }
 
-# classify message according to token-based white list 
+# classify message according to token-based white list
 fn tokenfilter {
 	if($BIN/list check $PF $D/from $D/sender $D/replyto)
 		echo match
@@ -189,4 +189,3 @@ fn isspam {
 # save and parse the mail file
 sed '/^$/,$ s/^From / From /' >$TMP.msg
 upas/fs -pf $TMP.msg || exit $status
-

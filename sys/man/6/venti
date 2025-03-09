@@ -34,17 +34,17 @@ The SHA1 hash that identifies a block is called its
 The score of the zero-length block is called the
 .IR "zero score" .
 .PP
-Scores may have an optional 
+Scores may have an optional
 .IB label :
 prefix, typically used to
 describe the format of the data.
-For example, 
+For example,
 .IR vac (1)
 uses a
 .B vac:
 prefix.
 .SS "Files and Directories
-Venti accepts blocks up to 56 kilobytes in size.  
+Venti accepts blocks up to 56 kilobytes in size.
 By convention, Venti clients use hash trees of blocks to
 represent arbitrary-size data
 .IR files .
@@ -62,7 +62,7 @@ a
 .B VtEntry
 structure recording the top-most score, the depth
 of the tree, the data block size, and the pointer block size.
-One or more 
+One or more
 .B VtEntry
 structures can be concatenated
 and stored as a special file called a
@@ -121,8 +121,8 @@ To avoid storing the same short data blocks padded with
 differing numbers of zeros, Venti clients working with fixed-size
 blocks conventionally
 `zero truncate' the blocks before writing them to the server.
-For example, if a 1024-byte data block contains the 
-11-byte string 
+For example, if a 1024-byte data block contains the
+11-byte string
 .RB ` hello " " world '
 followed by 1013 zero bytes,
 a client would store only the 11-byte block.
@@ -143,14 +143,14 @@ any file consisting entirely of zero bytes,
 no matter what its length, will be represented by the zero score:
 the data blocks contain all zeros and are thus truncated
 to the empty block, and the pointer blocks contain all zero scores
-and are thus also truncated to the empty block, 
+and are thus also truncated to the empty block,
 and so on up the hash tree.
 .SS Network Protocol
 A Venti session begins when a
 .I client
 connects to the network address served by a Venti
 .IR server ;
-the conventional address is 
+the conventional address is
 .BI tcp! server !venti
 (the
 .B venti
@@ -207,7 +207,7 @@ The
 character is illegal in text strings in the Venti protocol.
 The maximum string length in Venti is 1024 bytes.
 .PP
-Each Venti message begins with a two-byte size field 
+Each Venti message begins with a two-byte size field
 specifying the length in bytes of the message,
 not including the length field itself.
 The next byte is the message type, one of the constants
@@ -241,9 +241,9 @@ followed by
 bytes of UTF-8 text.
 The notation
 .IR parameter []
-where 
+where
 .I parameter
-is the last field in the message represents a 
+is the last field in the message represents a
 variable-length field that comprises all remaining
 bytes in the message.
 .PP
@@ -267,7 +267,7 @@ The message bodies are:
 .br
 .B VtRhello
 .IR tag [1]
-.IR sid [ s ] 
+.IR sid [ s ]
 .IR rcrypto [1]
 .IR rcodec [1]
 .IP
@@ -335,7 +335,7 @@ In the latter case, the
 .I error
 field contains a string describing the reason for failure.
 .PP
-Venti connections must begin with a 
+Venti connections must begin with a
 .B hello
 transaction.
 The
@@ -351,15 +351,15 @@ and
 could be used to add authentication, encryption,
 and compression to the Venti session
 but are currently ignored.
-The 
+The
 .IR rcrypto ,
 and
 .I rcodec
-fields in the 
+fields in the
 .B VtRhello
 response are similarly ignored.
 The
-.IR uid 
+.IR uid
 and
 .IR sid
 fields are intended to be the identity
@@ -373,7 +373,7 @@ transaction during the session.
 .PP
 The
 .B ping
-message has no effect and 
+message has no effect and
 is used mainly for debugging.
 Servers should respond immediately to pings.
 .PP
@@ -392,7 +392,7 @@ and
 to convert a block type enumeration value
 .RB ( VtDataType ,
 etc.)
-to the 
+to the
 .I type
 used on disk and in the protocol.
 The
@@ -413,7 +413,7 @@ to the server.
 The response includes the
 .I score
 to use to read the block,
-which should be the SHA1 hash of 
+which should be the SHA1 hash of
 .IR data .
 .PP
 The Venti server may buffer written blocks in memory,

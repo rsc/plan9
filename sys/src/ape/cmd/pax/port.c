@@ -2,7 +2,7 @@
  *
  * $Revision: 1.2 $
  *
- * port.c - These are routines not available in all environments. 
+ * port.c - These are routines not available in all environments.
  *
  * DESCRIPTION
  *
@@ -16,17 +16,17 @@
  *	Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *	John Gilmore (gnu@hoptoad)
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice is duplicated in all such 
- * forms and that any documentation, advertising materials, and other 
- * materials related to such distribution and use acknowledge that the 
- * software was developed * by Mark H. Colburn and sponsored by The 
- * USENIX Association. 
+ * provided that the above copyright notice is duplicated in all such
+ * forms and that any documentation, advertising materials, and other
+ * materials related to such distribution and use acknowledge that the
+ * software was developed * by Mark H. Colburn and sponsored by The
+ * USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -35,10 +35,10 @@
  * $Log:	port.c,v $
  * Revision 1.2  89/02/12  10:05:35  mark
  * 1.2 release fixes
- * 
+ *
  * Revision 1.1  88/12/23  18:02:29  mark
  * Initial revision
- * 
+ *
  */
 
 #ifndef lint
@@ -55,7 +55,7 @@ static char *copyright = "Copyright (c) 1989 Mark H. Colburn.\nAll rights reserv
 /*
  * Some computers are not so crass as to align themselves into the BSD or USG
  * camps.  If a system supplies all of the routines we fake here, add it to
- * the list in the #if !defined()'s below and it'll all be skipped. 
+ * the list in the #if !defined()'s below and it'll all be skipped.
  */
 
 #if !defined(mc300) && !defined(mc500) && !defined(mc700) && !defined(BSD) && !defined(_POSIX_SOURCE)
@@ -85,7 +85,7 @@ static char *copyright = "Copyright (c) 1989 Mark H. Colburn.\nAll rights reserv
 int mkdir(char *dpath, int dmode)
 
 #else
-    
+
 int mkdir(dpath, dmode)
 char           *dpath;
 int             dmode;
@@ -153,7 +153,7 @@ int             dmode;
 int rmdir(char *dpath)
 
 #else
-    
+
 int rmdir(dpath)
 char           *dpath;
 

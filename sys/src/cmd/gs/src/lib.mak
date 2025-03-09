@@ -1,12 +1,12 @@
 #    Copyright (C) 1995-2004 artofcode LLC. All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -257,7 +257,7 @@ $(GLOBJ)gsmisc.$(OBJ) : $(GLSRC)gsmisc.c $(GXERR)\
 $(GLOBJ)gslibctx.$(OBJ) : $(GLSRC)gslibctx.c  $(GXERR)\
   $(gslibctx_h) $(stdio__h)
 	$(GLCC) $(GLO_)gslibctx.$(OBJ) $(C_) $(GLSRC)gslibctx.c
-  
+
 $(GLOBJ)gsnotify.$(OBJ) : $(GLSRC)gsnotify.c $(GXERR)\
  $(gsnotify_h) $(gsstruct_h)
 	$(GLCC) $(GLO_)gsnotify.$(OBJ) $(C_) $(GLSRC)gsnotify.c
@@ -698,7 +698,7 @@ $(GLOBJ)gxpflat.$(OBJ) : $(GLSRC)gxpflat.c $(GX)\
 	$(GLCC) $(GLO_)gxpflat.$(OBJ) $(C_) $(GLSRC)gxpflat.c
 
 $(GLOBJ)gxsample.$(OBJ) : $(GLSRC)gxsample.c $(GX)\
- $(gxsample_h) $(gxfixed_h) $(gximage_h) $(gxsamplp_h) 
+ $(gxsample_h) $(gxfixed_h) $(gximage_h) $(gxsamplp_h)
 	$(GLCC) $(GLO_)gxsample.$(OBJ) $(C_) $(GLSRC)gxsample.c
 
 $(GLOBJ)gxstroke.$(OBJ) : $(GLSRC)gxstroke.c $(GXERR) $(math__h) $(gpcheck_h)\
@@ -1016,7 +1016,7 @@ $(GLOBJ)gdevplnx.$(OBJ) : $(GLSRC)gdevplnx.c $(GXERR)\
 $(GLOBJ)gdevtrac.$(OBJ) : $(GLSRC)gdevtrac.c $(GXERR)\
  $(gscspace_h)\
  $(gxdevice_h) $(gxdht_h) $(gxfont_h) $(gxiparam_h) $(gxistate_h)\
- $(gxpaint_h) $(gxtmap_h) $(gzcpath_h) $(gzpath_h) 
+ $(gxpaint_h) $(gxtmap_h) $(gzcpath_h) $(gzpath_h)
 	$(GLCC) $(GLO_)gdevtrac.$(OBJ) $(C_) $(GLSRC)gdevtrac.c
 
 $(GLD)tracedev.dev : $(ECHOGS_XE) $(LIB_MAK) $(GLOBJ)gdevtrac.$(OBJ)
@@ -1074,7 +1074,7 @@ LIB7s=$(GLOBJ)gsht.$(OBJ) $(GLOBJ)gshtscr.$(OBJ) $(GLOBJ)gswts.$(OBJ)
 LIB8s=$(GLOBJ)gsimage.$(OBJ) $(GLOBJ)gsimpath.$(OBJ) $(GLOBJ)gsinit.$(OBJ)
 LIB9s=$(GLOBJ)gsiodev.$(OBJ) $(GLOBJ)gsistate.$(OBJ) $(GLOBJ)gsline.$(OBJ)
 LIB10s=$(GLOBJ)gsmalloc.$(OBJ) $(GLOBJ)gsmatrix.$(OBJ) $(GLOBJ)gsmemlok.$(OBJ)
-LIB11s=$(GLOBJ)gsmemory.$(OBJ) $(GLOBJ)gsmemret.$(OBJ) $(GLOBJ)gsmisc.$(OBJ) $(GLOBJ)gsnotify.$(OBJ) $(GLOBJ)gslibctx.$(OBJ) 
+LIB11s=$(GLOBJ)gsmemory.$(OBJ) $(GLOBJ)gsmemret.$(OBJ) $(GLOBJ)gsmisc.$(OBJ) $(GLOBJ)gsnotify.$(OBJ) $(GLOBJ)gslibctx.$(OBJ)
 LIB12s=$(GLOBJ)gspaint.$(OBJ) $(GLOBJ)gsparam.$(OBJ) $(GLOBJ)gspath.$(OBJ)
 LIB13s=$(GLOBJ)gsserial.$(OBJ) $(GLOBJ)gsstate.$(OBJ) $(GLOBJ)gstext.$(OBJ)\
   $(GLOBJ)gsutil.$(OBJ)
@@ -1863,7 +1863,7 @@ $(GLOBJ)ttfmemd.$(OBJ) : $(GLSRC)ttfmemd.c $(GXERR) $(ttmisc_h)\
 	$(GLCC) $(GLO_)ttfmemd.$(OBJ) $(C_) $(GLSRC)ttfmemd.c
 
 $(GLOBJ)ttinterp.$(OBJ) : $(GLSRC)ttinterp.c $(GXERR) $(ttmisc_h)\
- $(ttfoutl_h) $(tttypes_h) $(ttcalc_h) $(ttinterp_h) $(ttfinp_h) 
+ $(ttfoutl_h) $(tttypes_h) $(ttcalc_h) $(ttinterp_h) $(ttfinp_h)
 	$(GLCC) $(GLO_)ttinterp.$(OBJ) $(C_) $(GLSRC)ttinterp.c
 
 $(GLOBJ)ttload.$(OBJ) : $(GLSRC)ttload.c $(GXERR) $(ttmisc_h)\
@@ -2480,7 +2480,7 @@ $(GLOBJ)gdevp14.$(OBJ) : $(GLSRC)gdevp14.c $(GXERR) $(math__h) $(memory__h)\
 	$(GLCC) $(GLO_)gdevp14.$(OBJ) $(C_) $(GLSRC)gdevp14.c
 
 translib_=$(GLOBJ)gstrans.$(OBJ) $(GLOBJ)gximag3x.$(OBJ)\
- $(GLOBJ)gxblend.$(OBJ) $(GLOBJ)gdevp14.$(OBJ) 
+ $(GLOBJ)gxblend.$(OBJ) $(GLOBJ)gdevp14.$(OBJ)
 $(GLD)translib.dev : $(LIB_MAK) $(ECHOGS_XE) $(translib_) $(GLD)cspixlib.dev $(GLD)bboxutil.dev
 	$(SETMOD) $(GLD)translib $(translib_)
 	$(ADDMOD) $(GLD)translib -imagetype 3x
@@ -2593,7 +2593,7 @@ $(GLOBJ)gsiomacres.$(OBJ) : $(GLSRC)gsiomacres.c \
 # (This stuff fixes Agfa's reentrancy problem with UFST callbacks.)
 # (To be removed after Agfa fixes the problem.)
 
-UFST_INC_1=$(I_)$(UFST_ROOT)$(D)sys$(D)inc$(_I) $(I_)$(UFST_ROOT)$(D)rts$(D)inc$(_I) 
+UFST_INC_1=$(I_)$(UFST_ROOT)$(D)sys$(D)inc$(_I) $(I_)$(UFST_ROOT)$(D)rts$(D)inc$(_I)
 UFST_INC_=$(UFST_INC_1) $(I_)$(UFST_ROOT)$(D)rts$(D)fco$(_I) $(I_)$(UFST_ROOT)$(D)rts$(D)gray$(_I)
 
 gxfapi_h=$(GLSRC)gxfapi.h

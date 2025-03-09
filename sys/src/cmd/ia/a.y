@@ -150,7 +150,7 @@ inst:
 		outcode($1, &$2, NREG, &$4);
 	}
 
-		
+
 |	LMOVW imm ',' rreg
 	{
 		outcode($1, &$2, NREG, &$4);
@@ -379,7 +379,7 @@ dreg:
 drreg:
 	dreg
 |	rreg
-	
+
 sreg:
 	LREG
 |	LR '(' expr ')'

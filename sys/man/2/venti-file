@@ -16,7 +16,7 @@ vtfilelock,
 vtfilelock2,
 vtfileopen,
 vtfileopenroot,
-vtfileread, 
+vtfileread,
 vtfileremove,
 vtfilesetdirsize,
 vtfilesetentry,
@@ -85,7 +85,7 @@ int	vtfilegetentry(VtFile *f, VtEntry *e);
 int	vtfilesetentry(VtFile *f, VtEntry *e);
 .PP
 .B
-int	vtfileblockscore(VtFile *f, u32int n, 
+int	vtfileblockscore(VtFile *f, u32int n,
 	    uchar score[VtScoreSize]);
 .PP
 .B
@@ -164,7 +164,7 @@ releases the reference to
 .IR f 's
 parent and then frees the in-memory structure
 .IR f .
-The data stored in 
+The data stored in
 .I f
 is still accessible by reopening it.
 .PP
@@ -172,7 +172,7 @@ is still accessible by reopening it.
 removes the file
 .I f
 from its parent directory.
-It also acts as 
+It also acts as
 .IR vtfileclose ,
 releasing the reference to
 .I f
@@ -183,11 +183,11 @@ returns the
 .IR n th
 block in the file
 .IR f .
-If there are not 
+If there are not
 .I n
 blocks in the file and
 .I mode
-is 
+is
 .BR VtOREAD ,
 .I vtfileblock
 returns nil.
@@ -210,13 +210,13 @@ into memory at
 It returns the number of bytes read.
 .PP
 .I Vtfilewrite
-writes the 
+writes the
 .I n
 bytes in memory at
 .I buf
 into the file
 .I f
-at offset 
+at offset
 .IR n .
 It returns the number of bytes written,
 or \-1 on error.
@@ -229,7 +229,7 @@ writes to an in-memory copy of the data blocks
 .IR venti-cache (2))
 instead of writing directly to Venti.
 .I Vtfileflush
-writes all copied blocks associated with 
+writes all copied blocks associated with
 .I f
 to the Venti server.
 .I Vtfileflushbefore
@@ -303,7 +303,7 @@ The functions that return files
 and
 .IR vtfileopen )
 return them unlocked.
-When files are passed to any of the functions documented in 
+When files are passed to any of the functions documented in
 this manual page, it is the caller's responsibility to ensure that
 they are already locked.
 .PP

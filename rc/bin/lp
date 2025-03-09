@@ -4,10 +4,10 @@
 # changes made directly to /rc/bin/lp will be lost.
 
 rfork en	# so that environment and name space are not polluted
-# 
+#
 # put 'fn sigexit { rm /tmp/lpcrap; exit interrupted }' into processes that create /tmp/lpcrap.
 
-ifs=' 	
+ifs='
 '		# set ifs in case it is munged in user's environment
 
 LPLIB=/sys/lib/lp		# lp scripts directories and configuration file are here

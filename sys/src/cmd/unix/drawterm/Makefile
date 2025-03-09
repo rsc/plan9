@@ -46,7 +46,7 @@ exportfs/libexportfs.a:
 
 libauth/libauth.a:
 	(cd libauth; $(MAKE))
-	
+
 libauthsrv/libauthsrv.a:
 	(cd libauthsrv; $(MAKE))
 

@@ -9,7 +9,7 @@ s=/n/dist/dist/replica
 serverroot=/n/dist
 serverlog=$s/plan9.log
 serverproto=$s/plan9.proto
-fn servermount { status='' } 
+fn servermount { status='' }
 fn serverupdate { status='' }
 
 fn clientmount { status='' }

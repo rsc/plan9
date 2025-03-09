@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -140,7 +140,7 @@ private ENUM_PTRS_WITH(copied_glyph_name_enum_ptrs, gs_copied_glyph_name_t *pcgn
 		 ENUM_CONST_STRING(&p->str));
      }
      return 0;
-     /* We should mark glyph name here, but we have no access to 
+     /* We should mark glyph name here, but we have no access to
         the gs_font_dir instance. Will mark in gs_copied_font_data_enum_ptrs.
       */
 ENUM_PTRS_END
@@ -202,7 +202,7 @@ struct gs_copied_font_data_s {
     gs_font_dir *dir;
 };
 extern_st(st_gs_font_info);
-private 
+private
 ENUM_PTRS_WITH(gs_copied_font_data_enum_ptrs, gs_copied_font_data_t *cfdata)
     if (index == 12) {
 	gs_copied_glyph_name_t *names = cfdata->names;
@@ -656,7 +656,7 @@ copied_enumerate_glyph(gs_font *font, int *pindex,
 		(glyph_space == GLYPH_SPACE_NAME && cfdata->names != 0 ?
 		 cfdata->names[*pindex].glyph :
 		 /* CIDFontType 0 uses CIDS as slot indices; CIDFontType 2 uses GIDs. */
-		 *pindex + (glyph_space == GLYPH_SPACE_NAME 
+		 *pindex + (glyph_space == GLYPH_SPACE_NAME
 			    ? GS_MIN_CID_GLYPH : GS_MIN_GLYPH_INDEX));
 	    ++(*pindex);
 	    return 0;
@@ -726,26 +726,26 @@ copied_build_char(gs_text_enum_t *pte, gs_state *pgs, gs_font *font,
     }
 }
 
-private inline bool 
+private inline bool
 compare_arrays(const float *v0, int l0, const float *v1, int l1)
 {
     if (l0 != l1)
 	return false;
     if (memcmp(v0, v1, l0 * sizeof(v0[0])))
 	return false;
-    return true;	
+    return true;
 }
 
 #define compare_tables(a, b) compare_arrays(a.values, a.count, b.values, b.count)
 
 private int
-compare_glyphs(const gs_font *cfont, const gs_font *ofont, gs_glyph *glyphs, 
+compare_glyphs(const gs_font *cfont, const gs_font *ofont, gs_glyph *glyphs,
 			   int num_glyphs, int glyphs_step, int level)
 {
-    /* 
-     * Checking widths because we can synthesize fonts from random fonts 
-     * having same FontName and FontType. 
-     * We must request width explicitely because Type 42 stores widths 
+    /*
+     * Checking widths because we can synthesize fonts from random fonts
+     * having same FontName and FontType.
+     * We must request width explicitely because Type 42 stores widths
      * separately from outline data. We could skip it for Type 1, which doesn't.
      * We don't care of Metrics, Metrics2 because copied font never has them.
      */
@@ -787,16 +787,16 @@ compare_glyphs(const gs_font *cfont, const gs_font *ofont, gs_glyph *glyphs,
 	    if(level > 5)
 		return_error(gs_error_rangecheck); /* abnormal glyph recursion */
 	    if (info0.num_pieces > countof(pieces0) / 2) {
-		pieces = (gs_glyph *)gs_alloc_bytes(cfont->memory, 
+		pieces = (gs_glyph *)gs_alloc_bytes(cfont->memory,
 		    sizeof(glyphs) * info0.num_pieces * 2, "compare_glyphs");
 		if (pieces == 0)
 		    return_error(gs_error_VMerror);
 	    }
 	    info0.pieces = pieces;
 	    info1.pieces = pieces + info0.num_pieces;
-	    code0 = ofont->procs.glyph_info((gs_font *)ofont, glyph, &mat, 
+	    code0 = ofont->procs.glyph_info((gs_font *)ofont, glyph, &mat,
 				    GLYPH_INFO_PIECES, &info0);
-	    code1 = cfont->procs.glyph_info((gs_font *)cfont, glyph, &mat, 
+	    code1 = cfont->procs.glyph_info((gs_font *)cfont, glyph, &mat,
 				    GLYPH_INFO_PIECES, &info1);
 	    if (code0 >= 0 && code1 >= 0) {
 		code2 = memcmp(info0.pieces, info1.pieces, info0.num_pieces * sizeof(*pieces));
@@ -825,7 +825,7 @@ compare_glyphs(const gs_font *cfont, const gs_font *ofont, gs_glyph *glyphs,
 	    }
 	} else {
 	    gs_glyph_data_t gdata0, gdata1;
-	    
+
 	    switch(cfont->FontType) {
 		case ft_encrypted:
 		case ft_encrypted2: {
@@ -838,7 +838,7 @@ compare_glyphs(const gs_font *cfont, const gs_font *ofont, gs_glyph *glyphs,
 		    code1 = font1->data.procs.glyph_data(font1, glyph, &gdata1);
 		    break;
 		}
-		case ft_TrueType: 
+		case ft_TrueType:
 		case ft_CID_TrueType: {
 		    gs_font_type42 *font0 = (gs_font_type42 *)cfont;
 		    gs_font_type42 *font1 = (gs_font_type42 *)ofont;
@@ -1018,7 +1018,7 @@ copy_glyph_type1(gs_font *font, gs_glyph glyph, gs_font *copied, int options)
 private int
 copied_type1_glyph_outline(gs_font *font, int WMode, gs_glyph glyph,
 			   const gs_matrix *pmat, gx_path *ppath, double sbw[4])
-{   /* 
+{   /*
      * 'WMode' may be inherited from an upper font.
      * We ignore in because Type 1,2 charstrings do not depend on it.
      */
@@ -1081,8 +1081,8 @@ private const gs_copied_font_procs_t copied_procs_type1 = {
     copied_encode_char, gs_type1_glyph_info, copied_type1_glyph_outline
 };
 
-private bool 
-same_type1_subrs(const gs_font_type1 *cfont, const gs_font_type1 *ofont, 
+private bool
+same_type1_subrs(const gs_font_type1 *cfont, const gs_font_type1 *ofont,
 		 bool global)
 {
     gs_glyph_data_t gdata0, gdata1;
@@ -1093,15 +1093,15 @@ same_type1_subrs(const gs_font_type1 *cfont, const gs_font_type1 *ofont,
     gdata1.memory = ofont->memory;
     /* Scan the font to determine the size of the subrs. */
     for (i = 0; !exit; i++) {
-	int code0 = cfont->data.procs.subr_data((gs_font_type1 *)cfont, 
+	int code0 = cfont->data.procs.subr_data((gs_font_type1 *)cfont,
 						i, global, &gdata0);
-	int code1 = ofont->data.procs.subr_data((gs_font_type1 *)ofont, 
+	int code1 = ofont->data.procs.subr_data((gs_font_type1 *)ofont,
 						i, global, &gdata1);
 	bool missing0, missing1;
-	
+
 	if (code0 == gs_error_rangecheck && code1 == gs_error_rangecheck)
 	    return 1; /* Both arrays exceeded. */
-	/*  Some fonts use null for skiping elements in subrs array. 
+	/*  Some fonts use null for skiping elements in subrs array.
 	    This gives typecheck.
 	*/
 	missing0 = (code0 == gs_error_rangecheck || code0 == gs_error_typecheck);
@@ -1128,7 +1128,7 @@ same_type1_subrs(const gs_font_type1 *cfont, const gs_font_type1 *ofont,
     return code;
 }
 
-private bool 
+private bool
 same_type1_hinting(const gs_font_type1 *cfont, const gs_font_type1 *ofont)
 {
     const gs_type1_data *d0 = &cfont->data, *d1 = &ofont->data;
@@ -1309,7 +1309,7 @@ copy_glyph_type42(gs_font *font, gs_glyph glyph, gs_font *copied, int options)
     gs_font_cid2 *fontCID2 = (gs_font_cid2 *)font;
     gs_font_type42 *const copied42 = (gs_font_type42 *)copied;
     uint gid = (options & COPY_GLYPH_BY_INDEX ? glyph - GS_MIN_GLYPH_INDEX :
-		font->FontType == ft_CID_TrueType 
+		font->FontType == ft_CID_TrueType
 		    ? fontCID2->cidata.CIDMap_proc(fontCID2, glyph)
 		    : font42->data.get_glyph_index(font42, glyph));
     int code;
@@ -1382,7 +1382,7 @@ private const gs_copied_font_procs_t copied_procs_type42 = {
 };
 
 private inline int
-access_type42_data(gs_font_type42 *pfont, ulong base, ulong length, 
+access_type42_data(gs_font_type42 *pfont, ulong base, ulong length,
 		   const byte **vptr)
 {
     /* See ACCESS macro in gstype42.c */
@@ -1538,7 +1538,7 @@ copied_cid0_glyph_info(gs_font *font, gs_glyph glyph, const gs_matrix *pmat,
 	 * Therefore we use FontBBox as default size.
 	 * Warning : this incompletely implements the request :
 	 * other requested members are not retrieved.
-	 */ 
+	 */
 	gs_font_info_t finfo;
 	int code = subfont1->procs.font_info(font, NULL, FONT_INFO_BBOX, &finfo);
 
@@ -1697,7 +1697,7 @@ copied_cid2_CIDMap_proc(gs_font_cid2 *fcid2, gs_glyph glyph)
     if (glyph < GS_MIN_CID_GLYPH || cid >= fcid2->cidata.common.CIDCount)
 	return_error(gs_error_rangecheck);
     if (CIDMap[cid] == 0xffff)
-	return -1;	
+	return -1;
     return CIDMap[cid];
 }
 
@@ -1738,7 +1738,7 @@ copy_font_cid2(gs_font *font, gs_font *copied)
     copied2->cidata.CIDMap_proc = copied_cid2_CIDMap_proc;
     {
 	gs_font_type42 *const copied42 = (gs_font_type42 *)copied;
-	
+
 	copied42->data.get_glyph_index = copied_cid2_get_glyph_index;
     }
     return 0;
@@ -1757,7 +1757,7 @@ private int expand_CIDMap(gs_font_cid2 *copied2, uint CIDCount)
     if (CIDMap == 0)
 	return_error(gs_error_VMerror);
     memcpy(CIDMap, cfdata->CIDMap, copied2->cidata.common.CIDCount * sizeof(*CIDMap));
-    memset(CIDMap + copied2->cidata.common.CIDCount, 0xFF, 
+    memset(CIDMap + copied2->cidata.common.CIDCount, 0xFF,
 	    (CIDCount - copied2->cidata.common.CIDCount) * sizeof(*CIDMap));
     cfdata->CIDMap = CIDMap;
     copied2->cidata.common.CIDCount = CIDCount;
@@ -1840,13 +1840,13 @@ private const gs_font_procs copied_font_procs = {
 
 #if GLYPHS_SIZE_IS_PRIME
 private const int some_primes[] = {
-    /* Arbitrary choosen prime numbers, being reasonable for a Type 1|2 font size. 
+    /* Arbitrary choosen prime numbers, being reasonable for a Type 1|2 font size.
        We start with 257 to fit 256 glyphs and .notdef .
        Smaller numbers aren't useful, because we don't know whether a font
        will add more glyphs incrementally when we allocate its stable copy.
     */
-    257, 359, 521, 769, 1031, 2053, 
-    3079, 4099, 5101, 6101, 7109, 8209, 10007, 12007, 14009, 
+    257, 359, 521, 769, 1031, 2053,
+    3079, 4099, 5101, 6101, 7109, 8209, 10007, 12007, 14009,
     16411, 20107, 26501, 32771, 48857, 65537};
 #endif
 
@@ -2097,7 +2097,7 @@ gs_copy_glyph_options(gs_font *font, gs_glyph glyph, gs_font *copied,
     default:
 	return 0;
     }
-#if 0 /* No need to add subglyphs to the Encoding because they always are 
+#if 0 /* No need to add subglyphs to the Encoding because they always are
 	 taken from StandardEncoding (See the Type 1 spec about 'seac').
 	 Attempt to add them to the encoding can cause a conflict,
 	 if the encoding specifies different glyphs for these char codes
@@ -2191,16 +2191,16 @@ gs_copy_font_complete(gs_font *font, gs_font *copied)
 
 /*
  * Check whether specified glyphs can be copied from another font.
- * It means that (1) fonts have same hinting parameters and 
- * (2) font subsets for the specified glyph set don't include different 
- * outlines or metrics. Possible returned values : 
+ * It means that (1) fonts have same hinting parameters and
+ * (2) font subsets for the specified glyph set don't include different
+ * outlines or metrics. Possible returned values :
  * 0 (incompatible), 1 (compatible), < 0 (error)
  */
 int
-gs_copied_can_copy_glyphs(const gs_font *cfont, const gs_font *ofont, 
+gs_copied_can_copy_glyphs(const gs_font *cfont, const gs_font *ofont,
 			  gs_glyph *glyphs, int num_glyphs, int glyphs_step,
 			  bool check_hinting)
-{   
+{
     int code = 0;
 
     if (cfont == ofont)
@@ -2211,12 +2211,12 @@ gs_copied_can_copy_glyphs(const gs_font *cfont, const gs_font *ofont,
 	return 0;
     if (cfont->font_name.size == 0 || ofont->font_name.size == 0) {
 	if (cfont->key_name.size != ofont->key_name.size ||
-	    memcmp(cfont->key_name.chars, ofont->key_name.chars, 
+	    memcmp(cfont->key_name.chars, ofont->key_name.chars,
 			cfont->font_name.size))
     	    return 0; /* Don't allow to merge random fonts. */
     } else {
 	if (cfont->font_name.size != ofont->font_name.size ||
-	    memcmp(cfont->font_name.chars, ofont->font_name.chars, 
+	    memcmp(cfont->font_name.chars, ofont->font_name.chars,
 			    cfont->font_name.size))
 	    return 0; /* Don't allow to merge random fonts. */
     }
@@ -2224,41 +2224,41 @@ gs_copied_can_copy_glyphs(const gs_font *cfont, const gs_font *ofont,
 	switch(cfont->FontType) {
 	    case ft_encrypted:
 	    case ft_encrypted2:
-		if (!same_type1_hinting((const gs_font_type1 *)cfont, 
+		if (!same_type1_hinting((const gs_font_type1 *)cfont,
 					(const gs_font_type1 *)ofont))
 		    return 0;
 		code = 1;
 		break;
 	    case ft_TrueType:
-		code = same_type42_hinting((gs_font_type42 *)cfont, 
+		code = same_type42_hinting((gs_font_type42 *)cfont,
 					(gs_font_type42 *)ofont);
 		break;
 	    case ft_CID_encrypted:
 		if (!gs_is_CIDSystemInfo_compatible(
-				gs_font_cid_system_info(cfont), 
+				gs_font_cid_system_info(cfont),
 				gs_font_cid_system_info(ofont)))
 		    return 0;
-		code = same_cid0_hinting((const gs_font_cid0 *)cfont, 
+		code = same_cid0_hinting((const gs_font_cid0 *)cfont,
 					 (const gs_font_cid0 *)ofont);
 		break;
 	    case ft_CID_TrueType:
 		if (!gs_is_CIDSystemInfo_compatible(
-				gs_font_cid_system_info(cfont), 
+				gs_font_cid_system_info(cfont),
 				gs_font_cid_system_info(ofont)))
 		    return 0;
-		code = same_cid2_hinting((const gs_font_cid2 *)cfont, 
+		code = same_cid2_hinting((const gs_font_cid2 *)cfont,
 					 (const gs_font_cid2 *)ofont);
 		break;
 	    default:
 		return_error(gs_error_unregistered); /* Must not happen. */
 	}
 	if (code <= 0) /* an error or false */
-	    return code; 
+	    return code;
     }
     return compare_glyphs(cfont, ofont, glyphs, num_glyphs, glyphs_step, 0);
 }
 
-/* Extension glyphs may be added to a font to resolve 
+/* Extension glyphs may be added to a font to resolve
    glyph name conflicts while conwerting a PDF Widths into Metrics.
    This function drops them before writing out an embedded font. */
 int
@@ -2291,7 +2291,7 @@ copied_drop_extension_glyphs(gs_font *copied)
 	   Find the corresponding non-extended one. */
 	i0 = i;
 	for (k = 0; k < gsize; k++)
-	    if (cfdata->glyphs[k].used && 
+	    if (cfdata->glyphs[k].used &&
 		    cfdata->names[k].str.size == j &&
 		    !memcmp(cfdata->names[k].str.data, name->str.data, j) &&
 		    !bytes_compare(pslot->gdata.data, pslot->gdata.size,
@@ -2303,7 +2303,7 @@ copied_drop_extension_glyphs(gs_font *copied)
 	cfdata->names[i0].str.size = j;
 	/* Drop others with same prefix. */
 	for (k = 0; k < gsize; k++)
-	    if (k != i0 && cfdata->glyphs[k].used && 
+	    if (k != i0 && cfdata->glyphs[k].used &&
 		    cfdata->names[k].str.size >= j + sl &&
 		    !memcmp(cfdata->names[k].str.data, name->str.data, j) &&
 		    !memcmp(gx_extendeg_glyph_name_separator, name + j, sl) &&

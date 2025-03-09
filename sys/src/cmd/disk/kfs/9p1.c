@@ -382,7 +382,7 @@ f_clwalk(Chan *cp, Oldfcall *in, Oldfcall *ou)
 		f_clunk(cp, in, ou);	/* sets tag, fid */
 		ou->err = 0;
 		ou->fid = fid;
-		if(CHAT(cp)) 
+		if(CHAT(cp))
 			print("	error: %s\n", errstring[er]);
 		return;
 	}
@@ -1400,7 +1400,7 @@ serve9p1(Chan *chan, uchar *ib, int nib)
 		fo.err = 0;
 		if(t == Tread9p1)
 			fo.data = (char*)outbuf + 8;
-	
+
 		/*
 		 * call the file system
 		 */
@@ -1412,15 +1412,15 @@ serve9p1(Chan *chan, uchar *ib, int nib)
 		 */
 		rlock(&mainlock);
 		rlock(&chan->reflock);
-	
+
 		(*call9p1[t])(chan, &fi, &fo);
-	
+
 		runlock(&chan->reflock);
 		runlock(&mainlock);
-	
+
 		fo.type = t+1;
 		fo.tag = fi.tag;
-	
+
 		if(chat)
 			print("9p1: fo %O\n", &fo);
 
@@ -1430,7 +1430,7 @@ serve9p1(Chan *chan, uchar *ib, int nib)
 				print("	error: %s\n", fo.ename);
 			fo.type = Terror9p1+1;
 		}
-	
+
 		n = convS2M9p1(&fo, outbuf);
 		if(n == 0) {
 			print("9p1: bad S2M conversion\n");

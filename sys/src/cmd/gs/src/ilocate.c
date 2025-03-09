@@ -1,12 +1,12 @@
 /* Copyright (C) 1995-2000, 2004 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -265,7 +265,7 @@ ialloc_validate_memory(const gs_ref_memory_t * mem, gc_state_t * gcst)
 		    break;
 		}
 		if ((i == LARGE_FREELIST_INDEX && size < max_freelist_size) ||
-		 (i != LARGE_FREELIST_INDEX && 
+		 (i != LARGE_FREELIST_INDEX &&
 		 (size < free_size - obj_align_mask || size > free_size))) {
 		    lprintf3("Object 0x%lx(%u) size wrong on freelist %i!\n",
 			     (ulong) pfree, size, i);
@@ -286,7 +286,7 @@ object_size_valid(const obj_header_t * pre, uint size, const chunk_t * cp)
 
 /* Validate all the objects in a chunk. */
 #if IGC_PTR_STABILITY_CHECK
-void ialloc_validate_pointer_stability(const obj_header_t * ptr_from, 
+void ialloc_validate_pointer_stability(const obj_header_t * ptr_from,
 				   const obj_header_t * ptr_to);
 private void ialloc_validate_ref(const ref *, gc_state_t *, const obj_header_t *pre_fr);
 private void ialloc_validate_ref_packed(const ref_packed *, gc_state_t *, const obj_header_t *pre_fr);
@@ -328,15 +328,15 @@ ialloc_validate_chunk(const chunk_t * cp, gc_state_t * gcst)
 	gs_ptr_type_t ptype;
 
 	if (proc != gs_no_struct_enum_ptrs)
-	    for (; (ptype = (*proc) (gcst_get_memory_ptr(gcst), 
-				     pre + 1, size, index, &eptr, 
+	    for (; (ptype = (*proc) (gcst_get_memory_ptr(gcst),
+				     pre + 1, size, index, &eptr,
 				     pre->o_type, gcst)) != 0; ++index) {
 		if (eptr.ptr == 0)
 		    DO_NOTHING;
 		else if (ptype == ptr_struct_type) {
 		    ialloc_validate_object(eptr.ptr, NULL, gcst);
 #		    if IGC_PTR_STABILITY_CHECK
-			ialloc_validate_pointer_stability(pre, 
+			ialloc_validate_pointer_stability(pre,
 			    (const obj_header_t *)eptr.ptr - 1);
 #		    endif
 		} else if (ptype == ptr_ref_type)
@@ -412,7 +412,7 @@ ialloc_validate_ref(const ref * pref, gc_state_t * gcst
 cks:	    if (optr != 0) {
 		ialloc_validate_object(optr, NULL, gcst);
 #		if IGC_PTR_STABILITY_CHECK
-		    ialloc_validate_pointer_stability(pre_fr, 
+		    ialloc_validate_pointer_stability(pre_fr,
 			    (const obj_header_t *)optr - 1);
 #		endif
 	    }
@@ -496,21 +496,21 @@ cka:	    if (!gc_locate(rptr, gcst)) {
 #if IGC_PTR_STABILITY_CHECK
 /* Validate an pointer stability. */
 void
-ialloc_validate_pointer_stability(const obj_header_t * ptr_fr, 
+ialloc_validate_pointer_stability(const obj_header_t * ptr_fr,
 				   const obj_header_t * ptr_to)
 {
-    static const char *sn[] = {"undef", "undef", "system", "undef", 
+    static const char *sn[] = {"undef", "undef", "system", "undef",
 		"global_stable", "global", "local_stable", "local"};
 
     if (ptr_fr->d.o.space_id < ptr_to->d.o.space_id) {
-	const char *sn_fr = (ptr_fr->d.o.space_id < count_of(sn) 
+	const char *sn_fr = (ptr_fr->d.o.space_id < count_of(sn)
 			? sn[ptr_fr->d.o.space_id] : "unknown");
-	const char *sn_to = (ptr_to->d.o.space_id < count_of(sn) 
+	const char *sn_to = (ptr_to->d.o.space_id < count_of(sn)
 			? sn[ptr_to->d.o.space_id] : "unknown");
 
 	lprintf6("Reference to a less stable object 0x%lx<%s> "
 	         "in the space \'%s\' from 0x%lx<%s> in the space \'%s\' !\n",
-		 (ulong) ptr_to, ptr_to->d.o.t.type->sname, sn_to, 
+		 (ulong) ptr_to, ptr_to->d.o.t.type->sname, sn_to,
 		 (ulong) ptr_fr, ptr_fr->d.o.t.type->sname, sn_fr);
     }
 }

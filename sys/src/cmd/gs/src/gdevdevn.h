@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 Artifex Software Inc.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -140,7 +140,7 @@ void cmyk_cs_to_devn_cm(gx_device * dev, int * map,
 
 /*
  * This routine will check to see if the color component name  match those
- * that are available amoung the current device's color components.  
+ * that are available amoung the current device's color components.
  *
  * Parameters:
  *   dev - pointer to device data structure.
@@ -182,7 +182,7 @@ int devn_printer_put_params(gx_device * pdev, gs_param_list * plist,
 			gs_devn_params * pdevn_params,
 			equivalent_cmyk_color_params * pequiv_colors);
 
-/* 
+/*
  * Utility routine for handling DeviceN related parameters.  This routine
  * may modify the color_info, devn_params, and the * equiv_colors fields.
  * The pointer to the equivalent_cmyk_color_params is optional (it should be

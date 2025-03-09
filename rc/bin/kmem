@@ -17,7 +17,7 @@ echo 'kinit(); blocksummary()' | acid -k -lkernel -lpool -lleak $pid $binary | a
 		total[alloc] += size
 		count[alloc]++
 	}
-	$1 == "summary" { 
+	$1 == "summary" {
 		alloc=$2
 		cnt=$3
 		size=$4

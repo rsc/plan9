@@ -23,7 +23,7 @@ sam -d $file >[2] /dev/null <<'!'
 ,x/SYS[A-Z0-9_]+,/ | tr A-Z a-z
 ,x/syssysr1/c/sysr1
 ,x/sys_x[0-9]*/c/sysdeath
-,x v/\[......+\]/ s/\]/]	
+,x v/\[......+\]/ s/\]/]
 ,p
 !
 
@@ -39,7 +39,7 @@ sam -d $file >[2] /dev/null <<'!'
 ,x/_"/c/"
 ,x/Sysr1/c/Running
 ,x/Rendezvous/c/Rendez
-,x v/\[......+\]/ s/\]/]	
+,x v/\[......+\]/ s/\]/]
 ,p
 !
 

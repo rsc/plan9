@@ -64,7 +64,7 @@ The Digital Encryption Standard (DES)
 is a shared-key or symmetric encryption algorithm using either
 a 56-bit key for single DES or three 56-bit keys for triple DES.
 The keys are encoded into 64 bits where every eight bit
-is parity. 
+is parity.
 .PP
 The basic DES function,
 .IR block_cipher ,
@@ -92,8 +92,8 @@ structure using the key and an 8-byte initialization vector.
 .PP
 Electronic code book, using
 .I desECBencrypt
-and 
-.IR desECBdecrypt , 
+and
+.IR desECBdecrypt ,
 is the less secure mode.  The encryption of each 8 bytes
 does not depend on the encryption of any other.
 Hence the encryption is a substitution

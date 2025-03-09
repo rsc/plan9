@@ -529,7 +529,7 @@ alpha(char *s, char *t)
 	if(strncmp(s, t, n)==0 && (s[n]<'a' || 'z'<s[n]))
 		return skipbl(s+n);
 	return 0;
-	
+
 }
 
 char*
@@ -541,7 +541,7 @@ text(char *s, char *t)
 	if(strncmp(s, t, n)==0 && (s[n]==0 || s[n]==' ' || s[n]=='\t'))
 		return skipbl(s+n);
 	return 0;
-	
+
 }
 
 int

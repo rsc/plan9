@@ -51,7 +51,7 @@ deleted=`$nl{git/query -c HEAD $base | grep '^-' | subst '^..'}
 # if we're not merging, don't clobber existing changes.
 if(~ $#merge 0){
 	if(! ~ $#modified 0 || ! ~ $#deleted 0){
-		git/walk -fRMA $modified $deleted || 
+		git/walk -fRMA $modified $deleted ||
 			die 'uncommitted changes would be clobbered'
 	}
 }

@@ -92,4 +92,3 @@ changes :
 	    -e "s'^.ds dQ.*'.ds dQ $(POSTLIB)'" \
 	postmd.1 >XXX.1; \
 	mv XXX.1 postmd.1
-

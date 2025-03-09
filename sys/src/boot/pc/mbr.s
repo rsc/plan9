@@ -241,7 +241,7 @@ TEXT invalidPBS(SB), $0
 TEXT reboot(SB), $0
 	BYTE $'\r';BYTE $'\n';
 	BYTE $'P'; BYTE $'r'; BYTE $'e'; BYTE $'s';
-	BYTE $'s'; BYTE $' '; BYTE $'a'; BYTE $'l'; 
+	BYTE $'s'; BYTE $' '; BYTE $'a'; BYTE $'l';
 	BYTE $'m'; BYTE $'o'; BYTE $'s'; BYTE $'t';
 	BYTE $' '; BYTE $'a'; BYTE $'n'; BYTE $'y';
 	BYTE $' '; BYTE $'k'; BYTE $'e'; BYTE $'y';

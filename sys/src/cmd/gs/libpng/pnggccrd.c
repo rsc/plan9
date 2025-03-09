@@ -5102,7 +5102,7 @@ png_read_filter_row(png_structp png_ptr, png_row_infop row_info, png_bytep
       case 1: sprintf(filnm, "sub-%s",
 #if defined(PNG_ASSEMBLER_CODE_SUPPORTED) && defined(PNG_THREAD_UNSAFE_OK)
 #if !defined(PNG_1_0_X)
-        (png_ptr->asm_flags & PNG_ASM_FLAG_MMX_READ_FILTER_SUB)? "MMX" : 
+        (png_ptr->asm_flags & PNG_ASM_FLAG_MMX_READ_FILTER_SUB)? "MMX" :
 #endif
 #endif
 "x86");
@@ -5397,7 +5397,7 @@ png_mmx_support(void)
 //      , "memory"   // if write to a variable gcc thought was in a reg
 //      , "cc"       // "condition codes" (flag bits)
     );
-#else     
+#else
     _mmx_supported = 0;
 #endif /* PNG_MMX_CODE_SUPPORTED */
 

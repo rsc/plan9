@@ -11,26 +11,26 @@
 /* Intel 82077A (8272A compatible) floppy controller */
 
 /* This module expects the following functions to be defined
- * elsewhere: 
- * 
+ * elsewhere:
+ *
  * inb()
  * outb()
  * floppyexec()
- * floppyeject() 
+ * floppyeject()
  * floppysetup0()
  * floppysetup1()
  * dmainit()
  * dmasetup()
  * dmaend()
- * 
- * On DMA systems, floppyexec() should be an empty function; 
- * on non-DMA systems, dmaend() should be an empty function; 
- * dmasetup() may enforce maximum transfer sizes. 
+ *
+ * On DMA systems, floppyexec() should be an empty function;
+ * on non-DMA systems, dmaend() should be an empty function;
+ * dmasetup() may enforce maximum transfer sizes.
  */
 
 enum {
 	/* file types */
-	Qdir=		0, 
+	Qdir=		0,
 	Qdata=		(1<<2),
 	Qctl=		(2<<2),
 	Qmask=		(3<<2),
@@ -163,7 +163,7 @@ floppyreset(void)
 	FDrive *dp;
 	FType *t;
 	ulong maxtsize;
-	
+
 	floppysetup0(&fl);
 	if(fl.ndrive == 0)
 		return;
@@ -606,7 +606,7 @@ floppycmd(void)
  *
  *  when the controller goes ready waiting for a command
  *  (instead of sending results), we're done
- * 
+ *
  */
 static int
 floppyresult(void)
@@ -1052,7 +1052,7 @@ floppyintr(Ureg *)
 	case Fread:
 	case Fwrite:
 	case Fformat:
-	case Fdumpreg: 
+	case Fdumpreg:
 		floppyresult();
 		break;
 	case Fseek:

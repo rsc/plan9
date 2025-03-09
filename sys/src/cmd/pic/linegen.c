@@ -234,7 +234,7 @@ obj *linegen(int type)
 			extreme(ex, ey);
 			nx = xi; ny = yi;
 		}
-			
+
 	}
 	p->o_ddval = ddval;
 	if (dbg) {

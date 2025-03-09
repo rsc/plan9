@@ -66,32 +66,32 @@ Req*	removereq(Reqpool *p, ulong tag);
 void	closereq(Req *f)
 .fi
 .SH DESCRIPTION
-These routines provide management of 
+These routines provide management of
 .B Fid
 and
 .B Req
-structures from 
+structures from
 .BR Fidpool s
 and
 .BR Reqpool s.
 They are primarily used by the 9P server loop
-described in 
+described in
 .IR 9p (2).
 .PP
 .B Fid
 structures are intended to represent
-active fids in a 9P connection, as 
+active fids in a 9P connection, as
 .B Chan
 structures do in the Plan 9 kernel.
 The
 .B fid
-element is the integer fid used in the 9P 
+element is the integer fid used in the 9P
 connection.
 .B Omode
-is the mode under which the fid was opened, or 
-.B -1 
+is the mode under which the fid was opened, or
+.B -1
 if this fid has not been opened yet.
-Note that in addition to the values 
+Note that in addition to the values
 .BR OREAD ,
 .BR OWRITE ,
 and
@@ -111,12 +111,12 @@ contains the qid returned in the last successful
 or
 .B create
 transaction involving the fid.
-In a file tree-based server, the 
+In a file tree-based server, the
 .BR Fid 's
 .B file
 element points at a
 .B File
-structure 
+structure
 (see
 .IR 9pfile (2))
 corresponding to the fid.
@@ -125,13 +125,13 @@ The
 member is intended for use by the
 client to hold information specific to a particular
 .BR Fid .
-With the exception of 
+With the exception of
 .BR aux ,
 these elements should be treated
 as read-only by the client.
 .PP
 .I Allocfidpool
-creates a new 
+creates a new
 .BR Fidpool .
 .I Freefidpool
 destroys such a pool.
@@ -143,31 +143,31 @@ whose fid number is
 There must not already be an extant
 .B Fid
 with that number in the pool.
-Once a 
+Once a
 .B Fid
-has been allocated, it can be looked up by 
+has been allocated, it can be looked up by
 fid number using
 .IR lookupfid .
 .BR Fid s
-are reference counted: both 
+are reference counted: both
 .I allocfid
 and
 .I lookupfid
-increment the reference count on the 
+increment the reference count on the
 .B Fid
 structure before
 returning.
-When a reference to a 
+When a reference to a
 .B Fid
-is no longer needed, 
+is no longer needed,
 .I closefid
 should be called to note the destruction of the reference.
-When the last reference to a 
+When the last reference to a
 .B Fid
 is removed, if
 .I destroy
 (supplied when creating the fid pool)
-is not zero, it is called with the 
+is not zero, it is called with the
 .B Fid
 as a parameter.
 It should perform whatever cleanup is necessary
@@ -195,7 +195,7 @@ has been called.
 and
 .I removereq
 are analogous but
-operate on 
+operate on
 .BR Reqpool s
 and
 .B Req

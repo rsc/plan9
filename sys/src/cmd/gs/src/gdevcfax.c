@@ -1,12 +1,12 @@
 /* Copyright (C) 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -20,14 +20,14 @@
 #include "strimpl.h"
 #include "scfx.h"
 #include "gdevfax.h"
- 
+
 /* The device descriptor */
 private dev_proc_print_page(cfax_print_page);
 private dev_proc_close_device(cfax_prn_close);
 
 /* Define procedures for cfax. For sff multipage documents  */
 /* a special close procedure is required because sff needs  */
-/* an additional "end of document" signature after the last */ 
+/* an additional "end of document" signature after the last */
 /* "end page" signature */
 private const gx_device_procs gdev_cfax_std_procs =
     prn_params_procs(gdev_prn_open, gdev_prn_output_page, cfax_prn_close,
@@ -102,7 +102,7 @@ cfax_doc_end(FILE * file)
 /* Send the page to the printer. */
 private int
 cfax_stream_print_page_width(gx_device_printer * pdev, FILE * prn_stream,
-			     const stream_template * temp, stream_state * ss, 
+			     const stream_template * temp, stream_state * ss,
                		     int width)
 {
     gs_memory_t *mem = pdev->memory;
@@ -128,7 +128,7 @@ cfax_stream_print_page_width(gx_device_printer * pdev, FILE * prn_stream,
     ss->memory = mem;
 
     /* Allocate the buffers. */
-    in = gs_alloc_bytes(mem, temp->min_in_size + max_size + 1, 
+    in = gs_alloc_bytes(mem, temp->min_in_size + max_size + 1,
     	"cfax_stream_print_page(in)");
 
 #define OUT_SIZE 1000
@@ -138,7 +138,7 @@ cfax_stream_print_page_width(gx_device_printer * pdev, FILE * prn_stream,
 	goto done;
     }
 
-    /* Process the image */ 
+    /* Process the image */
     for (lnum = 0; lnum < pdev->height; lnum++) {
 	/* Initialize read and write pointer each time, because they're getting modified */
 	r.ptr = in - 1;
@@ -171,7 +171,7 @@ cfax_stream_print_page_width(gx_device_printer * pdev, FILE * prn_stream,
 	    } else {
 		cfax_byte(218, prn_stream);
 	    }
-	} 
+	}
 	if (temp->release != 0)
 	    (*temp->release) (ss);
     }
@@ -215,7 +215,7 @@ cfax_print_page(gx_device_printer * pdev, FILE * prn_stream)
     state.K = 0;
 
     cfax_begin_page(pdev, prn_stream, state.Columns);
-    code = cfax_stream_print_page_width(pdev, prn_stream, 
+    code = cfax_stream_print_page_width(pdev, prn_stream,
       &s_CFE_template, (stream_state *) &state, state.Columns);
     return code;
 }

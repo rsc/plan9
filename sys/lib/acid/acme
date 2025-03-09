@@ -61,7 +61,7 @@ defn params(param, name)
 		param = tail param;
 		if param then
 			print (",");
-	}	
+	}
 }
 
 defn locals(l, name)
@@ -72,7 +72,7 @@ defn locals(l, name)
 		sym = head l;
 		print("\t*", fmt(name, 'a'), ":", sym[0], "=", sym[1], "\n");
 		l = tail l;
-	}	
+	}
 }
 
 defn bptab()					// print a table of breakpoints

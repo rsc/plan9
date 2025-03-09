@@ -327,7 +327,7 @@ tapreset(void)
 
 	irlen = dshiftdelay();
 	lastbit = 1;
-	
+
 	dstate(0x7, 5);		/*  00111 -> Shift-IR->Shift-DR */
 
 	ntaps = dshiftdelay();

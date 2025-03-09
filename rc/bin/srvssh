@@ -24,7 +24,7 @@
 # mode on the command line as well.  The hope is that -Rmp makes
 # the connection transparent enough for the Tversion, and the stty
 # command will do the rest.  If -Rmp doesn't make the connection
-# transparent enough for the Tversion (but the stty commands do 
+# transparent enough for the Tversion (but the stty commands do
 # make the connection fully transparent) then add "-s 5" to the srv
 # command to tell it to wait 5 seconds before sending the Tversion.
 # That should be enough time for the stty to take effect.

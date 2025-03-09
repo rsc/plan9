@@ -9,9 +9,9 @@
 %
 % where options_dict is a dictionary with the following entries :
 %
-% Key         Type      Description  
+% Key         Type      Description
 % Path        string    Absolute path to font file, or relative path to font file from
-%                       the GS_EXTFONTPATH value.  
+%                       the GS_EXTFONTPATH value.
 % CIDFontType interger  PostScript type for this CID font. Only 0 is currently allowed.
 %                       Note that this is unrelated to the real type of the font file -
 %                       the bridge will perform format conversion.
@@ -29,4 +29,3 @@
 %
 %  /Ryumin-Medium     << /Path (msgothic.ttc) /CIDFontType 0 /FAPI /AgfaUFST /CSI [(Japan1) 2] >> ;
 %  /HeiseiKakuGo-W5   << /Path (F:/WIN2000/Fonts/BATANG.TTC) /CIDFontType 0 /FAPI /AgfaUFST /CSI [(Japan1) 2] >> ;
-

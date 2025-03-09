@@ -35,7 +35,7 @@ struct	Fcall
 			char	*aname;		/* Tauth, Tattach */
 		};
 		struct {
-			u32int	perm;		/* Tcreate */ 
+			u32int	perm;		/* Tcreate */
 			char	*name;		/* Tcreate */
 			uchar	mode;		/* Tcreate, Topen */
 		};

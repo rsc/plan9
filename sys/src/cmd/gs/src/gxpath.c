@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -65,7 +65,7 @@ private rc_free_proc(rc_free_path_segments_local);
 /*
  * Define the default virtual path interface implementation.
  */
-private int 
+private int
     gz_path_add_point(gx_path *, fixed, fixed),
     gz_path_add_line_notes(gx_path *, fixed, fixed, segment_notes),
     gz_path_add_curve_notes(gx_path *, fixed, fixed, fixed, fixed, fixed, fixed, segment_notes),
@@ -83,7 +83,7 @@ private gx_path_procs default_path_procs = {
 /*
  * Define virtual path interface implementation for computing a path bbox.
  */
-private int 
+private int
     gz_path_bbox_add_point(gx_path *, fixed, fixed),
     gz_path_bbox_add_line_notes(gx_path *, fixed, fixed, segment_notes),
     gz_path_bbox_add_curve_notes(gx_path *, fixed, fixed, fixed, fixed, fixed, fixed, segment_notes),
@@ -862,21 +862,21 @@ gz_path_bbox_close_subpath_notes(gx_path * ppath, segment_notes notes)
 }
 
 /* Access path state flags */
-byte 
+byte
 gz_path_state_flags(gx_path *ppath, byte flags)
 {
     byte flags_old = ppath->state_flags;
     ppath->state_flags = flags;
     return flags_old;
 }
-byte 
+byte
 gx_path_get_state_flags(gx_path *ppath)
 {
     byte flags = ppath->procs->state_flags(ppath, 0);
     ppath->procs->state_flags(ppath, flags);
     return flags;
 }
-void 
+void
 gx_path_set_state_flags(gx_path *ppath, byte flags)
 {
     ppath->procs->state_flags(ppath, flags);

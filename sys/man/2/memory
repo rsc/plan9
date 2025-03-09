@@ -78,7 +78,7 @@ The comparison is bytewise unsigned.
 .I Memcpy
 copies
 .I n
-bytes from memory area 
+bytes from memory area
 .I s2
 to
 .IR s1 .

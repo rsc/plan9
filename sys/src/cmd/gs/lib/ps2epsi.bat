@@ -1,4 +1,4 @@
-@echo off 
+@echo off
 @rem $Id: ps2epsi.bat,v 1.9 2002/04/25 21:29:08 ghostgum Exp $
 
 if %1/==/ goto usage

@@ -32,7 +32,7 @@ pbs&.debug:	pbs%.$O
 	ls -l $target
 	# acid $target
 	# map({"text", 0x7C00, 0x7E00, 0x00000020})
-	
+
 clean:
 	rm -f *.[$OS] [$OS].out y.tab.? y.debug y.output $TARG
 
@@ -59,4 +59,3 @@ UPDATE=\
 
 update:V:
 	update $UPDATEFLAGS $UPDATE
-

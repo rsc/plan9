@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -315,7 +315,7 @@ gx_path__check_curves(const gx_path * ppath, gx_path_copy_options options, fixed
 			    return false;
 		    }
 		    if (options & pco_small_curves) {
-			fixed ax, bx, cx, ay, by, cy; 
+			fixed ax, bx, cx, ay, by, cy;
 			int k = gx_curve_log2_samples(pt0.x, pt0.y, pc, fixed_flat);
 
 			if(!curve_coeffs_ranged(pt0.x, pc->p1.x, pc->p2.x, pc->pt.x,
@@ -590,8 +590,8 @@ gx_curve_monotonic_points(fixed v0, fixed v1, fixed v2, fixed v3,
 /* ---------------- Path optimization for the filling algorithm. ---------------- */
 
 private bool
-find_contacting_segments(const subpath *sp0, segment *sp0last, 
-			 const subpath *sp1, segment *sp1last, 
+find_contacting_segments(const subpath *sp0, segment *sp0last,
+			 const subpath *sp1, segment *sp1last,
 			 segment **sc0, segment **sc1)
 {
     segment *s0, *s1;
@@ -603,9 +603,9 @@ find_contacting_segments(const subpath *sp0, segment *sp0last,
        "Quazi-vertical" means dx <= 1 && dy >= min_length . */
     /* To avoid a big unuseful expence of the processor time,
        we search the first subpath from the end
-       (assuming that it was recently merged near the end), 
-       and restrict the search with search_limit segments 
-       against a quadratic scanning of two long subpaths. 
+       (assuming that it was recently merged near the end),
+       and restrict the search with search_limit segments
+       against a quadratic scanning of two long subpaths.
        Thus algorithm is not necessary finds anything contacting.
        Instead it either quickly finds something, or maybe not. */
     for (s0 = sp0last, count0 = 0; count0 < search_limit && s0 != (segment *)sp0; s0 = s0->prev, count0++) {
@@ -614,7 +614,7 @@ find_contacting_segments(const subpath *sp0, segment *sp0last,
 	    (any_abs(s0s->pt.x - s0->pt.x) == 1 && any_abs(s0s->pt.y - s0->pt.y) > min_length))) {
 	    for (s1 = sp1last, count1 = 0; count1 < search_limit && s1 != (segment *)sp1; s1 = s1->prev, count1++) {
 		s1s = s1->prev;
-		if (s1->type == s_line && (s1s->pt.x == s1->pt.x || 
+		if (s1->type == s_line && (s1s->pt.x == s1->pt.x ||
 		    (any_abs(s1s->pt.x - s1->pt.x) == 1 && any_abs(s1s->pt.y - s1->pt.y) > min_length))) {
 		    if (s0s->pt.x == s1s->pt.x || s0->pt.x == s1->pt.x || s0->pt.x == s1s->pt.x || s0s->pt.x == s1->pt.x) {
 			if (s0s->pt.y < s0->pt.y && s1s->pt.y > s1->pt.y) {
@@ -658,11 +658,11 @@ gx_path_merge_contacting_contours(gx_path *ppath)
 	subpath *sp1 = (subpath *)sp0last->next, *spnext;
 	subpath *sp1p = sp0;
 	int count;
-	
+
 	for (count = 0; sp1 != NULL && count < window; sp1 = spnext, count++) {
 	    segment *sp1last = sp1->last;
 	    segment *sc0, *sc1;
-		
+
 	    spnext = (subpath *)sp1last->next;
 	    if (find_contacting_segments(sp0, sp0last, sp1, sp1last, &sc0, &sc1)) {
 		/* Detach the subpath 1 from the path: */
@@ -705,4 +705,3 @@ gx_path_merge_contacting_contours(gx_path *ppath)
     }
     return 0;
 }
-

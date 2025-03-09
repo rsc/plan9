@@ -34,9 +34,9 @@ enum
 };
 
 /*
- * When we're using a PCI device and memory-mapped I/O, 
+ * When we're using a PCI device and memory-mapped I/O,
  * the registers are spaced out as though each takes 32 bits,
- * even though they are only 16-bit registers.  Thus, 
+ * even though they are only 16-bit registers.  Thus,
  * ctlr->mmb[reg] is the right way to access register reg,
  * even though a priori you'd expect to use ctlr->mmb[reg/2].
  */
@@ -256,7 +256,7 @@ ltv_outstr(Ctlr* ctlr, int type, char* val)
 	ltv.type = type;
 
 //	This should be ltv.slen = len; according to Axel Belinfante
-	ltv.slen = len;	
+	ltv.slen = len;
 
 	strncpy(ltv.s, val, len);
 	w_outltv(ctlr, &ltv);
@@ -555,7 +555,7 @@ w_scaninfo(Ether* ether, Ctlr *ctlr, int len)
 	scanbuf = malloc(len*2);
 	if(scanbuf == nil)
 		return;
-	
+
 	for (i = 0; i < len ; i++)
 		scanbuf[i] = csr_ins(ctlr, WR_Data1);
 
@@ -959,7 +959,7 @@ w_ifstat(Ether* ether, void* a, long n, ulong offset)
 #undef PRINTSTAT
 
 static int
-parsekey(WKey* key, char* a) 
+parsekey(WKey* key, char* a)
 {
 	int i, k, len, n;
 	char buf[WMaxKeyLen];
@@ -983,7 +983,7 @@ parsekey(WKey* key, char* a)
 				n = *a++ - 'A' + 10;
 			else
 				return -1;
-	
+
 			if(i & 1){
 				buf[k] |= n;
 				k++;

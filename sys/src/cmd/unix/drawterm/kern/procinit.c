@@ -64,4 +64,3 @@ kproc(char *name, void (*fn)(void*), void *arg)
 	osproc(p);
 	return p->pid;
 }
-

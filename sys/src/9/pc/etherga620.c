@@ -824,9 +824,9 @@ ga620init(Ether* edev)
 	sethost64(&ctlr->gib->srcb.addr, ctlr->sr);
 	if(ctlr->hardwarecksum)
 		flags = TcpUdpCksum|NoPseudoHdrCksum|HostRing;
-	else 
+	else
 		flags = HostRing;
-	if(ctlr->coalupdateonly) 
+	if(ctlr->coalupdateonly)
 		flags |= CoalUpdateOnly;
 	ctlr->gib->srcb.control = Nsr<<16 | flags;
 	sethost64(&ctlr->gib->scp, ctlr->sci);

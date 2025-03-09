@@ -4,14 +4,14 @@ cleanname \- clean a path name
 .SH SYNOPSIS
 .B cleanname
 [
-.B -d 
+.B -d
 .I pwd
 ]
 .I names ...
 .SH DESCRIPTION
-For each file name argument, 
+For each file name argument,
 .IR cleanname ,
-by lexical processing only, 
+by lexical processing only,
 prints the shortest equivalent string that names the same
 (possibly hypothetical) file.
 It eliminates multiple and trailing slashes, and it lexically
@@ -20,7 +20,7 @@ interprets
 and
 .B ..
 directory components in the name.
-If the 
+If the
 .B -d
 option is present,
 unrooted names are prefixed with

@@ -79,7 +79,7 @@ Normally, login is attempted using the user name from
 .BR /dev/user .
 .PP
 Command-line options are:
-.TF "C 
+.TF "C
 .PD
 .TP
 .B -C
@@ -98,24 +98,24 @@ to perform RSA authentication.
 .TP
 .B -i
 force interactive mode.
-In interactive mode, 
+In interactive mode,
 .I ssh1
 prompts for passwords and confirmations of
 new host keys when necessary.
 (In non-interactive mode, password requests
-are rejected and unrecognized host keys are 
+are rejected and unrecognized host keys are
 cause for disconnecting.)
-By default, 
+By default,
 .I ssh 1
-runs in interactive mode only when its 
-input file descriptor is 
+runs in interactive mode only when its
+input file descriptor is
 .BR /dev/cons .
 .TP
 .B -I
 force non-interactive mode.
 .TP
 .B -m
-disable the 
+disable the
 .RB control- \e
 menu, described below.
 .TP
@@ -125,7 +125,7 @@ The SSH protocol, grounded in Unix tradition,
 differentiates between connections
 that request controlling pseudoterminals
 and those that do not.
-By default, 
+By default,
 .I ssh1
 requests a pseudoterminal only when no
 .I command
@@ -177,7 +177,7 @@ The full set of ciphers is
 and
 .B none
 (no encryption).
-The default cipher list is 
+The default cipher list is
 .B blowfish
 .B rc4
 .BR 3des .
@@ -213,7 +213,7 @@ Otherwise, the command is executed with its arguments.
 .LP
 .I Ssh1
 establishes a connection with an SSH daemon on the remote host.
-The daemon sends to 
+The daemon sends to
 .I ssh1
 its RSA public host key and session key.
 Using these,
@@ -224,9 +224,9 @@ data with this session key.
 .LP
 When the daemon's host key has been received,
 .I ssh1
-looks it up in 
+looks it up in
 .B $home/lib/keyring
-and in 
+and in
 .BR /sys/lib/ssh/keyring .
 If
 the key is found there, and it matches the received key,
@@ -284,8 +284,8 @@ can copy files from remote hosts and to remote hosts.
 .I Sshserve
 is the server that services
 SSH
-calls from remote hosts. 
-The 
+calls from remote hosts.
+The
 .B -A
 and
 .B -c

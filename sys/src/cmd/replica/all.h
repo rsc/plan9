@@ -19,7 +19,7 @@ struct Avl
 };
 
 Avltree *mkavltree(int(*cmp)(Avl*, Avl*));
-void insertavl(Avltree *tree, Avl *new, Avl **oldp); 
+void insertavl(Avltree *tree, Avl *new, Avl **oldp);
 Avl *lookupavl(Avltree *tree, Avl *key);
 void deleteavl(Avltree *tree, Avl *key, Avl **oldp);
 Avlwalk *avlwalk(Avltree *tree);
@@ -67,4 +67,3 @@ char *unroot(char*, char*);
 
 /* revproto.c */
 int revrdproto(char*, char*, char*, Protoenum*, Protowarn*, void*);
-

@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -62,7 +62,7 @@
  *     these devices both overprint and overprint mode require a form
  *     of mixing of the drawing color with any existing output. This
  *     mixing is mechanically similar to that required for transparency
- *     or raster op support, but differs from these because it affects 
+ *     or raster op support, but differs from these because it affects
  *     different color components differently (transparency and raster
  *     operations are applied uniformly to all color components).
  *
@@ -70,7 +70,7 @@
  * either trivial or essentially impossible (short of dealing with them
  * as low level devices), the discussion below is restricted to the
  * implementation for low level devices.
- * 
+ *
  * In principle, the effects of overprint and overprint mode are
  * modified by changes to the current color, the current color space,
  * and the process color model.
@@ -99,8 +99,8 @@
  * of two additional types of the devices for rendering. Forwarding
  * devices do not generate output of their own; they merely forward
  * rendering commands to a target device. Accumulating devices render
- * output to a special buffer (often part of clipping or a caching 
- * operation), which is subsequently sent to the primary output device 
+ * output to a special buffer (often part of clipping or a caching
+ * operation), which is subsequently sent to the primary output device
  * in a lower-level form.
  *
  * It is conceivable that a forwarding device could be dependent on the
@@ -132,7 +132,7 @@
  *    the high-level rendering methods (fill_path, etc.). Actual
  *    rendering is done with a separate marking device, an instance
  *    of which is created for each graphic object rendered. The
- *    marking device renders into the output buffer of the 
+ *    marking device renders into the output buffer of the
  *    gs_pdf14_device, which contains the results of prior rendering
  *    operations. Thus, overprint is significant to the marking
  *    device. The interaction of transparency and overprint are,

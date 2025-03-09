@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -42,8 +42,8 @@
  */
 
 /*ARGSUSED*/
-int 
-stc_gsmono(stcolor_device *sdev,int npixel,byte *in,byte *buf,byte *out) 
+int
+stc_gsmono(stcolor_device *sdev,int npixel,byte *in,byte *buf,byte *out)
 {
 
 /*
@@ -97,7 +97,7 @@ stc_gsmono(stcolor_device *sdev,int npixel,byte *in,byte *buf,byte *out)
  * additionally, the size of the scanlines may be expanded by one to the
  * right and to the left.
  */
-     buf_size = 
+     buf_size =
            sdev->stc.dither->bufadd              /* scanline-independend size */
              + (-npixel)                                     /* pixels */
                * (sdev->stc.dither->flags/STC_SCAN)          /* * scanlines */

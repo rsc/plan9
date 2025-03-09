@@ -7,4 +7,3 @@ xd -c -bx xdg
 ./8.mpssetest -t < examplesbad  xdb >[2] errors
 cat errors
 xd -c -bx xdb
-

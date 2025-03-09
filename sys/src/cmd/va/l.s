@@ -334,13 +334,13 @@ TEXT	tlbp(SB), $0
 	NOOP
 	MOVW	M(INDEX), R1
 	RET
-	
+
 TEXT	tlbvirt(SB), $0
 	TLBP
 	NOOP
 	MOVW	M(TLBVIRT), R1
 	RET
-	
+
 
 TEXT	gettlb(SB), $0
 
@@ -539,7 +539,7 @@ TEXT	rfnote(SB), $0
 	MOVW	0(FP), R26		/* 1st arg is &uregpointer */
 	SUBU	$(BY2WD), R26, SP	/* pc hole */
 	BNE	R26, restore
-	
+
 
 TEXT	clrfpintr(SB), $0
 	MOVW	FCR31, R1

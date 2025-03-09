@@ -48,7 +48,7 @@ void snarf(Vga *vga, Ctlr *ctlr)
 	Read the ctlr's registers into memory, storing them
 	either in the vga structure (if there is an appropriate
 	place) or into a privately allocated structure, a pointer
-	to which can be stored in vga->private [sic]. 
+	to which can be stored in vga->private [sic].
 	[The use of vga->private rather than ctlr->private betrays
 	the fact that private data has only been added after we got
 	down to having cards with basically a single controller.]
@@ -166,7 +166,7 @@ kernel-driver-provided fill and scroll routines rather than
 doing the memory operations ourselves.  For >8-bit pixel depths,
 hardware acceleration is noticeably needed.  For typical Plan 9
 applications, accelerating fill and scroll has been fast enough that we haven't
-worried about doing anything else.  
+worried about doing anything else.
 
 The kernel driver's drawinit function should sniff the card
 and decide whether it can use accelerated fill and scroll functions.
@@ -181,14 +181,14 @@ int fill(VGAscr *scr, Rectangle r, ulong val);
 	(meaning video memory has been updated).
 	Usually this means a busy wait looping for a bit
 	in some status register.  Although slighty inefficient,
-	the net effect is still much faster than doing the work 
+	the net effect is still much faster than doing the work
 	ourselves.  It's a good idea to break out of the busy
 	loop after a large number of iterations, so that
 	if the driver or the card gets confused we don't
 	lock up the system waiting for the bit.  Look at
 	any of the accelerated drivers for the conventional
 	method.
-	
+
 int scroll(VGAscr *scr, Rectangle r, Rectangle sr);
 	Set the pixels in rectangle r with the pixels in sr.
 	r and sr are allowed to overlap, and the correct
@@ -263,7 +263,7 @@ documentation and the Virge parts.)
 
 Even if you do get documentation, the XFree86 driver is good to
 have to double check.  Sometimes the documentation is incomplete,
-misleading, or just plain wrong, whereas the XFree86 drivers, 
+misleading, or just plain wrong, whereas the XFree86 drivers,
 complicated beasts though they are, are known to work most of the time.
 
 Another useful method for making sure you understand what is going on
@@ -300,8 +300,7 @@ as it can use one of the standard clock modes rather than
 require excessive clock fiddling.
 
 /sys/src/cmd/aux/vga/template.c is a template for a new
-vga controller driver.  There is no kernel template 
+vga controller driver.  There is no kernel template
 but any of the current drivers is a decent template.
 /sys/src/9/pc/vga3dfx.c is the smallest one that supports
 linear addressing mode.
-

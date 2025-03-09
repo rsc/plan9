@@ -943,7 +943,7 @@ asmout(Prog *p, Optab *o, int aflag)
 		/* OP_SRR will use only the low 5 bits of the shift value */
 		if(v >= 32 && vshift(p->as))
 			o1 = OP_SRR(opirr(p->as+ALAST), v-32, r, p->to.reg);
-		else 
+		else
 			o1 = OP_SRR(opirr(p->as), v, r, p->to.reg);
 		break;
 

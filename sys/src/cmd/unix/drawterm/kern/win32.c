@@ -145,7 +145,7 @@ random20(uchar *p)
 	FILETIME ft;
 	DigestState ds;
 	vlong tsc;
-	
+
 	GetSystemTimeAsFileTime(&ft);
 	memset(&ds, 0, sizeof ds);
 	sha1((uchar*)&ft, sizeof(ft), 0, &ds);
@@ -171,7 +171,7 @@ randomread(void *v, ulong n)
 {
 	int i;
 	uchar p[20];
-	
+
 	for(i=0; i<n; i+=20){
 		random20(p);
 		if(i+20 <= n)
@@ -214,7 +214,7 @@ int
 wstrutflen(Rune *s)
 {
 	int n;
-	
+
 	for(n=0; *s; n+=runelen(*s),s++)
 		;
 	return n;
@@ -348,7 +348,7 @@ args(char *argv[], int n, char *p)
 		/* move p up one to avoid pointing to null at end of p2 */
 		if(*p)
 			p++;
-		*p2 = 0;	
+		*p2 = 0;
 	}
 	argv[i] = 0;
 

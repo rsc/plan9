@@ -36,34 +36,34 @@ Features are
 .RS
 .TF country[1-3]
 .TP
-.BR shore [ 1 - 4 ] 
+.BR shore [ 1 - 4 ]
 seacoasts, lakes, and islands; option
 .B -f
 always shows
 .B shore1
 .TP
-.BR ilake [ 1 - 2 ] 
+.BR ilake [ 1 - 2 ]
 intermittent lakes
 .TP
-.BR river [ 1 - 4 ] 
+.BR river [ 1 - 4 ]
 rivers
 .TP
-.BR iriver [ 1 - 3 ] 
+.BR iriver [ 1 - 3 ]
 intermittent rivers
 .TP
-.BR canal [ 1 - 3 ] 
+.BR canal [ 1 - 3 ]
 .BR 3 =irrigation
 canals
 .TP
 .BR glacier
 .TP
-.BR iceshelf [ 12 ] 
+.BR iceshelf [ 12 ]
 .TP
 .BR reef
 .TP
-.BR saltpan [ 12 ] 
+.BR saltpan [ 12 ]
 .TP
-.BR country [ 1 - 3 ] 
+.BR country [ 1 - 3 ]
 .BR 2 =disputed
 boundaries,
 .BR 3 =indefinite
@@ -202,7 +202,7 @@ overrides option
 After all other positioning and scaling operations
 have been performed, rotate the image
 .I rot
-degrees counterclockwise about the center 
+degrees counterclockwise about the center
 and move the center to position
 .IR x ,
 .IR y ,
@@ -237,16 +237,16 @@ US map from Census Bureau
 .RE
 .IP
 The environment variables
-.B MAP 
+.B MAP
 and
-.B MAPDIR 
+.B MAPDIR
 change the default
 map and default directory.
 .TP
 .BI -b " \fR[\fPlat0 lon0 lat1 lon1\fR... ]"
 Suppress the drawing of the normal boundary
 (defined by options
-.BR -l 
+.BR -l
 and
 .BR -w ).
 Coordinates, if present, define the vertices of a
@@ -262,7 +262,7 @@ The
 .I files
 contain lists of points,
 given as latitude-longitude pairs in degrees.
-If the first file is named 
+If the first file is named
 .LR - ,
 the standard input is taken instead.
 The points of each list are plotted as connected `tracks'.
@@ -272,7 +272,7 @@ A label breaks the track.
 A label may be prefixed by
 \fL"\fR,
 .LR : ,
-or 
+or
 .L !
 and is terminated by a newline.
 An unprefixed string or a string prefixed with
@@ -304,7 +304,7 @@ tracks appear as dot-dashed lines if the plotting filter supports them.)
 .BI -y " file
 The
 .I file
-contains 
+contains
 .IR plot (6)-style
 data for
 .L :
@@ -435,15 +435,15 @@ and
 .I lat1
 .TP
 .BI lambert " lat0 lat1"
-conformal, true scale on 
+conformal, true scale on
 .I lat0
-and 
+and
 .I lat1
 .TP
 .BI albers " lat0 lat1"
 equal-area, true scale on
 .I lat0
-and 
+and
 .I lat1
 .TP
 .BI bonne " lat0"
@@ -465,7 +465,7 @@ equally spaced along Prime Meridian
 .TP
 .B aitoff
 equal-area projection of globe onto 2-to-1
-ellipse, based on 
+ellipse, based on
 .I azequalarea
 .TP
 .B lagrange
@@ -494,7 +494,7 @@ circular arc parallels equally spaced on 0- and 90-degree meridians
 sphere is circle,
 meridians as in
 .IR globular ,
-circular arc parallels resemble 
+circular arc parallels resemble
 .I mercator
 .PD
 .PP
@@ -617,7 +617,7 @@ earth's limb, which is 30° off vertical.
 The
 .B -o
 option overrides the default
-.BR "-o 90 0 180" , 
+.BR "-o 90 0 180" ,
 which would rotate
 the scene to behind the observer.
 .SH FILES
@@ -639,14 +639,14 @@ Map driver program
 .SH SOURCE
 .B /sys/src/cmd/map
 .SH "SEE ALSO"
-.IR map (6), 
+.IR map (6),
 .IR plot (1)
 .SH DIAGNOSTICS
 `Map seems to be empty'\(ema coarse survey found
-zero extent within the 
+zero extent within the
 .B -l
 and
-.BR -w 
+.BR -w
 bounds; for maps of limited extent
 the grid resolution,
 .IR res ,

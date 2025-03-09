@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000-2004, artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -102,7 +102,7 @@ stream_proc_report_error(filter_report_error);
  * a future garbage collection or restore.
  */
 
-/* 
+/*
  * Define the default stream buffer sizes.  For file streams,
  * this is arbitrary, since the C library or operating system
  * does its own buffering in addition.
@@ -171,18 +171,18 @@ check_file_permissions_reduced(i_ctx_t *i_ctx_p, const char *fname, int len,
 	int cwd_len = 0;
 
 	if (array_get(imemory, permitlist, i, &permitstring) < 0 ||
-	    r_type(&permitstring) != t_string 
-	   )    
+	    r_type(&permitstring) != t_string
+	   )
 	    break;	/* any problem, just fail */
 	permstr = permitstring.value.bytes;
 	permlen = r_size(&permitstring);
-	/* 
+	/*
 	 * Check if any file name is permitted with "*".
 	 */
 	if (permlen == 1 && permstr[0] == '*')
 	    return 0;		/* success */
-	/* 
-	 * If the filename starts with parent references, 
+	/*
+	 * If the filename starts with parent references,
 	 * the permission element must start with same number of parent references.
 	 */
 	if (plen != 0 && plen != gp_file_name_parents((const char *)permstr, permlen))
@@ -200,7 +200,7 @@ check_file_permissions_reduced(i_ctx_t *i_ctx_p, const char *fname, int len,
 	 * 'fname' has no "./" because it is reduced.
 	 */
         if (string_match( (const unsigned char*) fname, len,
-			  permstr + cwd_len, permlen - cwd_len, 
+			  permstr + cwd_len, permlen - cwd_len,
 		use_windows_pathsep ? &win_filename_params : NULL))
 	    return 0;		/* success */
     }
@@ -288,8 +288,8 @@ zfile(i_ctx_t *i_ctx_p)
 }
 
 /*
- * Files created with .tempfile permit some operations even if the 
- * temp directory is not explicitly named on the PermitFile... path 
+ * Files created with .tempfile permit some operations even if the
+ * temp directory is not explicitly named on the PermitFile... path
  * The names 'SAFETY' and 'tempfiles' are defined by gs_init.ps
 */
 private bool
@@ -890,8 +890,8 @@ make_stream_file(ref * pfile, stream * s, const char *access)
     }
 }
 
-private gp_file_name_combine_result 
-gp_file_name_combine_patch(const char *prefix, uint plen, const char *fname, uint flen, 
+private gp_file_name_combine_result
+gp_file_name_combine_patch(const char *prefix, uint plen, const char *fname, uint flen,
 			    bool no_sibling, char *buffer, uint *blen)
 {
     return gp_file_name_combine(prefix, plen, fname, flen, no_sibling, buffer, blen);
@@ -902,8 +902,8 @@ gp_file_name_combine_patch(const char *prefix, uint plen, const char *fname, uin
 /* On a successful return, the C file name is in the stream buffer. */
 /* If fname==0, set up stream, and buffer. */
 private int
-file_prepare_stream(const char *fname, uint len, const char *file_access, 
-		 uint buffer_size, stream ** ps, char fmode[4], 
+file_prepare_stream(const char *fname, uint len, const char *file_access,
+		 uint buffer_size, stream ** ps, char fmode[4],
 		 gx_io_device *iodev, gs_memory_t *mem)
 {
     byte *buffer;
@@ -952,12 +952,12 @@ check_file_permissions_aux(i_ctx_t *i_ctx_p, char *fname, uint flen)
 private int
 lib_fopen_with_libpath(gs_file_path_ptr  lib_path,
 		       const gs_memory_t *mem,
-		       i_ctx_t *i_ctx_p,      
-		       gx_io_device *iodev, 
+		       i_ctx_t *i_ctx_p,
+		       gx_io_device *iodev,
 		       const char *fname, uint flen, char fmode[4], char *buffer, int blen,
 		       FILE **file)
-{   /* i_ctx_p is NULL running init files. 
-     * lib_path and mem are never NULL 
+{   /* i_ctx_p is NULL running init files.
+     * lib_path and mem are never NULL
      */
     bool starting_arg_file = false;
     bool search_with_no_combine = false;
@@ -991,7 +991,7 @@ lib_fopen_with_libpath(gs_file_path_ptr  lib_path,
 	} else
 	    *file = NULL;
 	skip:;
-    } 
+    }
     if (search_with_combine) {
 	const gs_file_path *pfpath = lib_path;
 	uint pi;
@@ -1001,7 +1001,7 @@ lib_fopen_with_libpath(gs_file_path_ptr  lib_path,
 	    const char *pstr = (const char *)prdir->value.const_bytes;
 	    uint plen = r_size(prdir), blen1 = blen;
 
-	    gp_file_name_combine_result r = gp_file_name_combine_patch(pstr, plen, 
+	    gp_file_name_combine_result r = gp_file_name_combine_patch(pstr, plen,
 		    fname, flen, false, buffer, &blen1);
 	    if (r != gp_combine_success)
 		continue;
@@ -1033,7 +1033,7 @@ lib_fopen(const gs_file_path_ptr pfpath, const gs_memory_t *mem, const char *fna
     FILE *file = NULL;
 
     strcat(fmode, gp_fmode_binary_suffix);
-    lib_fopen_with_libpath(pfpath, mem, NULL, &iodev_default_copy, fname, strlen(fname), 
+    lib_fopen_with_libpath(pfpath, mem, NULL, &iodev_default_copy, fname, strlen(fname),
 			    fmode, buffer, sizeof(buffer), &file);
     return file;
 }
@@ -1042,7 +1042,7 @@ lib_fopen(const gs_file_path_ptr pfpath, const gs_memory_t *mem, const char *fna
 /* using the search paths. */
 /* The startup code calls this to open the initialization file gs_init.ps. */
 int
-lib_file_open(const gs_file_path_ptr pfpath, 
+lib_file_open(const gs_file_path_ptr pfpath,
 	      i_ctx_t *i_ctx_p, const char *fname, uint len, byte * cname, uint max_clen,
 	      uint * pclen, ref * pfile, gs_memory_t *mem)
 {   /* i_ctx_p is NULL running init files. */
@@ -1054,14 +1054,14 @@ lib_file_open(const gs_file_path_ptr pfpath,
     gx_io_device *iodev = iodev_default;
     FILE *file;
 
-    code = file_prepare_stream(fname, len, "r", file_default_buffer_size, 
+    code = file_prepare_stream(fname, len, "r", file_default_buffer_size,
 			    &s, fmode, iodev, mem);
     if (code < 0)
 	return code;
     if (fname == 0)
 	return 0;
     buffer = (char *)s->cbuf;
-    code = lib_fopen_with_libpath(pfpath, mem, i_ctx_p, 
+    code = lib_fopen_with_libpath(pfpath, mem, i_ctx_p,
 				  iodev, fname, len, fmode, buffer, s->bsize, &file);
     if (code < 0) {
 	s->cbuf = NULL;
@@ -1148,7 +1148,7 @@ file_open_stream(const char *fname, uint len, const char *file_access,
 
     if (!iodev)
 	iodev = iodev_default;
-    code = file_prepare_stream(fname, len, file_access, buffer_size, ps, fmode, 
+    code = file_prepare_stream(fname, len, file_access, buffer_size, ps, fmode,
 			    (!iodev ? iodev_default : iodev), mem);
     if (code < 0)
 	return code;

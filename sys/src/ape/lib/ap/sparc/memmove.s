@@ -114,7 +114,7 @@ fout:
  * whole thing repeated for backwards
  */
 back:
-	SUBCC	$4,R9, R0 
+	SUBCC	$4,R9, R0
 	BL	bout
 
 	XOR	R12,R13, R7

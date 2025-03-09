@@ -352,7 +352,7 @@ extern PCArch	*arch;			/* PC architecture */
  * the clock which is only maintained by the bootstrap processor (0).
  */
 Mach* machp[MAXMACH];
-	
+
 #define	MACHP(n)	(machp[n])
 
 extern Mach	*m;
@@ -362,7 +362,7 @@ extern Mach	*m;
  *  hardware info about a device
  */
 typedef struct {
-	ulong	port;	
+	ulong	port;
 	int	size;
 } Devport;
 

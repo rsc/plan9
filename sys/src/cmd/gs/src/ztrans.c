@@ -1,12 +1,12 @@
 /* Copyright (C) 2000-2002 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -65,7 +65,7 @@ current_float_value(i_ctx_t *i_ctx_p,
 }
 
 private int
-enum_param(const gs_memory_t *mem, const ref *pnref, 
+enum_param(const gs_memory_t *mem, const ref *pnref,
 	   const char *const names[])
 {
     const char *const *p;
@@ -266,14 +266,14 @@ zbegintransparencymaskgroup(i_ctx_t *i_ctx_p)
     if ((code = enum_param(imemory, pparam, subtype_names)) < 0)
 	return code;
     gs_trans_mask_params_init(&params, code);
-    if ((code = dict_floats_param(imemory, dop, "Background", 
+    if ((code = dict_floats_param(imemory, dop, "Background",
 		    cs_num_components(gs_currentcolorspace(i_ctx_p->pgs)),
 				  params.Background, NULL)) < 0
 	)
 	return code;
     else if (code > 0)
 	params.Background_components = code;
-    if ((code = dict_floats_param(imemory, dop, "GrayBackground", 
+    if ((code = dict_floats_param(imemory, dop, "GrayBackground",
 		    1, params.Background, NULL)) < 0
 	)
 	return code;
@@ -346,7 +346,7 @@ zinittransparencymask(i_ctx_t *i_ctx_p)
 /* ------ Soft-mask images ------ */
 
 /* <dict> .image3x - */
-private int mask_dict_param(const gs_memory_t *mem, os_ptr, 
+private int mask_dict_param(const gs_memory_t *mem, os_ptr,
 			    image_params *, const char *, int,
 			    gs_image3x_mask_t *);
 private int
@@ -376,10 +376,10 @@ zimage3x(i_ctx_t *i_ctx_p)
      * We have to process the masks in the reverse order, because they
      * insert their DataSource before the one(s) for the DataDict.
      */
-    if ((code = mask_dict_param(imemory, op, &ip_data, 
+    if ((code = mask_dict_param(imemory, op, &ip_data,
 				"ShapeMaskDict", num_components,
 				&image.Shape)) < 0 ||
-	(code = mask_dict_param(imemory, op, &ip_data, 
+	(code = mask_dict_param(imemory, op, &ip_data,
 				"OpacityMaskDict", num_components,
 				&image.Opacity)) < 0
 	)
@@ -387,11 +387,11 @@ zimage3x(i_ctx_t *i_ctx_p)
     return zimage_setup(i_ctx_p, (gs_pixel_image_t *)&image,
 			&ip_data.DataSource[0],
 			image.CombineWithColor, 1);
-}    
+}
 
 /* Get one soft-mask dictionary parameter. */
 private int
-mask_dict_param(const gs_memory_t *mem, os_ptr op, 
+mask_dict_param(const gs_memory_t *mem, os_ptr op,
 image_params *pip_data, const char *dict_name,
 		int num_components, gs_image3x_mask_t *pixm)
 {
@@ -440,7 +440,7 @@ zpushpdf14devicefilter(i_ctx_t *i_ctx_p)
     os_ptr op = osp;
 
     check_type(*op, t_integer);
-    code = gs_push_pdf14trans_device(igs); 
+    code = gs_push_pdf14trans_device(igs);
     if (code < 0)
         return code;
     pop(1);
@@ -452,7 +452,7 @@ zpushpdf14devicefilter(i_ctx_t *i_ctx_p)
 private int
 zpoppdf14devicefilter(i_ctx_t *i_ctx_p)
 {
-    return gs_pop_pdf14trans_device(igs); 
+    return gs_pop_pdf14trans_device(igs);
 }
 
 /* ------ Initialization procedure ------ */

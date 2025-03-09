@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 artofcode LLC. All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -21,14 +21,14 @@
  * Since we need several statically defined variants of this agorithm,
  * we store it in .h file and include it several times into gxfill.c .
  * Configuration macros (template arguments) are :
- * 
+ *
  *  FILL_DIRECT - See LOOP_FILL_RECTANGLE_DIRECT.
  *  TEMPLATE_slant_into_trapezoids - the name of the procedure to generate.
 */
 
 
 private inline int
-TEMPLATE_slant_into_trapezoids (const line_list *ll, 
+TEMPLATE_slant_into_trapezoids (const line_list *ll,
 	const active_line *flp, const active_line *alp, fixed y, fixed y1)
 {
     /*
@@ -86,10 +86,10 @@ TEMPLATE_slant_into_trapezoids (const line_list *ll,
 		if (code < 0)
 		    return code;
 		INCR(afill);
-		code = LOOP_FILL_RECTANGLE_DIRECT(fo, 
+		code = LOOP_FILL_RECTANGLE_DIRECT(fo,
 		 xli, fixed2int_pixround(y1 - fo->adjust_below),
 		     fixed2int_var_pixround(alp->x_next + fo->adjust_right) - xli, 1);
-		vd_rect(flp->x_next - fo->adjust_left, y1 - fo->adjust_below, 
+		vd_rect(flp->x_next - fo->adjust_left, y1 - fo->adjust_below,
 			alp->x_next + fo->adjust_right, y1, 1, VD_TRAP_COLOR);
 	    }
 	} else {	/* Slanted trapezoid. */
@@ -100,10 +100,10 @@ TEMPLATE_slant_into_trapezoids (const line_list *ll,
 	    if (ADJUSTED_Y_SPANS_PIXEL(y)) {
 		INCR(afill);
 		xli = fixed2int_var_pixround(flp->x_current - fo->adjust_left);
-		code = LOOP_FILL_RECTANGLE_DIRECT(fo, 
+		code = LOOP_FILL_RECTANGLE_DIRECT(fo,
 		  xli, fixed2int_pixround(y - fo->adjust_below),
 		     fixed2int_var_pixround(alp->x_current + fo->adjust_right) - xli, 1);
-		vd_rect(flp->x_current - fo->adjust_left, y - fo->adjust_below, 
+		vd_rect(flp->x_current - fo->adjust_left, y - fo->adjust_below,
 			alp->x_current + fo->adjust_right, y, 1, VD_TRAP_COLOR);
 		if (code < 0)
 		    return code;
@@ -119,4 +119,3 @@ TEMPLATE_slant_into_trapezoids (const line_list *ll,
     }
     return code;
 }
-

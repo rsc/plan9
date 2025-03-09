@@ -1,12 +1,12 @@
 /* Copyright (C) 2001 Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -17,9 +17,9 @@
 /* $Id: dxmain.c,v 1.15 2004/09/14 06:42:32 ghostgum Exp $ */
 
 /* dxmain.c */
-/* 
- * Ghostscript frontend which provides a graphical window 
- * using Gtk+.  Load time linking to libgs.so 
+/*
+ * Ghostscript frontend which provides a graphical window
+ * using Gtk+.  Load time linking to libgs.so
  * Compile using
  *    gcc `gtk-config --cflags` -o gs dxmain.c -lgs `gtk-config --libs`
  *
@@ -41,7 +41,7 @@
 
 const char start_string[] = "systemdict /start get exec\n";
 
-static void read_stdin_handler(gpointer data, gint fd, 
+static void read_stdin_handler(gpointer data, gint fd,
 	GdkInputCondition condition);
 static int gsdll_stdin(void *instance, char *buf, int len);
 static int gsdll_stdout(void *instance, const char *str, int len);
@@ -49,13 +49,13 @@ static int gsdll_stdout(void *instance, const char *str, int len);
 static int display_open(void *handle, void *device);
 static int display_preclose(void *handle, void *device);
 static int display_close(void *handle, void *device);
-static int display_presize(void *handle, void *device, int width, int height, 
+static int display_presize(void *handle, void *device, int width, int height,
 	int raster, unsigned int format);
-static int display_size(void *handle, void *device, int width, int height, 
+static int display_size(void *handle, void *device, int width, int height,
 	int raster, unsigned int format, unsigned char *pimage);
 static int display_sync(void *handle, void *device);
 static int display_page(void *handle, void *device, int copies, int flush);
-static int display_update(void *handle, void *device, int x, int y, 
+static int display_update(void *handle, void *device, int x, int y,
 	int w, int h);
 
 #ifndef min
@@ -72,7 +72,7 @@ struct stdin_buf {
 };
 
 /* handler for reading non-blocking stdin */
-static void 
+static void
 read_stdin_handler(gpointer data, gint fd, GdkInputCondition condition)
 {
     struct stdin_buf *input = (struct stdin_buf *)data;
@@ -94,7 +94,7 @@ read_stdin_handler(gpointer data, gint fd, GdkInputCondition condition)
 }
 
 /* callback for reading stdin */
-static int 
+static int
 gsdll_stdin(void *instance, char *buf, int len)
 {
     struct stdin_buf input;
@@ -104,7 +104,7 @@ gsdll_stdin(void *instance, char *buf, int len)
     input.buf = buf;
     input.count = -1;
 
-    input_tag = gdk_input_add(fileno(stdin), 
+    input_tag = gdk_input_add(fileno(stdin),
 	(GdkInputCondition)(GDK_INPUT_READ | GDK_INPUT_EXCEPTION),
 	read_stdin_handler, &input);
     while (input.count < 0)
@@ -114,7 +114,7 @@ gsdll_stdin(void *instance, char *buf, int len)
     return input.count;
 }
 
-static int 
+static int
 gsdll_stdout(void *instance, const char *str, int len)
 {
     gtk_main_iteration_do(FALSE);
@@ -123,7 +123,7 @@ gsdll_stdout(void *instance, const char *str, int len)
     return len;
 }
 
-static int 
+static int
 gsdll_stderr(void *instance, const char *str, int len)
 {
     gtk_main_iteration_do(FALSE);
@@ -226,64 +226,64 @@ window_draw(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
 	    switch (color) {
 		case DISPLAY_COLORS_NATIVE:
 		    if (depth == DISPLAY_DEPTH_8)
-			gdk_draw_indexed_image(widget->window, 
+			gdk_draw_indexed_image(widget->window,
 			    widget->style->fg_gc[GTK_STATE_NORMAL],
-			    x, y, width, height, 
-			    GDK_RGB_DITHER_MAX, 
-			    img->buf + x + y*img->rowstride, 
+			    x, y, width, height,
+			    GDK_RGB_DITHER_MAX,
+			    img->buf + x + y*img->rowstride,
 			    img->rowstride, img->cmap);
 		    else if ((depth == DISPLAY_DEPTH_16) && img->rgbbuf)
-			gdk_draw_rgb_image(widget->window, 
+			gdk_draw_rgb_image(widget->window,
 			    widget->style->fg_gc[GTK_STATE_NORMAL],
-			    x, y, width, height, 
-			    GDK_RGB_DITHER_MAX, 
-			    img->rgbbuf + x*3 + y*img->width*3, 
+			    x, y, width, height,
+			    GDK_RGB_DITHER_MAX,
+			    img->rgbbuf + x*3 + y*img->width*3,
 			    img->width * 3);
 		    break;
 		case DISPLAY_COLORS_GRAY:
 		    if (depth == DISPLAY_DEPTH_8)
-			gdk_draw_gray_image(widget->window, 
+			gdk_draw_gray_image(widget->window,
 			    widget->style->fg_gc[GTK_STATE_NORMAL],
 			    x, y, width, height,
-			    GDK_RGB_DITHER_MAX, 
-			    img->buf + x + y*img->rowstride, 
+			    GDK_RGB_DITHER_MAX,
+			    img->buf + x + y*img->rowstride,
 			    img->rowstride);
 		    break;
 		case DISPLAY_COLORS_RGB:
 		    if (depth == DISPLAY_DEPTH_8) {
 			if (img->rgbbuf)
-			    gdk_draw_rgb_image(widget->window, 
+			    gdk_draw_rgb_image(widget->window,
 				widget->style->fg_gc[GTK_STATE_NORMAL],
 				x, y, width, height,
-				GDK_RGB_DITHER_MAX, 
-				img->rgbbuf + x*3 + y*img->width*3, 
+				GDK_RGB_DITHER_MAX,
+				img->rgbbuf + x*3 + y*img->width*3,
 				img->width * 3);
 			else
-			    gdk_draw_rgb_image(widget->window, 
+			    gdk_draw_rgb_image(widget->window,
 				widget->style->fg_gc[GTK_STATE_NORMAL],
 				x, y, width, height,
-				GDK_RGB_DITHER_MAX, 
-				img->buf + x*3 + y*img->rowstride, 
+				GDK_RGB_DITHER_MAX,
+				img->buf + x*3 + y*img->rowstride,
 				img->rowstride);
 		    }
 		    break;
 		case DISPLAY_COLORS_CMYK:
-		    if (((depth == DISPLAY_DEPTH_1) || 
+		    if (((depth == DISPLAY_DEPTH_1) ||
 		        (depth == DISPLAY_DEPTH_8)) && img->rgbbuf)
-			gdk_draw_rgb_image(widget->window, 
+			gdk_draw_rgb_image(widget->window,
 			    widget->style->fg_gc[GTK_STATE_NORMAL],
 			    x, y, width, height,
-			    GDK_RGB_DITHER_MAX, 
-			    img->rgbbuf + x*3 + y*img->width*3, 
+			    GDK_RGB_DITHER_MAX,
+			    img->rgbbuf + x*3 + y*img->width*3,
 			    img->width * 3);
 		    break;
 		case DISPLAY_COLORS_SEPARATION:
 		    if ((depth == DISPLAY_DEPTH_8) && img->rgbbuf)
-			gdk_draw_rgb_image(widget->window, 
+			gdk_draw_rgb_image(widget->window,
 			    widget->style->fg_gc[GTK_STATE_NORMAL],
 			    x, y, width, height,
-			    GDK_RGB_DITHER_MAX, 
-			    img->rgbbuf + x*3 + y*img->width*3, 
+			    GDK_RGB_DITHER_MAX,
+			    img->rgbbuf + x*3 + y*img->width*3,
 			    img->width * 3);
 		    break;
 	    }
@@ -320,22 +320,22 @@ static void window_create(IMAGE *img)
     gtk_box_pack_start(GTK_BOX(img->vbox), img->scroll, TRUE, TRUE, 0);
     gtk_signal_connect(GTK_OBJECT (img->darea), "expose-event",
                         GTK_SIGNAL_FUNC (window_draw), img);
-    gtk_signal_connect(GTK_OBJECT (img->window), "destroy", 
+    gtk_signal_connect(GTK_OBJECT (img->window), "destroy",
 			GTK_SIGNAL_FUNC (window_destroy), img);
     /* do not show img->window until we know the image size */
 }
 
 static void window_resize(IMAGE *img)
 {
-    gtk_drawing_area_size(GTK_DRAWING_AREA (img->darea), 
+    gtk_drawing_area_size(GTK_DRAWING_AREA (img->darea),
 	img->width, img->height);
     if (!(GTK_WIDGET_FLAGS(img->window) & GTK_VISIBLE)) {
-	/* We haven't yet shown the window, so set a default size 
-	 * which is smaller than the desktop to allow room for 
-	 * desktop toolbars, and if possible a little larger than 
+	/* We haven't yet shown the window, so set a default size
+	 * which is smaller than the desktop to allow room for
+	 * desktop toolbars, and if possible a little larger than
 	 * the image to allow room for the scroll bars.
 	 * We don't know the width of the scroll bars, so just guess. */
-	gtk_window_set_default_size(GTK_WINDOW(img->window), 
+	gtk_window_set_default_size(GTK_WINDOW(img->window),
 	    min(gdk_screen_width()-96, img->width+24),
 	    min(gdk_screen_height()-96, img->height+24));
     }
@@ -388,13 +388,13 @@ static void signal_sep7(GtkWidget *w, gpointer data)
 }
 
 GtkSignalFunc signal_separation[IMAGE_DEVICEN_MAX] = {
-    signal_sep0, 
-    signal_sep1, 
-    signal_sep2, 
-    signal_sep3, 
-    signal_sep4, 
-    signal_sep5, 
-    signal_sep6, 
+    signal_sep0,
+    signal_sep1,
+    signal_sep2,
+    signal_sep3,
+    signal_sep4,
+    signal_sep5,
+    signal_sep6,
     signal_sep7
 };
 
@@ -500,17 +500,17 @@ static int display_close(void *handle, void *device)
     return 0;
 }
 
-static int display_presize(void *handle, void *device, int width, int height, 
+static int display_presize(void *handle, void *device, int width, int height,
 	int raster, unsigned int format)
 {
     /* Assume everything is OK.
-     * It would be better to return e_rangecheck if we can't 
+     * It would be better to return e_rangecheck if we can't
      * support the format.
      */
     return 0;
 }
-   
-static int display_size(void *handle, void *device, int width, int height, 
+
+static int display_size(void *handle, void *device, int width, int height,
 	int raster, unsigned int format, unsigned char *pimage)
 {
     IMAGE *img = image_find(handle, device);
@@ -556,7 +556,7 @@ static int display_size(void *handle, void *device, int width, int height,
 		for (i=0; i<96; i++) {
 		    /* 0->63 = 00RRGGBB, 64->95 = 010YYYYY */
 		    if (i < 64) {
-			color[i] = 
+			color[i] =
 			    (((i & 0x30) >> 4) * one << 16) + 	/* r */
 			    (((i & 0x0c) >> 2) * one << 8) + 	/* g */
 			    (i & 0x03) * one;		        /* b */
@@ -586,7 +586,7 @@ static int display_size(void *handle, void *device, int width, int height,
 	case DISPLAY_COLORS_RGB:
 	    if (depth == DISPLAY_DEPTH_8) {
 		if (((img->format & DISPLAY_ALPHA_MASK) == DISPLAY_ALPHA_NONE)
-		    && ((img->format & DISPLAY_ENDIAN_MASK) 
+		    && ((img->format & DISPLAY_ENDIAN_MASK)
 			== DISPLAY_BIGENDIAN))
 		    break;
 		else {
@@ -608,19 +608,19 @@ static int display_size(void *handle, void *device, int width, int height,
 		/* We already know about the CMYK components */
 		img->devicen[0].used = 1;
 		img->devicen[0].cyan = 65535;
-		strncpy(img->devicen[0].name, "Cyan", 
+		strncpy(img->devicen[0].name, "Cyan",
 		    sizeof(img->devicen[0].name));
 		img->devicen[1].used = 1;
 		img->devicen[1].magenta = 65535;
-		strncpy(img->devicen[1].name, "Magenta", 
+		strncpy(img->devicen[1].name, "Magenta",
 		    sizeof(img->devicen[1].name));
 		img->devicen[2].used = 1;
 		img->devicen[2].yellow = 65535;
-		strncpy(img->devicen[2].name, "Yellow", 
+		strncpy(img->devicen[2].name, "Yellow",
 		    sizeof(img->devicen[2].name));
 		img->devicen[3].used = 1;
 		img->devicen[3].black = 65535;
-		strncpy(img->devicen[3].name, "Black", 
+		strncpy(img->devicen[3].name, "Black",
 		    sizeof(img->devicen[3].name));
 	    }
 	    else
@@ -638,24 +638,24 @@ static int display_size(void *handle, void *device, int width, int height,
     }
 
 
-    if ((color == DISPLAY_COLORS_CMYK) || 
+    if ((color == DISPLAY_COLORS_CMYK) ||
 	(color == DISPLAY_COLORS_SEPARATION)) {
 	if (!img->cmyk_bar) {
 	    /* add bar to select separation */
 	    img->cmyk_bar = gtk_hbox_new(FALSE, 0);
-	    gtk_box_pack_start(GTK_BOX(img->vbox), img->cmyk_bar, 
+	    gtk_box_pack_start(GTK_BOX(img->vbox), img->cmyk_bar,
 		FALSE, FALSE, 0);
 	    for (i=0; i<IMAGE_DEVICEN_MAX; i++) {
-	       img->separation[i] = 
+	       img->separation[i] =
 		window_add_button(img, img->devicen[i].name,
 		   signal_separation[i]);
 	    }
 	    img->show_as_gray = gtk_check_button_new_with_label("Show as Gray");
-	    gtk_box_pack_end(GTK_BOX(img->cmyk_bar), img->show_as_gray, 
+	    gtk_box_pack_end(GTK_BOX(img->cmyk_bar), img->show_as_gray,
 		FALSE, FALSE, 5);
-	    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(img->show_as_gray), 
+	    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(img->show_as_gray),
 		FALSE);
-	    gtk_signal_connect(GTK_OBJECT(img->show_as_gray), "clicked", 
+	    gtk_signal_connect(GTK_OBJECT(img->show_as_gray), "clicked",
 		signal_show_as_gray, img);
 	    gtk_widget_show(img->show_as_gray);
 	}
@@ -673,7 +673,7 @@ static int display_size(void *handle, void *device, int width, int height,
     gtk_main_iteration_do(FALSE);
     return 0;
 }
-   
+
 static int display_sync(void *handle, void *device)
 {
     IMAGE *img = image_find(handle, device);
@@ -717,7 +717,7 @@ static int display_sync(void *handle, void *device)
 	else
 	    gtk_widget_hide(img->separation[i]);
     }
-		
+
     /* some formats need to be converted for use by GdkRgb */
     switch (color) {
 	case DISPLAY_COLORS_NATIVE:
@@ -813,8 +813,8 @@ static int display_sync(void *handle, void *device)
 	    }
 	    break;
 	case DISPLAY_COLORS_RGB:
-	    if ( (depth == DISPLAY_DEPTH_8) && 
-		 ((alpha == DISPLAY_ALPHA_FIRST) || 
+	    if ( (depth == DISPLAY_DEPTH_8) &&
+		 ((alpha == DISPLAY_ALPHA_FIRST) ||
 	          (alpha == DISPLAY_UNUSED_FIRST)) &&
 		 (endian == DISPLAY_BIGENDIAN) ) {
 		/* Mac format */
@@ -1047,7 +1047,7 @@ static int display_page(void *handle, void *device, int copies, int flush)
     return 0;
 }
 
-static int display_update(void *handle, void *device, 
+static int display_update(void *handle, void *device,
     int x, int y, int w, int h)
 {
     /* not implemented - eventually this will be used for progressive update */
@@ -1055,7 +1055,7 @@ static int display_update(void *handle, void *device,
 }
 
 
-static int 
+static int
 display_separation(void *handle, void *device,
     int comp_num, const char *name,
     unsigned short c, unsigned short m,
@@ -1078,7 +1078,7 @@ display_separation(void *handle, void *device,
 
 
 /* callback structure for "display" device */
-display_callback display = { 
+display_callback display = {
     sizeof(display_callback),
     DISPLAY_VERSION_MAJOR,
     DISPLAY_VERSION_MINOR,
@@ -1113,8 +1113,8 @@ int main(int argc, char *argv[])
     use_gui = gtk_init_check(&argc, &argv);
 
     /* insert display device parameters as first arguments */
-    sprintf(dformat, "-dDisplayFormat=%d", 
- 	    DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 | 
+    sprintf(dformat, "-dDisplayFormat=%d",
+ 	    DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 |
 	    DISPLAY_BIGENDIAN | DISPLAY_TOPFIRST);
     nargc = argc + 1;
     nargv = (char **)malloc((nargc + 1) * sizeof(char *));
@@ -1155,4 +1155,3 @@ int main(int argc, char *argv[])
 
     return exit_status;
 }
-

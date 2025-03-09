@@ -124,7 +124,7 @@ yylex(cf)
 #ifdef KSH
 	else if (cf&LETEXPR) {
 		*wp++ = OQUOTE;	 /* enclose arguments in (double) quotes */
-		state = SLETPAREN;	
+		state = SLETPAREN;
 		statep->ls_sletparen.nparen = 0;
 	}
 #endif /* KSH */
@@ -216,7 +216,7 @@ yylex(cf)
 				if (isalnum(c)) {
 					*wp++ = CHAR, *wp++ = '\\';
 					*wp++ = CHAR, *wp++ = c;
-				} else 
+				} else
 #endif
 				if (c) /* trailing \ is lost */
 					*wp++ = QCHAR, *wp++ = c;
@@ -465,7 +465,7 @@ yylex(cf)
 						statep->ls_scsparen.csstate = 0;
 						state = statep->ls_state
 							= SCSPAREN;
-						
+
 					}
 				}
 			}

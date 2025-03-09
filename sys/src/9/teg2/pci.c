@@ -104,7 +104,7 @@ struct Pci {
 	Devlinkslot port1;
 
 	/* 0xbc */
-	
+
 };
 
 enum {

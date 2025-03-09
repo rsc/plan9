@@ -130,7 +130,7 @@ init0(void)
 			ksetenv("service", "cpu", 0);
 		else
 			ksetenv("service", "terminal", 0);
-		
+
 /*
 		for(p = confenv; *p; p++) {
 			q = strchr(p[0], '=');

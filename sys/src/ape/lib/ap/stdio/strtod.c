@@ -285,7 +285,7 @@ strtod(CONST char *s00, char **se)
 				if (nd++ < 9)
 					y = 10*y + c;
 				else if (nd <= DBL_DIG + 1)
-					z = 10*z + c;	
+					z = 10*z + c;
 				nz = 0;
 				}
 			}

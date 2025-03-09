@@ -120,7 +120,7 @@ substituted for
 .BR chr .
 .PP
 .I Utfecpy
-copies UTF sequences until a null sequence has been copied, but writes no 
+copies UTF sequences until a null sequence has been copied, but writes no
 sequences beyond
 .IR es1 .
 If any sequences are copied,

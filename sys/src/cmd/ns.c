@@ -186,7 +186,7 @@ xlatemnt(Mount *m)
 	free(m->new);
 	m->new = t;
 
-Return:	
+Return:
 	free(s);
 }
 

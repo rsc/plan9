@@ -273,7 +273,7 @@ runtrap(p)
 		p->flags |= old_changed;
 	}
 }
- 
+
 /* clear pending traps and reset user's trap handlers; used after fork(2) */
 void
 cleartraps()

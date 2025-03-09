@@ -49,7 +49,7 @@ enum {
 	Calphacursor = 1<<9,
 
 	Rpalette = 1024,
-};	
+};
 
 typedef struct Vmware	Vmware;
 struct Vmware {
@@ -272,7 +272,7 @@ dump(Vga* vga, Ctlr* ctlr)
 	printitem(ctlr->name, "depth");
 	Bprint(&stdout, " %d\n", vm->depth);
 	printitem(ctlr->name, "linear");
-	
+
 }
 
 Ctlr vmware = {
@@ -292,4 +292,3 @@ Ctlr vmwarehwgc = {
 	0,				/* load */
 	0,				/* dump */
 };
-

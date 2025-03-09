@@ -238,7 +238,7 @@ init(Vga* vga, Ctlr* ctlr)
 			if(vga->f[0] > vga->f[1])
 				error("%s: invalid dclk - %lud\n",
 					ctlr->name, vga->f[0]);
-	
+
 			if((hqv->fr[0x01] & 0x03) != 0x02){
 				vga->m[1] = 1023;
 				clock(vga, ctlr);

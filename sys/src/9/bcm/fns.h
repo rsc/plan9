@@ -1,6 +1,6 @@
 #include "../port/portfns.h"
 
-Dirtab*	addarchfile(char*, int, long(*)(Chan*, void*, long, vlong), 
+Dirtab*	addarchfile(char*, int, long(*)(Chan*, void*, long, vlong),
 	long(*)(Chan*, void*, long, vlong));
 extern void archreboot(void);
 extern void archreset(void);

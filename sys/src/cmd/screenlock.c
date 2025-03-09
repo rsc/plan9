@@ -235,7 +235,7 @@ lockscreen(void)
 		i = readimage(display, fd, 0);
 		if(i){
  			r = screen->r;
-			p = Pt(r.max.x / 2, r.max.y * 2 / 3); 
+			p = Pt(r.max.x / 2, r.max.y * 2 / 3);
 			dx = (Dx(screen->r) - Dx(i->r)) / 2;
 			r.min.x += dx;
 			r.max.x -= dx;

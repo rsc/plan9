@@ -18,5 +18,3 @@ case go
 	distisfrom=$rd
 	export distisfrom
 }
-
-

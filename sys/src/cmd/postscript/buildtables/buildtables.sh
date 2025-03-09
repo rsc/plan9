@@ -91,4 +91,3 @@ for i do
 	rm -f $SHORT.ps
     fi
 done
-

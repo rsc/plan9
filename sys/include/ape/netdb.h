@@ -89,8 +89,8 @@ extern struct servent	*getservbyname(const char *, const char *),
 extern struct protoent	*getprotobyname(const char *),
 			*getprotobynumber(int),
 			*getprotoent(void);
-extern struct rpcent	*getrpcbyname(const char *), 
-			*getrpcbynumber(int), 
+extern struct rpcent	*getrpcbyname(const char *),
+			*getrpcbynumber(int),
 			*getrpcent(void);
 extern void sethostent(int),  endhostent(void),
 	    setnetent(int),   endnetent(void),

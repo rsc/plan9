@@ -1276,7 +1276,7 @@ addnode(Ctlr *ctlr, uchar id, uchar *addr, int plcp, int antenna)
 	p += 2;		/* reserved */
 	p += 16;	/* key */
 	put32(p, 4);	/* action (4 = set_rate) */
-	p += 4;		
+	p += 4;
 	p += 4;		/* mask */
 	p += 2;		/* tid */
 	*p++ = plcp;	/* plcp */

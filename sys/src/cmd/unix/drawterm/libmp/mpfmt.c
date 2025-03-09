@@ -133,7 +133,7 @@ mpfmt(Fmt *fmt)
 	b = va_arg(fmt->args, mpint*);
 	if(b == nil)
 		return fmtstrcpy(fmt, "*");
-	
+
 	p = mptoa(b, fmt->prec, nil, 0);
 	fmt->flags &= ~FmtPrec;
 

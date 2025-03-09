@@ -311,7 +311,7 @@ Loop:
 		if(getch() == '<') return LSH;
 		ungetc();
 		return '<';
-	case '>': 
+	case '>':
 		if(getch() == '>') return RSH;
 		ungetc();
 		return '>';

@@ -245,7 +245,7 @@ retry:
 		 *  race, another proc may have gotten here first while
 		 *  s->lk was unlocked
 		 */
-		if(*p == 0) { 
+		if(*p == 0) {
 			new->daddr = daddr;
 			cachepage(new, s->image);
 			*p = new;
@@ -373,7 +373,7 @@ checkpages(void)
 	Pte *p;
 	Page *pg;
 	Segment **sp, **ep, *s;
-	
+
 	if(up == nil)
 		return;
 

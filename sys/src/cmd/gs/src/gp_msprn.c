@@ -1,12 +1,12 @@
 /* Copyright (C) 2001 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -35,7 +35,7 @@
 /* The MS-Windows printer IODevice */
 
 /*
- * This allows a MS-Windows printer to be specified as an 
+ * This allows a MS-Windows printer to be specified as an
  * output using
  *  -sOutputFile="%printer%HP DeskJet 500"
  *
@@ -43,9 +43,9 @@
  *  -sOutputFile="%printer%\\server\printer name"
  *
  * If you don't supply a printer name you will get
- *  Error: /undefinedfilename in --.outputpage-- 
+ *  Error: /undefinedfilename in --.outputpage--
  * If the printer name is invalid you will get
- *  Error: /invalidfileaccess in --.outputpage-- 
+ *  Error: /invalidfileaccess in --.outputpage--
  *
  * This is implemented by returning the file pointer
  * for the write end of a pipe, and starting a thread
@@ -156,7 +156,7 @@ mswin_printer_fopen(gx_io_device * iodev, const char *fname, const char *access,
     unsigned long *ptid = &((tid_t *)(iodev->state))->tid;
 
     /* Win32s supports neither pipes nor Win32 printers. */
-    if (((HIWORD(version) & 0x8000) != 0) && 
+    if (((HIWORD(version) & 0x8000) != 0) &&
 	((HIWORD(version) & 0x4000) == 0))
 	return_error(gs_error_invalidfileaccess);
 
@@ -188,7 +188,7 @@ mswin_printer_fopen(gx_io_device * iodev, const char *fname, const char *access,
      * when the thread finishes.
      */
     if (!DuplicateHandle(GetCurrentProcess(), (HANDLE)tid,
-	GetCurrentProcess(), &hthread, 
+	GetCurrentProcess(), &hthread,
 	0, FALSE, DUPLICATE_SAME_ACCESS)) {
 	fclose(*pfile);
 	return_error(gs_error_invalidfileaccess);
@@ -196,7 +196,7 @@ mswin_printer_fopen(gx_io_device * iodev, const char *fname, const char *access,
     *ptid = (unsigned long)hthread;
 
     /* Give the name of the printer to the thread by writing
-     * it to the pipe.  This is avoids elaborate thread 
+     * it to the pipe.  This is avoids elaborate thread
      * synchronisation code.
      */
     strncpy(pname, fname, sizeof(pname));
@@ -220,5 +220,3 @@ mswin_printer_fclose(gx_io_device * iodev, FILE * file)
     }
     return 0;
 }
-
-

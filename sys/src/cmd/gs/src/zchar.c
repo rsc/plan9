@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -43,7 +43,7 @@
 #include "zchar42.h"
 
 /* Forward references */
-private bool map_glyph_to_char(const gs_memory_t *mem, 
+private bool map_glyph_to_char(const gs_memory_t *mem,
 			       const ref *, const ref *, ref *);
 private int finish_show(i_ctx_t *);
 private int op_show_cleanup(i_ctx_t *);
@@ -410,7 +410,7 @@ op_show_finish_setup(i_ctx_t *i_ctx_p, gs_text_enum_t * penum, int npop,
 
         /* According to PLRM, we don't need to raise a rangecheck error,
            if currentfont is changed in the proc of the operator 'cshow'. */
-	gs_default_same_font (gs_text_current_font(osenum), 
+	gs_default_same_font (gs_text_current_font(osenum),
 			      gs_text_current_font(penum), true)
 	) {
 	gs_text_params_t text;
@@ -591,7 +591,7 @@ op_show_continue_dispatch(i_ctx_t *i_ctx_p, int npop, int code)
 		op_proc_t cont = op_show_continue, exec_cont = 0;
 		gs_glyph glyph = penum->returned.current_glyph;
 		int code;
-    
+
 		pop(npop);
 		op = osp;
 		glyph_ref(imemory, glyph, &cnref);
@@ -599,10 +599,10 @@ op_show_continue_dispatch(i_ctx_t *i_ctx_p, int npop, int code)
 		    gs_font_type42 *pfont42 = (gs_font_type42 *)pfont;
 		    uint glyph_index = pfont42->data.get_glyph_index(pfont42, glyph);
 
-		    code = zchar42_set_cache(i_ctx_p, (gs_font_base *)pfont42, 
+		    code = zchar42_set_cache(i_ctx_p, (gs_font_base *)pfont42,
 				    &cnref, glyph_index, cont, &exec_cont, false);
 		} else if (pfont->FontType == ft_CID_encrypted)
-		    code = z1_set_cache(i_ctx_p, (gs_font_base *)pfont, 
+		    code = z1_set_cache(i_ctx_p, (gs_font_base *)pfont,
 				    &cnref, glyph, cont, &exec_cont);
 		else
 		    return_error(e_unregistered); /* Unimplemented. */
@@ -746,7 +746,7 @@ op_show_restore(i_ctx_t *i_ctx_p, bool for_error)
 	if (count > saved_count)	/* if <, we're in trouble */
 	    ref_stack_pop(&o_stack, count - saved_count);
     }
-    if (SHOW_IS_STRINGWIDTH(penum) && igs->text_rendering_mode != 3) {	
+    if (SHOW_IS_STRINGWIDTH(penum) && igs->text_rendering_mode != 3) {
 	/* stringwidth does an extra gsave */
 	--saved_level;
     }

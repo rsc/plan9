@@ -1,4 +1,4 @@
-.TH VERSION 5 
+.TH VERSION 5
 .SH NAME
 version \- negotiate protocol version
 .SH SYNOPSIS
@@ -15,7 +15,7 @@ version \- negotiate protocol version
 .IR msize [4]
 .IR version [ s ]
 .SH DESCRIPTION
-The 
+The
 .B version
 request negotiates the protocol version and message size
 to be used on the connection and initializes the connection for I/O.

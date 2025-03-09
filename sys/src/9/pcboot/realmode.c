@@ -9,9 +9,9 @@
 
 /*
  * Back the processor into real mode to run a BIOS call,
- * then return.  This must be used carefully, since it 
+ * then return.  This must be used carefully, since it
  * completely disables hardware interrupts (e.g., the i8259)
- * while running.  It is *not* using VM86 mode. 
+ * while running.  It is *not* using VM86 mode.
  * Maybe that's really the right answer, but real mode
  * is fine for now.  We don't expect to use this very much --
  * just for BIOS INT 13 disk i/o.

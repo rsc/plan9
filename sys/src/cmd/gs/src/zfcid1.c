@@ -1,12 +1,12 @@
 /* Copyright (C) 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -102,7 +102,7 @@ z11_CIDMap_proc(gs_font_cid2 *pfont, gs_glyph glyph)
 
 	if (code < 0)
 	    return code;
-	if ( code > 0 ) 
+	if ( code > 0 )
 	    return_error(e_invalidfont);
     }
     for (i = 0; i < gdbytes; ++i)
@@ -179,8 +179,8 @@ z11_glyph_info_aux(gs_font *font, gs_glyph glyph, const gs_matrix *pmat,
 {
     gs_font_cid2 *fontCID2 = (gs_font_cid2 *)font;
     uint glyph_index;
-    int code = (glyph > GS_MIN_GLYPH_INDEX 
-	    ? glyph - GS_MIN_GLYPH_INDEX 
+    int code = (glyph > GS_MIN_GLYPH_INDEX
+	    ? glyph - GS_MIN_GLYPH_INDEX
 	    : fontCID2->cidata.CIDMap_proc(fontCID2, glyph));
 
     if(code < 0)
@@ -195,7 +195,7 @@ z11_glyph_info(gs_font *font, gs_glyph glyph, const gs_matrix *pmat,
 {
     int wmode = (members & GLYPH_INFO_WIDTH0 ? 0 : 1);
 
-    return z1_glyph_info_generic(font, glyph, pmat, members, info, 
+    return z1_glyph_info_generic(font, glyph, pmat, members, info,
 				    &z11_glyph_info_aux, wmode);
 }
 
@@ -241,7 +241,7 @@ private int
 z11_glyph_outline(gs_font *font, int WMode, gs_glyph glyph, const gs_matrix *pmat,
 		  gx_path *ppath, double sbw[4])
 {
-    return gs_type42_glyph_outline(font, WMode, 
+    return gs_type42_glyph_outline(font, WMode,
 	    z11_get_glyph_index((gs_font_type42 *)font, glyph) + GS_MIN_GLYPH_INDEX,
 				   pmat, ppath, sbw);
 }
@@ -280,7 +280,7 @@ zbuildfont11(i_ctx_t *i_ctx_p)
 	ref *file_table_pos, *a, v;
 	const char *name[2] = {"loca", "glyf"};
 	int i, j;
-	
+
 	/*
 	 * Since build_gs_simple_font may resize the dictionary and cause
 	 * pointers to become invalid, save File and CIDFontName
@@ -295,7 +295,7 @@ zbuildfont11(i_ctx_t *i_ctx_p)
 	    if (code <= 0 || r_type(a) != t_array)
 		return_error(e_invalidfont);
 	    for (j = 0; j < 2; j++) {
-	        code = array_get(imemory, a, j, &v); 
+	        code = array_get(imemory, a, j, &v);
 		if (code < 0 || r_type(&v) != t_integer)
 		    return_error(e_invalidfont);
 		loca_glyph_pos[i][j] = v.value.intval;
@@ -351,7 +351,7 @@ zbuildfont11(i_ctx_t *i_ctx_p)
 	pfcid->cidata.orig_procs.get_metrics = pfont->data.get_metrics;
 	pfont->data.get_metrics = z11_get_metrics;
     } else if(pfile != NULL) {
-        /* 
+        /*
 	 * We assume that disk fonts has no MetricsCount.
 	 * We could do not, but the number of virtual function wariants increases.
 	 */
@@ -406,7 +406,7 @@ private int
 zfillCIDMap(i_ctx_t *i_ctx_p)
 {
     os_ptr op = osp;
-    ref *Decoding = op - 4, *TT_cmap = op - 3, *SubstNWP = op - 2, 
+    ref *Decoding = op - 4, *TT_cmap = op - 3, *SubstNWP = op - 2,
         *GDBytes = op - 1, *CIDMap = op;
     int code;
 

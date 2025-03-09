@@ -1,12 +1,12 @@
 /* Copyright (C) 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -36,13 +36,13 @@ typedef struct iostatic_state_s {
     ref data;
 } iostatic_state;
 
-private 
+private
 CLEAR_MARKS_PROC(iostatic_state_clear_marks)
 {   iostatic_state *const pptr = vptr;
 
     r_clear_attrs(&pptr->data, l_mark);
 }
-private 
+private
 ENUM_PTRS_WITH(iostatic_state_enum_ptrs, iostatic_state *pptr) return 0;
 case 0:
 ENUM_RETURN_REF(&pptr->data);
@@ -53,7 +53,7 @@ r_clear_attrs(&pptr->data, l_mark);
 RELOC_PTRS_END
 
 gs_private_st_complex_only(st_iostatic_state, iostatic_state,\
-    "iostatic_state", iostatic_state_clear_marks, iostatic_state_enum_ptrs, 
+    "iostatic_state", iostatic_state_clear_marks, iostatic_state_enum_ptrs,
     iostatic_state_reloc_ptrs, 0);
 
 const char iodev_dtype_static[] = "Special";
@@ -117,7 +117,7 @@ iostatic_open_file(gx_io_device * iodev, const char *fname, uint namelen,
     if (code == 0 || r_type(end_pos) != t_integer)
 	return_error(gs_error_unregistered); /* Wrong gs_resst.ps . */
     code = file_read_string(gs_init_string + beg_pos->value.intval,
-			    end_pos->value.intval - beg_pos->value.intval, 
+			    end_pos->value.intval - beg_pos->value.intval,
 			    &file, (gs_ref_memory_t *)mem);
     if (code < 0)
 	return code;
@@ -157,8 +157,3 @@ const op_def ziodevst_op_defs[] =
     {"0.setup_io_static", zsetup_io_static},
     op_def_end(0)
 };
-
-
- 
-
-

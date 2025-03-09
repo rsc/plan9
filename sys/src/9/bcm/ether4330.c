@@ -90,7 +90,7 @@ enum{
 	Pullups	= 0x1000f,
 	Wfrmcnt	= 0x10019,
 	Rfrmcnt	= 0x1001b,
-		
+
 	/* core control regs */
 	Ioctrl		= 0x408,
 	Resetctrl	= 0x800,
@@ -448,7 +448,7 @@ sdioset(int fn, int addr, int bits)
 {
 	sdiowr(fn, addr, sdiord(fn, addr) | bits);
 }
-	
+
 static void
 sdioinit(void)
 {
@@ -843,7 +843,7 @@ sbinit(Ctlr *ctl)
 		error("corescan didn't find essential cores\n");
 	if(ctl->armcore == ARMcr4)
 		sbreset(ctl->armctl, Cr4Cpuhalt, Cr4Cpuhalt);
-	else	
+	else
 		sbdisable(ctl->armctl, 0, 0);
 	sbreset(ctl->d11ctl, 8|4, 4);
 	ramscan(ctl);
@@ -990,7 +990,7 @@ findfirmware(char *file)
 		snprint(up->genbuf, sizeof up->genbuf, "can't find %s in /boot or /sys/lib/firmware", file);
 		error(up->genbuf);
 	}
-	return c;	
+	return c;
 }
 
 static int
@@ -1528,7 +1528,7 @@ bcmevent(Ctlr *ctl, uchar *p, int len)
 	status = nhgetl(p + 8);
 	reason = nhgetl(p + 12);
 	if(EVENTDEBUG)
-		print("ether4330: [%s] status %ld flags %#x reason %ld\n", 
+		print("ether4330: [%s] status %ld flags %#x reason %ld\n",
 			evstring(event), status, flags, reason);
 	switch(event){
 	case 19:	/* E_ROAM */
@@ -1614,7 +1614,7 @@ wlcmd(Ctlr *ctl, int write, int op, void *data, int dlen, void *res, int rlen)
 	p->seq = ctl->txseq;
 	p->doffset = sizeof(Sdpcm);
 	b->wp += sizeof(*p);
-	
+
 	q = (Cmd*)b->wp;
 	put4(q->cmd, op);
 	put4(q->len, tlen);
@@ -2110,7 +2110,7 @@ parsehex(char *buf, int buflen, char *a)
 }
 
 static int
-wepparsekey(WKey* key, char* a) 
+wepparsekey(WKey* key, char* a)
 {
 	int i, k, len, n;
 	char buf[WMaxKeyLen];
@@ -2134,7 +2134,7 @@ wepparsekey(WKey* key, char* a)
 				n = *a++ - 'A' + 10;
 			else
 				return -1;
-	
+
 			if(i & 1){
 				buf[k] |= n;
 				k++;

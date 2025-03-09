@@ -95,7 +95,7 @@ prof(fn, arg, entries, what)
 .EE
 .LP
 which causes the function \f2fn\fP(\f2arg\fP) to be profiled.  When \f2fn\fP
-returns 
+returns
 .B prof.\f2pid\fP
 is produced for the current process pid.
 .PP

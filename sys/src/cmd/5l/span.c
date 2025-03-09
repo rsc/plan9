@@ -116,7 +116,7 @@ span(void)
 	}
 
 	if(debug['t']) {
-		/* 
+		/*
 		 * add strings to text segment
 		 */
 		c = rnd(c, 8);
@@ -767,7 +767,7 @@ buildop(void)
 			oprange[AMOVFD] = oprange[r];
 			oprange[AMOVDF] = oprange[r];
 			break;
-			
+
 		case ACMPF:
 			oprange[ACMPD] = oprange[r];
 			break;
@@ -941,7 +941,7 @@ asmdyn()
 				t += 4;
 				t += sput(s->name);
 			}
-	
+
 	la = 0;
 	r = &rels;
 	n = r->n;

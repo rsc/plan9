@@ -82,7 +82,7 @@ walk(char *new, char *old, Dir *xd, void*)
 			change = 1;
 		}
 		if((!uid&&strcmp(od.uid,d.uid)!=0)
-		|| strcmp(od.gid,d.gid)!=0 
+		|| strcmp(od.gid,d.gid)!=0
 		|| od.mode!=d.mode){
 			xlog('m', new, &d);
 			change = 1;
@@ -211,4 +211,3 @@ main(int argc, char **argv)
 
 	exits(nil);
 }
-

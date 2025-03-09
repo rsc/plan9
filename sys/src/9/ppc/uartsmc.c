@@ -203,7 +203,7 @@ smcinit(Uart *uart)
 	/* step 14: clear events */
 	smc->smce = ce_Brke | ce_Br | ce_Bsy | ce_Txb | ce_Rxb;
 
-	/* 
+	/*
 	 * step 15: enable interrupts (done later)
 	 * smc->smcm = ce_Brke | ce_Br | ce_Bsy | ce_Txb | ce_Rxb;
 	 */
@@ -274,7 +274,7 @@ smcstatus(Uart* uart, void* buf, long n, long offset)
 		"dev(%d) type(%d) framing(%d) overruns(%d)\n",
 
 		uart->baud,
-		uart->hup_dcd, 
+		uart->hup_dcd,
 		uart->hup_dsr,
 		((sp->smcmr & Clen) >>11) - ((sp->smcmr&Pen) ? 1 : 0) - ((sp->smcmr&Sl) ? 2 : 1),
 		(sp->smcmr & Pen) ? ((sp->smcmr & Pm) ? 'e': 'o'): 'n',
@@ -283,7 +283,7 @@ smcstatus(Uart* uart, void* buf, long n, long offset)
 		uart->dev,
 		uart->type,
 		uart->ferr,
-		uart->oerr 
+		uart->oerr
 	);
 	n = readstr(offset, buf, n, p);
 	free(p);
@@ -420,10 +420,10 @@ smcbaud(Uart* uart, int baud)
 
 	if (uart->enabled){
 		sp = ((UartData*)uart->regs)->smc;
-	
+
 		if(uart->freq == 0 || baud <= 0)
 			return -1;
-	
+
 		i = sp - imm->smc;
 		imm->brgc[i] = (((m->brghz >> 4) / baud) << 1) | 0x00010000;
 	}
@@ -633,4 +633,4 @@ console(void)
 
 	consuart = uart;
 	uart->console = 1;
-} 
+}

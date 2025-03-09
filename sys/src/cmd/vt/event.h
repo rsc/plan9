@@ -10,4 +10,3 @@ typedef struct IOEvent {
 	short	size;
 	uchar	data[BSIZE];
 } IOEvent;
-

@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996, 1997, 1998, 1999, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -67,7 +67,7 @@ typedef struct {
     char decodingID[12];
 } ufst_common_font_data;
 
-typedef struct { 
+typedef struct {
     PCLETTO_CHR_HDR h;
     UW16   add_data;
     UW16   charDataSize;
@@ -135,7 +135,7 @@ private FAPI_retcode open_UFST(fapi_ufst_server *r)
     if ((code = CGIFenter(&r->IFS)) != 0)
 	return code;
     return 0;
-}		      
+}
 
 private FAPI_retcode ensure_open(FAPI_server *server)
 {   fapi_ufst_server *r = If_to_I(server);
@@ -164,7 +164,7 @@ private UW16 get_font_type(FILE *f)
     return 0; /* fixme : unknown type - actually an error. */
 }
 
-    
+
 private int choose_decoding_PS(fapi_ufst_server *r, ufst_common_font_data *d, const char *cmapId)
 { strncpy(d->decodingID, "Latin1", sizeof(d->decodingID));
   /*    fixme : must depend on charset used in the font.
@@ -197,7 +197,7 @@ private int choose_decoding_TT(fapi_ufst_server *r, ufst_common_font_data *d, co
     return 0;
 }
 
-private void scan_xlatmap(fapi_ufst_server *r, ufst_common_font_data *d, const char *xlatmap, const char *font_kind, 
+private void scan_xlatmap(fapi_ufst_server *r, ufst_common_font_data *d, const char *xlatmap, const char *font_kind,
                                     int (*choose_proc)(fapi_ufst_server *r, ufst_common_font_data *d, const char *cmapId))
 {   const char *p = xlatmap;
 
@@ -225,13 +225,13 @@ private void choose_decoding(fapi_ufst_server *r, ufst_common_font_data *d, cons
             case FC_PST1_TYPE: scan_xlatmap(r, d, xlatmap, "PostScript", choose_decoding_PS); break;
             case FC_TT_TYPE:   scan_xlatmap(r, d, xlatmap, "TrueType", choose_decoding_TT); break;
             case FC_FCO_TYPE:  scan_xlatmap(r, d, xlatmap, "PostScript", choose_decoding_PS/* fixme */); break;
-        } 
+        }
 }
 
 private inline void store_word(byte **p, ushort w)
 {   *((*p)++) = w / 256;
     *((*p)++) = w % 256;
-    
+
 }
 
 private LPUB8 get_TT_glyph(fapi_ufst_server *r, FAPI_font *ff, UW16 chId)
@@ -255,9 +255,9 @@ private LPUB8 get_TT_glyph(fapi_ufst_server *r, FAPI_font *ff, UW16 chId)
         r->callback_error = e_invalidfont;
         return 0;
     }
-    g = (pcleo_glyph_list_elem *)r->client_mem.alloc(&r->client_mem, 
-	    sizeof(pcleo_glyph_list_elem) + 
-	    (use_XL_format ? 12 : sizeof(PCLETTO_CHDR)) + glyph_length + 2, 
+    g = (pcleo_glyph_list_elem *)r->client_mem.alloc(&r->client_mem,
+	    sizeof(pcleo_glyph_list_elem) +
+	    (use_XL_format ? 12 : sizeof(PCLETTO_CHDR)) + glyph_length + 2,
 	    "PCLETTO char");
     if (g == 0) {
         r->callback_error = e_VMerror;
@@ -269,7 +269,7 @@ private LPUB8 get_TT_glyph(fapi_ufst_server *r, FAPI_font *ff, UW16 chId)
     h = (PCLETTO_CHDR *)(g + 1);
     h->h.format = 15;
     if (use_XL_format) {
-	h->h.continuation = 2; 
+	h->h.continuation = 2;
 	q = (LPUB8)h + 2;
 	store_word(&q, (ushort)(glyph_length + 10));
 	store_word(&q, (ushort)(r->sb_x >> r->If.frac_shift)); /* see can_replace_metrics */
@@ -690,7 +690,7 @@ private void prepare_typeface(fapi_ufst_server *r, ufst_common_font_data *d)
         r->fc.format |= FC_EXTERN_TYPE;
 }
 
-private FAPI_retcode get_scaled_font(FAPI_server *server, FAPI_font *ff, int subfont, 
+private FAPI_retcode get_scaled_font(FAPI_server *server, FAPI_font *ff, int subfont,
          const FAPI_font_scale *font_scale, const char *xlatmap, bool bVertical, FAPI_descendant_code dc)
 {   fapi_ufst_server *r = If_to_I(server);
     FONTCONTEXT *fc = &r->fc;
@@ -705,13 +705,13 @@ private FAPI_retcode get_scaled_font(FAPI_server *server, FAPI_font *ff, int sub
     FAPI_retcode code;
     bool use_XL_format = ff->is_mtx_skipped;
 
-    if (ff->is_cid && ff->is_type1 && ff->font_file_path == NULL && 
+    if (ff->is_cid && ff->is_type1 && ff->font_file_path == NULL &&
         (dc == FAPI_TOPLEVEL_BEGIN || dc == FAPI_TOPLEVEL_COMPLETE)) {
-	/* Don't need any processing for the top level font of a non-disk CIDFontType 0. 
+	/* Don't need any processing for the top level font of a non-disk CIDFontType 0.
 	   See comment in FAPI_prepare_font.
-	   Will do with its subfonts individually. 
+	   Will do with its subfonts individually.
 	 */
-	return 0; 
+	return 0;
     }
     ff->need_decrypt = 1;
     if (d == 0) {
@@ -726,13 +726,13 @@ private FAPI_retcode get_scaled_font(FAPI_server *server, FAPI_font *ff, int sub
     r->tran_xx = font_scale->matrix[0] / scale, r->tran_xy = font_scale->matrix[1] / scale;
     r->tran_yx = font_scale->matrix[2] / scale, r->tran_yy = font_scale->matrix[3] / scale;
     hx = hypot(r->tran_xx, r->tran_xy), hy = hypot(r->tran_yx, r->tran_yy);
-    sx = r->tran_xx * r->tran_yx + r->tran_xy * r->tran_yy; 
+    sx = r->tran_xx * r->tran_yx + r->tran_xy * r->tran_yy;
     sy = r->tran_xx * r->tran_yy - r->tran_xy * r->tran_yx;
     fc->xspot     = F_ONE;
     fc->yspot     = F_ONE;
     fc->fc_type   = FC_MAT2_TYPE;
     /* Round towards zero for a better view of mirrored characters : */
-    fc->s.m2.m[0] = (int)((double)font_scale->matrix[0] / hx + 0.5); 
+    fc->s.m2.m[0] = (int)((double)font_scale->matrix[0] / hx + 0.5);
     fc->s.m2.m[1] = (int)((double)font_scale->matrix[1] / hx + 0.5);
     fc->s.m2.m[2] = (int)((double)font_scale->matrix[2] / hy + 0.5);
     fc->s.m2.m[3] = (int)((double)font_scale->matrix[3] / hy + 0.5);
@@ -839,11 +839,11 @@ private FAPI_retcode can_retrieve_char_by_name(FAPI_server *server, FAPI_font *f
 
     *result = 0;
     switch (r->fc.format & FC_FONTTYPE_MASK) {
-        case FC_PST1_TYPE : 
-            *result = 1; 
+        case FC_PST1_TYPE :
+            *result = 1;
             break;
-        case FC_TT_TYPE : 
-#if 0 /* Doesn't work because Agfa can't retrive characters by name. 
+        case FC_TT_TYPE :
+#if 0 /* Doesn't work because Agfa can't retrive characters by name.
                      It wants a char code together with the name. */
                 if (ff->font_file_path != NULL) {
                     UB8 buf[2];
@@ -935,7 +935,7 @@ private int export_outline(fapi_ufst_server *r, PIFOUTLINE pol, FAPI_path *p)
 }
 
 private inline void set_metrics(fapi_ufst_server *r, FAPI_metrics *metrics, SL32 design_bbox[4], SW16 design_escapement, int escapement, SW16 du_emx, SW16 du_emy)
-{   metrics->escapement = design_escapement; 
+{   metrics->escapement = design_escapement;
     metrics->em_x = du_emx;
     metrics->em_y = du_emy;
     metrics->bbox_x0 = design_bbox[0];
@@ -1006,7 +1006,7 @@ private FAPI_retcode get_char_outline_metrics(FAPI_server *server, FAPI_font *ff
 
     release_char_data_inline(r);
     return get_char(r, ff, c, NULL, metrics, FC_CUBIC_TYPE);
-    /*	UFST cannot render enough metrics information without generating raster or outline. 
+    /*	UFST cannot render enough metrics information without generating raster or outline.
 	r->char_data keeps an outline after calling this function.
     */
 }
@@ -1026,7 +1026,7 @@ private FAPI_retcode get_char_raster_metrics(FAPI_server *server, FAPI_font *ff,
     if (code == ERR_bm_buff || code == ERR_bm_too_big) /* Too big character ? */
         return e_limitcheck;
     return code;
-    /*	UFST cannot render enough metrics information without generating raster or outline. 
+    /*	UFST cannot render enough metrics information without generating raster or outline.
 	r->char_data keeps a raster after calling this function.
     */
 }
@@ -1151,4 +1151,3 @@ private void gs_fapiufst_finit(i_plugin_instance *this, i_plugin_client_memory *
     }
     mem->free(mem, r, "fapi_ufst_server");
 }
-

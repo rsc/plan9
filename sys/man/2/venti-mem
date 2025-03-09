@@ -27,7 +27,7 @@ void*	vtmallocz(int size)
 .B
 void*	vtrealloc(void *ptr, int size)
 .PP
-.B 
+.B
 char*	vtstrdup(char *s)
 .PP
 .B

@@ -1,12 +1,12 @@
 %    Copyright (C) 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -510,7 +510,7 @@ dup							% Format 2
 % The following procedure does not use excessive op-stack space.
 { pop 65535 array card16 card16 exch			% Format 3
   { % Stack: array previndex
-    card8 card16 
+    card8 card16
     exch 1 index 4 -1 roll
     exch 1 exch 1 sub
     { 3 index exch 2 index put } for pop
@@ -716,7 +716,7 @@ dup							% Format 2
   {		% outer loop since offsets may be updated when processing
     CFFDEBUG { (offsets: ) print [ offsets { pop } forall ] == } if
     [ offsets { pop } forall ] { lt } .sort	% process in order of appearance
-    { 
+    {
       /f cff def
       CFFDEBUG { (queued offset: ) print dup =print flush (, current pos=) print pos = } if
       dup pos ne { dup pos sub nextstring pop } if	% negative advance will cause error

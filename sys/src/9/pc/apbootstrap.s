@@ -63,7 +63,7 @@ TEXT _apbootstrap(SB), $0			/* address APBOOTSTRAP+0x14 */
 
 /*
  * For Pentiums and higher, the code that enables paging must come from
- * pages that are identity mapped. 
+ * pages that are identity mapped.
  * To this end double map KZERO at virtual 0 and undo the mapping once virtual
  * nirvana has been obtained.
  */

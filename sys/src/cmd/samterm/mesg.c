@@ -461,7 +461,7 @@ void
 outcopy(int count, uchar *data)
 {
 	while(count--)
-		outdata[HSIZE+outcount++] = *data++;	
+		outdata[HSIZE+outcount++] = *data++;
 }
 
 void

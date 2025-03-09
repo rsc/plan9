@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -124,7 +124,7 @@ typedef struct gs_file_path_s *gs_file_path_ptr;
 FILE *lib_fopen(const gs_file_path_ptr pfpath, const gs_memory_t *mem, const char *);
 
 	/* for imain.c */
-int lib_file_open(const gs_file_path_ptr pfpath, i_ctx_t *, const char *, uint, byte *, uint, 
+int lib_file_open(const gs_file_path_ptr pfpath, i_ctx_t *, const char *, uint, byte *, uint,
 		  uint *, ref *, gs_memory_t *);
 
 	/* for imain.c */

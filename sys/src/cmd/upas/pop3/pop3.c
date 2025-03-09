@@ -810,4 +810,3 @@ apopcmd(char *arg)
 		return -1;
 	return dologin(resp);
 }
-

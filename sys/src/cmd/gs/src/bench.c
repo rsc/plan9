@@ -1,14 +1,14 @@
 /* pop (%!) .skipeof
 
    Copyright (C) 1989, 1995, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -45,16 +45,16 @@ gp_open_scratch_file(const char *prefix, char *fname, const char *mode)
 {
     return NULL;
 }
-void 
+void
 gp_set_printer_binary(int prnfno, int binary)
 {
 }
-void 
+void
 gs_to_exit(int n)
 {
 }
 #define eprintf_program_ident(f, pn, rn) (void)0
-void 
+void
 lprintf_file_and_line(FILE * f, const char *file, int line)
 {
     fprintf(f, "%s(%d): ", file, line);
@@ -361,21 +361,21 @@ main(int argc, const char *argv[])
    Now in gs_init.ps
    TextAlphaBits defined GraphicsAlphaBits defined
    Aladdin Ghostscript 3.50 (1995-9-24)
-   (c) 1995 Aladdin Enterprises, Menlo Park, CA.  All rights reserved. This 
-   software comes with NO WARRANTY: see the file PUBLIC for details. Leaving 
+   (c) 1995 Aladdin Enterprises, Menlo Park, CA.  All rights reserved. This
+   software comes with NO WARRANTY: see the file PUBLIC for details. Leaving
    gs_init.ps
    GS>(ben1.c) run
    Time for 5000 x 20 integer adds: 171 ms
    Time for 5000 x 20 integer multiplies: 504 ms
    Time for 5000 x 20 integer divides: 334 ms
-   Time for 5000 x 20 floating adds: 148 ms 
+   Time for 5000 x 20 floating adds: 148 ms
    Time for 5000 x 20 floating multiplies: 165 ms
-   Time for 5000 x 20 floating divides: 194 ms 
+   Time for 5000 x 20 floating divides: 194 ms
    Time for 5000 x 20 float/int conversions: 121 ms
    Time for 1000 x 10000(byte) fast memory accesses: 112 ms
    Time for 10 x 500 x 2000(byte) slower memory accesses: 236 ms
-   Loading NimbusRomanNo9L-Regular font from 
-   [...]/n021003l.gsf... 1739080 414724 2564864 1251073 0 
+   Loading NimbusRomanNo9L-Regular font from
+   [...]/n021003l.gsf... 1739080 414724 2564864 1251073 0
    done. Time for 100 x 10 (A) show (cache): 144 ms
    Time for 10 x 10 (A) show (no cache): 538 ms
 

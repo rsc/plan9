@@ -52,12 +52,12 @@ int	vtping(VtConn *z)
 .B
 extern int ventidoublechecksha1;  /* default 1 */
 .SH DESCRIPTION
-These routines execute the client side of the 
+These routines execute the client side of the
 .IR venti (6)
 protocol.
 .PP
 .I Vtrpc
-executes a single Venti RPC transaction, sending the request 
+executes a single Venti RPC transaction, sending the request
 packet
 .IR p
 and then waiting for and returning the response packet.
@@ -89,7 +89,7 @@ and
 .IR vthello ,
 in that order, returning success only
 if both succeed.
-This sequence (calling 
+This sequence (calling
 .I vtversion
 and then
 .IR vthello )
@@ -107,7 +107,7 @@ in memory at
 and returns the number of bytes read.
 If the server's block has size larger than
 .IR n ,
-.I vtread 
+.I vtread
 does not modify
 .I buf
 and
@@ -116,11 +116,11 @@ returns an error.
 .I Vtwrite
 writes the
 .I n
-bytes in 
+bytes in
 .I buf
 as a block of the given
 .IR type ,
-setting 
+setting
 .IR score .
 .PP
 .I Vtreadpacket
@@ -146,7 +146,7 @@ By default,
 .I vtread
 and
 .I vtreadpacket
-check that the SHA1 hash of the returned data 
+check that the SHA1 hash of the returned data
 matches the requested
 .IR score ,
 and
@@ -163,7 +163,7 @@ mainly for benchmarking purposes.
 Doing so in production code is not recommended.
 .PP
 These functions can be called from multiple threads
-or procs simultaneously to issue requests 
+or procs simultaneously to issue requests
 in parallel.
 Programs that issue requests from multiple threads
 in the same proc should start separate procs running

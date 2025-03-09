@@ -61,7 +61,7 @@ enum
 
 	DNotacolor	= 0xFFFFFF00,
 	DNofill		= DNotacolor,
-	
+
 };
 
 enum
@@ -115,7 +115,7 @@ typedef enum
 } Drawop;
 
 /*
- * image channel descriptors 
+ * image channel descriptors
  */
 enum {
 	CRed = 0,
@@ -310,7 +310,7 @@ struct Font
 	Display		*display;
 	short		height;	/* max height of image, interline spacing */
 	short		ascent;	/* top of image to baseline */
-	short		width;	/* widest so far; used in caching only */	
+	short		width;	/* widest so far; used in caching only */
 	short		nsub;	/* number of subfonts */
 	ulong		age;	/* increasing counter; used for LRU */
 	int		maxdepth;	/* maximum depth of all loaded subfonts */
@@ -326,7 +326,7 @@ struct Font
 #define	Dy(r)	((r).max.y-(r).min.y)
 
 #ifdef	__cplusplus
-extern "C" { 
+extern "C" {
 #endif
 
 /*
@@ -494,7 +494,7 @@ extern void	unlockdisplay(Display*);
 extern int		drawlsetrefresh(ulong, int, void*, void*);
 
 /*
- * Predefined 
+ * Predefined
  */
 extern	uchar	defontdata[];
 extern	int		sizeofdefont;

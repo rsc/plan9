@@ -100,7 +100,7 @@ The
 .B -r
 option specifies an exact rectangle.
 .PP
-The 
+The
 .B -t
 option specifies that the image's coordinate system should
 be translated by

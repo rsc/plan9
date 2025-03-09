@@ -69,6 +69,6 @@ _convM2D(uchar *buf, uint nbuf, Dir *d, char *strs)
 		d->gid = nullstring;
 		d->muid = nullstring;
 	}
-	
+
 	return p - buf;
 }

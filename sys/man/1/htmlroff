@@ -22,13 +22,13 @@ htmlroff \- HTML formatting and typesetting
 .I Htmlroff
 accepts
 .IR troff (1)
-input in the named 
+input in the named
 .I files
 and formats it as HTML for viewing in a web browser.
 .PP
 If no
 .I file
-argument is given, 
+argument is given,
 .I htmlroff
 reads the standard input.
 An argument consisting of a single minus
@@ -54,7 +54,7 @@ Set register
 .TP
 .B -u
 Generate UTF output.
-By default, 
+By default,
 .I htmlroff
 converts Unicode runes into the corresponding
 HTML entity sequences
@@ -70,7 +70,7 @@ for the conversion.
 Generate debugging output and warnings about suspicious input.
 .PD
 .PP
-Most 
+Most
 .I troff
 input files, especially those using the
 .IR ms (6)
@@ -78,7 +78,7 @@ macros, can be used unaltered.
 In general, the macro file
 .B tmac.html
 should be processed after processing other standard macro files,
-as in 
+as in
 .B htmlroff
 .B -ms
 .BR -mhtml .

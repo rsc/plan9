@@ -1,12 +1,12 @@
 /* Copyright (C) 1999, 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -146,7 +146,7 @@ private cie_cache_one_step_t
 cie_cached_abc_is_one_step(const gs_cie_abc *pcie, const gs_matrix3 **ppmat)
 {
     /* The order of steps is, DecodeABC, MatrixABC, DecodeLMN, MatrixLMN. */
-    
+
     if (CIE_CACHE3_IS_IDENTITY(pcie->common.caches.DecodeLMN)) {
 	if (pcie->MatrixABC.is_identity) {
 	    *ppmat = &pcie->common.MatrixLMN;
@@ -178,7 +178,7 @@ cie_scalar_cache_is_lab_lmn(const gs_cie_abc *pcie, int i)
 
 #define CC_V(j,i) (pcie->common.caches.DecodeLMN[j].floats.values[i])
 #define CC_WP(uvw) (pcie->common.points.WhitePoint.uvw)
-  
+
     return (fabs(CC_V(0, i) - g * CC_WP(u)) < 0.001 &&
 	    fabs(CC_V(1, i) - g * CC_WP(v)) < 0.001 &&
 	    fabs(CC_V(2, i) - g * CC_WP(w)) < 0.001
@@ -392,7 +392,7 @@ pdf_indexed_color_space(gx_device_pdf *pdev, cos_value_t *pvalue,
 	    case gs_color_space_index_Indexed:
 	    case gs_color_space_index_DeviceN:
 		return_error(gs_error_rangecheck);
-	    default: DO_NOTHING; 
+	    default: DO_NOTHING;
 	}
 
     }
@@ -477,7 +477,7 @@ pdf_indexed_color_space(gx_device_pdf *pdev, cos_value_t *pvalue,
     if ((code = pdf_color_space(pdev, pvalue, NULL, base_space,
 				&pdf_color_space_names, false)) < 0 ||
 	(code = cos_array_add(pca,
-			      cos_c_string_value(&v, 
+			      cos_c_string_value(&v,
 						 pdf_color_space_names.Indexed
 						 /*pcsn->Indexed*/))) < 0 ||
 	(code = cos_array_add(pca, pvalue)) < 0 ||
@@ -490,16 +490,16 @@ pdf_indexed_color_space(gx_device_pdf *pdev, cos_value_t *pvalue,
     return 0;
 }
 
-/* 
- * Find a color space resource by seriialized data. 
+/*
+ * Find a color space resource by seriialized data.
  */
 private pdf_resource_t *
-pdf_find_cspace_resource(gx_device_pdf *pdev, const byte *serialized, uint serialized_size) 
+pdf_find_cspace_resource(gx_device_pdf *pdev, const byte *serialized, uint serialized_size)
 {
     pdf_resource_t **pchain = pdev->resources[resourceColorSpace].chains;
     pdf_resource_t *pres;
     int i;
-    
+
     for (i = 0; i < NUM_RESOURCE_CHAINS; i++) {
 	for (pres = pchain[i]; pres != 0; pres = pres->next) {
 	    const pdf_color_space_t *const ppcs =
@@ -607,7 +607,7 @@ pdf_color_space_named(gx_device_pdf *pdev, cos_value_t *pvalue,
 	code = cs_serialize(pcs, &s);
 	if (code < 0)
 	    return_error(gs_error_unregistered); /* Must not happen. */
-	if (stell(&s) != serialized_size) 
+	if (stell(&s) != serialized_size)
 	    return_error(gs_error_unregistered); /* Must not happen. */
 	sclose(&s);
 	pres = pdf_find_cspace_resource(pdev, serialized, serialized_size);
@@ -642,7 +642,7 @@ pdf_color_space_named(gx_device_pdf *pdev, cos_value_t *pvalue,
 	/* Check that we can represent this as a CalGray space. */
 	const gs_cie_a *pcie = pcs->params.a;
 	bool unitary = cie_ranges_are_0_1(&pcie->RangeA, 1);
-	bool identityA = (pcie->MatrixA.u == 1 && pcie->MatrixA.v == 1 && 
+	bool identityA = (pcie->MatrixA.u == 1 && pcie->MatrixA.v == 1 &&
 	                  pcie->MatrixA.w == 1);
 	gs_vector3 expts;
 
@@ -780,7 +780,7 @@ pdf_color_space_named(gx_device_pdf *pdev, cos_value_t *pvalue,
 	if (pfn == 0)
 	    return_error(gs_error_rangecheck);
 	{
-	    cos_array_t *psna = 
+	    cos_array_t *psna =
 		cos_array_alloc(pdev, "pdf_color_space(DeviceN)");
 	    int i;
 	    byte *name_string;
@@ -791,9 +791,9 @@ pdf_color_space_named(gx_device_pdf *pdev, cos_value_t *pvalue,
 	    for (i = 0; i < pcs->params.device_n.num_components; ++i) {
 	 	if ((code = pcs->params.device_n.get_colorname_string(
 				  pdev->memory,
-				  pcs->params.device_n.names[i], &name_string, 
+				  pcs->params.device_n.names[i], &name_string,
 				  &name_string_length)) < 0 ||
-		    (code = pdf_string_to_cos_name(pdev, name_string, 
+		    (code = pdf_string_to_cos_name(pdev, name_string,
 				  name_string_length, &v)) < 0 ||
 		    (code = cos_array_add_no_copy(psna, &v)) < 0)
 		    return code;
@@ -816,10 +816,10 @@ pdf_color_space_named(gx_device_pdf *pdev, cos_value_t *pvalue,
 	    byte *name_string;
 	    uint name_string_length;
 	    if ((code = pcs->params.separation.get_colorname_string(
-				  pdev->memory, 
-				  pcs->params.separation.sep_name, &name_string, 
+				  pdev->memory,
+				  pcs->params.separation.sep_name, &name_string,
 				  &name_string_length)) < 0 ||
-		(code = pdf_string_to_cos_name(pdev, name_string, 
+		(code = pdf_string_to_cos_name(pdev, name_string,
 				      name_string_length, &v)) < 0 ||
 		(code = pdf_separation_color_space(pdev, pca, "/Separation", &v,
 						   (const gs_color_space *)
@@ -861,7 +861,7 @@ pdf_color_space_named(gx_device_pdf *pdev, cos_value_t *pvalue,
 	pdf_reserve_object_id(pdev, pres, 0);
 	if (res_name != NULL) {
 	    int l = min(name_length, sizeof(pres->rname) - 1);
-	    
+
 	    memcpy(pres->rname, res_name, l);
 	    pres->rname[l] = 0;
 	}
@@ -967,7 +967,7 @@ pdf_cs_Pattern_uncolored(gx_device_pdf *pdev, cos_value_t *pvalue)
 			     pcs_names[ncomp]);
 }
 int
-pdf_cs_Pattern_uncolored_hl(gx_device_pdf *pdev, 
+pdf_cs_Pattern_uncolored_hl(gx_device_pdf *pdev,
 		const gs_color_space *pcs, cos_value_t *pvalue)
 {
     /* Only for high level colors. */

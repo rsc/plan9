@@ -44,7 +44,7 @@ is a network address of the form
 or simply
 .IR netaddr .
 .I Network
-is any directory listed in 
+is any directory listed in
 .B /net
 or the special token,
 .BR net .
@@ -149,7 +149,7 @@ Like
 returns an open
 .B ctl
 file.
-The 
+The
 .I netaddr
 used in announce may be a local address or an asterisk,
 to indicate all local addresses, e.g.

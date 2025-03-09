@@ -45,7 +45,7 @@ fn prompt {
 		suf=' '
 	}
 	if not if(! ~ $#optstr 0) {
-		if(~ $optstr '') 
+		if(~ $optstr '')
 			suf=' '
 		if not {
 			pr=$pr^' ('^$"optstr^')'
@@ -87,7 +87,7 @@ fn prompt {
 			rd=`{echo $rd}
 			if(~ $#rd 0 || ~ $rd '')
 				rd=$def
-	
+
 			switch($#opts){
 			case 0
 				if(! ~ $rd '')
@@ -124,7 +124,7 @@ fn mustdo {
 # the variables.
 #
 # we just append to the vars file, so that later exports
-# override earlier ones; when we call coherence, 
+# override earlier ones; when we call coherence,
 # the duplicates are thrown out.
 
 fn export {
@@ -156,7 +156,5 @@ fn coherence {
 # ip device stats
 
 fn isipdevup {
-	grep -s $1 /net/ipifc/*/status >[2]/dev/null 
+	grep -s $1 /net/ipifc/*/status >[2]/dev/null
 }
-
-

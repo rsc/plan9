@@ -4,7 +4,7 @@
  *
  * Multiply two 64 numbers and return the middle 64 bits of the 128 bit result.
  *
- * The assumption is that one of the numbers is a 
+ * The assumption is that one of the numbers is a
  * fixed point number with the integer portion in the
  * high word and the fraction in the low word.
  *

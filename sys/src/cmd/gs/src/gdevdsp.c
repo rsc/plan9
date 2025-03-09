@@ -2,11 +2,11 @@
 
    This software is provided AS-IS with no warranty, either express or
    implied.
-   
+
    This software is distributed under license and may not be copied,
    modified or distributed except as expressly authorized under the terms
    of the license contained in the file LICENSE in this distribution.
-   
+
    For more information about licensing, please refer to
    http://www.ghostscript.com/licensing/. For information on
    commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -23,13 +23,13 @@
  * by Russell Lang, Ghostgum Software Pty Ltd
  *
  * This device is intended to be used for displays when
- * Ghostscript is loaded as a DLL/shared library/static library.  
- * It is intended to work for Windows, OS/2, Linux, Mac OS 9 and 
+ * Ghostscript is loaded as a DLL/shared library/static library.
+ * It is intended to work for Windows, OS/2, Linux, Mac OS 9 and
  * hopefully others.
  *
- * Before this device is opened, the address of a structure must 
+ * Before this device is opened, the address of a structure must
  * be provided using gsapi_set_display_callback(minst, callback);
- * This structure contains callback functions to notify the 
+ * This structure contains callback functions to notify the
  * caller when the device is opened, closed, resized, showpage etc.
  * The structure is defined in gdevdsp.h.
  *
@@ -163,7 +163,7 @@ private const gx_device_procs display_procs =
 /* GC descriptor */
 public_st_device_display();
 
-private 
+private
 ENUM_PTRS_WITH(display_enum_ptrs, gx_device_display *ddev)
     if (index == 0) {
 	if (ddev->mdev) {
@@ -177,7 +177,7 @@ ENUM_PTRS_WITH(display_enum_ptrs, gx_device_display *ddev)
 	return 0;
 ENUM_PTRS_END
 
-private 
+private
 RELOC_PTRS_WITH(display_reloc_ptrs, gx_device_display *ddev)
     if (ddev->mdev) {
 	ddev->mdev = (gx_device_memory *)
@@ -276,7 +276,7 @@ display_open(gx_device * dev)
 
     /* Tell caller the device parameters */
     ccode = (*(ddev->callback->display_size)) (ddev->pHandle, dev,
-	dev->width, dev->height, display_raster(ddev), ddev->nFormat, 
+	dev->width, dev->height, display_raster(ddev), ddev->nFormat,
 	ddev->mdev->base);
     if (ccode < 0) {
 	display_free_bitmap(ddev);
@@ -395,11 +395,11 @@ display_encode_color_device8(gx_device * dev, const gx_color_value cv[])
     }
     if (k > 0) {
 	/* The RGB->RGBK color mapping shouldn't generate this. */
-	r = ((r+k) > gx_max_color_value) ? gx_max_color_value : 
+	r = ((r+k) > gx_max_color_value) ? gx_max_color_value :
 	    (gx_color_value)(r+k);
-	g = ((g+k) > gx_max_color_value) ? gx_max_color_value : 
+	g = ((g+k) > gx_max_color_value) ? gx_max_color_value :
 	    (gx_color_value)(g+k);
-	b = ((b+k) > gx_max_color_value) ? gx_max_color_value : 
+	b = ((b+k) > gx_max_color_value) ? gx_max_color_value :
 	    (gx_color_value)(b+k);
     }
     r = ((r >> (gx_color_value_bits - 3)) + 1) >> 1;
@@ -492,21 +492,21 @@ display_map_color_rgb_device16(gx_device * dev, gx_color_index color,
 	    /* byte0=0RRRRRGG byte1=GGGBBBBB */
 	    value = (ushort) (color >> 10);
 	    prgb[0] = (gx_color_value)
-		(((value << 11) + (value << 6) + (value << 1) + 
+		(((value << 11) + (value << 6) + (value << 1) +
 		(value >> 4)) >> (16 - gx_color_value_bits));
 	    value = (ushort) ((color >> 5) & 0x1f);
 	    prgb[1] = (gx_color_value)
-		(((value << 11) + (value << 6) + (value << 1) + 
+		(((value << 11) + (value << 6) + (value << 1) +
 		(value >> 4)) >> (16 - gx_color_value_bits));
 	    value = (ushort) (color & 0x1f);
 	    prgb[2] = (gx_color_value)
-		(((value << 11) + (value << 6) + (value << 1) + 
+		(((value << 11) + (value << 6) + (value << 1) +
 		(value >> 4)) >> (16 - gx_color_value_bits));
 	}
 	else {
 	    /* byte0=RRRRRGGG byte1=GGGBBBBB */
 	    value = (ushort) (color >> 11);
-	    prgb[0] = ((value << 11) + (value << 6) + (value << 1) + 
+	    prgb[0] = ((value << 11) + (value << 6) + (value << 1) +
 		(value >> 4)) >> (16 - gx_color_value_bits);
 	    value = (ushort) ((color >> 5) & 0x3f);
 	    prgb[1] = (gx_color_value)
@@ -514,7 +514,7 @@ display_map_color_rgb_device16(gx_device * dev, gx_color_index color,
 		      >> (16 - gx_color_value_bits);
 	    value = (ushort) (color & 0x1f);
 	    prgb[2] = (gx_color_value)
-		((value << 11) + (value << 6) + (value << 1) + 
+		((value << 11) + (value << 6) + (value << 1) +
 		(value >> 4)) >> (16 - gx_color_value_bits);
 	}
     }
@@ -523,23 +523,23 @@ display_map_color_rgb_device16(gx_device * dev, gx_color_index color,
 	    /* byte0=GGGBBBBB byte1=0RRRRRGG */
 	    value = (ushort) ((color >> 2) & 0x1f);
 	    prgb[0] = (gx_color_value)
-		((value << 11) + (value << 6) + (value << 1) + 
+		((value << 11) + (value << 6) + (value << 1) +
 		(value >> 4)) >> (16 - gx_color_value_bits);
 	    value = (ushort)
 		(((color << 3) & 0x18) +  ((color >> 13) & 0x7));
 	    prgb[1] = (gx_color_value)
-		((value << 11) + (value << 6) + (value << 1) + 
+		((value << 11) + (value << 6) + (value << 1) +
 		(value >> 4)) >> (16 - gx_color_value_bits);
 	    value = (ushort) ((color >> 8) & 0x1f);
 	    prgb[2] = (gx_color_value)
-		((value << 11) + (value << 6) + (value << 1) + 
+		((value << 11) + (value << 6) + (value << 1) +
 		(value >> 4)) >> (16 - gx_color_value_bits);
 	}
 	else {
 	    /* byte0=GGGBBBBB byte1=RRRRRGGG */
 	    value = (ushort) ((color >> 3) & 0x1f);
 	    prgb[0] = (gx_color_value)
-		(((value << 11) + (value << 6) + (value << 1) + 
+		(((value << 11) + (value << 6) + (value << 1) +
 		(value >> 4)) >> (16 - gx_color_value_bits));
 	    value = (ushort)
 		(((color << 3) & 0x38) +  ((color >> 13) & 0x7));
@@ -548,7 +548,7 @@ display_map_color_rgb_device16(gx_device * dev, gx_color_index color,
 		      >> (16 - gx_color_value_bits));
 	    value = (ushort) ((color >> 8) & 0x1f);
 	    prgb[2] = (gx_color_value)
-		(((value << 11) + (value << 6) + (value << 1) + 
+		(((value << 11) + (value << 6) + (value << 1) +
 		(value >> 4)) >> (16 - gx_color_value_bits));
 	}
     }
@@ -604,7 +604,7 @@ display_map_color_rgb_rgb(gx_device * dev, gx_color_index color,
     gx_device_display *ddev = (gx_device_display *) dev;
     uint bits_per_color = 8;
     uint color_mask;
-    
+
     color_mask = (1 << bits_per_color) - 1;
 
     switch (ddev->nFormat & DISPLAY_ALPHA_MASK) {
@@ -613,13 +613,13 @@ display_map_color_rgb_rgb(gx_device * dev, gx_color_index color,
 		return gx_default_rgb_map_color_rgb(dev, color, prgb); /* RGB */
 	    else {
 		/* BGR */
-		prgb[0] = (gx_color_value) (((color) & color_mask) * 
+		prgb[0] = (gx_color_value) (((color) & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 		prgb[1] = (gx_color_value)
-			(((color >> bits_per_color) & color_mask) * 
+			(((color >> bits_per_color) & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 		prgb[2] = (gx_color_value)
-			(((color >> 2*bits_per_color) & color_mask) * 
+			(((color >> 2*bits_per_color) & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 	    }
 	    break;
@@ -628,24 +628,24 @@ display_map_color_rgb_rgb(gx_device * dev, gx_color_index color,
 	    if ((ddev->nFormat & DISPLAY_ENDIAN_MASK) == DISPLAY_BIGENDIAN) {
 		/* xRGB */
 		prgb[0] = (gx_color_value)
-			(((color >> 2*bits_per_color) & color_mask) * 
+			(((color >> 2*bits_per_color) & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
-		prgb[1] = (gx_color_value) 
-			(((color >> bits_per_color) & color_mask) * 
+		prgb[1] = (gx_color_value)
+			(((color >> bits_per_color) & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
-		prgb[2] = (gx_color_value) (((color) & color_mask) * 
+		prgb[2] = (gx_color_value) (((color) & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 	    }
 	    else {
 		/* xBGR */
 		prgb[0] = (gx_color_value)
-			(((color) & color_mask) * 
+			(((color) & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 		prgb[1] = (gx_color_value)
-			(((color >> bits_per_color)   & color_mask) * 
+			(((color >> bits_per_color)   & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 		prgb[2] = (gx_color_value)
-			(((color >> 2*bits_per_color) & color_mask) * 
+			(((color >> 2*bits_per_color) & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 	    }
 	    break;
@@ -654,25 +654,25 @@ display_map_color_rgb_rgb(gx_device * dev, gx_color_index color,
 	    if ((ddev->nFormat & DISPLAY_ENDIAN_MASK) == DISPLAY_BIGENDIAN) {
 		/* RGBx */
 		prgb[0] = (gx_color_value)
-			(((color >> 3*bits_per_color) & color_mask) * 
+			(((color >> 3*bits_per_color) & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 		prgb[1] = (gx_color_value)
-			(((color >> 2*bits_per_color) & color_mask) * 
+			(((color >> 2*bits_per_color) & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 		prgb[2] = (gx_color_value)
-			(((color >> bits_per_color)   & color_mask) * 
+			(((color >> bits_per_color)   & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 	    }
 	    else {
 		/* BGRx */
 		prgb[0] = (gx_color_value)
-			(((color >> bits_per_color)   & color_mask) * 
+			(((color >> bits_per_color)   & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 		prgb[1] = (gx_color_value)
-			(((color >> 2*bits_per_color) & color_mask) * 
+			(((color >> 2*bits_per_color) & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 		prgb[2] = (gx_color_value)
-			(((color >> 3*bits_per_color) & color_mask) * 
+			(((color >> 3*bits_per_color) & color_mask) *
 			(ulong) gx_max_color_value / color_mask);
 	    }
     }
@@ -710,7 +710,7 @@ display_fill_rectangle(gx_device * dev, int x, int y, int w, int h,
     gx_device_display *ddev = (gx_device_display *) dev;
     if (ddev->callback == NULL)
 	return 0;
-    dev_proc(ddev->mdev, fill_rectangle)((gx_device *)ddev->mdev, 
+    dev_proc(ddev->mdev, fill_rectangle)((gx_device *)ddev->mdev,
 	x, y, w, h, color);
     if (ddev->callback->display_update)
 	(*(ddev->callback->display_update))(ddev->pHandle, dev, x, y, w, h);
@@ -727,7 +727,7 @@ display_copy_mono(gx_device * dev,
     gx_device_display *ddev = (gx_device_display *) dev;
     if (ddev->callback == NULL)
 	return 0;
-    dev_proc(ddev->mdev, copy_mono)((gx_device *)ddev->mdev, 
+    dev_proc(ddev->mdev, copy_mono)((gx_device *)ddev->mdev,
 	base, sourcex, raster, id, x, y, w, h, zero, one);
     if (ddev->callback->display_update)
 	(*(ddev->callback->display_update))(ddev->pHandle, dev, x, y, w, h);
@@ -743,7 +743,7 @@ display_copy_color(gx_device * dev,
     gx_device_display *ddev = (gx_device_display *) dev;
     if (ddev->callback == NULL)
 	return 0;
-    dev_proc(ddev->mdev, copy_color)((gx_device *)ddev->mdev, 
+    dev_proc(ddev->mdev, copy_color)((gx_device *)ddev->mdev,
 	base, sourcex, raster, id, x, y, w, h);
     if (ddev->callback->display_update)
 	(*(ddev->callback->display_update))(ddev->pHandle, dev, x, y, w, h);
@@ -756,7 +756,7 @@ display_get_bits(gx_device * dev, int y, byte * str, byte ** actual_data)
     gx_device_display *ddev = (gx_device_display *) dev;
     if (ddev->callback == NULL)
 	return 0;
-    return dev_proc(ddev->mdev, get_bits)((gx_device *)ddev->mdev, 
+    return dev_proc(ddev->mdev, get_bits)((gx_device *)ddev->mdev,
 	y, str, actual_data);
 }
 
@@ -771,7 +771,7 @@ display_get_params(gx_device * dev, gs_param_list * plist)
     int i = 0;
     size_t dptr;
     char buf[64];
-   
+
     idx = ((int)sizeof(size_t)) * 8 - 4;
     buf[i++] = '1';
     buf[i++] = '6';
@@ -786,20 +786,20 @@ display_get_params(gx_device * dev, gs_param_list * plist)
 	idx -= 4;
     }
     buf[i] = '\0';
-     
+
     param_string_from_transient_string(dhandle, buf);
 
     code = gx_default_get_params(dev, plist);
     (void)(code < 0 ||
-	(code = param_write_string(plist, 
+	(code = param_write_string(plist,
 	    "DisplayHandle", &dhandle)) < 0 ||
-	(code = param_write_int(plist, 
+	(code = param_write_int(plist,
 	    "DisplayFormat", &ddev->nFormat)) < 0 ||
-	(code = param_write_float(plist, 
+	(code = param_write_float(plist,
 	    "DisplayResolution", &ddev->HWResolution[1])) < 0);
     if (code >= 0 &&
 	(ddev->nFormat & DISPLAY_COLORS_MASK) == DISPLAY_COLORS_SEPARATION)
-	code = devn_get_params(dev, plist, &ddev->devn_params, 
+	code = devn_get_params(dev, plist, &ddev->devn_params,
 		&ddev->equiv_cmyk_colors);
     return code;
 }
@@ -867,7 +867,7 @@ display_put_params(gx_device * dev, gs_param_list * plist)
 	default:
 	    if ((code == gs_error_typecheck) && (sizeof(size_t) <= 4)) {
 		/* 32-bit systems can use the older long type */
-		switch (code = param_read_long(plist, "DisplayHandle", 
+		switch (code = param_read_long(plist, "DisplayHandle",
 		    (long *)(&handle))) {
 		    case 0:
 			if (dev->is_open) {
@@ -897,8 +897,8 @@ display_put_params(gx_device * dev, gs_param_list * plist)
 	    break;
     }
     if (found_string_handle) {
-	/* 
-	 * Convert from a string to a pointer.  
+	/*
+	 * Convert from a string to a pointer.
 	 * It is assumed that size_t has the same size as a pointer.
 	 * Allow formats (1234), (10#1234) or (16#04d2).
 	 */
@@ -952,9 +952,9 @@ display_put_params(gx_device * dev, gs_param_list * plist)
 	}
     }
 
-    /* 
+    /*
      * Set the initial display resolution.
-     * If HWResolution is explicitly set, e.g. using -rDPI on the 
+     * If HWResolution is explicitly set, e.g. using -rDPI on the
      * command line, then use that.  Otherwise, use DisplayResolution
      * which is typically set by the client to the display
      * logical resolution.  Once either of these have been
@@ -981,7 +981,7 @@ display_put_params(gx_device * dev, gs_param_list * plist)
 	    (ddev->nFormat & DISPLAY_COLORS_MASK) == DISPLAY_COLORS_SEPARATION) {
 	/* Use utility routine to handle devn parameters */
 	ecode = devn_put_params(dev, plist, pdevn_params, pequiv_colors);
-        /* 
+        /*
 	 * Setting MaxSeparations changes color_info.depth in
 	 * devn_put_params, but we always use 64bpp,
 	 * so reset it to the the correct value.
@@ -1034,13 +1034,13 @@ display_put_params(gx_device * dev, gs_param_list * plist)
 	code = display_alloc_bitmap(ddev, dev);
 	if (code < 0) {
 	    /* No bitmap, so tell the caller it is zero size */
-	    (*ddev->callback->display_size)(ddev->pHandle, dev, 
+	    (*ddev->callback->display_size)(ddev->pHandle, dev,
 	        0, 0, 0, ddev->nFormat, NULL);
 	    return_error(code);
         }
-    
+
 	/* tell caller about the new size */
-	if ((*ddev->callback->display_size)(ddev->pHandle, dev, 
+	if ((*ddev->callback->display_size)(ddev->pHandle, dev,
 	    dev->width, dev->height, display_raster(ddev),
 	    ddev->nFormat, ddev->mdev->base) < 0)
 	    return_error(gs_error_rangecheck);
@@ -1080,7 +1080,7 @@ display_separation_gray_cs_to_cmyk_cm(gx_device * dev, frac gray, frac out[])
 }
 
 private void
-display_separation_rgb_cs_to_cmyk_cm(gx_device * dev, 
+display_separation_rgb_cs_to_cmyk_cm(gx_device * dev,
     const gs_imager_state *pis, frac r, frac g, frac b, frac out[])
 {
     int * map =
@@ -1090,7 +1090,7 @@ display_separation_rgb_cs_to_cmyk_cm(gx_device * dev,
 }
 
 private void
-display_separation_cmyk_cs_to_cmyk_cm(gx_device * dev, 
+display_separation_cmyk_cs_to_cmyk_cm(gx_device * dev,
     frac c, frac m, frac y, frac k, frac out[])
 {
     int * map =
@@ -1100,8 +1100,8 @@ display_separation_cmyk_cs_to_cmyk_cm(gx_device * dev,
 }
 
 private const gx_cm_color_map_procs display_separation_cm_procs = {
-    display_separation_gray_cs_to_cmyk_cm, 
-    display_separation_rgb_cs_to_cmyk_cm, 
+    display_separation_gray_cs_to_cmyk_cm,
+    display_separation_rgb_cs_to_cmyk_cm,
     display_separation_cmyk_cs_to_cmyk_cm
 };
 
@@ -1137,7 +1137,7 @@ display_separation_encode_color(gx_device *dev, const gx_color_value colors[])
  * Decode a gx_color_index value back to a list of colorant values.
  */
 private int
-display_separation_decode_color(gx_device * dev, gx_color_index color, 
+display_separation_decode_color(gx_device * dev, gx_color_index color,
     gx_color_value * out)
 {
     int bpc = ((gx_device_display *)dev)->devn_params.bitspercomponent;
@@ -1171,7 +1171,7 @@ display_update_spot_equivalent_colors(gx_device * dev, const gs_state * pgs)
 
 /*
  * This routine will check to see if the color component name  match those
- * that are available amoung the current device's color components.  
+ * that are available amoung the current device's color components.
  *
  * Parameters:
  *   dev - pointer to device data structure.
@@ -1184,12 +1184,12 @@ display_update_spot_equivalent_colors(gx_device * dev, const gs_state * pgs)
  * It returns a negative value if not found.
  */
 private int
-display_separation_get_color_comp_index(gx_device * dev, 
+display_separation_get_color_comp_index(gx_device * dev,
     const char * pname, int name_size, int component_type)
 {
     return devn_get_color_comp_index(dev,
-		&(((gx_device_display *)dev)->devn_params), 
-		&(((gx_device_display *)dev)->equiv_cmyk_colors), 
+		&(((gx_device_display *)dev)->devn_params),
+		&(((gx_device_display *)dev)->equiv_cmyk_colors),
 		pname, name_size, component_type, ENABLE_AUTO_SPOT_COLORS);
 }
 
@@ -1248,10 +1248,10 @@ display_free_bitmap(gx_device_display * ddev)
     if (ddev->callback == NULL)
 	return;
     if (ddev->pBitmap) {
-	if (ddev->callback->display_memalloc 
+	if (ddev->callback->display_memalloc
 	    && ddev->callback->display_memfree
 	    && ddev->pBitmap) {
-	    (*ddev->callback->display_memfree)(ddev->pHandle, ddev, 
+	    (*ddev->callback->display_memfree)(ddev->pHandle, ddev,
 		ddev->pBitmap);
 	}
 	else {
@@ -1270,7 +1270,7 @@ display_free_bitmap(gx_device_display * ddev)
 }
 
 /* calculate byte length of a row */
-private int 
+private int
 display_raster(gx_device_display *dev)
 {
     int align = 0;
@@ -1315,13 +1315,13 @@ display_alloc_bitmap(gx_device_display * ddev, gx_device * param_dev)
     mdproto = gdev_mem_device_for_bits(ddev->color_info.depth);
     if (mdproto == 0)
 	return_error(gs_error_rangecheck);
-    
-    ddev->mdev = gs_alloc_struct(gs_memory_stable(ddev->memory), 
+
+    ddev->mdev = gs_alloc_struct(gs_memory_stable(ddev->memory),
 	    gx_device_memory, &st_device_memory, "display_memory_device");
     if (ddev->mdev == 0)
         return_error(gs_error_VMerror);
 
-    gs_make_mem_device(ddev->mdev, mdproto, gs_memory_stable(ddev->memory), 
+    gs_make_mem_device(ddev->mdev, mdproto, gs_memory_stable(ddev->memory),
 	0, (gx_device *) NULL);
     check_device_separable((gx_device *)(ddev->mdev));
     gx_device_fill_in_procs((gx_device *)(ddev->mdev));
@@ -1329,7 +1329,7 @@ display_alloc_bitmap(gx_device_display * ddev, gx_device * param_dev)
      * we will clear this and the memory device will be then be freed.
      */
     gx_device_retain((gx_device *)(ddev->mdev), true);
-    
+
     /* Memory device width may be larger than device width
      * if row alignment is not 4.
      */
@@ -1345,9 +1345,9 @@ display_alloc_bitmap(gx_device_display * ddev, gx_device * param_dev)
 	ddev->mdev->width, ddev->mdev->height);
 
     /* allocate bitmap using an allocator not subject to GC */
-    if (ddev->callback->display_memalloc 
+    if (ddev->callback->display_memalloc
 	&& ddev->callback->display_memfree) {
-        ddev->pBitmap = (*ddev->callback->display_memalloc)(ddev->pHandle, 
+        ddev->pBitmap = (*ddev->callback->display_memalloc)(ddev->pHandle,
 	    ddev, ddev->ulBitmapSize);
     }
     else {
@@ -1383,7 +1383,7 @@ display_alloc_bitmap(gx_device_display * ddev, gx_device * param_dev)
     return ccode;
 }
 
-private int 
+private int
 display_set_separations(gx_device_display *dev)
 {
     if (((dev->nFormat & DISPLAY_COLORS_MASK) == DISPLAY_COLORS_SEPARATION) &&
@@ -1413,7 +1413,7 @@ display_set_separations(gx_device_display *dev)
 	    sep_num = comp_map[comp_num];
 	    /* Get the CMYK equivalent */
 	    if (sep_num < dev->devn_params.num_std_colorant_names) {
-		sep_name_size = 
+		sep_name_size =
 		    strlen(dev->devn_params.std_colorant_names[sep_num]);
 		if (sep_name_size > sizeof(name)-2)
 		    sep_name_size = sizeof(name)-1;
@@ -1429,11 +1429,11 @@ display_set_separations(gx_device_display *dev)
 	    }
 	    else {
 		sep_num -= dev->devn_params.num_std_colorant_names;
-		sep_name_size = 
+		sep_name_size =
 		    dev->devn_params.separations.names[sep_num].size;
 		if (sep_name_size > sizeof(name)-2)
 		    sep_name_size = sizeof(name)-1;
-		memcpy(name, dev->devn_params.separations.names[sep_num].data, 
+		memcpy(name, dev->devn_params.separations.names[sep_num].data,
 		    sep_name_size);
 		name[sep_name_size] = '\0';
 		if (dev->equiv_cmyk_colors.color[sep_num].color_info_valid) {
@@ -1447,9 +1447,9 @@ display_set_separations(gx_device_display *dev)
 			   * 65535 / frac_1;
 		}
 	    }
-	    (*dev->callback->display_separation)(dev->pHandle, dev, 
-		comp_num, name, 
-		(unsigned short)c, (unsigned short)m, 
+	    (*dev->callback->display_separation)(dev->pHandle, dev,
+		comp_num, name,
+		(unsigned short)c, (unsigned short)m,
 		(unsigned short)y, (unsigned short)k);
 	}
     }
@@ -1469,7 +1469,7 @@ typedef enum DISPLAY_MODEL_e {
  * structure (except for the anti alias info).
  */
 private void
-set_color_info(gx_device_color_info * pdci, DISPLAY_MODEL model, 
+set_color_info(gx_device_color_info * pdci, DISPLAY_MODEL model,
     int nc, int depth, int maxgray, int maxcolor)
 {
     pdci->num_components = pdci->max_components = nc;
@@ -1516,7 +1516,7 @@ set_color_info(gx_device_color_info * pdci, DISPLAY_MODEL model,
  * device.  The display device can change its setup.
  */
 private void
-set_color_procs(gx_device * pdev, 
+set_color_procs(gx_device * pdev,
 	dev_t_proc_encode_color((*encode_color), gx_device),
 	dev_t_proc_decode_color((*decode_color), gx_device),
 	dev_t_proc_get_color_mapping_procs((*get_color_mapping_procs), gx_device),
@@ -1537,7 +1537,7 @@ set_color_procs(gx_device * pdev,
  * device.  This routine is used when the display device is Gray.
  */
 private void
-set_gray_color_procs(gx_device * pdev, 
+set_gray_color_procs(gx_device * pdev,
 	dev_t_proc_encode_color((*encode_color), gx_device),
 	dev_t_proc_decode_color((*decode_color), gx_device))
 {
@@ -1551,7 +1551,7 @@ set_gray_color_procs(gx_device * pdev,
  * device.  This routine is used when the display device is RGB.
  */
 private void
-set_rgb_color_procs(gx_device * pdev, 
+set_rgb_color_procs(gx_device * pdev,
 	dev_t_proc_encode_color((*encode_color), gx_device),
 	dev_t_proc_decode_color((*decode_color), gx_device))
 {
@@ -1565,7 +1565,7 @@ set_rgb_color_procs(gx_device * pdev,
  * device.  This routine is used when the display device is RGBK.
  */
 private void
-set_rgbk_color_procs(gx_device * pdev, 
+set_rgbk_color_procs(gx_device * pdev,
 	dev_t_proc_encode_color((*encode_color), gx_device),
 	dev_t_proc_decode_color((*decode_color), gx_device))
 {
@@ -1579,7 +1579,7 @@ set_rgbk_color_procs(gx_device * pdev,
  * device.  This routine is used when the display device is CMYK.
  */
 private void
-set_cmyk_color_procs(gx_device * pdev, 
+set_cmyk_color_procs(gx_device * pdev,
 	dev_t_proc_encode_color((*encode_color), gx_device),
 	dev_t_proc_decode_color((*decode_color), gx_device))
 {
@@ -1661,7 +1661,7 @@ display_set_color_format(gx_device_display *ddev, int nFormat)
     switch (nFormat & DISPLAY_COLORS_MASK) {
 	case DISPLAY_COLORS_NATIVE:
 	    switch (nFormat & DISPLAY_DEPTH_MASK) {
-		case DISPLAY_DEPTH_1: 
+		case DISPLAY_DEPTH_1:
 		    /* 1bit/pixel, black is 1, white is 0 */
  	    	    set_color_info(&dci, DISPLAY_MODEL_GRAY, 1, 1, 1, 0);
                     dci.separable_and_linear = GX_CINFO_SEP_LIN_NONE;
@@ -1685,7 +1685,7 @@ display_set_color_format(gx_device_display *ddev, int nFormat)
 		case DISPLAY_DEPTH_16:
 		    /* Windows 16-bit display */
 		    /* Is maxgray = maxcolor = 63 correct? */
-	            if ((ddev->nFormat & DISPLAY_555_MASK) 
+	            if ((ddev->nFormat & DISPLAY_555_MASK)
 			== DISPLAY_NATIVE_555)
  	    	        set_color_info(&dci, DISPLAY_MODEL_RGB, 3, 16, 31, 31);
 		    else
@@ -1711,7 +1711,7 @@ display_set_color_format(gx_device_display *ddev, int nFormat)
 	    if ((nFormat & DISPLAY_ALPHA_MASK) == DISPLAY_ALPHA_NONE)
 		bpp = bpc * 3;
 	    else
-		bpp = bpc * 4; 
+		bpp = bpc * 4;
 	    set_color_info(&dci, DISPLAY_MODEL_RGB, 3, bpp, maxvalue, maxvalue);
 	    if (((nFormat & DISPLAY_DEPTH_MASK) == DISPLAY_DEPTH_8) &&
 	 	((nFormat & DISPLAY_ALPHA_MASK) == DISPLAY_ALPHA_NONE)) {
@@ -1749,12 +1749,12 @@ display_set_color_format(gx_device_display *ddev, int nFormat)
 	    if ((nFormat & DISPLAY_ENDIAN_MASK) != DISPLAY_BIGENDIAN)
 		return_error(gs_error_rangecheck);
 	    bpp = arch_sizeof_color_index * 8;
-	    set_color_info(&dci, DISPLAY_MODEL_SEP, bpp/bpc, bpp, 
+	    set_color_info(&dci, DISPLAY_MODEL_SEP, bpp/bpc, bpp,
 		maxvalue, maxvalue);
 	    if ((nFormat & DISPLAY_DEPTH_MASK) == DISPLAY_DEPTH_8) {
 		ddev->devn_params.bitspercomponent = bpc;
-		set_color_procs(pdev, 
-		    display_separation_encode_color, 
+		set_color_procs(pdev,
+		    display_separation_encode_color,
 		    display_separation_decode_color,
 		    display_separation_get_color_mapping_procs,
 		    display_separation_get_color_comp_index);
@@ -1807,64 +1807,64 @@ struct test_mode_s {
 
 test_mode test_modes[] = {
     {"1bit/pixel native, black is 1, Windows",
-     DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_1 | 
+     DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_1 |
      DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST},
     {"4bit/pixel native, Windows VGA 16 color palette",
-     DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_4 | 
+     DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_4 |
      DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST},
     {"8bit/pixel native, Windows SVGA 96 color palette",
-     DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 | 
+     DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 |
      DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST},
     {"16bit/pixel native, Windows BGR555",
-     DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_16 | 
+     DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_16 |
      DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST | DISPLAY_NATIVE_555},
     {"16bit/pixel native, Windows BGR565",
-     DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_16 | 
+     DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_16 |
      DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST | DISPLAY_NATIVE_565},
     {"1bit/pixel gray, black is 0, topfirst",
-     DISPLAY_COLORS_GRAY | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_1 | 
+     DISPLAY_COLORS_GRAY | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_1 |
      DISPLAY_BIGENDIAN | DISPLAY_TOPFIRST},
     {"4bit/pixel gray, bottom first",
-     DISPLAY_COLORS_GRAY | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_4 | 
+     DISPLAY_COLORS_GRAY | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_4 |
      DISPLAY_BIGENDIAN | DISPLAY_BOTTOMFIRST},
     {"8bit/pixel gray, bottom first",
-     DISPLAY_COLORS_GRAY | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 | 
+     DISPLAY_COLORS_GRAY | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 |
      DISPLAY_BIGENDIAN | DISPLAY_BOTTOMFIRST},
     {"24bit/pixel color, bottom first, Windows BGR24",
-     DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 | 
+     DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 |
      DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST},
     {"24bit/pixel color, bottom first, RGB24",
-     DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 | 
+     DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 |
      DISPLAY_BIGENDIAN | DISPLAY_BOTTOMFIRST},
     {"24bit/pixel color, top first, GdkRgb RGB24",
-     DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 | 
+     DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 |
      DISPLAY_BIGENDIAN | DISPLAY_TOPFIRST},
     {"32bit/pixel color, top first, Macintosh xRGB",
-     DISPLAY_COLORS_RGB | DISPLAY_UNUSED_FIRST | DISPLAY_DEPTH_8 | 
+     DISPLAY_COLORS_RGB | DISPLAY_UNUSED_FIRST | DISPLAY_DEPTH_8 |
      DISPLAY_BIGENDIAN | DISPLAY_TOPFIRST},
     {"32bit/pixel color, bottom first, xBGR",
-     DISPLAY_COLORS_RGB | DISPLAY_UNUSED_FIRST | DISPLAY_DEPTH_8 | 
+     DISPLAY_COLORS_RGB | DISPLAY_UNUSED_FIRST | DISPLAY_DEPTH_8 |
      DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST},
     {"32bit/pixel color, bottom first, Windows BGRx",
-     DISPLAY_COLORS_RGB | DISPLAY_UNUSED_LAST | DISPLAY_DEPTH_8 | 
+     DISPLAY_COLORS_RGB | DISPLAY_UNUSED_LAST | DISPLAY_DEPTH_8 |
      DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST},
     {"32bit/pixel color, bottom first, RGBx",
-     DISPLAY_COLORS_RGB | DISPLAY_UNUSED_LAST | DISPLAY_DEPTH_8 | 
+     DISPLAY_COLORS_RGB | DISPLAY_UNUSED_LAST | DISPLAY_DEPTH_8 |
      DISPLAY_BIGENDIAN | DISPLAY_BOTTOMFIRST},
     {"32bit/pixel CMYK, bottom first",
-     DISPLAY_COLORS_CMYK | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 | 
+     DISPLAY_COLORS_CMYK | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 |
      DISPLAY_BIGENDIAN | DISPLAY_BOTTOMFIRST},
     {"64bit/pixel separations, bottom first",
-     DISPLAY_COLORS_SEPARATIONS | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 | 
+     DISPLAY_COLORS_SEPARATIONS | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 |
      DISPLAY_BIGENDIAN | DISPLAY_BOTTOMFIRST},
     {"4bit/pixel CMYK, bottom first",
-     DISPLAY_COLORS_CMYK | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_1 | 
+     DISPLAY_COLORS_CMYK | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_1 |
      DISPLAY_BIGENDIAN | DISPLAY_BOTTOMFIRST},
     {"1bit/pixel native, black is 1, 8 byte alignment",
-     DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_1 | 
+     DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_1 |
      DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST | DISPLAY_ROW_ALIGN_8},
     {"24bit/pixel color, bottom first, BGR24, 64 byte alignment",
-     DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 | 
+     DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | DISPLAY_DEPTH_8 |
      DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST | DISPLAY_ROW_ALIGN_64}
 };
 
@@ -1876,7 +1876,7 @@ test(int index)
     system(buf);
 }
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
     int i;
     int dotest = 0;

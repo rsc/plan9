@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1995, 1996, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -139,7 +139,7 @@ typedef struct gx_device_s gx_device;
 int gs_image_init(gs_image_enum * penum, const gs_image_t * pim,
 		  bool MultipleDataSources, gs_state * pgs);
 
-/* Initialize an enumerator for a general image. 
+/* Initialize an enumerator for a general image.
    penum->memory must be initialized in advance.
 */
 int gs_image_enum_init(gs_image_enum * penum,

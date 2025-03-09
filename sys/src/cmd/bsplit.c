@@ -60,7 +60,7 @@ bufinit(Buffer *bp, uchar *block, unsigned size)
 	bufreset(bp);
 }
 
-static int 
+static int
 eopen(char *file, int mode)
 {
 	int fd = open(file, mode);
@@ -70,7 +70,7 @@ eopen(char *file, int mode)
 	return fd;
 }
 
-static int 
+static int
 ecreate(char *file, int mode)
 {
 	int fd = create(file, mode, 0666);
@@ -86,7 +86,7 @@ filename(Copy *cp)
 	return cp->filenm;
 }
 
-static int 
+static int
 opennext(Copy *cp)
 {
 	if (cp->outf >= 0)
@@ -97,7 +97,7 @@ opennext(Copy *cp)
 	return cp->outf;
 }
 
-static int 
+static int
 closeout(Copy *cp)
 {
 	if (cp->outf >= 0) {

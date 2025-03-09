@@ -53,7 +53,7 @@ allocmemimaged(Rectangle r, ulong chan, Memdata *md)
 
 	i->data = md;
 	i->zero = sizeof(ulong)*l*r.min.y;
-	
+
 	if(r.min.x >= 0)
 		i->zero += (r.min.x*d)/8;
 	else

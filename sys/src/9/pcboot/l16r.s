@@ -87,7 +87,7 @@ _floppyend:
 	SW(rDI, _DI(SB))
 
 	MTSR(rAX, rES)
-	
+
 /*
  * Check for APM1.2 BIOS support.
  */
@@ -222,7 +222,7 @@ TEXT _hello(SB), $0
 	BYTE $'r'; BYTE $'o'; BYTE $'m'; BYTE $' ';
 	BYTE $'B'; BYTE $'e'; BYTE $'l'; BYTE $'l';
 	BYTE $' '; BYTE $'L'; BYTE $'a'; BYTE $'b';
-	BYTE $'s'; 
+	BYTE $'s';
 	BYTE $'\z';
 
 TEXT _DI(SB), $0

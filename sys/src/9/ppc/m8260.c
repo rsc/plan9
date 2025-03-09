@@ -561,7 +561,7 @@ bdalloc(int n)
 {
 	static BD *palloc = ((Imap*)INTMEM)->bd;
 	BD *p;
-	
+
 	p = palloc;
 	if (palloc > ((Imap*)INTMEM)->bd + nelem(((Imap*)INTMEM)->bd)){
 		print("bdalloc: out of BDs\n");

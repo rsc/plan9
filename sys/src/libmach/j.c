@@ -12,7 +12,7 @@
 
 #define RCURMODE	REGOFF(curmode)
 #define FP_REG(x)	(RCURMODE+8+8*(x))
-#define	FPREGSIZE	(8*33)	
+#define	FPREGSIZE	(8*33)
 
 Reglist riscv64reglist[] = {
 	{"STATUS",	REGOFF(status),	RINT|RRDONLY, 'Y'},

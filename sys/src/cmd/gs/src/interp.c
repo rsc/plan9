@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -72,7 +72,7 @@ public_st_dict_stack();
 public_st_exec_stack();
 public_st_op_stack();
 
-/* 
+/*
  * The procedure to call if an operator requests rescheduling.
  * This causes an error unless the context machinery has been installed.
  */

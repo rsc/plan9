@@ -653,7 +653,7 @@ regused(Sch *s, Prog *realp)
 		s->used.cc |= E_MEMSB;
 		break;
 	}
-	
+
 	c = p->reg;
 	if(c != NREG) {
 		if(p->from.type == D_FREG || p->to.type == D_FREG)
@@ -706,7 +706,7 @@ depend(Sch *sa, Sch *sb)
 			return 1;
 	}
 
-	return 0; 
+	return 0;
 }
 
 int

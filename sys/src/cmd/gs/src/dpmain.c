@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 2001 Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -141,7 +141,7 @@ gs_load_dll(void)
 	return FALSE;
     }
     /* get path to EXE */
-    if ((rc = DosQueryModuleName(pppib->pib_hmte, sizeof(szExePath), 
+    if ((rc = DosQueryModuleName(pppib->pib_hmte, sizeof(szExePath),
 	szExePath)) != 0) {
 	fprintf(stdout, "Couldn't get module name, rc = %d\n", rc);
 	return FALSE;
@@ -162,7 +162,7 @@ gs_load_dll(void)
     if (rc) {
 	/* failed */
 	/* try again, with path of EXE */
-	if ((shortname = strrchr((char *)szDllName, '\\')) 
+	if ((shortname = strrchr((char *)szDllName, '\\'))
 	    == (const char *)NULL)
 	    shortname = szDllName;
 	strcpy(fullname, szExePath);
@@ -198,7 +198,7 @@ gs_load_dll(void)
 	if (debug)
 	    gs_addmess("Loaded Ghostscript DLL\n");
 #endif
-	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_REVISION", 
+	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_REVISION",
 		(PFN *) (&gsdll.revision))) != 0) {
 	    sprintf(buf, "Can't find GSAPI_REVISION, rc = %d\n", rc);
 	    gs_addmess(buf);
@@ -220,57 +220,57 @@ gs_load_dll(void)
 	    return FALSE;
 	}
 
-	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_NEW_INSTANCE", 
+	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_NEW_INSTANCE",
 		(PFN *) (&gsdll.new_instance))) != 0) {
 	    sprintf(buf, "Can't find GSAPI_NEW_INSTANCE, rc = %d\n", rc);
 	    gs_addmess(buf);
 	    gs_load_dll_cleanup();
 	    return FALSE;
 	}
-	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_DELETE_INSTANCE", 
+	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_DELETE_INSTANCE",
 		(PFN *) (&gsdll.delete_instance))) != 0) {
 	    sprintf(buf, "Can't find GSAPI_DELETE_INSTANCE, rc = %d\n", rc);
 	    gs_addmess(buf);
 	    gs_load_dll_cleanup();
 	    return FALSE;
 	}
-	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_SET_STDIO", 
+	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_SET_STDIO",
 		(PFN *) (&gsdll.set_stdio))) != 0) {
 	    sprintf(buf, "Can't find GSAPI_SET_STDIO, rc = %d\n", rc);
 	    gs_addmess(buf);
 	    gs_load_dll_cleanup();
 	    return FALSE;
 	}
-	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_SET_DISPLAY_CALLBACK", 
+	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_SET_DISPLAY_CALLBACK",
 		(PFN *) (&gsdll.set_display_callback))) != 0) {
 	    sprintf(buf, "Can't find GSAPI_SET_DISPLAY_CALLBACK, rc = %d\n", rc);
 	    gs_addmess(buf);
 	    gs_load_dll_cleanup();
 	    return FALSE;
 	}
-	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_SET_POLL", 
+	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_SET_POLL",
 		(PFN *) (&gsdll.set_poll))) != 0) {
 	    sprintf(buf, "Can't find GSAPI_SET_POLL, rc = %d\n", rc);
 	    gs_addmess(buf);
 	    gs_load_dll_cleanup();
 	    return FALSE;
 	}
-	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, 
-		"GSAPI_INIT_WITH_ARGS", 
+	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0,
+		"GSAPI_INIT_WITH_ARGS",
 		(PFN *) (&gsdll.init_with_args))) != 0) {
 	    sprintf(buf, "Can't find GSAPI_INIT_WITH_ARGS, rc = %d\n", rc);
 	    gs_addmess(buf);
 	    gs_load_dll_cleanup();
 	    return FALSE;
 	}
-	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_RUN_STRING", 
+	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_RUN_STRING",
 		(PFN *) (&gsdll.run_string))) != 0) {
 	    sprintf(buf, "Can't find GSAPI_RUN_STRING, rc = %d\n", rc);
 	    gs_addmess(buf);
 	    gs_load_dll_cleanup();
 	    return FALSE;
 	}
-	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_EXIT", 
+	if ((rc = DosQueryProcAddr(gsdll.hmodule, 0, "GSAPI_EXIT",
 		(PFN *) (&gsdll.exit))) != 0) {
 	    sprintf(buf, "Can't find GSAPI_EXIT, rc = %d\n", rc);
 	    gs_addmess(buf);
@@ -291,13 +291,13 @@ gs_load_dll(void)
 /*********************************************************************/
 /* stdio functions */
 
-static int 
+static int
 gsdll_stdin(void *instance, char *buf, int len)
 {
     return read(fileno(stdin), buf, len);
 }
 
-static int 
+static int
 gsdll_stdout(void *instance, const char *str, int len)
 {
     fwrite(str, 1, len, stdout);
@@ -305,7 +305,7 @@ gsdll_stdout(void *instance, const char *str, int len)
     return len;
 }
 
-static int 
+static int
 gsdll_stderr(void *instance, const char *str, int len)
 {
     fwrite(str, 1, len, stderr);
@@ -388,13 +388,13 @@ static int run_gspmdrv(IMAGE *img)
     }
     /* get full path to gsos2.exe and hence path to gspmdrv.exe */
     if ((rc = DosGetInfoBlocks(&pptib, &pppib)) != 0) {
-	fprintf(stdout, "run_gspmdrv: Couldn't get module handle, rc = %d\n", 
+	fprintf(stdout, "run_gspmdrv: Couldn't get module handle, rc = %d\n",
 	    rc);
 	return e_limitcheck;
     }
-    if ((rc = DosQueryModuleName(pppib->pib_hmte, sizeof(progname) - 1, 
+    if ((rc = DosQueryModuleName(pppib->pib_hmte, sizeof(progname) - 1,
 	progname)) != 0) {
-	fprintf(stdout, "run_gspmdrv: Couldn't get module name, rc = %d\n", 
+	fprintf(stdout, "run_gspmdrv: Couldn't get module name, rc = %d\n",
 	    rc);
 	return e_limitcheck;
     }
@@ -411,7 +411,7 @@ static int run_gspmdrv(IMAGE *img)
     /*  (2) id string */
     sprintf(arg, "-d %s", id);
 
-    /* because gspmdrv.exe is a different EXE type to gs.exe, 
+    /* because gspmdrv.exe is a different EXE type to gs.exe,
      * we must use start session not DosExecPgm() */
     sdata.Length = sizeof(sdata);
     sdata.Related = SSF_RELATED_CHILD;	/* to be a child  */
@@ -441,7 +441,7 @@ static int run_gspmdrv(IMAGE *img)
 	rc = DosStartSession(&sdata, &img->session_id, &img->process_id);
     }
     if (rc) {
-	fprintf(stdout, "run_gspmdrv: failed to run %s, rc = %d\n", 
+	fprintf(stdout, "run_gspmdrv: failed to run %s, rc = %d\n",
 	    sdata.PgmName, rc);
 	fprintf(stdout, "run_gspmdrv: error_message: %s\n", error_message);
 	return e_limitcheck;
@@ -454,7 +454,7 @@ static int run_gspmdrv(IMAGE *img)
 }
 
 void
-image_color(unsigned int format, int index, 
+image_color(unsigned int format, int index,
     unsigned char *r, unsigned char *g, unsigned char *b)
 {
     switch (format & DISPLAY_COLORS_MASK) {
@@ -562,12 +562,12 @@ int display_open(void *handle, void *device)
 
     if (first_image) {
 	/* gsos2.exe is a console application, and displays using
-	 * gspmdrv.exe which is a PM application.  To start 
-	 * gspmdrv.exe, DosStartSession is used with SSF_RELATED_CHILD.  
-	 * A process can have only one child session marked SSF_RELATED_CHILD.  
-	 * When we call DosStopSession for the second session, it will 
-	 * close, but it will not write to the termination queue.  
-	 * When we wait for the session to end by reading the 
+	 * gspmdrv.exe which is a PM application.  To start
+	 * gspmdrv.exe, DosStartSession is used with SSF_RELATED_CHILD.
+	 * A process can have only one child session marked SSF_RELATED_CHILD.
+	 * When we call DosStopSession for the second session, it will
+	 * close, but it will not write to the termination queue.
+	 * When we wait for the session to end by reading the
 	 * termination queue, we wait forever.
 	 * For this reason, multiple image windows are disabled
 	 * for OS/2.
@@ -615,7 +615,7 @@ int display_open(void *handle, void *device)
 	return e_limitcheck;
     }
 
-    /* Shared memory is common to all processes so we don't want to 
+    /* Shared memory is common to all processes so we don't want to
      * allocate too much.
      */
     sprintf(name, SHARED_NAME, id);
@@ -720,7 +720,7 @@ int display_close(void *handle, void *device)
     return 0;
 }
 
-int display_presize(void *handle, void *device, int width, int height, 
+int display_presize(void *handle, void *device, int width, int height,
 	int raster, unsigned int format)
 {
     IMAGE *img;
@@ -736,7 +736,7 @@ int display_presize(void *handle, void *device, int width, int height,
 	int depth = format & DISPLAY_DEPTH_MASK;
 	int alpha = format & DISPLAY_ALPHA_MASK;
 	img->format_known = FALSE;
-	if ( ((color == DISPLAY_COLORS_NATIVE) || 
+	if ( ((color == DISPLAY_COLORS_NATIVE) ||
 	      (color == DISPLAY_COLORS_GRAY))
 		 &&
 	     ((depth == DISPLAY_DEPTH_1) ||
@@ -764,8 +764,8 @@ int display_presize(void *handle, void *device, int width, int height,
 #endif
     return 0;
 }
-   
-int display_size(void *handle, void *device, int width, int height, 
+
+int display_size(void *handle, void *device, int width, int height,
 	int raster, unsigned int format, unsigned char *pimage)
 {
     IMAGE *img;
@@ -854,7 +854,7 @@ int display_size(void *handle, void *device, int width, int height,
 #endif
     return 0;
 }
-   
+
 int display_sync(void *handle, void *device)
 {
     IMAGE *img;
@@ -884,7 +884,7 @@ int display_page(void *handle, void *device, int copies, int flush)
 #ifdef DISPLAY_DEBUG
     if (debug)
 	fputc('p', stdout);
-    fprintf(stdout, "display_page(0x%x, 0x%x, copies=%d, flush=%d)\n", 
+    fprintf(stdout, "display_page(0x%x, 0x%x, copies=%d, flush=%d)\n",
 	handle, device, copies, flush);
 #endif
     display_sync(handle, device);
@@ -906,7 +906,7 @@ void *display_memalloc(void *handle, void *device, unsigned long size)
 #ifdef DISPLAY_DEBUG
     if (debug)
 	fputc('m', stdout);
-    fprintf(stdout, "display_memalloc(0x%x 0x%x %d)\n", 
+    fprintf(stdout, "display_memalloc(0x%x 0x%x %d)\n",
 	handle, device, size);
 #endif
     img = image_find(handle, device);
@@ -949,12 +949,12 @@ int display_memfree(void *handle, void *device, void *mem)
     /* we can't uncommit shared memory, so do nothing */
     /* memory will be released when device is closed */
 #ifdef DISPLAY_DEBUG
-    fprintf(stdout, "display_memfree(0x%x, 0x%x, 0x%x)\n", 
+    fprintf(stdout, "display_memfree(0x%x, 0x%x, 0x%x)\n",
 	handle, device, mem);
 #endif
 }
 
-int display_update(void *handle, void *device, 
+int display_update(void *handle, void *device,
     int x, int y, int w, int h)
 {
     /* unneeded - we are running image window in a separate process */
@@ -962,7 +962,7 @@ int display_update(void *handle, void *device,
 }
 
 
-display_callback display = { 
+display_callback display = {
     sizeof(display_callback),
     DISPLAY_VERSION_MAJOR,
     DISPLAY_VERSION_MINOR,
@@ -994,7 +994,7 @@ main(int argc, char *argv[])
     ULONG version[3];
     void *instance;
 
-    if (DosQuerySysInfo(QSV_VERSION_MAJOR, QSV_VERSION_REVISION, 
+    if (DosQuerySysInfo(QSV_VERSION_MAJOR, QSV_VERSION_REVISION,
 	    &version, sizeof(version)))
 	os_version = 201000;	/* a guess */
     else
@@ -1006,7 +1006,7 @@ main(int argc, char *argv[])
     }
 
     /* insert -dDisplayFormat=XXXXX as first argument */
-    {   int format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | 
+    {   int format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_1 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
 	int depth;
 	HPS ps = WinGetPS(HWND_DESKTOP);
@@ -1017,17 +1017,17 @@ main(int argc, char *argv[])
 	display_hasPalMan &= CAPS_PALETTE_MANAGER;
   	depth = display_planes * display_bitcount;
 	if ((depth <= 8) && !display_hasPalMan)
-	    depth = 24;		/* disaster: limited colours and no palette */ 
+	    depth = 24;		/* disaster: limited colours and no palette */
 	WinReleasePS(ps);
 
 	if (depth > 8)
- 	    format = DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | 
+ 	    format = DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_8 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
 	else if (depth >= 8)
- 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | 
+ 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_8 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
 	else if (depth >= 4)
- 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | 
+ 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_4 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
         sprintf(dformat, "-dDisplayFormat=%d", format);
     }
@@ -1035,7 +1035,7 @@ main(int argc, char *argv[])
 
 
 #ifdef DEBUG
-    if (debug) 
+    if (debug)
 	fprintf(stdout, "%s\n", dformat);
 #endif
     nargc = argc + 1;
@@ -1049,7 +1049,7 @@ main(int argc, char *argv[])
 	gsdll.set_display_callback(instance, &display);
 
 	code = gsdll.init_with_args(instance, nargc, nargv);
-	if (code == 0) 
+	if (code == 0)
 	    code = gsdll.run_string(instance, start_string, 0, &exit_code);
 	code1 = gsdll.exit(instance);
 	if (code == 0 || (code == e_Quit && code1 != 0))

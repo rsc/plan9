@@ -1755,7 +1755,7 @@ static const char *pan_par[] = {	/* generates pan.p */
 	"	&&    t->ostate)",	/* not initial state */
 	"	{	t->tau |= ((BFS_Trail *) t->ostate)->tau&64;",
 	"	}	/* lift 64 across claim moves */",
-	"#endif",	
+	"#endif",
 	"",
 	"#ifdef BFS_SEP_HASH",
 	"	#if SYNC",

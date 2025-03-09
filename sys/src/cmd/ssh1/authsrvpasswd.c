@@ -19,4 +19,3 @@ Authsrv authsrvpassword =
 	SSH_CMSG_AUTH_PASSWORD,
 	authsrvpasswordfn,
 };
-

@@ -362,7 +362,7 @@ check_fd(name, mode, emsgp)
 		}
 		fl &= O_ACCMODE;
 #ifdef OS2
-		if (mode == W_OK ) { 
+		if (mode == W_OK ) {
 		       if (setmode(fd, O_TEXT) == -1) {
 				if (emsgp)
 					*emsgp = "couldn't set write mode";
@@ -372,7 +372,7 @@ check_fd(name, mode, emsgp)
 	      		if (setmode(fd, O_BINARY) == -1) {
 				if (emsgp)
 					*emsgp = "couldn't set read mode";
-				return -1; 
+				return -1;
 			}
 #else /* OS2 */
 		/* X_OK is a kludge to disable this check for dups (x<&1):

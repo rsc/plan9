@@ -1,12 +1,12 @@
 /* Copyright (C) 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -275,7 +275,7 @@ z9_glyph_info(gs_font *font, gs_glyph glyph, const gs_matrix *pmat,
 {   /* fixme : same as z11_glyph_info. */
     int wmode = (members & GLYPH_INFO_WIDTH0 ? 0 : 1);
 
-    return z1_glyph_info_generic(font, glyph, pmat, members, info, 
+    return z1_glyph_info_generic(font, glyph, pmat, members, info,
 				    &gs_default_glyph_info, wmode);
 }
 
@@ -367,7 +367,7 @@ fd_array_element(i_ctx_t *i_ctx_p, gs_font_type1 **ppfont, ref *prfd)
 
 
 
-private int 
+private int
 notify_remove_font_type9(void *proc_data, void *event_data)
 {  /* Likely type 9 font descendents are never released explicitly.
       So releaseing a type 9 font we must reset pointers in descendents.
@@ -549,9 +549,9 @@ ztype9mapcid(i_ctx_t *i_ctx_p)
     }
 
     /****** FOLLOWING IS NOT GENERAL W.R.T. ALLOCATION OF GLYPH DATA ******/
-    make_const_string(op - 1, 
-		      a_readonly | imemory_space((gs_ref_memory_t *)pfont->memory), 
-		      gdata.bits.size, 
+    make_const_string(op - 1,
+		      a_readonly | imemory_space((gs_ref_memory_t *)pfont->memory),
+		      gdata.bits.size,
 		      gdata.bits.data);
     make_int(op, fidx);
     return code;

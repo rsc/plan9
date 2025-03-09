@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -52,7 +52,7 @@ private int image_cleanup(i_ctx_t *);
 
 /* Extract and check the parameters for a gs_data_image_t. */
 int
-data_image_params(const gs_memory_t *mem, 
+data_image_params(const gs_memory_t *mem,
 		  const ref *op, gs_data_image_t *pim,
 		  image_params *pip, bool require_DataSource,
 		  int num_components, int max_bits_per_component,
@@ -297,7 +297,7 @@ zimage_data_setup(i_ctx_t *i_ctx_p, const gs_pixel_image_t * pim,
     }
     /* Always place the image enumerator into local memory,
        because pie may have local objects inherited from igs,
-       which may be local when the current allocation mode is global. 
+       which may be local when the current allocation mode is global.
        Bug 688140. */
     if ((penum = gs_image_enum_alloc(imemory_local, "image_setup")) == 0)
 	return_error(e_VMerror);
@@ -554,7 +554,7 @@ image_cleanup(i_ctx_t *i_ctx_p)
 {
     es_ptr ep_top = esp + NUM_PUSH(EBOT_NUM_SOURCES(esp)->value.intval);
     gs_image_enum *penum = r_ptr(ep_top, gs_image_enum);
-    
+
     return gs_image_cleanup_and_free_enum(penum);
 }
 

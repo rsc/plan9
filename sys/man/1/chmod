@@ -1,4 +1,4 @@
-.TH CHMOD 1 
+.TH CHMOD 1
 .SH NAME
 chmod \- change mode
 .SH SYNOPSIS
@@ -45,7 +45,7 @@ has the form:
 The
 .I who
 part is a combination
-of the letters 
+of the letters
 .B u
 (for user's permissions),
 .B g

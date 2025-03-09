@@ -9,7 +9,7 @@ fn usage {
 
 . /rc/bin/replica/defs $*
 
-need serverroot serverexclude serverproto serverdb serverlog 
+need serverroot serverexclude serverproto serverdb serverlog
 
 must servermount
 replica/updatedb -r^$serverroot $serverexclude -p^$serverproto $serverdb >>$serverlog

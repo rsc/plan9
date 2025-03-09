@@ -32,7 +32,7 @@ TEXT reloc(SB), $-4
 	ISB
 	CMP.S $0, R15
 	BL.LT reset(SB)
-	
+
 	MOVW $0xf, R1
 	MOVW $0xffff0000, R3
 	MOVW $0xe58a1910, R0
@@ -62,7 +62,7 @@ TEXT reset(SB), $-4
 
 TEXT pllsetup(SB), $0
 	MOVW $SLCR_BASE, Rb
-	
+
 	SET(ARM_PLL_CFG, ARM_PLL_CFG_VAL)
 	SET(DDR_PLL_CFG, DDR_PLL_CFG_VAL)
 	SET(IO_PLL_CFG, IO_PLL_CFG_VAL)
@@ -90,11 +90,11 @@ _pllsetupl:
 	AND $7, R0
 	CMP.S $7, R0
 	BNE _pllsetupl
-	
+
 	SET(ARM_PLL_CTRL, ARM_FDIV)
 	SET(DDR_PLL_CTRL, DDR_FDIV)
 	SET(IO_PLL_CTRL, IO_FDIV)
-	
+
 	SET(ARM_CLK_CTRL, 0x1f << 24 | CPU_DIV << 8)
 	SET(UART_CLK_CTRL, UART_DIV << 8 | 3)
 	SET(DDR_CLK_CTRL, DDR_DIV3 << 20 | DDR_DIV2 << 26 | 3)
@@ -170,7 +170,7 @@ _ddrl4:
 	MOVW DDR_MODE_STS(Rb), R0
 	AND.S $7, R0
 	BEQ _ddrl4
-	
+
 	MOVW $MP_BASE, Rb
 	SET(FILTER_START, 0)
 	RET
@@ -222,7 +222,7 @@ _putcl:
 	AND $0xFF, R0
 	MOVW R0, UART_DATA(Rb)
 	RET
-	
+
 TEXT jump(SB), $-4
 	MOVW R0, R15
 
@@ -255,8 +255,8 @@ _loop:
 
 TEXT miodata(SB), $-4
 	WORD $NO // 0
-	WORD $SPI // 1 
-	WORD $SPI // 2 
+	WORD $SPI // 1
+	WORD $SPI // 2
 	WORD $SPI // 3
 	WORD $SPI // 4
 	WORD $SPI // 5

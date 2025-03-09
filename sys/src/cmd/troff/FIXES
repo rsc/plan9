@@ -264,7 +264,7 @@ June 24, 1993 (Rich):
 
 May 18, 1993:
 
-    Trivial fix (.cf) request for troff -a 
+    Trivial fix (.cf) request for troff -a
 
 	issuing
 
@@ -340,7 +340,7 @@ May 12, 1993:
 	It will be a problem for users who really relied on this as in
 
 		.ds x	string
-	
+
 	and expect the tab to become part of the string a, but I haven't
 	seen any use of that (obscure trick).
 

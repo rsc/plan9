@@ -41,7 +41,7 @@ enum {
 	/* ctl bits */
 	Twsiack		= 1<<2,		/* recv'd data; clear to ack */
 	Twsiint		= 1<<3,		/* interrupt conditions true */
-	Twsistop	= 1<<4,		
+	Twsistop	= 1<<4,
 	Twsistart	= 1<<5,
 	Twsislaveen	= 1<<6,
 	Twsiinten	= 1<<7,		/* interrupts enabled */

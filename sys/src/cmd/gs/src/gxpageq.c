@@ -1,12 +1,12 @@
 /* Copyright (C) 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -100,7 +100,7 @@ gx_page_queue_entry_free(
 {
     gs_free_object(entry->queue->memory, entry, "gx_page_queue_entry_free");
 }
-  
+
 /* Free the clist resources held by a gx_page_queue_entry_t */
 void
 gx_page_queue_entry_free_page_info(

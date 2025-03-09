@@ -120,7 +120,7 @@ the unsigned integral type with the same width as a pointer;
 .IR jmp_buf ,
 the type of the argument to
 .I setjmp
-and 
+and
 .IR longjmp ,
 plus macros that define the layout of
 .IR jmp_buf
@@ -430,8 +430,8 @@ For examples of this design, see
 or
 .IR mouse (2).
 .SH SEE ALSO
-.IR nm (1), 
-.IR 8l (1), 
+.IR nm (1),
+.IR 8l (1),
 .IR 8c (1)
 .SH DIAGNOSTICS
 Math functions in

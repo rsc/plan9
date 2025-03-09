@@ -158,7 +158,7 @@ So, for example:
 	@@ -6,6 +6,8 @@
 	 	const foldexpr : (e : expr# -> std.option(constval))
 	 ;;
-	 
+
 	+/* Look, diffing files just works, and I don't need any fancy glue! */
 	+
 	 const foldexpr = {e
@@ -166,7 +166,7 @@ So, for example:
 	 	| &(`Eident &[.sc=`Sclassenum, .name=name, .ty=`Tyenum &(`Body enum)]):
 	Only in .: refs
 
-	
+
 The following utilities and binaries are provided:
 
 	fs:	The git filesystem.

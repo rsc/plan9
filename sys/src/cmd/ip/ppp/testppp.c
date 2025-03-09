@@ -64,7 +64,7 @@ printbuf(uchar *p, int n)
 
 	if(n > 32)
 		n = 32;
-	
+
 	i = 0;
 	for(e = p + n; p < e; p++){
 		if(isprint(*p))
@@ -195,4 +195,3 @@ main(int argc, char **argv)
 	xfer(pfd2[1], pfd1[1]);
 	exits(0);
 }
-

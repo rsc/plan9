@@ -1,6 +1,6 @@
 /*
  * Attempt at emulation of Unix tar by calling Plan 9 tar.
- * 
+ *
  * The differences from Plan 9 tar are:
  *	In the absence of an "f" flag, the file /dev/tape is used.
  *	An "f" flag with argument "-" causes use of stdin/stdout

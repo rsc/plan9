@@ -112,6 +112,6 @@ if(grep -si '^\[paths\]' /n/c:/msdos.sys){	# Windows 9x rather than DOS
 	zeroopt Logo
 #	zeroopt BootGUI
 }
-		
+
 echo 'Plan 9 added to Windows 9X boot menu.'
 exit ''

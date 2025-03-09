@@ -302,7 +302,7 @@ treeify(Object *t, char **path, char **epath, int off, Hash *h)
 	r = writetree(ent, nent, h);
 err:
 	free(sub);
-	return r;		
+	return r;
 }
 
 

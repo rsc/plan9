@@ -170,7 +170,7 @@ The queue I/O routines provide a flow control mechanism to coordinate producers 
 Each queue has a limit on the number of bytes queued, its `high water mark',
 initially set when the queue is created, but adjustable by
 .IR qsetlimit ,
-below. 
+below.
 The low water mark is not set explicitly:
 it is always half the current queue limit.
 When the high water mark is exceeded, writes normally block until a reader drains the

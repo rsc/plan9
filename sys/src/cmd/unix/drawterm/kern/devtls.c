@@ -2002,7 +2002,7 @@ blockpad(uchar *buf, int n, int block)
 		buf[n++] = pad;
 	return nn;
 }
-		
+
 static int
 des3enc(Secret *sec, uchar *buf, int n)
 {

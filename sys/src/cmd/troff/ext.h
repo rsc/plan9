@@ -181,4 +181,3 @@ extern int	c_isalnum;
 extern char	*DWBfontdir;
 extern char	*DWBntermdir;
 extern char	*DWBalthyphens;
-

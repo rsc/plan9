@@ -533,7 +533,7 @@ putframe(PPP *ppp, int proto, Block *b)
 		/* escape and checksum the body */
 		fcs = PPP_initfcs;
 		to = buf->rptr;
-	
+
 		/* add frame marker */
 		*to++ = HDLC_frame;
 
@@ -546,7 +546,7 @@ putframe(PPP *ppp, int proto, Block *b)
 				   || (c < 0x20 && ((1<<c) & ctlmap))){
 					*to++ = HDLC_esc;
 					*to++ = c ^ 0x20;
-				} else 
+				} else
 					*to++ = c;
 				fcs = (fcs >> 8) ^ fcstab[(fcs ^ c) & 0xff];
 			}
@@ -559,16 +559,16 @@ putframe(PPP *ppp, int proto, Block *b)
 		   || (c < 0x20 && ((1<<c) & ctlmap))){
 			*to++ = HDLC_esc;
 			*to++ = c ^ 0x20;
-		} else 
+		} else
 			*to++ = c;
 		c = fcs>>8;
 		if(c == HDLC_frame || c == HDLC_esc
 		   || (c < 0x20 && ((1<<c) & ctlmap))){
 			*to++ = HDLC_esc;
 			*to++ = c ^ 0x20;
-		} else 
+		} else
 			*to++ = c;
-	
+
 		/* add frame marker */
 		*to++ = HDLC_frame;
 	}
@@ -764,7 +764,7 @@ getipinfo(PPP *ppp)
 static int
 getopts(PPP *ppp, Pstate *p, Block *b)
 {
-	Lcpmsg *m, *repm;	
+	Lcpmsg *m, *repm;
 	Lcpopt *o;
 	uchar *cp, *ap;
 	ulong rejecting, nacking, flags, proto, chapproto;
@@ -900,7 +900,7 @@ getopts(PPP *ppp, Pstate *p, Block *b)
 			break;
 		case Pipcp:
 			switch(o->type){
-			case Oipaddr:	
+			case Oipaddr:
 				v4tov6(ipaddr, o->data);
 				if(!validv4(ppp->remote))
 					continue;
@@ -917,10 +917,10 @@ getopts(PPP *ppp, Pstate *p, Block *b)
 			case Oipdns:
 				ap = ppp->dns[0];
 				goto ipinfo;
-			case Oipdns2:	
+			case Oipdns2:
 				ap = ppp->dns[1];
 				goto ipinfo;
-			case Oipwins:	
+			case Oipwins:
 				ap = ppp->wins[0];
 				goto ipinfo;
 			case Oipwins2:
@@ -982,7 +982,7 @@ getopts(PPP *ppp, Pstate *p, Block *b)
 			ppp->mtu = mtu;
 			if(chapproto)
 				ppp->chap->proto = chapproto;
-			
+
 			break;
 		case Pccp:
 			if(ppp->ctype != nil){
@@ -1665,7 +1665,7 @@ Again:
 			ppp->stat.uncompin += len;
 			ppp->stat.uncompout += BLEN(b);
 /* netlog("ppp: uncompressed frame %ux %d %d (%d uchars)\n", proto, b->rptr[0], b->rptr[1], BLEN(b)); /* */
-			goto Again;	
+			goto Again;
 		default:
 			syslog(0, LOG, "unknown proto %ux", proto);
 			if(ppp->lcp->state == Sopened){
@@ -1723,7 +1723,7 @@ pppwrite(PPP *ppp, Block *b)
 			ppp->stat.compin += len;
 			ppp->stat.compout += blen(b);
 		}
-	} 
+	}
 
 	if(putframe(ppp, proto, b) < 0) {
 		qunlock(ppp);
@@ -1882,7 +1882,7 @@ mediainproc(PPP *ppp)
 	syslog(0, LOG, "\t\tuncompress=%lud in=%lud out=%lud reset=%lud",
 		ppp->stat.uncomp, ppp->stat.uncompin, ppp->stat.uncompout,
 		ppp->stat.uncompreset);
-	syslog(0, LOG, "\t\tvjin=%lud vjout=%lud vjfail=%lud", 
+	syslog(0, LOG, "\t\tvjin=%lud vjout=%lud vjfail=%lud",
 		ppp->stat.vjin, ppp->stat.vjout, ppp->stat.vjfail);
 }
 
@@ -2017,7 +2017,7 @@ nthash(uchar hash[MShashlen], char *passwd)
 {
 	uchar buf[512];
 	int i;
-	
+
 	for(i=0; *passwd && i<sizeof(buf); passwd++) {
 		buf[i++] = *passwd;
 		buf[i++] = 0;
@@ -2031,7 +2031,7 @@ mschalresp(uchar resp[MSresplen], uchar hash[MShashlen], uchar chal[MSchallen])
 {
 	int i;
 	uchar buf[21];
-	
+
 	memset(buf, 0, sizeof(buf));
 	memcpy(buf, hash, MShashlen);
 
@@ -2175,7 +2175,7 @@ getchap(PPP *ppp, Block *b)
 			c->cs->resp = &mscr;
 			c->cs->nresp = sizeof mscr;
 			break;
-		} 
+		}
 
 		syslog(0, LOG, ": remote=%I vlen %d proto %d response user %s nresp %d", ppp->remote, vlen, c->proto, c->cs->user, c->cs->nresp);
 		if((ai = auth_response(c->cs)) == nil || auth_chuid(ai, nil) < 0){
@@ -2209,7 +2209,7 @@ getchap(PPP *ppp, Block *b)
 			/* restart chapp negotiation */
 			chapinit(ppp);
 		}
-		
+
 		break;
 	case Csuccess:
 		netlog("ppp: chap succeeded\n");
@@ -2311,7 +2311,7 @@ getpap(PPP *ppp, Block *b)
 static void
 printopts(Pstate *p, Block *b, int send)
 {
-	Lcpmsg *m;	
+	Lcpmsg *m;
 	Lcpopt *o;
 	int proto, x, period;
 	uchar *cp;
@@ -2395,16 +2395,16 @@ printopts(Pstate *p, Block *b, int send)
 			default:
 				netlog("\tunknown %d len=%d\n", o->type, o->len);
 				break;
-			case Ocoui:	
+			case Ocoui:
 				netlog("\tOUI\n");
 				break;
 			case Ocstac:
 				netlog("\tstac LZS\n");
 				break;
-			case Ocmppc:	
+			case Ocmppc:
 				netlog("\tMicrosoft PPC len=%d %ux\n", o->len, nhgetl(o->data));
 				break;
-			case Octhwack:	
+			case Octhwack:
 				netlog("\tThwack\n");
 				break;
 			}
@@ -2414,7 +2414,7 @@ printopts(Pstate *p, Block *b, int send)
 			default:
 				netlog("\tunknown %d len=%d\n", o->type, o->len);
 				break;
-			case Oeoui:	
+			case Oeoui:
 				netlog("\tOUI\n");
 				break;
 			case Oedese:
@@ -2427,25 +2427,25 @@ printopts(Pstate *p, Block *b, int send)
 			default:
 				netlog("\tunknown %d len=%d\n", o->type, o->len);
 				break;
-			case Oipaddrs:	
+			case Oipaddrs:
 				netlog("\tip addrs - deprecated\n");
 				break;
 			case Oipcompress:
 				netlog("\tip compress\n");
 				break;
-			case Oipaddr:	
+			case Oipaddr:
 				netlog("\tip addr %V\n", o->data);
 				break;
-			case Oipdns:	
+			case Oipdns:
 				netlog("\tdns addr %V\n", o->data);
 				break;
-			case Oipwins:	
+			case Oipwins:
 				netlog("\twins addr %V\n", o->data);
 				break;
-			case Oipdns2:	
+			case Oipdns2:
 				netlog("\tdns2 addr %V\n", o->data);
 				break;
-			case Oipwins2:	
+			case Oipwins2:
 				netlog("\twins2 addr %V\n", o->data);
 				break;
 			}
@@ -2566,16 +2566,16 @@ connect(int fd, int cfd)
 			if ((s = strchr(p, '\n')) == nil)
 				break;
 			*s++ = '\0';
-		
+
 			lineno++;
 
 			if (*p == '#') {
-				p = s; 
+				p = s;
 				continue;
 			}
 
 			if (tokenize(p, _args, 3) != 2)
-				sysfatal("invalid line %d (line expected: 'send' 'expect')", 
+				sysfatal("invalid line %d (line expected: 'send' 'expect')",
 						lineno);
 
 			if (debug)
@@ -2940,5 +2940,5 @@ getauth(PPP *ppp)
 	if(up != nil){
 		strcpy(ppp->chapname, up->user);
 		strcpy(ppp->secret, up->passwd);
-	}		
+	}
 }

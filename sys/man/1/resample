@@ -39,7 +39,7 @@ and
 .BR y .
 .PP
 The input should be a Plan 9 image
-as described in 
+as described in
 .IR image (6),
 and the output will be a compressed 24-bit
 .B r8g8b8

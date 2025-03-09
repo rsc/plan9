@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1995, 1996, 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -159,14 +159,14 @@ gp_file_is_console(FILE * f)
 }
 
 /* ------ Persistent data cache ------*/
-  
+
 /* insert a buffer under a (type, key) pair */
 int gp_cache_insert(int type, byte *key, int keylen, void *buffer, int buflen)
-{ 
+{
     /* not yet implemented */
     return 0;
-} 
- 
+}
+
 /* look up a (type, key) in the cache */
 int gp_cache_query(int type, byte* key, int keylen, void **buffer,
     gp_cache_alloc alloc, void *userdata)
@@ -562,7 +562,7 @@ pm_find_queue(char *queue_name, char *driver_name)
 	    DosFreeMem((PVOID) pBuf);
 	}
     }
-    /* end if Q level given */ 
+    /* end if Q level given */
     else {
 	/* If we are here we had a bad error code. Print it and some other info. */
 	eprintf4("SplEnumQueue Error=%ld, Total=%ld, Returned=%ld, Needed=%ld\n",
@@ -767,7 +767,7 @@ gp_fopen(const char *fname, const char *mode)
 
 uint gp_file_name_root(const char *fname, uint len)
 {   int i = 0;
-    
+
     if (len == 0)
 	return 0;
     if (len > 1 && fname[0] == '\\' && fname[1] == '\\') {
@@ -834,30 +834,30 @@ bool gp_file_name_is_empty_item_meanful(void)
 }
 
 gp_file_name_combine_result
-gp_file_name_combine(const char *prefix, uint plen, const char *fname, uint flen, 
+gp_file_name_combine(const char *prefix, uint plen, const char *fname, uint flen,
 		    bool no_sibling, char *buffer, uint *blen)
 {
-    return gp_file_name_combine_generic(prefix, plen, 
+    return gp_file_name_combine_generic(prefix, plen,
 	    fname, flen, no_sibling, buffer, blen);
 }
 
 /* ------ Font enumeration ------ */
- 
+
  /* This is used to query the native os for a list of font names and
   * corresponding paths. The general idea is to save the hassle of
   * building a custom fontmap file.
   */
- 
+
 void *gp_enumerate_fonts_init(gs_memory_t *mem)
 {
     return NULL;
 }
-         
+
 int gp_enumerate_fonts_next(void *enum_state, char **fontname, char **path)
 {
     return 0;
 }
-                         
+
 void gp_enumerate_fonts_free(void *enum_state)
 {
-}           
+}

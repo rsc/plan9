@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -202,7 +202,7 @@ private const fixed_colorant_names_list DeviceCMYKComponents = {
 private const gx_device_procs spot_cmyk_procs = device_procs(get_rinkj_color_mapping_procs);
 
 const rinkj_device gs_rinkj_device =
-{   
+{
     prn_device_body_extended(rinkj_device, spot_cmyk_procs, "rinkj",
 	 DEFAULT_WIDTH_10THS, DEFAULT_HEIGHT_10THS,
 	 X_DPI, Y_DPI,		/* X and Y hardware resolution */
@@ -520,7 +520,7 @@ check_process_color_names(const fixed_colorant_names_list * pcomp_list,
     if (pcomp_list) {
         const fixed_colorant_name * plist = *pcomp_list;
         uint size = pstring->size;
-    
+
 	while( *plist) {
 	    if (compare_color_names(*plist, strlen(*plist), pstring->data, size)) {
 		return true;
@@ -706,7 +706,7 @@ rinkj_put_params(gx_device * pdev, gs_param_list * plist)
         if (scna.data != 0) {
 	    int i;
 	    int num_names = scna.size;
-	    const fixed_colorant_names_list * pcomp_names = 
+	    const fixed_colorant_names_list * pcomp_names =
 	    			((rinkj_device *)pdev)->std_colorant_names;
 
 	    for (i = num_spot = 0; i < num_names; i++) {
@@ -720,7 +720,7 @@ rinkj_put_params(gx_device * pdev, gs_param_list * plist)
     }
     npcmcolors = pdevn->num_std_colorant_names;
     pdevn->color_info.num_components = npcmcolors + num_spot;
-    /* 
+    /*
      * The DeviceN device can have zero components if nothing has been
      * specified.  This causes some problems so force at least one
      * component until something is specified.
@@ -749,7 +749,7 @@ rinkj_put_params(gx_device * pdev, gs_param_list * plist)
 
 /*
  * This routine will check to see if the color component name  match those
- * that are available amoung the current device's color components.  
+ * that are available amoung the current device's color components.
  *
  * Parameters:
  *   dev - pointer to device data structure.
@@ -1050,7 +1050,7 @@ rinkj_write_image_data(gx_device_printer *pdev, RinkjDevice *cmyk_dev)
 
 		memcpy(cbuf, row + rowix, 3);
 		color = ((bits32 *)cbuf)[0];
-		
+
 		if (cache[hash].key != color) {
 		    double in[MAX_CHAN], out[MAX_CHAN];
 
@@ -1108,7 +1108,7 @@ rinkj_write_image_data(gx_device_printer *pdev, RinkjDevice *cmyk_dev)
 
 		memcpy(cbuf, row + rowix, 4);
 		color = ((bits32 *)cbuf)[0];
-		
+
 		if (cache[hash].key != color) {
 		    double in[MAX_CHAN], out[MAX_CHAN];
 

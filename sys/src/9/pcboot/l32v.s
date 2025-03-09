@@ -307,7 +307,7 @@ TEXT rdmsr(SB), $0				/* model-specific register */
 	MOVL	AX, 0(CX)			/* lo */
 	MOVL	DX, 4(CX)			/* hi */
 	RET
-	
+
 TEXT wrmsr(SB), $0
 	MOVL	index+0(FP), CX
 	MOVL	lo+4(FP), AX

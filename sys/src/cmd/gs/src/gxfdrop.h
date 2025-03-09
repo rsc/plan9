@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -21,7 +21,7 @@
 #  define gxfdrop_INCLUDED
 
 
-/*  The structure margin_set and related structures and functions are used for 
+/*  The structure margin_set and related structures and functions are used for
     preventing dropouts rasterizing a character with zero fill adjustment. The purpose
     is to paint something along thin quazi-horizontal stems,
     which are composed of multiple small segments (such as a result of flattenpath).
@@ -40,9 +40,9 @@
     to be painted), and array of "sections" (i-th section corresponds to
     half-integer X-coordinate Xi = bbox_left + i + 0.5, and stores fraction
     part of y-coordinate of intersection of the line x == Xi with margin
-    boudaries, being visible through window (only extremal coordinates are stored 
+    boudaries, being visible through window (only extremal coordinates are stored
     into a section)).
- 
+
     The structure margin_set snaps what has been painted inside window.
     We handle 2 instances of margin_set : margin_set0 is being prepared and margin_set1 is
     being refinished. When the filling loop steps down over a pixel center,
@@ -97,7 +97,7 @@ typedef struct section_s
 } section;
 
 typedef struct margin_set_s
-{   fixed y; 
+{   fixed y;
     margin *margin_list, *margin_touched;
     section *sect;
 } margin_set;

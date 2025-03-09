@@ -47,7 +47,7 @@ does not download large files all at once.
 Instead, it requests 64-kilobyte blocks as they are
 needed to satisfy reads, caching a few blocks in memory at a time.
 .PP
-The 
+The
 .B -D
 and
 .B -d
@@ -56,7 +56,7 @@ and general debugging messages.
 .PP
 The
 .B -s
-option causes 
+option causes
 .I httpfile
 to post the 9P service as
 .BI /srv/ srvname
@@ -65,7 +65,7 @@ and disables the default mount.
 The
 .B -x
 option specifies an alternate network directory
-.RI ( e.g., 
+.RI ( e.g.,
 .BR /net.alt ).
 .PP
 The

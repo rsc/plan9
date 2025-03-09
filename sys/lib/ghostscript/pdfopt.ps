@@ -1,12 +1,12 @@
 %    Copyright (C) 2000, 2001 Aladdin Enterprises.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -558,7 +558,7 @@ userdict /clostreams 20 dict put	% stream -> [data endproc]
     } {
       pop
     } ifelse
-  } for 
+  } for
   lgrowto def
 
   0
@@ -576,7 +576,7 @@ userdict /clostreams 20 dict put	% stream -> [data endproc]
     } {
       pop
     } ifelse
-  } for 
+  } for
   pop
 
   npobj
@@ -788,8 +788,8 @@ userdict /clostreams 20 dict put	% stream -> [data endproc]
       exch pop                   % []
       dup length 0 ne {
         dup 0 get 0 get          % [] 1st
-        exch dup                 % 1st [] [] 
-        length 1 sub get 0 get   % 1st last 
+        exch dup                 % 1st [] []
+        length 1 sub get 0 get   % 1st last
         true
       } {
         pop false
@@ -845,7 +845,7 @@ userdict /clostreams 20 dict put	% stream -> [data endproc]
   0 FirstPageNs { 1 index def 1 add } forall
     SharedNs { 1 index def 1 add } forall
   pop
-  currentdict end def 
+  currentdict end def
 
                 % Table F.3 Page offset hint table, header section
 
@@ -903,7 +903,7 @@ userdict /clostreams 20 dict put	% stream -> [data endproc]
   bits bitflush
 
 		% 3: Number of shared objects referenced from page:
-  FirstPageNs length maxsorbits bwn 
+  FirstPageNs length maxsorbits bwn
   SharedPageNs { length maxsorbits bwn } forall
   bits bitflush
                 % 4: A shared object identifier:
@@ -917,7 +917,7 @@ userdict /clostreams 20 dict put	% stream -> [data endproc]
                 % 5: Numerator of fractional position for each shared object:
   FirstPageNs { pop 0 numfbits bwn  } forall
   SharedPageNs {
-    { pop 0 numfbits bwn 
+    { pop 0 numfbits bwn
     } forall
   } forall
   bits bitflush
@@ -1005,7 +1005,7 @@ userdict /clostreams 20 dict put	% stream -> [data endproc]
     QUIET { pop } { print (, t = ) print realtime starttime sub = flush } ifelse
   } def
   omapinit
-  
+
 	% Create and open a temporary file.
 	% Because of .setsafe, we have to open it as read-write, rather than
 	% opening for writing, then closing it and reopening it for reading.

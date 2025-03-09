@@ -5,7 +5,7 @@ int
 wstrutflen(Rune *s)
 {
 	int n;
-	
+
 	for(n=0; *s; n+=runelen(*s),s++)
 		;
 	return n;

@@ -93,7 +93,7 @@ files.
 <h2><a name="Install_Unix"></a>Installing Ghostscript on Unix</h2>
 
 <p>
-Ghostscript uses the common configure, build and install method common 
+Ghostscript uses the common configure, build and install method common
 to many modern software packages. In general the following with suffice
 to build ghostscript:
 <blockquote><tt><b>
@@ -103,7 +103,7 @@ to build ghostscript:
 and then it may be installed in the default location with:
 <blockquote><b>
 	<tt>make install</tt>
-</b></blockquote>	
+</b></blockquote>
 This last command may need to be performed with super user privileges.
 
 <p>
@@ -133,8 +133,8 @@ installed separately. The fonts should be installed in
 configuration above.)
 
 <p>
-If you have Adobe Acrobat installed, you can use the Acrobat fonts 
-in place of the ones distributed with with Ghostscript by adding the 
+If you have Adobe Acrobat installed, you can use the Acrobat fonts
+in place of the ones distributed with with Ghostscript by adding the
 Acrobat fonts directory to
 <b><tt>GS_FONTPATH</tt></b> and removing these fonts from
 <b><tt>Fontmap.GS</tt></b>:
@@ -149,12 +149,12 @@ Times-BoldItalic, Times-Italic, Times-Roman, ZapfDingbats
 Similarly, you can have ghostscript use other fonts on your system by adding
 entries to the fontmap or adding the directories to the GS_FONTMAP environment
 variable. See the <a href="Use.htm#Font_lookup">usage documentation</a> for more
-information. 
+information.
 For example, many linux distributions place fonts under <tt>/usr/share/fonts</tt>.
 
 <h3><a name="Shared_object"></a>Ghostscript as a shared object</h3>
-If you've built Ghostscript as a shared object, instead of '<tt>make install</tt>', 
-you must use '<tt>make soinstall</tt>'.  
+If you've built Ghostscript as a shared object, instead of '<tt>make install</tt>',
+you must use '<tt>make soinstall</tt>'.
 See <a href="Make.htm#Shared_object">how to build Ghostscript
 as a shared object</a> for more details.
 
@@ -185,14 +185,14 @@ files can also be unpacked as if they were plain zip files.
 <p>
 The self-extracting archive is normally named
 <b><tt>gs###w32.exe</tt></b>,
-where ### is the release number (e.g., 650 for Ghostscript 6.50, 
+where ### is the release number (e.g., 650 for Ghostscript 6.50,
 700 for Ghostscript 7.00).
 
 <h3><a name="Windows4"></a>Windows 95/98 and NT 4</h3>
 
 <p>
 To install a self-extracting Ghostscript archive on Windows 95/98 or
-Windows NT4/2000, you need just this self-extracting archive file.  
+Windows NT4/2000, you need just this self-extracting archive file.
 Run this file to install Ghostscript.
 
 <p>
@@ -201,14 +201,14 @@ directory then run the included <b><tt>setupgs.exe</tt></b>.
 After the setup program has finished, remove the temporary files.
 
 <p>
-After installing Ghostscript, it is strongly recommended that you 
-install the <b>GSview previewer</b>, 
+After installing Ghostscript, it is strongly recommended that you
+install the <b>GSview previewer</b>,
 which provides an easier to use graphical interface for Ghostscript.
 Information on GSview is available from:
 
 <blockquote>
 <a
-href="http://www.cs.wisc.edu/~ghost/gsview/" 
+href="http://www.cs.wisc.edu/~ghost/gsview/"
 class="offsite">http://www.cs.wisc.edu/~ghost/gsview/</a>
 </blockquote>
 
@@ -320,13 +320,13 @@ Win32s (that is, Windows 3.1, which doesn't support named registry
 values).
 
 <p>
-Ghostscript will attempt to load the Ghostscript dynamic link 
+Ghostscript will attempt to load the Ghostscript dynamic link
 library <b><tt>GSDLL32.DLL</tt></b> in the following order:
 <ul>
 <li> In the same directory as the Ghostscript executable.
-<li> If the environment variable <b><tt>GS_DLL</tt></b> is defined, 
-Ghostscript tries to load the Ghostscript dynamic link library (DLL) 
-with the name given.  
+<li> If the environment variable <b><tt>GS_DLL</tt></b> is defined,
+Ghostscript tries to load the Ghostscript dynamic link library (DLL)
+with the name given.
 <li> Using the standard Windows library search method: the directory
 from which the application loaded, the current directory, the Windows
 system directory, the Windows directory and the directories listed in
@@ -335,7 +335,7 @@ the PATH environment variable.
 
 <p>
 The Ghostscript setup program will create registry values
-for the environment variables <b><tt>GS_LIB</tt></b> 
+for the environment variables <b><tt>GS_LIB</tt></b>
 and <b><tt>GS_DLL</tt></b>.
 
 <h3><a name="Uninstall_Windows"></a>Uninstalling Ghostscript on Windows</h3>
@@ -410,7 +410,7 @@ to run Ghostscript.  You should install all the files except the fonts in
 Ghostscript, you may wish to replace the <b><tt>FONTMAP</tt></b> file with
 <b><tt>FONTMAP.ATM</tt></b>, and to add to the environment variable
 <b><tt>GS_LIB</tt></b> the name of the directory where the fonts are located
-(see <a href="Use.htm#Finding_files">Use.htm</a> for more information 
+(see <a href="Use.htm#Finding_files">Use.htm</a> for more information
 about <b><tt>GS_LIB</tt></b>).  Before you
 do this, please read carefully the license that accompanies the ATM fonts;
 we take no responsibility for any possible violations of such licenses.
@@ -475,7 +475,7 @@ to copy the currently displayed bitmap to the Clipboard.
 OS/2 comes with some Adobe Type Manager fonts. If you wish to use these with
 Ghostscript, you should replace the <b><tt>FONTMAP</tt></b> file with
 <b><tt>FONTMAP.OS2</tt></b>, and add to the environment variable
-<b><tt>GS_LIB</tt></b> (see <a href="Use.htm#Finding_files">Use.htm</a> 
+<b><tt>GS_LIB</tt></b> (see <a href="Use.htm#Finding_files">Use.htm</a>
 for more information about
 <b><tt>GS_LIB</tt></b>) the name of the directory where the fonts are
 located, usually <b><tt>C:\PSFONTS</tt></b>.  Before you do this, please

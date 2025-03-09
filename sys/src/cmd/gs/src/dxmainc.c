@@ -1,12 +1,12 @@
 /* Copyright (C) 2001 Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -17,9 +17,9 @@
 /* $Id: dxmainc.c,v 1.10 2004/08/19 21:52:20 ghostgum Exp $ */
 
 /* dxmainc.c */
-/* 
+/*
  * Ghostscript frontend which provides a console to the Ghostscript
- * shared library.  Load time linking to libgs.so 
+ * shared library.  Load time linking to libgs.so
  * This does not support the display device.  Use dxmain.c/gsx for that,
  * or modify this program to use bare Xlib calls.
  * Compile using
@@ -51,13 +51,13 @@ static int gsdll_stdout(void *instance, const char *str, int len);
 
 /* callback for reading stdin */
 /* Use async input */
-static int 
+static int
 gsdll_stdin(void *instance, char *buf, int len)
 {
     return read(fileno(stdin), buf, len);
 }
 
-static int 
+static int
 gsdll_stdout(void *instance, const char *str, int len)
 {
     fwrite(str, 1, len, stdout);
@@ -65,7 +65,7 @@ gsdll_stdout(void *instance, const char *str, int len)
     return len;
 }
 
-static int 
+static int
 gsdll_stderr(void *instance, const char *str, int len)
 {
     fwrite(str, 1, len, stderr);
@@ -113,4 +113,3 @@ int main(int argc, char *argv[])
 
     return exit_status;
 }
-

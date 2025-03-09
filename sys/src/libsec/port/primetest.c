@@ -11,7 +11,7 @@ main(void)
 	mpint *nine = mpnew(0);
 
 	fmtinstall('B', mpconv);
-	strtomp("2492491", nil, 16, z);	// 38347921 = x*y = (2**28-9)/7, 
+	strtomp("2492491", nil, 16, z);	// 38347921 = x*y = (2**28-9)/7,
 				//    an example of 3**(n-1)=1 mod n
 	strtomp("15662C00E811", nil, 16, p);// 23528569104401, a prime
 	uitomp(9, nine);

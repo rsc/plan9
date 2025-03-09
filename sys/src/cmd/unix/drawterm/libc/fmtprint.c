@@ -30,4 +30,3 @@ fmtprint(Fmt *f, char *fmt, ...)
 		return 0;
 	return n;
 }
-

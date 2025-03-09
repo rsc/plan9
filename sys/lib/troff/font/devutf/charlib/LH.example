@@ -36,7 +36,7 @@
 %		four logo characters: \(LH\(LH\(LH\(LH
 %
 %	   is sufficient. The test file can go anywhere.
-% 
+%
 %	2: Change into directory /usr/lib/font/devpost/charlib. All file
 %	   pathnames will be relative to that directory.
 %
@@ -128,4 +128,3 @@ end def
 		grestore
 	end
 } def
-

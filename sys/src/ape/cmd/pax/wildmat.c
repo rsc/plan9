@@ -2,34 +2,34 @@
  *
  * $Revision: 1.2 $
  *
- * wildmat.c - simple regular expression pattern matching routines 
+ * wildmat.c - simple regular expression pattern matching routines
  *
- * DESCRIPTION 
+ * DESCRIPTION
  *
- * 	These routines provide simple UNIX style regular expression matching.  
- *	They were originally written by Rich Salz, the comp.sources.unix 
- *	moderator for inclusion in some of his software.  These routines 
- *	were released into the public domain and used by John Gilmore in 
- *	USTAR. 
+ * 	These routines provide simple UNIX style regular expression matching.
+ *	They were originally written by Rich Salz, the comp.sources.unix
+ *	moderator for inclusion in some of his software.  These routines
+ *	were released into the public domain and used by John Gilmore in
+ *	USTAR.
  *
- * AUTHORS 
+ * AUTHORS
  *
- * 	Mark H. Colburn, NAPS International (mark@jhereg.mn.org) 
- * 	John Gilmore (gnu@hoptoad) 
- * 	Rich Salz (rs@uunet.uu.net) 
+ * 	Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
+ * 	John Gilmore (gnu@hoptoad)
+ * 	Rich Salz (rs@uunet.uu.net)
  *
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice is duplicated in all such 
- * forms and that any documentation, advertising materials, and other 
- * materials related to such distribution and use acknowledge that the 
- * software was developed * by Mark H. Colburn and sponsored by The 
- * USENIX Association. 
+ * provided that the above copyright notice is duplicated in all such
+ * forms and that any documentation, advertising materials, and other
+ * materials related to such distribution and use acknowledge that the
+ * software was developed * by Mark H. Colburn and sponsored by The
+ * USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -38,10 +38,10 @@
  * $Log:	wildmat.c,v $
  * Revision 1.2  89/02/12  10:06:20  mark
  * 1.2 release fixes
- * 
+ *
  * Revision 1.1  88/12/23  18:02:41  mark
  * Initial revision
- * 
+ *
  */
 
 #ifndef lint
@@ -65,7 +65,7 @@ static int      star();
 
 
 /*
- * star - handle trailing * in a regular expression 
+ * star - handle trailing * in a regular expression
  *
  * DESCRIPTION
  *
@@ -73,18 +73,18 @@ static int      star();
  *	asterisk ('*').  Star call wildmat() to determine if the substring
  *	passed to it is matches the regular expression.
  *
- * PARAMETERS 
+ * PARAMETERS
  *
- * 	char *source 	- The source string which is to be compared to the 
- *			  regular expression pattern. 
- * 	char *pattern 	- The regular expression which we are supposed to 
- *			  match to. 
+ * 	char *source 	- The source string which is to be compared to the
+ *			  regular expression pattern.
+ * 	char *pattern 	- The regular expression which we are supposed to
+ *			  match to.
  *
- * RETURNS 
+ * RETURNS
  *
- * 	Returns non-zero if the entire source string is completely matched by 
- *	the regular expression pattern, returns 0 otherwise. This is used to 
- *	see if *'s in a pattern matched the entire source string. 
+ * 	Returns non-zero if the entire source string is completely matched by
+ *	the regular expression pattern, returns 0 otherwise. This is used to
+ *	see if *'s in a pattern matched the entire source string.
  *
  */
 
@@ -110,26 +110,26 @@ char           *pattern;	/* regular expression to match */
 
 
 /*
- * wildmat - match a regular expression 
+ * wildmat - match a regular expression
  *
  * DESCRIPTION
  *
- *	Wildmat attempts to match the string pointed to by source to the 
- *	regular expression pointed to by pattern.  The subset of regular 
- *	expression syntax which is supported is defined by POSIX P1003.2 
+ *	Wildmat attempts to match the string pointed to by source to the
+ *	regular expression pointed to by pattern.  The subset of regular
+ *	expression syntax which is supported is defined by POSIX P1003.2
  *	FILENAME EXPANSION rules.
  *
- * PARAMETERS 
+ * PARAMETERS
  *
- * 	char *pattern 	- The regular expression which we are supposed to 
- *			  match to. 
- * 	char *source 	- The source string which is to be compared to the 
- *			  regular expression pattern. 
+ * 	char *pattern 	- The regular expression which we are supposed to
+ *			  match to.
+ * 	char *source 	- The source string which is to be compared to the
+ *			  regular expression pattern.
  *
- * RETURNS 
+ * RETURNS
  *
- * 	Returns non-zero if the source string matches the regular expression 
- *	pattern specified, returns 0 otherwise. 
+ * 	Returns non-zero if the source string matches the regular expression
+ *	pattern specified, returns 0 otherwise.
  *
  */
 
@@ -191,7 +191,7 @@ char           *source;		/* source operand */
     }
 
     /*
-     * For "tar" use, matches that end at a slash also work. --hoptoad!gnu 
+     * For "tar" use, matches that end at a slash also work. --hoptoad!gnu
      */
     return (*source == '\0' || *source == '/');
 }

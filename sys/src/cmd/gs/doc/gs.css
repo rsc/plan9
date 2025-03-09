@@ -40,9 +40,9 @@ h3
 h3:before
 {
    content: counter(h2-count) "." counter(h3-count) " ";
-   
+
 }
-  
+
 tt
 {
   color: rgb(40%,24%,24%);

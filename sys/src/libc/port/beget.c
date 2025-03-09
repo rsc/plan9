@@ -74,4 +74,3 @@ be64put(uchar *t, u64int r)
 	*t++ = r;
 	return t;
 }
-

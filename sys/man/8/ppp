@@ -194,12 +194,12 @@ is a PPP over ethernet (PPPoE) client.
 It invokes
 .I ppp
 to start a PPP conversation which is
-tunneled in PPPoE packets on 
-the ethernet device mounted at 
+tunneled in PPPoE packets on
+the ethernet device mounted at
 .I etherdir
 (default
 .BR /net/ether0 ).
-The 
+The
 .IR pppoe -specific
 options are:
 .TP 3
@@ -212,7 +212,7 @@ during PPPoE discovery
 write debugging output to standard error,
 and pass
 .B -d
-to 
+to
 .I ppp
 .TP
 .B S
@@ -221,7 +221,7 @@ insist on a service named
 during PPPoE discovery
 .PD
 .PP
-The other options are relayed to 
+The other options are relayed to
 .IR ppp .
 .PP
 .I Pptp

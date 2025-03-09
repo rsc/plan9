@@ -12,7 +12,7 @@ Chan*
 lfdchan(int fd)
 {
 	Chan *c;
-	
+
 	c = newchan();
 	c->type = devno('L', 0);
 	c->aux = (void*)(uintptr)fd;
@@ -36,7 +36,7 @@ static Chan*
 lfdattach(char *x)
 {
 	USED(x);
-	
+
 	error(Egreg);
 	return nil;
 }
@@ -48,7 +48,7 @@ lfdwalk(Chan *c, Chan *nc, char **name, int nname)
 	USED(nc);
 	USED(name);
 	USED(nname);
-	
+
 	error(Egreg);
 	return nil;
 }
@@ -68,7 +68,7 @@ lfdopen(Chan *c, int omode)
 {
 	USED(c);
 	USED(omode);
-	
+
 	error(Egreg);
 	return nil;
 }
@@ -107,7 +107,7 @@ lfdwrite(Chan *c, void *buf, long n, vlong off)
 Dev lfddevtab = {
 	'L',
 	"lfd",
-	
+
 	devreset,
 	devinit,
 	devshutdown,

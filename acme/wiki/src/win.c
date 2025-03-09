@@ -147,7 +147,7 @@ wingeter(Window *w, char *buf, int *nb)
 		while(!fullrune(buf, n))
 			buf[n++] = wingetec(w);
 		chartorune(&r, buf);
-	} 
+	}
 	*nb = n;
 	return r;
 }
@@ -275,7 +275,7 @@ winisdirty(Window *w)
 
 	if (seek(w->ctl, 4*(11+1) + 10, 0) < 0)
 		error("control file seek error: %r");
-		
+
 	if(read(w->ctl, &m, 1)  != 1)
 		error("control file read error: %r");
 

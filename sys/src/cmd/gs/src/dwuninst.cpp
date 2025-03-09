@@ -1,12 +1,12 @@
 /* Copyright (C) 1999, Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -54,7 +54,7 @@ BOOL is_win4 = FALSE;
 HINSTANCE phInstance;
 char szSection[] = "////////////////////////////////";
 BOOL bQuit = FALSE;
-BOOL gError = FALSE;	// set TRUE if an uninstall was not successful 
+BOOL gError = FALSE;	// set TRUE if an uninstall was not successful
 
 char szTitle[MAXSTR];
 char szLogFile[MAXSTR];
@@ -69,7 +69,7 @@ BOOL shell_new(void);
 BOOL shell_old(void);
 BOOL doEOF(void);
 
-// #define gs_addmess(str) fputs(str, stdout)	// for debug 
+// #define gs_addmess(str) fputs(str, stdout)	// for debug
 #define gs_addmess(str)
 
 
@@ -239,7 +239,7 @@ DWORD dwResult;
 	    gs_addmess("\\");
 	    gs_addmess(skey);
 	    gs_addmess("\n");
-	    if (RegCreateKeyEx(hrkey, skey, 0, "", 0, KEY_ALL_ACCESS, 
+	    if (RegCreateKeyEx(hrkey, skey, 0, "", 0, KEY_ALL_ACCESS,
 		NULL, &hkey, &dwResult)
 		!= ERROR_SUCCESS)
 		return FALSE;
@@ -279,7 +279,7 @@ registry_delete()
 {
 	long logindex;
 	KEY *key;
-	
+
     // scan log file
     // so we can remove keys in reverse order
     logindex = 0;
@@ -295,9 +295,9 @@ registry_delete()
 		}
 		logindex = ftell(fLog);
     }
-	
+
     // Remove keys
-    for (key = last_key; key != NULL; 
+    for (key = last_key; key != NULL;
 	key = key->previous) {
 		if (key != last_key)
 			free(last_key);
@@ -306,7 +306,7 @@ registry_delete()
 		last_key = key;
     }
     free(last_key);
-	
+
     fseek(fLog, logindex, SEEK_SET);
 	GetLine();
     return TRUE;
@@ -361,7 +361,7 @@ registry_import()
     GetLine();
     if (strncmp(szLine, "REGEDIT4", 8) != 0)
 		return FALSE;
-	
+
     while (GetLine()) {
 		if (IsSection())
 			break;
@@ -394,7 +394,7 @@ registry_import()
 			gs_addmess("\\");
 			gs_addmess("skey");
 			gs_addmess("\n");
-			if (RegCreateKeyEx(hrkey, skey, 0, "", 0, KEY_ALL_ACCESS, 
+			if (RegCreateKeyEx(hrkey, skey, 0, "", 0, KEY_ALL_ACCESS,
 				NULL, &hkey, &dwResult)
 				!= ERROR_SUCCESS)
 				return FALSE;
@@ -409,7 +409,7 @@ registry_import()
 				gs_addmess("Setting registry key value\n   ");
 				gs_addmess(value);
 				gs_addmess("\n");
-				if (RegSetValueEx(hkey, NULL, 0, REG_SZ, 
+				if (RegSetValueEx(hkey, NULL, 0, REG_SZ,
 					(CONST BYTE *)value, strlen(value)+1)
 					!= ERROR_SUCCESS)
 					return FALSE;
@@ -437,8 +437,8 @@ registry_import()
 }
 
 // recursive mkdir
-// requires a full path to be specified, so ignores root \ 
-// apart from root \, must not contain trailing \ 
+// requires a full path to be specified, so ignores root \
+// apart from root \, must not contain trailing \
 // Examples:
 //  c:\          (OK, but useless)
 //  c:\gstools   (OK)
@@ -542,10 +542,10 @@ BOOL shell_new(void)
 }
 
 
-BOOL CreateShellLink(LPCSTR name, LPCSTR description, LPCSTR program, 
+BOOL CreateShellLink(LPCSTR name, LPCSTR description, LPCSTR program,
 	LPCSTR arguments, LPCSTR directory, LPCSTR icon, int nIconIndex)
 {
-	HRESULT hres;    
+	HRESULT hres;
 	IShellLink* psl;
 
 	// Ensure string is UNICODE.
@@ -559,29 +559,29 @@ BOOL CreateShellLink(LPCSTR name, LPCSTR description, LPCSTR program,
 		IID_IShellLink, (void **)&psl);
 	if (SUCCEEDED(hres))    {
 		IPersistFile* ppf;
-		// Query IShellLink for the IPersistFile interface for 
+		// Query IShellLink for the IPersistFile interface for
 		// saving the shell link in persistent storage.
 		hres = psl->QueryInterface(IID_IPersistFile, (void **)&ppf);
-		if (SUCCEEDED(hres)) {            
+		if (SUCCEEDED(hres)) {
 			gs_addmess("Adding shell link\n  ");
 			gs_addmess(name);
 			gs_addmess("\n");
 
 			// Set the path to the shell link target.
-			hres = psl->SetPath(program);         
+			hres = psl->SetPath(program);
 			if (!SUCCEEDED(hres)) {
 				gs_addmess("SetPath failed!");
 				gError = TRUE;
 			}
 			// Set the description of the shell link.
-			hres = psl->SetDescription(description);         
+			hres = psl->SetDescription(description);
 			if (!SUCCEEDED(hres)) {
 				gs_addmess("SetDescription failed!");
 				gError = TRUE;
 			}
 			if ((arguments != (LPCSTR)NULL) && *arguments) {
 				// Set the arguments of the shell link target.
-				hres = psl->SetArguments(arguments);         
+				hres = psl->SetArguments(arguments);
 				if (!SUCCEEDED(hres)) {
 					gs_addmess("SetArguments failed!");
 					gError = TRUE;
@@ -589,7 +589,7 @@ BOOL CreateShellLink(LPCSTR name, LPCSTR description, LPCSTR program,
 			}
 			if ((directory != (LPCSTR)NULL) && *directory) {
 				// Set the arguments of the shell link target.
-				hres = psl->SetWorkingDirectory(directory);         
+				hres = psl->SetWorkingDirectory(directory);
 				if (!SUCCEEDED(hres)) {
 					gs_addmess("SetWorkingDirectory failed!");
 					gError = TRUE;
@@ -597,7 +597,7 @@ BOOL CreateShellLink(LPCSTR name, LPCSTR description, LPCSTR program,
 			}
 			if ((icon != (LPCSTR)NULL) && *icon) {
 				// Set the arguments of the shell link target.
-				hres = psl->SetIconLocation(icon, nIconIndex);         
+				hres = psl->SetIconLocation(icon, nIconIndex);
 				if (!SUCCEEDED(hres)) {
 					gs_addmess("SetIconLocation failed!");
 					gError = TRUE;
@@ -605,12 +605,12 @@ BOOL CreateShellLink(LPCSTR name, LPCSTR description, LPCSTR program,
 			}
 
 			// Save the link via the IPersistFile::Save method.
-			hres = ppf->Save(wsz, TRUE);    
-			// Release pointer to IPersistFile.         
+			hres = ppf->Save(wsz, TRUE);
+			// Release pointer to IPersistFile.
 			ppf->Release();
 		}
-		// Release pointer to IShellLink.       
-		psl->Release();    
+		// Release pointer to IShellLink.
+		psl->Release();
 	}
 
 	return (hres == 0);
@@ -630,10 +630,10 @@ BOOL shell_old(void)
 	char icon[MAXSTR];
 	int nIconIndex;
 	// Remove shell items added by Ghostscript
-	name[0] = description[0] = program[0] = arguments[0] 
+	name[0] = description[0] = program[0] = arguments[0]
 		= directory[0] = icon[0] = '\0';
 	nIconIndex = 0;
-	
+
 	while (GetLine()) {
 		if (IsSection())
 			return TRUE;
@@ -642,10 +642,10 @@ BOOL shell_old(void)
 		if (strlen(szLine) == 0) {
 			if (name[0] != '\0') {
 				// add start menu item
-				CreateShellLink(name, description, program, arguments, 
+				CreateShellLink(name, description, program, arguments,
 					directory, icon, nIconIndex);
 			}
-			name[0] = description[0] = program[0] = arguments[0] 
+			name[0] = description[0] = program[0] = arguments[0]
 				= directory[0] = icon[0] = '\0';
 			nIconIndex = 0;
 			continue;
@@ -671,7 +671,7 @@ BOOL shell_old(void)
 		else if (strcmp(p, "IconIndex") == 0)
 			nIconIndex = atoi(q);
 	}
-	
+
 	return TRUE;
 }
 
@@ -693,8 +693,8 @@ RemoveDlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		    // delete registry entries for uninstall
 			if (is_win4) {
 				HKEY hkey;
-				if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, 
-					UNINSTALLKEY, 0, KEY_ALL_ACCESS, &hkey) 
+				if (RegOpenKeyEx(HKEY_LOCAL_MACHINE,
+					UNINSTALLKEY, 0, KEY_ALL_ACCESS, &hkey)
 					== ERROR_SUCCESS) {
 					RegDeleteKey(hkey, szTitle);
 					RegCloseKey(hkey);
@@ -791,11 +791,11 @@ init(void)
 		s++;
 	}
 	if (strlen(szLogFile) == 0) {
-		MessageBox(HWND_DESKTOP, "Usage: uninstgs logfile.txt", 
+		MessageBox(HWND_DESKTOP, "Usage: uninstgs logfile.txt",
 			"AFPL Ghostscript Uninstall", MB_OK);
 		return FALSE;
 	}
-	
+
 	// read first few lines of file to get title
 	fLog = fopen(szLogFile, "r");
 	if (fLog == (FILE *)NULL) {
@@ -804,21 +804,21 @@ init(void)
 	}
 	GetLine();
 	if (!IsSection()) {
-		MessageBox(HWND_DESKTOP, szLogFile, "Not valid uninstall log", 
+		MessageBox(HWND_DESKTOP, szLogFile, "Not valid uninstall log",
 			MB_OK);
 		return FALSE;
 	}
 	GetLine();
 	if (strcmp(szLine, "UninstallName") != 0) {
-		MessageBox(HWND_DESKTOP, szLogFile, "Not valid uninstall log", 
+		MessageBox(HWND_DESKTOP, szLogFile, "Not valid uninstall log",
 			MB_OK);
 		return FALSE;
 	}
 	GetLine();
 	strcpy(szTitle, szLine);
-	
+
 	NextSection();
-	
+
 	if (LOBYTE(LOWORD(version)) >= 4)
 		is_win4 = TRUE;
 	return TRUE;
@@ -827,7 +827,7 @@ init(void)
 #ifdef __BORLANDC__
 #pragma argsused
 #endif
-int PASCAL 
+int PASCAL
 WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int cmdShow)
 {
 MSG msg;
@@ -839,13 +839,13 @@ MSG msg;
 
     CoInitialize(NULL);
 
-    hDlgModeless = CreateDialogParam(hInstance, 
+    hDlgModeless = CreateDialogParam(hInstance,
 	    MAKEINTRESOURCE(IDD_UNSET),
 	    HWND_DESKTOP, RemoveDlgProc, (LPARAM)NULL);
     hText1 = GetDlgItem(hDlgModeless, IDC_T1);
     hText2 = GetDlgItem(hDlgModeless, IDC_T2);
 
-    SetWindowPos(hDlgModeless, HWND_TOP, 0, 0, 0, 0, 
+    SetWindowPos(hDlgModeless, HWND_TOP, 0, 0, 0, 0,
 	SWP_SHOWWINDOW | SWP_NOMOVE | SWP_NOSIZE);
 
     while (hDlgModeless && GetMessage(&msg, (HWND)NULL, 0, 0)) {
@@ -857,9 +857,8 @@ MSG msg;
 
 	if (fLog)
 		fclose(fLog);
-	
+
 	CoUninitialize();
 
     return 0;
 }
-

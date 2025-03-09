@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -310,7 +310,7 @@ gx_adjust_color_Pattern(const gs_client_color * pcc,
 
 /* GC procedures */
 
-private 
+private
 ENUM_PTRS_BEGIN_PROC(cs_Pattern_enum_ptrs)
 {
     EV_CONST gs_color_space *const pcs = vptr;
@@ -334,7 +334,7 @@ RELOC_PTRS_END
 
 /* ---------------- Serialization. -------------------------------- */
 
-private int 
+private int
 gx_serialize_Pattern(const gs_color_space * pcs, stream * s)
 {
     const gs_pattern_params * p = &pcs->params.pattern;

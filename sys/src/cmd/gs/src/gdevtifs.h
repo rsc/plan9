@@ -1,12 +1,12 @@
 /* Copyright (C) 1994, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -191,10 +191,10 @@ typedef struct gdev_tiff_state_s {
     long dir_off;		/* file offset of next write */
     int ntags;			/* # of tags in directory */
     long strip_index;		/* current strip being output, 0 = first */
-    long strip_count;		
-    long rows;		
+    long strip_count;
+    long rows;
     /* Record offsets of values - these may be indirect if more than one strip */
-    int offset_StripOffsets; 
+    int offset_StripOffsets;
     int offset_StripByteCounts;
     TIFF_ulong *StripOffsets;
     TIFF_ulong *StripByteCounts;

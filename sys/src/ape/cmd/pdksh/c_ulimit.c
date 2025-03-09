@@ -194,7 +194,7 @@ c_ulimit(wp)
 					val = limit.rlim_cur;
 				else if (how & HARD)
 					val = limit.rlim_max;
-			} else 
+			} else
 #endif /* HAVE_SETRLIMIT */
 #ifdef HAVE_ULIMIT
 			{

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989 - 1995, 2001-2003 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -66,7 +66,7 @@ HWND hwndtext;	/* used as identifier for the dll instance */
 char *
 mygetenv(const char * env)
 {
-	return (NULL);	
+	return (NULL);
 }
 
 void
@@ -74,7 +74,7 @@ gp_init (void)
 {
 	extern char    *gs_lib_default_path;
 	extern char    *gs_init_file;
-	
+
 #if 0
 	/*...Initialize Ghostscript's default library paths and initialization file...*/
 
@@ -151,7 +151,7 @@ gp_get_realtime(long *pdt)
     /* Some Unix systems (e.g., Interactive 3.2 r3.0) return garbage */
     /* in tp.tv_usec.  Try to filter out the worst of it here. */
     pdt[1] = tp.tv_usec >= 0 && tp.tv_usec < 1000000 ? tp.tv_usec * 1000 : 0;
-	
+
 #ifdef DEBUG_CLOCK
     printf("tp.tv_sec = %d  tp.tv_usec = %d  pdt[0] = %ld  pdt[1] = %ld\n",
 	   tp.tv_sec, tp.tv_usec, pdt[0], pdt[1]);
@@ -188,7 +188,7 @@ void
 gp_get_clock (long *pdt) {
 
    gp_get_realtime(pdt);	/* Use an approximation on other hosts.  */
-  
+
 }
 
 void
@@ -242,13 +242,13 @@ gpp_get_realtime (long *pdt)
     if ((beginMicroTickCount.lo == 0)&&(beginMicroTickCount.hi == 0) )  {
     	Microseconds(&beginMicroTickCount);
     }
-    	
+
 
    	Microseconds(&microTickCount);
-    
+
     nMicroTickCount.lo = microTickCount.lo - beginMicroTickCount.lo;
     nMicroTickCount.hi = microTickCount.hi - beginMicroTickCount.hi;
-    
+
 	GetDateTime ((unsigned long *) &secs);
 	SecondsToDate (secs, &dateRec);
 
@@ -348,4 +348,3 @@ gp_getenv_display(void)
 {
 	return NULL;
 }
-

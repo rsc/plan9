@@ -1,6 +1,6 @@
 ;	'Ghostscript Interpreter DLL'
 LIBRARY		GSDLL32
-EXPORTS	
+EXPORTS
 		DllEntryPoint
 		DllMain
 		gsdll_revision		@1

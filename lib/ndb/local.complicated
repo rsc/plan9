@@ -99,7 +99,7 @@ ipnet=mysubnetwork ip=10.0.1.0 ipmask=255.255.255.0
 #	- unless a bootf= tuple exists, dhcp will not answer boot requests for it
 #
 ip=10.0.1.10 ether=0010dc724074 sys=fs
-	dom=myfileserver.myuniversity.edu 
+	dom=myfileserver.myuniversity.edu
 	bootf=/386/9boot			# to load /386/9pcfs
 
 ip=10.0.1.11 ether=0010dc724075 sys=auth

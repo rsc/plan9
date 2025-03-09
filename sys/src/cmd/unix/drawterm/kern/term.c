@@ -12,7 +12,7 @@
 #define	Backgnd		0xFF	/* white */
 
 		Memsubfont	*memdefont;
-		
+
 struct{
 	Point	pos;
 	int	bwid;
@@ -58,7 +58,7 @@ screenwin(void)
 	back = memwhite;
 	conscol = memblack;
 	memfillcolor(gscreen, 0x444488FF);
-	
+
 	h = memdefont->height;
 
 	window.min = addpt(gscreen->r.min, Pt(20,20));

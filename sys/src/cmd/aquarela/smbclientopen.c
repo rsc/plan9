@@ -50,4 +50,3 @@ smbclientopen(SmbClient *c, ushort mode, char *name, uchar *errclassp, ushort *e
 	*accessallowedp = smbnhgets(pdata);
 	return 1;
 }
-

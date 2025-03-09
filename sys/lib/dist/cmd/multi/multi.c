@@ -3,7 +3,7 @@
 
 #include "multiproto.h"
 struct {
-	char *name; 
+	char *name;
 	void (*fn)(int, char**);
 } mains[] =
 {
@@ -15,12 +15,12 @@ main(int argc, char **argv)
 {
 	int i;
 	char *cmd, *p;
-	
+
 	if(argc == 1){
 		fprint(2, "usage: multi cmd args...\n");
 		exits("usage");
 	}
-	
+
 	cmd = argv[1];
 	if(p = strrchr(cmd, '/'))
 		cmd = p+1;

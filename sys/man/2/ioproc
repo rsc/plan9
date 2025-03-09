@@ -175,4 +175,3 @@ ioread(Ioproc *io, int fd, void *a, long n)
 .IR open (2),
 .IR read (2),
 .IR thread (2)
-

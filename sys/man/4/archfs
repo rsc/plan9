@@ -7,7 +7,7 @@ archfs \- mount mkfs-style archive
 .B -abcC
 ]
 [
-.B -m 
+.B -m
 .I mtpt
 ]
 .I archfile
@@ -17,7 +17,7 @@ mounts at
 .I mtpt
 (default
 .BR /mnt/arch )
-a file system presenting the contents of an 
+a file system presenting the contents of an
 archive in the format produced by
 the
 .B -a

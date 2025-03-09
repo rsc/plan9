@@ -85,7 +85,7 @@ or
 The return value is a linked list of
 .B Item
 structures, described in detail below.
-As a side effect, 
+As a side effect,
 .BI * pdi
 is set to point to a newly created
 .B Docinfo

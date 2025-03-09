@@ -1,12 +1,12 @@
 %    Copyright (C) 1994-2003 artofcode LLC.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -103,7 +103,7 @@ pdfdict begin
 /.pdftokenerror {		% <count> <opdict> <errtoken> .pdftokenerror -
   BXlevel 0 le {
     (   **** Unknown operator: ') pdfformaterror
-    dup =string cvs pdfformaterror 
+    dup =string cvs pdfformaterror
     % Attempt a retry scan of the element after changing to PDFScanInvNum
     << /PDFScanInvNum true >> setuserparams
     =string cvs
@@ -135,7 +135,7 @@ pdfdict begin
 	pdfdict /PDFSTEPcount PDFSTEPcount 1 sub .forceput
       } {
         dup ==only
-        (    step # ) print PDFtokencount =only 
+        (    step # ) print PDFtokencount =only
 	( ? ) print flush 1 false .outputpage
 	(%stdin) (r) file 255 string readline {
 	  token {
@@ -655,7 +655,7 @@ pdfdict begin
     } ifelse			% ifelse generation number is correct
     exch PDFfile exch setfileposition	% Return to original file position
   } ifelse
-} bind def      
+} bind def
 
 % ================================ Streams ================================ %
 
@@ -696,7 +696,7 @@ pdfdict begin
 	  % thus, if the terminator was \r, we have a format error!
 	  (   **** Warning: stream operator not terminated by valid EOL.\n) pdfformaterror
 	  pop exit	% fileposition is OK (just past the \r).
-	} if 
+	} if
 	10 eq { exit } if
       } loop	% scan past \n
       dup /FilePosition PDFfile fileposition put
@@ -709,7 +709,7 @@ pdfdict begin
     % Some (bad) PDf files have invalid stream lengths.  This causes problems
     % if we reposition beyond the end of the file.  So we compare the given
     % length to number of bytes left in the file.
-    dup /Length oget 
+    dup /Length oget
     dup PDFfile bytesavailable lt {	% compare to to bytes left in file
       PDFfile fileposition 		% reposition to the end of stream
       add PDFfile exch setfileposition
@@ -738,7 +738,7 @@ pdfdict begin
     (   **** Warning: stream missing 'endstream'.\n) pdfformaterror
     pop /endstream		% fake a valid endstream
   } if
-  /endstream ne { 
+  /endstream ne {
     (   **** Warning: stream Length incorrect.\n) pdfformaterror
     dup /Length undef % prevent the use of the incorrect length.
     cvx endobj exit   % exit from .pdfrun now.
@@ -780,7 +780,7 @@ pdfdict begin
 /filtername {		% <filtername> filtername <filtername'>
   //unabbrevfilterdict 1 index .knownget { exch pop } if
   dup /Filter resourcestatus { pop pop } {
-    Repaired exch	% this error is not the creator's fault	
+    Repaired exch	% this error is not the creator's fault
     (   **** ERROR: Unable to process ) pdfformaterror
     64 string cvs pdfformaterror
     ( data. Page will be missing data.\n) pdfformaterror

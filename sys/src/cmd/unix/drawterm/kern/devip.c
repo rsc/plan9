@@ -187,7 +187,7 @@ ipinit(void)
 
 	fmtinstall('I', eipfmt);
 	fmtinstall('E', eipfmt);
-	
+
 }
 
 Chan *
@@ -769,7 +769,7 @@ cswrite(Chan *c, void *a, long n, vlong offset)
 	return n;
 }
 
-Dev ipdevtab = 
+Dev ipdevtab =
 {
 	'I',
 	"ip",
@@ -790,4 +790,3 @@ Dev ipdevtab =
 	devremove,
 	devwstat,
 };
-

@@ -807,7 +807,7 @@ xtramodes(Reg *r, Adr *a)
 			if(p1->from.type == D_REG ||
 			   (p1->from.type == D_SHIFT && (p1->from.offset&(1<<4)) == 0 &&
 			    (p->as != AMOVB || (a == &p->from && (p1->from.offset&~0xf) == 0))) ||
-			   (p1->from.type == D_CONST && 
+			   (p1->from.type == D_CONST &&
 			    p1->from.offset > -4096 && p1->from.offset < 4096))
 			if(nochange(uniqs(r1), r, p1)) {
 				if(a != &p->from || v.reg != p->to.reg)
@@ -815,7 +815,7 @@ xtramodes(Reg *r, Adr *a)
 					if(p1->reg == NREG || p1->reg == v.reg)
 						/* pre-indexing */
 						p->scond |= C_WBIT;
-					else return 0;	
+					else return 0;
 				}
 				switch (p1->from.type) {
 				case D_REG:
@@ -925,7 +925,7 @@ copyu(Prog *p, Adr *v, Adr *s)
 				return 3;
 		}
 		return 0;
-		
+
 	case ANOP:	/* read, write */
 	case AMOVW:
 	case AMOVF:
@@ -1231,26 +1231,26 @@ copysub1(Prog *p1, Adr *v, Adr *s, int f)
 struct {
 	int opcode;
 	int notopcode;
-	int scond; 
-	int notscond; 
-} predinfo[]  = { 
-	{ ABEQ,	ABNE,	0x0,	0x1, }, 
-	{ ABNE,	ABEQ,	0x1,	0x0, }, 
-	{ ABCS,	ABCC,	0x2,	0x3, }, 
-	{ ABHS,	ABLO,	0x2,	0x3, }, 
-	{ ABCC,	ABCS,	0x3,	0x2, }, 
-	{ ABLO,	ABHS,	0x3,	0x2, }, 
-	{ ABMI,	ABPL,	0x4,	0x5, }, 
-	{ ABPL,	ABMI,	0x5,	0x4, }, 
-	{ ABVS,	ABVC,	0x6,	0x7, }, 
-	{ ABVC,	ABVS,	0x7,	0x6, }, 
-	{ ABHI,	ABLS,	0x8,	0x9, }, 
-	{ ABLS,	ABHI,	0x9,	0x8, }, 
-	{ ABGE,	ABLT,	0xA,	0xB, }, 
-	{ ABLT,	ABGE,	0xB,	0xA, }, 
-	{ ABGT,	ABLE,	0xC,	0xD, }, 
-	{ ABLE,	ABGT,	0xD,	0xC, }, 
-}; 
+	int scond;
+	int notscond;
+} predinfo[]  = {
+	{ ABEQ,	ABNE,	0x0,	0x1, },
+	{ ABNE,	ABEQ,	0x1,	0x0, },
+	{ ABCS,	ABCC,	0x2,	0x3, },
+	{ ABHS,	ABLO,	0x2,	0x3, },
+	{ ABCC,	ABCS,	0x3,	0x2, },
+	{ ABLO,	ABHS,	0x3,	0x2, },
+	{ ABMI,	ABPL,	0x4,	0x5, },
+	{ ABPL,	ABMI,	0x5,	0x4, },
+	{ ABVS,	ABVC,	0x6,	0x7, },
+	{ ABVC,	ABVS,	0x7,	0x6, },
+	{ ABHI,	ABLS,	0x8,	0x9, },
+	{ ABLS,	ABHI,	0x9,	0x8, },
+	{ ABGE,	ABLT,	0xA,	0xB, },
+	{ ABLT,	ABGE,	0xB,	0xA, },
+	{ ABGT,	ABLE,	0xC,	0xD, },
+	{ ABLE,	ABGT,	0xD,	0xC, },
+};
 
 typedef struct {
 	Reg *start;
@@ -1267,7 +1267,7 @@ enum {
 	Setcond,
 	Toolong
 };
-	
+
 enum {
 	Falsecond,
 	Truecond,
@@ -1275,10 +1275,10 @@ enum {
 	Keepbranch
 };
 
-int 
+int
 isbranch(Prog *p)
 {
-	return (ABEQ <= p->as) && (p->as <= ABLE); 
+	return (ABEQ <= p->as) && (p->as <= ABLE);
 }
 
 int
@@ -1299,23 +1299,23 @@ predicable(Prog *p)
 		|| p->as == AINIT
 		|| p->as == ABCASE
 		|| p->as == ACASE)
-		return 0; 
-	return 1; 
+		return 0;
+	return 1;
 }
 
-/* 
- * Depends on an analysis of the encodings performed by 5l. 
+/*
+ * Depends on an analysis of the encodings performed by 5l.
  * These seem to be all of the opcodes that lead to the "S" bit
- * being set in the instruction encodings. 
- * 
+ * being set in the instruction encodings.
+ *
  * C_SBIT may also have been set explicitly in p->scond.
- */ 
+ */
 int
 modifiescpsr(Prog *p)
 {
 	return (p->scond&C_SBIT)
-		|| p->as == ATST 
-		|| p->as == ATEQ 
+		|| p->as == ATST
+		|| p->as == ATEQ
 		|| p->as == ACMN
 		|| p->as == ACMP
 		|| p->as == AMULU
@@ -1325,7 +1325,7 @@ modifiescpsr(Prog *p)
 		|| p->as == AMOD
 		|| p->as == AMODU
 		|| p->as == ABL;
-} 
+}
 
 /*
  * Find the maximal chain of instructions starting with r which could
@@ -1371,24 +1371,24 @@ Reg *
 successor(Reg *r)
 {
 	if (r->s1)
-		return r->s1; 
+		return r->s1;
 	else
-		return r->s2; 
+		return r->s2;
 }
 
 void
 applypred(Reg *rstart, Joininfo *j, int cond, int branch)
 {
-	int pred; 
-	Reg *r; 
+	int pred;
+	Reg *r;
 
 	if(j->len == 0)
 		return;
 	if (cond == Truecond)
 		pred = predinfo[rstart->prog->as - ABEQ].scond;
 	else
-		pred = predinfo[rstart->prog->as - ABEQ].notscond; 
-	
+		pred = predinfo[rstart->prog->as - ABEQ].notscond;
+
 	for (r = j->start; ; r = successor(r)) {
 		if (r->prog->as == AB) {
 			if (r != j->last || branch == Delbranch)
@@ -1400,7 +1400,7 @@ applypred(Reg *rstart, Joininfo *j, int cond, int branch)
 				r->prog->as = predinfo[rstart->prog->as - ABEQ].notopcode;
 			}
 		}
-		else if (predicable(r->prog)) 
+		else if (predicable(r->prog))
 			r->prog->scond = (r->prog->scond&~C_SCOND)|pred;
 		if (r->s1 != r->link) {
 			r->s1 = r->link;
@@ -1413,7 +1413,7 @@ applypred(Reg *rstart, Joininfo *j, int cond, int branch)
 
 void
 predicate(void)
-{	
+{
 	Reg *r;
 	int t1, t2;
 	Joininfo j1, j2;
@@ -1437,6 +1437,6 @@ predicate(void)
 				excise(r);
 				continue;
 			}
-		} 
-	} 
+		}
+	}
 }

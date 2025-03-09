@@ -2,7 +2,7 @@
 .SH NAME
 regexp \- regular expression notation
 .SH DESCRIPTION
-A 
+A
 .I "regular expression"
 specifies
 a set of strings of characters.
@@ -40,7 +40,7 @@ is any non-metacharacter, or a metacharacter
 (one of
 .BR .*+?[]()|\e^$ ),
 or the delimiter
-preceded by 
+preceded by
 .LR \e .
 .PP
 A
@@ -55,7 +55,7 @@ it matches any character in (or not in)
 .IR s .
 A negated character class never
 matches newline.
-A substring 
+A substring
 .IB a - b\f1,
 with
 .I a
@@ -68,7 +68,7 @@ characters between
 .I a
 and
 .IR b .
-In 
+In
 .IR s ,
 the metacharacters
 .LR - ,
@@ -78,11 +78,11 @@ an initial
 and the regular expression delimiter
 must be preceded by a
 .LR \e ;
-other metacharacters 
+other metacharacters
 have no special meaning and
 may appear unescaped.
 .PP
-A 
+A
 .L .
 matches any character.
 .PP
@@ -92,7 +92,7 @@ matches the beginning of a line;
 .L $
 matches the end of the line.
 .PP
-The 
+The
 .B REP
 operators match zero or more
 .RB ( * ),
@@ -100,12 +100,12 @@ one or more
 .RB ( + ),
 zero or one
 .RB ( ? ),
-instances respectively of the preceding regular expression 
+instances respectively of the preceding regular expression
 .BR e2 .
 .PP
 A concatenated regular expression,
 .BR "e1\|e2" ,
-matches a match to 
+matches a match to
 .B e1
 followed by a match to
 .BR e2 .
@@ -124,6 +124,6 @@ a match to the remainder of the regular expression.
 .IR awk (1),
 .IR ed (1),
 .IR grep (1),
-.IR sam (1), 
+.IR sam (1),
 .IR sed (1),
 .IR regexp (2)

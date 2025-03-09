@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -1351,6 +1351,6 @@ gc_free_empty_chunks(gs_ref_memory_t * mem)
 const gs_memory_t * gcst_get_memory_ptr(gc_state_t *gcst)
 {
     vm_spaces spaces = gcst->spaces;
-    const gs_memory_t *cmem = space_system->stable_memory;	
+    const gs_memory_t *cmem = space_system->stable_memory;
     return cmem;
 }

@@ -103,7 +103,7 @@ enum {					/* Imsc, Mis, Icr */
 	Rxint		= 0x010,
 	Ctsmint		= 0x002,
 };
-	
+
 
 typedef struct Ctlr {
 	u32int*	io;
@@ -579,7 +579,7 @@ pl011enable(Uart* uart, int ie)
 		ctlr->sticky[Imsc] = 0;
 	}
 	csr8w(ctlr, Imsc, 0);
-	
+
 	ctlr->sticky[Cr] = Uarten|Rxe|Txe|Rts;
 	csr8w(ctlr, Cr, 0);
 }

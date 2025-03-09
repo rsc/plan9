@@ -20,4 +20,3 @@ by an interval list and grayscale map. The default interval list is
 grayscale map gets darker as the regions move from left to right along
 the real line. The -i option changes the interval list and the -g option
 modifies the grayscale mapping. Check the man page for more details.
-

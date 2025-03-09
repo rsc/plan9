@@ -10,7 +10,7 @@ Jim McKie
 Russ Cox
 jmk,rsc@plan9.bell-labs.com
 .AB
-This paper describes the internals and 
+This paper describes the internals and
 operation of Fossil, an archival file server built for Plan 9.
 Fossil has not yet replaced the current Plan 9 file server
 and
@@ -270,7 +270,7 @@ Venti file.
 Note that Venti files are assumed
 .I not
 to contain pointers to other Venti blocks.
-The only pointers to Venti blocks occur in 
+The only pointers to Venti blocks occur in
 .CW VtEntry
 structures in
 Venti directories
@@ -363,7 +363,7 @@ Level2: [
 	MetaSource: [
 		right
 		B1: box wid 5*mb
-	] 
+	]
 	Source: [
 		right
 		B1: box fill f
@@ -437,7 +437,7 @@ copies a Venti hierarchy from one Venti server to another,
 given the root
 .CW VtEntry .
 Because the traditional file system described in later sections is
-layered on a Venti hierarchy, 
+layered on a Venti hierarchy,
 .I venti/copy
 can copy it without fully understanding its structure.
 .NH 1
@@ -474,7 +474,7 @@ The notation
 .CW name[s]
 denotes a string stored as a two-byte length
 and then that many bytes.
-The above describes Version 9 of the 
+The above describes Version 9 of the
 .CW DirEntry
 format.  Versions 7 and 8 are very similar; they can be
 read by the current
@@ -496,7 +496,7 @@ field is an index into the parallel Venti directory.
 The
 .CW gen
 field must match the
-.CW gen 
+.CW gen
 field in the corresponding
 .CW VtEntry
 in the directory;
@@ -591,7 +591,7 @@ Level2: [
 		B3: box wid mb
 		B4: box wid mb
 		B5: box wid mb
-	] 
+	]
 	Source: [
 		right
 		B1: box fill f
@@ -693,7 +693,7 @@ structures along with a sorted index to make it easy
 to look for a particular
 .CW DirEntry
 by its
-.CW elem 
+.CW elem
 field.
 The details are in the source code.
 .PP
@@ -708,7 +708,7 @@ and a Venti file holding metadata for the root directory itself.
 These
 .CW VtEntry
 structures are placed in a Venti directory of their own,
-described by the single 
+described by the single
 .CW VtEntry
 in the
 root block.
@@ -720,7 +720,7 @@ The changes only affect the data on the local disk; the data
 archived to Venti is exactly in vac format.
 .PP
 Blocks stored on local disk may contain scores pointing at local disk
-blocks or at Venti blocks. 
+blocks or at Venti blocks.
 Local block addresses are stored as 20-byte scores in which the first 16 bytes
 are all zero and the last 4 bytes specify a block number in the disk.
 Before a block is archived, all the
@@ -785,7 +785,7 @@ the epoch in which the block was allocated.
 If a block was allocated in an epoch earlier than the current one,
 it is immutable and treated as copy-on-write.
 Taking a snapshot can be accomplished by
-recording the address of the current root block and then 
+recording the address of the current root block and then
 incrementing the epoch number.
 Notice that the copy-on-write method makes
 snapshots both time efficient and space efficient.
@@ -801,13 +801,13 @@ The blocks in the archival snapshots are moved to Venti,
 but the blocks in the ephemeral snapshots take up space
 in the local disk file.
 To allow reclamation of this disk space, the file system
-maintains a 
+maintains a
 .I low
 .I epoch ,
 which is the epoch of the earliest ephemeral snapshot
 still available.
 Fossil only allows access to snapshots with epoch numbers
-between the 
+between the
 low epoch and the current epoch
 (also called the high epoch).
 Incrementing the low epoch thus makes old
@@ -909,7 +909,7 @@ Block reclamation
 .HP
 The blocks in the active file system form a tree: each
 block has only one parent.
-Once a copy-on-write block 
+Once a copy-on-write block
 .I b
 is replaced by its copy, it is no longer
 needed by the active file system.
@@ -1032,7 +1032,7 @@ Process structure
 The file server is structured as a set of processes synchronizing
 mostly through message passing along queues.
 The processes are given names, which can be seen in the output of
-.CW ps 
+.CW ps
 .CW -a .
 .PP
 .CW Listen
@@ -1081,13 +1081,13 @@ taking snapshots of the file system.
 .NH 2
 Block cache
 .HP
-Fossil maintains an in-memory block cache which 
+Fossil maintains an in-memory block cache which
 holds both local disk blocks and Venti blocks.
 Cache eviction follows a least recently used policy.
 Dirty blocks are restricted to at most half the cache.
 This can be changed by editing
 .CW DirtyPercentage
-in 
+in
 .CW dat.h .
 .PP
 The block cache uses soft updates [1] to ensure that the on-disk
@@ -1095,7 +1095,7 @@ file system is always self-consistent.
 Thus there is no
 .I halt
 console command
-and no need to check a file system 
+and no need to check a file system
 that was shut down without halting.
 .NH 2
 Archiving
@@ -1114,7 +1114,7 @@ The snapshots
 .CW /snapshot/\fIyyyy\fP/\fImmdd\fP/\fIhhmm
 are stored as empty directories.
 Once all the blocks have been archived,
-a 
+a
 .CW VtRoot
 header for the file system is archived.
 The score of that header is recorded in
@@ -1127,17 +1127,17 @@ to restore a file system (see
 .NH 2
 Contrast with the old file server
 .HP
-The most obvious difference between Fossil and the 
-old Plan 9 file server [2] is that Fossil uses a Venti server as 
+The most obvious difference between Fossil and the
+old Plan 9 file server [2] is that Fossil uses a Venti server as
 its archival storage in place of a WORM juke box.
-There are a few other architectural differences to be 
+There are a few other architectural differences to be
 aware of.
 .PP
 Fossil is a user-level program run on a standard kernel.
 .PP
 Fossil does not have any way to concatenate, stripe, or
 mirror disk files.  For functionality similar to the old file server's
-configuration strings, use the experimental file stack device 
+configuration strings, use the experimental file stack device
 (see
 .I fs (3)).
 .PP

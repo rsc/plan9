@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -209,7 +209,7 @@ private const fixed_colorant_names_list DeviceCMYKComponents = {
 private const gx_device_procs spot_rgb_procs = device_procs(get_spotrgb_color_mapping_procs);
 
 const xcf_device gs_xcf_device =
-{   
+{
     prn_device_body_extended(xcf_device, spot_rgb_procs, "xcf",
 	 DEFAULT_WIDTH_10THS, DEFAULT_HEIGHT_10THS,
 	 X_DPI, Y_DPI,		/* X and Y hardware resolution */
@@ -233,7 +233,7 @@ const xcf_device gs_xcf_device =
 private const gx_device_procs spot_cmyk_procs = device_procs(get_xcf_color_mapping_procs);
 
 const xcf_device gs_xcfcmyk_device =
-{   
+{
     prn_device_body_extended(xcf_device, spot_cmyk_procs, "xcfcmyk",
 	 DEFAULT_WIDTH_10THS, DEFAULT_HEIGHT_10THS,
 	 X_DPI, Y_DPI,		/* X and Y hardware resolution */
@@ -690,7 +690,7 @@ check_process_color_names(const fixed_colorant_names_list * pcomp_list,
     if (pcomp_list) {
         const fixed_colorant_name * plist = *pcomp_list;
         uint size = pstring->size;
-    
+
 	while( *plist) {
 	    if (compare_color_names(*plist, strlen(*plist), pstring->data, size)) {
 		return true;
@@ -875,7 +875,7 @@ xcf_put_params(gx_device * pdev, gs_param_list * plist)
         if (scna.data != 0) {
 	    int i;
 	    int num_names = scna.size;
-	    const fixed_colorant_names_list * pcomp_names = 
+	    const fixed_colorant_names_list * pcomp_names =
 	    			((xcf_device *)pdev)->std_colorant_names;
 
 	    for (i = num_spot = 0; i < num_names; i++) {
@@ -888,7 +888,7 @@ xcf_put_params(gx_device * pdev, gs_param_list * plist)
         }
         npcmcolors = pdevn->num_std_colorant_names;
         pdevn->color_info.num_components = npcmcolors + num_spot;
-        /* 
+        /*
          * The DeviceN device can have zero components if nothing has been
 	 * specified.  This causes some problems so force at least one
 	 * component until something is specified.
@@ -922,7 +922,7 @@ xcf_put_params(gx_device * pdev, gs_param_list * plist)
 
 /*
  * This routine will check to see if the color component name  match those
- * that are available amoung the current device's color components.  
+ * that are available amoung the current device's color components.
  *
  * Parameters:
  *   dev - pointer to device data structure.
@@ -1193,7 +1193,7 @@ xcf_shuffle_to_tile(xcf_write_ctx *xc, byte **tile_data, const byte *row,
 	int extra_stride = tile_width * tile_height;
 	byte *extra_ptr = tile_data[tile_i] + extra_stride * base_bytes_pp +
 	    yrem * tile_width;
-	    
+
 	int base_idx = 0;
 
 	for (x = 0; x < tile_width; x++) {
@@ -1230,7 +1230,7 @@ xcf_icc_to_tile(xcf_write_ctx *xc, byte **tile_data, const byte *row,
 	byte *extra_ptr = tile_data[tile_i] + extra_stride * base_bytes_pp +
 	    yrem * tile_width;
 	double in[MAX_CHAN], out[MAX_CHAN];
-	    
+
 	int base_idx = 0;
 
 	for (x = 0; x < tile_width; x++) {
@@ -1380,7 +1380,7 @@ xcf_write_footer(xcf_write_ctx *xc, xcf_device *pdev)
 	    offset += bytes_pp * tile_size;
 	}
 	xcf_write_32(xc, 0);
-	
+
     }
     return code;
 }

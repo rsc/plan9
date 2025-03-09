@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -42,7 +42,7 @@ private_st_cpath_enum();
 private_st_cpath_path_list();
 
 /* GC procedures for gx_clip_path */
-private 
+private
 ENUM_PTRS_WITH(clip_path_enum_ptrs, gx_clip_path *cptr) return ENUM_USING(st_path, &cptr->path, sizeof(cptr->path), index - 2);
 
 case 0:
@@ -347,7 +347,7 @@ rc_free_cpath_path_list(gs_memory_t * mem, void *vplist, client_name_t cname)
    of 1, and "steals" the reference to next (i.e. does not increment
    its reference count). */
 private int
-gx_cpath_path_list_new(gs_memory_t *mem, gx_clip_path *pcpath, int rule, 
+gx_cpath_path_list_new(gs_memory_t *mem, gx_clip_path *pcpath, int rule,
 			gx_path *ppfrom, gx_cpath_path_list *next, gx_cpath_path_list **pnew)
 {
     int code;
@@ -622,7 +622,7 @@ gx_cpath_intersect(gx_clip_path *pcpath, /*const*/ gx_path *ppath_orig,
 					new_box.q.x, new_box.q.y);
 
 	if (!path_valid && next == NULL) {
-	    code = gx_cpath_path_list_new(pcpath->path.memory, pcpath, pcpath->rule, 
+	    code = gx_cpath_path_list_new(pcpath->path.memory, pcpath, pcpath->rule,
 					    &pcpath->path, NULL, &next);
 	    if (code < 0)
 		goto ex;
@@ -634,7 +634,7 @@ gx_cpath_intersect(gx_clip_path *pcpath, /*const*/ gx_path *ppath_orig,
 	    gx_path_assign_preserve(&pcpath->path, ppath_orig);
 	    pcpath->path_valid = true;
 	} else {
-	    code = gx_cpath_path_list_new(pcpath->path.memory, NULL, rule, 
+	    code = gx_cpath_path_list_new(pcpath->path.memory, NULL, rule,
 					    ppath_orig, next, &pcpath->path_list);
 	}
     }

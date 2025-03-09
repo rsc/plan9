@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -270,7 +270,7 @@ int gs_text_resync(gs_text_enum_t *pte, const gs_text_enum_t *pfrom);
 	/*
 	 * The device has asked to execute CDevProc.
 	 * Obtain the current codes from gs_text_current_char/glyph,
-	 * do whatever is necessary and put CDevProc results to pte->cdevproc_result, 
+	 * do whatever is necessary and put CDevProc results to pte->cdevproc_result,
 	 * and then call gs_text_process again with pte->cdevproc_result_valid=true.
 	 */
 #define TEXT_PROCESS_CDEVPROC 3

@@ -1,12 +1,12 @@
 #    Copyright (C) 1997-2002 artofcode LLC. All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -403,7 +403,7 @@ include $(GLSRCDIR)/unixlink.mak
 include $(GLSRCDIR)/unix-end.mak
 include $(GLSRCDIR)/unixinst.mak
 
-# platform-specific clean-up  
+# platform-specific clean-up
 # this makefile is intended to be hand edited so we don't distribute
 # the (presumedly modified) version in the top level directory
 distclean : clean config-clean
@@ -411,4 +411,3 @@ distclean : clean config-clean
 
 maintainer-clean : distclean
 	# nothing special to do
-

@@ -35,4 +35,3 @@ $LIB:
 	$CC $CFLAGS ../cc/$stem.c
 
 bound.$O:	bound.h
-

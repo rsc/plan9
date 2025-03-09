@@ -177,7 +177,7 @@ command below) and a newline character is typed,
 acme copies leading white space on the current line to the new line.
 The option
 .B -a
-causes each window to start in 
+causes each window to start in
 autoindent mode.
 .SS "Directory context
 Each window's tag names a directory: explicitly if the window

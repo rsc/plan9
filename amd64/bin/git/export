@@ -40,7 +40,7 @@ for(c in $commits){
 			bind $pp/tree a
 		if(test -d $cp/tree)
 			bind $cp/tree b
-		
+
 		echo From: `{cat $cp/author}
 		echo Date: `{date -uf'WW, DD MMM YYYY hh:mm:ss Z' `{walk -em $cp/author}}
 		<$cp/msg awk '
@@ -53,7 +53,7 @@ for(c in $commits){
 			else
 				patch = "[PATCH]"
 			printf "Subject: %s %s\n\n", patch, msg
-			
+
 			gsub("^[ 	]|[ 	]$", "", msg)
 			gsub("[^a-zA-Z0-9_]+", "-", msg)
 			printf "%.4d-%s.patch", n, msg >ENVIRON["patchname"]

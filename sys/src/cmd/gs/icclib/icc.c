@@ -1,5 +1,5 @@
 
-/* 
+/*
  * International Color Consortium Format Library (icclib)
  * For ICC profile version 3.4
  *
@@ -18,7 +18,7 @@
  *      errors are ignored where possible, rather than generating
  *      a fatal error (see ICM_STRICT #define).
  *
- *      NameColor Dump doesn't handle device space correctly - 
+ *      NameColor Dump doesn't handle device space correctly -
  *	    should use appropriate interpretation in case device is Lab etc.
  *
  *      Should recognise & honour unicode 0xFFFE endian marker.
@@ -51,7 +51,7 @@
 
 /*
  * Change History:
- * 
+ *
  * 2.02
  *      Merged rename of [u]int64 to icm[Ui][I]nt64 (to work around
  *      AIX 5.1L portability bug) from Raph Levien.
@@ -96,13 +96,13 @@
  * 1.31
  *      Added file I/O class to allow substitution of alternative ICC profile
  *      file access. Provide standard file class instance, and memory image
- *      instance of file I/O class as default and example. 
+ *      instance of file I/O class as default and example.
  *      Added an optional new_icc_a() object creator, that takes a memory
  *      allocator class instance. This allows an alternate memory heap to
- *      be used with the icc class. 
+ *      be used with the icc class.
  *      Renamed object free() methods to del() for more consistency with new().
  *
- * 1.30	
+ * 1.30
  *      Added workaround for reading some Adobe profiles with confused header DateTime.
  *      Enhanced tag allocate() methods so that they can resize allocations.
  *      Enhanced icmLut_set_tables() to access grid points in a cache friendly order.
@@ -110,15 +110,15 @@
  *      uneccessary static declarations in icc.h, and fixed a bug in
  *      icmTable_lookup_bwd() that effected both accuracy and speed. (Thanks to Andrei Frolov)
  *      Removed icmAbsoluteColorimetricXYZ intent, and replaced it with
- *      a PCS overide capability. This adds a new parameter to get_luobj() 
+ *      a PCS overide capability. This adds a new parameter to get_luobj()
  *      Added Lab translations of some XYZ "dump" strings.
  *      Fix memory leak after failed tag read + rename_tag function
  *      + shared library support changes. (Thanks to Carles Llopis).
  *		Changed all the public 2str utility routines to a single function
  *      that can be used to interpret an enumeration or tag in a human
- *      readable form. 
+ *      readable form.
  *
- * 1.23	
+ * 1.23
  *      Fixed important bug in Lut read/write. The matrix values had their
  *      rows and columns switched. Not many profiles exercise this code.
  *      Thanks to David Gillman for discovering this problem.
@@ -145,7 +145,7 @@
  *      for this correction of Lab encoding.
  *      Trying to create an 8 bit XYZ Lut will now fail if icclib helper
  *      functions are used to create it.
- * 
+ *
  * 1.20	99/2/7
  *      Added profile color lookup functon.
  *      Added set_tables() support.
@@ -273,7 +273,7 @@ char *mode
 	if ((fp = freopen(name, nmode, fp)) == NULL)
 		return NULL;
 #endif
-	
+
 	p = new_icmFileStd_fp(fp);
 
 	if (p != NULL) {
@@ -885,7 +885,7 @@ static int check_null_string16(char *cp, int len) {
 			break;
 		cp += 2;
 	}
-	if (len == 0) 
+	if (len == 0)
 		return 1;
 	return 0;
 }
@@ -2716,7 +2716,7 @@ static char *string_XYZNumber_and_Lab(icmXYZNumber *p) {
 	sprintf(buf,"%f, %f, %f    [Lab %f, %f, %f]", p->X, p->Y, p->Z, lab[0], lab[1], lab[2]);
 	return buf;
 }
-			
+
 /* icmXYZArray object */
 
 /* Return the number of bytes needed to write this tag */
@@ -2849,7 +2849,7 @@ static void icmXYZArray_dump(
 		unsigned long i;
 		for (i = 0; i < p->size; i++) {
 			fprintf(op,"    %lu:  %s\n",i,string_XYZNumber_and_Lab(&p->data[i]));
-			
+
 		}
 	}
 }
@@ -2963,7 +2963,7 @@ static int icmTable_setup_bwd(
 
 	rt->size = size;		/* Stash pointers to these away */
 	rt->data = data;
-	
+
 	/* Find range of output values */
 	rt->rmin = 1e300;
 	rt->rmax = -1e300;
@@ -2977,7 +2977,7 @@ static int icmTable_setup_bwd(
 	/* Decide on reverse granularity */
 	rt->rsize = (rt->size+2)/2;
 	rt->qscale = (double)rt->rsize/(rt->rmax - rt->rmin);	/* Scale factor to quantize to */
-	
+
 	/* Initialize the reverse lookup structures, and get overall min/max */
 	if ((rt->rlists = (int **) icp->al->calloc(icp->al, 1, rt->rsize * sizeof(int *))) == NULL) {
 		return 2;
@@ -3122,7 +3122,7 @@ static int icmCurve_lookup_bwd(
 		else
 			*out = pow(val, 1.0/p->data[0]);
 	} else { /* Use linear interpolation */
-		if (p->rt.inited == 0) {	
+		if (p->rt.inited == 0) {
 			rv = icmTable_setup_bwd(icp, &p->rt, p->size, p->data);
 			if (rv != 0) {
 				sprintf(icp->err,"icmCurve_lookup: Malloc failure in reverse lookup init.");
@@ -3917,7 +3917,7 @@ static int read_DateTimeNumber(icmDateTimeNumber *p, char *d) {
 	 || p->hours > 23
 	 || p->minutes > 59
 	 || p->seconds > 59) {
-		unsigned int tt; 
+		unsigned int tt;
 
 		/* Check for Adobe problem */
 		if (p->month < 1900 || p->month > 3000
@@ -3943,7 +3943,7 @@ static char *string_DateTimeNumber(icmDateTimeNumber *p) {
 					  "Jul","Aug","Sep","Oct","Nov","Dec"};
 	static char buf[80];
 
-	sprintf(buf,"%d %s %4d, %d:%02d:%02d", 
+	sprintf(buf,"%d %s %4d, %d:%02d:%02d",
 	                p->day, mstring[p->month > 12 ? 0 : p->month], p->year,
 	                p->hours, p->minutes, p->seconds);
 	return buf;
@@ -3953,10 +3953,10 @@ static char *string_DateTimeNumber(icmDateTimeNumber *p) {
 static void setcur_DateTimeNumber(icmDateTimeNumber *p) {
 	time_t cclk;
 	struct tm *ctm;
-	
+
 	cclk = time(NULL);
 	ctm = localtime(&cclk);
-	
+
 	p->year    = ctm->tm_year + 1900;
 	p->month   = ctm->tm_mon + 1;
 	p->day     = ctm->tm_mday;
@@ -4141,7 +4141,7 @@ static int icmLut_nu_matrix(
 	icmLut *p		/* Pointer to Lut object */
 ) {
 	int i, j;
-	
+
 	for (j = 0; j < 3; j++) {		/* Rows */
 		for (i = 0; i < 3; i++) {	/* Columns */
 			if (   (i == j && p->e[j][i] != 1.0)
@@ -4523,14 +4523,14 @@ int co[]		/* Coordinates to return */
 	do {
 		int b;
 		int gix;	/* Gray code index */
-		
+
 		p->ix = (p->ix + 1) & p->tmask;
 
 		gix = p->ix ^ (p->ix >> 1);		/* Convert to gray code index */
-	
-		for (e = 0; e < di; e++) 
+
+		for (e = 0; e < di; e++)
 			co[e] = 0;
-		
+
 		for (b = 0; b < bits; b++) {	/* Distribute bits */
 			if (b & 1) {
 				for (e = di-1; e >= 0; e--)  {		/* In reverse order */
@@ -4544,7 +4544,7 @@ int co[]		/* Coordinates to return */
 				}
 			}
 		}
-	
+
 		/* Convert from Gray to binary coordinates */
 		for (e = 0; e < di; e++)  {
 			unsigned sh, tv;
@@ -4561,7 +4561,7 @@ int co[]		/* Coordinates to return */
 		}
 
 	} while (e < di);
-	
+
 	return (p->ix == 0);
 }
 
@@ -4578,7 +4578,7 @@ typedef enum {
 /* given the color space and Lut type */
 /* Return 0 on success, 1 on match failure */
 static int getNormFunc(
-	icColorSpaceSignature csig, 
+	icColorSpaceSignature csig,
 	icTagTypeSignature    tagSig,
 	icmNormFlag           flag,
 	void               (**nfunc)(double *out, double *in)
@@ -4736,28 +4736,28 @@ void (*outfunc)(void *cbctx, double *out, double *in)
 
 	/* To make this clut function cache friendly, we use the pseudo-hilbert */
 	/* count sequence. This keeps each point close to the last in the */
-	/* multi-dimensional space. */ 
+	/* multi-dimensional space. */
 
 	psh_init(&counter, p->inputChan, p->clutPoints, ii);	/* Initialise counter */
 
 	/* Itterate through all verticies in the grid */
 	for (;;) {
 		int ti;			/* Table index */
-	
+
 		for (ti = e = 0; e < p->inputChan; e++) { 	/* Input tables */
 			ti += ii[e] * p->dinc[e];				/* Clut index */
 			iv[e] = ii[e]/(p->clutPoints-1.0);		/* Vertex coordinates */
 			iv[e] = iv[e] * (imax[e] - imin[e]) + imin[e]; /* Undo expansion to 0.0 - 1.0 */
 			*((int *)&iv[-e-1]) = ii[e];			/* Trick to supply grid index in iv[] */
 		}
-	
+
 		ifromentry(iv,iv);			/* Convert from table value to input color space */
-	
+
 		/* Apply incolor -> outcolor function we want to represent */
 		clutfunc(cbctx, iv, iv);
-	
+
 		otoentry(iv,iv);			/* Convert from output color space value to table value */
-	
+
 		/* Expand used range to 0.0 - 1.0, and clip to legal values */
 		for (e = 0; e < p->outputChan; e++) {
 			double tt;
@@ -4768,10 +4768,10 @@ void (*outfunc)(void *cbctx, double *out, double *in)
 				tt = 1.0;
 			iv[e] = tt;
 		}
-	
+
 		for (e = 0; e < p->outputChan; e++) 	/* Output chans */
 			p->clutTable[ti++] = iv[e];
-	
+
 		/* Increment index within block (Reverse index significancd) */
 		if (psh_inc(&counter, ii))
 			break;
@@ -5191,7 +5191,7 @@ static void icmLut_dump(
 				for (k = 0; k < p->outputChan; k++, i++)
 					fprintf(op," %1.10f",p->clutTable[i]);
 				fprintf(op,"\n");
-			
+
 				for (j = 0; j < p->inputChan; j++) { /* Increment index */
 					ii[j]++;
 					if (ii[j] < p->clutPoints)
@@ -5275,7 +5275,7 @@ static int icmLut_allocate(
 			p->dcube[g+i] = p->dcube[i] + p->dinc[j];
 		g *= 2;
 	}
-	
+
 	return 0;
 }
 
@@ -5805,7 +5805,7 @@ static int icmNamedColor_read(
 		}
 		strcpy((void *)p->prefix, (void *)bp);
 		bp += strlen(p->prefix) + 1;
-	
+
 		/* Suffix for each color name */
 		mxl = (end - bp) < 32 ? (end - bp) : 32;
 		if (check_null_string(bp,mxl) != 0) {
@@ -5815,12 +5815,12 @@ static int icmNamedColor_read(
 		}
 		strcpy((void *)p->suffix, (void *)bp);
 		bp += strlen(p->suffix) + 1;
-	
+
 		if ((rv = p->allocate((void *)p)) != 0) {
 			icp->al->free(icp->al, buf);
 			return rv;
 		}
-	
+
 		/* Read all the data from the buffer */
 		for (i = 0; i < p->count; i++) {
 			if ((rv = read_NamedColorVal(p->data+i, bp, end, icp->header->pcs, p->nDeviceCoords)) != 0) {
@@ -5833,7 +5833,7 @@ static int icmNamedColor_read(
 	} else {  /* icmNC2 */
 		/* Number of device coords per color */
 		p->nDeviceCoords = read_UInt32Number(bp+16);
-	
+
 		/* Prefix for each color name */
 		memcpy((void *)p->prefix, (void *)(bp + 20), 32);
 		if (check_null_string(p->prefix,32) != 0) {
@@ -5841,7 +5841,7 @@ static int icmNamedColor_read(
 			icp->al->free(icp->al, buf);
 			return icp->errc = 1;
 		}
-	
+
 		/* Suffix for each color name */
 		memcpy((void *)p->suffix, (void *)(bp + 52), 32);
 		if (check_null_string(p->suffix,32) != 0) {
@@ -5849,12 +5849,12 @@ static int icmNamedColor_read(
 			icp->al->free(icp->al, buf);
 			return icp->errc = 1;
 		}
-	
+
 		if ((rv = p->allocate((icmBase *)p)) != 0) {
 			icp->al->free(icp->al, buf);
 			return rv;
 		}
-	
+
 		/* Read all the data from the buffer */
 		bp = bp + 84;
 		for (i = 0; i < p->count; i++, bp += (32 + 6 + p->nDeviceCoords * 2)) {
@@ -5912,7 +5912,7 @@ static int icmNamedColor_write(
 
 	if (p->ttype == icSigNamedColorType) {
 		bp = bp + 16;
-	
+
 		/* Prefix for each color name */
 		if ((rv = check_null_string(p->prefix,32)) != 0) {
 			sprintf(icp->err,"icmNamedColor_write: Color prefix is not null terminated");
@@ -5921,7 +5921,7 @@ static int icmNamedColor_write(
 		}
 		strcpy((void *)bp, (void *)p->prefix);
 		bp += strlen(p->prefix) + 1;
-	
+
 		/* Suffix for each color name */
 		if (check_null_string(p->suffix,32)) {
 			sprintf(icp->err,"icmNamedColor_write: Color sufix is not null terminated");
@@ -5930,7 +5930,7 @@ static int icmNamedColor_write(
 		}
 		strcpy((void *)bp, (void *)p->suffix);
 		bp += strlen(p->suffix) + 1;
-	
+
 		/* Write all the data to the buffer */
 
 		for (i = 0; i < p->count; i++) {
@@ -5948,7 +5948,7 @@ static int icmNamedColor_write(
 			icp->al->free(icp->al, buf);
 			return icp->errc = rv;
 		}
-	
+
 		/* Prefix for each color name */
 		if ((rv = check_null_string(p->prefix,32)) != 0) {
 			sprintf(icp->err,"icmNamedColor_write: Color prefix is not null terminated");
@@ -5956,7 +5956,7 @@ static int icmNamedColor_write(
 			return icp->errc = 1;
 		}
 		memcpy((void *)(bp + 20), (void *)p->prefix, 32);
-	
+
 		/* Suffix for each color name */
 		if (check_null_string(p->suffix,32)) {
 			sprintf(icp->err,"icmNamedColor_write: Color sufix is not null terminated");
@@ -5964,7 +5964,7 @@ static int icmNamedColor_write(
 			return icp->errc = 1;
 		}
 		memcpy((void *)(bp + 52), (void *)p->suffix, 32);
-	
+
 		/* Write all the data to the buffer */
 		bp = bp + 84;
 		for (i = 0; i < p->count; i++, bp += (32 + 6 + p->nDeviceCoords * 2)) {
@@ -6213,7 +6213,7 @@ static int icmTextDescription_core_read(
 		strcpy((void *)p->desc, (void *)bp);
 		bp += p->size;
 	}
-	
+
 	/* Read the Unicode string */
 	if ((bp + 8) > end) {
 		*bpp = bp;
@@ -6244,7 +6244,7 @@ static int icmTextDescription_core_read(
 		*up = 0;	/* Unicode null */
 		bp += 2;
 	}
-	
+
 	/* Read the ScriptCode string */
 	if ((bp + 3) > end) {
 		*bpp = bp;
@@ -6276,7 +6276,7 @@ static int icmTextDescription_core_read(
 		memset((void *)p->scDesc, 0, 67);
 	}
 	bp += 67;
-	
+
 	*bpp = bp;
 	return 0;
 }
@@ -6351,7 +6351,7 @@ static int icmTextDescription_core_write(
 		strcpy((void *)bp, (void *)p->desc);
 		bp += p->size;
 	}
-	
+
 	/* Write the Unicode string */
 	if ((rv = write_UInt32Number(p->ucLangCode, bp)) != 0) {
 		sprintf(icp->err,"icmTextDescription_write: write_UInt32Number() failed");
@@ -6383,7 +6383,7 @@ static int icmTextDescription_core_write(
 		bp[1] = 0;
 		bp += 2;
 	}
-	
+
 	/* Write the ScriptCode string */
 	if ((rv = write_UInt16Number(p->scCode, bp)) != 0) {
 		sprintf(icp->err,"icmTextDescription_write: write_UInt16Number() failed");
@@ -6655,7 +6655,7 @@ static int icmDescStruct_read(
 	if ((rv = p->model.core_read(&p->model, bpp, end)) != 0) {
 		return rv;
 	}
-	
+
 	return 0;
 }
 
@@ -7622,7 +7622,7 @@ static void icmUcrBg_dump(
 		unsigned long i, r, c, size;
 		fprintf(op,"  Description:\n");
 		fprintf(op,"    No. chars = %lu\n",p->size);
-	
+
 		size = p->size > 0 ? p->size-1 : 0;
 		i = 0;
 		for (r = 1;; r++) {		/* count rows */
@@ -8313,7 +8313,7 @@ static unsigned int icmCrdInfo_get_size(
 	len += 8;				/* 8 bytes for tag and padding */
 	len += 4 + p->ppsize;	/* Postscript product name */
 	for (t = 0; t < 4; t++) {	/* For all 4 intents */
-		len += 4 + p->crdsize[t];	/* crd names */ 
+		len += 4 + p->crdsize[t];	/* crd names */
 	}
 	return len;
 }
@@ -8385,7 +8385,7 @@ static int icmCrdInfo_read(
 		memcpy((void *)p->ppname, (void *)bp, p->ppsize);
 		bp += p->ppsize;
 	}
-	
+
 	/* CRD names for the four rendering intents */
 	for (t = 0; t < 4; t++) {	/* For all 4 intents */
 		if ((bp + 4) > end) {
@@ -8406,7 +8406,7 @@ static int icmCrdInfo_read(
 				icp->al->free(icp->al, buf);
 				return icp->errc = 1;
 			}
-			if ((rv = p->allocate((icmBase *)p)) != 0) { 
+			if ((rv = p->allocate((icmBase *)p)) != 0) {
 				icp->al->free(icp->al, buf);
 				return rv;
 			}
@@ -8511,7 +8511,7 @@ static void icmCrdInfo_dump(
 
 	fprintf(op,"  Product name:\n");
 	fprintf(op,"    No. chars = %lu\n",p->ppsize);
-	
+
 	size = p->ppsize > 0 ? p->ppsize-1 : 0;
 	i = 0;
 	for (r = 1;; r++) {		/* count rows */
@@ -8543,7 +8543,7 @@ static void icmCrdInfo_dump(
 	for (t = 0; t < 4; t++) {	/* For all 4 intents */
 		fprintf(op,"  CRD%ld name:\n",t);
 		fprintf(op,"    No. chars = %lu\n",p->crdsize[t]);
-		
+
 		size = p->crdsize[t] > 0 ? p->crdsize[t]-1 : 0;
 		i = 0;
 		for (r = 1;; r++) {		/* count rows */
@@ -8663,7 +8663,7 @@ static int icmHeader_read(
 	char *buf;
 	unsigned int tt;
 	int rv = 0;
-	
+
 	if (len != 128) {
 		sprintf(icp->err,"icmHeader_read: Length expected to be 128");
 		return icp->errc = 1;
@@ -8932,7 +8932,7 @@ static struct {
 	{icSigViewingConditionsType,   new_icmViewingConditions},
 	{icSigXYZArrayType,            new_icmXYZArray},
 	{icMaxEnumType,                NULL}
-}; 
+};
 
 /* Table that lists the legal Types for each Tag Signature */
 static struct {
@@ -8984,7 +8984,7 @@ static struct {
 	{icSigViewingCondDescTag,		{icSigTextDescriptionType,icMaxEnumType}},
 	{icSigViewingConditionsTag,		{icSigViewingConditionsType,icMaxEnumType}},
 	{icMaxEnumType,					{icMaxEnumType}}
-}; 
+};
 
 /* Fake color tag for specifying PCS */
 #define icSigPCSData  ((icColorSpaceSignature) 0x50435320L)
@@ -9141,7 +9141,7 @@ static struct {
 		 icSigCopyrightTag, icMaxEnumType}},
 
 	{icMaxEnumType,-1,icMaxEnumData, icMaxEnumData,		{icMaxEnumType}}
-}; 
+};
 
 /* ------------------------------------------------------------- */
 /* Check that the ICC profile looks like it will be legal. */
@@ -9208,7 +9208,7 @@ static int check_icc_legal(
 		    space can be any, and the output space must be PCS.
 		~~ should check this here ???
 	*/
-	
+
 	return 0;	/* Assume anything is ok */
 }
 
@@ -9224,7 +9224,7 @@ static int icc_read(
 	int i;
 	unsigned int len;
 	int er = 0;				/* Error code */
-	
+
 	p->fp = fp;
 	p->of = of;
 	if (p->header == NULL) {
@@ -9251,7 +9251,7 @@ static int icc_read(
 			sprintf(p->err,"icc_read: Tag table malloc() failed");
 			return p->errc = 2;
 		}
-	
+
 		len = 4 + p->count * 12;
 		if ((buf = (char *) p->al->malloc(p->al, len)) == NULL) {
 			sprintf(p->err,"icc_read: Tag table read buffer malloc() failed");
@@ -9271,9 +9271,9 @@ static int icc_read(
 		/* Fill in the tag table structure */
 		bp = buf+4;
 		for (i = 0; i < p->count; i++, bp += 12) {
-	    	p->data[i].sig = (icTagSignature)read_SInt32Number(bp + 0);	
+	    	p->data[i].sig = (icTagSignature)read_SInt32Number(bp + 0);
 	    	p->data[i].offset = read_UInt32Number(bp + 4);
-	    	p->data[i].size = read_UInt32Number(bp + 8);	
+	    	p->data[i].size = read_UInt32Number(bp + 8);
 			if (   p->fp->seek(p->fp, of + p->data[i].offset) != 0
 			    || p->fp->read(p->fp, tcbuf, 1, 4) != 4) {
 				sprintf(p->err,"icc_read: fseek() or fread() failed on tag headers");
@@ -9317,7 +9317,7 @@ static unsigned int icc_get_size(
 
 	size = DO_ALIGN(size);
 	size += 4 + p->count * 12;	/* Tag table length */
-	
+
 	/* Reset touched flag for each tag type */
 	for (i = 0; i < p->count; i++) {
 		if (p->data[i].objp == NULL) {
@@ -9370,7 +9370,7 @@ static int icc_write(
 	len = 4 + p->count * 12;	/* Tag table length */
 	size = DO_ALIGN(size);
 	size += len;
-	
+
 	/* Allocate memory buffer for tag table */
 	if ((buf = (char *) p->al->malloc(p->al, len)) == NULL) {
 		sprintf(p->err,"icc_write malloc() failed");
@@ -9408,7 +9408,7 @@ static int icc_write(
 					break;
 			}
 			if (k == p->count) {
-				sprintf(p->err,"icc_write: corrupted link"); 
+				sprintf(p->err,"icc_write: corrupted link");
 				return p->errc = 2;
 			}
 		    p->data[i].offset = p->data[k].offset;
@@ -9433,7 +9433,7 @@ static int icc_write(
 		bp += 12;
 	}
 	p->header->size = size;		/* Record total icc size */
-	
+
 	/* Write the header */
 	if ((rv = p->header->write(p->header, of)) != 0) {
 		p->al->free(p->al, buf);
@@ -9515,7 +9515,7 @@ static icmBase *icc_add_tag(
 	/* (Perhaps we should simply replace it, rather than erroring ?) */
 	for (j = 0; j < p->count; j++) {
 		if (p->data[j].sig == sig) {
-			sprintf(p->err,"icc_add_tag: Already have tag '%s' in profile",tag2str(p->data[j].sig)); 
+			sprintf(p->err,"icc_add_tag: Already have tag '%s' in profile",tag2str(p->data[j].sig));
 			p->errc = 1;
 			return NULL;
 		}
@@ -9567,13 +9567,13 @@ static icmBase *icc_link_tag(
 			break;
 	}
 	if (exi == p->count) {
-		sprintf(p->err,"icc_link_tag: Can't find existing tag '%s'",tag2str(ex_sig)); 
+		sprintf(p->err,"icc_link_tag: Can't find existing tag '%s'",tag2str(ex_sig));
 		p->errc = 1;
 		return NULL;
 	}
 
     if (p->data[exi].objp == NULL) {
-		sprintf(p->err,"icc_link_tag: Existing tag '%s' isn't loaded",tag2str(ex_sig)); 
+		sprintf(p->err,"icc_link_tag: Existing tag '%s' isn't loaded",tag2str(ex_sig));
 		p->errc = 1;
 		return NULL;
 	}
@@ -9598,7 +9598,7 @@ static icmBase *icc_link_tag(
 	/* Check that this tag doesn't already exits */
 	for (j = 0; j < p->count; j++) {
 		if (p->data[j].sig == sig) {
-			sprintf(p->err,"icc_link_tag: Already have tag '%s' in profile",tag2str(p->data[j].sig)); 
+			sprintf(p->err,"icc_link_tag: Already have tag '%s' in profile",tag2str(p->data[j].sig));
 			p->errc = 1;
 			return NULL;
 		}
@@ -9689,7 +9689,7 @@ static icmBase *icc_read_tag(
     if (p->data[i].objp != NULL) {
 		return p->data[i].objp;		/* Just return it */
 	}
-	
+
 	/* See if this should be a link */
 	for (k = 0; k < p->count; k++) {
 		if (i == k)
@@ -9716,7 +9716,7 @@ static icmBase *icc_read_tag(
 		p->errc = 1;
 		return NULL;
 	}
-	
+
 	/* Creat and read in the object */
 	if ((nob = typetable[j].new_obj(p)) == NULL)
 		return NULL;
@@ -9796,7 +9796,7 @@ static int icc_unread_tag(
 		sprintf(p->err,"icc_unread_tag: Tag '%s' not currently loaded",string_TagSignature(sig));
 		return p->errc = 2;
 	}
-	
+
 	if (--(p->data[i].objp->refcount) == 0)			/* decrement reference count */
 			(p->data[i].objp->del)(p->data[i].objp);	/* Last reference */
   	p->data[i].objp = NULL;
@@ -9830,7 +9830,7 @@ static int icc_delete_tag(
 			(p->data[i].objp->del)(p->data[i].objp);	/* Last reference */
   		p->data[i].objp = NULL;
 	}
-	
+
 	/* Now remove it from the tag list */
 	for (; i < (p->count-1); i++)
 		p->data[i] = p->data[i+1];	/* Copy the structure down */
@@ -9878,8 +9878,8 @@ static void icc_dump(
 		icmBase *ob;
 		int tr;
 		fprintf(op,"tag %d:\n",i);
-		fprintf(op,"  sig      %s\n",tag2str(p->data[i].sig)); 
-		fprintf(op,"  type     %s\n",tag2str(p->data[i].ttype)); 
+		fprintf(op,"  sig      %s\n",tag2str(p->data[i].sig));
+		fprintf(op,"  type     %s\n",tag2str(p->data[i].ttype));
 		fprintf(op,"  offset   %d\n", p->data[i].offset);
 		fprintf(op,"  size     %d\n", p->data[i].size);
 		tr = 0;
@@ -9955,7 +9955,7 @@ static void icc_delete(
 /* as processing the output luts values into normalized form ready */
 /* for writing. */
 
-/* These functions should be accessed by calling icc.getNormFuncs() */ 
+/* These functions should be accessed by calling icc.getNormFuncs() */
 
 /* - - - - - - - - - - - - - - - - */
 /* According to 6.5.5 and 6.5.6 of the spec., */
@@ -9963,14 +9963,14 @@ static void icc_delete(
 /* values, ie. as a u1.15 representation, with a value */
 /* range from 0.0 ->  1.999969482422 */
 
-/* Convert Lut index/value to XYZ coord. */ 
+/* Convert Lut index/value to XYZ coord. */
 static void Lut_Lut2XYZ(double *out, double *in) {
 	out[0] = in[0] * (1.0 + 32767.0/32768); /* X */
 	out[1] = in[1] * (1.0 + 32767.0/32768); /* Y */
 	out[2] = in[2] * (1.0 + 32767.0/32768); /* Z */
 }
 
-/* Convert XYZ coord to Lut index/value. */ 
+/* Convert XYZ coord to Lut index/value. */
 static void Lut_XYZ2Lut(double *out, double *in) {
 	out[0] = in[0] * (1.0/(1.0 + 32767.0/32768));
 	out[1] = in[1] * (1.0/(1.0 + 32767.0/32768));
@@ -10168,13 +10168,13 @@ static struct {
 	{icSig15colorData, Lut_15,       Lut_15,        Lut_15,       Lut_15 },
 	{icMaxEnumData,    NULL,         NULL,          NULL,         NULL   }
 };
-	
+
 /* Find appropriate conversion functions */
 /* given the color space and Lut type */
 /* Return 0 on success, 1 on match failure */
 /* NOTE: doesn't set error value, message etc.! */
 static int getNormFunc(
-	icColorSpaceSignature csig, 
+	icColorSpaceSignature csig,
 	icTagTypeSignature    tagSig,
 	icmNormFlag           flag,
 	void               (**nfunc)(double *out, double *in)
@@ -10232,9 +10232,9 @@ static struct {
 } colorrangetable[] = {
 	{icSigXYZData,     1, { 0.0 } , { 1.0 + 32767.0/32768.0 } },
 	{icSigLabData,     0, { 0.0, -128.0, -128.0 },
-	                      { 100.0 + 25500.0/65280.0, 127.0 + 255.0/256.0, 127.0 + 255.0/256.0 } }, 
+	                      { 100.0 + 25500.0/65280.0, 127.0 + 255.0/256.0, 127.0 + 255.0/256.0 } },
 	{icSigLuvData,     0, { 0.0, -128.0, -128.0 },
-	                      { 100.0, 127.0 + 255.0/256.0, 127.0 + 255.0/256.0 } }, 
+	                      { 100.0, 127.0 + 255.0/256.0, 127.0 + 255.0/256.0 } },
 	{icSigYxyData,     1, { 0.0 }, { 1.0 } },
 	{icSigRgbData,     1, { 0.0 }, { 1.0 } },
 	{icSigGrayData,    1, { 0.0 }, { 1.0 } },
@@ -10259,12 +10259,12 @@ static struct {
 	{icSig15colorData, 1, { 0.0 }, { 1.0 } },
 	{icMaxEnumData     }
 };
-	
+
 /* Find appropriate typical encoding ranges for a */
 /* colorspace given the color space. */
 /* Return 0 on success, 1 on match failure */
 static int getRange(
-	icColorSpaceSignature csig, 
+	icColorSpaceSignature csig,
 	double *min, double *max
 ) {
 	int i, e, ee;
@@ -10297,15 +10297,15 @@ static int getRange(
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - */
 
-/* 
+/*
 	Matrix Inversion
 	by Richard Carling
 	from "Graphics Gems", Academic Press, 1990
 */
 
-/* 
+/*
  *   adjoint( original_matrix, inverse_matrix )
- * 
+ *
  *     calculate the adjoint of a 3x3 matrix
  *
  *      Let  a   denote the minor determinant of matrix A obtained by
@@ -10341,11 +10341,11 @@ double in[3][3]
     out[0][0]  =   det2x2(b2, b3, c2, c3);
     out[1][0]  = - det2x2(a2, a3, c2, c3);
     out[2][0]  =   det2x2(a2, a3, b2, b3);
-        
+
     out[0][1]  = - det2x2(b1, b3, c1, c3);
     out[1][1]  =   det2x2(a1, a3, c1, c3);
     out[2][1]  = - det2x2(a1, a3, b1, b3);
-        
+
     out[0][2]  =   det2x2(b1, b2, c1, c2);
     out[1][2]  = - det2x2(a1, a2, c1, c2);
     out[2][2]  =   det2x2(a1, a2, b1, b2);
@@ -10353,7 +10353,7 @@ double in[3][3]
 
 /*
  * double = det3x3(  a1, a2, a3, b1, b2, b3, c1, c2, c3 )
- * 
+ *
  * calculate the determinant of a 3x3 matrix
  * in the form
  *
@@ -10377,12 +10377,12 @@ static double det3x3(double in[3][3]) {
 }
 
 #define SMALL_NUMBER	1.e-8
-/* 
+/*
  *   inverse( original_matrix, inverse_matrix )
- * 
+ *
  *    calculate the inverse of a 4x4 matrix
  *
- *     -1     
+ *     -1
  *     A  = ___1__ adjoint A
  *         det A
  */
@@ -10396,7 +10396,7 @@ double in[3][3]
     double det;
 
     /*  calculate the 3x3 determinant
-     *  if the determinant is zero, 
+     *  if the determinant is zero,
      *  then the inverse matrix is not unique.
      */
     det = det3x3(in);
@@ -10519,7 +10519,7 @@ double icmLabDE(double *Lab1, double *Lab2) {
 	rv += tt * tt;
 	tt = Lab1[2] - Lab2[2];
 	rv += tt * tt;
-	
+
 	return sqrt(rv);
 }
 
@@ -10533,7 +10533,7 @@ double icmLabDEsq(double *Lab1, double *Lab2) {
 	rv += tt * tt;
 	tt = Lab1[2] - Lab2[2];
 	rv += tt * tt;
-	
+
 	return rv;
 }
 
@@ -10577,7 +10577,7 @@ double icmCIE94(double Lab1[3], double Lab2[3]) {
 		/* Weighting factors for delta chromanance & delta hue */
 		sc = 1.0 + 0.048 * c12;
 		sh = 1.0 + 0.014 * c12;
-	
+
 		return sqrt(dlsq + dcsq/(sc * sc) + dhsq/(sh * sh));
 	}
 }
@@ -10622,7 +10622,7 @@ double icmCIE94sq(double Lab1[3], double Lab2[3]) {
 		/* Weighting factors for delta chromanance & delta hue */
 		sc = 1.0 + 0.048 * c12;
 		sh = 1.0 + 0.014 * c12;
-	
+
 		return dlsq + dcsq/(sc * sc) + dhsq/(sh * sh);
 	}
 }
@@ -10868,10 +10868,10 @@ double *in			/* Vector of input values in Native PCS */
 
 		if (p->pcs == icSigLabData) 	/* Convert L to Y */
 			icmLab2XYZ(&p->pcswht, out, out);
-		
+
 		/* Convert from Relative to Absolute colorometric */
 		icmMulBy3x3(out, p->toAbs, out);
-		
+
 		if (p->e_pcs == icSigLabData)
 			icmXYZ2Lab(&p->pcswht, out, out);
 
@@ -11490,13 +11490,13 @@ static int icmLuLut_in_abs(icmLuLut *p, double *out, double *in) {
 	/* If Bwd Lut, take care of Absolute color space and effective input space */
 	if ((p->function == icmBwd || p->function == icmGamut || p->function == icmPreview)
 		&& p->intent == icAbsoluteColorimetric) {
-	
+
 		if (p->e_inSpace == icSigLabData)
 			icmLab2XYZ(&p->pcswht, out, out);
 
 		/* Convert from Absolute to Relative colorometric */
 		icmMulBy3x3(out, p->fromAbs, out);
-		
+
 		if (p->inSpace == icSigLabData)
 			icmXYZ2Lab(&p->pcswht, out, out);
 
@@ -11517,7 +11517,7 @@ static int icmLuLut_matrix(icmLuLut *p, double *out, double *in) {
 	icmLut *lut = p->lut;
 	int rv = 0;
 
-	if (p->usematrix)		
+	if (p->usematrix)
 		rv |= lut->lookup_matrix(lut,out,in);
 	else if (out != in) {
 		int i;
@@ -11578,7 +11578,7 @@ static int icmLuLut_out_abs(icmLuLut *p, double *out, double *in) {
 
 		if (p->outSpace == icSigLabData)
 			icmLab2XYZ(&p->pcswht, out, out);
-		
+
 		/* Convert from Relative to Absolute colorometric XYZ */
 		icmMulBy3x3(out, p->toAbs, out);
 
@@ -11609,7 +11609,7 @@ double *in			/* Vector of input values */
 	double temp[MAX_CHAN];
 
 	rv |= p->in_abs(p,temp,in);						/* Possible absolute conversion */
-	if (p->usematrix)		
+	if (p->usematrix)
 		rv |= lut->lookup_matrix(lut,temp,temp);/* If XYZ, multiply by non-unity matrix */
 	p->in_normf(temp, temp);					/* Normalize for input color space */
 	rv |= lut->lookup_input(lut,temp,temp);		/* Lookup though input tables */
@@ -11667,10 +11667,10 @@ static int icmLuLut_inv_out_abs(icmLuLut *p, double *out, double *in) {
 
 		if (p->e_outSpace == icSigLabData)
 			icmLab2XYZ(&p->pcswht, out, out);
-	
+
 		/* Convert from Absolute to Relative colorometric */
 		icmMulBy3x3(out, p->fromAbs, out);
-		
+
 		if (p->outSpace == icSigLabData)
 			icmXYZ2Lab(&p->pcswht, out, out);
 
@@ -11691,7 +11691,7 @@ static int icmLuLut_inv_output(icmLuLut *p, double *out, double *in) {
 	icmLut *lut = p->lut;
 	int rv = 0;
 
-	if (lut->rot.inited == 0) {	
+	if (lut->rot.inited == 0) {
 		rv = icmTable_setup_bwd(icp, &lut->rot, lut->outputEnt, lut->outputTable);
 		if (rv != 0) {
 			sprintf(icp->err,"icc_Lut_inv_input: Malloc failure in inverse lookup init.");
@@ -11714,7 +11714,7 @@ static int icmLuLut_inv_input(icmLuLut *p, double *out, double *in) {
 	icmLut *lut = p->lut;
 	int rv = 0;
 
-	if (lut->rit.inited == 0) {	
+	if (lut->rit.inited == 0) {
 		rv = icmTable_setup_bwd(icp, &lut->rit, lut->inputEnt, lut->inputTable);
 		if (rv != 0) {
 			sprintf(icp->err,"icc_Lut_inv_input: Malloc failure in inverse lookup init.");
@@ -11777,7 +11777,7 @@ static int icmLuLut_inv_in_abs(icmLuLut *p, double *out, double *in) {
 
 		/* Convert from Relative to Absolute colorometric XYZ */
 		icmMulBy3x3(out, p->toAbs, out);
-		
+
 		if (p->e_inSpace == icSigLabData)
 			icmXYZ2Lab(&p->pcswht, out, out);
 	} else {
@@ -12141,7 +12141,7 @@ new_icmLuLut(
 				case icSigHsvData:
 					lc = 2;
 					break;
-				
+
 				/* default means give up and use N-linear type lookup */
 				default:
 					lc = -2;
@@ -12158,7 +12158,7 @@ new_icmLuLut(
 				/* Determine input space location of min and max of */
 				/* given output channel (chan = -1 means average of all) */
 				p->lut->min_max(p->lut, tout1, tout2, lc);
-				
+
 				/* Convert to vector and then calculate normalized */
 				/* dot product with diagonal vector (1,1,1...) */
 				for (tt = 0.0, n = 0; n < inn; n++) {
@@ -12209,11 +12209,11 @@ static icmLuBase* icc_get_luobj (
 	icmLuBase *luobj = NULL;	/* Lookup object to return */
 	icmXYZNumber whitePoint, blackPoint;
 	icColorSpaceSignature pcs, e_pcs;	/* PCS and effective PCS */
-	
+
 	/* Check that the profile is legal, since we depend on it */
 	if ((rv = check_icc_legal(p)) != 0)
 		return NULL;
-	
+
 	/* Figure out the native and effective PCS */
 	e_pcs = pcs = p->header->pcs;
 	if (pcsor != icmSigDefaultData)
@@ -12237,7 +12237,7 @@ static icmLuBase* icc_get_luobj (
 		if ((blackPointTag = (icmXYZArray *)p->read_tag(p, icSigMediaBlackPointTag)) == NULL
          || blackPointTag->ttype != icSigXYZType || blackPointTag->size < 1) {
 			blackPoint = icmBlack;						/* default */
-		} else 
+		} else
 			blackPoint = blackPointTag->data[0];	/* Copy structure */
 	}
 
@@ -12247,7 +12247,7 @@ static icmLuBase* icc_get_luobj (
     	case icSigDisplayClass:
 			/* Look for AToB0 based profile + optional BToA0 reverse */
 			/* or three component matrix profile (reversable) */
-			/* or momochrome table profile (reversable) */ 
+			/* or momochrome table profile (reversable) */
 			/* No intent */
 			/* Device <-> PCS */
 			/* Determine the algorithm and set its parameters */
@@ -12268,21 +12268,21 @@ static icmLuBase* icc_get_luobj (
 						     p->header->colorSpace, e_pcs, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* See if it could be a matrix lookup */
 						if ((luobj = new_icmLuMatrixFwd(p,
 						     p->header->colorSpace, pcs, pcs,
 						     p->header->colorSpace, e_pcs, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* See if it could be a monochrome lookup */
 						if ((luobj = new_icmLuMonoFwd(p,
 						     p->header->colorSpace, pcs, pcs,
 						     p->header->colorSpace, e_pcs, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 					} else {
 						/* See if it could be a monochrome lookup */
 						if ((luobj = new_icmLuMonoFwd(p,
@@ -12297,7 +12297,7 @@ static icmLuBase* icc_get_luobj (
 						     p->header->colorSpace, e_pcs, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* Try Lut type lookup last */
 						if ((luobj = new_icmLuLut(p, icSigAToB0Tag,
 						     p->header->colorSpace, pcs, pcs,
@@ -12315,14 +12315,14 @@ static icmLuBase* icc_get_luobj (
 						     e_pcs, p->header->colorSpace, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* See if it could be a matrix lookup */
 						if ((luobj = new_icmLuMatrixBwd(p,
 						     pcs, p->header->colorSpace, pcs,
 						     e_pcs, p->header->colorSpace, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* See if it could be a monochrome lookup */
 						if ((luobj = new_icmLuMonoBwd(p,
 						     pcs, p->header->colorSpace, pcs,
@@ -12336,14 +12336,14 @@ static icmLuBase* icc_get_luobj (
 						     e_pcs, p->header->colorSpace, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* See if it could be a matrix lookup */
 						if ((luobj = new_icmLuMatrixBwd(p,
 						     pcs, p->header->colorSpace, pcs,
 						     e_pcs, p->header->colorSpace, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* Try Lut type lookup last */
 						if ((luobj = new_icmLuLut(p, icSigBToA0Tag,
 						     pcs, p->header->colorSpace, pcs,
@@ -12359,18 +12359,18 @@ static icmLuBase* icc_get_luobj (
 					return NULL;
 				}
 			break;
-			
+
     	case icSigOutputClass:
 			/* Expect BToA Lut and optional AToB Lut, All intents, expect gamut */
-			/* or momochrome table profile (reversable) */ 
+			/* or momochrome table profile (reversable) */
 			/* Device <-> PCS */
 			/* Gamut Lut - no intent */
 			/* Optional preview links PCS <-> PCS */
-			
+
 			/* Determine the algorithm and set its parameters */
 			switch (func) {
 				icTagSignature ttag;
-				
+
 		    	case icmFwd:	/* Device to PCS */
 
 					if (intent == icmDefaultIntent)
@@ -12400,14 +12400,14 @@ static icmLuBase* icc_get_luobj (
 						     p->header->colorSpace, e_pcs, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* See if it could be a matrix lookup */
 						if ((luobj = new_icmLuMatrixFwd(p,
 						     p->header->colorSpace, pcs, pcs,
 						     p->header->colorSpace, e_pcs, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* See if it could be a monochrome lookup */
 						if ((luobj = new_icmLuMonoFwd(p,
 						     p->header->colorSpace, pcs, pcs,
@@ -12428,7 +12428,7 @@ static icmLuBase* icc_get_luobj (
 						     p->header->colorSpace, e_pcs, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* Try Lut type lookup last */
 						if ((luobj = new_icmLuLut(p, ttag,
 						     p->header->colorSpace, pcs, pcs,
@@ -12467,14 +12467,14 @@ static icmLuBase* icc_get_luobj (
 						     e_pcs, p->header->colorSpace, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* See if it could be a matrix lookup */
 						if ((luobj = new_icmLuMatrixBwd(p,
 						     pcs, p->header->colorSpace, pcs,
 						     e_pcs, p->header->colorSpace, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* See if it could be a monochrome lookup */
 						if ((luobj = new_icmLuMonoBwd(p,
 						     pcs, p->header->colorSpace, pcs,
@@ -12495,7 +12495,7 @@ static icmLuBase* icc_get_luobj (
 						     e_pcs, p->header->colorSpace, e_pcs,
 						     whitePoint, blackPoint, intent, func)) != NULL)
 							break;
-	
+
 						/* Try Lut type lookup last */
 						if ((luobj = new_icmLuLut(p, ttag,
 						     pcs, p->header->colorSpace, pcs,
@@ -12749,7 +12749,7 @@ icmAlloc *al			/* Optional memory allocator. NULL for default */
     p->header->model = -1;					/* Dev model number - should be set ! */
     p->header->attributes.l = 0;			/* ICC Device attributes - should set ! */
     p->header->flags = 0;					/* Embedding flags - should be set ! */
-	
+
 	/* Values that may be set before writing */
     p->header->attributes.h = 0;			/* Dev Device attributes - may be set ! */
     p->header->creator = str2tag("argl");	/* Profile creator - Argyll - may be set ! */

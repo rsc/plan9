@@ -6,7 +6,7 @@ OFILES=dial.$O\
 	announce.$O\
 	netmkaddr.$O\
 	hangup.$O\
-	
+
 
 </sys/src/cmd/mksyslib
 

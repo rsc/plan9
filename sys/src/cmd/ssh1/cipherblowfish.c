@@ -29,7 +29,7 @@ decryptblowfish(CipherState *cs, uchar *buf, int nbuf)
 	bfCBCdecrypt(buf, nbuf, &cs->dec);
 }
 
-Cipher cipherblowfish = 
+Cipher cipherblowfish =
 {
 	SSH_CIPHER_BLOWFISH,
 	"blowfish",
@@ -37,4 +37,3 @@ Cipher cipherblowfish =
 	encryptblowfish,
 	decryptblowfish,
 };
-

@@ -108,7 +108,7 @@ llookup(ulong key)
 {
 	uint c;
 	Node **l, **top, *n;
-	
+
 	if(nhash == 0){
 		uint x;
 
@@ -275,7 +275,7 @@ compress(void)
 				n->offset[0] = o;
 			}
 		}
-				
+
 		if(maxrun >= minrun)
 			j = i+refblock(i, maxrun, maxoff);
 		else
@@ -373,5 +373,5 @@ main(int argc, char **argv)
 	Bterm(&bout);
 	fprint(2, "brk %p\n", sbrk(1));
 	fprint(2, "%d nodes used; %d of %d hash slots used\n", nalloc, nnew, nhash);
-	exits(nil);	
+	exits(nil);
 }

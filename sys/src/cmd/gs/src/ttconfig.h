@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -19,23 +19,23 @@
 
 /*******************************************************************
  *
- *  ttconfig.h                                                1.0   
+ *  ttconfig.h                                                1.0
  *
- *    Configuration settings header file (spec only).            
+ *    Configuration settings header file (spec only).
  *
  *  Copyright 1996-1998 by
  *  David Turner, Robert Wilhelm, and Werner Lemberg.
  *
  *  This file is part of the FreeType project, and may only be used
  *  modified and distributed under the terms of the FreeType project
- *  license, LICENSE.TXT.  By continuing to use, modify, or distribute 
+ *  license, LICENSE.TXT.  By continuing to use, modify, or distribute
  *  this file you indicate that you have read the license and
  *  understand and accept it fully.
  *
  *  Notes:
  *
  *    All the configuration #define statements have been gathered in
- *    this file to allow easy check and modification.       
+ *    this file to allow easy check and modification.
  *
  ******************************************************************/
 

@@ -1,4 +1,4 @@
-/* include struct defs to get acid library 
+/* include struct defs to get acid library
 	cpp -I/sys/include/ape -I/$objtype/include/ape -I./include  acid.c > t.c
 	vc -a t.c > acidlib
 */

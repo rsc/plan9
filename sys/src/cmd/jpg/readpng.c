@@ -14,9 +14,9 @@ enum
 
 	/* filtering algorithms */
 	FilterNone =	0,	/* new[x][y] = buf[x][y] */
-	FilterSub =	1,	/* new[x][y] = buf[x][y] + new[x-1][y] */ 
-	FilterUp =	2,	/* new[x][y] = buf[x][y] + new[x][y-1] */ 
-	FilterAvg =	3,	/* new[x][y] = buf[x][y] + (new[x-1][y]+new[x][y-1])/2 */ 
+	FilterSub =	1,	/* new[x][y] = buf[x][y] + new[x-1][y] */
+	FilterUp =	2,	/* new[x][y] = buf[x][y] + new[x][y-1] */
+	FilterAvg =	3,	/* new[x][y] = buf[x][y] + (new[x-1][y]+new[x][y-1])/2 */
 	FilterPaeth =	4,	/* new[x][y] = buf[x][y] + paeth(new[x-1][y],new[x][y-1],new[x-1][y-1]) */
 	FilterLast =	5,
 
@@ -152,7 +152,7 @@ zread(void *va)
 	return *z->p++;
 }
 
-static uchar 
+static uchar
 paeth(uchar a, uchar b, uchar c)
 {
 	int p, pa, pb, pc;

@@ -1,12 +1,12 @@
 /* Copyright (C) 2001-2002 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -20,12 +20,12 @@
  * Intended to work with any IJS compliant inkjet driver, including
  * hpijs 1.0 and later, an IJS-enhanced gimp-print driver, and
  * the IJS Windows GDI server (ijsmswin.exe).
- * 
+ *
  * DRAFT
  *
  * WARNING: The ijs server can be selected on the gs command line
  * which is a security risk, since any program can be run.
- * You should use -dSAFER which sets .LockSafetyParams to true 
+ * You should use -dSAFER which sets .LockSafetyParams to true
  * before opening this device.
  */
 
@@ -161,11 +161,11 @@ gx_device_ijs gs_ijs_device =
 private int gsijs_client_set_param(gx_device_ijs *ijsdev, const char *key,
     const char *value);
 private int gsijs_set_color_format(gx_device_ijs *ijsdev);
-private int gsijs_read_int(gs_param_list *plist, gs_param_name pname, 
+private int gsijs_read_int(gs_param_list *plist, gs_param_name pname,
    int *pval, int min_value, int max_value, bool only_when_closed);
-private int gsijs_read_bool(gs_param_list *plist, gs_param_name pname, 
+private int gsijs_read_bool(gs_param_list *plist, gs_param_name pname,
    bool *pval, bool only_when_closed);
-private int gsijs_read_string(gs_param_list * plist, gs_param_name pname, 
+private int gsijs_read_string(gs_param_list * plist, gs_param_name pname,
    char * str, uint size, bool safety, bool only_when_closed);
 
 /**************************************************************************/
@@ -232,7 +232,7 @@ gsijs_set_generic_params_hpijs(gx_device_ijs *ijsdev)
 
     if (code == 0 && ijsdev->Duplex_set) {
 	int duplex_val;
-	
+
 	duplex_val = ijsdev->Duplex ? (ijsdev->IjsTumble ? 1 : 2) : 0;
 	sprintf (buf, "%d", duplex_val);
 	code = gsijs_client_set_param(ijsdev, "Duplex", buf);
@@ -588,10 +588,10 @@ gsijs_open(gx_device *dev)
 	   platforms. In that case, this branch should be #ifdef'ed out.
 	*/
 	sprintf(buf, "%d", fd);
-	ijs_client_set_param(ijsdev->ctx, 0, "OutputFD", buf, strlen(buf)); 
+	ijs_client_set_param(ijsdev->ctx, 0, "OutputFD", buf, strlen(buf));
 	close(fd);
     } else {
-	ijs_client_set_param(ijsdev->ctx, 0, "OutputFile", 
+	ijs_client_set_param(ijsdev->ctx, 0, "OutputFile",
 			     ijsdev->fname, strlen(ijsdev->fname));
     }
 
@@ -628,9 +628,9 @@ gsijs_finish_copydevice(gx_device *dev, const gx_device *from_dev)
     code = gx_default_finish_copydevice(dev, from_dev);
     if(code < 0)
         return code;
- 
+
     if (!ijsdev->ColorSpace) {
-	ijsdev->ColorSpace = gs_malloc(ijsdev->memory, sizeof(rgb), 1, 
+	ijsdev->ColorSpace = gs_malloc(ijsdev->memory, sizeof(rgb), 1,
 		"gsijs_finish_copydevice");
         if (!ijsdev->ColorSpace)
  	    return gs_note_error(gs_error_VMerror);
@@ -709,7 +709,7 @@ private int ijs_all_white(unsigned char *data, int size)
    return clean;
 }
 
-/* Print a page.  Don't use normal printer gdev_prn_output_page 
+/* Print a page.  Don't use normal printer gdev_prn_output_page
  * because it opens the output file.
  */
 private int
@@ -750,7 +750,7 @@ gsijs_output_page(gx_device *dev, int num_copies, int flush)
     gsijs_client_set_param(ijsdev, "BitsPerSample", buf);
 
     /* This needs to become more sophisticated for DeviceN. */
-    strcpy(buf, (n_chan == 4) ? "DeviceCMYK" : 
+    strcpy(buf, (n_chan == 4) ? "DeviceCMYK" :
 	((n_chan == 3) ? "DeviceRGB" : "DeviceGray"));
     gsijs_client_set_param(ijsdev, "ColorSpace", buf);
 
@@ -973,7 +973,7 @@ gsijs_read_string_malloc(gs_param_list *plist, gs_param_name pname, char **str,
     switch (code = param_read_string(plist, pname, &new_value)) {
         case 0:
 	    differs = bytes_compare(new_value.data, new_value.size,
-			(const byte *)(*str ? *str : ""), 
+			(const byte *)(*str ? *str : ""),
 		  	*str ? strlen(*str) : 0);
 	    if (only_when_closed && differs) {
 		code = gs_error_rangecheck;
@@ -987,7 +987,7 @@ gsijs_read_string_malloc(gs_param_list *plist, gs_param_name pname, char **str,
 		*size = 0;
 	    }
 	    if (*str == NULL)
-	        *str = gs_malloc(plist->memory, new_value.size + 1, 1, 
+	        *str = gs_malloc(plist->memory, new_value.size + 1, 1,
 					"gsijs_read_string_malloc");
 	    if (*str == NULL) {
                 code = gs_note_error(gs_error_VMerror);
@@ -1030,26 +1030,26 @@ gsijs_put_params(gx_device *dev, gs_param_list *plist)
      * If a parameter may be changed at any time, it is false.
      */
     if (code >= 0)
-	code = gsijs_read_string(plist, "IjsServer", 
-	    ijsdev->IjsServer, sizeof(ijsdev->IjsServer), 
+	code = gsijs_read_string(plist, "IjsServer",
+	    ijsdev->IjsServer, sizeof(ijsdev->IjsServer),
 	    dev->LockSafetyParams, is_open);
 
     if (code >= 0)
-	code = gsijs_read_string_malloc(plist, "DeviceManufacturer", 
-	    &ijsdev->DeviceManufacturer, &ijsdev->DeviceManufacturer_size, 
+	code = gsijs_read_string_malloc(plist, "DeviceManufacturer",
+	    &ijsdev->DeviceManufacturer, &ijsdev->DeviceManufacturer_size,
 	    is_open);
 
     if (code >= 0)
-	code = gsijs_read_string_malloc(plist, "DeviceModel", 
-	    &ijsdev->DeviceModel, &ijsdev->DeviceModel_size, 
+	code = gsijs_read_string_malloc(plist, "DeviceModel",
+	    &ijsdev->DeviceModel, &ijsdev->DeviceModel_size,
 	    is_open);
 
     if (code >= 0)
-	code = gsijs_read_string_malloc(plist, "IjsParams", 
+	code = gsijs_read_string_malloc(plist, "IjsParams",
 	    &(ijsdev->IjsParams), &(ijsdev->IjsParams_size), is_open);
 
     if (code >= 0)
-	code = gsijs_read_int(plist, "BitsPerSample", &ijsdev->BitsPerSample, 
+	code = gsijs_read_int(plist, "BitsPerSample", &ijsdev->BitsPerSample,
 		1, 16, is_open);
 
     if (code >= 0)
@@ -1080,7 +1080,7 @@ gsijs_put_params(gx_device *dev, gs_param_list *plist)
 	if (code < 0)
 	    return gs_note_error(gs_error_ioerror);
     }
-    
+
     return code;
 }
 
@@ -1088,13 +1088,13 @@ private int
 gsijs_client_set_param(gx_device_ijs *ijsdev, const char *key,
     const char *value)
 {
-    int code = ijs_client_set_param(ijsdev->ctx, 0 /* job id */, 
+    int code = ijs_client_set_param(ijsdev->ctx, 0 /* job id */,
 	key, value, strlen(value));
     if (code < 0)
 	dprintf2("ijs: Can't set parameter %s=%s\n", key, value);
     return code;
 }
- 
+
 
 private int
 gsijs_set_color_format(gx_device_ijs *ijsdev)
@@ -1152,7 +1152,7 @@ gsijs_set_color_format(gx_device_ijs *ijsdev)
 
     dci.separable_and_linear = GX_CINFO_SEP_LIN;
     dci.cm_name = ColorSpace;
-    
+
     ijsdev->color_info = dci;
 
     set_linear_color_bits_mask_shift((gx_device *)ijsdev);

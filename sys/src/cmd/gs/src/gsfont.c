@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -88,7 +88,7 @@ public_st_gs_font_ptr_element();
  * relocation phase of the GC.  */
 
 /* Font directory GC procedures */
-private 
+private
 ENUM_PTRS_WITH(font_dir_enum_ptrs, gs_font_dir *dir)
 {
     /* Enumerate pointers from cached characters to f/m pairs, */
@@ -190,7 +190,7 @@ gs_font_finalize(void *vptr)
 	*ppfirst = next;
     gs_notify_release(&pfont->notify_list);
 }
-private 
+private
 ENUM_PTRS_WITH(font_enum_ptrs, gs_font *pfont) return ENUM_USING(st_gs_notify_list, &pfont->notify_list, sizeof(gs_notify_list_t), index - 5);
 	/* We don't enumerate next or prev of base fonts. */
 	/* See above for details. */
@@ -280,7 +280,7 @@ gs_font_alloc(gs_memory_t *mem, gs_memory_type_ptr_t pstype,
 
     if (pfont == 0)
 	return 0;
-#if 1 /* Clear entire structure to avoid unitialized pointers 
+#if 1 /* Clear entire structure to avoid unitialized pointers
          when the initialization exits prematurely by error. */
     memset(pfont, 0, pstype->ssize);
     pfont->memory = mem;
@@ -408,7 +408,7 @@ gs_definefont(gs_font_dir * pdir, gs_font * pfont)
 
 /* Find a sililar registered font of same type. */
 int
-gs_font_find_similar(const gs_font_dir * pdir, const gs_font **ppfont, 
+gs_font_find_similar(const gs_font_dir * pdir, const gs_font **ppfont,
 		       int (*similar)(const gs_font *, const gs_font *))
 {
     const gs_font *pfont0 = *ppfont;
@@ -923,8 +923,8 @@ gs_default_glyph_info(gs_font *font, gs_glyph glyph, const gs_matrix *pmat,
     int wmode = ((members & GLYPH_INFO_WIDTH1) != 0);
     double sbw[4] = {0, 0, 0, 0};
     /* Currently glyph_outline retrieves sbw only with type 1,2,9 fonts. */
-    bool charstrings_font = (font->FontType == ft_encrypted || 
-			     font->FontType == ft_encrypted2 || 
+    bool charstrings_font = (font->FontType == ft_encrypted ||
+			     font->FontType == ft_encrypted2 ||
 			     font->FontType == ft_CID_encrypted);
 
     gx_path_init_bbox_accumulator(&path);
@@ -1007,4 +1007,3 @@ gs_no_glyph_name(gs_font *font, gs_glyph glyph, gs_const_string *pstr)
 {
     return_error(gs_error_undefined);
 }
-

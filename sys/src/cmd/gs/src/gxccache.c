@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -45,7 +45,7 @@ private const gs_log2_scale_point scale_log2_1 =
 {0, 0};
 
 void
-gx_compute_char_matrix(const gs_matrix *char_tm, const gs_log2_scale_point *log2_scale, 
+gx_compute_char_matrix(const gs_matrix *char_tm, const gs_log2_scale_point *log2_scale,
     float *mxx, float *mxy, float *myx, float *myy)
 {
     int scale_x = 1 << log2_scale->x;
@@ -58,17 +58,17 @@ gx_compute_char_matrix(const gs_matrix *char_tm, const gs_log2_scale_point *log2
 }
 
 void
-gx_compute_ccache_key(gs_font * pfont, const gs_matrix *char_tm, 
+gx_compute_ccache_key(gs_font * pfont, const gs_matrix *char_tm,
     const gs_log2_scale_point *log2_scale, bool design_grid,
     float *mxx, float *mxy, float *myx, float *myy)
 {
-    if (design_grid && 
+    if (design_grid &&
 	    (pfont->FontType == ft_TrueType || pfont->FontType == ft_CID_TrueType)) {
-	/* 
+	/*
 	 * We need a special face for this case, because the TT interpreter
 	 * can't generate both grid_fitted and non-grid-fitted outlines
 	 * with a same face instance. This happens due to control
-	 * values in 'cvt' must be different. 
+	 * values in 'cvt' must be different.
 	 * Since a single face satisfies all font sizes,
 	 * we use a zero matrix as the cache entry key.
 	 */
@@ -79,7 +79,7 @@ gx_compute_ccache_key(gs_font * pfont, const gs_matrix *char_tm,
 
 /* Look up, and if necessary add, a font/matrix pair in the cache */
 int
-gx_lookup_fm_pair(gs_font * pfont, const gs_matrix *char_tm, 
+gx_lookup_fm_pair(gs_font * pfont, const gs_matrix *char_tm,
     const gs_log2_scale_point *log2_scale, bool design_grid, cached_fm_pair **ppair)
 {
     float mxx, mxy, myx, myy;
@@ -138,7 +138,7 @@ gx_lookup_fm_pair(gs_font * pfont, const gs_matrix *char_tm,
 /* Return the cached_char or 0. */
 cached_char *
 gx_lookup_cached_char(const gs_font * pfont, const cached_fm_pair * pair,
-		      gs_glyph glyph, int wmode, int depth, 
+		      gs_glyph glyph, int wmode, int depth,
 		      gs_fixed_point *subpix_origin)
 {
     gs_font_dir *dir = pfont->dir;
@@ -147,7 +147,7 @@ gx_lookup_cached_char(const gs_font * pfont, const cached_fm_pair * pair,
 
     while ((cc = dir->ccache.table[chi & dir->ccache.table_mask]) != 0) {
 	if (cc->code == glyph && cc_pair(cc) == pair &&
-	    cc->subpix_origin.x == subpix_origin->x && 
+	    cc->subpix_origin.x == subpix_origin->x &&
 	    cc->subpix_origin.y == subpix_origin->y &&
 	    cc->wmode == wmode && cc_depth(cc) == depth
 	    ) {
@@ -216,8 +216,8 @@ gx_lookup_xfont_char(const gs_state * pgs, cached_fm_pair * pair,
 	    return NULL;
     }
     log2_scale.x = log2_scale.y = 1;
-    cc = gx_alloc_char_bits(font->dir, NULL, NULL, 
-		(ushort)(bbox.q.x - bbox.p.x), (ushort)(bbox.q.y - bbox.p.y), 
+    cc = gx_alloc_char_bits(font->dir, NULL, NULL,
+		(ushort)(bbox.q.x - bbox.p.x), (ushort)(bbox.q.y - bbox.p.y),
 		&log2_scale, 1);
     if (cc == 0)
 	return NULL;
@@ -364,7 +364,7 @@ gx_image_cached_char(register gs_show_enum * penum, register cached_char * cc)
      * by taking the high-order alpha bit.
      */
     bits = cc_bits(cc);
-    /* With 4x2 scale, depth == 3. 
+    /* With 4x2 scale, depth == 3.
      * An example is -dTextAlphaBits=4 comparefiles/fonttest.pdf .
      * We need to map 4 bitmap bits to 2 alpha bits.
      */
@@ -467,7 +467,7 @@ compress_alpha_bits(const cached_char * cc, gs_memory_t * mem)
     const byte *data = cc_const_bits(cc);
     uint width = cc->width;
     uint height = cc->height;
-    /* With 4x2 scale, depth == 3. 
+    /* With 4x2 scale, depth == 3.
      * An example is -dTextAlphaBits=4 comparefiles/fonttest.pdf .
      * We need to map 4 bitmap bits to 2 alpha bits.
      */

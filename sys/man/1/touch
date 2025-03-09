@@ -15,7 +15,7 @@ touch \- set modification date of a file
 .I Touch
 attempts to set the modification time of the
 .I files
-to 
+to
 .I time
 (by default, the current time).
 If a

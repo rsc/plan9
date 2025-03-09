@@ -152,7 +152,7 @@ cycle counter),
 will be set to its frequency in Hz.
 .B Kcycles
 .RB ( pcycles )
-counts the number of cycles 
+counts the number of cycles
 this process has spent in kernel mode
 (kernel and user mode).
 .B Pid

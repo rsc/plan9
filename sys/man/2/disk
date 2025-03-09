@@ -24,7 +24,7 @@ typedef struct Disk {
 Disk* opendisk(char *file, int rdonly, int noctl)
 .SH DESCRIPTION
 These routines provide a simple way to gather
-and use information about 
+and use information about
 .IR floppy (3)
 and
 .IR sd (3)
@@ -35,14 +35,14 @@ as well as plain files.
 opens
 .I file
 for reading and stores the file descriptor in
-the 
+the
 .B fd
 field of the
 .B Disk
 structure.
-If 
+If
 .I rdonly
-is not set, 
+is not set,
 .I opendisk
 also opens
 .I file
@@ -53,7 +53,7 @@ help prevent accidents.
 .PP
 If
 .I noctl
-is not set, 
+is not set,
 .I opendisk
 looks for a
 .B ctl
@@ -85,7 +85,7 @@ If either
 control
 file is found, it is opened for reading
 and writing, and the resulting file descriptor
-is saved as 
+is saved as
 .BR ctlfd .
 Otherwise the returned disk
 has type
@@ -96,11 +96,11 @@ then stats the file and stores its length in
 .BR size .
 If the disk is an
 .I sd
-partition, 
+partition,
 .I opendisk
 reads the sector size from the
 control
-file and stores it in 
+file and stores it in
 .BR secsize ;
 otherwise the sector size is assumed to be 512,
 as is the case for floppy disks.
@@ -110,8 +110,8 @@ then stores the disk size measured in sectors in
 .PP
 If the disk is an
 .I sd
-partition, 
-.I opendisk 
+partition,
+.I opendisk
 parses the
 control
 file to find the partition's offset
@@ -123,7 +123,7 @@ If the disk is an ATA disk,
 .I opendisk
 reads
 the disk geometry (number of cylinders, heads, and sectors)
-from the 
+from the
 .B geometry
 line in the
 .I sd
@@ -136,12 +136,12 @@ the disk partition, and is useful for forming messages to the
 control file.
 .B Prefix
 is set to the passed filename without
-the 
+the
 .B name
 suffix.
 .PP
 The IBM PC BIOS interface allocates
-10 bits for the number of cylinders, 8 for 
+10 bits for the number of cylinders, 8 for
 the number of heads, and 6 for the number of sectors per track.
 Disk geometries are not quite so simple
 anymore, but to keep the interface useful,

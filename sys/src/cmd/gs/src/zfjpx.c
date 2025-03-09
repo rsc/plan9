@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -50,7 +50,7 @@ z_jpx_decode(i_ctx_t * i_ctx_p)
 	    dlprintf("found Colorspace parameter (NYI)\n");
         }
     }
-    	
+
     /* we pass npop=0, since we've no arguments left to consume */
     /* we pass 0 instead of the usual rspace(sop) which will allocate storage
        for filter state from the same memory pool as the stream it's coding.

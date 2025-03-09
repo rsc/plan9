@@ -22,7 +22,7 @@ enum{
 };
 
 Dirtab mousedir[]={
-	".",		{Qdir, 0, QTDIR},	0,	DMDIR|0555,	
+	".",		{Qdir, 0, QTDIR},	0,	DMDIR|0555,
 	"cursor",	{Qcursor},	0,			0666,
 	"mouse",	{Qmouse},	0,			0666,
 };
@@ -234,4 +234,3 @@ Dev mousedevtab = {
 	devremove,
 	devwstat,
 };
-

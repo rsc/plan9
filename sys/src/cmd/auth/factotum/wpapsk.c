@@ -66,8 +66,8 @@ prfn(uchar *k, int klen, char *a, uchar *b, int blen, uchar *d, int dlen)
 }
 
 static void
-calcptk(uchar pmk[PMKlen], uchar smac[Eaddrlen], uchar amac[Eaddrlen], 
-	uchar snonce[Noncelen],  uchar anonce[Noncelen], 
+calcptk(uchar pmk[PMKlen], uchar smac[Eaddrlen], uchar amac[Eaddrlen],
+	uchar snonce[Noncelen],  uchar anonce[Noncelen],
 	uchar ptk[PTKlen])
 {
 	uchar b[2*Eaddrlen + 2*Noncelen];

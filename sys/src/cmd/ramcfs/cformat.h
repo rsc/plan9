@@ -56,7 +56,7 @@ struct Inode
 {
 	Qid	qid;
 	vlong	length;
-	Dptr	ptr;		/* pointer page */	
+	Dptr	ptr;		/* pointer page */
 	char	inuse;
 };
 

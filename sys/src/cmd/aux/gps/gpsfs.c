@@ -240,7 +240,7 @@ threadmain(int argc, char*argv[])
 	} ARGEND
 
 	fmtinstall('L', placeconv);
-	
+
 	rfork(RFNOTEG);
 
 	fsinit();
@@ -388,7 +388,7 @@ gpstrack(void *)
 				fix.s[i].snr = strtol(t[k++], nil, 10);
 				k += 4;
 				i++;
-			} 
+			}
 			fix.messages |= 1 << tp;
 			break;
 		case GPVTG:
@@ -446,7 +446,7 @@ printfix(int f, Fix *fix){
 	if(fix->lat >= 0)
 		fprint(f, "%11.8fN, ", fix->lat);
 	else
-		fprint(f, "%11.8fS, ", -fix->lat);		
+		fprint(f, "%11.8fS, ", -fix->lat);
 	if(fix->lon >= 0)
 		fprint(f, "%12.8fE, ", fix->lon);
 	else

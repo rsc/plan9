@@ -111,4 +111,3 @@ int wikiopen(char*, char*);
 int wikiput(Wiki*);
 void wikiget(Wiki*);
 int wikidiff(Wiki*);
-

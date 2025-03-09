@@ -22,7 +22,7 @@
 
 % c toupper - c
 /toupper {
-	dup dup 8#141 ge exch 8#172 le and { 
+	dup dup 8#141 ge exch 8#172 le and {
 		8#40 sub
 	} if
 } bind def
@@ -66,10 +66,10 @@
 	% define a new font with v as its encoding vector
 	currentfont maxlength dict /f exch def
 	currentfont {
-		exch dup dup /FID ne exch /Encoding ne and { 
+		exch dup dup /FID ne exch /Encoding ne and {
 			exch f 3 1 roll put
-		} { 
-			pop pop 
+		} {
+			pop pop
 		} ifelse
 	} forall
 	f /Encoding v put
@@ -80,9 +80,9 @@
 	/e currentfont /Encoding get def
 	0 1 255 {
 		dup e exch get
-		dup dup /.notdef ne exch s exch known not and { 
+		dup dup /.notdef ne exch s exch known not and {
 			exch -1 printmetric
-		} { 
+		} {
 			pop pop
 		} ifelse
 	} for

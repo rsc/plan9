@@ -679,7 +679,7 @@ compile(uchar *expbuf)
 			if(c >= '1' && c <= '9') {
 				if((c -= '1') >= closed)
 					return(badp);
-	
+
 				*ep++ = CBACK;
 				*ep++ = c;
 				continue;
@@ -992,4 +992,3 @@ ycomp(uchar *expbuf)
 
 	return(ep + 0400);
 }
-

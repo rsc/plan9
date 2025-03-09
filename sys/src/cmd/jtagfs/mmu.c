@@ -12,7 +12,7 @@
 #include "mpsse.h"
 #include "/sys/src/9/kw/arm.h"
 
-/* 
+/*
  *	Feroceon's scan chain 15 does not work, I suspect it has the multi-ice
  *	40 bits limit (even if it is only one core). Just pushing MCR/MRC and
  *	reading back seems to be more portable
@@ -26,7 +26,7 @@ printmmuregs(MMURegs *mmuregs, char *s, int ssz)
 	char *e, *te;
 
 	te = s + ssz - 1;
-	
+
 	e = seprint(s, te, "cpid: %#8.8ux\n", mmuregs->cpid);
 	e = seprint(e, te, "ct: %#8.8ux\n", mmuregs->ct);
 	e = seprint(e, te, "control: %#8.8ux\n", mmuregs->control);
@@ -121,5 +121,3 @@ mmurdregs(JMedium *jmed, MMURegs *regs)
 
 	return 0;
 }
-
-

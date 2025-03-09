@@ -152,13 +152,13 @@ mkvqueue(int size)
 
 	q = malloc(sizeof(*q) + sizeof(void*)*size);
 	p = mallocalign(
-		PGROUND(sizeof(Vdesc)*size + 
-			VringSize + 
-			sizeof(u16int)*size + 
+		PGROUND(sizeof(Vdesc)*size +
+			VringSize +
+			sizeof(u16int)*size +
 			sizeof(u16int)) +
-		PGROUND(VringSize + 
-			sizeof(Vused)*size + 
-			sizeof(u16int)), 
+		PGROUND(VringSize +
+			sizeof(Vused)*size +
+			sizeof(u16int)),
 		BY2PG, 0, 0);
 	if(p == nil || q == nil){
 		print("virtio: no memory for Vqueue\n");

@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -108,8 +108,8 @@ or     geninit [-(I|i) lib/] gs_init.ps gconfig.h -c gs_init.c\n");
 private void
 translate_path(char *path)
 {
-    /* 
-     * It looks that we only need to do for Mac OS. 
+    /*
+     * It looks that we only need to do for Mac OS.
      * We don't support 16-bit DOS/Windows, which wants '\'.
      * Win32 API supports '/'.
      */
@@ -371,7 +371,7 @@ mergefile(const char *prefix, const char *inname, FILE * in, FILE * config,
 		rl(in, line, LINE_SIZE);
 	    if (psname[0] == '(') {
 		FILE *ps;
-		
+
 		psname[strlen(psname) - 1] = 0;
 		ps = prefix_open(prefix, psname + 1);
 		if (ps == 0)

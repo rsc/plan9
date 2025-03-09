@@ -548,7 +548,7 @@ struct
 	"TLBIEL",	LNOP,	ATLBIEL,
 	"LSW",	LXLD, ALSW,
 	"STSW",	LXST, ASTSW,
-	
+
 	"ISYNC",	LRETRN, AISYNC,
 	"SYNC",		LRETRN, ASYNC,
 	"TLBSYNC",	LRETRN,	ATLBSYNC,
@@ -772,7 +772,7 @@ outcode(int a, Gen *g1, int reg, Gen *g2)
 void
 outgcode(int a, Gen *g1, int reg, Gen *g2, Gen *g3)
 {
-	int s1, s2, s3, flag; 
+	int s1, s2, s3, flag;
 
 	if(a != AGLOBL && a != ADATA)
 		pc++;

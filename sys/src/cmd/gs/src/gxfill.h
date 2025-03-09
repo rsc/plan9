@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -125,7 +125,7 @@ struct line_list_s {
 #define x_list x_head.next
     active_line *h_list0, *h_list1; /* lists of horizontal lines for y, y1 */
     margin_set margin_set0, margin_set1;
-    margin *free_margin_list; 
+    margin *free_margin_list;
     int local_margin_alloc_count;
     int bbox_left, bbox_width;
     int main_dir;
@@ -175,5 +175,3 @@ extern stats_fill_t stats_fill;
 #endif
 
 #endif /* gxfill_INCLUDED */
-
-

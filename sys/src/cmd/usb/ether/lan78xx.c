@@ -63,7 +63,7 @@ enum {
 		Bce	= 1<<5,
 	Usbcfg1		= 0x84,
 	Rxfifoctl		= 0xC0,
-		Rxen	= 1<<31,	
+		Rxen	= 1<<31,
 	Txfifoctl		= 0xC4,
 		Txen	= 1<<31,
 	Rxfifo		= 0xC8,

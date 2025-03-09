@@ -87,7 +87,7 @@ for related quote-handling software.
 .I Tokenize
 is similar to
 .I gettokens
-with 
+with
 .I delims
 set to \f5"\et\er\en\ "\fP,
 except that quotes are interpreted but do not appear in the resulting

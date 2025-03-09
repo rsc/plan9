@@ -173,7 +173,7 @@ checkblock(addr)
 	if addr.magic == KEMPT_MAGIC then {
 		a = addr;
 		complex Alloc a;
-		if a.size > 1024*1024*1024 then 
+		if a.size > 1024*1024*1024 then
 			print(addr\X, " block ridiculously large\n");
 		t = B2T(addr);
 		if t.magic0 != TAIL_MAGIC0 || t.magic1 != TAIL_MAGIC1 then
@@ -268,7 +268,7 @@ poolwhopointsat(p, addr)
 	}
 }
 
-defn 
+defn
 arenawhopointsat(arena, addr)
 {
 	local atail, b;
@@ -277,7 +277,7 @@ arenawhopointsat(arena, addr)
 	complex Bhdr arena;
 	b = arena;
 	while b < atail do {
-		if *b == addr then 
+		if *b == addr then
 			print(b\X, "\n");
 		b = b+4;
 	}
@@ -294,7 +294,7 @@ blockhdr(addr)
 {
 	addr = addr & ~3;
 
-	while *addr != FREE_MAGIC 
+	while *addr != FREE_MAGIC
 		&& *addr !=  ARENA_MAGIC
 		&& *addr != UNKEMPT_MAGIC
 		&& *addr != KEMPT_MAGIC
@@ -303,4 +303,3 @@ blockhdr(addr)
 		addr = addr-4;
 	return addr;
 }
-

@@ -1,7 +1,7 @@
 #
 # This proto includes into armpaq enough tools to make the bitsy or
 # guruplug brick useful without mounting a file server.
-# 
+#
 
 acme
 	bin

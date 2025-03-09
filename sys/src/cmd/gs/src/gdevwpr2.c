@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -259,7 +259,7 @@ win_pr2_open(gx_device * dev)
     FILE *pfile;
     DOCINFO docinfo;
     float ratio = 1.0;
-    
+
     win_pr2_copy_check(wdev);
 
     /* get a HDC for the printer */
@@ -267,30 +267,30 @@ win_pr2_open(gx_device * dev)
 	(wdev->win32_hdevnames)) {
 	/* The user has already had the opportunity to choose the output */
 	/* file interactively. Just use the specified parameters. */
-	
+
 	LPDEVMODE devmode = (LPDEVMODE) GlobalLock(wdev->win32_hdevmode);
 	LPDEVNAMES devnames = (LPDEVNAMES) GlobalLock(wdev->win32_hdevnames);
-	
+
 	const char* driver = (char*)(devnames)+(devnames->wDriverOffset);
 	const char* device = (char*)(devnames)+(devnames->wDeviceOffset);
 	const char* output = (char*)(devnames)+(devnames->wOutputOffset);
-	
+
 	wdev->hdcprn = CreateDC(driver, device, output, devmode);
-	
+
 	GlobalUnlock(wdev->win32_hdevmode);
 	GlobalUnlock(wdev->win32_hdevnames);
-	
+
 	if (wdev->hdcprn == NULL) {
 	    return gs_error_Fatal;
 	}
-	
+
     } else if (!win_pr2_getdc(wdev)) {
 	/* couldn't get a printer from -sOutputFile= */
 	/* Prompt with dialog box */
-	
+
 	LPDEVMODE devmode = NULL;
 	memset(&pd, 0, sizeof(pd));
-	
+
 	pd.lStructSize = sizeof(pd);
 	pd.hwndOwner = PARENT_WINDOW;
 	pd.Flags = PD_RETURNDC;
@@ -299,25 +299,25 @@ win_pr2_open(gx_device * dev)
 	pd.nFromPage = wdev->user_page_begin;
 	pd.nToPage = wdev->user_page_end;
 	pd.nCopies = wdev->user_copies;
-	
+
 	if (!PrintDlg(&pd)) {
 	    /* device not opened - exit ghostscript */
 	    return gs_error_Fatal;	/* exit Ghostscript cleanly */
 	}
-	
+
 	devmode = GlobalLock(pd.hDevMode);
 	win_pr2_update_dev(wdev,devmode);
 	GlobalUnlock(pd.hDevMode);
-	
+
 	if (wdev->win32_hdevmode)
 	    GlobalFree(wdev->win32_hdevmode);
 	if (wdev->win32_hdevnames)
 	    GlobalFree(wdev->win32_hdevnames);
-	
+
 	wdev->hdcprn = pd.hDC;
 	wdev->win32_hdevmode = pd.hDevMode;
 	wdev->win32_hdevnames = pd.hDevNames;
-	
+
 	pd.hDevMode = NULL;
 	pd.hDevNames = NULL;
     }
@@ -351,17 +351,17 @@ win_pr2_open(gx_device * dev)
 	DeleteDC(wdev->hdcprn);
 	return gs_error_limitcheck;
     }
-    
+
     dev->x_pixels_per_inch = (float)GetDeviceCaps(wdev->hdcprn, LOGPIXELSX);
     dev->y_pixels_per_inch = (float)GetDeviceCaps(wdev->hdcprn, LOGPIXELSY);
-    
+
     wdev->ratio = 1;
-    
+
     if (wdev->max_dpi > 50) {
-	
+
 	float dpi_x = dev->x_pixels_per_inch;
 	float dpi_y = dev->y_pixels_per_inch;
-	
+
 	while ((dev->x_pixels_per_inch > wdev->max_dpi)
 	    || (dev->y_pixels_per_inch > wdev->max_dpi)) {
 	    ratio += 1.0;
@@ -370,20 +370,20 @@ win_pr2_open(gx_device * dev)
 	    dev->y_pixels_per_inch = dpi_y / ratio;
 	}
     }
-    
+
     size.x = GetDeviceCaps(wdev->hdcprn, PHYSICALWIDTH);
     size.y = GetDeviceCaps(wdev->hdcprn, PHYSICALHEIGHT);
     gx_device_set_width_height(dev, (int)(size.x / ratio), (int)(size.y / ratio));
     offset.x = GetDeviceCaps(wdev->hdcprn, PHYSICALOFFSETX);
     offset.y = GetDeviceCaps(wdev->hdcprn, PHYSICALOFFSETY);
-    
+
     /* m[] gives margins in inches */
     m[0] /*left   */ = offset.x / dev->x_pixels_per_inch / ratio;
     m[3] /*top    */ = offset.y / dev->y_pixels_per_inch / ratio;
     m[2] /*right  */ = (size.x - offset.x - GetDeviceCaps(wdev->hdcprn, HORZRES)) / dev->x_pixels_per_inch / ratio;
     m[1] /*bottom */ = (size.y - offset.y - GetDeviceCaps(wdev->hdcprn, VERTRES)) / dev->y_pixels_per_inch / ratio;
     gx_device_set_margins(dev, m, true);
-    
+
     depth = dev->color_info.depth;
     if (depth == 0) {
 	/* Set parameters that were unknown before opening device */
@@ -513,7 +513,7 @@ win_pr2_print_page(gx_device_printer * pdev, FILE * file)
     bmi.h.biYPelsPerMeter = 0;	/* default */
 
     StartPage(wdev->hdcprn);
-    
+
     /* Write the palette. */
 
     if (depth <= 8) {
@@ -551,7 +551,7 @@ win_pr2_print_page(gx_device_printer * pdev, FILE * file)
 	for (i = 0; i < lines; i++)
 	    gdev_prn_copy_scan_lines(pdev, y + i,
 			      row + (bmp_raster * (lines - 1 - i)), raster);
-	
+
 	if (ratio > 1) {
 	    StretchDIBits(wdev->hdcprn, 0, y*ratio, pdev->width*ratio, lines*ratio,
 			  0, 0, pdev->width, lines,
@@ -687,22 +687,22 @@ win_pr2_set_bpp(gx_device * dev, int depth)
 	dev->color_info = win_pr2_1color;
 	depth = 1;
     }
-    
+
     ((gx_device_win_pr2 *)dev)->selected_bpp = depth;
 
     /* copy encode/decode procedures */
     dev->procs.encode_color = dev->procs.map_rgb_color;
     dev->procs.decode_color = dev->procs.map_color_rgb;
     if (depth == 1) {
-	dev->procs.get_color_mapping_procs = 
+	dev->procs.get_color_mapping_procs =
 	    gx_default_DevGray_get_color_mapping_procs;
-	dev->procs.get_color_comp_index = 
+	dev->procs.get_color_comp_index =
 	    gx_default_DevGray_get_color_comp_index;
     }
     else {
-	dev->procs.get_color_mapping_procs = 
+	dev->procs.get_color_mapping_procs =
 	    gx_default_DevRGB_get_color_mapping_procs;
-	dev->procs.get_color_comp_index = 
+	dev->procs.get_color_comp_index =
 	    gx_default_DevRGB_get_color_comp_index;
     }
 }
@@ -725,7 +725,7 @@ win_pr2_get_params(gx_device * pdev, gs_param_list * plist)
 				&(wdev->query_user));
     if (code >= 0)
 	code = win_pr2_write_user_settings(wdev, plist);
-    
+
     if ((code >= 0) && (wdev->Duplex_set > 0))
 	code = param_write_bool(plist, "Tumble",
 				&(wdev->tumble));
@@ -757,7 +757,7 @@ win_pr2_put_params(gx_device * pdev, gs_param_list * plist)
 	wdev->Duplex = false;
 	wdev->tumble = false;
     }
-    
+
     win_pr2_copy_check(wdev);
 
     code = win_pr2_read_user_settings(wdev, plist);
@@ -827,7 +827,7 @@ win_pr2_put_params(gx_device * pdev, gs_param_list * plist)
 
     if (ecode >= 0)
 	ecode = gdev_prn_put_params(pdev, plist);
-    
+
     if (wdev->win32_hdevmode && wdev->hdcprn) {
 	if ( (old_duplex != wdev->Duplex)
 	  || (old_tumble != wdev->tumble)
@@ -835,9 +835,9 @@ win_pr2_put_params(gx_device * pdev, gs_param_list * plist)
 	  || (old_color  != wdev->user_color)
 	  || (old_paper  != wdev->user_paper)
 	  || (old_mx_dpi != wdev->max_dpi) ) {
-	    
+
 	    LPDEVMODE pdevmode = GlobalLock(wdev->win32_hdevmode);
-	    
+
 	    if (pdevmode) {
 		win_pr2_update_win(wdev, pdevmode);
 		ResetDC(wdev->hdcprn, pdevmode);
@@ -845,7 +845,7 @@ win_pr2_put_params(gx_device * pdev, gs_param_list * plist)
 	    }
 	}
     }
-    
+
     return ecode;
 }
 
@@ -1007,7 +1007,7 @@ win_pr2_getdc(gx_device_win_pr2 * wdev)
 	}
     }
     gs_free(wdev->memory, devcap, devcapsize, 1, "win_pr2_getdc");
-    
+
     /* get the dmPaperSize */
     devcapsize = pfnDeviceCapabilities(device, output, DC_PAPERS, NULL, NULL);
     devcapsize *= sizeof(WORD);
@@ -1031,7 +1031,7 @@ win_pr2_getdc(gx_device_win_pr2 * wdev)
     memcpy(pidevmode, podevmode, size);
 
     pidevmode->dmFields = 0;
-    
+
     wdev->paper_name[0] = 0;
 
     if ( (wdev->user_paper)
@@ -1044,11 +1044,11 @@ win_pr2_getdc(gx_device_win_pr2 * wdev)
     if (wdev->user_orient) {
 	orientation = wdev->user_orient;
     }
-    
+
     pidevmode->dmFields &= ~(DM_PAPERSIZE | DM_ORIENTATION | DM_COLOR | DM_PAPERLENGTH | DM_PAPERWIDTH | DM_DUPLEX);
     pidevmode->dmFields |= DM_DEFAULTSOURCE;
     pidevmode->dmDefaultSource = 0;
-    
+
     if (orientation) {
 	wdev->user_orient = orientation;
     }
@@ -1056,7 +1056,7 @@ win_pr2_getdc(gx_device_win_pr2 * wdev)
 	wdev->user_paper = papersize;
 	strcpy (wdev->paper_name, papername);
     }
-    
+
     if (paperheight && paperwidth) {
 	pidevmode->dmFields |= (DM_PAPERLENGTH | DM_PAPERWIDTH);
 	pidevmode->dmPaperWidth = paperwidth;
@@ -1064,19 +1064,19 @@ win_pr2_getdc(gx_device_win_pr2 * wdev)
         wdev->user_media_size[0] = paperwidth / 254.0 * 72.0;
 	wdev->user_media_size[1] = paperheight / 254.0 * 72.0;
     }
-    
+
     if (DeviceCapabilities(device, output, DC_DUPLEX, NULL, NULL)) {
 	wdev->Duplex_set = 1;
     }
-    
+
     win_pr2_update_win(wdev, pidevmode);
-    
+
     if (!is_win32s) {
-	
+
 	/* merge the entries */
 	DocumentProperties(NULL, hprinter, device, podevmode, pidevmode, DM_IN_BUFFER | DM_OUT_BUFFER);
 	ClosePrinter(hprinter);
-	
+
 	/* now get a DC */
 	wdev->hdcprn = CreateDC(driver, device, NULL, podevmode);
     } else
@@ -1090,11 +1090,11 @@ win_pr2_getdc(gx_device_win_pr2 * wdev)
 	    strtok(driver, ".");	/* remove .drv */
 	wdev->hdcprn = CreateDC(driver, device, output, podevmode);
     }
-    
+
     if (wdev->win32_hdevmode == NULL) {
 	wdev->win32_hdevmode = GlobalAlloc(0, sizeof(DEVMODE));
     }
-    
+
     if (wdev->win32_hdevmode) {
 	LPDEVMODE pdevmode = (LPDEVMODE) GlobalLock(wdev->win32_hdevmode);
 	if (pdevmode) {
@@ -1124,7 +1124,7 @@ win_pr2_update_dev(gx_device_win_pr2 * dev, LPDEVMODE pdevmode)
 {
     if (pdevmode == 0)
 	return FALSE;
-    
+
     if (pdevmode->dmFields & DM_COLOR) {
 	dev->user_color = pdevmode->dmColor;
     }
@@ -1142,7 +1142,7 @@ win_pr2_update_dev(gx_device_win_pr2 * dev, LPDEVMODE pdevmode)
 	dev->Duplex = pdevmode->dmDuplex == DMDUP_SIMPLEX ? false : true;
 	dev->tumble = pdevmode->dmDuplex == DMDUP_HORIZONTAL ? true : false;
     }
-    
+
     return TRUE;
 }
 
@@ -1160,17 +1160,17 @@ win_pr2_update_win(gx_device_win_pr2 * dev, LPDEVMODE pdevmode)
 	    }
 	}
     }
-    
+
     if (dev->user_color) {
 	pdevmode->dmColor = dev->user_color;
 	pdevmode->dmFields |= DM_COLOR;
     }
-    
+
     if (dev->user_orient) {
 	pdevmode->dmFields |= DM_ORIENTATION;
 	pdevmode->dmOrientation = dev->user_orient;
     }
-    
+
     if (dev->user_paper) {
 	pdevmode->dmFields |= DM_PAPERSIZE;
 	pdevmode->dmPaperSize = dev->user_paper;
@@ -1222,7 +1222,7 @@ win_pr2_read_user_settings(gx_device_win_pr2 * wdev, gs_param_list * plist)
 	case 0:
 	    {
 		gs_param_int_array ia;
-		
+
 		BEGIN_ARRAY_PARAM(param_read_int_array, "DocumentRange", ia, 2, ia)
 		if ((ia.data[0] < 0) ||
 		    (ia.data[1] < 0) ||
@@ -1231,7 +1231,7 @@ win_pr2_read_user_settings(gx_device_win_pr2 * wdev, gs_param_list * plist)
 		wdev->doc_page_begin = ia.data[0];
 		wdev->doc_page_end = ia.data[1];
 		END_ARRAY_PARAM(ia, doc_range_error)
-		
+
 		BEGIN_ARRAY_PARAM(param_read_int_array, "SelectedRange", ia, 2, ia)
 		if ((ia.data[0] < 0) ||
 		    (ia.data[1] < 0) ||
@@ -1240,13 +1240,13 @@ win_pr2_read_user_settings(gx_device_win_pr2 * wdev, gs_param_list * plist)
 		wdev->user_page_begin = ia.data[0];
 		wdev->user_page_end = ia.data[1];
 		END_ARRAY_PARAM(ia, sel_range_error)
-		
+
 		param_read_int(dict.list, "Copies", &wdev->user_copies);
 		param_read_int(dict.list, "Paper", &wdev->user_paper);
 		param_read_int(dict.list, "Orientation", &wdev->user_orient);
 		param_read_int(dict.list, "Color", &wdev->user_color);
 		param_read_int(dict.list, "MaxResolution", &wdev->max_dpi);
-		
+
 		switch (code = param_read_string(dict.list, (param_name = "DocumentName"), &docn)) {
 		    case 0:
 			if (docn.size < sizeof(wdev->doc_name))
@@ -1261,16 +1261,16 @@ win_pr2_read_user_settings(gx_device_win_pr2 * wdev, gs_param_list * plist)
 			docn.data = 0;
 			break;
 		}
-		
+
 		param_end_read_dict(plist, dict_name, &dict);
-		
+
 		if (docn.data) {
 		    memcpy(wdev->doc_name, docn.data, docn.size);
 		    wdev->doc_name[docn.size] = 0;
 		}
-		
+
 		wdev->print_copies = 1;
-		
+
 		if (wdev->win32_hdevmode) {
 		    LPDEVMODE devmode = (LPDEVMODE) GlobalLock(wdev->win32_hdevmode);
 		    if (devmode) {
@@ -1332,16 +1332,16 @@ win_pr2_write_user_settings(gx_device_win_pr2 * wdev, gs_param_list * plist)
 
     code = param_write_int(dict.list, "Paper", &wdev->user_paper);
     if (code < 0) goto error;
-    
+
     code = param_write_int(dict.list, "Orientation", &wdev->user_orient);
     if (code < 0) goto error;
-    
+
     code = param_write_int(dict.list, "Color", &wdev->user_color);
     if (code < 0) goto error;
-    
+
     code = param_write_int(dict.list, "MaxResolution", &wdev->max_dpi);
     if (code < 0) goto error;
-    
+
     code = param_write_int(dict.list, "PrintCopies", &wdev->print_copies);
     if (code < 0) goto error;
 
@@ -1351,11 +1351,11 @@ win_pr2_write_user_settings(gx_device_win_pr2 * wdev, gs_param_list * plist)
 
     code = param_write_string(dict.list, "DocumentName", &docn);
     if (code < 0) goto error;
-    
+
     papn.data = (const byte*)wdev->paper_name;
     papn.size = strlen(wdev->paper_name);
     papn.persistent = false;
-    
+
     code = param_write_string(dict.list, "PaperName", &papn);
     if (code < 0) goto error;
 
@@ -1431,7 +1431,7 @@ win_pr2_print_setup_interaction(gx_device_win_pr2 * wdev, int mode)
     wdev->user_paper = devmode->dmPaperSize;
     wdev->user_orient = devmode->dmOrientation;
     wdev->user_color = devmode->dmColor;
-    
+
     if (devmode->dmFields & DM_DUPLEX) {
 	wdev->Duplex_set = 1;
 	wdev->Duplex = devmode->dmDuplex == DMDUP_SIMPLEX ? false : true;
@@ -1444,9 +1444,9 @@ win_pr2_print_setup_interaction(gx_device_win_pr2 * wdev, int mode)
 	const char* driver = (char*)(devnames)+(devnames->wDriverOffset);
 	const char* device = (char*)(devnames)+(devnames->wDeviceOffset);
 	const char* output = (char*)(devnames)+(devnames->wOutputOffset);
-	
+
 	HDC hic = CreateIC(driver, device, output, devmode);
-	
+
 	if (hic) {
 	    xppinch = (float)GetDeviceCaps(hic, LOGPIXELSX);
 	    yppinch = (float)GetDeviceCaps(hic, LOGPIXELSY);
@@ -1518,7 +1518,7 @@ win_pr2_copy_check(gx_device_win_pr2 * wdev)
 
 
 /* Modeless dialog box - Cancel printing */
-BOOL CALLBACK 
+BOOL CALLBACK
 CancelDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message) {
@@ -1537,7 +1537,7 @@ CancelDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 
-BOOL CALLBACK 
+BOOL CALLBACK
 AbortProc2(HDC hdcPrn, int code)
 {
     process_interrupts(NULL);
@@ -1545,4 +1545,3 @@ AbortProc2(HDC hdcPrn, int code)
 	return (FALSE);		/* cancel job */
     return (TRUE);
 }
-

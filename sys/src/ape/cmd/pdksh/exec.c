@@ -99,7 +99,7 @@ execute(t, flags)
 	newenv(E_EXEC);
 	if (trap)
 		runtraps(0);
- 
+
 	if (t->type == TCOM) {
 		/* Clear subst_exstat before argument expansion.  Used by
 		 * null commands (see comexec() and c_eval()) and by c_set().
@@ -149,7 +149,7 @@ execute(t, flags)
 				goto Break;
 			}
 		}
-	
+
 	switch(t->type) {
 	  case TCOM:
 		rv = comexec(t, tp, ap, flags);
@@ -1134,14 +1134,14 @@ search_access(path, mode, errnop)
 	char *tp = mpath + strlen(mpath);
 	char *p;
 	char **sfx;
- 
+
 	/* If a suffix has been specified, check if it is one of the
 	 * suffixes that indicate the file is executable - if so, change
 	 * the access test to R_OK...
 	 * This code assumes OS/2 files can have only one suffix...
 	 */
 	if ((p = strrchr((p = ksh_strrchr_dirsep(mpath)) ? p : mpath, '.'))) {
-		if (mode == X_OK) 
+		if (mode == X_OK)
 			mode = R_OK;
 		return search_access1(mpath, mode, errnop);
 	}
@@ -1217,7 +1217,7 @@ search(name, path, mode, errnop)
 	}
 
 	/* Look in current context always. (os2 style) */
-	if (search_access(Xstring(xs, xp), mode, errnop) == 0) 
+	if (search_access(Xstring(xs, xp), mode, errnop) == 0)
 		return Xstring(xs, xp); /* not Xclose() - xp may be wrong */
 #else /* OS2 */
 	if (ksh_strchr_dirsep(name)) {

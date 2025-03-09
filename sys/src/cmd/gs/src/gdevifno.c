@@ -103,7 +103,7 @@ inferno_device far_data gs_inferno_device =
  * ghostscript asks us how to convert between
  * rgb and color map entries
  */
-private gx_color_index 
+private gx_color_index
 inferno_rgb2cmap(gx_device *dev, gx_color_value rgb[3]) {
 	int shift;
 	inferno_device *idev;
@@ -119,7 +119,7 @@ inferno_rgb2cmap(gx_device *dev, gx_color_value rgb[3]) {
 	/*
 	 * we keep track of what ldepth bitmap this is by watching
 	 * what colors gs asks for.
-	 * 
+	 *
 	 * one catch: sometimes print_page gets called more than one
 	 * per page (for multiple copies) without cmap calls inbetween.
 	 * if idev->cmapcall is 0 when print_page gets called, it uses
@@ -142,7 +142,7 @@ inferno_rgb2cmap(gx_device *dev, gx_color_value rgb[3]) {
 	return (blue << (2*Nbits)) | (green << Nbits) | red;
 }
 
-private int 
+private int
 inferno_cmap2rgb(gx_device *dev, gx_color_index color,
   gx_color_value rgb[3]) {
 	int shift, i;
@@ -230,7 +230,7 @@ inferno_put_params(gx_device * pdev, gs_param_list * plist)
 #define Rfactor 1		/* multiple of red level in p9color[] index */
 #define Gfactor Rlevs
 #define Bfactor	(Rlevs*Glevs)
-			
+
 ulong p9color[Rlevs*Glevs*Blevs];	/* index blue most sig, red least sig */
 
 void init_p9color(void)		/* init at run time since p9color[] is so big */
@@ -398,7 +398,7 @@ inferno_print_page(gx_device_printer *pdev, FILE *f)
 
 /*
  * this is a modified version of the image compressor
- * from fb/bit2enc.  it is modified only in that it 
+ * from fb/bit2enc.  it is modified only in that it
  * now compiles as part of gs.
  */
 
@@ -444,7 +444,7 @@ struct WImage {
 	/*
 	 * ibase is the pointer to where the beginning of
 	 * the input "is" in memory.  whenever we "slide" the
-	 * buffer N bytes, what we are actually doing is 
+	 * buffer N bytes, what we are actually doing is
 	 * decrementing ibase by N.
 	 * the ulongs in the Hlist structures are just
 	 * pointers relative to ibase.
@@ -579,7 +579,7 @@ gobbleline(WImage *w)
 		/* hash table lookup */
 		for(hp=w->hash[w->h].next;hp;hp=hp->next){
 			/*
-			 * the next block is an optimization of 
+			 * the next block is an optimization of
 			 * for(s=p, t=w->ibase+hp->p; s<es && *s == *t; s++, t++)
 			 * 	;
 			 */
@@ -605,7 +605,7 @@ gobbleline(WImage *w)
 		}
 
 		/*
-		 * if we didn't find a long enough run, append to 
+		 * if we didn't find a long enough run, append to
 		 * the raw dump buffer
 		 */
 		if(runlen<NMATCH){
@@ -746,7 +746,7 @@ writeimageblock(WImage *w, uchar *data, int ndata)
 }
 
 /*
- * functions from the Plan9/Brazil drawing libraries 
+ * functions from the Plan9/Brazil drawing libraries
  */
 private int
 bytesperline(Rectangle r, int ld)
@@ -827,4 +827,3 @@ cmap2rgb(int c)
  *
  *
  */
-

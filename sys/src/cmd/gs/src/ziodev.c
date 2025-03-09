@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 1995, 1997, 1998, 1999, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -94,10 +94,10 @@ zgetiodevice(i_ctx_t *i_ctx_p)
 /* ------ %lineedit and %statementedit ------ */
 
 /* <file> <bool> <int> <string> .filelineedit <file> */
-/* This opens %statementedit% or %lineedit% and is also the 
+/* This opens %statementedit% or %lineedit% and is also the
  * continuation proc for callouts.
  * Input:
- *  string is the statement/line buffer, 
+ *  string is the statement/line buffer,
  *  int is the write index into string
  *  bool is true if %statementedit%
  *  file is stdin
@@ -105,7 +105,7 @@ zgetiodevice(i_ctx_t *i_ctx_p)
  *  file is a string based stream
  * We store the line being read in a PostScript string.
  * This limits the size to max_string_size (64k).
- * This could be increased by storing the input line in something 
+ * This could be increased by storing the input line in something
  * other than a PostScript string.
  */
 int
@@ -142,7 +142,7 @@ zfilelineedit(i_ctx_t *i_ctx_p)
 	return_error(e_limitcheck);
     if (!buf->data || (buf->size < initial_buf_size)) {
 	count = 0;
-	buf->data = gs_alloc_string(imemory, initial_buf_size, 
+	buf->data = gs_alloc_string(imemory, initial_buf_size,
 	    "zfilelineedit(buffer)");
 	if (buf->data == 0)
 	    return_error(e_VMerror);
@@ -158,7 +158,7 @@ rd:
 	 * Return an error, but first realloc the buffer
 	 * back to a legal size.
 	 */
-	byte *nbuf = gs_resize_string(imemory, buf->data, buf->size, 
+	byte *nbuf = gs_resize_string(imemory, buf->data, buf->size,
 		max_string_size, "zfilelineedit(shrink buffer)");
 	if (nbuf == 0)
 	    return_error(e_VMerror);
@@ -185,7 +185,7 @@ rd:
 		(op-1)->value.intval = count;
 		/* callout is for stdin */
 		make_file(&rfile, a_readonly | avm_system, ins->read_id, ins);
-		code = s_handle_read_exception(i_ctx_p, code, &rfile,  
+		code = s_handle_read_exception(i_ctx_p, code, &rfile,
 		    NULL, 0, zfilelineedit);
 	    }
 	    break;

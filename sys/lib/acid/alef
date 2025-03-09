@@ -35,7 +35,7 @@ pchan(addr)
 		}
 		print(n\D, " free buffers\n");
 	}
-		
+
 	if addr.selt then {
 		l = "send";
 		if addr.selt then
@@ -77,7 +77,7 @@ tdb()
 	print("Tasks ready to run:\n");
 	while tq != 0 do {
 		print("Task(", tq, ")\n");
-		tq = tq.link;		
+		tq = tq.link;
 	}
 }
 
@@ -122,7 +122,7 @@ pqlock(addr)
 	print("Tasks waiting:\n");
 	while t do {
 		print("Task(", t, ")\n");
-		tq = tq.qlink;		
+		tq = tq.qlink;
 	}
 }
 

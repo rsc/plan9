@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -57,7 +57,7 @@ int gs_cmap_decode_next(const gs_cmap_t *pcmap, const gs_const_string *str,
 /*
  * Allocate and initialize a ToUnicode CMap.
  */
-int gs_cmap_ToUnicode_alloc(gs_memory_t *mem, int id, int num_codes, int key_size, 
+int gs_cmap_ToUnicode_alloc(gs_memory_t *mem, int id, int num_codes, int key_size,
 			    gs_cmap_t **ppcmap);
 
 /*

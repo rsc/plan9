@@ -1,6 +1,6 @@
 # rcmain: unix version
 if(~ $#home 0) home=$HOME
-if(~ $#ifs 0) ifs=' 	
+if(~ $#ifs 0) ifs='
 '
 switch($#prompt){
 case 0

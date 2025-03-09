@@ -67,16 +67,16 @@ isum(void)
 					syscall += i->count;
 					break;
 				}
-		
+
 			}
 		}
 	}
 
-	Bprint(bioout, "\n%-8ud      Memory cycles\n", mems+total);	
+	Bprint(bioout, "\n%-8ud      Memory cycles\n", mems+total);
 	Bprint(bioout, "%-8ud %3d%% Instruction cycles\n",
 			total, Percent(total, mems+total));
 	Bprint(bioout, "%-8ud %3d%% Data cycles\n\n",
-			mems, Percent(mems, mems+total));	
+			mems, Percent(mems, mems+total));
 
 	Bprint(bioout, "%-8ud %3d%% Arithmetic\n",
 			arith, Percent(arith, total));
@@ -93,7 +93,7 @@ isum(void)
 	Bprint(bioout, "   %-8ud %3d%% Delay slots\n",
 			useddelay, Percent(useddelay, branch));
 
-	Bprint(bioout, "   %-8ud %3d%% Unused delay slots\n", 
+	Bprint(bioout, "   %-8ud %3d%% Unused delay slots\n",
 			branch-useddelay, Percent(branch-useddelay, branch));
 
 	Bprint(bioout, "%-8ud %3d%% Program total delay slots\n",

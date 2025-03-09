@@ -55,7 +55,7 @@ int	hasperm(File *file, char *uid, int p)
 .BR File s
 and
 .BR Tree s
-provide an in-memory file hierarchy 
+provide an in-memory file hierarchy
 intended for use in 9P file servers.
 .PP
 .I Alloctree
@@ -73,8 +73,8 @@ and be owned by user
 and group
 .IR gid .
 .I Destroy
-is used when freeing 
-.B File 
+is used when freeing
+.B File
 structures and is described later.
 .PP
 .BR File s
@@ -86,11 +86,11 @@ which attempts to create a file named
 in the directory
 .IR dir .
 If created, the file will have owner
-.I uid 
+.I uid
 and have a group inherited from
 the directory.
 .I Mode
-and the permissions of 
+and the permissions of
 .I dir
 are used to calculate the permission bits for
 the file as described in
@@ -122,7 +122,7 @@ returning the resulting file,
 or zero if the named file or any intermediate element
 does not exist.
 .PP
-The 
+The
 .B File
 structure's
 .B aux
@@ -135,13 +135,13 @@ are reference-counted: if not zero,
 .I destroy
 (specified in the call to
 .IR alloctree )
-will be called for each file when its 
+will be called for each file when its
 last reference is removed or when the tree is freed.
 .I Destroy
 should take care of any necessary cleanup related to
 .BR aux .
 When creating new file references by copying pointers,
-call 
+call
 .I incref
 (see
 .IR lock (2))
@@ -150,7 +150,7 @@ To note the removal of a reference to a file, call
 .IR closefile .
 .I Createfile
 and
-.I walkfile 
+.I walkfile
 return new references.
 .IR Removefile ,
 .IR closefile ,
@@ -167,7 +167,7 @@ for each file in the directory.
 In order to allow concurrent reading of directories,
 clients must obtain a
 .B Readdir
-structure by calling 
+structure by calling
 .I opendirfile
 on a directory.
 Subsequent calls to
@@ -183,7 +183,7 @@ to free the
 does simplistic permission checking; it assumes only
 one-user groups named by uid and returns non-zero if
 .I uid
-has permission 
+has permission
 .I p
 (a bitwise-or of
 .BR AREAD ,

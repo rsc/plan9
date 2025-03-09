@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 1994, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -164,10 +164,10 @@ mem_planar_copy_mono(gx_device * dev, const byte * base, int sourcex,
 	gx_color_index mask = ((gx_color_index)1 << plane_depth) - 1;
 	const gx_device_memory *mdproto =
 	    gdev_mem_device_for_bits(plane_depth);
-	gx_color_index c0 = 
+	gx_color_index c0 =
 	    (color0 == gx_no_color_index ? gx_no_color_index :
 	     (color0 >> shift) & mask);
-	gx_color_index c1 = 
+	gx_color_index c1 =
 	    (color1 == gx_no_color_index ? gx_no_color_index :
 	     (color1 >> shift) & mask);
 
@@ -308,10 +308,10 @@ mem_planar_strip_tile_rectangle(gx_device * dev, const gx_strip_bitmap * tiles,
 	gx_color_index mask = ((gx_color_index)1 << plane_depth) - 1;
 	const gx_device_memory *mdproto =
 	    gdev_mem_device_for_bits(plane_depth);
-	gx_color_index c0 = 
+	gx_color_index c0 =
 	    (color0 == gx_no_color_index ? gx_no_color_index :
 	     (color0 >> shift) & mask);
-	gx_color_index c1 = 
+	gx_color_index c1 =
 	    (color1 == gx_no_color_index ? gx_no_color_index :
 	     (color1 >> shift) & mask);
 

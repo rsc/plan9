@@ -172,7 +172,7 @@ get_len_state(int len)
 State
 St_set_char(State st)
 {
-	static State next[states] = { 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 4, 5 };	
+	static State next[states] = { 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 4, 5 };
 
 	assert((unsigned)st < nelem(next));
 	return next[st];

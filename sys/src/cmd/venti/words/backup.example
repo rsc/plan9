@@ -17,10 +17,9 @@ fn x {
 		whatis $y >>bkup.info
 	}
 }
-hget http://127.1:8000/index | 
+hget http://127.1:8000/index |
 awk '
 /^index=/ { blockSize=0+substr($3, 11); }
 /^arena=/ { arena=substr($1, 7); }
 /^	arena=/ { start=0+substr($5, 2)-blockSize; printf("x %s %d %s\n", arena, start, $3); }
 ' |rc
-

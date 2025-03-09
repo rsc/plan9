@@ -3,9 +3,9 @@
 snap \- process snapshots
 .SH DESCRIPTION
 Process snapshots are used to
-save a process image for debugging on 
+save a process image for debugging on
 another machine or at another time.
-They are like old Unix core dumps but 
+They are like old Unix core dumps but
 can hold multiple process images and
 are smaller.
 .PP
@@ -27,7 +27,7 @@ This header is a decimal process id followed by
 an identification string, which denotes the type of
 data in the record.
 .PP
-Records of type 
+Records of type
 .BR fd ,
 .BR fpregs ,
 .BR kregs ,
@@ -37,19 +37,19 @@ Records of type
 .BR regs ,
 .BR segment ,
 and
-.BR status 
-are all formatted as a decimal number 
+.BR status
+are all formatted as a decimal number
 .I n
-followed by 
+followed by
 .I n
 bytes of data.
 This data is the contents of the file
-of the same name found in 
+of the same name found in
 .BR /proc .
 .PP
-The format of the 
+The format of the
 .B mem
-and 
+and
 .B text
 sections is not as simple.
 These sections contain one or more page descriptions.
@@ -66,11 +66,11 @@ If the flag is
 .BR z ,
 then the data is understood to be zeros,
 and is omitted.
-If the flag is 
-.B m 
-or 
+If the flag is
+.B m
+or
 .BR t ,
-then it is followed by two decimal strings 
+then it is followed by two decimal strings
 .I p
 and
 .IR o ,
@@ -78,7 +78,7 @@ indicating that this page is the same
 as the page at offset
 .I o
 of the memory or text
-segment for process 
+segment for process
 .IR p .
 This data must have been previously
 described in the snapshot, and the offset

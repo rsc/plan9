@@ -34,7 +34,7 @@ main(int argc, char **argv)
 
 	if((fd = open(file, OREAD)) < 0)
 		sysfatal("open %q: %r", file);
-		
+
 	for(;;){
 		sleep(250);
 		if(pread(fd, buf, sizeof buf, 0) < 0)

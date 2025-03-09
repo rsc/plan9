@@ -195,7 +195,7 @@ WS	[ \t]
 <A>"<"		return(LT);
 <A>"&&"		return(AND);
 <A>"||"		return(OR);
-<A>"!"		return(NOT);	
+<A>"!"		return(NOT);
 
 <A>\"		{ BEGIN str; clen = 0; }
 

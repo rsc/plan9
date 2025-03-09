@@ -57,7 +57,7 @@ are arbitrary text strings, typically the same as
 In older Plan 9 file servers,
 .IR id s
 are small decimal numbers.
-In those, 
+In those,
 a negative
 .I id
 is special: a user with a negative

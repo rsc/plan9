@@ -124,7 +124,7 @@ static char* iorname[Nreg] = {
 	"DpWriteMsk",
 
 	"LcdIndex",
-	"LcdData",	
+	"LcdData",
 };
 
 static char* lcdname[Nlcd] = {
@@ -491,7 +491,7 @@ clock(Vga* vga, Ctlr* ctlr)
 	/*
 	 * Don't compute clock timings for LCD panels.
 	 * Just use what's already there.  We can't just use
-	 * the frequency in the vgadb for this because 
+	 * the frequency in the vgadb for this because
 	 * the frequency being programmed into the PLLs
 	 * is not the frequency being used to compute the DSP
 	 * settings.  The DSP-relevant frequency is the one
@@ -623,7 +623,7 @@ struct Meminfo {
 
 enum {
 	Mdram,
-	Medo,	
+	Medo,
 	Msdram,
 	Mwram,
 };
@@ -696,11 +696,11 @@ setdsp(Vga* vga, Ctlr*)
 	mem = &meminfo[memtyp];
 
 	/*
-	 * First we need to calculate x, the number of 
+	 * First we need to calculate x, the number of
 	 * XCLKs that one QWORD occupies in the display FIFO.
 	 *
 	 * For some reason, x gets stretched out if LCD stretching
-	 * is turned on. 
+	 * is turned on.
 	 */
 
 	x = ((double)memclk*640000.0) /
@@ -1277,7 +1277,7 @@ enum {
 /*
  * mostly derived from the xfree86 probe routines.
  */
-static void 
+static void
 dumpmach64bios(Mach64xx *mp)
 {
 	int i, romtable, clocktable, freqtable, lcdtable, lcdpanel;
@@ -1394,5 +1394,3 @@ Ctlr mach64xxhwgc = {
 	0,				/* load */
 	0,				/* dump */
 };
-
-

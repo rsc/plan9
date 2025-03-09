@@ -32,4 +32,3 @@ print(f->suid);
 	STRING(key, NONCELEN);
 	USED(p);
 }
-

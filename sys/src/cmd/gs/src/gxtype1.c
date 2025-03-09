@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -53,7 +53,7 @@ public_st_gs_font_type1();
 /* Define the structure type for a Type 1 interpreter state. */
 public_st_gs_type1_state();
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(gs_type1_state_enum_ptrs, gs_type1_state *pcis)
 {
     index -= 4;
@@ -99,7 +99,7 @@ const char gx_extendeg_glyph_name_separator[] = "~GS~";
 /* The caller must supply a string to the first call of gs_type1_interpret. */
 int
 gs_type1_interp_init(register gs_type1_state * pcis, gs_imager_state * pis,
-    gx_path * ppath, const gs_log2_scale_point * pscale, 
+    gx_path * ppath, const gs_log2_scale_point * pscale,
     const gs_log2_scale_point * psubpixels, bool no_grid_fitting,
 		     int paint_type, gs_font_type1 * pfont)
 {
@@ -296,9 +296,9 @@ gs_type1_endchar(gs_type1_state * pcis)
 	/* Ask the caller to provide the accent's CharString. */
 	code = pfont->data.procs.seac_data(pfont, achar, NULL, &gstr, &agdata);
 	if (code == gs_error_undefined) {
-	    /* 
+	    /*
 	     * The font is missing the accent's CharString (due to
-	     * bad subsetting).  Just end drawing here without error. 
+	     * bad subsetting).  Just end drawing here without error.
 	     * This is like Acrobat Reader behaves.
 	     */
 	    char buf0[gs_font_name_max + 1], buf1[30];
@@ -372,7 +372,7 @@ gs_type1_piece_codes(/*const*/ gs_font_type1 *pfont,
     crypt_state state;
     int c;
     int code;
-    
+
     CLEAR_CSTACK(cstack, csp);
     cip = pgd->bits.data;
  call:

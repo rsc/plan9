@@ -29,7 +29,7 @@ The code
 should be the cases of a C switch on
 option characters;
 it is executed once for each option character.
-Options end after an argument 
+Options end after an argument
 .BR -- ,
 before an argument
 .BR - ,
@@ -61,7 +61,7 @@ and, if that returns, calls
 .IR abort (2).
 A typical value for
 .I code
-is 
+is
 .BR usage() ,
 as in
 .BR EARGF(usage()) .

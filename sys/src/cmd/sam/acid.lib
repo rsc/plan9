@@ -16,7 +16,7 @@ defn printrunestring(addr, len)
 defn runestring(addr, len)
 {
 	local s;
-	
+
 	s = "";
 	loop 1,len do {
 		s = s + *(addr\r);
@@ -35,12 +35,12 @@ defn filemenu(f)
 {
 	complex File f;
 	local s;
-	
+
 	s = "";
 	if f != *cmd then {
 		if f.mod then
 			s = s + "'";
-		else 
+		else
 			s = s + " ";
 		if f.rasp != 0 then
 			s = s + "+";
@@ -59,7 +59,7 @@ defn filemenu(f)
 defn files()
 {
 	local i, f, fx, fp;
-	
+
 	fx = (List)file;
 	if fx.nused == 0 then
 		filemenu(*cmd);
@@ -74,7 +74,7 @@ defn files()
 defn range(r)
 {
 	complex Range r;
-	
+
 	if r.p1 == r.p2 then
 		return itoa(r.p1, "#%d");
 	return itoa(r.p1, "#%d")+"-"+itoa(r.p2, "#%d");
@@ -83,7 +83,7 @@ defn range(r)
 defn file(f)
 {
 	complex File f;
-	
+
 	filemenu(f);
 	print("\t$=#", f.nc\D, " .=", range(f.dot.r), " buffer(", f\X, ")\n");
 	if f == *cmd then {
@@ -94,7 +94,7 @@ defn file(f)
 defn buffer(b)
 {
 	complex Buffer b;
-	
+
 	print("buffer(", b\X, "): c=", b.c\X, " nc=", b.nc\D, "\n");
 	print("cache: ==(");
 	print(runestring(b.c, b.nc));

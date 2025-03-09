@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -154,7 +154,7 @@ c_overprint_write(const gs_composite_t * pct, byte * data, uint * psize)
             if (code < 0 && code != gs_error_rangecheck)
                 return code;
             used += tmp_size;
-        }            
+        }
     }
 
     /* check for overflow */
@@ -970,7 +970,7 @@ c_overprint_create_default_compositor(
                                        "create overprint compositor" );
     if ((*popdev = (gx_device *)opdev) == 0)
         return_error(gs_error_VMerror);
-    gx_device_init( (gx_device *)opdev, 
+    gx_device_init( (gx_device *)opdev,
                     (const gx_device *)&gs_overprint_device,
                     mem,
                     true );

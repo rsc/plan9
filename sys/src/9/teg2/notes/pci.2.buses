@@ -74,5 +74,4 @@ tbdf 0xc016800 probe 0x8011a800 failed
 tbdf 0xc017000 probe 0x8011b000 failed
 tbdf 0xc017800 probe 0x8011b800 failed
 scanning pci bus 2...tbdf 0xc020000 probe 0x80124000 failed
-tbdf 0xc020800 probe 0x80124800 
-
+tbdf 0xc020800 probe 0x80124800

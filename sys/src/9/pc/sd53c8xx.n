@@ -64,7 +64,7 @@ STATE_DONE = 4
 STATE_END = 5
 
 RESULT_OK = 0
-	
+
 MSG_IDENTIFY = 0x80
 MSG_DISCONNECT = 0x04
 MSG_SAVE_DATA_POINTER = 0x02
@@ -79,7 +79,7 @@ BSIZE = 512
 //BSIZE=4096
 
  // idle:
-	jump	wait_for_reselection	
+	jump	wait_for_reselection
 start:
 	call	load_sync
 //	move	13 to ctest0
@@ -196,7 +196,7 @@ rejected:
 msg_in_skip:
 	clear	ack
 	jump	to_decisions
-	
+
 extended:
 	clear	ack
 	int	error_unexpected_phase, when not msg_in
@@ -254,7 +254,7 @@ reject:
 	clear	ack					// finish ACK
 	jump	reject, when msg_out			// parity error
 	jump	to_decisions
-	
+
 ignore_wide:
 	clear	ack
 	int	error_unexpected_phase, when not msg_in
@@ -374,7 +374,7 @@ post_data_to_decisions:
 	jump	status_phase, when status
 	jump	msg_in_phase, if msg_in
 	int	error_unexpected_phase
-	
+
 //
 // MULTI_TARGET
 //

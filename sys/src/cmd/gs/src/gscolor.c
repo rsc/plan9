@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1992, 1993, 1994, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -36,7 +36,7 @@ public_st_client_color();
 public_st_transfer_map();
 
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(transfer_map_enum_ptrs, gx_transfer_map *mptr) return 0;
 case 0: ENUM_RETURN((mptr->proc == 0 ? mptr->closure.data : 0));
 ENUM_PTRS_END

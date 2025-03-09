@@ -31,7 +31,7 @@ except for segments of the form
 .LP
 which describe tables
 and are replaced by
-.I troff 
+.I troff
 requests to lay out the tables.
 If no arguments are given,
 .I tbl
@@ -59,7 +59,7 @@ enclose the table in a box or double box
 enclose every item in a box
 .TP
 .BI tab( x )
-use 
+use
 .I x
 to separate input items; default is tab
 .TP
@@ -109,7 +109,7 @@ Numeric: align at decimal point (inferred for integers) or at
 Span: extend previous column across this one.
 .TP
 .B A
-Alphabetic: left-aligned within column, widest item centered, indented relative to 
+Alphabetic: left-aligned within column, widest item centered, indented relative to
 .B L
 rows.
 .TP
@@ -152,7 +152,7 @@ and
 .BR FI .
 .TP
 .B T
-Begin vertically-spanned item at top row of range; default is 
+Begin vertically-spanned item at top row of range; default is
 vertical centering (with
 .LR ^ ).
 .TP
@@ -186,8 +186,8 @@ Each line of
 becomes one row of the table; tabs separate items.
 Lines beginning with
 .L .
-are 
-.I troff 
+are
+.I troff
 requests.
 Certain special data items are recognized:
 .RS
@@ -218,7 +218,7 @@ Span the previous item in this column down into this row.
 .B T{
 The item is a text block to be separately formatted
 by
-.I troff 
+.I troff
 and placed in the table.
 The block continues to the next line beginning with
 .BR T} .
@@ -252,8 +252,8 @@ Bedminster\*(tb789\*(tb3.26
 Bernards Twp.\*(tb3087\*(tb3.74
 Bernardsville\*(tb2018\*(tb3.30
 \&.TE
-.if t \{\0 
-\0 
+.if t \{\0
+\0
 \0\}
 .if n .PP
 .TS
@@ -274,7 +274,7 @@ Bernardsville	2018	3.30
 .SH SOURCE
 .B /sys/src/cmd/tbl
 .SH SEE ALSO
-.IR troff (1), 
+.IR troff (1),
 .IR eqn (1),
 .IR doctype (1)
 .br

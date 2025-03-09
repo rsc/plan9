@@ -22,7 +22,7 @@ mysbrk(ulong size)
 		chunk = Chunk;
 		if(chunk < size)
 			chunk = Chunk + size;
-		brk = VirtualAlloc(NULL, chunk, MEM_COMMIT, PAGE_EXECUTE_READWRITE); 	
+		brk = VirtualAlloc(NULL, chunk, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 		if(brk == 0)
 			return (void*)-1;
 	}

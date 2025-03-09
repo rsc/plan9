@@ -166,7 +166,7 @@ m68020excep(Map *map, Rgetter rget)
 }
 	/* 68020 Disassembler and related functions */
 /*
-not supported: cpBcc, cpDBcc, cpGEN, cpScc, cpTRAPcc, cpRESTORE, cpSAVE 
+not supported: cpBcc, cpDBcc, cpGEN, cpScc, cpTRAPcc, cpRESTORE, cpSAVE
 
 opcode:					1 1 1 1 1 1
 					5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
@@ -351,7 +351,7 @@ enum
 	IPACK,		/* packed real immediate */
 	IDBL,		/* double precision real immediate */
 };
-	
+
 typedef	struct optable	Optable;
 typedef	struct operand	Operand;
 typedef	struct inst	Inst;
@@ -1699,7 +1699,7 @@ formatins(char *fmt, Inst *ip)
 		case 'y':	/* register number; opcode: [0-2] */
 			*ip->curr++ = (op&0x07)+'0';
 			break;
-		case 'z':	/* shift count; opcode: [9-11] */	
+		case 'z':	/* shift count; opcode: [9-11] */
 			*ip->curr++ = ((op>>9)&0x07)+'0';
 			break;
 		case 'A':	/* register number; word 2: [0-2] */
@@ -1930,7 +1930,7 @@ instrsize(Inst *ip, Optable *op)
 				ip->n++;
 			else if (t == 2)
 				ip->n += 2;
-			else 
+			else
 				return -1;
 			break;
 		case BR8:	/* loony branch displacement format */
@@ -2031,7 +2031,7 @@ m68020foll(Map *map, uvlong pc, Rgetter rget, uvlong *foll)
 			break;
 		}
 	}
-	foll[0] = pc+i.n*2;			
+	foll[0] = pc+i.n*2;
 	return 1;
 }
 
@@ -2072,7 +2072,7 @@ m68020das(Map *map, uvlong pc, char *buf, int n)
 	i.curr = buf;
 	i.end = buf+n-1;
 	i.errmsg = 0;
-	
+
 	op = instruction(&i);
 	if (!op)
 		return -1;

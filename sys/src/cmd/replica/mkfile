@@ -6,7 +6,7 @@ SCRIPTS=\
 	push\
 	scan\
 	setupdirs\
-	
+
 TARG=\
 	applychanges\
 	applylog\
@@ -46,4 +46,3 @@ ${SCRIPTS:%=$BIN/%}:
 
 ${SCRIPTS:%=$O.%}:QV:
 	;
-

@@ -39,15 +39,15 @@ audiodevopen(void)
 		goto err;
 	if((cfd = open("/dev/mixer", ORDWR)) < 0)
 		goto err;
-	
+
 	t = Bits;
 	if(ioctl(afd, SNDCTL_DSP_SAMPLESIZE, &t) < 0)
 		goto err;
-	
+
 	t = Channels-1;
 	if(ioctl(afd, SNDCTL_DSP_STEREO, &t) < 0)
 		goto err;
-	
+
 	speed = Rate;
 	ul = Rate;
 	if(ioctl(afd, SNDCTL_DSP_SPEED, &ul) < 0)
@@ -106,7 +106,7 @@ static int
 lookname(int id9)
 {
 	int i;
-	
+
 	for(i=0; i<nelem(names); i++)
 		if(names[i].id9 == id9)
 			return names[i].id;
@@ -119,7 +119,7 @@ audiodevsetvol(int what, int left, int right)
 	int id;
 	ulong x;
 	int can, v;
-	
+
 	if(cfd < 0)
 		error("audio device not open");
 	if(what == Vspeed){
@@ -145,7 +145,7 @@ audiodevgetvol(int what, int *left, int *right)
 {
 	int id;
 	int can, v;
-	
+
 	if(cfd < 0)
 		error("audio device not open");
 	if(what == Vspeed){
@@ -168,7 +168,7 @@ int
 audiodevwrite(void *v, int n)
 {
 	int m, tot;
-	
+
 	for(tot=0; tot<n; tot+=m)
 		if((m = write(afd, (uchar*)v+tot, n-tot)) <= 0)
 			oserror();

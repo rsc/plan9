@@ -126,7 +126,7 @@
  */
 #define	NULLSEG	0	/* null segment */
 #define	KDSEG	1	/* kernel data/stack */
-#define	KESEG	2	/* kernel executable */	
+#define	KESEG	2	/* kernel executable */
 #define	UDSEG	3	/* user data/stack */
 #define	UESEG	4	/* user executable */
 #define	TSSSEG	5	/* task segment */
@@ -176,7 +176,7 @@
 /*
  *  virtual MMU
  */
-#define	PTEMAPMEM	(1024*1024)	
+#define	PTEMAPMEM	(1024*1024)
 #define	PTEPERTAB	(PTEMAPMEM/BY2PG)
 #define	SEGMAPSIZE	1984
 #define	SSEGMAPSIZE	16
@@ -200,10 +200,9 @@
 
 /*
  * Macros for calculating offsets within the page directory base
- * and page tables. 
+ * and page tables.
  */
 #define	PDX(va)		((((ulong)(va))>>22) & 0x03FF)
 #define	PTX(va)		((((ulong)(va))>>12) & 0x03FF)
 
 #define	getpgcolor(a)	0
-

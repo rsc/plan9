@@ -26,7 +26,7 @@ full name of the user
 department of the user
 .TP
 .I email...
-one or more fields containing email addresses 
+one or more fields containing email addresses
 to be notified when the key is about to expire
 .PD
 .PP

@@ -140,7 +140,7 @@ defn trump() {
 		pc = *PC;
 		x = trumpfninfo();
 		arg0 = x[0];
-		if pc == reallocPC || pc == sbrkmergePC then 
+		if pc == reallocPC || pc == sbrkmergePC then
 			arg1 = x[1];
 		bpset(x[2]);
 		cont();

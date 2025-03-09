@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1990, 1991 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -24,12 +24,12 @@
  *** Note: this driver was contributed by a user, Alfred Kayser:
  ***       please contact AKayser@et.tudelft.nl if you have questions.
  ***/
-                                              
+
 #ifndef SHINGLING        /* Interlaced, multi-pass printing */
 #define SHINGLING 1      /* 0 = none, 1 = 50%, 2 = 25%, 2 is best & slowest */
 #endif
 
-#ifndef DEPLETION        /* 'Intelligent' dot-removal */ 
+#ifndef DEPLETION        /* 'Intelligent' dot-removal */
 #define DEPLETION 1      /* 0 = none, 1 = 25%, 2 = 50%, 1 best for graphics? */
 #endif                   /* Use 0 for transparencies */
 
@@ -80,46 +80,46 @@ djet500c_print_page(gx_device_printer *pdev, FILE *fprn)
     /* select the most compressed mode available & clear tmp storage */
     /* put printer in known state */
     fputs("\033E",fprn);
-    
+
     /* ends raster graphics to set raster graphics resolution */
     fputs("\033*rbC", fprn);	/*  was \033*rB  */
 
     /* set raster graphics resolution -- 300 dpi */
-    fputs("\033*t300R", fprn);                                           
-    
-    /* A4, skip perf, def. paper tray */ 
-    fputs("\033&l26a0l1H", fprn); 
+    fputs("\033*t300R", fprn);
+
+    /* A4, skip perf, def. paper tray */
+    fputs("\033&l26a0l1H", fprn);
 
     /* RGB Mode */
-    fputs("\033*r3U", fprn);    
-    
+    fputs("\033*r3U", fprn);
+
     /* set depletion level */
     fprintf(fprn, "\033*o%dD", DEPLETION);
-    
+
     /* set shingling level */
     fprintf(fprn, "\033*o%dQ", SHINGLING);
-    
+
     /* move to top left of page & set current position */
     fputs("\033*p0x0Y", fprn); /* cursor pos: 0,0 */
-     
+
     fputs("\033*b2M", fprn);	/*  mode 2 compression for now  */
-    
+
     fputs("\033*r0A", fprn);  /* start graf. left */
-    
+
     /* Send each scan line in turn */
        {    int lnum;
 	int num_blank_lines = 0;
 	int lineSize = gdev_mem_bytes_per_scan_line((gx_device *)pdev);
 	if (lineSize>bitSize)
-	{                         
+	{
             if (bitData) free(bitData);
             bitSize=lineSize;
             bitData=(byte*)malloc(bitSize+16);
 	}
 	for (lnum=0; lnum<pdev->height; lnum++)
-	{    
+	{
             byte *endData;
-            
+
             gdev_prn_copy_scan_lines(pdev, lnum, bitData, lineSize);
 
             /* Remove trailing 0s. */
@@ -134,9 +134,9 @@ djet500c_print_page(gx_device_printer *pdev, FILE *fprn)
 		/* Pad with 0s to fill out the last */
 		/* block of 8 bytes. */
 		memset(endData, 0, 7);
-                              
-		lineLen=((endData-bitData)+7)/8;    /* Round to next 8multiple */           
-		if (planeSize<lineLen)                             
+
+		lineLen=((endData-bitData)+7)/8;    /* Round to next 8multiple */
+		if (planeSize<lineLen)
 		{
                     if (plane1) free(plane1);
                     if (plane2) free(plane2);
@@ -148,9 +148,9 @@ djet500c_print_page(gx_device_printer *pdev, FILE *fprn)
 		}
 		/* Transpose the data to get pixel planes. */
 		for (k=i=0; k<lineLen; i+=8, k++)
-		{ 
+		{
                    register ushort t, c;
-                   
+
                    /* Three smaller loops are better optimizable and use less
                       vars, so most of them can be in registers even on pc's */
                    for (c=t=0;t<8;t++)
@@ -162,7 +162,7 @@ djet500c_print_page(gx_device_printer *pdev, FILE *fprn)
                    for (c=t=0;t<8;t++)
 			c = (c<<1) | (bitData[t+i]&1);
                    plane1[k] = ~(byte)(c);
-		}           
+		}
 
 		/* Skip blank lines if any */
 		if (num_blank_lines > 0)
@@ -177,19 +177,19 @@ djet500c_print_page(gx_device_printer *pdev, FILE *fprn)
                    lineLen of bytes */
 		/* P.s. mode9 compression is akward(??) to use, because the lineLenght's
                    are different, so we are stuck with mode 2, which is good enough */
-                   
+
 		/* set the line width */
 		fprintf(fprn, "\033*r%dS", lineLen*8);
 
 		count = mode2compress(plane1, plane1 + lineLen, bitData);
 		fprintf(fprn, "\033*b%dV", count);
-		fwrite(bitData, sizeof(byte), count, fprn); 
+		fwrite(bitData, sizeof(byte), count, fprn);
 		count = mode2compress(plane2, plane2 + lineLen, bitData);
 		fprintf(fprn, "\033*b%dV", count);
-		fwrite(bitData, sizeof(byte), count, fprn); 
+		fwrite(bitData, sizeof(byte), count, fprn);
 		count = mode2compress(plane3, plane3 + lineLen, bitData);
 		fprintf(fprn, "\033*b%dW", count);
-		fwrite(bitData, sizeof(byte), count, fprn); 
+		fwrite(bitData, sizeof(byte), count, fprn);
             }
 	}
     }
@@ -199,10 +199,10 @@ djet500c_print_page(gx_device_printer *pdev, FILE *fprn)
 
        /* put printer in known state */
     fputs("\033E",fprn);
-    
+
     /* eject page */
-    fputs("\033&l0H", fprn);        
-    
+    fputs("\033&l0H", fprn);
+
     /* release allocated memory */
     if (bitData) free(bitData);
     if (plane1) free(plane1);
@@ -227,7 +227,7 @@ djet500c_print_page(gx_device_printer *pdev, FILE *fprn)
 
 static int
 mode2compress(byte *row, byte *end_row, byte *compressed)
-{    
+{
     register byte *exam; /* word being examined in the row to compress */
     register byte *cptr = compressed; /* output pointer into compressed bytes */
     int i, count, len;
@@ -235,40 +235,40 @@ mode2compress(byte *row, byte *end_row, byte *compressed)
 
     exam = row;
     while (1)
-    {                        
+    {
 	test = *exam++;
 	/* Advance exam until test==*exam  or exam==end_row */
 	while ((test != *exam) && (exam < end_row))
-            test = *exam++;                    
+            test = *exam++;
 	/* row points to start of differing bytes,
-           exam points to start of consequtive series 
+           exam points to start of consequtive series
                     or to end of row */
 	if (exam<end_row) exam--;
-	len=exam-row;   
+	len=exam-row;
 	while (len>0)
 	{
             count=len;
             if (count>127) count=127;
-            *cptr++=count-1;  
+            *cptr++=count-1;
             for (i=0;i<count;i++) *cptr++ = *row++;
             len-=count;
-	}     
-	if (exam>=end_row) break;     /* done */             
+	}
+	if (exam>=end_row) break;     /* done */
 	exam++;     /* skip first same byte */
 	while ((test == *exam) && (exam < end_row))  /* skip all same bytes */
             exam++;
 	/* exam points now first different word or to end of data */
 	len = exam-row;
 	while (len>0)
-	{     
+	{
             count=len;
             if (count>127) count=127;
             *cptr++=(257-count);
-            *cptr++=test;             
+            *cptr++=test;
             len-=count;
-	}                
+	}
 	if (exam>=end_row) break;            /* end of data */
 	row = exam;    /* row points to first dissimular byte */
-    }                                          
+    }
     return (cptr-compressed);
 }

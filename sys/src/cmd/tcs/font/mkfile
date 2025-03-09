@@ -99,4 +99,3 @@ rc.gb:VQD:
 		g FangSong '-g -s -f ../han/cclib16fs.bdf' 16
 	} > $target
 	chmod 775 $target
-

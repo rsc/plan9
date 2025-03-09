@@ -5,7 +5,7 @@
 #include "error.h"
 
 Proc *up;
-Conf conf = 
+Conf conf =
 {
 	1,
 	100,

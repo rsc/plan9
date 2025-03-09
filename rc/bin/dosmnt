@@ -1,7 +1,7 @@
 #!/bin/rc
 
 rfork e
-if(! ~ $#* 2){ 
+if(! ~ $#* 2){
 	echo 'usage: dosmnt N mntpt' >[1=2]
 	exit usage
 }

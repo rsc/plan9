@@ -1,4 +1,4 @@
-.TH PCC 1 
+.TH PCC 1
 .SH NAME
 pcc \- APE C compiler driver
 .SH SYNOPSIS
@@ -109,14 +109,14 @@ as if by
 .TP
 .BI -I dir
 .L #include
-files whose names do not begin with 
+files whose names do not begin with
 .L /
 are always
-sought first in the directory 
+sought first in the directory
 of the
 .I file
 argument,
-then in directories named in 
+then in directories named in
 .B -I
 options,
 then in
@@ -149,10 +149,10 @@ except that functions for structures declared in included header files
 are omitted.
 .TP
 .B -F
-Enable vararg type checking as described in 
+Enable vararg type checking as described in
 .IR 8c (1).
-This is of limited use without the appropriate 
-.B #pragma 
+This is of limited use without the appropriate
+.B #pragma
 definitions.
 .TP
 .B -f

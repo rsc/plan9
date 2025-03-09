@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2001 artofcode, LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -72,7 +72,7 @@ private int GSDLLCALL gsdll_old_poll(void *caller_handle);
 /* ---------- DLL exported functions ---------- */
 
 /* arguments are:
- * 1. callback function for stdio and for notification of 
+ * 1. callback function for stdio and for notification of
  *   sync_output, output_page and resize events
  * 2. window handle, used as parent.  Use NULL if you have no window.
  * 3. argc
@@ -86,7 +86,7 @@ gsdll_init(GSDLL_CALLBACK callback, HWND hwnd, int argc, char * argv[])
     if ((code = gsapi_new_instance(&pgs_minst, (void *)1)) < 0)
 	return -1;
 
-    gsapi_set_stdio(pgs_minst, 
+    gsapi_set_stdio(pgs_minst,
 	gsdll_old_stdin, gsdll_old_stdout, gsdll_old_stderr);
     gsapi_set_poll(pgs_minst, gsdll_old_poll);
     /* ignore hwnd */
@@ -123,7 +123,7 @@ int GSDLLEXPORT GSDLLAPI
 gsdll_execute_cont(const char * str, int len)
 {
     int exit_code;
-    int code = gsapi_run_string_continue(pgs_minst, str, len, 
+    int code = gsapi_run_string_continue(pgs_minst, str, len,
 	0, &exit_code);
     if (code == e_NeedInput)
 	code = 0;		/* this is not an error */

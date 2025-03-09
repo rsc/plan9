@@ -173,7 +173,7 @@ loaddevconf(Dev *d, int n)
 		free(buf);
 		return -1;
 	}
-	
+
 	if(d->usb->conf[n] == nil)
 		d->usb->conf[n] = emallocz(sizeof(Conf), 1);
 	nr = parseconf(d->usb, d->usb->conf[n], buf, nr);

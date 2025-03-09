@@ -326,7 +326,7 @@ typedef struct Ctlr {
 	uint	txstats[Ntxstats];
 	ulong	totalt;
 	uint	intr;
-	uint	lintr;			
+	uint	lintr;
 	uint	lsleep;
 	uint	rintr;
 	uint	tintr;
@@ -906,7 +906,7 @@ vt6105Minterrupt(Ureg*, void* arg)
 			csr16w(ctlr, Isr, isr);
 		if((isr & ctlr->imr) == 0)
 			break;
-			
+
 		if(isr & Srci){
 			imr &= ~Srci;
 			ctlr->lwakeup = isr & Srci;
@@ -939,8 +939,8 @@ vt6105Minterrupt(Ureg*, void* arg)
 					csr8w(ctlr, Bcr1, r|ctlr->tft);
 				}
 			}
-			
-			
+
+
 			ctlr->totalt += lcycles() - t;
 			vt6105Mtransmit(edev);
 			t = lcycles();
@@ -952,7 +952,7 @@ vt6105Minterrupt(Ureg*, void* arg)
 	}
 	ctlr->imr = imr;
 	csr16w(ctlr, Imr, ctlr->imr);
-	
+
 	ctlr->totalt += lcycles() - t;
 	iunlock(&ctlr->clock);
 }
@@ -1199,7 +1199,7 @@ vt6105Mpnp(Ether* edev)
 	edev->irq = ctlr->pcidev->intl;
 	edev->tbdf = ctlr->pcidev->tbdf;
 	/*
-	 * Set to 1000Mb/s to fool the bsz calculation.  We need 
+	 * Set to 1000Mb/s to fool the bsz calculation.  We need
 	 * something better, though.
 	 */
 	edev->mbps = 1000;

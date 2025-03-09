@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -96,7 +96,7 @@ zsethalftone5(i_ctx_t *i_ctx_p)
     check_dict_read(*op);
     check_type(op[-1], t_dictionary);
     check_dict_read(op[-1]);
- 
+
     /*
      * We think that Type 2 and Type 4 halftones, like
      * screens set by setcolorscreen, adapt automatically to
@@ -161,8 +161,8 @@ zsethalftone5(i_ctx_t *i_ctx_p)
     rc_alloc_struct_0(pdht, gx_device_halftone, &st_device_halftone,
 		      imemory, pdht = 0, ".sethalftone5");
     if (pht == 0 || phtc == 0 || pdht == 0) {
-	j = 0; /* Quiet the compiler: 
-	          gs_note_error isn't necessarily identity, 
+	j = 0; /* Quiet the compiler:
+	          gs_note_error isn't necessarily identity,
 		  so j could be left ununitialized. */
 	code = gs_note_error(e_VMerror);
     } else {

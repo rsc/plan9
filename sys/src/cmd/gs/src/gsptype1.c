@@ -1,12 +1,12 @@
 /* Copyright (C) 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -211,9 +211,9 @@ gs_pattern1_make_pattern(gs_client_color * pcc,
 		if (code < 0)
 		    goto fsaved;
 		if (ADJUST_SCALE_FOR_THIN_LINES) {
-		    /* To allow thin lines at a cell boundary 
+		    /* To allow thin lines at a cell boundary
 		       to be painted inside the cell,
-		       we adjust the scale so that 
+		       we adjust the scale so that
 		       the scaled width is in fixed_1 smaller */
 		    gs_scale(saved, (fabs(inst.size.x) - 1.0 / fixed_scale) / fabs(inst.size.x),
 				    (fabs(inst.size.y) - 1.0 / fixed_scale) / fabs(inst.size.y));
@@ -228,15 +228,15 @@ gs_pattern1_make_pattern(gs_client_color * pcc,
 		    fabs(fabs(mat.xx) - bbw) < 0.5 &&
 		    fabs(fabs(mat.yy) - bbh) < 0.5
 		    ) {
-		    if (inst.step_matrix.xx <= 2) { 
+		    if (inst.step_matrix.xx <= 2) {
 			/* Prevent a degradation - see -r72 mspro.pdf */
 			gs_scale(saved, fabs(inst.size.x / mat.xx), 1);
 			inst.step_matrix.xx = (float)inst.size.x;
 		    } else {
 			inst.step_matrix.xx = (float)floor(inst.step_matrix.xx + 0.5);
-			/* To allow thin lines at a cell boundary 
+			/* To allow thin lines at a cell boundary
 			   to be painted inside the cell,
-			   we adjust the scale so that 
+			   we adjust the scale so that
 			   the scaled width is in fixed_1 smaller */
 			if (bbw >= inst.size.x - 1.0 / fixed_scale)
 			    gs_scale(saved, (fabs(inst.size.x) - 1.0 / fixed_scale) / fabs(inst.size.x), 1);
@@ -569,7 +569,7 @@ gs_private_st_suffix_add1(st_pixmap_info,
  *  Free routine for pattern instances created from pixmaps. This overwrites
  *  the free procedure originally stored in the pattern instance, and stores
  *  the pointer to that procedure in the pixmap_info structure. This procedure
- *  will call the original procedure, then free the pixmap_info structure. 
+ *  will call the original procedure, then free the pixmap_info structure.
  *
  *  Note that this routine does NOT release the data in the original pixmap;
  *  that remains the responsibility of the client.
@@ -872,7 +872,7 @@ const gx_device_color_type_t gx_dc_pattern = {
     gx_dc_ht_get_phase,
     gx_dc_pattern_load, gx_dc_pattern_fill_rectangle,
     gx_dc_default_fill_masked, gx_dc_pattern_equal,
-    gx_dc_pattern_write, gx_dc_pattern_read, 
+    gx_dc_pattern_write, gx_dc_pattern_read,
     gx_dc_pattern_get_nonzero_comps
 };
 
@@ -885,7 +885,7 @@ const gx_device_color_type_t gx_dc_pure_masked = {
     gx_dc_no_get_phase,
     gx_dc_pure_masked_load, gx_dc_pure_masked_fill_rect,
     gx_dc_default_fill_masked, gx_dc_pure_masked_equal,
-    gx_dc_pattern_write, gx_dc_pattern_read, 
+    gx_dc_pattern_write, gx_dc_pattern_read,
     gx_dc_pure_get_nonzero_comps
 };
 
@@ -898,7 +898,7 @@ const gx_device_color_type_t gx_dc_binary_masked = {
     gx_dc_ht_get_phase,
     gx_dc_binary_masked_load, gx_dc_binary_masked_fill_rect,
     gx_dc_default_fill_masked, gx_dc_binary_masked_equal,
-    gx_dc_pattern_write, gx_dc_pattern_read, 
+    gx_dc_pattern_write, gx_dc_pattern_read,
     gx_dc_ht_binary_get_nonzero_comps
 };
 
@@ -911,7 +911,7 @@ const gx_device_color_type_t gx_dc_colored_masked = {
     gx_dc_ht_get_phase,
     gx_dc_colored_masked_load, gx_dc_colored_masked_fill_rect,
     gx_dc_default_fill_masked, gx_dc_colored_masked_equal,
-    gx_dc_pattern_write, gx_dc_pattern_read, 
+    gx_dc_pattern_write, gx_dc_pattern_read,
     gx_dc_ht_colored_get_nonzero_comps
 };
 
@@ -920,7 +920,7 @@ const gx_device_color_type_t *const gx_dc_type_pattern = &gx_dc_pattern;
 #define gx_dc_type_pattern (&gx_dc_pattern)
 
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(dc_pattern_enum_ptrs, gx_device_color *cptr)
 {
     return ENUM_USING(st_dc_pure_masked, vptr, size, index - 1);
@@ -991,7 +991,7 @@ RELOC_PTRS_END
  */
 void
 gx_dc_pattern_save_dc(
-    const gx_device_color * pdevc, 
+    const gx_device_color * pdevc,
     gx_device_color_saved * psdc )
 {
     psdc->type = pdevc->type;
@@ -1000,7 +1000,7 @@ gx_dc_pattern_save_dc(
 	psdc->colors.pattern.phase = pdevc->phase;
     } {
 	/* The client color has been changed to a non-pattern color,
-	   but device color has not been created yet. 
+	   but device color has not been created yet.
 	 */
 	psdc->colors.pattern.id = gs_no_id;
 	psdc->colors.pattern.phase.x = psdc->colors.pattern.phase.y = 0;

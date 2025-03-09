@@ -310,7 +310,7 @@ Xcreate(Fsrpc *t)
 		putsbuf(t);
 		return;
 	}
-	
+
 
 	path = makepath(f->f, t->work.name);
 	f->fid = create(path, t->work.mode, t->work.perm);
@@ -635,7 +635,7 @@ openmount(int sfd)
 	arg[3] = nil;
 
 	exec(arg[0], arg);
-	_exits("whoops: exec failed");	
+	_exits("whoops: exec failed");
 	return -1;
 }
 
@@ -658,7 +658,7 @@ slaveopen(Fsrpc *p)
 		close(f->fid);
 		f->fid = -1;
 	}
-	
+
 	path = makepath(f->f, "");
 	DEBUG(DFD, "\topen: %s %d\n", path, work->mode);
 	f->fid = open(path, work->mode);

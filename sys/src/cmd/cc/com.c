@@ -1300,7 +1300,7 @@ loop:
 }
 
 /*	OEQ, ONE, OLE, OLS, OLT, OLO, OGE, OHS, OGT, OHI */
-static char *cmps[12] = 
+static char *cmps[12] =
 {
 	"==", "!=", "<=", "<=", "<", "<", ">=", ">=", ">", ">",
 };
@@ -1331,7 +1331,7 @@ static Big
 add(Big x, int y)
 {
 	uvlong ob;
-	
+
 	ob = x.b;
 	x.b += y;
 	if(y > 0 && x.b < ob)
@@ -1339,7 +1339,7 @@ add(Big x, int y)
 	if(y < 0 && x.b > ob)
 		x.a--;
 	return x;
-} 
+}
 
 Big
 big(vlong a, uvlong b)
@@ -1361,9 +1361,9 @@ compar(Node *n, int reverse)
 	Type *lt, *rt;
 
 	/*
-	 * The point of this function is to diagnose comparisons 
+	 * The point of this function is to diagnose comparisons
 	 * that can never be true or that look misleading because
-	 * of the `usual arithmetic conversions'.  As an example 
+	 * of the `usual arithmetic conversions'.  As an example
 	 * of the latter, if x is a ulong, then if(x <= -1) really means
 	 * if(x <= 0xFFFFFFFF), while if(x <= -1LL) really means
 	 * what it says (but 8c compiles it wrong anyway).
@@ -1396,7 +1396,7 @@ compar(Node *n, int reverse)
 		return 0;
 	if(lt->etype == TXXX || lt->etype > TUVLONG)
 		return 0;
-	
+
 	/*
 	 * Skip over the right casts to find the on-screen value.
 	 */
@@ -1476,4 +1476,3 @@ if(debug['y']) prtree(n, "strange");
 	warn(n, "useless or misleading comparison: %s", cmpbuf);
 	return 0;
 }
-

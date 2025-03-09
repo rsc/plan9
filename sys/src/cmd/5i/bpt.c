@@ -99,7 +99,7 @@ delbpt(char *addr)
 			free(b);
 			return;
 		}
-		l = &b->next;	
+		l = &b->next;
 	}
 
 	Bprint(bioout, "no breakpoint\n");
@@ -124,5 +124,5 @@ brkchk(ulong addr, int type)
 				return;
 			}
 		}
-	}	
+	}
 }

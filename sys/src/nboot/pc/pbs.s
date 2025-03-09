@@ -148,7 +148,7 @@ _nextdir:
 	POPR(rSI)
 	POPR(rCX)
 	JEQ _found
-	ADDI(0x20, rSI)	
+	ADDI(0x20, rSI)
 	LOOP _nextdir
 	ADDI(1, rAX)
 	ADC(rCX, rBX)

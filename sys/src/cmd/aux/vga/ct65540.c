@@ -29,7 +29,7 @@ struct Group {
 	char *name;
 	int *x;
 };
-static Group group[] = 
+static Group group[] =
 {
 	{ "misc", misc, },
 	{ "map", map, },
@@ -154,7 +154,7 @@ init(Vga* vga, Ctlr* ctlr)
 			ctlr->flag |= Ulinear;
 		vga->vmz = 1024*1024;
 		vga->vmb = 1024*1024;
-	
+
 		/* linear mapping - extension regs*/
 		greg[0x04] = (1<<2);	/* enable CRTC bits 16 & 17, 32 bit mode */
 		greg[0x0b] = 0x15;	/* linear addressing, > 256k, sequential addr */

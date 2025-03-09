@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -111,8 +111,8 @@ assign_char_code(gx_device_pdf * pdev, int width)
 	pdfont->u.simple.FirstChar = 0;
     }
     c = ++(pdfont->u.simple.LastChar);
-    pdfont->Widths[c] = psdf_round(pdev->char_width.x, 100, 10); /* See 
-			pdf_write_Widths about rounding. We need to provide 
+    pdfont->Widths[c] = psdf_round(pdev->char_width.x, 100, 10); /* See
+			pdf_write_Widths about rounding. We need to provide
 			a compatible data for Tj. */
     if (c > pbfs->max_embedded_code)
 	pbfs->max_embedded_code = c;
@@ -121,7 +121,7 @@ assign_char_code(gx_device_pdf * pdev, int width)
     {	gs_text_enum_t *pte = pdev->pte;
         gs_font *font = pte->current_font;
 
-	code = pdf_add_ToUnicode(pdev, font, pdfont, pte->returned.current_glyph, c); 
+	code = pdf_add_ToUnicode(pdev, font, pdfont, pte->returned.current_glyph, c);
 	if (code < 0)
 	    return code;
     }
@@ -160,7 +160,7 @@ pdf_write_contents_bitmap(gx_device_pdf *pdev, pdf_font_resource_t *pdfont)
 	}
     }
     stream_puts(s, ">>");
-    pprintg6(s, "/FontMatrix[%g %g %g %g %g %g]", 
+    pprintg6(s, "/FontMatrix[%g %g %g %g %g %g]",
 	    (float)pdfont->u.simple.s.type3.FontMatrix.xx,
 	    (float)pdfont->u.simple.s.type3.FontMatrix.xy,
 	    (float)pdfont->u.simple.s.type3.FontMatrix.yx,
@@ -239,7 +239,7 @@ pdf_char_image_y_offset(const gx_device_pdf *pdev, int x, int y, int h)
 /* Begin a CharProc for a synthesized font. */
 private int
 pdf_begin_char_proc_generic(gx_device_pdf * pdev, pdf_font_resource_t *pdfont,
-		    gs_id id, gs_char char_code, 
+		    gs_id id, gs_char char_code,
 		    pdf_char_proc_t ** ppcp, pdf_stream_position_t * ppos)
 {
     pdf_resource_t *pres;
@@ -255,7 +255,7 @@ pdf_begin_char_proc_generic(gx_device_pdf * pdev, pdf_font_resource_t *pdfont,
     pdfont->u.simple.s.type3.char_procs = pcp;
     pcp->char_code = char_code;
     pres->object->written = true;
-    pcp->char_name.data = 0; 
+    pcp->char_name.data = 0;
     pcp->char_name.size = 0;
 
     {
@@ -285,10 +285,10 @@ pdf_begin_char_proc(gx_device_pdf * pdev, int w, int h, int x_width,
 		    pdf_stream_position_t * ppos)
 {
     int char_code = assign_char_code(pdev, x_width);
-    pdf_bitmap_fonts_t *const pbfs = pdev->text->bitmap_fonts; 
+    pdf_bitmap_fonts_t *const pbfs = pdev->text->bitmap_fonts;
     pdf_font_resource_t *font = pbfs->open_font; /* Type 3 */
     int code = pdf_begin_char_proc_generic(pdev, font, id, char_code, ppcp, ppos);
-    
+
     if (code < 0)
 	return code;
     (*ppcp)->y_offset = y_offset;
@@ -388,7 +388,7 @@ pdf_start_charproc_accum(gx_device_pdf *pdev)
 {
     pdf_char_proc_t *pcp;
     pdf_resource_t *pres;
-    int code = pdf_enter_substream(pdev, resourceCharProc, gs_next_ids(pdev->memory, 1), 
+    int code = pdf_enter_substream(pdev, resourceCharProc, gs_next_ids(pdev->memory, 1),
 				   &pres, false, pdev->CompressFonts);
 
     if (code < 0)
@@ -427,16 +427,16 @@ pdf_set_charproc_attrs(gx_device_pdf *pdev, gs_font *font, const double *pw, int
     pcp->v.x = (narg > 8 ? pw[8] : 0);
     pcp->v.y = (narg > 8 ? pw[9] : 0);
     if (control == TEXT_SET_CHAR_WIDTH) {
-	/* PLRM 5.7.1 "BuildGlyph" reads : "Normally, it is unnecessary and 
-	undesirable to initialize the current color parameter, because show 
+	/* PLRM 5.7.1 "BuildGlyph" reads : "Normally, it is unnecessary and
+	undesirable to initialize the current color parameter, because show
 	is defined to paint glyphs with the current color."
 	However comparefiles/Bug687044.ps doesn't follow that. */
-	pdev->skip_colors = false; 
+	pdev->skip_colors = false;
 	pprintg2(pdev->strm, "%g %g d0\n", (float)pw[0], (float)pw[1]);
     } else {
 	pdev->skip_colors = true;
-	pprintg6(pdev->strm, "%g %g %g %g %g %g d1\n", 
-	    (float)pw[0], (float)pw[1], (float)pw[2], 
+	pprintg6(pdev->strm, "%g %g %g %g %g %g d1\n",
+	    (float)pw[0], (float)pw[1], (float)pw[2],
 	    (float)pw[3], (float)pw[4], (float)pw[5]);
 	pdfont->u.simple.s.type3.cached[ch >> 3] |= 0x80 >> (ch & 7);
     }
@@ -450,8 +450,8 @@ pdf_set_charproc_attrs(gx_device_pdf *pdev, gs_font *font, const double *pw, int
  */
 
 int
-pdf_open_aside(gx_device_pdf *pdev, pdf_resource_type_t rtype, 
-	gs_id id, pdf_resource_t **ppres, bool reserve_object_id, int options) 
+pdf_open_aside(gx_device_pdf *pdev, pdf_resource_type_t rtype,
+	gs_id id, pdf_resource_t **ppres, bool reserve_object_id, int options)
 {
     int code;
     pdf_resource_t *pres;
@@ -491,10 +491,10 @@ pdf_open_aside(gx_device_pdf *pdev, pdf_resource_type_t rtype,
  * Close a stream object in the temporary file.
  */
 int
-pdf_close_aside(gx_device_pdf *pdev) 
+pdf_close_aside(gx_device_pdf *pdev)
 {
     /* We should call pdf_end_data here, but we don't want to put pdf_data_writer_t
-       into pdf_substream_save stack to simplify garbager descriptors. 
+       into pdf_substream_save stack to simplify garbager descriptors.
        Use a lower level functions instead that. */
     stream *s = pdev->strm;
     int status = s_close_filters(&s, cos_write_stream_from_pipeline(s));
@@ -513,8 +513,8 @@ pdf_close_aside(gx_device_pdf *pdev)
  * Enter the substream accumulation mode.
  */
 int
-pdf_enter_substream(gx_device_pdf *pdev, pdf_resource_type_t rtype, 
-	gs_id id, pdf_resource_t **ppres, bool reserve_object_id, bool compress) 
+pdf_enter_substream(gx_device_pdf *pdev, pdf_resource_type_t rtype,
+	gs_id id, pdf_resource_t **ppres, bool reserve_object_id, bool compress)
 {
     int sbstack_ptr = pdev->sbstack_depth;
     pdf_resource_t *pres;
@@ -528,7 +528,7 @@ pdf_enter_substream(gx_device_pdf *pdev, pdf_resource_type_t rtype,
 	if (pdev->sbstack[sbstack_ptr].text_state == 0)
 	    return_error(gs_error_VMerror);
     }
-    code = pdf_open_aside(pdev, rtype, id, &pres, reserve_object_id, 
+    code = pdf_open_aside(pdev, rtype, id, &pres, reserve_object_id,
 		    (compress ? DATA_STREAM_COMPRESS : 0));
     if (code < 0)
 	return code;
@@ -576,7 +576,7 @@ pdf_enter_substream(gx_device_pdf *pdev, pdf_resource_type_t rtype,
  * Exit the substream accumulation mode.
  */
 int
-pdf_exit_substream(gx_device_pdf *pdev) 
+pdf_exit_substream(gx_device_pdf *pdev)
 {
     int code, code1;
     int sbstack_ptr;
@@ -622,7 +622,7 @@ pdf_exit_substream(gx_device_pdf *pdev)
     return code;
 }
 
-private bool 
+private bool
 pdf_is_same_charproc1(gx_device_pdf * pdev, pdf_char_proc_t *pcp0, pdf_char_proc_t *pcp1)
 {
     if (pcp0->char_code != pcp1->char_code)
@@ -630,7 +630,7 @@ pdf_is_same_charproc1(gx_device_pdf * pdev, pdf_char_proc_t *pcp0, pdf_char_proc
     if (pcp0->font->u.simple.Encoding[pcp0->char_code].glyph !=
 	pcp1->font->u.simple.Encoding[pcp1->char_code].glyph)
 	return false; /* We need same encoding. */
-    if (bytes_compare(pcp0->char_name.data, pcp0->char_name.size, 
+    if (bytes_compare(pcp0->char_name.data, pcp0->char_name.size,
 		      pcp1->char_name.data, pcp1->char_name.size))
 	return false; /* We need same encoding. */
     if (pcp0->real_width.x != pcp1->real_width.x)
@@ -649,15 +649,15 @@ pdf_is_same_charproc1(gx_device_pdf * pdev, pdf_char_proc_t *pcp0, pdf_char_proc
     return pdf_check_encoding_compatibility(pcp1->font, pdev->cgp->s, pdev->cgp->num_all_chars);
 }
 
-private int 
+private int
 pdf_is_same_charproc(gx_device_pdf * pdev, pdf_resource_t *pres0, pdf_resource_t *pres1)
 {
     return pdf_is_same_charproc1(pdev, (pdf_char_proc_t *)pres0, (pdf_char_proc_t *)pres1);
 }
 
-private int 
-pdf_find_same_charproc(gx_device_pdf *pdev, 
-	    pdf_font_resource_t *pdfont, const pdf_char_glyph_pairs_t *cgp, 
+private int
+pdf_find_same_charproc(gx_device_pdf *pdev,
+	    pdf_font_resource_t *pdfont, const pdf_char_glyph_pairs_t *cgp,
 	    pdf_char_proc_t **ppcp)
 {
     pdf_char_proc_t *pcp;
@@ -705,7 +705,7 @@ pdf_is_charproc_defined(gx_device_pdf *pdev, pdf_font_resource_t *pdfont, gs_cha
  * Complete charproc accumulation for a Type 3 font.
  */
 int
-pdf_end_charproc_accum(gx_device_pdf *pdev, gs_font *font, const pdf_char_glyph_pairs_t *cgp) 
+pdf_end_charproc_accum(gx_device_pdf *pdev, gs_font *font, const pdf_char_glyph_pairs_t *cgp)
 {
     int code;
     pdf_resource_t *pres = (pdf_resource_t *)pdev->accumulating_substream_resource;
@@ -767,7 +767,7 @@ pdf_end_charproc_accum(gx_device_pdf *pdev, gs_font *font, const pdf_char_glyph_
 		    return code;
 	    }
 	}
-    } 
+    }
     pdf_reserve_object_id(pdev, pres, 0);
     code = pdf_attached_font_resource(pdev, font, &pdfont,
 		&glyph_usage, &real_widths, &char_cache_size, &width_cache_size);
@@ -791,7 +791,7 @@ pdf_end_charproc_accum(gx_device_pdf *pdev, gs_font *font, const pdf_char_glyph_
 	pdfont->u.simple.v[ch].y = pcp->v.x;
     }
     for (i = 0; i < 256; i++) {
-	gs_glyph glyph = font->procs.encode_char(font, i, 
+	gs_glyph glyph = font->procs.encode_char(font, i,
 		    font->FontType == ft_user_defined ? GLYPH_SPACE_NOGEN
 						      : GLYPH_SPACE_NAME);
 
@@ -846,10 +846,10 @@ pdf_add_resource(gx_device_pdf *pdev, cos_dict_t *pcd, const char *key, pdf_reso
 	}
 	sprintf(buf, "%ld 0 R\n", pres->object->id);
 	if (v != NULL) {
-	    if (v->value_type != COS_VALUE_OBJECT && 
+	    if (v->value_type != COS_VALUE_OBJECT &&
 		v->value_type != COS_VALUE_RESOURCE)
 		return_error(gs_error_unregistered); /* Must not happen. */
-	    list = (cos_dict_t *)v->contents.object;	
+	    list = (cos_dict_t *)v->contents.object;
 	    if (list->cos_procs != &cos_dict_procs)
 		return_error(gs_error_unregistered); /* Must not happen. */
 	} else {
@@ -867,4 +867,3 @@ pdf_add_resource(gx_device_pdf *pdev, cos_dict_t *pcd, const char *key, pdf_reso
     }
     return 0;
 }
-

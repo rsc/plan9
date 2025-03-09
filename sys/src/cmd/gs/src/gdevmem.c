@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -32,7 +32,7 @@
 public_st_device_memory();
 
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(device_memory_enum_ptrs, gx_device_memory *mptr)
 {
     return ENUM_USING(st_device_forward, vptr, sizeof(gx_device_forward), index - 3);
@@ -173,7 +173,7 @@ gs_make_mem_device(gx_device_memory * dev, const gx_device_memory * mdproto,
     }
     if (dev->color_info.depth == 1) {
 	gdev_mem_mono_set_inverted(dev,
-				   (target == 0 || 
+				   (target == 0 ||
                                     dev->color_info.polarity == GX_CINFO_POLARITY_SUBTRACTIVE));
     }
     check_device_separable((gx_device *)dev);
@@ -550,7 +550,7 @@ mem_mapped_map_rgb_color(gx_device * dev, const gx_color_value cv[])
 {
     gx_device_memory * const mdev = (gx_device_memory *)dev;
     byte br = gx_color_value_to_byte(cv[0]);
-    
+
     register const byte *pptr = mdev->palette.data;
     int cnt = mdev->palette.size;
     const byte *which = 0;	/* initialized only to pacify gcc */

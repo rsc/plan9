@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -191,7 +191,7 @@ typedef struct gx_image_enum_procs_s {
      * By default, all data planes are always wanted; however, ImageType 3
      * images with separate mask and image data sources may want mask data
      * before image data or vice versa.
-     * 
+     *
      * This procedure is optional (may be 0).
      */
 

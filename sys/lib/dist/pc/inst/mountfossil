@@ -100,5 +100,3 @@ case go
 	fossil=$rd
 	export fossil
 }
-
-

@@ -92,7 +92,7 @@ acidinit(void)
 	}
 	if(types[TIND]->width == types[TUVLONG]->width)
 		acidchar[TIND] = 'Y';
-	
+
 }
 
 void
@@ -291,7 +291,7 @@ acidvar(Sym *s)
 			Bprint(&outbuf, "complex %s %s:%s;\n",
 				amap(s1->name), amap(s2->name), amap(s->name));
 		break;
-	
+
 	case CSTATIC:
 	case CEXTERN:
 	case CGLOBL:

@@ -37,7 +37,7 @@ $O.drawtime: drawtime.$O $LIB
 
 $O.drawtest: drawtest.$O $LIB
 	$LD -o $target $prereq
- 
+
 $O.arctest: arctest.$O draw.$O arc.$O $LIB
 	$LD -o $target $prereq
 

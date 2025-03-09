@@ -138,7 +138,7 @@ span(void)
 	}
 
 	if(debug['t']) {
-		/* 
+		/*
 		 * add strings to text segment
 		 */
 		c = rnd(c, 8);
@@ -167,7 +167,7 @@ span(void)
 		Bprint(&bso, "tsize = %lux\n", textsize);
 	Bflush(&bso);
 }
-		
+
 void
 xdefine(char *p, int t, long v)
 {

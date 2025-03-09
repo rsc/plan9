@@ -342,7 +342,7 @@ and/or the Unicode 3.0 book:
 
   The Unicode Consortium: The Unicode Standard, Version 3.0,
   Reading, MA, Addison-Wesley Developers Press, 2000,
-  ISBN 0-201-61633-5. 
+  ISBN 0-201-61633-5.
   http://www.amazon.com/exec/obidos/ASIN/0201616335/mgk25
 
 All these fonts are from time to time resubmitted to the XFree86
@@ -366,7 +366,7 @@ where you will also find information on joining the
 linux-utf8@nl.linux.org mailing list.
 
 A number of UTF-8 example text files can be found in the examples/
-subdirectory or on 
+subdirectory or on
 
   http://www.cl.cam.ac.uk/~mgk25/ucs/examples/
 
@@ -404,5 +404,5 @@ without Mark Leisher's wonderful xmbdfed software.
 
 Markus
 
--- 
+--
 Markus G. Kuhn, Computer Laboratory, University of Cambridge, England

@@ -197,4 +197,3 @@ start(void *sp)
 		print("\n");
 	}
 }
-

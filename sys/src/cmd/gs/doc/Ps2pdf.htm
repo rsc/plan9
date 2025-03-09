@@ -218,7 +218,7 @@ the output.  The default value is <b><tt>true</tt></b>; the
 than this size, <b><tt>ps2pdf</tt></b> will create an XObject instead of embedding
 the image into the context stream.
 The default value is <b><tt>4000</tt></b>.
-Note that redundant inline images must be embedded each time they occur in the 
+Note that redundant inline images must be embedded each time they occur in the
 document, while multiple references can be made to a single XObject image. Therefore
 it may be advantageous to set a small or zero value if the source document is expected
 to contain multiple identical images, reducing the size of the generated PDF.
@@ -256,24 +256,24 @@ The following option controls a conversion into PDF/X-3:
 <dd>Specifies the generated document to follow the PDF/X-3 standard.
 When true, a <b><tt>DefaultRGB</b></tt> <b><tt>ColorSpace</b></tt> resource must be defined, and
 options <b><tt>NOSUBSTDEVICECOLORS</b></tt>, <b><tt>NOCIE</b></tt> must not be specified.
-Default value is <b><tt>false</b></tt>. 
+Default value is <b><tt>false</b></tt>.
 </dl>
 
 <p>
 
-When generating a PDF/X-3 document, Ghostscript performs the following 
+When generating a PDF/X-3 document, Ghostscript performs the following
 special actions to satisfy the PDF/X-3 standard :
 <ul>
 <li> All fonts are being embedded.
 <li> <b><tt>DeviceRGB</b></tt> color space is being substituted with <b><tt>DefaultRGB</b></tt> color space,
 which must be defined in the <b><tt>ColorSpace</b></tt> category.
-The easiest way is to provide it in the <b><tt>DefaultRGB</b></tt> file in the resource directory. 
+The easiest way is to provide it in the <b><tt>DefaultRGB</b></tt> file in the resource directory.
 <li> <b><tt>DeviceRGB</b></tt> color values are being passed unchanged.
-If an user needs an untrivial color adjustment, an untrivial <b><tt>DefaultRGB</b></tt> color space to be 
+If an user needs an untrivial color adjustment, an untrivial <b><tt>DefaultRGB</b></tt> color space to be
 defined.
 <li> Transfer functions and halftone phases are being skipped.
 <li> <b><tt>/PS pdfmark</b></tt> interpretes the <b><tt>DataSource</b></tt> stream or file.
-</ul>    
+</ul>
 
 
 <p>
@@ -293,7 +293,7 @@ Default value is <b><tt>false</b></tt>.
 
 <dt><b><tt>-dMaxClipPathSize=</tt></b><em>integer</em>
 <dd>Specifies the maximum number of elements in the clipping path
-that the target viewer can handle. This option is used only with 
+that the target viewer can handle. This option is used only with
 <b><tt>CompatibilityLevel &LT 1.3 </b></tt> and <b><tt>PatternImagemask=false</tt></b>,
 and only when converting a mask into a clipping path.
 If the clipping path exceeds the specified size,
@@ -303,7 +303,7 @@ The value of the option counts straight path segments
 Default value is <b><tt>12000</b></tt>.
 
 <dt><b><tt>-dMaxShadingBitmapSize=</tt></b><em>integer</em>
-<dd>With <b><tt>CompatibilityLevel &LT 1.3 </b></tt> it specifies 
+<dd>With <b><tt>CompatibilityLevel &LT 1.3 </b></tt> it specifies
 the maximum number of bytes allowed for representing a shading as a bitmap.
 If a shading exceeds this value, the resolution of the output bitmap
 is being reduces to fit into the specified frame.
@@ -319,7 +319,7 @@ but the output file size may dramatically increase.
 Therefore the user should choose a compromise value.
 
 <dt><b><tt>-dHaveTrueTypes=</tt></b><em>boolean</em>
-<dd>With <b><tt>CompatibilityLevel &LT 1.3 </b></tt> it specifies 
+<dd>With <b><tt>CompatibilityLevel &LT 1.3 </b></tt> it specifies
 whether the target viewer can handle TrueType fonts.
 If not, TrueType fonts are being converted into raster fonts
 with resolution specified in </b></tt>HWResolution</b></tt>.
@@ -335,7 +335,7 @@ The following option controls a conversion into PDF 1.3:
 <dl>
 
 <dt><b><tt>-dHaveTransparency=</tt></b><em>boolean</em>
-<dd>With <b><tt>CompatibilityLevel &GT= 1.4 </b></tt> it specifies 
+<dd>With <b><tt>CompatibilityLevel &GT= 1.4 </b></tt> it specifies
 whether the target viewer can handle PDF 1.4 transparency objects.
 If not, transparency objects are being converted into plain images.
 Default value is <b><tt>true</b></tt>.
@@ -347,7 +347,7 @@ The following switches are used for creating encrypted documents :
 
 <dl>
 <dt><b><tt>-sOwnerPassword=</tt></b><em>string</em>
-<dd>Defines that the document be encrypted with the specified 
+<dd>Defines that the document be encrypted with the specified
 owner password.
 </dl>
 
@@ -380,7 +380,7 @@ If the length isn't 40, <b><tt>-dEncryptionR</tt></b> must be 3.
 
 <p>
 <b><tt>ps2pdf</tt></b> recognizes all of the Acrobat Distiller 5 parameters
-defined in the DistillerParameters document included in the 
+defined in the DistillerParameters document included in the
 <a href="http://partners.adobe.com/public/developer/acrobat/sdk/index.html">Acrobat SDK</a>.
 Cells in the table
 containing '=' mean that the value of the parameter is the same as in the
@@ -486,7 +486,7 @@ This parameter can be set and queried, but currently has no effect.
 <p>
 <a name="note_1">(note 1)</a>
 Currently, <b><tt>AutoFilterxxxImages</tt></b> doesn't examine the image to
-decide between JPEG and LZW or Flate compression: it always uses 
+decide between JPEG and LZW or Flate compression: it always uses
 Flate compression.  If you want to force JPEG compression, use
 <b><tt>-dAutoFilterxxxImages=false</tt></b>.
 
@@ -569,7 +569,7 @@ The default, screen, and ebook settings never embed the 14 standard fonts
 If a CID font is substituted in <b><tt>lib/cidfmap</tt></b>,
 the substitute font name is used when the CID font is embedded,
 and the original CID font name is used when it is not embedded.
-<b><tt>NeverEmbed</tt></b> should always specify the original CID font 
+<b><tt>NeverEmbed</tt></b> should always specify the original CID font
 name.
 
 <hr>
@@ -577,32 +577,32 @@ name.
 <h2><a name="PPD"></a>Ghostscript PDF Printer Description</h2>
 <p>
 To assist with creating a PostScript file suitable for conversion
-to PDF, ghostscript includes <a href="../lib/ghostpdf.ppd">ghostpdf.ppd</a>, 
+to PDF, ghostscript includes <a href="../lib/ghostpdf.ppd">ghostpdf.ppd</a>,
 a PostScript Printer Description (PPD) file.
 This allows some <a href="#Options">distiller parameters</a>
 to be set when a PostScript file is generated.
 
 <h3>Windows XP or 2000</h3>
 <p>
-To install a "Ghostscript PDF" printer on Windows XP, 
-select the Windows Control Panel, 
-Printers and Faxes, 
-Add a Printer, 
-Local Printer, 
+To install a "Ghostscript PDF" printer on Windows XP,
+select the Windows Control Panel,
+Printers and Faxes,
+Add a Printer,
+Local Printer,
 Use port FILE: (Print to File),
-Have Disk..., 
-select the directory containg 
-<a href="../lib/ghostpdf.ppd">ghostpdf.ppd</a> 
+Have Disk...,
+select the directory containg
+<a href="../lib/ghostpdf.ppd">ghostpdf.ppd</a>
 and
 <a href="../lib/ghostpdf.inf">ghostpdf.inf</a>,
-select "Ghostscript PDF", 
+select "Ghostscript PDF",
 Replace existing driver (if asked),
 and answer the remaining questions appropriately.
 After installing, open the "Ghostscript PDF" properties,
-select the Device Settings tab, 
+select the Device Settings tab,
 set "Mimimum Font Size to Download as Outline" to 0 pixels.
 <p>
-To set distiller parameters, select the "Ghostscript PDF" 
+To set distiller parameters, select the "Ghostscript PDF"
 Printing Preferences, then the Advanced button.
 The PDF settings are under "Printer Features".
 
@@ -616,7 +616,7 @@ To create a PDF/X-3 document from a Postscript or a PDF file, you should :
 
 <ul>
 <li> Specify the <b><tt>pdfwrite</b></tt> device or use the <b><tt>ps2pdf</b></tt> script.
-<li> Specify the <b><tt>-dPDFX</b></tt> option. It provides the document conformity 
+<li> Specify the <b><tt>-dPDFX</b></tt> option. It provides the document conformity
      and forces <b><tt>-dCompatibilityLevel=1.3</b></tt>.
 <li> Specify <b><tt>-sProcessColorModel=DeviceGray</b></tt> or <b><tt>-sProcessColorModel=DeviceCMYK</b></tt>
      (<b><tt>DeviceRGB</b></tt> is not allowed).
@@ -630,7 +630,7 @@ To create a PDF/X-3 document from a Postscript or a PDF file, you should :
 <li> Provide a <b><tt>DefaultRGB</b></tt> resource file in the ColorSpace resource category.
      Either define it in the PDF/X definition file, or provide
      a definition of <b><tt>gs/Resource/ColorSpace/DefaultRGB</b></tt> .
-     Rather <b><tt>gs/Resource/ColorSpace/DefaultRGB</b></tt> is usually 
+     Rather <b><tt>gs/Resource/ColorSpace/DefaultRGB</b></tt> is usually
      distributed with Ghostscript, its contents is not necessarily satisfy your needs, see below.
 </ul>
 
@@ -639,13 +639,13 @@ As mentioned above, the PDF/X definition file provides a special information,
 which the PDF/X-3 standard requires. You can find a sample file in
 <b><tt>gs/lib/PDFX_def.ps</b></tt>, and edit it according to your needs.
 The file follows Postscript syntax and uses the operator <b><tt>pdfmark</b></tt>
-to pass the special information. For your comfort 
+to pass the special information. For your comfort
 we marked editable lines in the sample file with the comment <b><tt>% Customize</b></tt>.
 They are explained below.
 
 <dl>
 <dt><b><tt>ICCProfile</tt></b> <em>string</em>
-<dd>Defines a file name of an ICC profile file to be included into the output document. 
+<dd>Defines a file name of an ICC profile file to be included into the output document.
 You may specify either an absolute file name, or a relative
 path fronm the current directory.
 </dl>
@@ -676,10 +676,10 @@ Rather the PDF/X-3 standard requires colors to be adjusted at the
 document generation time, Ghostscript <em>does not</em> perform any
 special color conversion. Either colors to be adjusted in advance,
 or a proper color conversion to be specified in <b><tt>/DefaultGray</b></tt>,
-<b><tt>DefaultRGB</b></tt>,  <b><tt>DefaultCMYK</b></tt> resources of the  
+<b><tt>DefaultRGB</b></tt>,  <b><tt>DefaultCMYK</b></tt> resources of the
 <b><tt>ColorSpace</b></tt> resource category,
 and the <b><tt>-dUseCIEColor</b></tt> option to be specified
-to remap device colors into CIE colors. 
+to remap device colors into CIE colors.
 The choice of the ICC profile is also the user's responsibility.
 
 <p>Please note that if a graphic object can't embed into the output format,
@@ -752,7 +752,7 @@ gs -q -dSAFER -dNOPAUSE -dBATCH -sOutputFile=file.pdf </tt></b><em>[more options
 &nbsp;&nbsp;-sDEVICE=pdfwrite -c .setpdfwrite -f </b></tt><em>source1.ps [more files]</em>
 </blockquote>
 
-See <a href="Language.htm#.setpdfwrite">Language.htm</a> for details 
+See <a href="Language.htm#.setpdfwrite">Language.htm</a> for details
 of the <tt>.setpdfwrite</tt> operator.
 <hr>
 

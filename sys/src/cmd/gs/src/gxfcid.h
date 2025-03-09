@@ -1,12 +1,12 @@
 /* Copyright (C) 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -163,7 +163,7 @@ font_proc_enumerate_glyph(gs_font_cid0_enumerate_glyph);
 /*
  * Check CIDSystemInfo compatibility.
  */
-bool gs_is_CIDSystemInfo_compatible(const gs_cid_system_info_t *info0, 
+bool gs_is_CIDSystemInfo_compatible(const gs_cid_system_info_t *info0,
 				    const gs_cid_system_info_t *info1);
 
 /* Return the font from the FDArray at the given index */

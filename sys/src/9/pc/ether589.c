@@ -148,7 +148,7 @@ reset(Ether* ether)
 
 	/*
 	 * Read Ethernet address from card memory
-	 * on 3C562, but only if the user has not 
+	 * on 3C562, but only if the user has not
 	 * overridden it.
 	 */
 	memset(ea, 0, sizeof ea);
@@ -175,7 +175,7 @@ reset(Ether* ether)
 		else if(cistrcmp(p, "10baseT") == 0)
 			want = Want10BT;
 	}
-	
+
 	/* try configuring as a 10BaseT */
 	if(want==WantAny || want==Want10BT){
 		if(configASIC(ether, port, xcvr10BaseT) < 0){

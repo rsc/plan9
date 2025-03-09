@@ -189,10 +189,10 @@ again:
 			break;
 		default:
 			continue;
-			
+
 		}
 		mi = &mitem[i];
-	
+
 		p = seprint(str, str + len, "menuitem=%s\n", mi->mb->name);
 		for(i = 0; i < nmblock; i++){
 			mb = &mblock[i];
@@ -328,10 +328,10 @@ dotini(Fs *fs)
 	 * Change runs of spaces into single spaces.
 	 * Strip out trailing spaces, blank lines.
 	 *
-	 * We do this before we make the copy so that if we 
+	 * We do this before we make the copy so that if we
 	 * need to change the copy, it is already fairly clean.
 	 * The main need is in the case when plan9.ini has been
-	 * padded with lots of trailing spaces, as is the case 
+	 * padded with lots of trailing spaces, as is the case
 	 * for those created during a distribution install.
 	 */
 	p = cp;
@@ -364,7 +364,7 @@ dotini(Fs *fs)
 			incomment = 1;
 		blankline = 0;
 		if(!incomment)
-			*p++ = *q;	
+			*p++ = *q;
 	}
 	if(p > cp && p[-1] != '\n')
 		*p++ = '\n';

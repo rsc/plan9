@@ -226,7 +226,7 @@ loopbackgen(Chan *c, char*, Dirtab*, int, int i, Dir *dp)
 	default:
 		/* non directory entries end up here; must be in lowest level */
 		if(c->qid.type & QTDIR)
-			panic("loopbackgen: unexpected directory");	
+			panic("loopbackgen: unexpected directory");
 		if(i != 0)
 			return -1;
 		tab = &loopdirs[type];

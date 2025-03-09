@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Artifex Software Inc.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -102,7 +102,7 @@ zbuildsampledfunction(i_ctx_t *i_ctx_p)
     gs_function_Sd_params_t params = {0};
 
     check_type(*pdict, t_dictionary);
-    /* 
+    /*
      * Check procedure to be sampled.
      */
     if (dict_find_string(pdict, "Function", &pfunc) <= 0)
@@ -130,7 +130,7 @@ zbuildsampledfunction(i_ctx_t *i_ctx_p)
      */
     return sampled_data_setup(i_ctx_p, pfn, pfunc, sampled_data_finish, imemory);
 }
-    
+
 /* ------- Internal procedures ------- */
 
 
@@ -223,7 +223,7 @@ cube_ptr_from_index(gs_function_Sd_params_t * params, int indexes[])
 	sum *= params->Size[i];
 	sum += indexes[i];
     }
-    return (byte *)(params->DataSource.data.str.data) + 
+    return (byte *)(params->DataSource.data.str.data) +
 	sum * params->n * bits2bytes(params->BitsPerSample);
 }
 
@@ -286,7 +286,7 @@ cube_build_func0(const ref * pdict, gs_function_Sd_params_t * params,
 		    			&params->Domain, mem)) < 0 ) ||
 	((code = params->n =
 	    fn_build_float_array(pdict, "Range", false, true,
-		    			&params->Range, mem)) < 0) 
+		    			&params->Range, mem)) < 0)
 	) {
 	goto fail;
     }
@@ -468,7 +468,7 @@ sampled_data_sample(i_ctx_t *i_ctx_p)
     return o_push_estack;
 }
 
-/* 
+/*
  * Continuation procedure for processing sampled values.
  */
 private int
@@ -490,7 +490,7 @@ sampled_data_continue(i_ctx_t *i_ctx_p)
      */
     if (num_out + O_STACK_PAD + penum->o_stack_depth != ref_stack_count(&o_stack)) {
 	int stack_depth_adjust = ref_stack_count(&o_stack) - penum->o_stack_depth;
-	
+
 	if (stack_depth_adjust >= 0)
 	    pop(stack_depth_adjust);
 	else {
@@ -509,7 +509,7 @@ sampled_data_continue(i_ctx_t *i_ctx_p)
 	ifree_object(penum, "sampled_data_continue((enum)");
 	return_error(e_undefinedresult);
     }
-    
+
     /* Save data from the given function */
     data_ptr = cube_ptr_from_index(params, penum->indexes);
     for (i=0; i < num_out; i++) {
@@ -531,7 +531,7 @@ sampled_data_continue(i_ctx_t *i_ctx_p)
 	    data_ptr[bps * i + j] = (byte)(cv >> ((bps - 1 - j) * 8));	/* MSB first */
     }
     pop(num_out);		    /* Move op to base of result values */
-    
+
     /* Check if we are done collecting data. */
 
     if (increment_cube_indexes(params, penum->indexes)) {

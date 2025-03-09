@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -39,22 +39,22 @@ int dict_range3_param(const gs_memory_t *mem,
 		      gs_range3 *prange3);
 
 /* Get a 3x3 matrix parameter from a dictionary. */
-int dict_matrix3_param(const gs_memory_t *mem, const ref *pdref, 
+int dict_matrix3_param(const gs_memory_t *mem, const ref *pdref,
 		       const char *kstr,
 		       gs_matrix3 *pmat3);
 
 /* Get an array of procedures from a dictionary. */
 /* We know count <= countof(empty_procs). */
-int dict_proc_array_param(const gs_memory_t *mem, const ref *pdict, 
+int dict_proc_array_param(const gs_memory_t *mem, const ref *pdict,
 			  const char *kstr,
 			  uint count, ref * pparray);
 
 /* Get 3 procedures from a dictionary. */
-int dict_proc3_param(const gs_memory_t *mem, const ref *pdref, 
+int dict_proc3_param(const gs_memory_t *mem, const ref *pdref,
 		     const char *kstr, ref proc3[3]);
 
 /* Get WhitePoint and BlackPoint values. */
-int cie_points_param(const gs_memory_t *mem, 
+int cie_points_param(const gs_memory_t *mem,
 		     const ref * pdref, gs_cie_wb * pwb);
 
 /* Process a 3- or 4-dimensional lookup table from a dictionary. */

@@ -580,7 +580,7 @@ rdy(ulong ir)
 	USED(rs2);
 	if(rs1 != 0)
 		undef(ir);
-	
+
 	if(trace)
 		itrace("rdy\tY,r%d", rd);
 
@@ -698,7 +698,7 @@ mulscc(ulong ir)
 	b31r = r>>31;
 	if((b31o1 & b31o2 & ~b31r) | (~b31o1 & ~b31o2 & b31r))
 		reg.psr |= PSR_v;
-	if((b31o1 & b31o2) | (~b31r & (b31o1 | b31o2)))		
+	if((b31o1 & b31o2) | (~b31r & (b31o1 | b31o2)))
 		reg.psr |= PSR_c;
 
 	b = reg.r[rs1]&1;
@@ -1403,7 +1403,7 @@ bicc(ulong ir)
 	if(ba && anul) {
 		anulled++;
 		reg.pc = npc-4;
-		return;	
+		return;
 	}
 	reg.ir = ifetch(reg.pc+4);
 	delay(npc);

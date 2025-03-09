@@ -203,7 +203,7 @@ plural(int n)
 	if (n == 1)
 		return "";
 
-	return "s";		
+	return "s";
 }
 
 void
@@ -842,7 +842,7 @@ snprintHeader(char *buf, int len, int indent, Message *m)
 
 char sstring[256];
 
-//	cmd := range cmd ' ' arg-list ; 
+//	cmd := range cmd ' ' arg-list ;
 //	range := address
 //		| address ',' address
 //		| 'g' search ;
@@ -952,7 +952,7 @@ parseaddr(char **pp, Message *first, Message *cur, Message *unspec, Message **mp
 			goto number;
 		}
 		*mp = unspec;
-		break;	
+		break;
 	case '0': case '1': case '2': case '3': case '4':
 	case '5': case '6': case '7': case '8': case '9':
 		n = strtoul(p, pp, 10);
@@ -1151,7 +1151,7 @@ parsecmd(char *p, Cmd *cmd, Message *first, Message *cur)
 			free(prog);
 		}
 	} else {
-	
+
 		// parse an address
 		s = e = nil;
 		err = parseaddr(&p, first, cur, cur, &s);
@@ -1218,7 +1218,7 @@ parsecmd(char *p, Cmd *cmd, Message *first, Message *cur)
 		}
 		cmd->f = cmdtab[i].f;
 	}
-	return nil; 
+	return nil;
 }
 
 // inefficient read from standard input
@@ -1814,7 +1814,7 @@ tokenize822(char *str, char **args, int max)
 	int intok = 0, inquote = 0;
 
 	if(max <= 0)
-		return 0;	
+		return 0;
 	for(na=0; ;str++)
 		switch(*str) {
 		case ' ':
@@ -2401,7 +2401,7 @@ switchmb(char *file, char *singleton)
 	// if the user didn't say anything and there
 	// is an mbox mounted already, use that one
 	// so that the upas/fs -fdefault default is honored.
-	if(file 
+	if(file
 	|| (singleton && access(singleton, 0)<0)
 	|| (!singleton && access("/mail/fs/mbox", 0)<0)){
 		if(file == nil)
@@ -2414,9 +2414,9 @@ switchmb(char *file, char *singleton)
 		fd = open("/mail/fs/ctl", ORDWR);
 		if(fd < 0)
 			sysfatal("can't open /mail/fs/ctl: %r");
-	
+
 		path = s_new();
-	
+
 		// get an absolute path to the mail box
 		if(strncmp(file, "./", 2) == 0){
 			// resolve path here since upas/fs doesn't know
@@ -2430,7 +2430,7 @@ switchmb(char *file, char *singleton)
 		} else {
 			mboxpath(file, user, path, 0);
 		}
-	
+
 		// make up a handle to use when talking to fs
 		p = strrchr(file, '/');
 		if(p == nil){

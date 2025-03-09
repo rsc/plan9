@@ -190,7 +190,7 @@ wavelanpcireset(Ether *ether)
 	iunlock(ctlr);
 	return 0;
 }
-	
+
 void
 etherwavelanlink(void)
 {

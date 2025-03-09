@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1993, 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -100,7 +100,7 @@ private const gx_device_procs bmp256_procs =
 prn_color_procs(gdev_prn_open, gdev_prn_output_page, gdev_prn_close,
 		pc_8bit_map_rgb_color, pc_8bit_map_color_rgb);
 const gx_device_printer gs_bmp256_device = {
-  prn_device_body(gx_device_printer, bmp256_procs, "bmp256", 
+  prn_device_body(gx_device_printer, bmp256_procs, "bmp256",
 	   DEFAULT_WIDTH_10THS, DEFAULT_HEIGHT_10THS,
 	   X_DPI, Y_DPI,
 	   0, 0, 0, 0,		/* margins */
@@ -186,7 +186,7 @@ bmp_cmyk_print_page(gx_device_printer * pdev, FILE * file)
     if (row == 0)		/* can't allocate row buffer */
 	return_error(gs_error_VMerror);
     memset(row+raster, 0, bmp_raster - raster); /* clear the padding bytes */
-    
+
     for (plane = 0; plane <= 3; ++plane) {
 	gx_render_plane_t render_plane;
 

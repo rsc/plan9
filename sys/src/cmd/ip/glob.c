@@ -73,7 +73,7 @@ globadd(Globlist *gl, char *dir, char *file)
 		s_append(g->glob, "/");
 	s_append(g->glob, file);
 	*(gl->l) = g;
-	gl->l = &(g->next); 
+	gl->l = &(g->next);
 }
 
 static void

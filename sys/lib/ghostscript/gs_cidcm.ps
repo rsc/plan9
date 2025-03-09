@@ -1,12 +1,12 @@
 %    Copyright (C) 2000 artofcode LLC.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -38,7 +38,7 @@ languagelevel 2 .setlanguagelevel currentglobal true setglobal
 % Define local variables :
 
 /.prs_dict currentdict def       % self-reference (constant)
-/.prs_empty 0 dict readonly def  
+/.prs_empty 0 dict readonly def
 /path_buffer 8192 string def
 /name_buffer 1024 string def
 /minus (-) 0 get def             % character code constant for '-'
@@ -55,7 +55,7 @@ languagelevel 2 .setlanguagelevel currentglobal true setglobal
 
 % Define a dummy CIDInit procset to use while pre-scanning :
 
-/DummyCIDInit 15 dict 
+/DummyCIDInit 15 dict
 begin
 
   /begincmap {} def
@@ -63,7 +63,7 @@ begin
 
   {stop} bind
   [ /begincodespacerange /endcodespacerange /beginnotdefchar /endnotdefchar
-    /beginnotdefrange /endnotdefrange /begincidchar /endcidchar /begincidrange 
+    /beginnotdefrange /endnotdefrange /begincidchar /endcidchar /begincidrange
     /endcidrange /endcmap /usefont /StartData
   ] {
     1 index def
@@ -87,8 +87,8 @@ currentdict end def
 % Define procedures for pre-scanning :
 
 /StopIfCSIDefined {   % - StopIfCSIDefined -
-  
-  % Check if the dictionary stack contains a dictionary containing /CIDSystemInfo. 
+
+  % Check if the dictionary stack contains a dictionary containing /CIDSystemInfo.
   % The search is limited to the top .prsDictCount dictionaries in the stack.
   % If so, retrieve the CSI, and execute stop to terminate the pre-scanning of the file.
   % Otherwise, do nothing, so the pre-scanning continues.
@@ -105,7 +105,7 @@ currentdict end def
 } bind def
 
 /PrescanFile {     % - PrescanFile -
-  { //.prs_dict /.prsFile get token {      
+  { //.prs_dict /.prsFile get token {
       dup type                          % token type
       dup /nametype eq exch /operatortype eq or {
         dup xcheck {
@@ -120,7 +120,7 @@ currentdict end def
 } bind odef
 
 /GetCIDSystemInfoFromFile { % <file> GetCIDSystemInfoFromFile <CSI>
-  
+
   % This procedure reads resource files with 'token',
   % executing the tokens untill /CIDSystemInfo appears to be defined.
   % Normally the resource file creates a new dictionary on
@@ -141,12 +141,12 @@ currentdict end def
 } bind def
 
 /GetCIDSystemInfo {     % <InstName> <CatName> GetCIDSystemInfo <CSI>
-  
+
   % Retrieve CSI, using caches.
 
   RESMPDEBUG { (cidcm GetCIDSystemInfo beg) = } if
   /Category findresource begin                % /InstName
-  dup ResourceStatus 
+  dup ResourceStatus
   {
     pop 2 lt {
       FindResource /CIDSystemInfo .knownget not {
@@ -174,7 +174,7 @@ currentdict end def
           { (r) file                          % CSIs /InstName g [ file
             //GetCIDSystemInfoFromFile exec   % CSIs /InstName g [ CSI
           } stopped {
-            cleartomark //.prs_empty             
+            cleartomark //.prs_empty
           } {
             exch pop
           } ifelse                            % CSIs /InstName g CSI
@@ -199,7 +199,7 @@ currentdict end def
 } bind def
 
 /IsCompatibleCSI {  % <CSI-M> <CSI-F> IsCompatibleCSI <bool>
-  
+
   % The CSI in a CIDFont may be an array, a dict, or null.
   % If it is an array, it must be of 1 element, which is a dict.
   % In this case the dict is used for testing the compatibility.
@@ -220,7 +220,7 @@ currentdict end def
       pop pop false exit
     } if                                % <<CSI-M>> <<CSI-F>>
     true                                % <<CSI-M>> <<CSI-F>> bEQ
-    [/Registry /Ordering] {                    
+    [/Registry /Ordering] {
       2 index 1 index .knownget not {
         1234567
       } if                              % <<CSI-M>> <<CSI-F>> bEQ /key vF
@@ -236,12 +236,12 @@ currentdict end def
 } bind def
 
 /IsWellComposed {     % <CIDFontName> <CMapName> IsWellComposed <bool>
-  
+
   % Check if the given CIDFont and CMap have compatible CSIs.
   exch                                  % /CMapName /CIDFontName
   /CIDFont //GetCIDSystemInfo exec      % /CMapName CSI-F
   dup type /dicttype eq {
-    dup length 0 ne {                          
+    dup length 0 ne {
       exch                              % CSI-F /CMapName
       /CMap //GetCIDSystemInfo exec     % CSI-F CSI-M
       //IsCompatibleCSI exec            % bool
@@ -255,7 +255,7 @@ currentdict end def
 
 /IsComposedFont {   % <FontName> IsComposedFont <CIDFontName> <CMapName> true
                     % <FontName> IsComposedFont false
-  
+
   % Check if the given font name may be decomposed into CIDFont.CMap, CIDFont-CMap
   % or into CIDFont--CMap, such that CIDFont and CMap have compatible CSIs.
                                         % FontName
@@ -264,7 +264,7 @@ currentdict end def
   } if                                  % (FontName)
   { dup length 2 sub -1 1 {
                                         % (FontName) i
-      2 copy get dup //minus eq exch //period eq or {                
+      2 copy get dup //minus eq exch //period eq or {
         2 copy 2 copy                   % (FontName) i (FontName) i (FontName) i
         2 copy get //minus eq {
           2 copy 1 sub get //minus eq {
@@ -276,7 +276,7 @@ currentdict end def
         1 add dup                       % (FontName) i /CIDFontName (FontName) i1 i1
         5 index length                  % (FontName) i /CIDFontName (FontName) i1 i1 l
         exch sub getinterval cvn        % (FontName) i /CIDFontName /CMapName
-        2 copy //IsWellComposed exec {  % (FontName) i /CIDFontName /CMapName 
+        2 copy //IsWellComposed exec {  % (FontName) i /CIDFontName /CMapName
           4 2 roll pop pop              % /CIDFontName /CMapName
           stop
         } if
@@ -314,8 +314,8 @@ currentdict end def
 /FindResource {  % <InstName> FindResource <inst>
   dup //ResourceStatus exec {
     pop pop //FindResource exec
-  } {                                                
-    dup //IsComposedFont exec {          % /FontName /CIDFontName /CMapName 
+  } {
+    dup //IsComposedFont exec {          % /FontName /CIDFontName /CMapName
       exch [ exch ] composefont          % inst
     } {
       //FindResource exec
@@ -325,13 +325,13 @@ currentdict end def
 
 /ResourceStatus {  % <InstName> ResourceStatus <nStatus> <nSize> true
                    % <InstName> ResourceStatus false
-  dup //ResourceStatus exec {                    
+  dup //ResourceStatus exec {
     3 2 roll pop true                     % nStatus nSize true
   } {
-    //IsComposedFont exec {               % /CIDFontName /CMapName 
-      /CMap resourcestatus {              % /CIDFontName nStatusM nSizeM 
-        exch pop exch                     % nSizeM /CIDFontName 
-        /CIDFont resourcestatus {         % nSizeM nStatusF nSizeF 
+    //IsComposedFont exec {               % /CIDFontName /CMapName
+      /CMap resourcestatus {              % /CIDFontName nStatusM nSizeM
+        exch pop exch                     % nSizeM /CIDFontName
+        /CIDFont resourcestatus {         % nSizeM nStatusF nSizeF
           exch pop                        % nSizeF nSizeM
           dup 0 ge {
             exch dup 0 ge {
@@ -343,10 +343,10 @@ currentdict end def
             pop
           } ifelse                        % nSize
           2 exch true                     % nStatus nSize true
-        } {                        
+        } {
           pop pop pop false  % work around buggy resource file
         } ifelse
-      } {                            
+      } {
         pop pop pop false    % work around buggy resource file
       } ifelse
     } {
@@ -355,14 +355,14 @@ currentdict end def
   } ifelse
 } bind def
 
-/ResourceForAll { % <template> <proc> <scratch> ResourceForAll - 
+/ResourceForAll { % <template> <proc> <scratch> ResourceForAll -
 
-  % We suppose that the resourceforall procedure does not 
+  % We suppose that the resourceforall procedure does not
   % define or install new fonts, CMaps, and/or CIDFonts.
 
   % First we create 3 temporary dictionaries to store temporary data
   % about fonts, CMaps and CIDFonts.
-  % These dictionaries must be created dynamically, to allow for a possible 
+  % These dictionaries must be created dynamically, to allow for a possible
   % recursive call to resourceforall from the resourceforall procedure.
   currentglobal false setglobal
   20 dict 20 dict 20 dict
@@ -394,30 +394,30 @@ currentdict end def
   %% Make the list of fonts in the form (/Name status) :
 
                                           % (templ) proc (scr) <<CIDFont>> <<CMap>> <<Fonts>>
-  dup {                                              
+  dup {
     pop dup
-    //ResourceStatus exec {                        
+    //ResourceStatus exec {
       pop 2 index                         % (templ) proc (scr) <<CIDFont>> <<CMap>> <<Fonts>> /Name nStatus <<Font>>
       3 1 roll put                        % (templ) proc (scr) <<CIDFont>> <<CMap>> <<Fonts>>
     } {
       pop
     } ifelse
   } forall                                % (templ) proc (scr) <<CIDFont>> <<CMap>> <<Fonts>>
- 
+
   %% Add CIDFont-CMap to it (filtering duplicates) :
- 
-  3 2 roll  {                                        
-    3 index {                                        
+
+  3 2 roll  {
+    3 index {
       3 1 roll                            % (templ) proc (scr) <<CMap>> <<Font>> /CIDFont /CMap /CIDFont /CMap
       6 index //ComposeName exec          % (templ) proc (scr) <<CMap>> <<Font>> /CIDFont /CMap (Font)
-      dup 8 index .stringmatch {              
+      dup 8 index .stringmatch {
         cvn                               % (templ) proc (scr) <<CMap>> <<Font>> /CIDFont /CMap /Font
         dup 4 index exch known {
           pop pop
-        } {                                            
+        } {
           2 index                         % (templ) proc (scr) <<CMap>> <<Font>> /CIDFont /CMap /Font /CIDFont
           4 2 roll                        % (templ) proc (scr) <<CMap>> <<Font>> /Font /CIDFont /CIDFont /CMap
-          //IsWellComposed exec {                
+          //IsWellComposed exec {
             exch 2 index exch 2 put       % (templ) proc (scr) <<CMap>> <<Font>> /CIDFont
           } {
             exch pop

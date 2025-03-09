@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -51,7 +51,7 @@ gs_private_st_simple(st_font_cache_bytes, byte, "font cache bytes");
 /* GC procedures */
 /* We do all the work in font_dir_enum/reloc_ptrs in gsfont.c. */
 /* See gxfcache.h for details. */
-private 
+private
 ENUM_PTRS_BEGIN(cc_ptr_enum_ptrs) return 0;
 
 ENUM_PTRS_END
@@ -140,8 +140,8 @@ gx_char_cache_init(register gs_font_dir * dir)
 /* a client-supplied procedure. */
 void
 gx_purge_selected_cached_chars(gs_font_dir * dir,
-			       bool(*proc) (const gs_memory_t *mem, 
-					    cached_char *, void *), 
+			       bool(*proc) (const gs_memory_t *mem,
+					    cached_char *, void *),
 			       void *proc_data)
 {
     int chi;
@@ -205,9 +205,9 @@ gx_add_fm_pair(register gs_font_dir * dir, gs_font * font, const gs_uid * puid,
     pair->ttf = 0;
     pair->ttr = 0;
     pair->design_grid = false;
-    if (font->FontType == ft_TrueType || font->FontType == ft_CID_TrueType) 
+    if (font->FontType == ft_TrueType || font->FontType == ft_CID_TrueType)
 	if (((gs_font_type42 *)font)->FAPI==NULL) {
-	    int code; 
+	    int code;
 	    float cxx, cxy, cyx, cyy;
 	    gs_matrix m;
 	    gx_compute_char_matrix(char_tm, log2_scale, &cxx, &cxy, &cyx, &cyy);
@@ -226,7 +226,7 @@ gx_add_fm_pair(register gs_font_dir * dir, gs_font * font, const gs_uid * puid,
 	    if (!pair->ttf)
 		return_error(gs_error_VMerror);
 	    gx_ttfReader__set_font(pair->ttr, (gs_font_type42 *)font);
-	    code = ttfFont__Open_aux(pair->ttf, dir->tti, pair->ttr, 
+	    code = ttfFont__Open_aux(pair->ttf, dir->tti, pair->ttr,
 			(gs_font_type42 *)font, &m, log2_scale, design_grid);
 	    gx_ttfReader__set_font(pair->ttr, NULL);
 	    if (code < 0)
@@ -560,7 +560,7 @@ cached_char * cc, cached_fm_pair * pair, const gs_log2_scale_point * pscale)
 	dir->ccache.table[chi] = cc;
 	if (cc->pair == NULL) {
 	    /* gx_show_text_retry could reset it when bbox_draw
-	       discovered an insufficient FontBBox and enlarged it. 
+	       discovered an insufficient FontBBox and enlarged it.
 	       Glyph raster params could change then. */
 	    cc->pair = pair;
 	} else
@@ -662,7 +662,7 @@ gx_add_char_bits(gs_font_dir * dir, cached_char * cc,
 	    byte *to = bits;
 	    uint n = cc->height;
 
-	    /* We'd like to move only 
+	    /* We'd like to move only
 	       uint nbytes = (nwidth_bits + 7) >> 3;
 	       * bytes per scan line, but unfortunately this drops
 	       * the guaranteed zero padding at the end.

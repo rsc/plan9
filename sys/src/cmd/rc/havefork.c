@@ -87,7 +87,7 @@ Xbackq(void)
 
  	stop = "";
  	if(runq->argv && runq->argv->words)
- 		stop = runq->argv->words->word;	
+ 		stop = runq->argv->words->word;
 	if(pipe(pfd)<0){
 		Xerror("can't make pipe");
 		return;

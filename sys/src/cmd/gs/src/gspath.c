@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -89,11 +89,11 @@ gs_currentpoint(gs_state * pgs, gs_point * ppt)
 {
     if (!pgs->current_point_valid)
 	return_error(gs_error_nocurrentpoint);
-    return gs_itransform(pgs, pgs->current_point.x, 
+    return gs_itransform(pgs, pgs->current_point.x,
 			      pgs->current_point.y, ppt);
 }
 
-private inline int 
+private inline int
 gs_point_transform_compat(floatp x, floatp y, const gs_matrix_fixed *m, gs_point *pt)
 {
 #if !PRECISE_CURRENTPOINT
@@ -110,7 +110,7 @@ gs_point_transform_compat(floatp x, floatp y, const gs_matrix_fixed *m, gs_point
 #endif
 }
 
-private inline int 
+private inline int
 gs_distance_transform_compat(floatp x, floatp y, const gs_matrix_fixed *m, gs_point *pt)
 {
 #if !PRECISE_CURRENTPOINT
@@ -135,7 +135,7 @@ clamp_point_aux(bool clamp_coordinates, gs_fixed_point *ppt, floatp x, floatp y)
 	    return_error(gs_error_limitcheck);
 	clamp_point(ppt, x, y);
     } else {
-	/* 181-01.ps" fails with no rounding in 
+	/* 181-01.ps" fails with no rounding in
 	   "Verify as last element of a userpath and effect on setbbox." */
 	ppt->x = float2fixed_rounded(x);
 	ppt->y = float2fixed_rounded(y);
@@ -177,7 +177,7 @@ int
 gs_rmoveto(gs_state * pgs, floatp x, floatp y)
 {
     gs_point dd;
-    int code; 
+    int code;
 
     if (!pgs->current_point_valid)
 	return_error(gs_error_nocurrentpoint);
@@ -185,7 +185,7 @@ gs_rmoveto(gs_state * pgs, floatp x, floatp y)
     if (code < 0)
 	return code;
     /* fixme : check in range. */
-    return gs_moveto_aux((gs_imager_state *)pgs, pgs->path, 
+    return gs_moveto_aux((gs_imager_state *)pgs, pgs->path,
 		dd.x + pgs->current_point.x, dd.y + pgs->current_point.y);
 }
 
@@ -221,7 +221,7 @@ int
 gs_rlineto(gs_state * pgs, floatp x, floatp y)
 {
     gs_point dd;
-    int code; 
+    int code;
 
     if (!pgs->current_point_valid)
 	return_error(gs_error_nocurrentpoint);
@@ -229,7 +229,7 @@ gs_rlineto(gs_state * pgs, floatp x, floatp y)
     if (code < 0)
 	return code;
     /* fixme : check in range. */
-    return gs_lineto_aux(pgs, dd.x + pgs->current_point.x, 
+    return gs_lineto_aux(pgs, dd.x + pgs->current_point.x,
                               dd.y + pgs->current_point.y);
 }
 
@@ -283,7 +283,7 @@ gs_rcurveto(gs_state * pgs,
      floatp dx1, floatp dy1, floatp dx2, floatp dy2, floatp dx3, floatp dy3)
 {
     gs_point dd1, dd2, dd3;
-    int code; 
+    int code;
 
     if (!pgs->current_point_valid)
 	return_error(gs_error_nocurrentpoint);
@@ -297,8 +297,8 @@ gs_rcurveto(gs_state * pgs,
     if (code < 0)
 	return code;
     /* fixme : check in range. */
-    return gs_curveto_aux(pgs, dd1.x + pgs->current_point.x, dd1.y + pgs->current_point.y, 
-			       dd2.x + pgs->current_point.x, dd2.y + pgs->current_point.y, 
+    return gs_curveto_aux(pgs, dd1.x + pgs->current_point.x, dd1.y + pgs->current_point.y,
+			       dd2.x + pgs->current_point.x, dd2.y + pgs->current_point.y,
 			       dd3.x + pgs->current_point.x, dd3.y + pgs->current_point.y);
 }
 

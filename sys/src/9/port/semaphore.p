@@ -32,7 +32,7 @@ inline sleep(cond)
 	assert !interrupted;
 	if
 	:: cond
-	:: atomic { else -> sleeping[_pid] = 1 } -> 
+	:: atomic { else -> sleeping[_pid] = 1 } ->
 		!sleeping[_pid]
 	fi;
 	if
@@ -76,7 +76,7 @@ inline semwakeup(n)
 	do
 	:: (i < N && j > 0) ->
 		if
-		:: onlist[i] && waiting[i] -> 
+		:: onlist[i] && waiting[i] ->
 			atomic { printf("kicked %d\n", i);
 			waiting[i] = 0 };
 			wakeup(i);
@@ -92,7 +92,7 @@ inline semwakeup(n)
 	unlock(listlock)
 }
 
-inline semrelease(n) 
+inline semrelease(n)
 {
 	atomic { value = value+n; printf("release %d\n", n); };
 	semwakeup(n)
@@ -109,7 +109,7 @@ inline canacquire()
 inline semacquire(block)
 {
 	if
-	:: atomic { canacquire() -> printf("easy acquire\n"); } -> 
+	:: atomic { canacquire() -> printf("easy acquire\n"); } ->
 		goto out
 	:: else
 	fi;
@@ -129,7 +129,7 @@ inline semacquire(block)
 		fi;
 		sleep(semawoke())
 		if
-		:: interrupted -> 
+		:: interrupted ->
 			printf("%d interrupted\n", _pid);
 			break
 		:: !interrupted
@@ -163,7 +163,7 @@ active proctype release()
 
 	k = 0;
 	do
-	:: k < N -> 
+	:: k < N ->
 		semrelease(1);
 		k++;
 	:: else -> break
@@ -173,9 +173,9 @@ active proctype release()
 
 /*
  * If this guy, the highest-numbered proc, sticks
- * around, then everyone else sticks around.  
+ * around, then everyone else sticks around.
  * This makes sure that we get a state line for
- * everyone in a proc dump.  
+ * everyone in a proc dump.
  */
 active proctype dummy()
 {

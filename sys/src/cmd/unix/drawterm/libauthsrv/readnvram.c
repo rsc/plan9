@@ -340,7 +340,7 @@ finddosfile(int fd, char *file)
 	if(rootsects <= 0 || rootsects > 64)
 		return -1;
 
-	/* 
+	/*
 	 *  read root. it is contiguous to make stuff like
 	 *  this easier
 	 */
@@ -365,4 +365,3 @@ finddosfile(int fd, char *file)
 	 */
 	return rootoff + rootsects*sectsize + (n-2)*sectsize*b->clustsize;
 }
-

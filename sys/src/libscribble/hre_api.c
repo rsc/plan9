@@ -1,4 +1,4 @@
-/* 
+/*
  *  hre_api.c:        Implementation of HRE API
  *  Author:           James &
  *  Created On:       Wed Dec  9 13:49:14 1992
@@ -7,8 +7,8 @@
  *  Update Count:     137
  *  Copyright (c) 1994 by Sun Microsystems Computer Company
  *  All rights reserved.
- *  
- *  Use and copying of this software and preparation of 
+ *
+ *  Use and copying of this software and preparation of
  *  derivative works based upon this software are permitted.
  *  Any distribution of this software or derivative works
  *  must comply with all applicable United States export control
@@ -104,7 +104,7 @@ static char *safe_malloc (int nbytes)
  * sets errno to indicate why.
 */
 
-recognizer 
+recognizer
 recognizer_load(char* directory, char* name, char** subset)
 {
     recognizer	rec;				/*the recognizer*/
@@ -119,11 +119,11 @@ recognizer_load(char* directory, char* name, char** subset)
     /*The name takes precedence.*/
     rinf = make_rec_info(directory, name, subset);
     if (rinf == nil) {
-	the_last_error = 
+	the_last_error =
 	  dgettext(INTL_DOMAIN,
 		   "Ran out of memory during prelinking initialization.");
 	return((recognizer)nil);
-    } 
+    }
 /* fprint(2, "Got past make_rec_info.\n"); */
 
     /*Let recognition code create recognizer and initialize*/
@@ -155,7 +155,7 @@ recognizer_load(char* directory, char* name, char** subset)
 
 	recognizer_unload(rec);
 /* fprint(2, "Unloading b/c null function pointer.\n"); */
-	the_last_error = 
+	the_last_error =
 	  dgettext(INTL_DOMAIN,
 		   "One or more recognizer function pointers is nil.");
 	return((recognizer)nil);
@@ -192,12 +192,12 @@ int
 recognizer_unload(recognizer rec)
 {
     /*Make sure magic numbers right.*/
-    
+
 	if( !RI_CHECK_MAGIC(rec) ) {
 		the_last_error = dgettext(INTL_DOMAIN,"Bad recognizer object.");
 		return(-1);
 	}
-    
+
 	return __recognizer_internal_finalize(rec);
 }
 
@@ -325,7 +325,7 @@ int recognizer_add_to_dictionary(recognizer rec,letterset* word,wordset dict)
  * return 0 if OK, -1 if error.
 */
 
-int 
+int
 recognizer_delete_from_dictionary(recognizer rec,letterset* word,wordset dict)
 {
     /*Make sure magic numbers right.*/
@@ -376,7 +376,7 @@ const char* recognizer_manager_version(recognizer rec)
     }
 
     return(rec->recognizer_version);
-  
+
 }
 /*
  * recognizer_error-Return the last error message, or nil if none.
@@ -384,7 +384,7 @@ const char* recognizer_manager_version(recognizer rec)
 
 char* recognizer_error(recognizer rec)
 {
-    
+
     /*Make sure magic numbers right and function there.*/
 
     if( !RI_CHECK_MAGIC(rec) && the_last_error == nil ) {
@@ -422,7 +422,7 @@ int recognizer_set_context(recognizer rec,rc* rec_xt)
     return(rec->recognizer_set_context(rec,rec_xt));
 }
 
-/* 
+/*
  * recognzier_get_context-Get the recognition context for translation.
  * If none or error, return nil.
 */
@@ -482,7 +482,7 @@ int recognizer_get_buffer(recognizer rec, uint* nstrokes,Stroke** strokes)
 }
 
 /*
- * recognizer_set_buffer-Set stroke buffer to arg. Return 0 if success, else 
+ * recognizer_set_buffer-Set stroke buffer to arg. Return 0 if success, else
  * return -1.
 */
 
@@ -504,7 +504,7 @@ int recognizer_set_buffer(recognizer rec,uint nstrokes,Stroke* strokes)
 
 /*
  * recognizer_translate-Translate the strokes in the current context, including
- * buffered strokes. If nstrokes == 0 or strokes == nil, return 
+ * buffered strokes. If nstrokes == 0 or strokes == nil, return
  * translation of stroke buffer.
 */
 
@@ -537,7 +537,7 @@ int recognizer_translate(recognizer rec,
  *	for (ari = 0; ari < ari_pstr.ps_npts; ari++)
  *	   fprint(2, "%ld -- (%d, %d)  ", ari_pts[ari], ari_pts[ari].x, ari_pts[ari].y);
  *      }
- *    }     
+ *    }
 */
     /*Do the function.*/
 /* ari -- this is calling cmu_recognizer_translate */
@@ -596,7 +596,7 @@ recognizer_get_gesture_names(recognizer rec)
  * recognizer_set_gesture_action-Set the action function for the gesture.
 */
 
-xgesture 
+xgesture
 recognizer_train_gestures(recognizer rec,char* name,xgesture fn,void* wsinfo)
 {
     /*Make sure magic numbers right.*/
@@ -635,14 +635,14 @@ static char* shared_library_name(char* directory,char* locale,char* name)
 		strcat(ret,name);
     } else {
 		char* dir;
-	
+
 		/*First try the environment variable.*/
-	
+
 		if( (dir = getenv(RECHOME)) == nil ) {
 		    dir = "REC_DEFAULT_HOME_DIR";
-	
+
 		  }
-	
+
 		ret = (char*)safe_malloc(strlen(dir) + strlen(locale) + len + 3);
 		/*Form the pathname.*/
 		strcpy(ret,dir);
@@ -705,15 +705,15 @@ static rec_info* make_rec_info(char*, char*, char** subset)
     /*Initialize the subset information.*/
 
     if( subset != nil ) {
-	
+
 	/*Count the subset strings.*/
 
 	for( len = 1; subset[len] != nil; len++ ) ;
-	
+
 	/*Copy the subset strings.*/
-	
+
 	ri->ri_subset = (char**)safe_malloc((len +1)*sizeof(char*));
-	
+
 	for( i = 0; i < len; i++ ) {
 	    if( subset[i] != nil ) {
 		if( (ri->ri_subset[i] = strdup(subset[i])) == nil ) {
@@ -731,7 +731,7 @@ static rec_info* make_rec_info(char*, char*, char** subset)
 
 	ri->ri_subset = nil;
     }
-    
+
     return(ri);
 }
 
@@ -820,7 +820,7 @@ static int check_for_user_home()
 recognizer make_recognizer(rec_info* rif)
 {
     recognizer rec;
-    
+
     /*Allocate it.*/
 
     rec = (recognizer)safe_malloc(sizeof(*rec));
@@ -879,7 +879,7 @@ rec_alternative* make_rec_alternative_array(uint size)
 	ri[i].ra_next = nil;
     }
 
-    return(ri);    
+    return(ri);
 }
 
 rec_alternative*
@@ -906,9 +906,9 @@ void delete_rec_alternative_array(uint nalter,
 
       for( i = 0; i < nalter; i++ ) {
 	cleanup_rec_element(&ra[i].ra_elem,delete_points_p);
-	
+
 	/*Now do the next one down the line.*/
-	
+
 	if( ra[i].ra_nalter > 0 ) {
 	  delete_rec_alternative_array(ra[i].ra_nalter,
 				       ra[i].ra_next,
@@ -935,37 +935,37 @@ initialize_rec_element(rec_element* re,
 	re->re_type = type;
 	re->re_conf = conf;
 	re->re_result.aval = nil;
-	
+
 	switch (type) {
-	    
+
 	  case REC_GESTURE:
 	    if( size > 0 && trans != nil ) {
-		re->re_result.gval = 
+		re->re_result.gval =
 		     (gesture*)safe_malloc(sizeof(gesture));
 		memcpy((void*)re->re_result.gval,trans,sizeof(gesture));
 	    }
 	    break;
-	    
+
 	  case REC_ASCII:
 	  case REC_VAR:
 	  case REC_OTHER:
 	    if( size > 0 && trans != nil ) {
-		re->re_result.aval = 
+		re->re_result.aval =
 		     (char*)safe_malloc((size+1)*sizeof(char));
 		memcpy((void*)re->re_result.aval,trans,size*sizeof(char));
 		re->re_result.aval[size] = '\000';
 	    }
 	    break;
-	    
+
 	  case REC_WCHAR:
 	    if( size > 0 && trans != nil ) {
-		re->re_result.wval = 
+		re->re_result.wval =
 		     (wchar_t*)safe_malloc((size+1)*sizeof(wchar_t));
 		memcpy((void*)re->re_result.wval,trans,size*sizeof(wchar_t));
 		re->re_result.wval[size] = '\000';
 	    }
 	    break;
-	    
+
 	  case REC_CORR:
 	    if( size > 0 && trans != nil ) {
 	      re->re_result.rcval =
@@ -988,17 +988,17 @@ initialize_rec_element(rec_element* re,
 static void cleanup_rec_element(rec_element* re,bool delete_points_p)
 {
   switch(re->re_type) {
-    
+
   case REC_NONE:
     break;
-    
+
   case REC_ASCII:
   case REC_VAR:
   case REC_WCHAR:
   case REC_OTHER:
     free(re->re_result.aval);
     break;
-    
+
   case REC_GESTURE:
     delete_gesture_array(1,re->re_result.gval,true);
     break;
@@ -1007,9 +1007,9 @@ static void cleanup_rec_element(rec_element* re,bool delete_points_p)
     delete_rec_correlation(re->re_result.rcval,
 			   delete_points_p);
     break;
-    
+
   }
-  
+
 }
 
 /*
@@ -1017,7 +1017,7 @@ static void cleanup_rec_element(rec_element* re,bool delete_points_p)
 */
 
 
-rec_correlation* 
+rec_correlation*
 make_rec_correlation(char type,
 		     uint size,
 		     void* trans,
@@ -1039,11 +1039,11 @@ make_rec_correlation(char type,
 			       conf) == nil ) {
       return(nil);
     }
-    
+
     if( (rc->ro_strokes = make_Stroke_array(ps_size)) == nil ) {
       return(nil);
     }
-    
+
     rc->ro_start = (uint*)safe_malloc(ps_size * sizeof(int));
     rc->ro_stop = (uint*)safe_malloc(ps_size * sizeof(int));
     return(rc);
@@ -1113,7 +1113,7 @@ Stroke* make_Stroke_array(uint size)
 	ri[i].pts = nil;
     }
 
-    return(ri);       
+    return(ri);
 }
 
 Stroke* initialize_Stroke(Stroke* ps,
@@ -1130,7 +1130,7 @@ Stroke* initialize_Stroke(Stroke* ps,
 void delete_Stroke_array(uint size,Stroke* ps,bool delete_points_p)
 {
   int i;
-  
+
     if( ps != nil ) {
 
       for( i = 0; i < size; i++ ) {
@@ -1138,7 +1138,7 @@ void delete_Stroke_array(uint size,Stroke* ps,bool delete_points_p)
 		delete_pen_point_array(ps[i].pts);
 	    }
       }
-	
+
       free(ps);
     }
 }
@@ -1155,7 +1155,7 @@ void delete_pen_point_array(pen_point* pp)
 }
 
 /*
- * gesture 
+ * gesture
 */
 
 gesture*
@@ -1196,14 +1196,14 @@ delete_gesture_array(uint size,gesture* ga,bool delete_points_p)
     if( ga != nil ) {
 
       for( i = 0; i < size; i++ ) {
-	
+
 	free(ga[i].g_name);
-	
+
 	if( delete_points_p ) {
 	  delete_pen_point_array(ga[i].g_hspots);
 	}
       }
-      
+
       free(ga);
     }
 }
@@ -1212,7 +1212,7 @@ delete_gesture_array(uint size,gesture* ga,bool delete_points_p)
  * copy fns for stroke buffer management.
 */
 
-static Stroke* 
+static Stroke*
 copy_Stroke(Stroke* ps1,Stroke* ps2)
 {
   initialize_Stroke(ps1,

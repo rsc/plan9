@@ -16,4 +16,3 @@ int		so_getservbyname(char*, char*, char*);
 int		so_gethostbyname(char*, char**, int);
 
 char*	hostlookup(char*);
-

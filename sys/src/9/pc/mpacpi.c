@@ -220,12 +220,12 @@ mpacpiscan(void (*func)(uchar *))
 				dhpa = l64get(sdt+i);
 			else
 				dhpa = L32GET(sdt+i);
-	
+
 			if((tbl = vmap(dhpa, 8)) == nil)
 				continue;
 			tbllen = L32GET(tbl + 4);
 			vunmap(tbl, 8);
-	
+
 			if((tbl = vmap(dhpa, tbllen)) == nil)
 				continue;
 			if(mpacpirsdchecksum(tbl, tbllen) != nil)

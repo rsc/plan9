@@ -16,7 +16,7 @@
 
 /* $Id: mkromfs.c,v 1.2 2005/09/16 03:59:44 ray Exp $ */
 /* Generate source data for the %rom% IODevice */
- 
+
 /*
  * For reasons of convenience and footprint reduction, the various postscript
  * source files, resources and fonts required by Ghostscript can be compiled
@@ -54,7 +54,7 @@ static int put_int32(unsigned char *p, const unsigned int q)
     *p++ = (q >> 16) & 0xFF;
     *p++ = (q >>  8) & 0xFF;
     *p++ = (q >>  0) & 0xFF;
-    
+
     return 4;
 }
 
@@ -62,7 +62,7 @@ static int put_int32(unsigned char *p, const unsigned int q)
 void inode_clear(romfs_inode* node)
 {
     int i;
-    
+
     if (node) {
         if (node->data) {
             for (i = 0; i < node->blocks; i++) {
@@ -82,21 +82,21 @@ inode_write(FILE *out, romfs_inode *node)
     int i, offset = 0;
     unsigned char buf[64];
     unsigned char *p = buf;
-    
+
     /* 4 byte offset to next inode */
     p += put_int32(p, node->offset);
     /* 4 byte file length */
     p += put_int32(p, node->length);
     /* 4 byte path length */
     p += put_int32(p, strlen(node->name));
-    
+
     printf("writing node '%s'...\n", node->name);
     printf(" offset %ld\n", node->offset);
     printf(" length %ld\n", node->length);
     printf(" path length %ld\n", strlen(node->name));
-    
+
     printf(" %d compressed blocks comprising %ld bytes\n", node->blocks, node->data_size);
-    
+
     /* write header */
     offset += fwrite(buf, 3, 4, out);
     /* write path */
@@ -106,7 +106,7 @@ inode_write(FILE *out, romfs_inode *node)
     /* write out compressed data */
     for (i = 0; i < node->blocks; i++)
         offset += fwrite(node->data[i], 1, node->data_lengths[i], out);
-    
+
     printf(" wrote %d bytes in all\n", offset);
     return offset;
 }
@@ -124,14 +124,14 @@ main(int argc, char *argv[])
 
     ubuf = malloc(ROMFS_BLOCKSIZE);
     cbuf = malloc(ROMFS_CBUFSIZE);
-    
+
     printf("compressing with %d byte blocksize (zlib output buffer %d bytes)\n",
         ROMFS_BLOCKSIZE, ROMFS_CBUFSIZE);
-    
+
     out = fopen("gsromfs", "wb");
-    
+
     /* for each path on the commandline, attach an inode */
-    for (i = 1; i < argc; i++) {  
+    for (i = 1; i < argc; i++) {
         node = calloc(1, sizeof(romfs_inode));
         /* get info for this file */
         node->name = strdup(argv[i]);
@@ -153,7 +153,7 @@ main(int argc, char *argv[])
             if (ret != Z_OK) {
                 printf("error compressing data block!\n");
             }
-            node->data_lengths[block] = clen; 
+            node->data_lengths[block] = clen;
             node->data[block] = malloc(clen);
             memcpy(node->data[block], cbuf, clen);
             block++;
@@ -169,12 +169,10 @@ main(int argc, char *argv[])
         inode_clear(node);
         free(node);
     }
-    
+
     free(ubuf);
-    
+
     fclose(out);
-    
+
     return 0;
 }
-
-

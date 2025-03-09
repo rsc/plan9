@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1993, 1994, 1997, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -156,7 +156,7 @@ mgr_print_page(gx_device_printer *pdev, FILE *pstream)
 	mgr_wide = bdev->width;
 	if (mgr_wide & 7)
 	   mgr_wide += 8 - (mgr_wide & 7);
-	   
+
 	while ( !(code = mgr_next_row(&cur)) )
 	   {	if ( fwrite(cur.data, sizeof(char), mgr_wide / 8, pstream) <
                     mgr_wide / 8)
@@ -168,14 +168,14 @@ mgr_print_page(gx_device_printer *pdev, FILE *pstream)
 
 /* Print a gray-mapped page. */
 static unsigned char bgreytable[16], bgreybacktable[16];
-static unsigned char bgrey256table[256], bgrey256backtable[256];        
+static unsigned char bgrey256table[256], bgrey256backtable[256];
 private int
 mgrN_print_page(gx_device_printer *pdev, FILE *pstream)
 {	mgr_cursor cur;
 	int i = 0, j, k, mgr_wide;
 	uint mgr_line_size;
 	byte *bp, *data = NULL, *dp;
-        
+
 	int code = mgr_begin_page(bdev, pstream, &cur);
 	if ( code < 0 ) return code;
 
@@ -210,7 +210,7 @@ mgrN_print_page(gx_device_printer *pdev, FILE *pstream)
 
 	if ( bdev->mgr_depth != 8 )
 	    data = (byte *)gs_malloc(pdev->memory, mgr_line_size, 1, "mgrN_print_page");
-        
+
 	while ( !(code = mgr_next_row(&cur)) )
 	   {
 		switch (bdev->mgr_depth) {
@@ -224,7 +224,7 @@ mgrN_print_page(gx_device_printer *pdev, FILE *pstream)
                 		if ( fwrite(data, sizeof(byte), mgr_line_size, pstream) < mgr_line_size )
                                 	return_error(gs_error_ioerror);
 				break;
-	                        
+
 			case 4:
 				for (i = 0,dp = data, bp = cur.data; i < mgr_line_size; i++) {
 					*dp =  bgreybacktable[*(bp++) >> 4] << 4;
@@ -233,7 +233,7 @@ mgrN_print_page(gx_device_printer *pdev, FILE *pstream)
                 		if ( fwrite(data, sizeof(byte), mgr_line_size, pstream) < mgr_line_size )
                                 	return_error(gs_error_ioerror);
 				break;
-	                        
+
 			case 8:
 				for (i = 0,bp = cur.data; i < mgr_line_size; i++, bp++)
 	                              *bp = bgrey256backtable[*bp];
@@ -241,7 +241,7 @@ mgrN_print_page(gx_device_printer *pdev, FILE *pstream)
 					< mgr_line_size )
                                 	return_error(gs_error_ioerror);
 				break;
-		}  
+		}
 	   }
 	if (bdev->mgr_depth != 8)
 	    gs_free(bdev->memory, (char *)data, mgr_line_size, 1, "mgrN_print_page(done)");
@@ -281,7 +281,7 @@ cmgrN_print_page(gx_device_printer *pdev, FILE *pstream)
 	byte *bp, *data, *dp;
 	ushort prgb[3];
 	unsigned char table[256], backtable[256];
-        
+
 	int code = mgr_begin_page(bdev, pstream, &cur);
 	if ( code < 0 ) return code;
 
@@ -318,17 +318,17 @@ cmgrN_print_page(gx_device_printer *pdev, FILE *pstream)
                 		if ( fwrite(data, sizeof(byte), mgr_line_size, pstream) < mgr_line_size )
                                 	return_error(gs_error_ioerror);
 				break;
-	                        
+
 			case 8:
 				for (i = 0,bp = cur.data; i < mgr_line_size; i++, bp++)
 	                              *bp = backtable[*bp] + MGR_RESERVEDCOLORS;
                 		if ( fwrite(cur.data, sizeof(cur.data[0]), mgr_line_size, pstream) < mgr_line_size )
                                 	return_error(gs_error_ioerror);
 				break;
-		}  
+		}
 	   }
        	gs_free(bdev->memory, (char *)data, mgr_line_size, 1, "cmgrN_print_page(done)");
-       	
+
 	if (bdev->mgr_depth == 4) {
             for (i = 0; i < 16; i++) {
                pc_4bit_map_color_rgb((gx_device *)0, (gx_color_index) i, prgb);
@@ -350,7 +350,7 @@ cmgrN_print_page(gx_device_printer *pdev, FILE *pstream)
    	}
 #if !arch_is_big_endian
 	swap_bwords( (unsigned char *) clut, sizeof( struct nclut ) * i );
-#endif    
+#endif
 	if ( fwrite(&clut, sizeof(struct nclut), i, pstream) < i )
             return_error(gs_error_ioerror);
 	return (code < 0 ? code : 0);
@@ -422,7 +422,7 @@ swap_bwords(register unsigned char *p, int n)
   register unsigned char c;
 
   n /= 2;
-  
+
   for (; n > 0; n--, p += 2) {
     c    = p[0];
     p[0] = p[1];

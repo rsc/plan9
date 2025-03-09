@@ -305,10 +305,10 @@ _nextword:
 	RET
 
 TEXT error(SB), $0
-	BYTE $'E'; 
+	BYTE $'E';
 
 TEXT ioerror(SB), $0
-	BYTE $'I'; 
+	BYTE $'I';
 
 TEXT nl(SB), $0
 	BYTE $'\r';

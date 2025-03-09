@@ -54,7 +54,7 @@ static Clock clocks[] = {
 	{  75000000,	0x00, 0x02, 0x10, 0x08, },
 	{	  0, },
 };
-	
+
 static ulong atix;
 
 static uchar

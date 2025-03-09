@@ -1,12 +1,12 @@
 /* Copyright (C) 2001 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -115,7 +115,7 @@ RELOC_PTRS_END
  *
  * Several of the methods used by ICCBased color space apply as well to
  * DeviceN color spaces, in that they are generic to color spaces having
- * a variable number of components. We have elected not to attempt to 
+ * a variable number of components. We have elected not to attempt to
  * extract and combine these operations, because this would save only a
  * small amount of code, and much more could be saved by intorducing certain
  * common elements (ranges, number of components, etc.) into the color space
@@ -273,7 +273,7 @@ gx_concretize_CIEICC(
     if (picc_info->plu->e_inSpace == icSigLabData) {
         inv[0] *= 100;
         inv[1] = inv[1]*255 - 128;
-        inv[2] = inv[2]*255 - 128; 
+        inv[2] = inv[2]*255 - 128;
     }
 
     /*
@@ -432,7 +432,7 @@ gx_load_icc_profile(gs_cie_icc *picc_info)
     icc *           picc;
     icmLuBase * plu = NULL;
     icmFile *pfile = NULL;
-	
+
     /* verify that the file is legitimate */
     if (picc_info->file_id != (instrp->read_id | instrp->write_id))
 	return_error(gs_error_ioerror);
@@ -440,7 +440,7 @@ gx_load_icc_profile(gs_cie_icc *picc_info)
      * Load the top-level ICC profile.
      *
      * If an ICC profile fails to load, generate an error.
-     * 
+     *
      * Testing demonstrates, however, Acrobat Reader silently
      * ignores the error and uses the alternate color space.
      * This behaviour is implemented by catching the error using
@@ -458,10 +458,10 @@ gx_load_icc_profile(gs_cie_icc *picc_info)
 	gs_vector3 *            ppt;
 
 	pfile = gx_wrap_icc_stream (instrp);
-      
+
 	if ((picc->read(picc, pfile, 0)) != 0)
 	    goto return_rangecheck;
-            
+
 	/* verify the profile type */
 	profile_class = picc->header->deviceClass;
 	if ( profile_class != icSigInputClass     &&
@@ -552,7 +552,7 @@ gx_load_icc_profile(gs_cie_icc *picc_info)
 	if (plu == NULL)
 	    goto return_rangecheck;
 
-	/* 
+	/*
 	 * Get the appropriate white and black points. See the note on
 	 * rendering intent above for a discussion of why we are using
 	 * the profile space illuminant and pure black. (Pure black need
@@ -653,7 +653,7 @@ gs_cspace_build_CIEICC(
 
 /* ---------------- Serialization. -------------------------------- */
 
-private int 
+private int
 gx_serialize_CIEICC(const gs_color_space * pcs, stream * s)
 {
     const gs_icc_params * p = &pcs->params.icc;

@@ -1,6 +1,6 @@
 .TH RUNESTRCAT 2
 .SH NAME
-runestrcat, 
+runestrcat,
 runestrncat,
 runestrcmp,
 runestrncmp,
@@ -55,7 +55,7 @@ Rune*	runestrdup(Rune *s)
 Rune*	runestrstr(Rune *s1, Rune *s2)
 .SH DESCRIPTION
 These functions are rune string analogues of
-the corresponding functions in 
+the corresponding functions in
 .IR strcat (2).
 .SH SOURCE
 .B /sys/src/libc/port

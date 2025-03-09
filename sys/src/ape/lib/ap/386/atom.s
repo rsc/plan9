@@ -93,7 +93,7 @@ TEXT	xcasl+0(SB),0,$0
 	LOCK
 	CMPXCHG
 	RET
-	
+
 /*
  * The CMPXCHG8B instruction also requires three operands:
  * a 64-bit value in EDX:EAX, a 64-bit value in ECX:EBX,

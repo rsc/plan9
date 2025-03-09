@@ -22,7 +22,7 @@ char	*GoalCargoImage= SOKOIMG "goalcargo.bit";
 char	*GoalImage =	SOKOIMG "goal.bit";
 char	*WinImage =	SOKOIMG "win.bit";
 
-char *buttons[] = 
+char *buttons[] =
 {
 	"restart",
 	"easy",
@@ -34,7 +34,7 @@ char *buttons[] =
 
 char **levelnames;
 
-Menu menu = 
+Menu menu =
 {
 	buttons,
 };
@@ -86,7 +86,7 @@ eloadfile(char *path)
 	if(img == nil)
 		sysfatal("cannot load image: %r");
 	close(fd);
-	
+
 	return img;
 }
 
@@ -95,7 +95,7 @@ void
 allocimages(void)
 {
 	Rectangle one = Rect(0, 0, 1, 1);
-	
+
 	bg		= eallocimage(one, 1, DDarkyellow);
 	text 		= eallocimage(one, 1, DBluegreen);
 
@@ -172,7 +172,7 @@ mouse2route(Mouse m)
 char *
 genlevels(int i)
 {
-	
+
 	if(i >= numlevels)
 		return 0;
 
@@ -199,7 +199,7 @@ eresized(int new)
 
 	if(new && getwindow(display, Refnone) < 0)
 		sysfatal("can't reattach to window");
-	
+
 	p = Pt(Dx(screen->r), Dy(screen->r));
 
 	if(!new || !eqpt(p, boardsize(level.max))) {
@@ -208,7 +208,7 @@ eresized(int new)
 	drawscreen();
 }
 
-void 
+void
 main(int argc, char **argv)
 {
 	Mouse m;
@@ -220,11 +220,11 @@ main(int argc, char **argv)
 	int animate;
 
 
-	if(argc == 2) 
+	if(argc == 2)
 		levelfile = argv[1];
 	else
 		levelfile = LEasy;
-		
+
 	if(! loadlevels(levelfile)) {
 		fprint(2, "usage: %s [levelfile]\n", argv[0]);
 		exits("usage");

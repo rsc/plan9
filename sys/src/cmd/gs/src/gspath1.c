@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -75,7 +75,7 @@ gx_setcurrentpoint_from_path(gs_imager_state *pis, gx_path *path)
 }
 
 private inline int
-gs_arc_add_inline(gs_state *pgs, bool cw, floatp xc, floatp yc, floatp rad, 
+gs_arc_add_inline(gs_state *pgs, bool cw, floatp xc, floatp yc, floatp rad,
 		    floatp a1, floatp a2, bool add)
 {
     int code = gs_imager_arc_add(pgs->path, (gs_imager_state *)pgs, cw, xc, yc, rad, a1, a2, add);
@@ -242,7 +242,7 @@ gs_imager_arc_add(gx_path * ppath, gs_imager_state * pis, bool clockwise,
 		return code;
 	    arc.action = arc_nothing;
 	    arc.notes = sn_not_first;
-	}	    
+	}
 	/* Do multiples of 90 degrees.  Invariant: ang1 >= ang2 >= 0. */
 	while ((anext = arc.angle - fixed_90) >= ang2) {
 	    code = next_arc_quadrant(&arc, anext);
@@ -272,7 +272,7 @@ gs_imager_arc_add(gx_path * ppath, gs_imager_state * pis, bool clockwise,
 		return code;
 	    arc.action = arc_nothing;
 	    arc.notes = sn_not_first;
-	}	    
+	}
 	/* Do multiples of 90 degrees.  Invariant: 0 <= ang1 <= ang2. */
 	while ((anext = arc.angle + fixed_90) <= ang2) {
 	    code = next_arc_quadrant(&arc, anext);
@@ -438,7 +438,7 @@ add:
 }
 
 void
-make_quadrant_arc(gs_point *p, const gs_point *c, 
+make_quadrant_arc(gs_point *p, const gs_point *c,
 	const gs_point *p0, const gs_point *p1, double r)
 {
     p[0].x = c->x + p0->x * r;
@@ -512,7 +512,7 @@ gs_reversepath(gs_state * pgs)
     }
     if (pgs->current_point_valid) {
 	/* Not empty. */
-	gx_setcurrentpoint(pgs, fixed2float(rpath.position.x), 
+	gx_setcurrentpoint(pgs, fixed2float(rpath.position.x),
 				fixed2float(rpath.position.y));
 	pgs->subpath_start.x = fixed2float(rpath.segments->contents.subpath_current->pt.x);
 	pgs->subpath_start.y = fixed2float(rpath.segments->contents.subpath_current->pt.y);

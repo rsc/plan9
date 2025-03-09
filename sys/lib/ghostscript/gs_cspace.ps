@@ -1,12 +1,12 @@
 %    Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -17,10 +17,10 @@
 % basic colorspace mechanism
 
 %
-% This new implementation of color spaces extends the color space 
-% formalism to all PostScript levels. Level specific features and 
-% operators continue to be accessible only in the appropriate level, 
-% but the colorspace concept and associated mechanisms are used 
+% This new implementation of color spaces extends the color space
+% formalism to all PostScript levels. Level specific features and
+% operators continue to be accessible only in the appropriate level,
+% but the colorspace concept and associated mechanisms are used
 % throughout.
 %
 % The color space mechanism is built around two dictionaries:
@@ -85,7 +85,7 @@
 %
 %   <c1> ... <cn>  <name | array>   cs_get_currentrgb   <red>  <green>  <blue>
 %
-%   <c1> ... <cn>  <name | array>   cs_get_currentcmyk 
+%   <c1> ... <cn>  <name | array>   cs_get_currentcmyk
 %                                       <cyan>  <magenta>  <yellow>  <black>
 %
 %
@@ -125,7 +125,7 @@
 %   CIEBased and ICCBased color spaces. For Indexed color spaces this is
 %   [ 0 hival ], where hival is the maximum support index value. For all
 %   other non-CIEBased, non-ICCBased color spaces, the range is an array
-%   of ncomps elements, all of which are [ 0 1 ], where ncomps is the 
+%   of ncomps elements, all of which are [ 0 1 ], where ncomps is the
 %   number of color space components.
 %
 % cs_get_default_color
@@ -239,7 +239,7 @@ userdict /.cspace_util 80 dict put
 
 %
 % Colorspacedict is initially in .cspace_util; it is copied to level2dict
-% in the Level 2 initialization code to retain compatibility with 
+% in the Level 2 initialization code to retain compatibility with
 % earlier implementations.
 %
 /colorspacedict 20 dict def
@@ -547,7 +547,7 @@ systemdict /setcolorspace .undef
 %
 % The Level 1 color setting operators. setcmykcolor is created only if
 % setcolorscreen is present. These operators are always defined in
-% systemdict. 
+% systemdict.
 %
 /setgray
   {
@@ -952,7 +952,7 @@ bind def
         { pop pop dup }
       }
     1 index 6 mul cvi              % (int)(6 * h)
-    get exec    
+    get exec
   }
 bind def
 

@@ -168,7 +168,7 @@ dmasetup(int chan, void *va, long len, int isread)
 	 *  if this isn't kernel memory or crossing 64k boundary or above 16 meg
 	 *  use the bounce buffer.
 	 */
-	if((ulong)va < KZERO 
+	if((ulong)va < KZERO
 	|| ((pa=PADDR(va))&0xFFFF0000) != ((pa+len)&0xFFFF0000)
 	|| pa >= 16*MB){
 		if(xp->bva == nil)
@@ -254,7 +254,7 @@ dmacount(int chan)
 {
 	int     retval;
 	DMA     *dp;
- 
+
 	dp = &dma[(chan>>2)&1];
 	outb(dp->cbp, 0);
 	retval = inb(dp->count[chan]);

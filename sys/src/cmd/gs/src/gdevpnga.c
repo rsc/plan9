@@ -1,13 +1,13 @@
 /*
   Copyright (C) 2001-2004 artofcode LLC. All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -215,7 +215,7 @@ prn_device(pnga_procs, "pnga",
 #endif
 
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(pnga_device_enum_ptrs, pnga_device *pdev) return 0;
 case 0: return ENUM_OBJ(pdev->ctx);
 ENUM_PTRS_END
@@ -473,7 +473,7 @@ pdf14_push_transparency_group(pdf14_ctx *ctx, gs_int_rect *rect,
 	    int y;
 
 	    for (y = y0; y < y1; ++y) {
-		memcpy (buf_ptr, tos_ptr, width); 
+		memcpy (buf_ptr, tos_ptr, width);
 		buf_ptr += buf->rowstride;
 		tos_ptr += tos->rowstride;
 	    }
@@ -535,7 +535,7 @@ pdf14_pop_transparency_group(pdf14_ctx *ctx)
 		tos_pixel[i] = tos_ptr[x + i * tos_planestride];
 		nos_pixel[i] = nos_ptr[x + i * nos_planestride];
 	    }
-	    
+
 	    if (nos_knockout) {
 		byte *nos_shape_ptr = nos_has_shape ?
 		    &nos_ptr[x + nos_shape_offset] : NULL;
@@ -574,7 +574,7 @@ pdf14_pop_transparency_group(pdf14_ctx *ctx)
 					 shape);
 	    }
 	    /* todo: knockout cases */
-	    
+
 	    for (i = 0; i < n_chan; ++i) {
 		nos_ptr[x + i * nos_planestride] = nos_pixel[i];
 	    }

@@ -4,12 +4,12 @@
 .globl ___sha1block
 ___sha1block:
 	jmp sha1block
-	
+
 .p2align 2,0x90
 .globl __sha1block
 __sha1block:
 	jmp sha1block
-	
+
 .p2align 2,0x90
 .globl _sha1block
 _sha1block:

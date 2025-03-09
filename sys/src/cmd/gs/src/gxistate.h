@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -190,7 +190,7 @@ typedef struct gs_devicen_color_map_s {
     bool use_alt_cspace;
     separation_type sep_type;
     uint num_components;	/* Input - Duplicate of value in gs_device_n_params */
-    uint num_colorants;		/* Number of colorants - output */ 
+    uint num_colorants;		/* Number of colorants - output */
     gs_id cspace_id;		/* Used to verify color space and map match */
     int color_map[GS_CLIENT_COLOR_MAX_COMPONENTS];
 } gs_devicen_color_map;

@@ -38,7 +38,7 @@ see
 .IR proc (3)),
 the set of rendezvous tags
 (see
-.IR rendezvous (2)); 
+.IR rendezvous (2));
 and open files.
 .I Flags
 is the logical OR of some subset of

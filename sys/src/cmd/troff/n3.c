@@ -1,6 +1,6 @@
 /*
  * troff3.c
- * 
+ *
  * macro and string routines, storage allocation
  */
 
@@ -137,7 +137,7 @@ void maddhash(Contab *rp)
 }
 
 void munhash(Contab *mp)
-{	
+{
 	Contab *p;
 	Contab **lp;
 
@@ -325,7 +325,7 @@ Offset finds(int mn)
 			if (contabp[i].rq == 0)
 				break;
 		}
-		if (i == nm) 
+		if (i == nm)
 			growcontab();
 		freeslot = i + 1;
 		if ((nextb = alloc()) == -1) {
@@ -530,7 +530,7 @@ Tchar rbf(void)	/* return next char from blist[] block */
 		else
 			return(popi());
 	}
-	
+
 	i = rbf0(ip);
 	if (i == 0) {
 		if (!app)
@@ -595,9 +595,9 @@ Offset pushi(Offset newip, int  mname)
 	lastpbp = pbp;
 	pendt = ch = 0;
 	frame = nxf;
-	if (nxf->nargs == 0) 
+	if (nxf->nargs == 0)
 		nxf += 1;
-	else 
+	else
 		nxf = (Stack *)argtop;
 	return(ip = newip);
 }
@@ -623,7 +623,7 @@ int getsn(void)
 		return(0);
 	if (i == '(')
 		return(getrq());
-	else 
+	else
 		return(i);
 }
 
@@ -697,7 +697,7 @@ void collect(void)
 		quote = 0;
 		if (cbits(i = getch()) == '"')
 			quote++;
-		else 
+		else
 			ch = i;
 		while (1) {
 			i = getch();
@@ -849,7 +849,7 @@ void casetl(void)
 	if (ismot(delim = getch())) {
 		ch = delim;
 		delim = '\'';
-	} else 
+	} else
 		delim = cbits(delim);
 	tp = buf;
 	numtabp[HP].val = 0;
@@ -931,7 +931,7 @@ void casepm(void)
 		tcnt++;
 		j = contabp[i].mx;
 		for (k = 1; (j = blist[bindex(j)].nextoff) != -1; )
-			k++; 
+			k++;
 		cnt++;
 		kk += k;
 		if (!tot)

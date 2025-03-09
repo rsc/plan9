@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1992, 1993, 1994, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -153,13 +153,13 @@ gs_setcolortransfer_remap(gs_state * pgs, gs_mapping_proc red_proc,
     ptran->green->id = new_ids + 2;
     ptran->blue->proc = blue_proc;
     ptran->blue->id = new_ids + 3;
-    ptran->red_component_num = 
+    ptran->red_component_num =
         gs_color_name_component_number(dev, "Red", 3, ht_type_colorscreen);
-    ptran->green_component_num = 
+    ptran->green_component_num =
         gs_color_name_component_number(dev, "Green", 5, ht_type_colorscreen);
-    ptran->blue_component_num = 
+    ptran->blue_component_num =
         gs_color_name_component_number(dev, "Blue", 4, ht_type_colorscreen);
-    ptran->gray_component_num = 
+    ptran->gray_component_num =
         gs_color_name_component_number(dev, "Gray", 4, ht_type_colorscreen);
     if (remap) {
 	load_transfer_map(pgs, ptran->red, 0.0);

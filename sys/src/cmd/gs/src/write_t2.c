@@ -160,7 +160,7 @@ static void write_delta_array_entry(FAPI_font* a_fapi_font,WRF_output* a_output,
 		for (i = 0; i < count; i++)
 			{
 			/* Get the value and convert it from unsigned to signed. */
-			short value = a_fapi_font->get_word(a_fapi_font,a_feature_id,i); 
+			short value = a_fapi_font->get_word(a_fapi_font,a_feature_id,i);
 			/* Divide by the divisor to bring it back to font units. */
 			value = (short)(value / a_divisor);
 			write_type2_int(a_output,value - prev_value);
@@ -323,7 +323,7 @@ static void write_private_dict(FAPI_font* a_fapi_font,WRF_output* a_output,unsig
 	write_type2_float(a_output,a_fapi_font->get_long(a_fapi_font,FAPI_FONT_FEATURE_BlueScale,0) / 65536.0);
 	WRF_wbyte(a_output,12);
 	WRF_wbyte(a_output,9);
-	
+
 	write_word_entry(a_fapi_font,a_output,FAPI_FONT_FEATURE_BlueShift,1,true,10,16);
 	write_delta_array_entry(a_fapi_font,a_output,FAPI_FONT_FEATURE_BlueValues,false,6,16);
 	write_delta_array_entry(a_fapi_font,a_output,FAPI_FONT_FEATURE_OtherBlues,false,7,16);
@@ -348,7 +348,7 @@ static void write_private_dict(FAPI_font* a_fapi_font,WRF_output* a_output,unsig
 	WRF_wbyte(a_output,21);
 	}
 
-	/* Write the length in bytes of the private dictionary to the top dictionary. */	
+	/* Write the length in bytes of the private dictionary to the top dictionary. */
 	if (a_output->m_pos)
 		write_4_byte_int(a_private_dict_length_ptr + 1,a_output->m_pos - start);
 	}

@@ -19,7 +19,7 @@ extern String*	s_append(String*, char*);
 extern String*	s_array(char*, int);
 extern String*	s_copy(char*);
 extern void	s_free(String*);
-extern String*	s_incref(String*);	
+extern String*	s_incref(String*);
 extern String*	s_memappend(String*, char*, int);
 extern String*	s_nappend(String*, char*, int);
 extern String*	s_new(void);

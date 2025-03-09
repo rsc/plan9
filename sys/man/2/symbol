@@ -115,7 +115,7 @@ or \-1 if an error occurs.
 returns the address of the
 .IR i th
 .B Sym
-structure or zero if 
+structure or zero if
 .I index
 is out of range.
 .PP
@@ -129,7 +129,7 @@ entries in the symbol table is returned in
 .I Fileelem
 converts a file name, encoded as described in
 .IR a.out (6),
-to a character string.  
+to a character string.
 .I Fp
 is the base of
 an array of pointers to file path components ordered by path index.
@@ -137,7 +137,7 @@ an array of pointers to file path components ordered by path index.
 is the address of an array of encoded
 file path components in the form of a
 .B z
-symbol table entry.  
+symbol table entry.
 .I Buf
 and
 .I n
@@ -150,7 +150,7 @@ that is at most
 bytes long.
 .PP
 .I Filesym
-is a higher-level interface to 
+is a higher-level interface to
 .IR fileelem .
 It fills
 .I buf
@@ -168,7 +168,7 @@ is too large or too small or an error occurs during file name
 conversion.
 .PP
 .I Pc2sp
-returns an offset associated with 
+returns an offset associated with
 a given value of the program counter.  Adding this offset
 to the current value of the stack pointer gives the address
 of the current stack frame.  This approach only applies
@@ -245,7 +245,7 @@ The
 data structure:
 .IP
 .EX
-typedef struct {	
+typedef struct {
 	void *handle;     /* private */
 	struct {
 	    char  *name;

@@ -206,7 +206,7 @@ for more details.
 .I Buildfont
 parses the font description in the buffer
 .BR desc ,
-returning a 
+returning a
 .B Font*
 pointer that can be used by
 .B string
@@ -537,18 +537,18 @@ and
 convert between the channel descriptor strings
 used by
 .IR image (6)
-and the internal 
+and the internal
 .B ulong
-representation 
+representation
 used by the graphics protocol
 (see
 .IR draw (3)'s
 .B b
 message).
 .B Chantostr
-writes at most nine bytes into the buffer pointed at by 
+writes at most nine bytes into the buffer pointed at by
 .I s
-and returns 
+and returns
 .I s
 on success,
 0
@@ -626,7 +626,7 @@ The names
 .B clr
 and
 .B set
-in the 
+in the
 .B Cursor
 structure are reminders of an archaic color map
 and might be more appropriately called

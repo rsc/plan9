@@ -111,9 +111,9 @@ typedef struct MCCparam MCCparam;
 struct MCCparam {
 /*0x00*/	ulong	mccbase;
 /*0x04*/	ushort	mccstate;
-/*0x06*/	ushort	mrblr;	
-/*0x08*/	ushort	grfthr;	
-/*0x0a*/	ushort	grfcnt;	
+/*0x06*/	ushort	mrblr;
+/*0x08*/	ushort	grfthr;
+/*0x0a*/	ushort	grfcnt;
 /*0x0c*/	ulong	rinttmp;
 /*0x10*/	ulong	data0;
 /*0x14*/	ulong	data1;
@@ -455,7 +455,7 @@ struct RegMap {
 /*0x10DA6*/	ushort	trr4;			/*  Timer4 reference register 16 bits 17.2.4/17-7 */
 			};
 /*0x10DA4*/	ulong	trrl3;
-		};			
+		};
 		union{
 			struct {
 /*0x10DA8*/	ushort	tcr3;			/*  Timer3 capture register 16 bits 17.2.5/17-8 */

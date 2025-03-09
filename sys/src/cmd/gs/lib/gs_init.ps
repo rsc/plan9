@@ -1,12 +1,12 @@
 % Copyright (C) 1989-2004 artofcode LLC. All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -64,12 +64,12 @@ ifelse
 systemdict /.languagelevel known not { /.languagelevel 1 def } if
 
 % Optionally choose a default paper size other than U.S. letter.
-% The default page size for many devices is set at compile time to 
-% letter, but this can be changed to A4 although this is rarely done.  
+% The default page size for many devices is set at compile time to
+% letter, but this can be changed to A4 although this is rarely done.
 % Some devices such as bbox have a different default page size,
 % and should not be set to A4 or letter.
 % When ghostscript is used in countries that use the international
-% standard page size A4 rather than US letter, the page size of 
+% standard page size A4 rather than US letter, the page size of
 % devices that default to letter or A4 can be changed by setting
 % DEFAULTPAPERSIZE.
 % /DEFAULTPAPERSIZE (a4) def
@@ -89,7 +89,7 @@ currentdict /DEBUG known   /DEBUG exch def
 mark	% '[' isn't defined yet
   /CCFONTDEBUG		% Compiled Fonts
   /CFFDEBUG		% CFF Fonts
-  /CMAPDEBUG		% CMAP 
+  /CMAPDEBUG		% CMAP
   /DOCIEDEBUG		% CIE color
   /EPSDEBUG		% EPS handling
   /FAPIDEBUG		% Font API
@@ -950,10 +950,10 @@ userdict /.currentresourcefile //null put
          }
          if
      }
-     ifelse	% newerror 
+     ifelse	% newerror
      end
      flush
-    } bind def     
+    } bind def
   /.printerror_long			% long error printout,
 					% $error is on the dict stack
    {	% Push the (anonymous) stack printing procedure.
@@ -963,10 +963,10 @@ userdict /.currentresourcefile //null put
 	 {
 	   4 1 roll			% stack: <stack> <head> <==flag> <over>
 	   /errordict .systemvar exch .knownget	% overridename defined?
-	   { 
+	   {
 	     exch pop exch pop exec	% call override with <stack>
 	   }
-	   { 
+	   {
 	     exch print exch		% print heading. stack <==flag> <stack>
 	     1 index not { () = } if
 	     { 1 index { (\n    ) } { (   ) } ifelse print
@@ -1078,7 +1078,7 @@ errordict begin
 /.GShandleerror
  { /.printerror .systemvar exec
  } bind def
- 
+
 end
 
 % Define the [write]==[only] procedures.
@@ -1343,7 +1343,7 @@ devicedict /Default devicedict .defaultdevicename get put
    1 index 4.01 div .min	% at least a 4x4 cell
    45
 	% The following screen algorithm is used by permission of the author.
-    { 1 add 180 mul cos 1 0.08 add mul exch 2 add 180 mul cos 
+    { 1 add 180 mul cos 1 0.08 add mul exch 2 add 180 mul cos
       1 0.08 sub mul add 2 div % (C) 1989 Berthold K.P. Horn
     }
    bind
@@ -1404,7 +1404,7 @@ devicedict /Default devicedict .defaultdevicename get put
     }
    ifelse
 } bind def
-/.sethiresscreen {	% <dpi> .sethiresscreen 
+/.sethiresscreen {	% <dpi> .sethiresscreen
   .sethireshalftone     % pushes true if a screen halftone used
 			% Stack: doscree
   {
@@ -1453,7 +1453,7 @@ devicedict /Default devicedict .defaultdevicename get put
 % contexts so that with LL1, the .set??reshalftone will be used.
 %
 %	- .getdefaulthalftone <halftonedict> true	if default found
-%			      false			
+%			      false
 /.getdefaulthalftone {
   % try the device to see if it has a default halftone
   { currentdevice /HalftoneDefault gsgetdeviceprop } .internalstopped
@@ -1464,14 +1464,14 @@ devicedict /Default devicedict .defaultdevicename get put
   %         false		  not found
   dup not
   { % device did not provide a default, try Resource
-    pop { /Default /Halftone /findresource .systemvar exec } .internalstopped 
+    pop { /Default /Halftone /findresource .systemvar exec } .internalstopped
     { pop pop false } { true } ifelse
   }
   if
 } bind def
 
 /.setdefaulthalftone {
-  .getdefaulthalftone 
+  .getdefaulthalftone
   { sethalftone }
   { % default not found
     .useloresscreen { .setloreshalftone } { .sethireshalftone pop } ifelse
@@ -1513,19 +1513,19 @@ devicedict /Default devicedict .defaultdevicename get put
         2 index 2 index 92
         put
         exch 1 add exch
-     } 
+     }
      if
      dup 42 eq {		% * -> \*
         2 index 2 index 92
         put
         exch 1 add exch
-     } 
+     }
      if
      dup 63 eq {		% ? -> \?
         2 index 2 index 92
         put
         exch 1 add exch
-     } 
+     }
      if
      2 index 2 index 3 -1 roll put 1 add
    } for
@@ -1552,7 +1552,7 @@ devicedict /Default devicedict .defaultdevicename get put
   % because it is already a template.
   % Besides that, we cannot combine template using .file_name_combine,
   % because template syntax breaks the platform path syntax.
-  % To resolve this, we first convert the <template> into 
+  % To resolve this, we first convert the <template> into
   % a fake filename, and combine it with path,
   % obtaining a correct separator. Then we replace
   % the fake file name with the given template.
@@ -1583,7 +1583,7 @@ devicedict /Default devicedict .defaultdevicename get put
   } loop
   pop pop                                          % [dl] (templ) (ffn)
 
-  % An internal procedure : 
+  % An internal procedure :
   {                                 % {} [dl] (templ) (ffn) (dffn)
     .makepathtemplate               % {} [dl] (templ) (ffn) (Dffn)
     dup                             % {} [dl] (templ) (ffn) (Dffn) (Dffn)
@@ -1694,7 +1694,7 @@ defaultdevice
 % situation, which pstoedit (among other programs) relies on.
 %DISPLAYING not { setdevice (%END DISPLAYING) .skipeof } if
 
-% If the paper size is not specifed and the device defaults to 
+% If the paper size is not specifed and the device defaults to
 % letter or A4 paper, select the DEFAULTPAPERSIZE.
 systemdict /DEFAULTPAPERSIZE known
 systemdict /PAPERSIZE known not and
@@ -1703,7 +1703,7 @@ systemdict /DEVICEHEIGHT known not and
 systemdict /DEVICEWIDTHPOINTS known not and
 systemdict /DEVICEHEIGHTPOINTS known not and
  {
-   defaultdevice mark /PageSize //null .dicttomark .getdeviceparams 
+   defaultdevice mark /PageSize //null .dicttomark .getdeviceparams
    .dicttomark /PageSize get
    dup 0 get 0.5 add cvi 612 eq 1 index 1 get 0.5 add cvi 792 eq and
    1 index 0 get 0.5 add cvi 595 eq 2 index 1 get 0.5 add cvi 842 eq and
@@ -1922,8 +1922,8 @@ readonly def
       /PermitFileReading [
         currentuserparams /PermitFileReading get aload pop
         /FONTPATH .systemvar (*) .generate_dir_list_templates
-          % Library files : 
-        /LIBPATH  .systemvar (*) .generate_dir_list_templates       
+          % Library files :
+        /LIBPATH  .systemvar (*) .generate_dir_list_templates
           % Resource files on OpenVMS requires a separate template (gs:[dir.*]*)
           % because the (gs:[dir]*) doesn't cover them.
         /LIBPATH  .systemvar (*) .file_name_separator (*)
@@ -2096,7 +2096,7 @@ currentdict /INTERPOLATE known not { (%END INTERPOLATE) .skipeof } if
         /ImageMatrix exch def             % ... glob w h bit
         /BitsPerComponent exch def        % ... glob w h
         /Height exch def                  % ... glob w
-        /Width exch def                   % ... glob 
+        /Width exch def                   % ... glob
         /ImageType 1 def
         /Interpolate //true def
         .setglobal currentdict end        % ... <<>>
@@ -2113,12 +2113,12 @@ currentdict /INTERPOLATE known not { (%END INTERPOLATE) .skipeof } if
   { dup type /dicttype eq
       { dup /ImageType get 3 eq
           { .currentglobal //false .setglobal exch
-            dup length dict copy begin .setglobal 
+            dup length dict copy begin .setglobal
             /DataDict DataDict .interpolate def
             /MaskDict MaskDict .interpolate def
             currentdict end
           }
-          { .interpolate 
+          { .interpolate
           }
         ifelse
         image
@@ -2232,7 +2232,7 @@ userdict /AGM_preserve_spots false put
 % Start the job as encapsulated if requested, if not, perform an
 % outer save so that jobs which depend on global VM not being
 % restored will operate correctly.
-% 
+%
 % Note that .setsafe is already in effect if in SAFER mode.
 % so an exitserver will restore with SAFER mode still in effect.
 JOBSERVER

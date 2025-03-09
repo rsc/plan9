@@ -21,4 +21,3 @@ UPDATE=\
 all:V:
 
 < /sys/src/cmd/mkmany
-

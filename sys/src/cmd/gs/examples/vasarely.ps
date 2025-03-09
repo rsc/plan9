@@ -14,7 +14,7 @@
 %% random polygons
 % /part { ngon } def /nnrand true def
 %% random stars (not my favorite on this program)
-% /part { nstar } def /nnrand true def 
+% /part { nstar } def /nnrand true def
 
 %% tilt the base shape a random amount?
 /twist false def
@@ -23,7 +23,7 @@
 
 /rainbow false def
 %% To make rainbows
-% /rainbow true def 
+% /rainbow true def
 %% Set this to 1 to go through a full range of colors
 /rainrange .25 def
 
@@ -60,7 +60,7 @@ usertime srand
   /radius radius 1.33 mul def
   currentpoint /herey exch def /herex exch def
    herex herey radius 0 360 arc
-} def 
+} def
 
 /ngon{ % polygon of n sides, n determined by nn
   nside 2 div radius rmoveto
@@ -75,7 +75,7 @@ usertime srand
   /radius radius 1.33 mul def
   currentpoint /herey exch def /herex exch def
    0 radius rmoveto
-       90 nstarangle 2 div add  neg rotate 
+       90 nstarangle 2 div add  neg rotate
 	nn cvi {nstarside 0 rlineto
 	    180 180 nstarangle 2 mul sub sub neg rotate
 	    nstarside 0 rlineto
@@ -86,30 +86,30 @@ usertime srand
 } def
 
 /nstarangle {180 360 nn div sub 3 div}  def
-/nstarside { 
-   2 
+/nstarside {
+   2
      radius
-        1 
-          180 nn div 
-          sin 
-        div 
-     div 
-   mul 
-   nstarangle sin 
+        1
+          180 nn div
+          sin
+        div
+     div
    mul
-   180 
+   nstarangle sin
+   mul
+   180
      nstarangle 2 mul
-   sub 
-   sin 
-   div 
+   sub
+   sin
+   div
 } def
 
-/nside { 
-   2 
+/nside {
+   2
    radius
    360 nn div 2 div tan
    mul
-   mul  
+   mul
 } def
 
 
@@ -165,7 +165,7 @@ usertime srand
      /strokesat 1 def
      /strokebright  high def
    }
-   { 
+   {
      /strokesat  high def
      /strokebright  medlow def
    } ifelse
@@ -184,7 +184,7 @@ usertime srand
 
 /contrast {
   /sat medhigh def
-  /bright rand 2 mod 0 eq {medhigh} {medlow} ifelse def 
+  /bright rand 2 mod 0 eq {medhigh} {medlow} ifelse def
   /backsat  sat def
   /backbright  bright def
   /eosat  sat def
@@ -259,7 +259,7 @@ usertime srand
      /strokesat 1 def
      /strokebright  high def
    }
-   { 
+   {
      /strokesat  high def
      /strokebright  medlow def
    } ifelse
@@ -276,7 +276,7 @@ usertime srand
      /strokesat 1 def
      /strokebright  high def
    }
-   { 
+   {
      /strokesat  high def
      /strokebright  medlow def
    } ifelse
@@ -337,7 +337,7 @@ usertime srand
 	/backhue 0 def
 	/strokehue 1 def
 } def
-	
+
 
 /freecolor {
    /fillhue anyrand def
@@ -370,25 +370,25 @@ usertime srand
 
 /origcolor {
   /backhue hue def
-  /strokehue 
+  /strokehue
      hue 1000 mul cvi 3 mod dup 1 eq
 	          {hue closevary}
 	          {2 eq
-                    {rand 999 mod 1000 div} 
+                    {rand 999 mod 1000 div}
                     {hue .5 add dup 1 gt {1 sub} if }
                     ifelse
                    }
 		ifelse def
-  /fillhue hue 1000 mul cvi 3 mod dup 1 eq 
+  /fillhue hue 1000 mul cvi 3 mod dup 1 eq
 			{hue closevary}
                         {2 eq
-  			  {rand 999 mod 1000 div} 
+  			  {rand 999 mod 1000 div}
                           {hue .5 add dup 1 gt {1 sub} if }
                          ifelse
                         }
-		ifelse 
+		ifelse
   def
-  /eohue hue 1000 mul cvi 2 mod 1 eq 
+  /eohue hue 1000 mul cvi 2 mod 1 eq
 			{hue closevary}
 			{rand 999 mod 1000 div}
 		ifelse def
@@ -403,14 +403,14 @@ usertime srand
 
 /harmfour {
   /fillhue hue closevary def
-  /backhue hue .1 add dup 1 gt {1 sub} if def 
+  /backhue hue .1 add dup 1 gt {1 sub} if def
   /strokehue hue .2 add dup 1 gt {1 sub} if closevary def
   /eohue hue .1 sub dup 1 lt {1 add} if closevary def
 } def
 
 /closeharm {
   /fillhue hue def
-  /backhue hue .05 add dup 1 gt {1 sub} if closevary def 
+  /backhue hue .05 add dup 1 gt {1 sub} if closevary def
   /strokehue hue .1 add dup 1 gt {1 sub} if closevary def
   /eohue hue .05 sub dup 0 lt {1 add} if closevary def
 } def
@@ -424,7 +424,7 @@ usertime srand
 /anyrand { rand 100 mod 100 div } def
 /closevary {rand 70 mod rand 100 mod sub 1000 div add} def
 
-%rainbow 
+%rainbow
 %  {/colorfill {fillhue 1 1 sethsbcolor fill} def}
   /colorfill {fillhue fillsat fillbright sethsbcolor fill } def
 %ifelse
@@ -437,7 +437,7 @@ usertime srand
 
 /functionarray [
  {sin abs}
- {sin } 
+ {sin }
  {cos  }
  {cos abs}
  {sin dup mul  }
@@ -456,19 +456,19 @@ usertime srand
  } def
 
 /drawone {
-    /radius 
+    /radius
       width height lt {width 3 div} {height 3 div} ifelse
     def
     seed srand
-    0 0 moveto 
-    /origmatrix  [ 0 0 0 0 0 0 ] currentmatrix def 
+    0 0 moveto
+    /origmatrix  [ 0 0 0 0 0 0 ] currentmatrix def
     [ % xstep  function ystep function2 add .4 1.3 range
 	1
       ystep function xstep function add -.25 .25 range
       ystep function3 xstep function2 add -.5 .5 range
 %      xstep  function4 ystep function mul .4 1.3 range
 	1
-     0 
+     0
      0
       ]
     concat
@@ -487,10 +487,10 @@ usertime srand
   nnrand {/nn rand 6 mod 3 add def} if
   /x1 rand width 3 div cvi mod width 8 div add  def
   /y1 rand height 3 div cvi mod height 8 div add def
-  rand 3 mod dup 1 eq 
+  rand 3 mod dup 1 eq
     {pop /x2 rand width 2 div cvi mod def
      /y2 rand height 2 div cvi mod def}
-    { 2 eq 
+    { 2 eq
        {/x2 y1 def /y2 x1 def}
        {/x2 y1 width mul height div def /y2 x1 height mul width div def}
       ifelse
@@ -506,7 +506,7 @@ usertime srand
    colorvary {colorfam colorway} if
     /i i 1 add def
     /radius radius stripe sub def
-    
+
   } repeat
 } def
 
@@ -516,7 +516,7 @@ usertime srand
 def
 /pagewidth urx llx sub 36 72 mul min def
 /pageheight ury lly sub 36 72 mul min def
-0 0 moveto 
+0 0 moveto
  llx lly translate
    /outerwidth
      pagewidth inwidth div
@@ -532,17 +532,17 @@ def
    def
 
 
- 
+
  /size
    width height gt {width} {height} ifelse
  def
   inwidth {
      inheight {
-      
+
         /seed rand def
         /hue rand 999 mod 1000 div def
         colorway colorfam
-        /x 1 def /y 1 def   
+        /x 1 def /y 1 def
     nnrand {/nn rand 6 mod 3 add def} if
     /twistdeg rand 360 mod  def
 
@@ -562,7 +562,7 @@ def
 	backfill
 
         xtimes {
-           ytimes{ 
+           ytimes{
 	    /y y 1 add def
             width 2 div height 2 div translate
             drawone
@@ -573,16 +573,16 @@ def
          /y 1 def
          /x x 1 add def
          width height ytimes mul neg translate
- 
+
         } repeat
-        
+
         width xtimes mul neg  outerheight translate
       } repeat
       outerwidth outerheight inheight mul neg translate
    } repeat
-  
+
  } def
-	
+
 page showpage
 clear cleardictstack
 vasarelysave restore

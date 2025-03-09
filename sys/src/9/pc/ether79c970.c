@@ -50,7 +50,7 @@ enum {					/* CSR0 */
 	Babl		= 0x4000,	/* transmitter timeout */
 	Err		= 0x8000,	/* Babl|Cerr|Miss|Merr */
 };
-	
+
 enum {					/* CSR3 */
 	Bswp		= 0x0004,	/* byte swap */
 	Emba		= 0x0008,	/* enable modified back-off algorithm */
@@ -443,7 +443,7 @@ intrloop:
 			dre = &ctlr->tdr[ctlr->tdri];
 			if(dre->md1 & Own)
 				break;
-	
+
 			if(dre->md1 & TxErr){
 				if(dre->md2 & Rtry)
 					ctlr->rtry++;
@@ -457,9 +457,9 @@ intrloop:
 					ctlr->txbuff++;
 				ether->oerrs++;
 			}
-	
+
 			freeb(dre->bp);
-	
+
 			ctlr->ntq--;
 			ctlr->tdri = NEXT(ctlr->tdri, Ntdre);
 		}

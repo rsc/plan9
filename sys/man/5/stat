@@ -1,4 +1,4 @@
-.TH STAT 5 
+.TH STAT 5
 .SH NAME
 stat, wstat \- inquire or change file attributes
 .SH SYNOPSIS
@@ -294,7 +294,7 @@ message is formatted as
 .RI ( n -2)[2]
 .IR type [2]
 .IR dev [4]...,''
-where 
+where
 .I n
 is the value returned by
 .BR convD2M .

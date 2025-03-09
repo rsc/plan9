@@ -24,7 +24,7 @@ is written to
 If
 .I who
 is
-.BI PNGROUP , 
+.BI PNGROUP ,
 the note is delivered to the
 process group by writing
 .I note

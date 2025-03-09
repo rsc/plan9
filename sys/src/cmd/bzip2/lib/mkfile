@@ -32,4 +32,3 @@ CFLAGS=-FV -p -DPLAN9
 
 clean:V:
 	rm -f *.[$OS] [$OS].out libbzip2.a[$OS]
-

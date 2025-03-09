@@ -91,7 +91,7 @@ putskip(int m)	/* states that need not be reached */
 				tmp = newsrc(m, lst->nxt);
 				lst->nxt = tmp;
 			}
-			return;	
+			return;
 	}	}
 	/* insert at the end */
 	if (lst)
@@ -436,7 +436,7 @@ comwork(FILE *fd, Lextok *now, int m)
 			{	Cat3("(", now->rgt->lft, ") : ");
 				Cat3("(", now->rgt->rgt, ") )");
 			}
-			break;	
+			break;
 
 	case ASGN:
 			if (check_track(now) == STRUCT) { break; }
@@ -509,7 +509,7 @@ comwork(FILE *fd, Lextok *now, int m)
 			break;
 	case   'q':	fprintf(fd, "%s", now->sym->name);
 			break;
-	case C_EXPR:	
+	case C_EXPR:
 	case C_CODE:	fprintf(fd, "{%s}", now->sym->name);
 			break;
 	case ASSERT:	Cat3("assert(", now->lft, ")");

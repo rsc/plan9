@@ -5,10 +5,10 @@ upastmp=/mail/tmp
 #
 # exit status matching:
 #
-#	*discard* - is really bad, refuse the message 
+#	*discard* - is really bad, refuse the message
 #	*accept* - is really good, leave attachment alone
 #	* - rewrite attachment to have .suspect extension
-# 
+#
 
 if(! ~ $#* 1){
 	echo usage: validateattachment mboxfile >[1=2]
@@ -32,7 +32,7 @@ cd /mail/fs/mbox/1
 x=`{file body | sed s/body://}
 x=$"x
 switch($x){
-case *Ascii* *text* *'c program'* *'rc executable'* 
+case *Ascii* *text* *'c program'* *'rc executable'*
 	save accept
 	exit accept
 

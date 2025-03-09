@@ -276,4 +276,3 @@ extern	double	__Inf(int);
 extern	int	__isInf(double, int);
 
 extern int (*fmtdoquote)(int);
-

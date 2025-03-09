@@ -13,17 +13,17 @@ stream of
 instruction lines.
 Arguments are delimited by spaces, tabs, or commas.
 Numbers may be floating point.
-Punctuation marks (except 
+Punctuation marks (except
 .LR : )
 ,
 spaces, and tabs at the beginning of lines are ignored.
-Comments run from  
+Comments run from
 .L :
 to newline.
 Extra letters appended to a valid instruction are ignored.
 Thus
 .LR ...line ,
-.LR line , and 
+.LR line , and
 .L li
 all mean the same thing.
 Arguments are interpreted as follows:
@@ -74,7 +74,7 @@ for the next command.
 .TP 10
 .BI o " string"
 Open plotting device.
-For 
+For
 .IR troff ,
 .I string
 specifies the size of the plot
@@ -160,7 +160,7 @@ Draw a disc centered at
 .I "xc yc"
 with radius
 .I r
-using the filling color (see 
+using the filling color (see
 .B cfill
 below).
 .TP 10
@@ -175,7 +175,7 @@ Draw a solid box with lower left corner at
 .I "x1 y1"
 and upper right corner at
 .I "x2 y2"
-using the filling color (see 
+using the filling color (see
 .B cfill
 below).
 .TP 10
@@ -313,7 +313,7 @@ for lower left corner
 and
 .I "px2 py2"
 for upper right corner.
-Thus  
+Thus
 .L frame .5 0 1. .5
 plots in the lower right
 quadrant of the display;
@@ -332,5 +332,5 @@ There are 7 levels.
 Restore previous environment.
 .PD
 .SH "SEE ALSO"
-.IR plot (1), 
+.IR plot (1),
 .IR graph (1)

@@ -59,7 +59,7 @@ Additional comments on implementation approaches or project goals are in
 <h3>bbox device doesn't allow min coords < 0.</h3>
 Adobe eps specification doesn't say that bbox values must be positive,
 and, for example Adobe Illustrator, can create EPS files with negative bboxes.
-In such case, Ghostscipt returns zero instead of proper negative number. 
+In such case, Ghostscipt returns zero instead of proper negative number.
 <p>
 Bug <a href="http://bugs.ghostscript.com/show_bug.cgi?id=202735"
 class="offsite">#202735</a>, March 09, 2000.
@@ -92,12 +92,12 @@ fails with:
 <h3>pswrite device generates low level PostScript.</h3>
 
 <p>
-pswrite and epswrite devices reduce everything to path, fill, stroke, clip 
-image, and imagemask operations. Although the resulting file 
+pswrite and epswrite devices reduce everything to path, fill, stroke, clip
+image, and imagemask operations. Although the resulting file
 prints OK it produces unsatisfactory results when scaled,
-distilled or imported into graphic editors. 
-The file can easily exceed 4GB and hit file size limits 
-in some applications or operation systems. Handling of big files is 
+distilled or imported into graphic editors.
+The file can easily exceed 4GB and hit file size limits
+in some applications or operation systems. Handling of big files is
 slow.
 <p>
 Bug <a href="http://bugs.ghostscript.com/show_bug.cgi?id=615165"
@@ -107,10 +107,10 @@ class="offsite">#615165</a>, September 26, 2002.
 
 <h3> Bad JPEG stream in PDF generated when source ends prematurely</h3>
 When GS converts the source image to JPEG stream in PDF file and the
-source data end prematurely, it generates bad JPEG stream. 
+source data end prematurely, it generates bad JPEG stream.
 tiff2ps from libtiff distribution often generates such files.
 <p>
-One potential workaround is to use -dAutoFilterColorImages=false and 
+One potential workaround is to use -dAutoFilterColorImages=false and
 -dColorImageFilter=/FlateEncode.
 <p>
 Bug <a href="http://bugs.ghostscript.com/show_bug.cgi?id=228808"
@@ -133,50 +133,50 @@ from pdfmark's.
 <p>
 March 25, 2001.
 <h3>ps2pdf ignores transfer functions in shaded fill</h3>
-ps2pdf ignores transfer functions in the shaded fill but 
-uses them for vector objects. The following sample program 
-has 2 shaded fills and 2 rectangles that should have the 
+ps2pdf ignores transfer functions in the shaded fill but
+uses them for vector objects. The following sample program
+has 2 shaded fills and 2 rectangles that should have the
 same color as the left end of the shaded fill.
 <blockquote><pre>
 
 %!
-&lt;&lt;/PageSize [612 200] /Policies&lt;&lt;/PageSize 1&gt;&gt; &gt;&gt;setpagedevice 
-612 1 scale 
-/grad 
-{ gsave 
-  0 0 1 100 rectclip 
+&lt;&lt;/PageSize [612 200] /Policies&lt;&lt;/PageSize 1&gt;&gt; &gt;&gt;setpagedevice
+612 1 scale
+/grad
+{ gsave
+  0 0 1 100 rectclip
   &lt;&lt;
-	  /ColorSpace [/DeviceCMYK] 
-	  /Domain [0 1] 
-	  /Coords [0 0 1 0] 
-	  /Extend [false false] 
-	  /Function 
-	  &lt;&lt; /FunctionType 3 
-		  /Domain [ 0 1] 
-		  /Functions 
+	  /ColorSpace [/DeviceCMYK]
+	  /Domain [0 1]
+	  /Coords [0 0 1 0]
+	  /Extend [false false]
+	  /Function
+	  &lt;&lt; /FunctionType 3
+		  /Domain [ 0 1]
+		  /Functions
 		  [ &lt;&lt;
-			  /FunctionType 2 
-			  /N 1 
-			  /C0 [ 0 0.5 0 0 ] 
-			  /Domain [ 0 1] 
-			  /C1 [0.5 0 0 0] 
-		  &gt;&gt; ] 
-		  /Bounds [] 
-		  /Encode [0 1] 
-	  &gt;&gt; 
-	  /ShadingType 2 
-  &gt;&gt; shfill 
+			  /FunctionType 2
+			  /N 1
+			  /C0 [ 0 0.5 0 0 ]
+			  /Domain [ 0 1]
+			  /C1 [0.5 0 0 0]
+		  &gt;&gt; ]
+		  /Bounds []
+		  /Encode [0 1]
+	  &gt;&gt;
+	  /ShadingType 2
+  &gt;&gt; shfill
 
-  0 0.5 0 0 setcmykcolor 
-  0 0 0.1 50 rectfill 
-  grestore 
-} def 
+  0 0.5 0 0 setcmykcolor
+  0 0 0.1 50 rectfill
+  grestore
+} def
 
-grad 
-{1 exch 2 div sub} settransfer 
-0 100 translate 
-grad 
-showpage 
+grad
+{1 exch 2 div sub} settransfer
+0 100 translate
+grad
+showpage
 
 </pre></blockquote>
 Bug <a href="http://bugs.ghostscript.com/show_bug.cgi?id=232334"
@@ -186,27 +186,27 @@ class="offsite">#232334</a>, February 14, 2001.
 The following sequence:
 
 <blockquote><pre>
-/Font /Category findresource begin 
-/CharterBT-Roman 255 string ResourceFileName = 
-end 
+/Font /Category findresource begin
+/CharterBT-Roman 255 string ResourceFileName =
+end
 </pre></blockquote>
 
 Gives the results:
 <pre>
-        /Resource/Font/CharterBT-Roman 
+        /Resource/Font/CharterBT-Roman
 </pre>
 
 This should be a valid platform specific file name and path such as:
 <pre>
-        f:/afpl/fonts/bchr.pfa 
+        f:/afpl/fonts/bchr.pfa
 </pre>
 Bug <a href="http://bugs.ghostscript.com/show_bug.cgi?id=233403"
 class="offsite">#233403</a>, February 21, 2001.
 <h3>GS doesn't handle names of separations with HalftoneType 5.</h3>
-PLRM3 says, that HalftoneType 5 may use user defined 
+PLRM3 says, that HalftoneType 5 may use user defined
 names of separations. Neither zht2.c nor cmd_put_drawing_color in
 gxclpath.c can handle this. GS chooses default halftone component
-for any non-standard separation name. 
+for any non-standard separation name.
 <p>
 Bug <a href="http://bugs.ghostscript.com/show_bug.cgi?id=406643"
 class="offsite">#406643</a>, March 7, 2001.
@@ -222,7 +222,7 @@ still be nicer to free it explicitly.
 <h3> Truetype fonts are written with incorrect table checksums </h3>
 
 <p>
-psf_write_truetype_data() writes truetype fonts with incorrect 
+psf_write_truetype_data() writes truetype fonts with incorrect
 checksums on most tables. Most truetype interpreters ignore these
 so in practice the issue hasn't been a problem. Nevertheless,
 Ghostscript is embedding off-spec fonts in pdf documents.
@@ -231,9 +231,9 @@ Ghostscript is embedding off-spec fonts in pdf documents.
 A complete fix should generate font data in 2 passes: the
 first pass computes the checksums, the second one
 really writes data. Fonts can be very large, so
-buffering the entire font is not a good solution. The 
+buffering the entire font is not a good solution. The
 checksums can't be modified after the data is written
-because the output stream may not be positionable 
+because the output stream may not be positionable
 (likely it's a FlateEncode filter).
 
 <p>
@@ -399,20 +399,20 @@ specification, this will most likely be left as is.
 <h3> Inconsistent handling of /Orientation.</h3>
 PLRM says "The dictionary returned by currentpagedevice always
 contains an entry for every parameter supported by the device".
-GS prints both messages in the following program: 
+GS prints both messages in the following program:
 
 <blockquote><pre>
-%! 
-currentpagedevice /Orientation known not 
-{ (This printer does _not_ support Orientation.) = 
-} 
-if 
-&lt;&lt;/Orientation 1gt;gt; setpagedevice 
-currentpagedevice /Orientation known 
-{ (Err... wait... it does.) = 
-} 
-if 
-%%EOF 
+%!
+currentpagedevice /Orientation known not
+{ (This printer does _not_ support Orientation.) =
+}
+if
+&lt;&lt;/Orientation 1gt;gt; setpagedevice
+currentpagedevice /Orientation known
+{ (Err... wait... it does.) =
+}
+if
+%%EOF
 </pre></blockquote>
 Bug <a href="http://bugs.ghostscript.com/show_bug.cgi?id=220967"
 class="offsite">#220967</a>, October 31, 2000.
@@ -464,12 +464,12 @@ Directory names, including . and .. are not enumerated
 </I>
 
 <h3>Cannot load Adobe's fonts. </h3>
-The following program fails with Adobe fonts: 
+The following program fails with Adobe fonts:
 
 <blockquote><pre>
-(C*) 
-{ cvn findfont pop 
-} 255 string /Font resourceforall 
+(C*)
+{ cvn findfont pop
+} 255 string /Font resourceforall
 </pre></blockquote>
 Bug <a href="http://bugs.ghostscript.com/show_bug.cgi?id=226462"
 class="offsite">#226462</a>, December 20, 2000.
@@ -481,8 +481,8 @@ in two different ways. The problem is likely to be in lib/gs_fonts.ps,
 lib/gs_res.ps, and lib/gs_cidcm.ps.
 </I>
 <h3> There's no %ram% device.</h3>
-GS doesn't have %ram% device reguired on all Level 3 products. 
-It is documented in PS Supplement 3010 and 3011 dated August 30, 1999 
+GS doesn't have %ram% device reguired on all Level 3 products.
+It is documented in PS Supplement 3010 and 3011 dated August 30, 1999
 <br>
 Bug <a href="http://bugs.ghostscript.com/show_bug.cgi?id=226943"
 class="offsite">#226943</a>, December 27, 2000.
@@ -532,7 +532,7 @@ The following program prints differently to stdout on GS and Adobe :
     (%) anchorsearch { pop } if
   } bind def
 /test
-  { //proc /ASCIIHexDecode filter 
+  { //proc /ASCIIHexDecode filter
     3 string readstring pop ==
   } bind def
 

@@ -112,7 +112,7 @@ getdir(Hblock *hp, int in, vlong *lenp)
 	return 1;
 }
 
-uvlong 
+uvlong
 passtar(Hblock *hp, int in, int outf, vlong len)
 {
 	ulong bytes;

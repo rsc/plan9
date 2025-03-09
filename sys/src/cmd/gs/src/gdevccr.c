@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 1997 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -126,7 +126,7 @@ ccr_map_rgb_color(gx_device *pdev, const ushort cv[])
   return r<<2 | g<<1 | b;
 }
 
-/* map an ccr cmy bitmap to a rgb color */ 
+/* map an ccr cmy bitmap to a rgb color */
 private int
 ccr_map_color_rgb(gx_device *pdev, gx_color_index color, ushort rgb[3])
 {
@@ -152,7 +152,7 @@ ccr_print_page(gx_device_printer *pdev, FILE *pstream)
 
   if((in = (byte *)gs_malloc(pdev->memory, line_size, 1, "gsline")) == NULL)
      return_error(gs_error_VMerror);
-    
+
   if(alloc_rb( pdev->memory, &linebuf, lnum))
     {
       gs_free(pdev->memory, in, line_size, 1, "gsline");
@@ -192,9 +192,9 @@ CCNEWPASS(pstream);
 write_cpass(linebuf, lnum, MPASS, pstream);
 CCNEWPASS(pstream);
 write_cpass(linebuf, lnum, CPASS, pstream);
-CCFILEEND(pstream);		 
+CCFILEEND(pstream);
 
-/* clean up */	      
+/* clean up */
 gs_free(pdev->memory, in, line_size, 1, "gsline");
 free_rb_line( pdev->memory, linebuf, lnum, pixnum );
 return 0;

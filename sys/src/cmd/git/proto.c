@@ -161,7 +161,7 @@ parseuri(char *uri, char *proto, char *host, char *port, char *path, char *repo)
 	}else{
 		grab(host, Nhost, s, p);
 	}
-	
+
 	snprint(path, Npath, "%s", p);
 	if((q = strrchr(p, '/')) != nil)
 		p = q + 1;

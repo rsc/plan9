@@ -171,4 +171,3 @@ _strfindattr(Attr *a, char *n)
 		return nil;
 	return a->val;
 }
-

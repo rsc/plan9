@@ -46,7 +46,7 @@ static void	stripQuotes(char *q);
 static MAddr	*unixFrom(char *s);
 
 
-static char bogusBody[] = 
+static char bogusBody[] =
 	"This message contains null characters, so it cannot be displayed correctly.\r\n"
 	"Most likely you were sent a bogus message or a binary file.\r\n"
 	"\r\n"

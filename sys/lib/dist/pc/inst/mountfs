@@ -11,4 +11,3 @@ case *
 	export mountfs
 	exit
 }
-

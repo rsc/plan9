@@ -80,7 +80,7 @@ wdogoff(void)
 	r = (u32int*)POWERREGS;
 	r[Rstc] = Password | (r[Rstc] & ~CfgMask);
 }
-	
+
 char *
 cputype2name(char *buf, int size)
 {
@@ -178,4 +178,3 @@ cmpswap(long *addr, long old, long new)
 {
 	return cas32(addr, old, new);
 }
-

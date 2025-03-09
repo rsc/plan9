@@ -1,4 +1,4 @@
-.TH BASENAME 1 
+.TH BASENAME 1
 .SH NAME
 basename \- strip file name affixes
 .SH SYNOPSIS

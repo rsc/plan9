@@ -1,4 +1,4 @@
-.TH FACTOR 1 
+.TH FACTOR 1
 .CT 1 numbers
 .SH NAME
 factor, primes \- factor a number, generate large primes
@@ -27,7 +27,7 @@ The number must be positive and less than
 .if t 1.8\(mu10\u\s716\s0\d\|).
 .PP
 If no
-.I number 
+.I number
 is given,
 .I factor
 reads a stream of numbers from the standard input and factors them.
@@ -46,10 +46,10 @@ where
 .I start
 and
 .I finish
-are positive numbers less than 
+are positive numbers less than
 .if n 2**56.
 .if t 2\u\s756\s0\d.
-If 
+If
 .I finish
 is missing,
 .I primes

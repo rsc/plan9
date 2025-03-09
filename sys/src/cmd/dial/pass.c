@@ -69,7 +69,7 @@ main(int argc, char **argv)
 				break;
 			if(buf[0] == '\n' || buf[0] == '\r')
 				break;
-		}	
+		}
 		break;
 	case 0:
 		// pass one character at a time till end of line

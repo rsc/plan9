@@ -1,12 +1,12 @@
 /* Copyright (C) 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -30,13 +30,13 @@
 
 /* This allows an MS-Windows file handle to be passed in to
  * Ghostscript as %handle%NNNNNNNN where NNNNNNNN is the hexadecimal
- * value of the handle.  
- * The typical use is for another program to create a pipe, 
- * pass the write end into Ghostscript using 
+ * value of the handle.
+ * The typical use is for another program to create a pipe,
+ * pass the write end into Ghostscript using
  *  -sOutputFile="%handle%NNNNNNNN"
  * so that Ghostscript printer output can be captured by the
  * other program.  The handle would be created with CreatePipe().
- * If Ghostscript is not a DLL, the pipe will have to be inheritable 
+ * If Ghostscript is not a DLL, the pipe will have to be inheritable
  * by the Ghostscript process.
  */
 
@@ -65,13 +65,13 @@ const gx_io_device gs_iodev_handle = {
  *   The OS file handle on success.
  *   INVALID_HANDLE_VALUE on failure.
  *
- * This allows the caller to create an OS pipe and give us a 
+ * This allows the caller to create an OS pipe and give us a
  * handle to the write end of the pipe.
- * If we are called as an EXE, the OS file handle must be 
+ * If we are called as an EXE, the OS file handle must be
  * inherited by Ghostscript.
  * Pipes aren't supported under Win32s.
  */
-private long 
+private long
 get_os_handle(const char *name)
 {
     ulong hfile;	/* This must be as long as the longest handle. */
@@ -83,7 +83,7 @@ get_os_handle(const char *name)
 	    return (long)INVALID_HANDLE_VALUE;
     if (sscanf(name, "%lx", &hfile) != 1)
 	return (long)INVALID_HANDLE_VALUE;
-    return (long)hfile; 
+    return (long)hfile;
 }
 
 private int

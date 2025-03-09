@@ -47,5 +47,3 @@ threadmain(int argc, char **argv)
 	threadpostmountsrv(&fs, nil, net, MBEFORE);
 	threadexits(nil);
 }
-
-

@@ -15,4 +15,3 @@ must servermount
 must clientmount
 exec replica/applychanges -p $clientproto $clientexclude $opt $cfgopt \
 	$clientdb $clientroot $serverroot $paths
-

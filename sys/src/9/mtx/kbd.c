@@ -53,7 +53,7 @@ enum {
  * The codes at 0x79 and 0x81 are produed by the PFU Happy Hacking keyboard.
  * A 'standard' keyboard doesn't produce anything above 0x58.
  */
-Rune kbtab[] = 
+Rune kbtab[] =
 {
 [0x00]	No,	0x1b,	'1',	'2',	'3',	'4',	'5',	'6',
 [0x08]	'7',	'8',	'9',	'0',	'-',	'=',	'\b',	'\t',

@@ -28,19 +28,19 @@ due to networking problems), the
 .I aan
 client re-establishes the connection by redialing the server.
 .PP
-.I Aan 
+.I Aan
 uses a unique protocol to make sure no data is ever lost even
 when the connection breaks.
 After a reconnection,
 .I aan
 retransmits all unacknowledged data between client and server.
 .PP
-A connection can be broken voluntarily (e.g. by roaming over IP networks), 
+A connection can be broken voluntarily (e.g. by roaming over IP networks),
 or a connection can break when the IP service is unreliable.
 In either case,
 .I aan
 re-establishes the client's connection automatically.
-.PP 
+.PP
 When the server part has not heard from the client in
 .I maxto
 seconds, the server part of
@@ -53,7 +53,7 @@ The client side (option
 .BR -c )
 calls the server by its
 .IR dialstring ,
-while the server side listens for connections in the 
+while the server side listens for connections in the
 already-announced network directory
 .IR netdir .
 .PP

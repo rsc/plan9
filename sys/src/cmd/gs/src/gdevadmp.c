@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -18,7 +18,7 @@
 /*
  * Apple DMP / Imagewriter driver
  *
- * This is a modification of Mark Wedel's Apple DMP and 
+ * This is a modification of Mark Wedel's Apple DMP and
  * Jonathan Luckey's Imagewriter II driver to
  * support the Imagewriter LQ's higher resolution (320x216):
  *      appledmp:  120dpi x  72dpi is still supported (yuck)
@@ -49,7 +49,7 @@
  * the formfeed will skip a whole page.  As a work around, I reverse
  * the paper about a 1.5 inches at the end of the page before the
  * formfeed to make it think its on the 'right' page.  bah. hack!
- * 
+ *
  * This is  my first attempt to work with gs, so your milage may vary
  *
  * Jonathan Luckey (luckey@rtfm.mlb.fl.us)
@@ -166,17 +166,17 @@ prn_device(prn_std_procs, "iwlq",
 /* Send the page to the printer. */
 private int
 dmp_print_page(gx_device_printer *pdev, FILE *prn_stream)
-{	
+{
 	int dev_type;
 
 	int line_size = gdev_mem_bytes_per_scan_line((gx_device *)pdev);
 	/* Note that in_size is a multiple of 8. */
 	int in_size = line_size * 8;
-  
+
 	byte *buf1 = (byte *)gs_malloc(pdev->memory, in_size, 1, "dmp_print_page(buf1)");
 	byte *buf2 = (byte *)gs_malloc(pdev->memory, in_size, 1, "dmp_print_page(buf2)");
 	byte *prn = (byte *)gs_malloc(pdev->memory, 3*in_size, 1, "dmp_print_page(prn)");
-  
+
 	byte *in = buf1;
 	byte *out = buf2;
 	int lnum = 0;
@@ -184,13 +184,13 @@ dmp_print_page(gx_device_printer *pdev, FILE *prn_stream)
 	/* Check allocations */
 	if ( buf1 == 0 || buf2 == 0 || prn == 0 )
 	{
-		if ( buf1 ) 
+		if ( buf1 )
 			gs_free(pdev->memory, (char *)buf1, in_size, 1,
 			"dmp_print_page(buf1)");
-		if ( buf2 ) 
+		if ( buf2 )
 			gs_free(pdev->memory, (char *)buf2, in_size, 1,
 			"dmp_print_page(buf2)");
-		if ( prn ) 
+		if ( prn )
 			gs_free(pdev->memory, (char *)prn, in_size, 1,
 			"dmp_print_page(prn)");
 		return_error(gs_error_VMerror);
@@ -218,7 +218,7 @@ dmp_print_page(gx_device_printer *pdev, FILE *prn_stream)
 	case IWLO:
 		fputs("\033P", prn_stream);
 		break;
-	case DMP: 
+	case DMP:
 	default:
 		fputs("\033q", prn_stream);
 		break;
@@ -226,7 +226,7 @@ dmp_print_page(gx_device_printer *pdev, FILE *prn_stream)
 
 	/* Print lines of graphics */
 	while ( lnum < pdev->height )
-	{	
+	{
 		byte *inp;
 		byte *in_end;
 		byte *out_end;
@@ -263,7 +263,7 @@ dmp_print_page(gx_device_printer *pdev, FILE *prn_stream)
 				default: ltmp = lcnt; break;
 				}
 
-				if ((lnum+ltmp)>pdev->height) 
+				if ((lnum+ltmp)>pdev->height)
 					memset(in+lcnt*line_size,0,line_size);
 				else
 					gdev_prn_copy_scan_lines(pdev,
@@ -298,7 +298,7 @@ dmp_print_page(gx_device_printer *pdev, FILE *prn_stream)
 				else prn_end++;
 			}
 		}
-      
+
 		switch (dev_type)
 		{
 		case IWLQ:
@@ -396,7 +396,7 @@ dmp_print_page(gx_device_printer *pdev, FILE *prn_stream)
 	/* so skip back more than an inch */
 	if ( !(dev_type == DMP) )
 		fputs("\033T99\n\n\033r\n\n\n\n\033f", prn_stream);
-  
+
 	/* Formfeed and Reset printer */
 	fputs("\033T16\f\033<\033B\033E", prn_stream);
 	fflush(prn_stream);

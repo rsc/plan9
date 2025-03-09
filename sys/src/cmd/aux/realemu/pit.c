@@ -286,7 +286,7 @@ wpit(Pit *pit, uchar addr, uchar data)
 		omode = (data >> 1) & 7;
 		amode = (data >> 4) & 3;
 		sc = (data >> 6) & 3;
-	
+
 		if(sc == Readback){
 			ch = nil;
 			for(;;){
@@ -319,7 +319,7 @@ wpit(Pit *pit, uchar addr, uchar data)
 			return;
 		}
 		ch->bcd = bcd;
-		
+
 		ch->amode = amode;
 		ch->omode = omode;
 

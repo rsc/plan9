@@ -220,7 +220,7 @@ cgen(Node *n, Node *nn)
 			gopcode(OAS, &nod2, Z, &nod);
 			gopcode(o, r, Z, &nod);
 			gopcode(OAS, &nod, Z, &nod2);
-	
+
 			regfree(&nod);
 			if(l->addable < INDEXED)
 				regfree(&nod2);
@@ -871,7 +871,7 @@ boolgen(Node *n, int true, Node *nn)
 			regalloc(&nod1, l, Z);
 			cgen(l, &nod1);
 		}
-		
+
 		gopcode(o, &nod, &nod1, Z);
 		regfree(&nod);
 		regfree(&nod1);
@@ -1150,7 +1150,7 @@ copy:
 
 	regalloc(&nod3, &regnode, Z);
 	layout(&nod1, &nod2, w%c, w/c, &nod3);
-	
+
 	pc1 = pc;
 	layout(&nod1, &nod2, c, 0, Z);
 
@@ -1161,7 +1161,7 @@ copy:
 	nod2.op = OREGISTER;
 	nod2.type = types[TIND];
 	gopcode(OADD, nodconst(c*SZ_LONG), Z, &nod2);
-	
+
 	gopcode(OEQ, &nod3, Z, Z);
 	p->as = ABGT;
 	patch(p, pc1);

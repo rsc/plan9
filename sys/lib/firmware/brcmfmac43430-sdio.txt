@@ -56,7 +56,7 @@ muxenab=0x1
 #cldo_pwm=0x4
 
 #VCO freq 326.4MHz
-spurconfig=0x3 
+spurconfig=0x3
 
 # Improved Bluetooth coexistence parameters from Cypress
 btc_mode=1

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1993, 1996, 1997 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -59,7 +59,7 @@ gs_font_dir *gs_font_dir_alloc2_limits(gs_memory_t * struct_mem,
 int gs_definefont(gs_font_dir *, gs_font *);
 
 /* Find a sililar registered font of same type. */
-int gs_font_find_similar(const gs_font_dir * pdir, const gs_font **ppfont, 
+int gs_font_find_similar(const gs_font_dir * pdir, const gs_font **ppfont,
 			   int (*similar)(const gs_font *, const gs_font *));
 
 /* gs_scalefont and gs_makefont return 0 if the scaled font */

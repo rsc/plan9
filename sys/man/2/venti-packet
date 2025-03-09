@@ -141,7 +141,7 @@ appending it to
 .I Packetconsume
 removes
 .I n
-bytes from the beginning of 
+bytes from the beginning of
 .IR p ,
 storing them into
 .IR buf .
@@ -195,7 +195,7 @@ frees the packet
 .I Packetheader
 returns a pointer to the first
 .I n
-bytes of 
+bytes of
 .IR p ,
 making them contiguous in memory
 if necessary.
@@ -236,7 +236,7 @@ returns the length, in bytes, of the data contained in
 .I Packetsplit
 returns a new packet initialized with
 .I n
-bytes removed from the beginning of 
+bytes removed from the beginning of
 .IR p .
 .PP
 .I Packetstats

@@ -2,7 +2,7 @@ CDDB SUBMISSION
 ---------------
 
 Your software may allow users to enter CDDB data and then submit them
-to the freedb archive.  
+to the freedb archive.
 There are two methods of submission: <a href="#email">via e-mail</a> or <a href="#http">via http</a> using submit.cgi
 
 <a name="email"></a>1. Submission via e-mail
@@ -57,7 +57,7 @@ that a CD player client should meet is listed below:
    the CD database information form is not edited at all.
 2. Check that the disc artist/title contains something (that the user
    typed in).
-3. Check that all of the tracks have a title filled in by the user 
+3. Check that all of the tracks have a title filled in by the user
    (some (but not all!) may be blank, but not the default string).
 
 This should minimize the number of useless garbage being submitted
@@ -169,13 +169,13 @@ by a textual description of the response code. For example:
 400 Internal error: failed to forward submission.
 500 Missing required header information.
 
-These are but a few of the possible responses. 
-See the description of the <a href="http://freedb.freedb.org/sections.php?op=viewarticle&artid=28">CDDB server protocol</a> for more information on 
+These are but a few of the possible responses.
+See the description of the <a href="http://freedb.freedb.org/sections.php?op=viewarticle&artid=28">CDDB server protocol</a> for more information on
 handling response codes.
 
 The body of the freedb entry being submitted should be sent verbatim as
-described in the <a href="http://freedb.freedb.org/software/old/DBFORMAT">database-format specification</a>. DO NOT encode the data in any 
-way before transmitting it; data must be sent as raw text. For example, 
+described in the <a href="http://freedb.freedb.org/software/old/DBFORMAT">database-format specification</a>. DO NOT encode the data in any
+way before transmitting it; data must be sent as raw text. For example,
 Windows programmers should not use the Windows URL encode function prior to
 calling the submit CGI program. Doing so may lead to corrupt data being sent
 and also possibly to rejected submissions.
@@ -207,7 +207,7 @@ that a CD player client should meet is listed below:
    typed in).
 3. Check that all of the tracks have a title filled in by the user.
    (some (but not all!) may be blank, but not the default string).
-	
+
 Before you release your software, please be sure that it produces
 submissions that adhere to the CDDB file format, and that the frame
 offset, disc length, and disc ID information are correctly computed.

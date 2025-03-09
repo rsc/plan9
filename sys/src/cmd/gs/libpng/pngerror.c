@@ -56,7 +56,7 @@ png_error(png_structp png_ptr, png_const_charp error_message)
      {
          if (png_ptr->flags&PNG_FLAG_STRIP_ERROR_TEXT)
          {
-            msg[0]='0';        
+            msg[0]='0';
             msg[1]='\0';
             error_message=msg;
          }

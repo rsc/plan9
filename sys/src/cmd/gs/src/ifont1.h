@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -45,7 +45,7 @@ int charstring_font_get_refs(const_os_ptr op, charstring_font_refs_t *pfr);
  * CIDFontType 0 font.  The client has filled in pdata1->interpret,
  * subroutineNumberBias, lenIV, and (if applicable) the Type 2 elements.
  */
-int charstring_font_params(const gs_memory_t *mem, 
+int charstring_font_params(const gs_memory_t *mem,
 			   const_os_ptr op, charstring_font_refs_t *pfr,
 			   gs_type1_data *pdata1);
 

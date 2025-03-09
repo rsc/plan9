@@ -418,7 +418,7 @@ cleaner(void)
  * can't always send pending info
  * in particular, can't send expunge info
  * in response to a fetch, store, or search command.
- * 
+ *
  * rfc2060 5.2:	server must send mailbox size updates
  * rfc2060 5.2:	server may send flag updates
  * rfc2060 5.5:	servers prohibited from sending expunge while fetch, store, search in progress
@@ -932,7 +932,7 @@ again:
 		setupuser(ai);
 		return nil;
 	}
-		
+
 }
 
 static void
@@ -2098,4 +2098,3 @@ peekc(void)
 	Bungetc(&bin);
 	return c;
 }
-

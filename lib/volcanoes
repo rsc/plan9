@@ -1,6 +1,6 @@
 This nice little file came from the Smithsonian.
 Doug McIlroy
-  
+
                           SMITHSONIAN INSTITUTION
                          GLOBAL VOLCANISM PROGRAM
                      NHB MRC 119, Washington, DC 20560
@@ -15,7 +15,7 @@ Institution Global Volcanism Program in any disseminated form as the
 source of the data.  (3) And finally, we would appreciate copies of
 whatever publications result from your use of the database.
 
-Please contact us if you have questions about the data (202/357-2786 
+Please contact us if you have questions about the data (202/357-2786
 for me, 202/357-3041 for Lee Siebert, who knows the data well, or
 (202/357-2822 for Roland Pool, our computer specialist).
 
@@ -29,9 +29,9 @@ for me, 202/357-3041 for Lee Siebert, who knows the data well, or
 
 These data are basically those in our 1981 book, "Volcanoes of the World",
 but have been updated to include new volcanoes and new eruptions though mid
-1992, and additional information from the literature and our correspondents.  
-The following data, described in more detail in our book, appear for each 
-volcano. 
+1992, and additional information from the literature and our correspondents.
+The following data, described in more detail in our book, appear for each
+volcano.
 
    VOLCANO NUMBER AND NAME (at left of each record, followed by: )
 
@@ -41,16 +41,16 @@ volcano.
 
    STATUS (two-column code described below) followed immediately by:
 
-   ERUPTION TOTAL (The total number of eruptions in our file, excluding 
- questionable eruptions.  This should not be taken as the total number of 
- Holocene eruptions, but is a useful measure of known activity). 
+   ERUPTION TOTAL (The total number of eruptions in our file, excluding
+ questionable eruptions.  This should not be taken as the total number of
+ Holocene eruptions, but is a useful measure of known activity).
 
 
          STATUS CODE                            LAST KNOWN ERUPTION
 
-D = Dated Holocene eruption(s).             Dl = Since January 1, 1964 
+D = Dated Holocene eruption(s).             Dl = Since January 1, 1964
 Number following D indicates the
-time period of the most recent              D2 = Since January 1, 1900 
+time period of the most recent              D2 = Since January 1, 1900
 known eruption.
                                             D3 = Since January 1, 1800
 U = Undated, but probably Holocene
@@ -58,9 +58,9 @@ eruptions.                                  D4 = Since January 1, 1700
 
 ? = Uncertain Holocene eruptions            D5 = Since January 1, 1500
 
-Q = Quaternary eruption(s). The only        D6 = Since January 1, 1 A.D.  
+Q = Quaternary eruption(s). The only        D6 = Since January 1, 1 A.D.
 Holocene activity, however, has
-been hydrothermal, such as                  D7 = B.C.  eruption 
+been hydrothermal, such as                  D7 = B.C.  eruption
 solfatara fields.
 
                              VOLCANOES OF THE WORLD
@@ -78,7 +78,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0101-001  LARDERELLO           Italy                43.25  N  10.86  E   Q
 0101-002  AMIATA               Italy                42.90  N  11.63  E   Q
 0101-003  VULSINI              Italy                42.58  N  11.91  E   D7  1
-0101-004  ALBANO, MONTE        Italy                41.75  N  12.75  E   ?    
+0101-004  ALBANO, MONTE        Italy                41.75  N  12.75  E   ?
 0101-01=  CAMPI FLEGREI        Italy                40.827 N  14.138 E   D5 15
 0101-02=  VESUVIO              Italy                40.821 N  14.426 E   D2 50
 0101-03=  ISCHIA               Italy                40.73  N  13.897 E   D6 18
@@ -105,7 +105,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0103-022  ALADAG               Turkey               39.16  N  42.86  E   U
 0103-03=  TENDURUK DAGI        Turkey               39.33  N  43.83  E   U
 0103-04-  ARARAT, MT.          Turkey               39.70  N  44.28  E   U
-0103-05-  UNNAMED              Turkey               40.75  N  42.75  E   ?    
+0103-05-  UNNAMED              Turkey               40.75  N  42.75  E   ?
 0104-01=  DAMAVAND             Iran                 35.951 N  52.109 E   U
 0104-011  QAL'EH HASAN ALI     Iran                 29.40  N  57.56  E   ?
 0104-02=  TAFTAN               Iran                 28.60  N  61.60  E   U
@@ -163,8 +163,8 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0201-142  ASMARA               Ethiopia             11.26  N  41.51  E   U
 0201-15=  GABILLEMA            Ethiopia             11.08  N  41.26  E   U
 0201-151  YANGUDI              Ethiopia             10.58  N  41.041 E   U
-0201-16=  AYELU                Ethiopia             10.082 N  40.701 E   U    
-0201-17=  ADWA                 Ethiopia             10.07  N  40.84  E   U    
+0201-16=  AYELU                Ethiopia             10.082 N  40.701 E   U
+0201-17=  ADWA                 Ethiopia             10.07  N  40.84  E   U
 0201-171  HERTALI              Ethiopia              9.78  N  40.33  E   U
 0201-172  LIADO HAYK FIELD     Ethiopia              9.56  N  40.28  E   ?
 0201-18=  DOFEN                Ethiopia              9.35  N  40.13  E   U
@@ -182,7 +182,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0201-26-  BUTAJIRI-SILTI FIELD Ethiopia              8.05  N  38.35  E   U
 0201-27-  ALUTU                Ethiopia              7.76  N  38.78  E   U
 0201-28-  SHALA                Ethiopia              7.46  N  38.55  E   U
-0201-29-  CORBETTI CALDERA     Ethiopia              7.18  N  38.43  E   U    
+0201-29-  CORBETTI CALDERA     Ethiopia              7.18  N  38.43  E   U
 0201-291  BILATE RIVER FIELD   Ethiopia              7.06  N  38.10  E   U
 0201-293  HOBICHA CALDERA      Ethiopia              6.78  N  37.83  E   ?
 0201-30-  CHIRACHA             Ethiopia              6.65  N  38.11  E   U
@@ -190,7 +190,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0201-32-  KORATH RANGE         Ethiopia              5.10  N  35.90  E   ?
 0201-33-  MEGA BASALT FIELD    Ethiopia              4.00  N  37.50  E   U
 0202-001  NORTH ISLAND         Africa-E              4.07  N  36.05  E   U
-0202-01=  CENTRAL ISLAND       Africa-E              3.50  N  36.042 E   U    
+0202-01=  CENTRAL ISLAND       Africa-E              3.50  N  36.042 E   U
 0202-02=  SOUTH ISLAND         Africa-E              2.63  N  36.60  E   U
 0202-021  MARSABIT             Africa-E              2.31  N  37.96  E   ?
 0202-03=  BARRIER, THE         Africa-E              2.32  N  36.57  E   D2  9
@@ -274,8 +274,8 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0302-11=  SAWAD, HARRA ES-     Arabia-S             13.58  N  46.12  E   D6  1
 0302-12-  UNNAMED              Arabia-S             12.25  N  45.00  E   ?
 0302-13-  BAL HAF, HARRA OF    Arabia-S             14.05  N  48.33  E   U
-0302-131  BIR BORHUT           Arabia-S             15.55  N  50.63  E   ?    
-0302-14-  ORMUS ISLANDS        Arabia-S             26.00  N  57.00  E   ?    
+0302-131  BIR BORHUT           Arabia-S             15.55  N  50.63  E   ?
+0302-14-  ORMUS ISLANDS        Arabia-S             26.00  N  57.00  E   ?
 0303-001  GRILLE, LA           Indian O.-W          11.47  S  43.33  E   U
 0303-01=  KARTHALA             Indian O.-W          11.75  S  43.38  E   D1 30
 0303-02=  FOURNAISE, PITON DE  Indian O.-W          21.229 S  55.713 E   D1152
@@ -292,7 +292,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0304-06-  COCHONS, ILE AUX     Indian O.-S          46.10  S  50.23  E   U
 0304-07-  PRINCE EDWARD ISLAND Indian O.-S          46.63  S  37.95  E   U
 0304-08-  MARION ISLAND        Indian O.-S          46.90  S  37.75  E   D1  1
-0305-01=  UNNAMED              Indian O.-E          11.75  N  80.75  E   ?    
+0305-01=  UNNAMED              Indian O.-E          11.75  N  80.75  E   ?
 0401-01=  KAIKOHE-BAY OF ISLAN New Zealand          35.30  S 173.90  E   D6  1
 0401-011  WHANGAREI VOLC FIELD New Zealand          35.65  S 174.33  E*  U
 0401-02=  AUCKLAND FIELD       New Zealand          36.90  S 174.87  E   D4  4
@@ -326,7 +326,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0401-30-  RUMBLE III           New Zealand          35.745 S 178.478 E   D1  5
 0401-31-  RUMBLE IV            New Zealand          36.22  S 178.05  E   D1  1
 0401-32-  RUMBLE V             New Zealand          36.139 S 178.197 E   ?
-0402-01=  CURTIS ISLAND        Kermadec Is          30.542 S 178.56  W   U    
+0402-01=  CURTIS ISLAND        Kermadec Is          30.542 S 178.56  W   U
 0402-02=  BRIMSTONE ISLAND     Kermadec Is          30.23  S 178.91  W   D3  1
 0402-021  MACAULEY ISLAND      Kermadec Is          30.20  S 178.46  W   D7  1
 0402-03=  RAOUL ISLAND         Kermadec Is          29.26  S 177.91  W   D1 14
@@ -353,21 +353,21 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0405-01-  TAVEUNI              Fiji Is-SW Pacific   16.82  S 179.97  W   D7  1
 0405-02-  KORO                 Fiji Is-SW Pacific   17.32  S 179.40  E   ?
 0500-01=  ST. ANDREW STRAIT    Admiralty Is-SW Pac   2.38  S 147.35  E   D2  4
-0500-02-  BALUAN               Admiralty Is-SW Pac   2.57  S 147.28  E   U    
+0500-02-  BALUAN               Admiralty Is-SW Pac   2.57  S 147.28  E   U
 0500-03-  UNNAMED              Admiralty Is-SW Pac   3.03  S 147.78  E   D1  1
-0501-00-  BLUP BLUP            New Guinea-NE of      3.508 S 144.62  E   U    
-0501-001  KADOVAR              New Guinea-NE of      3.62  S 144.62  E   U    
+0501-00-  BLUP BLUP            New Guinea-NE of      3.508 S 144.62  E   U
+0501-001  KADOVAR              New Guinea-NE of      3.62  S 144.62  E   U
 0501-01=  BAM                  New Guinea-NE of      3.60  S 144.85  E   D2 16
 0501-011  BOISA                New Guinea-NE of      3.994 S 144.963 E   U
 0501-02=  MANAM                New Guinea-NE of      4.10  S 145.061 E   D1 31
 0501-03=  KARKAR               New Guinea-NE of      4.649 S 145.964 E   D1 11
-0501-04=  UNNAMED              New Guinea-NE of      4.311 S 146.256 E   ?    
+0501-04=  UNNAMED              New Guinea-NE of      4.311 S 146.256 E   ?
 0501-041  YOMBA ISLAND         New Guinea-NE of      4.91  S 146.75  E   ?
 0501-05=  LONG ISLAND          New Guinea-NE of      5.358 S 147.12  E   D1 10
 0501-06=  UMBOI                New Guinea-NE of      5.589 S 147.875 E   U
 0501-07=  RITTER ISLAND        New Guinea-NE of      5.52  S 148.121 E   D1  6
 0501-08=  SAKAR                New Guinea-NE of      5.414 S 148.094 E   ?
-0502-001  UNNAMED              New Britain-SW Pac    5.20  S 148.57  E   ?    
+0502-001  UNNAMED              New Britain-SW Pac    5.20  S 148.57  E   ?
 0502-01=  LANGILA              New Britain-SW Pac    5.525 S 148.42  E   D1 18
 0502-02=  NARAGE               New Britain-SW Pac    4.55  S 149.125 E   Q
 0502-021  MUNDUA               New Britain-SW Pac    4.63  S 149.35  E   U
@@ -383,7 +383,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0502-11=  BAMUS                New Britain-SW Pac    5.20  S 151.23  E   D3  4
 0502-12=  ULAWUN               New Britain-SW Pac    5.05  S 151.33  E   D1 21
 0502-13=  LOLOBAU              New Britain-SW Pac    4.92  S 151.158 E   D2  2
-0502-131  UNNAMED              New Britain-SW Pac    4.75  S 150.85  E   ?    
+0502-131  UNNAMED              New Britain-SW Pac    4.75  S 150.85  E   ?
 0502-14=  RABAUL               New Britain-SW Pac    4.271 S 152.203 E   D2 11
 0503-00-  DOMA PEAKS           New Guinea            5.90  S 143.15  E   ?
 0503-001  CRATER MOUNTAIN      New Guinea            6.58  S 145.08  E   ?
@@ -403,14 +403,14 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0504-01=  LIHIR GROUP          New Ireland-SW Pac    3.125 S 152.642 E   ?
 0504-02=  AMBITLE              New Ireland-SW Pac    4.08  S 153.65  E   D7  1
 0505-00-  TORE                 Bougainville-SW Pac   5.83  S 154.93  E   U
-0505-01=  BALBI                Bougainville-SW Pac   5.83  S 154.98  E   U    
+0505-01=  BALBI                Bougainville-SW Pac   5.83  S 154.98  E   U
 0505-011  BILLY MITCHELL       Bougainville-SW Pac   6.092 S 155.225 E   D5  2
 0505-02=  BAGANA               Bougainville-SW Pac   6.14  S 155.195 E   D1 24
 0505-021  TAKUAN GROUP         Bougainville-SW Pac   6.442 S 155.608 E   U
 0505-03=  LOLORU               Bougainville-SW Pac   6.52  S 155.62  E   D7  6
 0505-04=  NONDA                Solomon Is-SW Pac     7.67  S 156.60  E   Q
 0505-05=  SIMBO                Solomon Is-SW Pac     8.292 S 156.52  E   ?
-0505-051  COOK                 Solomon Is-SW Pac     8.415 S 157.10  E   ?    
+0505-051  COOK                 Solomon Is-SW Pac     8.415 S 157.10  E   ?
 0505-052  KANA KEOKI           Solomon Is-SW Pac     8.75  S 157.03  E   U
 0505-053  COLEMAN SEAMOUNT     Solomon Is-SW Pac     8.83  S 157.17  E   U
 0505-06=  KAVACHI              Solomon Is-SW Pac     9.02  S 157.95  E   D1 25
@@ -421,7 +421,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0507-001  MOTLAV               Vanuatu-SW Pacific   13.67  S 167.67  E   U
 0507-01=  SORETIMEAT           Vanuatu-SW Pacific   13.80  S 167.47  E   D1  3
 0507-02=  GAUA                 Vanuatu-SW Pacific   14.27  S 167.50  E   D1 13
-0507-021  MERE LAVA            Vanuatu-SW Pacific   14.45  S 168.05  E   U    
+0507-021  MERE LAVA            Vanuatu-SW Pacific   14.45  S 168.05  E   U
 0507-03=  AOBA                 Vanuatu-SW Pacific   15.40  S 167.83  E   D3  3
 0507-04=  AMBRYM               Vanuatu-SW Pacific   16.25  S 168.12  E   D1 49
 0507-05=  LOPEVI               Vanuatu-SW Pacific   16.507 S 168.346 E   D1 22
@@ -440,18 +440,18 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0509-01-  NEWER VOLCANICS PROV Australia            37.77  S 142.50  E   D7  4
 0600-01=  BARREN ISLAND        Andaman Is-Ind O     12.25  N  93.83  E   D1  5
 0601-01=  PULAU WEH            Sumatra               5.88  N  95.33  E   U
-0601-02=  SEULAWAH AGAM        Sumatra               5.425 N  95.60  E   U    
+0601-02=  SEULAWAH AGAM        Sumatra               5.425 N  95.60  E   U
 0601-03=  PEUET SAGUE          Sumatra               4.925 N  96.33  E   D2  1
 0601-04=  GEUREUDONG, BUR NI   Sumatra               4.81  N  96.80  E   U
 0601-05=  TELONG, BUR NI       Sumatra               4.76  N  96.808 E   D2  6
 0601-06=  GAYOLESTEN           Sumatra               3.86  N  97.60  E   ?
 0601-07=  SIBAYAK              Sumatra               3.208 N  98.46  E   D3  1
-0601-08=  SINABUNG             Sumatra               3.16  N  98.391 E   U    
+0601-08=  SINABUNG             Sumatra               3.16  N  98.391 E   U
 0601-09=  TOBA                 Sumatra               2.58  N  98.83  E   U
 0601-10=  HELATOBA-TARUTUNG    Sumatra               2.03  N  98.93  E   ?
 0601-11=  BUAL BUALI           Sumatra               1.56  N  99.25  E   U
 0601-12=  SORIKMARAPI          Sumatra               0.686 N  99.536 E   D1  7
-0601-13=  TALAKMAU             Sumatra               0.079 N  99.981 E   U    
+0601-13=  TALAKMAU             Sumatra               0.079 N  99.981 E   U
 0601-14=  MARAPI               Sumatra               0.38  S 100.471 E   D1 56
 0601-15=  TANDIKAT             Sumatra               0.433 S 100.317 E   D2  3
 0601-16=  TALANG               Sumatra               0.978 S 100.679 E   D1  8
@@ -467,7 +467,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0601-231  PATAH                Sumatra               4.26  S 103.30  E   ?
 0601-24=  LUMUT BALAI, BUKIT   Sumatra               4.21  S 103.61  E   U
 0601-25=  BESAR, GUNUNG        Sumatra               4.43  S 103.66  E   D2  1
-0601-251  RANAU                Sumatra               4.83  S 103.91  E   ?    
+0601-251  RANAU                Sumatra               4.83  S 103.91  E   ?
 0601-26=  SEKINCAU BELIRANG    Sumatra               5.11  S 104.31  E   U
 0601-27=  SUOH                 Sumatra               5.25  S 104.26  E   D2  1
 0601-28=  HULUBELU             Sumatra               5.35  S 104.60  E   U
@@ -489,7 +489,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0603-131  TAMPOMAS             Java                  6.76  S 107.95  E   U
 0603-14=  GALUNGGUNG           Java                  7.25  S 108.05  E   D1  5
 0603-15=  TALAGABODAS          Java                  7.208 S 108.06  E   U
-0603-16=  KAWAHKARAHA          Java                  7.16  S 108.08  E   ?    
+0603-16=  KAWAHKARAHA          Java                  7.16  S 108.08  E   ?
 0603-17=  CEREME               Java                  6.891 S 108.40  E   D2  6
 0603-18=  SLAMET               Java                  7.242 S 109.208 E   D1 39
 0603-20=  DIENG VOLC COMPLEX   Java                  7.20  S 109.92  E   D1 21
@@ -504,7 +504,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0603-28=  KELUT                Java                  7.93  S 112.308 E   D1 34
 0603-281  KAWI-BUTAK           Java                  7.91  S 112.45  E   U
 0603-29=  ARJUNO-WELIRANG      Java                  7.725 S 112.58  E   D1  1
-0603-291  PENANGGUNGAN         Java                  7.61  S 112.63  E   U    
+0603-291  PENANGGUNGAN         Java                  7.61  S 112.63  E   U
 0603-292  UNNAMED              Java                  8.01  S 112.68  E   U
 0603-30=  SEMERU               Java                  8.108 S 112.92  E   D1 57
 0603-31=  TENGGER CALDERA      Java                  7.942 S 112.95  E   D1 53
@@ -518,7 +518,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0604-03=  RINJANI              Lesser Sunda Is       8.41  S 116.46  E   D1 12
 0604-04=  TAMBORA              Lesser Sunda Is       8.25  S 118.00  E   D3  3
 0604-05=  SANGEANG API         Lesser Sunda Is       8.18  S 119.058 E   D1 17
-0604-051  GILIBANTA            Lesser Sunda Is       8.51  S 119.35  E   ?    
+0604-051  GILIBANTA            Lesser Sunda Is       8.51  S 119.35  E   ?
 0604-06=  SANO, WAI            Lesser Sunda Is       8.68  S 120.025 E   U
 0604-07=  POCO LEOK            Lesser Sunda Is       8.68  S 120.48  E   U
 0604-071  RANAKAH, GUNUNG      Lesser Sunda Is       8.62  S 120.52  E   D1  2
@@ -542,8 +542,8 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0604-26=  TARA, BATU           Lesser Sunda Is       7.792 S 123.579 E   D3  1
 0604-27=  SIRUNG               Lesser Sunda Is       8.51  S 124.148 E   D1  8
 0604-28=  YERSEY               Lesser Sunda Is       7.53  S 123.95  E   ?
-0605-01=  EMPEROR OF CHINA     Banda Sea             6.61  S 124.21  E   ?    
-0605-02=  NIEUWERKERK          Banda Sea             6.60  S 124.675 E   ?    
+0605-01=  EMPEROR OF CHINA     Banda Sea             6.61  S 124.21  E   ?
+0605-02=  NIEUWERKERK          Banda Sea             6.60  S 124.675 E   ?
 0605-03=  GUNUNGAPI WETAR      Banda Sea             6.641 S 126.65  E   D4  2
 0605-04=  WURLALI              Banda Sea             7.125 S 128.675 E   D3  1
 0605-05=  TEON                 Banda Sea             6.91  S 129.125 E   D2  5
@@ -554,7 +554,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0606-01=  COLO [UNA UNA]       Sulawesi-Indonesia    0.17  S 121.608 E   D1  3
 0606-02=  AMBANG               Sulawesi-Indonesia    0.75  N 124.42  E   D3  1
 0606-03=  SOPUTAN              Sulawesi-Indonesia    1.108 N 124.725 E   D1 28
-0606-04=  SEMPU                Sulawesi-Indonesia    1.141 N 124.73  E   U    
+0606-04=  SEMPU                Sulawesi-Indonesia    1.141 N 124.73  E   U
 0606-07-  TONDANO CALDERA      Sulawesi-Indonesia    1.23  N 124.83  E   Q
 0606-10=  LOKON-EMPUNG         Sulawesi-Indonesia    1.358 N 124.792 E   D1 21
 0606-11=  MAHAWU               Sulawesi-Indonesia    1.358 N 124.858 E   D1  7
@@ -564,7 +564,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0607-02=  API SIAU             Sangihe Is-Indonesia  2.78  N 125.48  E   D1 42
 0607-03=  BANUA WUHU           Sangihe Is-Indonesia  3.138 N 125.491 E   D1  6
 0607-04=  AWU                  Sangihe Is-Indonesia  3.67  N 125.50  E   D1 15
-0607-05=  UNNAMED              Sangihe Is-Indonesia  3.96  N 124.16  E   ?    
+0607-05=  UNNAMED              Sangihe Is-Indonesia  3.96  N 124.16  E   ?
 0608-01=  DUKONO               Halmahera-Indonesia   1.70  N 127.87  E   D1  5
 0608-03=  IBU                  Halmahera-Indonesia   1.48  N 127.63  E   D2  1
 0608-04=  GAMKONORA            Halmahera-Indonesia   1.375 N 127.52  E   D1 12
@@ -594,7 +594,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0702-03=  MANDALAGAN           Philippines-C        10.615 N 123.22  E   U
 0702-04=  SILAY                Philippines-C        10.77  N 123.23  E   U
 0702-05=  CABALIAN             Philippines-C        10.287 N 125.22  E   U
-0702-07=  MAHAGNOA             Philippines-C        10.872 N 124.853 E   U    
+0702-07=  MAHAGNOA             Philippines-C        10.872 N 124.853 E   U
 0702-08=  BILIRAN              Philippines-C        11.523 N 124.534 E   D2  1
 0703-01=  BULUSAN              Luzon-Philippines    12.77  N 124.05  E   D1 13
 0703-02=  POCDOL MOUNTAINS     Luzon-Philippines    13.05  N 123.958 E   U
@@ -607,7 +607,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0703-044  DAGIT-DAGITAN        Luzon-Philippines    13.53  N 121.078 E   Q
 0703-045  PANAY, MT.           Luzon-Philippines    13.723 N 120.893 E   Q
 0703-046  LABO                 Luzon-Philippines    14.02  N 122.792 E   U
-0703-05=  BANAHAW              Luzon-Philippines    14.07  N 121.48  E   U    
+0703-05=  BANAHAW              Luzon-Philippines    14.07  N 121.48  E   U
 0703-051  LAGUNA VOLC FIELD    Luzon-Philippines    14.11  N 121.30  E*  D6  1
 0703-06=  MAQUILING            Luzon-Philippines    14.13  N 121.20  E   U
 0703-07=  TAAL                 Luzon-Philippines    14.002 N 120.993 E   D1 33
@@ -619,9 +619,9 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0703-085  AMORONG, MT.         Luzon-Philippines    15.828 N 120.805 E   U
 0703-086  SANTO TOMAS          Luzon-Philippines    16.33  N 120.55  E   ?
 0703-087  AMBALATUNGAN GROUP   Luzon-Philippines    17.32  N 121.10  E   U
-0703-088  BINULUAN, MT.        Luzon-Philippines    17.308 N 121.093 E   U    
+0703-088  BINULUAN, MT.        Luzon-Philippines    17.308 N 121.093 E   U
 0703-089  PATOC, MT.           Luzon-Philippines    17.146 N 120.98  E   U
-0703-09=  CAGUA                Luzon-Philippines    18.222 N 122.123 E   U    
+0703-09=  CAGUA                Luzon-Philippines    18.222 N 122.123 E   U
 0704-01=  CAMIGUIN DE BABUYANE Luzon Is-N of        18.83  N 121.86  E   D3  1
 0704-02=  DIDICAS              Luzon Is-N of        19.076 N 122.201 E   D1  5
 0704-03=  BABUYAN CLARO        Luzon Is-N of        19.523 N 121.94  E   D2  8
@@ -633,13 +633,13 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0705-04-  HAUT DONG NAI        SE Asia              11.60  N 108.20  E*  ?
 0705-05-  BAS DONG NAI         SE Asia              10.80  N 107.20  E*  ?
 0705-06-  CENDRES, ILE DES     SE Asia              10.157 N 109.013 E   D2  1
-0705-07-  VETERAN              SE Asia               9.83  N 109.05  E   U    
+0705-07-  VETERAN              SE Asia               9.83  N 109.05  E   U
 0705-08-  POPA, MT.            SE Asia              21.00  N  95.20  E   D7  1
 0705-09-  LOWER CHINDWIN       SE Asia              22.10  N  94.80  E   ?
 0705-10-  SINGU PLATEAU        SE Asia              22.50  N  96.10  E   U
 0705-11-  TENGCHONG            China-S              25.32  N  98.47  E   D5  1
-0801-01=  UNNAMED              Taiwan-E of          20.93  N 134.75  E   ?    
-0801-011  UNNAMED              Taiwan-E of          19.16  N 132.25  E   ?    
+0801-01=  UNNAMED              Taiwan-E of          20.93  N 134.75  E   ?
+0801-011  UNNAMED              Taiwan-E of          19.16  N 132.25  E   ?
 0801-02=  UNNAMED              Taiwan-E of          21.83  N 121.18  E   D3  1
 0801-03=  UNNAMED              Taiwan-E of          24.00  N 121.83  E   D3  1
 0801-031  KUEI-SHAN-TAO        Taiwan               24.85  N 121.91  E   Q
@@ -713,19 +713,19 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0804-07=  BAYONNAISE ROCKS     Izu Is-Japan         31.92  N 139.92  E   D1 13
 0804-08=  SMITH ROCK           Izu Is-Japan         31.28  N 139.77  E   D2  6
 0804-09=  TORI-SHIMA           Izu Is-Japan         30.48  N 140.32  E   D1  5
-0804-091  UNNAMED              Izu Is-Japan         29.30  N 140.80  E   ?    
+0804-091  UNNAMED              Izu Is-Japan         29.30  N 140.80  E   ?
 0804-092  NISHINO-SHIMA        Volcano Is-Japan     27.243 N 140.876 E   D1  1
-0804-093  UNNAMED              Volcano Is-Japan     26.13  N 144.48  E   ?    
+0804-093  UNNAMED              Volcano Is-Japan     26.13  N 144.48  E   ?
 0804-10=  KAITOKU SEAMOUNT     Volcano Is-Japan     26.06  N 141.13  E   D1  2
 0804-11=  KITA-IWO-JIMA        Volcano Is-Japan     25.43  N 141.23  E   D2  3
 0804-12=  IWO-JIMA             Volcano Is-Japan     24.75  N 141.33  E   D1 10
 0804-13=  SHIN-IWO-JIMA        Volcano Is-Japan     24.28  N 141.52  E   D1  6
 0804-131  MINAMI-HIYOSHI       Volcano Is-Japan     23.506 N 141.905 E   D1  1
-0804-132  NIKKO SEAMOUNT       Volcano Is-Japan     23.075 N 142.308 E   ?    
+0804-132  NIKKO SEAMOUNT       Volcano Is-Japan     23.075 N 142.308 E   ?
 0804-133  FUKUJIN SEAMOUNT     Volcano Is-Japan     21.925 N 143.441 E   D1  3
-0804-134  KASUGA SEAMOUNT      Volcano Is-Japan     21.76  N 143.71  E   ?    
-0804-135  UNNAMED              Mariana Is-C Pac     21.00  N 142.90  E   ?    
-0804-136  UNNAMED              Mariana Is-C Pac     20.30  N 143.20  E   ?    
+0804-134  KASUGA SEAMOUNT      Volcano Is-Japan     21.76  N 143.71  E   ?
+0804-135  UNNAMED              Mariana Is-C Pac     21.00  N 142.90  E   ?
+0804-136  UNNAMED              Mariana Is-C Pac     20.30  N 143.20  E   ?
 0804-14=  FARALLON DE PAJAROS  Mariana Is-C Pac     20.53  N 144.90  E   D1 18
 0804-15=  ASUNCION             Mariana Is-C Pac     19.66  N 145.40  E   D2  1
 0804-16=  AGRIGAN              Mariana Is-C Pac     18.77  N 145.67  E   D2  1
@@ -759,11 +759,11 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0900-03=  TIATIA               Kuril Is             44.35  N 146.25  E   D1  3
 0900-031  SMIRNOV              Kuril Is             44.38  N 146.11  E   U
 0900-032  RURUI                Kuril Is             44.43  N 146.125 E   U
-0900-04=  BERUTARUBE           Kuril Is             44.46  N 146.93  E   U    
+0900-04=  BERUTARUBE           Kuril Is             44.46  N 146.93  E   U
 0900-041  LVINAYA PAST         Kuril Is             44.60  N 147.00  E   D7  1
 0900-05=  ATSONUPURI           Kuril Is             44.82  N 147.125 E   D2  2
 0900-06-  STOKAP GROUP         Kuril Is             44.83  N 147.36  E   U
-0900-061  UNNAMED              Kuril Is             45.06  N 147.23  E   ?    
+0900-061  UNNAMED              Kuril Is             45.06  N 147.23  E   ?
 0900-07=  GROZNY GROUP         Kuril Is             45.02  N 147.87  E   D1  5
 0900-08=  BARANSKY             Kuril Is             45.10  N 148.03  E   D2  1
 0900-09=  CHIRIP PENINSULA GRO Kuril Is             45.38  N 147.92  E   D3  2
@@ -774,7 +774,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0900-112  RUDAKOV              Kuril Is             45.86  N 149.83  E   ?
 0900-113  TRI SESTRY           Kuril Is             45.93  N 149.91  E   ?
 0900-12=  KOLOKOL GROUP        Kuril Is             46.05  N 150.058 E   D1  9
-0900-13-  UNNAMED              Kuril Is             46.10  N 150.50  E   ?    
+0900-13-  UNNAMED              Kuril Is             46.10  N 150.50  E   ?
 0900-14=  BRAT CHIRPOEV        Kuril Is             46.46  N 150.808 E   U
 0900-15=  CHIRPOI              Kuril Is             46.525 N 150.875 E   D1  8
 0900-16-  UNNAMED              Kuril Is             46.50  N 151.00  E   D1  1
@@ -785,14 +785,14 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 0900-191  URATAMAN             Kuril Is             47.11  N 152.23  E   U
 0900-20=  KETOI                Kuril Is             47.35  N 152.475 E   D2  3
 0900-21=  USHISHIR CALDERA     Kuril Is             47.51  N 152.81  E   D3  4
-0900-211  SREDNII              Kuril Is             47.61  N 152.90  E   U    
+0900-211  SREDNII              Kuril Is             47.61  N 152.90  E   U
 0900-22=  RASSHUA              Kuril Is             47.77  N 153.02  E   D2  2
 0900-23=  UNNAMED              Kuril Is             48.08  N 153.33  E   D2  1
 0900-24=  SARYCHEV PEAK        Kuril Is             48.092 N 153.20  E   D1 14
 0900-25=  RAIKOKE              Kuril Is             48.25  N 153.25  E   D2  3
 0900-26=  CHIRINKOTAN          Kuril Is             48.98  N 153.48  E   D1  5
 0900-27=  EKARMA               Kuril Is             48.95  N 153.941 E   D1  2
-0900-28=  KUNTOMINTAR          Kuril Is             48.758 N 154.01  E   Q    
+0900-28=  KUNTOMINTAR          Kuril Is             48.758 N 154.01  E   Q
 0900-29=  SINARKA              Kuril Is             48.875 N 154.175 E   D3  4
 0900-30=  HARIMKOTAN           Kuril Is             49.05  N 154.43  E   D2  6
 0900-31=  TAO-RUSYR CALDERA    Kuril Is             49.358 N 154.708 E   D2  2
@@ -937,7 +937,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1004-01-  TURFAN               China-W              42.90  N  89.25  E   D6  1
 1004-02-  TIANSHAN VOLCANO GRO China-W              42.50  N  86.50  E   D6  2
 1004-03-  KUNLUN VOLCANO GROUP China-W              35.51  N  80.20  E   D2  1
-1004-04-  UNNAMED              China-W              35.85  N  91.70  E   U    
+1004-04-  UNNAMED              China-W              35.85  N  91.70  E   U
 1005-01-  DATONG               China-E              40.00  N 113.28  E*  D6  1
 1005-02-  HONGGEERTU           China-E              41.46  N 113.00  E   U
 1005-03-  KELUO GROUP          China-E              49.36  N 125.91  E   U
@@ -967,7 +967,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1101-14-  KONIUJI              Aleutian Is          52.21  N 175.13  W   ?
 1101-15-  SERGIEF              Aleutian Is          52.03  N 174.93  W   ?
 1101-16-  ATKA                 Aleutian Is          52.38  N 174.15  W   D1  4
-1101-17-  UNNAMED              Aleutian Is          52.25  N 173.55  W   ?    
+1101-17-  UNNAMED              Aleutian Is          52.25  N 173.55  W   ?
 1101-18-  SEGUAM               Aleutian Is          52.31  N 172.51  W   D1  5
 1101-19-  AMUKTA               Aleutian Is          52.50  N 171.25  W   D1  3
 1101-20-  CHAGULAK             Aleutian Is          52.56  N 171.13  W   U
@@ -1121,7 +1121,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1203-15-  PISGAH CRATER        US-Calif             34.75  N 116.38  W   U
 1203-151  PINTO BASIN-SALTON C US-Calif             33.90  N 115.63  W   ?
 1203-16-  OBSIDIAN BUTTES      US-Calif             33.20  N 115.61  W   D7  2
-1203-17-  UNNAMED              US-Calif             32.50  N 119.13  W   ?    
+1203-17-  UNNAMED              US-Calif             32.50  N 119.13  W   ?
 1204-01-  SHOSHONE LAVA FIELD  US-Idaho             43.06  N 114.43  W*  U
 1204-02-  CRATERS OF THE MOON  US-Idaho             43.41  N 113.50  W*  D7 10
 1204-03-  WAPI LAVA FIELD      US-Idaho             42.88  N 113.21  W   D7  1
@@ -1143,8 +1143,8 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1210-03-  VALLES CALDERA       US-New Mexico        35.87  N 106.57  W   Q
 1210-04-  RATON-CLAYTON        US-New Mexico        36.42  N 104.08  W   D7  1
 1301-01-  UNNAMED              Pacific-N            45.03  N 130.20  W   D1  1
-1301-02-  UNNAMED              Pacific-N            31.75  N 124.25  W   ?    
-1302-00-  LOIHI SEAMOUNT       Hawaiian Is          18.92  N 155.27  W   U    
+1301-02-  UNNAMED              Pacific-N            31.75  N 124.25  W   ?
+1302-00-  LOIHI SEAMOUNT       Hawaiian Is          18.92  N 155.27  W   U
 1302-01-  KILAUEA              Hawaiian Is          19.425 N 155.292 W   D1 97
 1302-02=  MAUNA LOA            Hawaiian Is          19.475 N 155.608 W   D1109
 1302-03-  MAUNA KEA            Hawaiian Is          19.81  N 155.46  W   D7  2
@@ -1152,19 +1152,19 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1302-05-  KAHOOLAWE            Hawaiian Is          20.55  N 156.55  W   ?
 1302-06-  HALEAKALA            Hawaiian Is          20.708 N 156.25  W   D4 11
 1302-07-  KOOLAU               Hawaiian Is          21.36  N 157.80  W   ?
-1302-08-  UNNAMED              Hawaiian Is          21.75  N 158.75  W   ?    
+1302-08-  UNNAMED              Hawaiian Is          21.75  N 158.75  W   ?
 1302-09-  UNNAMED              Hawaiian Is          23.58  N 163.83  W   D2  1
 1303-01-  MACDONALD            Pacific-C            28.98  S 140.25  W   D1 12
-1303-02-  MEHETIA              Pacific-C            17.91  S 148.03  W   U    
-1303-03-  ROCARD               Pacific-C            17.641 S 148.60  W   U    
-1303-031  TEAHITIA             Pacific-C            17.56  S 148.85  W   U    
-1303-04-  MOUA PIHAA           Pacific-C            18.31  S 148.66  W   U    
+1303-02-  MEHETIA              Pacific-C            17.91  S 148.03  W   U
+1303-03-  ROCARD               Pacific-C            17.641 S 148.60  W   U
+1303-031  TEAHITIA             Pacific-C            17.56  S 148.85  W   U
+1303-04-  MOUA PIHAA           Pacific-C            18.31  S 148.66  W   U
 1303-041  UNNAMED              Pacific-C             9.82  N 104.30  W   D1  1
-1303-05-  GALAPAGOS RIFT       Pacific-C             0.791 N  86.15  W   U    
+1303-05-  GALAPAGOS RIFT       Pacific-C             0.791 N  86.15  W   U
 1303-06-  EASTER ISLAND        Pacific-C            27.11  S 109.45  W   U
 1304-01-  ANTIPODES ISLAND     Pacific-S            49.68  S 178.76  E   ?
-1304-02-  UNNAMED              Pacific-S            53.90  S 140.30  W   ?    
-1304-03-  UNNAMED              Pacific-S            55.97  S 143.17  W   ?    
+1304-02-  UNNAMED              Pacific-S            53.90  S 140.30  W   ?
+1304-03-  UNNAMED              Pacific-S            55.97  S 143.17  W   ?
 1401-00-  PRIETO, CERRO        Mexico               32.418 N 115.305 W   U
 1401-001  PINACATE PEAKS       Mexico               31.772 N 113.498 W   D2  2
 1401-002  SAN QUINTIN VOLC FIE Mexico               30.467 N 115.996 W   U
@@ -1172,14 +1172,14 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1401-004  JARAQUAY VOLC FIELD  Mexico               29.33  N 114.50  W*  U
 1401-005  CORONADO             Mexico               29.08  N 113.513 W   U
 1401-006  GUADELUPE            Mexico               29.06  N 118.28  W   U
-1401-007  UNNAMED              Mexico               28.00  N 115.00  W   ?    
+1401-007  UNNAMED              Mexico               28.00  N 115.00  W   ?
 1401-008  TORTUGA, ISLA        Mexico               27.391 N 111.858 W   U
 1401-009  SAN BORJA VOLC FIELD Mexico               28.50  N 113.75  W   U
 1401-01=  TRES VIRGENES        Mexico               27.469 N 112.591 W   D3  1
 1401-02=  BARCENA              Mexico-Is            19.27  N 110.80  W   D2  1
 1401-021  SOCORRO              Mexico-Is            18.75  N 110.95  W   D2  2
 1401-022  DURANGO VOLC FIELD   Mexico               24.15  N 104.45  W*  U
-1401-023  SANGANGUEY           Mexico               21.45  N 104.73  W   U    
+1401-023  SANGANGUEY           Mexico               21.45  N 104.73  W   U
 1401-024  TEPETILTIC, VOLCAN   Mexico               21.26  N 104.70  W   U
 1401-03=  CEBORUCO, VOLCAN     Mexico               21.125 N 104.50  W   D3  4
 1401-031  MASCOTA VOLC FIELD   Mexico               20.61  N 104.83  W   U
@@ -1199,7 +1199,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1401-11=  SAN MARTIN, VOLCAN D Mexico               18.572 N  95.168 W   D2  6
 1401-12=  CHICHON, EL          Mexico               17.36  N  93.228 W   D1  5
 1401-13=  TACANA               Mexico               15.13  N  92.113 W   D1  2
-1402-02=  TAJUMULCO            Guatemala            15.034 N  91.903 W   U    
+1402-02=  TAJUMULCO            Guatemala            15.034 N  91.903 W   U
 1402-03=  SANTA MARIA          Guatemala            14.756 N  91.552 W   D1  3
 1402-04=  ALMOLONGA            Guatemala            14.81  N  91.48  W   D3  2
 1402-05=  TZANJUYUB, VOLCAN DE Guatemala            14.75  N  91.43  W   Q
@@ -1215,7 +1215,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1402-14-  FLORES, VOLCAN DE    Guatemala            14.30  N  90.00  W   U
 1402-15-  CHINGO VOLC FIELD    Guatemala            14.11  N  89.73  W   U
 1402-16-  SANTIAGO, CERRO      Guatemala            14.33  N  89.86  W   U
-1402-17-  SUCHITAN VOLC FIELD  Guatemala            14.40  N  89.78  W   U    
+1402-17-  SUCHITAN VOLC FIELD  Guatemala            14.40  N  89.78  W   U
 1402-18-  IXTEPEQUE, VOLCAN    Guatemala            14.41  N  89.68  W   U
 1402-19-  IPALA VOLC FIELD     Guatemala            14.55  N  89.63  W   U
 1402-20-  CHIQUIMULA VOLC FIEL Guatemala            14.83  N  89.55  W   U
@@ -1249,7 +1249,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1404-092  NEJAPA-TICOMO        Nicaragua            12.11  N  86.31  W   U
 1404-10=  MASAYA               Nicaragua            11.984 N  86.161 W   D1 19
 1404-101  APOYO                Nicaragua            11.92  N  86.03  W   ?
-1404-11=  MOMBACHO             Nicaragua            11.826 N  85.968 W   U    
+1404-11=  MOMBACHO             Nicaragua            11.826 N  85.968 W   U
 1404-111  ZAPATERA ISLAND      Nicaragua            11.73  N  85.81  W   U
 1404-12=  CONCEPCION           Nicaragua            11.538 N  85.623 W   D1 24
 1404-13-  MADERA, LA           Nicaragua            11.445 N  85.515 W   ?
@@ -1316,11 +1316,11 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1503-09=  SANTIAGO             Galapagos             0.22  S  90.77  W   D2  3
 1503-091  SANTA CRUZ           Galapagos             0.62  S  90.33  W   U
 1503-092  SANTA FE             Galapagos             0.806 S  90.07  W   ?
-1503-10=  FLOREANA             Galapagos             1.30  S  90.45  W   U    
+1503-10=  FLOREANA             Galapagos             1.30  S  90.45  W   U
 1503-12-  SAN CRISTOBAL        Galapagos             0.88  S  89.50  W   U
 1504-00-  FIRURA, NEVADOS      Peru                 15.23  S  72.63  W   U
 1504-001  COROPUNA             Peru                 15.51  S  72.65  W   U
-1504-002  ANDAHUA VALLEY       Peru                 15.41  S  72.33  W   U    
+1504-002  ANDAHUA VALLEY       Peru                 15.41  S  72.33  W   U
 1504-003  SABANCAYA            Peru                 15.78  S  71.85  W   D1  5
 1504-004  QUIMSACHATA          Peru                 14.37  S  71.17  W   U
 1504-005  CHACHANI, NEVADO     Peru                 16.191 S  71.529 W   U
@@ -1331,7 +1331,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1504-04=  TUTUPACA             Peru                 17.025 S  70.358 W   D2  4
 1504-05-  YUCAMANE             Peru                 17.18  S  70.20  W   D4  1
 1504-06-  CASIRI, NEVADOS      Peru                 17.46  S  69.81  W   U
-1505-01=  TACORA               Chile-N              17.72  S  69.77  W   U    
+1505-01=  TACORA               Chile-N              17.72  S  69.77  W   U
 1505-011  LEXONE               Chile-N              17.86  S  69.48  W   U
 1505-012  PATILLA PATA         Bolivia              18.05  S  69.03  W   ?
 1505-013  ANALLAJSI, NEVADO    Bolivia              17.91  S  68.91  W   ?
@@ -1349,7 +1349,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1505-03=  ISLUGA               Chile-N              19.15  S  68.83  W   D2  7
 1505-031  PUCHULDIZA           Chile-N              19.41  S  68.96  W   Q
 1505-032  UNNAMED              Chile-N              19.50  S  68.63  W   ?
-1505-04=  IRRUPUTUNCU          Chile-N              20.73  S  68.55  W   U    
+1505-04=  IRRUPUTUNCU          Chile-N              20.73  S  68.55  W   U
 1505-041  UNNAMED              Chile-N              20.83  S  68.63  W   ?
 1505-042  PAMPA LUXSAR         Bolivia              20.85  S  68.20  W   U
 1505-05=  OLCA-PARUMA          Chile-N              20.93  S  68.48  W   D3  1
@@ -1381,7 +1381,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1505-103  CORDON DE PUNTAS NEG Chile-N              23.75  S  67.53  W   U
 1505-104  CORDON CHALVIRI      Chile-N              23.85  S  67.62  W   U
 1505-105  TUJLE, CERRO         Chile-N              23.83  S  67.95  W   U
-1505-106  PULAR                Chile-N              24.18  S  68.05  W   U    
+1505-106  PULAR                Chile-N              24.18  S  68.05  W   U
 1505-107  NEGRILLAR, EL        Chile-N              24.18  S  68.25  W   U
 1505-108  SOCOMPA, VOLCAN      Chile-N              24.40  S  68.25  W   D7  1
 1505-109  NEGRILLAR, LA        Chile-N              24.28  S  68.60  W   U
@@ -1391,7 +1391,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1505-12=  LASTARRIA            Chile-N              25.17  S  68.50  W   U
 1505-121  CORDON DEL AZUFRE    Chile-N              25.33  S  68.51  W   U
 1505-122  BAYO, CERRO          Chile-N              25.41  S  68.58  W   U
-1505-123  ANTOFALLA, VOLCAN    Argentina            25.53  S  68.00  W   U    
+1505-123  ANTOFALLA, VOLCAN    Argentina            25.53  S  68.00  W   U
 1505-124  ANTOFAGASTA DE LA SI Argentina            26.16  S  67.33  W   U
 1505-125  NEVADA, SIERRA       Argentina            26.48  S  68.58  W   U
 1505-126  CONDOR, CERRO EL     Argentina            26.61  S  68.35  W   U
@@ -1402,12 +1402,12 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1505-131  TIPAS                Argentina            27.20  S  68.55  W   U
 1505-14-  COPIAPO              Chile-N              27.30  S  69.13  W   ?
 1506-01=  SAN FELIX            Chile-Is             26.26  S  80.11  W   U
-1506-02=  MAS A TIERRA         Chile-Is             33.658 S  78.85  W   ?    
+1506-02=  MAS A TIERRA         Chile-Is             33.658 S  78.85  W   ?
 1506-03=  UNNAMED              Chile-Is             33.621 S  78.78  W   D3  1
-1506-04=  UNNAMED              Chile-Is             33.61  S  76.83  W*  ?    
+1506-04=  UNNAMED              Chile-Is             33.61  S  76.83  W*  ?
 1507-01=  TUPUNGATITO          Chile-C              33.40  S  69.80  W   D1 17
 1507-02=  SAN JOSE             Chile-C              33.782 S  69.897 W   D2  4
-1507-021  MAIPO                Chile-C              34.161 S  69.833 W   U    
+1507-021  MAIPO                Chile-C              34.161 S  69.833 W   U
 1507-022  PALOMO               Chile-C              34.607 S  70.295 W   U
 1507-03=  TINGUIRIRICA         Chile-C              34.814 S  70.352 W   D2  1
 1507-04=  PLANCHON-PETEROA     Chile-C              35.24  S  70.57  W   D1 13
@@ -1425,11 +1425,11 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1507-067  PAYUN MATRU, CERRO   Argentina            36.35  S  69.48  W*  U
 1507-068  DOMUYO, VOLCAN       Argentina            36.63  S  70.41  W   ?
 1507-07=  CHILLAN, NEVADOS DE  Chile-C              36.863 S  71.376 W   D1 17
-1507-071  TROMEN               Argentina            37.142 S  70.03  W   ?    
+1507-071  TROMEN               Argentina            37.142 S  70.03  W   ?
 1507-072  PUESTO CORTADERAS    Argentina            37.55  S  69.61  W   U
 1507-08=  ANTUCO               Chile-C              37.405 S  71.349 W   D1 12
 1507-081  CALLAQUI             Chile-C              37.91  S  71.41  W   D1  1
-1507-09=  COPAHUE              Chile-C              37.85  S  71.16  W   U    
+1507-09=  COPAHUE              Chile-C              37.85  S  71.16  W   U
 1507-091  TOLGUACA             Chile-C              38.30  S  71.65  W   U
 1507-10=  LONQUIMAY            Chile-C              38.37  S  71.58  W   D1  4
 1507-101  CHAPULUL, CERRO      Chile-C              38.36  S  71.08  W   U
@@ -1480,7 +1480,7 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1600-04=  NEVIS PEAK           W Indies             17.15  N  62.58  W   U
 1600-05=  SOUFRIERE HILLS      W Indies             16.72  N  62.18  W   D5  1
 1600-06=  SOUFRIERE GUADELOUPE W Indies             16.05  N  61.67  W   D1 20
-1600-07=  UNNAMED              W Indies             15.96  N  61.43  W   Q    
+1600-07=  UNNAMED              W Indies             15.96  N  61.43  W   Q
 1600-08=  DIABLE, MORNE AU     W Indies             15.62  N  61.45  W   U
 1600-09=  DIABLOTINS, MORNE    W Indies             15.50  N  61.42  W   U
 1600-10=  MICOTRIN             W Indies             15.33  N  61.33  W   D3  1
@@ -1521,12 +1521,12 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1703-08=  TJORNES FRACTURE ZON Iceland-N of         66.30  N  17.10  W   D3  1
 1704-01=  ORAEFAJOKULL         Iceland-SE           64.00  N  16.65  W   D4  2
 1704-02=  ESJUFJOLL            Iceland-SE           64.27  N  16.65  W   D2  1
-1705-001  UNNAMED              Iceland-N of         66.25  N  18.92  W   ?    
+1705-001  UNNAMED              Iceland-N of         66.25  N  18.92  W   ?
 1705-01=  KOLBEINSEY RIDGE     Iceland-N of         67.12  N  18.60  W   D4  1
 1706-01=  JAN MAYEN            Atl-N-Jan Mayen      71.08  N   8.17  W   D1  7
-1801-01=  UNNAMED              Atlantic-N           66.00  N  27.75  W*  ?    
+1801-01=  UNNAMED              Atlantic-N           66.00  N  27.75  W*  ?
 1801-02=  UNNAMED              Atlantic-N           49.00  N  34.50  W   D3  1
-1801-03=  UNNAMED              Atlantic-N           39.95  N  25.83  W   ?    
+1801-03=  UNNAMED              Atlantic-N           39.95  N  25.83  W   ?
 1801-04=  UNNAMED              Atlantic-N           38.75  N  38.08  W   D3  1
 1802-01=  FAYAL                Azores               38.60  N  28.73  W   D2  2
 1802-02=  PICO                 Azores               38.46  N  28.40  W   D1  3
@@ -1549,15 +1549,15 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1804-02-  BRAVA                Cape Verde Is        14.85  N  24.72  W   U
 1804-03-  SANTO ANTAO          Cape Verde Is        17.07  N  25.17  W   U
 1804-04-  SAN VICENTE          Cape Verde Is        16.85  N  24.97  W   U
-1805-01=  UNNAMED              Atlantic-C            7.00  N  21.83  W   ?    
-1805-02=  UNNAMED              Atlantic-C            4.20  N  21.45  W   ?    
+1805-01=  UNNAMED              Atlantic-C            7.00  N  21.83  W   ?
+1805-02=  UNNAMED              Atlantic-C            4.20  N  21.45  W   ?
 1805-03=  UNNAMED              Atlantic-C            0.58  S  15.83  W   D3  1
-1805-04=  UNNAMED              Atlantic-C            3.50  S  24.50  W   ?    
+1805-04=  UNNAMED              Atlantic-C            3.50  S  24.50  W   ?
 1805-05-  ASCENSION            Atlantic-S            7.95  S  14.36  W   U
 1805-051  TRINDADE             Atlantic-S           20.514 S  29.33  W   U
 1806-01=  TRISTAN DA CUNHA     Atlantic-S           37.091 S  12.28  W   D2  2
 1806-02-  BOUVET               Atlantic-S           54.41  S   3.35  E   D2  1
-1806-03-  THOMPSON ISLAND      Atlantic-S           53.93  S   5.50  E   ?    
+1806-03-  THOMPSON ISLAND      Atlantic-S           53.93  S   5.50  E   ?
 1900-01=  BUCKLE ISLAND        Antarctica           66.80  S 163.25  E   D2  2
 1900-011  YOUNG ISLAND         Antarctica           66.41  S 162.45  E   U
 1900-012  STURGE ISLAND        Antarctica           67.40  S 164.83  E   ?
@@ -1573,19 +1573,19 @@ NUMBER    VOLCANO NAME         SUBREGION            LAT.     LONG.       STATUS
 1900-025  SIPLE, MT            Antarctica           73.43  S 126.66  W   ?
 1900-026  TONEY MOUNTAIN       Antarctica           75.80  S 115.83  W   ?
 1900-027  TAKAHE               Antarctica           76.28  S 112.08  W   ?
-1900-028  HUDSON MOUNTAINS     Antarctica           74.33  S  99.41  W*  ?    
+1900-028  HUDSON MOUNTAINS     Antarctica           74.33  S  99.41  W*  ?
 1900-029  PETER I ISLAND       Antarctica           68.85  S  90.58  W   U
 1900-03=  DECEPTION ISLAND     Antarctica           62.97  S  60.65  W   D1  8
 1900-031  PENGUIN              Antarctica           62.10  S  57.93  W   D2  3
 1900-04=  BRIDGEMAN ISLAND     Antarctica           62.05  S  56.75  W   ?
-1900-041  PAULET               Antarctica           63.58  S  55.76  W   U    
+1900-041  PAULET               Antarctica           63.58  S  55.76  W   U
 1900-05=  SEAL NUNATAKS GROUP  Antarctica           65.03  S  60.05  W   D1  1
-1900-051  UNNAMED              Antarctica           56.25  S  72.16  W   ?    
+1900-051  UNNAMED              Antarctica           56.25  S  72.16  W   ?
 1900-07=  THULE ISLANDS        Antarctica           59.45  S  27.36  W   U
 1900-08=  BRISTOL ISLAND       Antarctica           59.03  S  26.58  W   D2  5
 1900-09=  MICHAEL, MT.         Antarctica           57.78  S  26.45  W   D3  1
 1900-10=  CANDLEMAS ISLAND     Antarctica           57.08  S  26.71  W   D2  2
-1900-11=  HODSON, MT.          Antarctica           56.70  S  27.15  W   U    
+1900-11=  HODSON, MT.          Antarctica           56.70  S  27.15  W   U
 1900-12=  LESKOV ISLAND        Antarctica           56.66  S  28.13  W   U
 1900-13=  ZAVODOVSKI           Antarctica           56.30  S  27.56  W   D2  1
 1900-14-  PROTECTOR SHOAL      Antarctica           55.91  S  28.08  W   D2  1

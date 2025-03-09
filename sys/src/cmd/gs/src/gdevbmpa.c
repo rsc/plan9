@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -38,7 +38,7 @@
 /*
  * The original version of this driver was restricted to producing a single
  * page per file.  If for some reason you want to reinstate this
- * restriction, uncomment the next line. 
+ * restriction, uncomment the next line.
  * NOTE: Even though the logic for multi-page files is straightforward,
  * it results in a file that most programs that process BMP format cannot
  * handle. Most programs will only display the first page.
@@ -248,7 +248,7 @@ private int
 			      int last_plane, int raster);
 
 /* Thread to do rendering, started by bmpa_reader_start_render_thread */
-private void 
+private void
 bmpa_reader_thread(void *params)
 {
     gdev_prn_async_render_thread((gdev_prn_start_render_params *)params);
@@ -602,7 +602,7 @@ bmpa_get_space_params(const gx_device_printer *pdev,
      *
      * The moral of the story is that you should never make a band
      * so small that its buffer limits the command buffer excessively.
-     * Again, Max image row bytes = band buffer size - # bands * 72. 
+     * Again, Max image row bytes = band buffer size - # bands * 72.
      *
      * In the overlapped case, everything is exactly as above, except that
      * two identical devices, each with an identical buffer, are allocated:
@@ -636,7 +636,7 @@ bmpa_get_space_params(const gx_device_printer *pdev,
      * Note: per the comments in gxclmem.c, the banding logic will perform
      * better with 1MB or better for the command list.
      */
-    
+
     /* This will give us a very "ungenerous" buffer. */
     /* Here, my arbitrary rule for min image row is: twice the dest width */
     /* in full CMYK. */

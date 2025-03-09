@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -39,7 +39,7 @@ void gx_set_effective_transfer(gs_state *);
  * order, to indicate that the wts field of this order points to the
  * same structure as an earlier order. This is used to suppress
  * multiple realeases of shared wts_screen_t orders.
- * 
+ *
  * The width field is available for this purpose at it is nominally
  * unused in a well-tempered screening halftone.
  */
@@ -74,7 +74,7 @@ RELOC_PTRS_WITH(ht_order_reloc_ptrs, gx_ht_order *porder)
 }
 RELOC_PTRS_END
 
-private 
+private
 ENUM_PTRS_WITH(halftone_enum_ptrs, gs_halftone *hptr) return 0;
 case 0:
 switch (hptr->type)
@@ -722,8 +722,8 @@ gs_cname_to_colorant_number(gs_state * pgs, byte * pname, uint name_size,
  * Install a device halftone into the imager state.
  *
  * To allow halftones to be shared between graphic states, the imager
- * state contains a pointer to a device halftone structure. Thus, when 
- * we say a halftone is "in" the imager state, we are only claiming 
+ * state contains a pointer to a device halftone structure. Thus, when
+ * we say a halftone is "in" the imager state, we are only claiming
  * that the halftone pointer in the imager state points to that halftone.
  *
  * Though the operand halftone uses the same structure as the halftone
@@ -823,7 +823,7 @@ gs_cname_to_colorant_number(gs_state * pgs, byte * pname, uint name_size,
  * the graphic state extends even to the individual fields of the
  * gx_ht_order structure incorporated in the order field of the halftone
  * and the corder field of the elements of the components array. The
- * fields of this structure that are handled differently in the operand 
+ * fields of this structure that are handled differently in the operand
  * and imager state device halftones are:
  *
  *  params          Provides a set of parameters that are required for
@@ -855,7 +855,7 @@ gs_cname_to_colorant_number(gs_state * pgs, byte * pname, uint name_size,
  *                 installation process; it may be set in the operand
  *                 device halftone, but its value is ignored.
  *
- *  
+ *
  *  data_memory    Points to the memory structure used to allocate the
  *                 levels and bit_data arrays. The handling of this field
  *                 is a bit complicated. For orders that are "taken over"
@@ -1106,7 +1106,7 @@ gx_imager_dev_ht_install(
                 pcache = gx_ht_alloc_cache( pis->memory,
                                             num_tiles,
                                             tile_bytes * num_tiles );
-                if (pcache == NULL) 
+                if (pcache == NULL)
                     code = gs_error_VMerror;
                 else {
                     porder->cache = pcache;

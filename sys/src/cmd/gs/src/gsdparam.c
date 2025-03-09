@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -161,7 +161,7 @@ gx_default_get_params(gx_device * dev, gs_param_list * plist)
 				&dev->color_info.anti_alias.text_bits)) < 0 ||
 	(code = param_write_int(plist, "GraphicsAlphaBits",
 				&dev->color_info.anti_alias.graphics_bits)) < 0 ||
-	(code = param_write_bool(plist, ".LockSafetyParams", &dev->LockSafetyParams)) < 0 
+	(code = param_write_bool(plist, ".LockSafetyParams", &dev->LockSafetyParams)) < 0
 	)
 	return code;
 
@@ -252,7 +252,7 @@ const gdev_input_media_t gdev_input_media_default =
     gdev_input_media_default_values
 };
 
-int 
+int
 gdev_begin_input_media(gs_param_list * mlist, gs_param_dict * pdict,
 		       int count)
 {
@@ -328,7 +328,7 @@ gdev_write_input_page_size(int index, gs_param_dict * pdict,
     return gdev_write_input_media(index, pdict, &media);
 }
 
-int 
+int
 gdev_end_input_media(gs_param_list * mlist, gs_param_dict * pdict)
 {
     return param_end_write_dict(mlist, "InputAttributes", pdict);
@@ -341,7 +341,7 @@ const gdev_output_media_t gdev_output_media_default =
     gdev_output_media_default_values
 };
 
-int 
+int
 gdev_begin_output_media(gs_param_list * mlist, gs_param_dict * pdict,
 			int count)
 {
@@ -368,7 +368,7 @@ gdev_write_output_media(int index, gs_param_dict * pdict,
     return param_end_write_dict(pdict->list, key, &mdict);
 }
 
-int 
+int
 gdev_end_output_media(gs_param_list * mlist, gs_param_dict * pdict)
 {
     return param_end_write_dict(mlist, "OutputAttributes", pdict);

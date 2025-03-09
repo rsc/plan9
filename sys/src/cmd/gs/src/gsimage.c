@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -120,7 +120,7 @@ gs_private_st_composite(st_gs_image_enum, gs_image_enum, "gs_image_enum",
 #define gs_image_enum_num_ptrs 2
 
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(gs_image_enum_enum_ptrs, gs_image_enum *eptr)
 {
     /* Enumerate the data planes. */
@@ -290,7 +290,7 @@ gs_image_common_init(gs_image_enum * penum, gx_image_enum_common_t * pie,
 {
     /*
      * HACK : For a compatibility with gs_image_cleanup_and_free_enum,
-     * penum->memory must be initialized in advance 
+     * penum->memory must be initialized in advance
      * with the memory heap that owns *penum.
      */
     int i;
@@ -327,7 +327,7 @@ gs_image_common_init(gs_image_enum * penum, gx_image_enum_common_t * pie,
     return 0;
 }
 
-/* Initialize an enumerator for a general image. 
+/* Initialize an enumerator for a general image.
    penum->memory must be initialized in advance.
 */
 int

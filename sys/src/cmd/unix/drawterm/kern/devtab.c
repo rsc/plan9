@@ -32,4 +32,3 @@ Dev *devtab[] = {
 	&audiodevtab,
 	0
 };
-

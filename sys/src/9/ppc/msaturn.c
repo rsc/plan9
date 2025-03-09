@@ -29,15 +29,15 @@ static uchar intprio[] = {
 		Vecunused,		// timer 1
 		Vecether,			// ethernet
 		Vecunused,		// tea
-		Vecunused,		// irq0	
-		Vecunused,		// irq1	
-		Vecunused,		// irq2	
-		Vecunused,		// irq3	
-		Vecunused,		// irq4	
-		Vecunused,		// irq5	
-		Vecunused,		// irq6	
-		Vecunused,		// irq7	
-		Vecunused,		// irq8	
+		Vecunused,		// irq0
+		Vecunused,		// irq1
+		Vecunused,		// irq2
+		Vecunused,		// irq3
+		Vecunused,		// irq4
+		Vecunused,		// irq5
+		Vecunused,		// irq6
+		Vecunused,		// irq7
+		Vecunused,		// irq8
 };
 
 void
@@ -92,7 +92,7 @@ intvec(void)
 	for(i=0; i<nelem(intprio); i++)
 		if(iar==intprio[i])
 			return iar;
-		
+
 	iprint("saturnint: no vector %d\n", iar);
 	intack();
 	return -1;

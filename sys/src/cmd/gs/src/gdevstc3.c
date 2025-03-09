@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -42,7 +42,7 @@
  */
 
 /*ARGSUSED*/
-int 
+int
 stc_gsrgb(stcolor_device *sdev,int npixel,byte *ip,byte *buf,byte *out)
 {
 
@@ -65,7 +65,7 @@ stc_gsrgb(stcolor_device *sdev,int npixel,byte *ip,byte *buf,byte *out)
       int p;
 
 /*
- *    simply merge the color-values into a single byte 
+ *    simply merge the color-values into a single byte
  *    (RED, GREEN, BLUE are defined in gdevstc.h)
  */
       for(p = 0; p < npixel; ++p,++out) { /* loop over pixels */

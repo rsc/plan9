@@ -197,7 +197,7 @@ oserror(void)
 	char buf[200];
 
 	e = GetLastError();
-	
+
 	r = FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM,
 		0, e, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
 		buf, sizeof(buf), 0);
@@ -277,10 +277,9 @@ args(char *argv[], int n, char *p)
 		/* move p up one to avoid pointing to null at end of p2 */
 		if(*p)
 			p++;
-		*p2 = 0;	
+		*p2 = 0;
 	}
 	argv[i] = 0;
 
 	return i;
 }
-

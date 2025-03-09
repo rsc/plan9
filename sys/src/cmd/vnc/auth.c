@@ -239,4 +239,3 @@ vncsrvauth(Vnc *v)
 
 	return 0;
 }
-

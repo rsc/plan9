@@ -389,18 +389,18 @@ uchar	ysvrs[] =
 	Ym,	Ynone,	Zm_o,	2,
 	0
 };
-uchar	ymm[] = 
+uchar	ymm[] =
 {
 	Ymm,	Ymr,	Zm_r_xm,	1,
 	Yxm,	Yxyr,	Zm_r_xm,	2,
 	0
 };
-uchar	yxm[] = 
+uchar	yxm[] =
 {
 	Yxm,	Yxr,	Zm_r_xm,	1,
 	0
 };
-uchar	yxcvm1[] = 
+uchar	yxcvm1[] =
 {
 	Yxm,	Yxr,	Zm_r_xm,	2,
 	Yxm,	Ymr,	Zm_r_xm,	2,
@@ -412,12 +412,12 @@ uchar	yxcvm2[] =
 	Ymm,	Yxr,	Zm_r_xm,	2,
 	0
 };
-uchar	yxmq[] = 
+uchar	yxmq[] =
 {
 	Yxm,	Yxr,	Zm_r_xm,	2,
 	0
 };
-uchar	yxr[] = 
+uchar	yxr[] =
 {
 	Yxr,	Yxr,	Zm_r_xm,	1,
 	0
@@ -453,7 +453,7 @@ uchar	yxmov[] =
 	Yxr,	Yxm,	Zr_m_xm,	1,
 	0
 };
-uchar	yxcvfl[] = 
+uchar	yxcvfl[] =
 {
 	Yxm,	Yrl,	Zm_r_xm,	1,
 	0
@@ -463,7 +463,7 @@ uchar	yxcvlf[] =
 	Yml,	Yxr,	Zm_r_xm,	1,
 	0
 };
-uchar	yxcvfq[] = 
+uchar	yxcvfq[] =
 {
 	Yxm,	Yrl,	Zm_r_xm,	2,
 	0
@@ -473,7 +473,7 @@ uchar	yxcvqf[] =
 	Yml,	Yxr,	Zm_r_xm,	2,
 	0
 };
-uchar	yps[] = 
+uchar	yps[] =
 {
 	Ymm,	Ymr,	Zm_r_xm,	1,
 	Yi8,	Ymr,	Zibo_m_xm,	2,

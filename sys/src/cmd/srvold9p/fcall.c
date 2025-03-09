@@ -109,7 +109,7 @@ fcall(int fd)
 
 	switch(rfork(RFPROC|RFMEM|RFFDG|RFCNAMEG)){
 	default:
-		return pipefd[0];	/* parent returns fd */	
+		return pipefd[0];	/* parent returns fd */
 	case 0:
 		break;	/* child builds buffers */
 	case -1:

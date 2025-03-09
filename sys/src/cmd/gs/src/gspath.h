@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -60,7 +60,7 @@ int gs_imager_arc_add(gx_path * ppath, gs_imager_state * pis,
 		      bool clockwise, floatp axc, floatp ayc,
 		      floatp arad, floatp aang1, floatp aang2,
 		      bool add_line);
-void make_quadrant_arc(gs_point *p, const gs_point *c, 
+void make_quadrant_arc(gs_point *p, const gs_point *c,
 	const gs_point *p0, const gs_point *p1, double r);
 
 /* Add the current path to the path in the previous graphics state. */

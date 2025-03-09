@@ -13,7 +13,7 @@
  *
  *     Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
@@ -23,7 +23,7 @@
  * duplicated in all such forms and that any documentation,
  * advertising materials, and other materials related to such
  * distribution and use acknowledge that the software was developed
- * by Mark H. Colburn and sponsored by The USENIX Association. 
+ * by Mark H. Colburn and sponsored by The USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -180,7 +180,7 @@
 #endif
 
 /*
- * Trailer pathnames. All must be of the same length. 
+ * Trailer pathnames. All must be of the same length.
  */
 #define	TRAILER	"TRAILER!!!"	/* Archive trailer (cpio compatible) */
 #define	TRAILZ	11		/* Trailer pathname length (including null) */
@@ -198,7 +198,7 @@
 #define AR_APPEND 	4
 
 /*
- * Header block on tape. 
+ * Header block on tape.
  */
 #define	NAMSIZ		100
 #define	PFIXSIZ		155
@@ -209,7 +209,7 @@
 #define	CHKBLANKS	"        "	/* 8 blanks, no null */
 
 /*
- * Exit codes from the "tar" program 
+ * Exit codes from the "tar" program
  */
 #define	EX_SUCCESS	0	/* success! */
 #define	EX_ARGSBAD	1	/* invalid args */
@@ -220,12 +220,12 @@
 #define	ROUNDUP(a,b) 	(((a) % (b)) == 0 ? (a) : ((a) + ((b) - ((a) % (b)))))
 
 /*
- * Mininum value. 
+ * Mininum value.
  */
 #define	MIN(a, b)	(((a) < (b)) ? (a) : (b))
 
 /*
- * Remove a file or directory. 
+ * Remove a file or directory.
  */
 #ifdef _POSIX_SOURCE
 #define	REMOVE(name, asb) \
@@ -236,7 +236,7 @@
 #endif
 
 /*
- * Cast and reduce to unsigned short. 
+ * Cast and reduce to unsigned short.
  */
 #define	USH(n)		(((ushort) (n)) & 0177777)
 
@@ -244,7 +244,7 @@
 /* Type Definitions */
 
 /*
- * Binary archive header (obsolete). 
+ * Binary archive header (obsolete).
  */
 typedef struct {
     short           b_dev;	/* Device code */
@@ -261,7 +261,7 @@ typedef struct {
 
 /*
  * File status with symbolic links. Kludged to hold symbolic link pathname
- * within structure. 
+ * within structure.
  */
 typedef struct {
     struct stat     sb_stat;
@@ -289,13 +289,13 @@ typedef struct {
 #	define	sb_blocks	sb_stat.st_blocks
 #else				/* S_IFLNK */
 /*
- * File status without symbolic links. 
+ * File status without symbolic links.
  */
 #	define	LSTAT(name, asb)	stat(name, &(asb)->sb_stat)
 #endif				/* S_IFLNK */
 
 /*
- * Hard link sources. One or more are chained from each link structure. 
+ * Hard link sources. One or more are chained from each link structure.
  */
 typedef struct name {
     struct name    *p_forw;	/* Forward chain (terminated) */
@@ -305,7 +305,7 @@ typedef struct name {
 
 /*
  * File linking information. One entry exists for each unique file with with
- * outstanding hard links. 
+ * outstanding hard links.
  */
 typedef struct link {
     struct link    *l_forw;	/* Forward chain (terminated) */
@@ -331,7 +331,7 @@ typedef struct replstr {
 
 
 /*
- * This has to be included here to insure that all of the type 
+ * This has to be included here to insure that all of the type
  * delcarations are declared for the prototypes.
  */
 #ifndef STRERROR

@@ -450,7 +450,7 @@ enum {
 					/* translator's hub */
 		OHubaddr	= 7,
 	Xactpos		= 0x3<<14,	/* payload's position within transaction */
-		POS_MID		= 0<<14,		
+		POS_MID		= 0<<14,
 		POS_END		= 1<<14,
 		POS_BEGIN	= 2<<14,
 		POS_ALL		= 3<<14, /* all of data (<= 188 bytes) */

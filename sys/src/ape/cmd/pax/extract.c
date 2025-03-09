@@ -2,7 +2,7 @@
  *
  * $Revision: 1.3 $
  *
- * extract.c - Extract files from a tar archive. 
+ * extract.c - Extract files from a tar archive.
  *
  * DESCRIPTION
  *
@@ -10,17 +10,17 @@
  *
  *	Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice is duplicated in all such 
- * forms and that any documentation, advertising materials, and other 
- * materials related to such distribution and use acknowledge that the 
- * software was developed * by Mark H. Colburn and sponsored by The 
- * USENIX Association. 
+ * provided that the above copyright notice is duplicated in all such
+ * forms and that any documentation, advertising materials, and other
+ * materials related to such distribution and use acknowledge that the
+ * software was developed * by Mark H. Colburn and sponsored by The
+ * USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -29,13 +29,13 @@
  * $Log:	extract.c,v $
  * Revision 1.3  89/02/12  10:29:43  mark
  * Fixed misspelling of Replstr
- * 
+ *
  * Revision 1.2  89/02/12  10:04:24  mark
  * 1.2 release fixes
- * 
+ *
  * Revision 1.1  88/12/23  18:02:07  mark
  * Initial revision
- * 
+ *
  */
 
 #ifndef lint
@@ -52,7 +52,7 @@ static char *copyright = "Copyright (c) 1989 Mark H. Colburn.\nAll rights reserv
 /* Defines */
 
 /*
- * Swap bytes. 
+ * Swap bytes.
  */
 #define	SWAB(n)	((((ushort)(n) >> 8) & 0xff) | (((ushort)(n) << 8) & 0xff00))
 
@@ -95,7 +95,7 @@ static int readcpio();
 int read_archive(void)
 
 #else
-    
+
 int read_archive()
 
 #endif
@@ -113,8 +113,8 @@ int read_archive()
 	    if (match) {
 		print_entry(name, &sb);
 	    }
-	    if (((ar_format == TAR) 
-		? buf_skip(ROUNDUP((OFFSET) sb.sb_size, BLOCKSIZE)) 
+	    if (((ar_format == TAR)
+		? buf_skip(ROUNDUP((OFFSET) sb.sb_size, BLOCKSIZE))
 		: buf_skip((OFFSET) sb.sb_size)) < 0) {
 		warn(name, "File data is corrupt");
 	    }
@@ -125,16 +125,16 @@ int read_archive()
 		    continue;
 		}
 	    }
-	    if (get_disposition("extract", name) || 
+	    if (get_disposition("extract", name) ||
                 get_newname(name, sizeof(name))) {
 		/* skip file... */
-		if (((ar_format == TAR) 
-		    ? buf_skip(ROUNDUP((OFFSET) sb.sb_size, BLOCKSIZE)) 
+		if (((ar_format == TAR)
+		    ? buf_skip(ROUNDUP((OFFSET) sb.sb_size, BLOCKSIZE))
 		    : buf_skip((OFFSET) sb.sb_size)) < 0) {
 		    warn(name, "File data is corrupt");
 		}
 		continue;
-	    } 
+	    }
 	    if (inentry(name, &sb) < 0) {
 		warn(name, "File data is corrupt");
 	    }
@@ -155,8 +155,8 @@ int read_archive()
 		buf_skip((OFFSET) pad);
 	    }
 	} else {
-	    if (((ar_format == TAR) 
-		? buf_skip(ROUNDUP((OFFSET) sb.sb_size, BLOCKSIZE)) 
+	    if (((ar_format == TAR)
+		? buf_skip(ROUNDUP((OFFSET) sb.sb_size, BLOCKSIZE))
 		: buf_skip((OFFSET) sb.sb_size)) < 0) {
 		warn(name, "File data is corrupt");
 	    }
@@ -192,7 +192,7 @@ int read_archive()
 int get_header(char *name, Stat *asb)
 
 #else
-    
+
 int get_header(name, asb)
 char *name;
 Stat *asb;
@@ -237,7 +237,7 @@ Stat *asb;
 static int readtar(char *name, Stat *asb)
 
 #else
-    
+
 static int readtar(name, asb)
 char	*name;
 Stat    *asb;
@@ -277,14 +277,14 @@ Stat    *asb;
 }
 
 
-/* readcpio - read a CPIO header 
+/* readcpio - read a CPIO header
  *
  * DESCRIPTION
  *
- *	Read in a cpio header.  Understands how to determine and read ASCII, 
- *	binary and byte-swapped binary headers.  Quietly translates 
- *	old-fashioned binary cpio headers (and arranges to skip the possible 
- *	alignment byte). Returns zero if successful, -1 upon archive trailer. 
+ *	Read in a cpio header.  Understands how to determine and read ASCII,
+ *	binary and byte-swapped binary headers.  Quietly translates
+ *	old-fashioned binary cpio headers (and arranges to skip the possible
+ *	alignment byte). Returns zero if successful, -1 upon archive trailer.
  *
  * PARAMETERS
  *
@@ -307,7 +307,7 @@ Stat    *asb;
 static int readcpio(char *name, Stat *asb)
 
 #else
-    
+
 static int readcpio(name, asb)
 char           *name;
 Stat           *asb;
@@ -398,8 +398,8 @@ Stat           *asb;
  *
  * RETURNS
  *
- * 	Returns the number of trailing alignment bytes to skip; -1 if 
- *	unsuccessful. 
+ * 	Returns the number of trailing alignment bytes to skip; -1 if
+ *	unsuccessful.
  *
  */
 
@@ -408,7 +408,7 @@ Stat           *asb;
 static int inswab(char *magic, char *name, Stat *asb)
 
 #else
-    
+
 static int inswab(magic, name, asb)
 char           *magic;
 char           *name;
@@ -476,8 +476,8 @@ Stat           *asb;
  *
  * RETURNS
  *
- * 	Returns zero if successful; -1 otherwise. Assumes that  the entire 
- *	magic number has been read. 
+ * 	Returns zero if successful; -1 otherwise. Assumes that  the entire
+ *	magic number has been read.
  */
 
 #ifdef __STDC__
@@ -485,7 +485,7 @@ Stat           *asb;
 static int inascii(char *magic, char *name, Stat *asb)
 
 #else
-    
+
 static int inascii(magic, name, asb)
 char           *magic;
 char           *name;
@@ -550,8 +550,8 @@ Stat           *asb;
  *
  * RETURNS
  *
- * 	Returns the number of trailing alignment bytes to skip; -1 if 
- *	unsuccessful. 
+ * 	Returns the number of trailing alignment bytes to skip; -1 if
+ *	unsuccessful.
  */
 
 #ifdef __STDC__
@@ -559,7 +559,7 @@ Stat           *asb;
 static int inbinary(char *magic, char *name, Stat *asb)
 
 #else
-    
+
 static int inbinary(magic, name, asb)
 char           *magic;
 char           *name;

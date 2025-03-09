@@ -147,7 +147,7 @@ printtrie(Biobuf *b, Trie *t)
 			Bprint(b, "\"");
 		}
 		Bprint(b, ",\n");
-	}	
+	}
 }
 
 void

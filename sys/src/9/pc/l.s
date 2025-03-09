@@ -115,8 +115,8 @@ TEXT tgdt(SB), $0
 
 /*
  *  pointer to initial gdt
- *  Note the -KZERO which puts the physical address in the gdtptr. 
- *  that's needed as we start executing in physical addresses. 
+ *  Note the -KZERO which puts the physical address in the gdtptr.
+ *  that's needed as we start executing in physical addresses.
  */
 TEXT tgdtptr(SB), $0
 	WORD	$(3*8)
@@ -259,7 +259,7 @@ TEXT saveregs(SB), $0
 	POPL AX
 	POPL AX
 	POPL AX
-	
+
 	PUSHL	AX
 	PUSHL	BX
 	PUSHL	CX
@@ -285,7 +285,7 @@ TEXT restoreregs(SB), $0
 	PUSHL	AX
 	PUSHL	AX
 	ADDL	$32, SP
-	
+
 	XCHGL	32(SP), AX	/* swap return PC and saved flags */
 	XCHGL	0(SP), AX
 	XCHGL	32(SP), AX
@@ -303,7 +303,7 @@ TEXT restoreregs(SB), $0
 /*
  * Assumed to be in protected mode at time of call.
  * Switch to real mode, execute an interrupt, and
- * then switch back to protected mode.  
+ * then switch back to protected mode.
  *
  * Assumes:
  *
@@ -385,7 +385,7 @@ TEXT now16real(SB), $0
 	LWI(0x0000, rAX)
 	MOVW	AX,SS
 	LWI(RMUADDR, rBP)
-	
+
 	/* offsets are in Ureg */
 	LXW(44, xBP, rAX)
 	MOVW	AX, DS
@@ -414,7 +414,7 @@ TEXT realmodeintrinst(SB), $0
 	LWI(0, rAX)
 	MOVW	AX,SS
 	LWI(RMUADDR, rBP)
-	
+
 	OPSIZE; SXW(rDI, 0, xBP)
 	OPSIZE; SXW(rSI, 4, xBP)
 	OPSIZE; SXW(rBX, 16, xBP)
@@ -434,7 +434,7 @@ TEXT realmodeintrinst(SB), $0
 	/* re-enter protected mode and jump to 32-bit code */
 	OPSIZE; MOVL $1, AX
 	OPSIZE; MOVL AX, CR0
-	
+
 /*	JMPFAR	SELECTOR(KESEG, SELGDT, 0):$again32bit(SB) /**/
 	 OPSIZE
 	 BYTE $0xEA
@@ -459,7 +459,7 @@ TEXT again32bit(SB), $0
 TEXT again32kzero(SB), $0
 	/* breathe a sigh of relief - back in 32-bit protected mode */
 
-	/* switch to old stack */	
+	/* switch to old stack */
 	PUSHL	AX	/* match popl below for 8l */
 	MOVL	$0x7BFC, SP
 	POPL	SP
@@ -678,7 +678,7 @@ TEXT rdmsr(SB), $0				/* model-specific register */
 	MOVL	AX, 0(CX)			/* lo */
 	MOVL	DX, 4(CX)			/* hi */
 	RET
-	
+
 TEXT wrmsr(SB), $0
 	MOVL	index+0(FP), CX
 	MOVL	lo+4(FP), AX

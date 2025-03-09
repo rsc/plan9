@@ -51,7 +51,7 @@ rdb(void)
 int
 iprint(char *fmt, ...)
 {
-	int n;	
+	int n;
 	va_list va;
 	char buf[1024];
 
@@ -62,4 +62,3 @@ iprint(char *fmt, ...)
 	write(1,buf,n);
 	return 1;
 }
-

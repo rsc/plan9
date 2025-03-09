@@ -143,7 +143,7 @@ complement(void)
 				writerune(1, (Rune) from);
 			}
 		}
-				
+
 	} else {
 		while (readrune(0, &from) > 0){
 			if (from > high)
@@ -195,7 +195,7 @@ translit(void)
 				writerune(1, (Rune) from);
 			}
 		}
-				
+
 	} else {
 		while (readrune(0, &from) > 0) {
 			if (from <= high)

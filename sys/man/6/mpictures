@@ -56,10 +56,10 @@ One or more of:
 .RS
 .PD 0v
 .TP
-.BI a d 
+.BI a d
 Rotate the picture clockwise
 .I d
-degrees, default 
+degrees, default
 .IR d =90.
 .TP
 .B o
@@ -88,10 +88,10 @@ If there's room,
 fills text around the frame.
 Everything destined for either side of the frame
 goes into a diversion to be retrieved when the accumulated
-text sweeps past the trap set by 
+text sweeps past the trap set by
 .B .BP
 or when the diversion is explicitly closed
-by 
+by
 .BR .EP .
 .RE
 .TP

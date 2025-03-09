@@ -20,7 +20,7 @@ If the self-tests complete ok, carry on to installation:
 
 To install in /usr/bin, /usr/lib, /usr/man and /usr/include, type
    make install
-To install somewhere else, eg, /xxx/yyy/{bin,lib,man,include}, type 
+To install somewhere else, eg, /xxx/yyy/{bin,lib,man,include}, type
    make install PREFIX=/xxx/yyy
 If you are (justifiably) paranoid and want to see what 'make install'
 is going to do, you can first do

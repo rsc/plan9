@@ -44,7 +44,7 @@ enum {
  * This is based only on the Savage4 documentation.
  * It is expected to work on other Savage cards as well,
  * but has not been tried.
- * 
+ *
  * There are five ways to access the 2D graphics engine registers:
  * 	- Old MMIO non-packed format
  *	- Old MMIO packed format
@@ -54,7 +54,7 @@ enum {
  *
  * Of these, the manual hints that the first three are deprecated,
  * and it does not document any of those three well enough to use.
- * 
+ *
  * I have tried for many hours with no success to understand the BCI
  * interface well enough to use it.  It is not well documented, and the
  * XFree86 driver seems to completely contradict what little documentation
@@ -62,14 +62,14 @@ enum {
  *
  * This leaves the packed new MMIO.
  * The manual contradicts itself here, claming that the registers
- * start at 0x2008100 as well as at 0x0008100 from the base of the 
+ * start at 0x2008100 as well as at 0x0008100 from the base of the
  * mmio segment.  Since the segment is only 512k, we assume that
  * the latter is the correct offset.
  *
  * According to the manual, only 16-bit reads of the 2D registers
  * are supported: 32-bit reads will return garbage in the upper word.
  * 32-bit writes must be enabled explicitly.
- * 
+ *
  * 32-bit reads of the status registers seem just fine.
  */
 
@@ -385,10 +385,10 @@ savagewaitidle(VGAscr *scr)
 		goal = Ge2IdleA;
 		break;
 	default:
-		/* 
+		/*
 		 * best we can do: can't print or we'll call ourselves.
 		 * savageinit is supposed to not let this happen.
-		 */	
+		 */
 		return;
 	}
 

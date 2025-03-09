@@ -7,4 +7,3 @@ segattach(int attr, char *class, void *va, unsigned long len)
 {
 	return _SEGATTACH(attr, class, va, len);
 }
-

@@ -187,7 +187,7 @@ tcpcompress(Tcpc *comp, Block *b, int *protop)
 found:
 
 	/*
-	 * Make sure that only what we expect to change changed. 
+	 * Make sure that only what we expect to change changed.
 	 */
 	if(ip->vihl  != h->ip->vihl || ip->tos   != h->ip->tos ||
 	   ip->ttl   != h->ip->ttl  || ip->proto != h->ip->proto)
@@ -447,7 +447,7 @@ tcpuncompress(Tcpc *comp, Block *b, int type)
 		b->rptr -= len;
 	hnputs(ip->length, BLEN(b));
 	memmove(b->rptr, ip, len);
-	
+
 	/* recompute the ip header checksum */
 	ip = (Iphdr*)b->rptr;
 	ip->cksum[0] = ip->cksum[1] = 0;

@@ -4,7 +4,7 @@
  *  the location we're linked for and then copy back the
  *  decompressed kernel.
  *
- *  All 
+ *  All
  */
 TEXT _start(SB), $-4
 	MOVW	$setR12(SB), R12		/* load the SB */
@@ -34,7 +34,7 @@ _start2:
 	/* flush caches */
 	MCR	CpMMU, 0, R0, C(CpCacheFlush), C(0x7), 0
 	/* drain prefetch */
-	MOVW	R0,R0						
+	MOVW	R0,R0
 	MOVW	R0,R0
 	MOVW	R0,R0
 	MOVW	R0,R0
@@ -81,13 +81,13 @@ _cfloop:
 	MOVW.P	32(R0),R2
 	CMP.S	R0,R1
 	BNE	_cfloop
-	
+
 	/* drain write buffer and invalidate i&d cache contents */
 	MCR	CpMMU, 0, R0, C(CpCacheFlush), C(0xa), 4
 	MCR	CpMMU, 0, R0, C(CpCacheFlush), C(0x7), 0
 
 	/* drain prefetch */
-	MOVW	R0,R0						
+	MOVW	R0,R0
 	MOVW	R0,R0
 	MOVW	R0,R0
 	MOVW	R0,R0

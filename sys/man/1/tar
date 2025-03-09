@@ -35,7 +35,7 @@ The named files
 are appended to the archive.
 .TP
 .B  t
-List all occurrences of each 
+List all occurrences of each
 .I file
 in the archive, or of all files if there are no
 .I file

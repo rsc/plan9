@@ -325,7 +325,7 @@ userinit(void)
 	 * Kernel Stack
 	 *
 	 * N.B. make sure there's enough space for syscall to check
-	 *	for valid args and 
+	 *	for valid args and
 	 *	4 bytes for gotolabel's return PC
 	 */
 	p->sched.pc = (ulong)init0;
@@ -623,7 +623,7 @@ void
 idlehands(void)
 {
 	/*
-	 * we used to halt only on single-core setups. halting in an smp system 
+	 * we used to halt only on single-core setups. halting in an smp system
 	 * can result in a startup latency for processes that become ready.
 	 * if less_power_slower is true, we care more about saving energy
 	 * than reducing this latency.

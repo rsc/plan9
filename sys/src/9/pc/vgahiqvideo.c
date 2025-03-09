@@ -77,7 +77,7 @@ hiqvideoenable(VGAscr* scr)
 
 	scr->pci = p;
 	vgalinearpci(scr);
-	
+
 	if(scr->paddr) {
 		addvgaseg("hiqvideoscreen", scr->paddr, scr->apsize);
 	}

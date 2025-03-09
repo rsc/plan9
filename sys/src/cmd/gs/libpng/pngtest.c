@@ -1435,7 +1435,7 @@ main(int argc, char *argv[])
                current_allocation);
             while (pinfo != NULL)
             {
-               fprintf(STDERR, " %lu bytes at %x\n", pinfo->size, 
+               fprintf(STDERR, " %lu bytes at %x\n", pinfo->size,
                  (unsigned int) pinfo->pointer);
                pinfo = pinfo->next;
             }

@@ -1,12 +1,12 @@
 %    Copyright (C) 2000 artofcode LLC.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -55,12 +55,12 @@ currentdict /super.complete_instance currentdict /complete_instance get put
   currentdict end
 } bind def
 
-/load_sfnts  % <FontDict> load_sfnts <FontDict> 
+/load_sfnts  % <FontDict> load_sfnts <FontDict>
 { % Read the True Type file from the path /Path, and buld /sfnts,
-  % skipping glyf and loca. 
+  % skipping glyf and loca.
   dup /Path get                                            % <font> (path)
   QUIET not {
-    (Loading a TT font from ) print dup print 
+    (Loading a TT font from ) print dup print
     ( to emulate a CID font ) print 1 index /CIDFontName get =only ( ... ) print
   } if
   (r) file dup                                             % <font> file file

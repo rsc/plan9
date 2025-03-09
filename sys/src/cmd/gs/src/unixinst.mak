@@ -1,12 +1,12 @@
 #    Copyright (C) 1997-2005 artofcode LLC. All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -61,7 +61,7 @@ install-data: install-libdata install-resdata install-doc install-man install-ex
 # There's no point in providing a complete dependency list: we include
 # one file from each subdirectory just as a sanity check.
 
-install-libdata: 
+install-libdata:
 	-mkdir -p $(datadir)
 	-mkdir -p $(gsdir)
 	-mkdir -p $(gsdatadir)
@@ -93,7 +93,7 @@ pdf2dsc.ps pdfopt.ps ;\
 
 # install the default resource files
 # copy in every category (directory) but CVS
-RES_CATEGORIES=`ls $(PSRESDIR) | grep -v CVS` 
+RES_CATEGORIES=`ls $(PSRESDIR) | grep -v CVS`
 install-resdata: $(PSRESDIR)/Decoding/Unicode
 	-mkdir -p $(datadir)
 	-mkdir -p $(gsdir)

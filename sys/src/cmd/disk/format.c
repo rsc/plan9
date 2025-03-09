@@ -296,7 +296,7 @@ sanitycheck(Disk *disk)
 	bad = 0;
 	if(dos && nresrv < 2 && seek(disk->fd, disk->secsize, 0) == disk->secsize
 	&& read(disk->fd, buf, sizeof(buf)) >= 5 && strncmp(buf, "part ", 5) == 0) {
-		fprint(2, 
+		fprint(2,
 			"there's a plan9 partition on the disk\n"
 			"and you didn't specify -r 2 (or greater).\n"
 			"either specify -r 2 or -x to disable this check.\n");
@@ -332,9 +332,9 @@ getdriveno(Disk *disk)
 		return 0x80;
 
 	/*
-	 * The name is of the format #SsdC0/foo 
+	 * The name is of the format #SsdC0/foo
 	 * or /dev/sdC0/foo.
-	 * So that we can just look for /sdC0, turn 
+	 * So that we can just look for /sdC0, turn
 	 * #SsdC0/foo into #/sdC0/foo.
 	 */
 	if(buf[0] == '#' && buf[1] == 'S')
@@ -344,7 +344,7 @@ getdriveno(Disk *disk)
 		if(p[0] == 's' && p[1] == 'd' && (p[2]=='C' || p[2]=='D') &&
 		    (p[3]=='0' || p[3]=='1'))
 			return 0x80 + (p[2]-'C')*2 + (p[3]-'0');
-		
+
 	return 0x80;
 }
 
@@ -440,9 +440,9 @@ dosfs(int dofat, int dopbs, Disk *disk, char *label, int argc, char *argv[], int
 	b->magic[1] = 0x3C;
 	b->magic[2] = 0x90;
 	memmove(b->version, "Plan9.00", sizeof(b->version));
-	
+
 	/*
-	 * Add bootstrapping code; assume it starts 
+	 * Add bootstrapping code; assume it starts
 	 * at 0x3E (the destination of the jump we just
 	 * wrote to b->magic).
 	 */
@@ -488,7 +488,7 @@ dosfs(int dofat, int dopbs, Disk *disk, char *label, int argc, char *argv[], int
 			clustersize = t->cluster;
 		/*
 		 * the number of fat bits depends on how much disk is left
-		 * over after you subtract out the space taken up by the fat tables. 
+		 * over after you subtract out the space taken up by the fat tables.
 		 * try both.  what a crock.
 		 */
 		fatbits = 12;
@@ -518,7 +518,7 @@ Tryagain:
 				fatal("can't decide how many clusters to use (%d? %d?)", clusters, newclusters);
 if(chatty) print("clusters %d\n", clusters);
 		}
-				
+
 if(chatty) print("try %d fatbits => %d clusters of %d\n", fatbits, clusters, clustersize);
 		switch(fatbits){
 		case 12:
@@ -545,7 +545,7 @@ if(chatty) print("try %d fatbits => %d clusters of %d\n", fatbits, clusters, clu
 		PUTSHORT(b->nheads, t->heads);
 		PUTLONG(b->nhidden, disk->offset);
 		PUTLONG(b->bigvolsize, volsecs);
-	
+
 		/*
 		 * Extended BIOS Parameter Block.
 		 */
@@ -554,7 +554,7 @@ if(chatty) print("try %d fatbits => %d clusters of %d\n", fatbits, clusters, clu
 		else
 			b->driveno = 0;
 if(chatty) print("driveno = %ux\n", b->driveno);
-	
+
 		b->bootsig = 0x29;
 		x = disk->offset + b->nfats*fatsecs + nresrv;
 		PUTLONG(b->volid, x);
@@ -615,7 +615,7 @@ if(chatty) print("files @%lluX\n", seek(disk->wfd, 0LL, 1));
 
 	/*
 	 * Now positioned at the Files Area.
-	 * If we have any arguments, process 
+	 * If we have any arguments, process
 	 * them and write out.
 	 */
 	for(p = root; argc > 0; argc--, argv++, p += sizeof(Dosdir)){
@@ -646,7 +646,7 @@ if(chatty) print("files @%lluX\n", seek(disk->wfd, 0LL, 1));
 			length *= secsize*clustersize;
 			if((buf = malloc(length)) == 0)
 				fatal("out of memory");
-	
+
 			if(readn(sysfd, buf, d->length) != d->length)
 				fatal("read %s: %r", *argv);
 			memset(buf+d->length, 0, length-d->length);
@@ -656,7 +656,7 @@ if(chatty) print("%s @%lluX\n", d->name, seek(disk->wfd, 0LL, 1));
 			free(buf);
 
 			close(sysfd);
-	
+
 			/*
 			 * Allocate the FAT clusters.
 			 * We're assuming here that where we
@@ -725,7 +725,7 @@ clustalloc(int flag)
 			fat[o+1] = x>>8;
 		}
 	}
-		
+
 	if(flag == Eof)
 		return 0;
 	else{

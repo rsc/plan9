@@ -1,4 +1,4 @@
-# Cloned from bcm94345wlpagb_p2xx.txt 
+# Cloned from bcm94345wlpagb_p2xx.txt
 NVRAMRev=$Rev: 498373 $
 sromrev=11
 vendid=0x14e4

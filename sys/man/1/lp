@@ -1,4 +1,4 @@
-.TH LP 1 
+.TH LP 1
 .SH NAME
 lp \- printer output
 .SH SYNOPSIS
@@ -37,7 +37,7 @@ is
 .L /dev/lpt1data
 line printer port on a 386 machine, assumed
 to be connected to a PostScript printer.
-Destinations 
+Destinations
 .L hpdeskjet
 and
 .L bjc240l
@@ -54,8 +54,8 @@ where
 is a Ghostscript output device.
 See
 .IR gs (1)
-and the 
-.L canonbjc240l 
+and the
+.L canonbjc240l
 entry in
 .LR /sys/lib/lp/devices .
 .TP
@@ -67,9 +67,9 @@ for the given destination.
 The given processor is invoked.
 The default processor is
 .LR generic ,
-which tries to do the right thing for regular text, 
+which tries to do the right thing for regular text,
 .IR troff (1)
-output, or 
+output, or
 .IR tex (1)
 output.
 If no processing is desired
@@ -150,7 +150,7 @@ a range
 .IB n -
 means from page
 .I n
-to the end. 
+to the end.
 .TP
 .B -r
 Reverse the order of page printing.

@@ -200,7 +200,7 @@ A better way is
 if (~ $1 -c) echo OK
 .EE
 .PP
-Test whether 
+Test whether
 .L abc
 is in the current directory.
 .IP
@@ -208,7 +208,7 @@ is in the current directory.
 .SH SOURCE
 .B /sys/src/cmd/test.c
 .SH "SEE ALSO"
-.IR rc (1) 
+.IR rc (1)
 .SH BUGS
 Won't complain about extraneous arguments
 since there may be arguments left unprocessed by

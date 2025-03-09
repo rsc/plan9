@@ -7,7 +7,7 @@ rm -f /srv/log
 if(~ $#* 2) {
 	wid=$1
 	ht=$2
-} 
+}
 if not {
 	scr=(`{cat /dev/draw/new >[2]/dev/null || status=''})
 	wid=$scr(7)

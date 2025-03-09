@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -170,7 +170,7 @@ extern const stream_template s_compr_chooser_template;
 
 /* Set image dimensions. */
 int
-s_compr_chooser_set_dimensions(stream_compr_chooser_state * st, int width, 
+s_compr_chooser_set_dimensions(stream_compr_chooser_state * st, int width,
 			       int height, int depth, int bits_per_sample);
 
 /* Get choice */
@@ -218,7 +218,7 @@ struct stream_image_colors_state_s {
 
 extern const stream_template s_image_colors_template;
 
-void s_image_colors_set_dimensions(stream_image_colors_state * st, 
+void s_image_colors_set_dimensions(stream_image_colors_state * st,
 			       int width, int height, int depth, int bits_per_sample);
 
 void s_image_colors_set_mask_colors(stream_image_colors_state * ss, uint *MaskColor);

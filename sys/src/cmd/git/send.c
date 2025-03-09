@@ -84,7 +84,7 @@ readours(Hash **tailp, char ***refp)
 		dprint(1, "update: %H %s\n", tail[i], ref[i]);
 	*tailp = tail;
 	*refp = ref;
-	return nu;	
+	return nu;
 }
 
 char *
@@ -237,7 +237,7 @@ sendpack(Conn *c)
 		if(chattygit)
 			fprint(2, "done sending pack, status %s\n", buf);
 		nsp = getfields(buf, sp, nelem(sp), 1, " \t\n\r");
-		if(nsp < 2) 
+		if(nsp < 2)
 			continue;
 		if(nsp < 3)
 			sp[2] = "";

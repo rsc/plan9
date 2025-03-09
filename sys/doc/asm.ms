@@ -765,7 +765,7 @@ with an
 .CW W ,
 or
 .CW B
-appended to identify 32-bit, 
+appended to identify 32-bit,
 16-bit, and 8-bit operations.
 The exceptions are loads, stores, and conditionals.
 All load and store opcodes to and from general registers, special registers
@@ -1160,7 +1160,7 @@ The assembler knows the commonly used special purpose registers:
 and
 .CW XER .
 The rest, which are often architecture-dependent, are referenced as
-.CW SPR(n) . 
+.CW SPR(n) .
 The segment registers of the 60x series are similarly
 .CW SEG(n) ,
 but

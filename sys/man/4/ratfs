@@ -111,7 +111,7 @@ The remaining directories,
 and
 .BR dial ,
 represent the contents of the
-.I classification 
+.I classification
 (default
 .BR /mail/lib/smtpd.conf.ext ).
 Each contains two directories;
@@ -120,7 +120,7 @@ and
 .BR account .
 The
 .B ip
-directory has the same open semantics as the 
+directory has the same open semantics as the
 .B trusted
 directory, i.e., to check if an IP address falls
 in that category, try to open a file whose
@@ -170,5 +170,3 @@ are described in
 .IR mail (1)
 .IR smtpd (6)
 .IR scanmail (8)
-
-

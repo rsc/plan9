@@ -82,7 +82,7 @@ int
 mountfactotum(void)
 {
 	int fd;
-	
+
 	if((fd = dialfactotum()) < 0)
 		return -1;
 	if(sysmount(fd, -1, "/mnt/factotum", MREPL, "") < 0){
@@ -190,7 +190,7 @@ cpumain(int argc, char **argv)
 	else
 		writestr(data, dat, "dir", 0);
 
-	/* 
+	/*
 	 *  Wait for the other end to execute and start our file service
 	 *  of /mnt/term
 	 */
@@ -290,7 +290,7 @@ readstr(int fd, char *str, int len)
 
 	while(len) {
 		n = read(fd, str, 1);
-		if(n < 0) 
+		if(n < 0)
 			return -1;
 		if(*str == '\0')
 			return 0;
@@ -528,9 +528,9 @@ int
 askuser(char *params)
 {
 	Attr *attr;
-	
+
 	fmtinstall('A', _attrfmt);
-	
+
 	attr = promptforkey(params);
 	if(attr == nil)
 		sysfatal("no key supplied");
@@ -648,7 +648,7 @@ p9any(int fd)
 		werrstr("");
 		fatal(0, "server says: %s", buf);
 	}
-	
+
 	convM2A(tbuf, &auth, t.key);
 	if(auth.num != AuthAs
 	|| memcmp(auth.chal, cchal, CHALLEN) != 0

@@ -375,7 +375,7 @@ imagechanreclaim(void)
 
 	/*
 	 * We don't have to recheck that nfreechan > 0 after we
-	 * acquire the lock, because we're the only ones who decrement 
+	 * acquire the lock, because we're the only ones who decrement
 	 * it (the other lock contender increments it), and there's only
 	 * one of us thanks to the qlock above.
 	 */
@@ -797,4 +797,3 @@ segclock(ulong pc)
 		s->profile[pc>>LRESPROF] += TK2MS(1);
 	}
 }
-

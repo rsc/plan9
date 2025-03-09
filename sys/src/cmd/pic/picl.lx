@@ -182,7 +182,7 @@ WS	[ \t]
 <A>"<"		return(LT);
 <A>"&&"		return(ANDAND);
 <A>"||"		return(OROR);
-<A>"!"		return(NOT);	
+<A>"!"		return(NOT);
 
 <A>Here		return(yylval.i = HERE);
 

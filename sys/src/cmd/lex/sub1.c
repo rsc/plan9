@@ -495,7 +495,7 @@ allprint(int c)
 			if(!isprint(c)){
 				print("\\%-3o",c);
 				charc += 3;
-			} else 
+			} else
 				print("%c", c);
 			break;
 	}
@@ -595,7 +595,7 @@ treedump(void)
 				print("final %d",left[t]);
 				break;
 			case S1FINAL:
-				print("s1final %d",left[t]);	
+				print("s1final %d",left[t]);
 				break;
 			case S2FINAL:
 				print("s2final %d",left[t]);

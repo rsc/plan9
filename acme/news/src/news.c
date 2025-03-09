@@ -203,7 +203,7 @@ adddir(Biobuf *body, int hi, int lo, int nshow)
 	return i;
 }
 
-/* 
+/*
  * Show the first nshow messages in the window.
  * This depends on nntpfs presenting contiguously
  * numbered directories, and on the qid version being
@@ -219,7 +219,7 @@ dirwindow(Window *w)
 		w->data = winopenfile(w, "data");
 
 	fprint(w->ctl, "dirty\n");
-	
+
 	winopenbody(w, OWRITE);
 	lo = adddir(w->body, hi, 0, nshow);
 	winclean(w);
@@ -347,14 +347,14 @@ acmecmd(Article *m, Window *w, char *s)
 		if(w->data < 0)
 			w->data = winopenfile(w, "data");
 		winsetaddr(w, "$", 1);
-	
+
 		fprint(w->ctl, "dirty\n");
 
 		b = emalloc(sizeof(*b));
 		Binit(b, w->data, OWRITE);
 		lo = adddir(b, lo, 0, nshow);
 		Bterm(b);
-		free(b);		
+		free(b);
 		winclean(w);
 		winsetaddr(w, ".,", 0);
 	}
@@ -439,7 +439,7 @@ acmeevent(Article *m, Window *w, Event *e)
 				recvp(w->cevent);		/* ignore origin */
 			}else
 				na = 0;
-			
+
 			/* append chorded arguments */
 			if(na){
 				t = emalloc(strlen(s)+1+na+1);
@@ -548,7 +548,7 @@ X-Priority: 3
 Date: Wed, 13 Dec 2000 10:49:50 GMT
 */
 
-char *skipheader[] = 
+char *skipheader[] =
 {
 	"x-",
 	"path:",
@@ -578,7 +578,7 @@ fillmesgwindow(int fd, Article *m)
 		sprint(tmp, "%d/article", m->n);
 		p = estrstrdup(dir, tmp);
 		if((xfd = open(p, OREAD)) < 0){
-			free(p);	
+			free(p);
 			return 0;
 		}
 		free(p);
@@ -665,7 +665,7 @@ replywindow(Article *m)
 	sprint(tmp, "%d/article", m->n);
 	p = estrstrdup(dir, tmp);
 	if((fd = open(p, OREAD)) < 0){
-		free(p);	
+		free(p);
 		return;
 	}
 	free(p);
@@ -840,7 +840,7 @@ mesgopen(char *s)
 	sprint(tmp, "%d/article", n);
 	p = estrstrdup(dir, tmp);
 	if((fd = open(p, OREAD)) < 0){
-		free(p);	
+		free(p);
 		return 0;
 	}
 

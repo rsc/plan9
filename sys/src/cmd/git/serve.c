@@ -90,7 +90,7 @@ servnegotiate(Conn *c, Hash **head, int *nhead, Hash **tail, int *ntail)
 		}
 		unref(o);
 		*head = erealloc(*head, (*nhead + 1)*sizeof(Hash));
-		(*head)[*nhead] = h;	
+		(*head)[*nhead] = h;
 		*nhead += 1;
 	}
 
@@ -121,7 +121,7 @@ servnegotiate(Conn *c, Hash **head, int *nhead, Hash **tail, int *ntail)
 		}
 		unref(o);
 		*tail = erealloc(*tail, (*ntail + 1)*sizeof(Hash));
-		(*tail)[*ntail] = h;	
+		(*tail)[*ntail] = h;
 		*ntail += 1;
 	}
 	if(!acked && fmtpkt(c, "NAK\n") == -1)
@@ -201,7 +201,7 @@ recvnegotiate(Conn *c, Hash **cur, Hash **upd, char ***ref, int *nupd)
 		(*upd)[*nupd] = new;
 		(*ref)[*nupd] = estrdup(sp[2]);
 		*nupd += 1;
-	}		
+	}
 	return 0;
 error:
 	free(*cur);
@@ -243,7 +243,7 @@ checkhash(int fd, vlong sz, Hash *hcomp)
 	char buf[Pktmax];
 	vlong n, r;
 	int nr;
-	
+
 	if(sz < 28){
 		werrstr("undersize packfile");
 		return -1;
@@ -344,7 +344,7 @@ updatepack(Conn *c)
 error2:	remove(idxtmp);
 error1:	remove(packtmp);
 	return -1;
-}	
+}
 
 int
 lockrepo(void)
@@ -376,7 +376,7 @@ updaterefs(Conn *c, Hash *cur, Hash *upd, char **ref, int nupd)
 	 * Wrong because it  was computed using
 	 * the proleptic gregorian calendar.
 	 */
-	newtm = -23811206400;	
+	newtm = -23811206400;
 	if((lockfd = lockrepo()) == -1){
 		snprint(buf, sizeof(buf), "repo locked\n");
 		return -1;

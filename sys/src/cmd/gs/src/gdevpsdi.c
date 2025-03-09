@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -85,7 +85,7 @@ pixel_resize(psdf_binary_writer * pbw, int width, int num_components,
 }
 
 private int
-convert_color(gx_device *pdev, const gs_color_space *pcs, const gs_imager_state * pis, 
+convert_color(gx_device *pdev, const gs_color_space *pcs, const gs_imager_state * pis,
 	      gs_client_color *cc, float c[3])
 {
     int code;
@@ -102,12 +102,12 @@ convert_color(gx_device *pdev, const gs_color_space *pcs, const gs_imager_state 
 }
 
 /* A hewristic choice of DCT compression parameters - see bug 687174. */
-private int 
-choose_DCT_params(gx_device *pdev, const gs_color_space *pcs, 
-		  const gs_imager_state * pis, 
-		  gs_c_param_list *list, gs_c_param_list **param, 
-		  stream_state *st) 
-{   
+private int
+choose_DCT_params(gx_device *pdev, const gs_color_space *pcs,
+		  const gs_imager_state * pis,
+		  gs_c_param_list *list, gs_c_param_list **param,
+		  stream_state *st)
+{
     gx_device_memory mdev;
     gs_client_color cc;
     int code;
@@ -130,7 +130,7 @@ choose_DCT_params(gx_device *pdev, const gs_color_space *pcs,
     set_linear_color_bits_mask_shift((gx_device *)&mdev);
     mdev.color_info.separable_and_linear = GX_CINFO_SEP_LIN;
 
-    /* Check for an RGB-like color space.  
+    /* Check for an RGB-like color space.
        To recognize that we make a matrix as it were a linear operator,
        suppress an ununiformity by subtracting the image of {0,0,0},
        and then check for giagonal domination.  */
@@ -151,7 +151,7 @@ choose_DCT_params(gx_device *pdev, const gs_color_space *pcs,
     if (c[0][0] * domination > c[0][1] && c[0][0] * domination > c[0][2] &&
 	c[1][1] * domination > c[1][0] && c[1][1] * domination > c[1][2] &&
 	c[2][2] * domination > c[2][0] && c[2][2] * domination > c[2][1]) {
-	/* Yes, it looks like an RGB color space. 
+	/* Yes, it looks like an RGB color space.
 	   Replace ColorTransform with 1. */
 	code = param_write_int((gs_param_list *)list, "ColorTransform", &one);
 	if (code < 0)
@@ -176,7 +176,7 @@ choose_DCT_params(gx_device *pdev, const gs_color_space *pcs,
     if (c[0][0] * domination > c[0][1] && c[0][0] * domination > c[0][2] &&
 	c[1][0] * domination > c[1][1] && c[1][0] * domination > c[1][2] &&
 	c[2][0] * domination > c[2][1] && c[2][0] * domination > c[2][2]) {
-	/* Yes, it looks like an Lab color space. 
+	/* Yes, it looks like an Lab color space.
 	   Replace ColorTransform with 0. */
 	code = param_write_int((gs_param_list *)list, "ColorTransform", &zero);
 	if (code < 0)
@@ -205,7 +205,7 @@ done:
 /* Add the appropriate image compression filter, if any. */
 private int
 setup_image_compression(psdf_binary_writer *pbw, const psdf_image_params *pdip,
-			const gs_pixel_image_t * pim, const gs_imager_state * pis, 
+			const gs_pixel_image_t * pim, const gs_imager_state * pis,
 			bool lossless)
 {
     gx_device_psdf *pdev = pbw->dev;
@@ -219,7 +219,7 @@ setup_image_compression(psdf_binary_writer *pbw, const psdf_image_params *pdip,
     const gs_color_space *pcs = pim->ColorSpace; /* null if mask */
     int Colors = (pcs ? gs_color_space_num_components(pcs) : 1);
     bool Indexed =
-	(pcs != 0 && 
+	(pcs != 0 &&
 	 gs_color_space_get_index(pcs) == gs_color_space_index_Indexed);
     gs_c_param_list *dict = pdip->Dict;
     stream_state *st;
@@ -244,7 +244,7 @@ setup_image_compression(psdf_binary_writer *pbw, const psdf_image_params *pdip,
         }
 	dict = pdip->ACSDict;
     } else if (!lossless)
-	return gs_error_rangecheck; /* Reject the alternative stream. */   
+	return gs_error_rangecheck; /* Reject the alternative stream. */
     if (pdev->version < psdf_version_ll3 && template == &s_zlibE_template)
 	orig_template = template = lossless_template;
     if (dict) /* NB: rather than dereference NULL lets continue on without a dict */
@@ -350,7 +350,7 @@ do_downsample(const psdf_image_params *pdip, const gs_pixel_image_t *pim,
 /* Assumes do_downsampling() is true. */
 private int
 setup_downsampling(psdf_binary_writer * pbw, const psdf_image_params * pdip,
-		   gs_pixel_image_t * pim, const gs_imager_state * pis, 
+		   gs_pixel_image_t * pim, const gs_imager_state * pis,
 		   floatp resolution, bool lossless)
 {
     gx_device_psdf *pdev = pbw->dev;
@@ -407,7 +407,7 @@ setup_downsampling(psdf_binary_writer * pbw, const psdf_image_params * pdip,
 
 /* Decive whether to convert an image to RGB. */
 bool
-psdf_is_converting_image_to_RGB(const gx_device_psdf * pdev, 
+psdf_is_converting_image_to_RGB(const gx_device_psdf * pdev,
 		const gs_imager_state * pis, const gs_pixel_image_t * pim)
 {
     return pdev->params.ConvertCMYKImagesToRGB &&
@@ -509,7 +509,7 @@ psdf_setup_image_filters(gx_device_psdf * pdev, psdf_binary_writer * pbw,
 	if (cmyk_to_rgb) {
 	    extern_st(st_color_space);
 	    gs_memory_t *mem = pdev->v_memory;
-	    gs_color_space *rgb_cs = gs_alloc_struct(mem, 
+	    gs_color_space *rgb_cs = gs_alloc_struct(mem,
 		    gs_color_space, &st_color_space, "psdf_setup_image_filters");
 
 	    gs_cspace_init_DeviceRGB(mem, rgb_cs);  /* idempotent initialization */
@@ -529,7 +529,7 @@ psdf_setup_image_filters(gx_device_psdf * pdev, psdf_binary_writer * pbw,
 	    stream_C2R_state *ss = (stream_C2R_state *)
 		s_alloc_state(mem, s_C2R_template.stype, "C2R state");
 	    int code = pixel_resize(pbw, pim->Width, 3, 8, bpc_out);
-		    
+
 	    if (code < 0 ||
 		(code = psdf_encode_binary(pbw, &s_C2R_template,
 					   (stream_state *) ss)) < 0 ||
@@ -578,7 +578,7 @@ psdf_setup_compression_chooser(psdf_binary_writer *pbw, gx_device_psdf *pdev,
 		    int width, int height, int depth, int bits_per_sample)
 {
     int code;
-    stream_state *ss = s_alloc_state(pdev->memory, s_compr_chooser_template.stype, 
+    stream_state *ss = s_alloc_state(pdev->memory, s_compr_chooser_template.stype,
                                      "psdf_setup_compression_chooser");
 
     if (ss == 0)
@@ -591,7 +591,7 @@ psdf_setup_compression_chooser(psdf_binary_writer *pbw, gx_device_psdf *pdev,
     code = psdf_encode_binary(pbw, &s_compr_chooser_template, ss);
     if (code < 0)
 	return code;
-    code = s_compr_chooser_set_dimensions((stream_compr_chooser_state *)ss, 
+    code = s_compr_chooser_set_dimensions((stream_compr_chooser_state *)ss,
 		    width, height, depth, bits_per_sample);
     return code;
 }
@@ -602,7 +602,7 @@ psdf_setup_image_to_mask_filter(psdf_binary_writer *pbw, gx_device_psdf *pdev,
 		    int width, int height, int depth, int bits_per_sample, uint *MaskColor)
 {
     int code;
-    stream_state *ss = s_alloc_state(pdev->memory, s__image_colors_template.stype, 
+    stream_state *ss = s_alloc_state(pdev->memory, s__image_colors_template.stype,
 	"psdf_setup_image_colors_filter");
 
     if (ss == 0)
@@ -612,7 +612,7 @@ psdf_setup_image_to_mask_filter(psdf_binary_writer *pbw, gx_device_psdf *pdev,
     code = psdf_encode_binary(pbw, &s__image_colors_template, ss);
     if (code < 0)
 	return code;
-    s_image_colors_set_dimensions((stream_image_colors_state *)ss, 
+    s_image_colors_set_dimensions((stream_image_colors_state *)ss,
 		    width, height, depth, bits_per_sample);
     s_image_colors_set_mask_colors((stream_image_colors_state *)ss, MaskColor);
     return 0;
@@ -620,15 +620,15 @@ psdf_setup_image_to_mask_filter(psdf_binary_writer *pbw, gx_device_psdf *pdev,
 
 /* Set up an image colors filter. */
 int
-psdf_setup_image_colors_filter(psdf_binary_writer *pbw, 
-			       gx_device_psdf *pdev, gs_pixel_image_t * pim, 
+psdf_setup_image_colors_filter(psdf_binary_writer *pbw,
+			       gx_device_psdf *pdev, gs_pixel_image_t * pim,
 			       const gs_imager_state *pis,
 			       gs_color_space_index output_cspace_index)
 {   /* fixme: currently it's a stub convertion to mask. */
     int code;
     extern_st(st_color_space);
     gs_memory_t *mem = pdev->v_memory;
-    stream_state *ss = s_alloc_state(pdev->memory, s__image_colors_template.stype, 
+    stream_state *ss = s_alloc_state(pdev->memory, s__image_colors_template.stype,
 	"psdf_setup_image_colors_filter");
     gs_color_space *cs;
     int i;
@@ -640,15 +640,15 @@ psdf_setup_image_colors_filter(psdf_binary_writer *pbw,
     code = psdf_encode_binary(pbw, &s__image_colors_template, ss);
     if (code < 0)
 	return code;
-    cs = gs_alloc_struct(mem, gs_color_space, &st_color_space, 
+    cs = gs_alloc_struct(mem, gs_color_space, &st_color_space,
 			    "psdf_setup_image_colors_filter");
     if (cs == NULL)
 	return_error(gs_error_VMerror);
-    s_image_colors_set_dimensions((stream_image_colors_state *)ss, 
-		    pim->Width, pim->Height, 
-		    gs_color_space_num_components(pim->ColorSpace), 
+    s_image_colors_set_dimensions((stream_image_colors_state *)ss,
+		    pim->Width, pim->Height,
+		    gs_color_space_num_components(pim->ColorSpace),
 		    pim->BitsPerComponent);
-    s_image_colors_set_color_space((stream_image_colors_state *)ss, 
+    s_image_colors_set_color_space((stream_image_colors_state *)ss,
 		    (gx_device *)pdev, pim->ColorSpace, pis, pim->Decode);
     pim->BitsPerComponent = pdev->color_info.comp_bits[0]; /* Same precision for all components. */
     for (i = 0; i < pdev->color_info.num_components; i++) {
@@ -660,15 +660,15 @@ psdf_setup_image_colors_filter(psdf_binary_writer *pbw,
 	    gs_cspace_init_DeviceGray(mem, cs);
 	    break;
 	case gs_color_space_index_DeviceRGB:
-	    gs_cspace_init_DeviceRGB(mem, cs); 
+	    gs_cspace_init_DeviceRGB(mem, cs);
 	    break;
 	case gs_color_space_index_DeviceCMYK:
-	    gs_cspace_init_DeviceCMYK(mem, cs); 
+	    gs_cspace_init_DeviceCMYK(mem, cs);
 	    break;
 	default:
 	    /* Notify the user and terminate.
 	       Don't emit rangecheck becuause it would fall back
-	       to a default implementation (rasterisation). 
+	       to a default implementation (rasterisation).
 	     */
 	    eprintf("Unsupported ProcessColorModel");
 	    return_error(gs_error_undefined);

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989-1994, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -41,7 +41,7 @@ private dev_proc_get_params(lxm_get_params);
 private dev_proc_put_params(lxm_put_params);
 
 /* set up dispatch table.  I follow gdevdjet in using gdev_prn_output_page */
-static const gx_device_procs lxm5700m_procs = 
+static const gx_device_procs lxm5700m_procs =
     prn_params_procs(gdev_prn_open, gdev_prn_output_page, gdev_prn_close,
                      lxm_get_params, lxm_put_params);
 
@@ -98,14 +98,14 @@ lxm_device far_data gs_lxm5700m_device = {
 /*
  * various output shorthands
  */
- 
+
 #define init1() \
 	top(), \
 	0xA5,0, 3, 0x40,4,5, \
 	0xA5,0, 3, 0x40,4,6, \
 	0xA5,0, 3, 0x40,4,7, \
 	0xA5,0, 3, 0x40,4,8, \
-	0xA5,0, 4, 0x40,0xe0,0x0b, 3 
+	0xA5,0, 4, 0x40,0xe0,0x0b, 3
 
 #define init2() \
 	0xA5,0, 11, 0x40,0xe0,0x41, 0,0,0,0,0,0,0, 2, \
@@ -137,7 +137,7 @@ lxm_device far_data gs_lxm5700m_device = {
 /* height of printhead in pixels */
 #define swipeHeight 208
 /* number of shorts described by each column directory */
-#define directorySize 13 
+#define directorySize 13
 
 /* ------ Driver procedures ------ */
 
@@ -145,11 +145,11 @@ lxm_device far_data gs_lxm5700m_device = {
 /* Send the page to the printer. */
 private int
 lxm5700m_print_page(gx_device_printer *pdev, FILE *prn_stream)
-{	
+{
     int lnum,minX, maxX, i, l, highestX, leastX, extent;
     int direction = RIGHTWARD;
     int lastY = 0;
-    
+
     int line_size = gdev_mem_bytes_per_scan_line((gx_device *)pdev);
     /* Note that in_size is a multiple of 8. */
     int in_size = line_size * (swipeHeight);
@@ -161,10 +161,10 @@ lxm5700m_print_page(gx_device_printer *pdev, FILE *prn_stream)
 
     /* Check allocations */
     if ( buf1 == 0 || swipeBuf == 0 ) {
-	if ( buf1 ) 
+	if ( buf1 )
 quit_ignomiously: /* and a goto into an if statement is pretty ignomious! */
 	gs_free(pdev->memory, (char *)buf1, in_size, 1, "lxm_print_page(buf1)");
-	if ( swipeBuf ) 
+	if ( swipeBuf )
 	    gs_free(pdev->memory, (char *)swipeBuf, swipeBuf_size, 1, "lxm_print_page(swipeBuf)");
 	return_error(gs_error_VMerror);
     }
@@ -245,7 +245,7 @@ quit_ignomiously: /* and a goto into an if statement is pretty ignomious! */
 	highestX = maxX*8-1;
 	leastX = minX*8;
 	extent = highestX -leastX +1;
-		
+
 	outp = swipeBuf;
 
 	/* macro, not fcn call.  Space penalty is modest, speed helps */
@@ -326,17 +326,17 @@ quit_ignomiously: /* and a goto into an if statement is pretty ignomious! */
 	    /* put out header*/
 	    int deltaY = 2*(leastY - lastY);  /* vert coordinates here are 1200 dpi */
 	    lastY = leastY;
-	    outByte(0x1b); outByte('*'); outByte(3); 
+	    outByte(0x1b); outByte('*'); outByte(3);
 	    outByte(deltaY>>8); outByte(deltaY&0xff);
 	    outByte(0x1b); outByte('*'); outByte(4); outByte(0); outByte(0);
-	    outByte(sz>>8); outByte(sz&0xff); outByte(0); outByte(3); 
+	    outByte(sz>>8); outByte(sz&0xff); outByte(0); outByte(3);
 	    outByte(1); outByte(1); outByte(0x1a);
-	    outByte(0); 
-	    outByte(extent>>8); outByte(extent&0xff); 
+	    outByte(0);
+	    outByte(extent>>8); outByte(extent&0xff);
 	    outByte(leastX>>8); outByte(leastX&0xff);
 	    outByte(highestX>>8); outByte(highestX&0xff);
 	    outByte(0); outByte(0);
-	    outByte(0x22); outByte(0x33); outByte(0x44); 
+	    outByte(0x22); outByte(0x33); outByte(0x44);
 	    outByte(0x55); outByte(1);
 	    /* put out bytes */
 	    fwrite(swipeBuf,1,outp-swipeBuf,prn_stream);
@@ -351,7 +351,7 @@ quit_ignomiously: /* and a goto into an if statement is pretty ignomious! */
 	    fin() /*,  looks like I can get away with only this much ...
 	    init1(),
 	    init3(),
-	    fin()   , 
+	    fin()   ,
 	    top(),
 	    fin()  */
 	};
@@ -364,11 +364,11 @@ quit_ignomiously: /* and a goto into an if statement is pretty ignomious! */
     return 0;
 }
 
-/* 
- * There are a number of parameters which can differ between ink cartridges. 
+/*
+ * There are a number of parameters which can differ between ink cartridges.
  * The Windows driver asks you to recalibrate every time you load a new
  * cartridge.
- * most of the parameters adjusted there relate to color, and so this 
+ * most of the parameters adjusted there relate to color, and so this
  * monotone driver doesn't need them.  However, the Lexmark 5700 black
  * cartridge has two columns of dots, separated by about 16 pixels.
  * This `head separation' distance can vary between cartridges, so
@@ -386,15 +386,15 @@ quit_ignomiously: /* and a goto into an if statement is pretty ignomious! */
 
 private int
 lxm_get_params(gx_device *pdev, gs_param_list *plist)
-{       
+{
     lxm_device* const ldev = (lxm_device*)pdev;
     int code = gdev_prn_get_params(pdev, plist);
 
     if ( code < 0 ) return code;
-    code = param_write_int(plist, 
+    code = param_write_int(plist,
 			   "HeadSeparation",
 			   (int *)&(ldev->headSeparation));
-           
+
     return code;
 }
 

@@ -91,7 +91,7 @@ pickleinit(void)
 		if(types[TINT]->width != types[TSHORT]->width)
 			warn(Z, "picklemember int not long or short");
 	}
-	
+
 }
 
 void
@@ -256,7 +256,7 @@ picklevar(Sym *s)
 			Bprint(&outbuf, "complex %s %s:%s;\n",
 				pmap(s1->name), pmap(s2->name), pmap(s->name));
 		break;
-	
+
 	case CSTATIC:
 	case CEXTERN:
 	case CGLOBL:

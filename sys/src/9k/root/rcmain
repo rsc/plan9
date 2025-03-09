@@ -3,7 +3,7 @@
 # Plan 9 initial boot environment version
 #
 home=/
-ifs=' 	
+ifs='
 '
 prompt=('# ' '	')
 path=(. /bin)
@@ -26,7 +26,7 @@ fn netstat {@{
 			cat $i/status $i/local $i/remote \
 			| sed -n -e :a -e '$!N; s/ .*//; s/!/	/; s/\n/	/; ta;
 				s/([^	]+)	([^	]+)	([^	]+)	([^	]+)	([^	]+)/\1	\3	\5 \4/p'
-		}			
+		}
 	}
 }}
 

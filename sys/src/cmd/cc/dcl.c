@@ -709,7 +709,7 @@ loop:
 
 	case ODOTDOT:
 		break;
-	
+
 	case ONAME:
 		s = n->sym;
 		if(pass == 0) {

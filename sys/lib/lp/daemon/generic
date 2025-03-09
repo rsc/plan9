@@ -92,7 +92,7 @@ while (schedule; ! ~ $#FILE 0) {
 # we don't want to be here
 #			trap '' 13	# temp hack: ignore SIGPIPE
 			STARTIME=`{date}
-			eval $REMOTE_CMD 
+			eval $REMOTE_CMD
 			rv=$status
 			ENDTIME=`{date}
 			if (~ $rv '') {

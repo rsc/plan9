@@ -148,7 +148,7 @@ defn syscall() {
 
 defn UPCSPRET() {
 	// return sys call number, address of first argument, location of syscall return value
-	if objtype == "386" then 
+	if objtype == "386" then
 		return { code(*(*PC-4)), code(*SP+4), code(*AX) };
 	if (objtype == "mips") || (objtype == "mips2") then
 		return { code(*(*PC-4) & 0xffff), code(*SP+4), code(*R1) };

@@ -1,12 +1,12 @@
 #    Copyright (C) 1999, 2000 Aladdin Enterprises.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -45,7 +45,7 @@
 # Usage:
 #	make <arch-name> TARGETS='...'
 #
-# or, for convenience at Utah, 
+# or, for convenience at Utah,
 #
 #	make `hostname`
 #
@@ -665,7 +665,7 @@ sgi-mips-irix6.1:	init
 		XINCLUDE=-I/usr/include/X11 \
 		XLIBDIRS='-L/usr/local/lib -L/usr/lib/X11'
 
-# 
+#
 sgi-mips-irix6.3:	init
 	$(MAKE) $(ARGS) \
 		CC='cc $(SGIARCHFLAGS) -D_POSIX_4SOURCE ' \

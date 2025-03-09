@@ -45,7 +45,7 @@ lex.$O: ../cc/lex.c ../cc/y.tab.h
 	$CC ../cc/$stem.c
 
 $TARG.bin:	l.$O $OFILES $LIB
-	$LD -l -o $target -R4 l.$O $OFILES $LIB -lbio $home/lib9pclient/lib9pclient.a -lc $home/lib9pclient/lib9pclient.a 
+	$LD -l -o $target -R4 l.$O $OFILES $LIB -lbio $home/lib9pclient/lib9pclient.a -lc $home/lib9pclient/lib9pclient.a
 
 $TARG.hex: $TARG.bin
 	echo @1000 >$target

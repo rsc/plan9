@@ -65,4 +65,3 @@ if(! cmp -s <{sed 1q /tmp/fossilconf.$pid} <{echo fossil config}){
 
 sed 1d /tmp/fossilconf.$pid
 exit 0
-

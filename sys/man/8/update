@@ -7,7 +7,7 @@ setup.kfs, update \- administration for local file systems
 .I floppydisk
 .I plan9.ini
 .br
-.B pc/bootplan9 
+.B pc/bootplan9
 .I /dev/sdXX
 .br
 .B pc/bootwin9x
@@ -75,7 +75,7 @@ a zeroed 512-byte
 and the named file as
 .BR plan9.ini .
 .I Bootplan9
-sets the 
+sets the
 .B 9fat
 partition to be the active partition, the one
 used at boot time.
@@ -90,17 +90,17 @@ on the drive mounted by
 to provide Plan 9
 as a boot menu option.
 These system files are first backed up
-as 
+as
 .BR config.p9 ,
 .BR msdos.p9 ,
 and
 .BR autoexec.p9 .
 .I Bootwinnt
-edits the Windows NT 
+edits the Windows NT
 boot loader menu contained in
 the first FAT partition's
 .I boot.ini
-to provide Plan 9 
+to provide Plan 9
 as an option.
 It is first backed up as
 .IR boot.p9 .

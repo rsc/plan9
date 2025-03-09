@@ -34,7 +34,7 @@
 <li><a href="#Color_definition">Color definition</a>
 <ul>
 <li><a href="#sep_and_linear_fields">Separable and linear fields</a>
-<li><a href="#Changing_color_info_data">Changing color_info data</a>           
+<li><a href="#Changing_color_info_data">Changing color_info data</a>
 </ul>
 <li><a href="#Types">Types</a>
 </ul>
@@ -241,7 +241,7 @@ smurf_device gs_smurf_device = {
 The device structure instance <b>must</b> have the name
 <b><tt>gs_smurf_device</tt></b>, where <b><tt>smurf</tt></b> is the device
 name used in <b><tt>contrib.mak</tt></b>.  <b><tt>gx_device_common</tt></b>
-is a macro consisting only of the element definitions. 
+is a macro consisting only of the element definitions.
 <p>
 All the device procedures are called with the device as the first argument.
 Since each device type is actually a different structure type, the device
@@ -439,7 +439,7 @@ typedef struct gx_device_color_info_s {
     gx_color_polarity_t polarity;
 
     /*
-     * The number of bits of gx_color_index actually used. 
+     * The number of bits of gx_color_index actually used.
      * This must be <= sizeof(gx_color_index), which is usually 64.
      */
     byte depth;
@@ -449,7 +449,7 @@ typedef struct gx_device_color_info_s {
      * dither_gray values apply to this component only; all other
      * components use the max_color and dither_color values.
      *
-     * This will be GX_CINFO_COMP_NO_INDEX if there is no gray 
+     * This will be GX_CINFO_COMP_NO_INDEX if there is no gray
      * component.
      */
     byte gray_index;
@@ -537,7 +537,7 @@ typedef struct gx_device_color_info_s {
 
 <p>
 Note: See <a href="#Changing_color_info_data">Changing color_info data</a> before changing
-any information in the <b><tt>color_info structure</tt></b> for a device.           
+any information in the <b><tt>color_info structure</tt></b> for a device.
 
 <p>
 It is recommended that the values for this structure be defined using one
@@ -565,12 +565,12 @@ to define a 24 bit RGB device or a 4 or 32 bit CMYK device.
 
 <p>
 The <b><tt>#define dci_extended_alpha_values</tt></b> macro (in
-<a href="../src/gxdevcli.h">gxdevcli.h</a>) 
-specifies most of the current fields in the structure. However this macro allows 
-only the default setting for the comp_shift, comp_bits, and comp_mask fields 
-to be set. Any device which requires a non-default setting for these fields 
+<a href="../src/gxdevcli.h">gxdevcli.h</a>)
+specifies most of the current fields in the structure. However this macro allows
+only the default setting for the comp_shift, comp_bits, and comp_mask fields
+to be set. Any device which requires a non-default setting for these fields
 has to correctly these fields during the device open procedure.
-See 
+See
 <a href="#sep_and_linear_fields">Separable and linear fields></a> and
 <a href="#Changing_color_info_data">Changing color_info data</a>.
 
@@ -611,29 +611,29 @@ the nearest ones to the desired color for halftoning.
 
 <h4><a name="sep_and_linear_fields"></a>Separable and linear fields</h4>
 <p>
-The three fields <b><tt>comp_shift</tt></b>, <b><tt>comp_bits</tt></b>, and 
-<b><tt>comp_mask</tt></b> are only used if the <b><tt>separable_and_linear</tt></b> 
-field is set to <b><tt>GX_CINFO_SEP_LIN</tt></b>. In this situation a <b><tt>gx_color_index</tt></b> 
-value must represent a combination created by or'ing bits for each of the devices's 
-output colorants. The <b><tt>comp_shift</tt></b> array defines the location 
-(shift count) of each colorants bits in the output gx_color_index value. The 
-<b><tt>comp_bits</tt></b> array defines the number of bits for each colorant. 
-The <b><tt>comp_mask</tt></b> array contains a mask which can be used to isolate 
-the bits for each colorant. These fields must be set if the device supports 
+The three fields <b><tt>comp_shift</tt></b>, <b><tt>comp_bits</tt></b>, and
+<b><tt>comp_mask</tt></b> are only used if the <b><tt>separable_and_linear</tt></b>
+field is set to <b><tt>GX_CINFO_SEP_LIN</tt></b>. In this situation a <b><tt>gx_color_index</tt></b>
+value must represent a combination created by or'ing bits for each of the devices's
+output colorants. The <b><tt>comp_shift</tt></b> array defines the location
+(shift count) of each colorants bits in the output gx_color_index value. The
+<b><tt>comp_bits</tt></b> array defines the number of bits for each colorant.
+The <b><tt>comp_mask</tt></b> array contains a mask which can be used to isolate
+the bits for each colorant. These fields must be set if the device supports
 more than four colorants.
 
 <h4><a name="Changing_color_info_data"></a>Changing color_info data</h4>
 
-<p> For most devices, the information in the device's <tt><b>color_info</b></tt> 
-structure is defined by the various device definition macros and the data remains 
-constant during the entire existence of the device. In general the Ghostscript 
-graphics assumes that the information is constant. However some devices want 
+<p> For most devices, the information in the device's <tt><b>color_info</b></tt>
+structure is defined by the various device definition macros and the data remains
+constant during the entire existence of the device. In general the Ghostscript
+graphics assumes that the information is constant. However some devices want
 to modify the data in this structure.
 
 <p>
 The device's <b><tt>put_params</tt></b> procedure may change
 <b><tt>color_info</tt></b> field values.
-After the data has been modified then the 
+After the data has been modified then the
 device should be closed (via a call to <tt><b>gs_closedevice</b></tt>). Closing
 the device will erase the current page so these changes should only be made
 before anything has been drawn on a page.
@@ -645,7 +645,7 @@ calling any other procedures are called.
 <p>
 The Ghostscript graphics library
 uses some of the data in <b><tt>color_info</tt></b> to set the default
-procedures for the 
+procedures for the
 <b><tt>get_color_mapping_procs</tt></b>,
 <b><tt>get_color_comp_index</tt></b>,
 <b><tt>encode_color</tt></b>, and
@@ -685,20 +685,20 @@ and <b><tt>gx_max_color_value</tt></b> is the maximum value, equal to
 </dl>
 
 <dl>
-<dt><b><tt>gx_device</tt></b> (defined in 
+<dt><b><tt>gx_device</tt></b> (defined in
 <a href="../src/gxdevice.h">gxdevice.h</a>)
 <dd>This is the device structure, as explained above.
 </dl>
 
 <dl>
-<dt><b><tt>gs_matrix</tt></b> (defined in 
+<dt><b><tt>gs_matrix</tt></b> (defined in
 <a href="../src/gsmatrix.h">gsmatrix.h</a>)
 <dd>This is a 2-D homogeneous coordinate transformation matrix, used by
 many Ghostscript operators.
 </dl>
 
 <dl>
-<dt><b><tt>gx_color_index</tt></b> (defined in 
+<dt><b><tt>gx_color_index</tt></b> (defined in
 <a href="../src/gxcindex.h">gxcindex.h</a>)
 <dd>This is meant to be whatever the driver uses to represent a device
 color.  For example, it might be an index in a color map, or it might be R,
@@ -717,9 +717,9 @@ value <b><tt>gx_no_color_index</tt></b> (defined as
 the procedures.
 
 <p>
-The size of <b><tt>gx_color_index</tt></b> can be either 32 or 64 bits. The 
-choice depends upon the architecture of the CPU and the compiler. The default 
-type definition is simply: 
+The size of <b><tt>gx_color_index</tt></b> can be either 32 or 64 bits. The
+choice depends upon the architecture of the CPU and the compiler. The default
+type definition is simply:
 
 <blockquote><b><tt>
 typedef unsigned long gx_color_index;
@@ -734,7 +734,7 @@ typedef GX_COLOR_INDEX_TYPE gx_color_index;
 
 The smaller size (32 bits) may produce more efficient or faster executing
 code. The larger size (64 bits) is needed for representing either more
-bits per component or more components. An example of the later case is 
+bits per component or more components. An example of the later case is
 a device that supports 8 bit contone colorants using a DeviceCMYK process
 color model with its four colorants and also supports additional spot
 colorants.
@@ -745,15 +745,15 @@ compiler being used, and if a 64 bit type is found then
 <b><tt>GX_COLOR_INDEX_TYPE</tt></b> is set to the type.
 
 <p>
-For Microsoft and the MSVC compiler, <b><tt>GX_COLOR_INDEX_TYPE</tt></b> will 
-be set to <b><tt>unsigned _int64</tt></b> if <b><tt>USE_LARGE_COLOR_INDEX</tt></b> 
-is set to 1 either on the make command line or by editing the definition 
- in <a href="../src/msvc32.mak">msvc32.mak</a> 
+For Microsoft and the MSVC compiler, <b><tt>GX_COLOR_INDEX_TYPE</tt></b> will
+be set to <b><tt>unsigned _int64</tt></b> if <b><tt>USE_LARGE_COLOR_INDEX</tt></b>
+is set to 1 either on the make command line or by editing the definition
+ in <a href="../src/msvc32.mak">msvc32.mak</a>
 </dl>
 
 <dl>
 <dt><b><tt>gs_param_list</tt></b> (defined in <a
-href="../src/gsparam.h">gsparam.h</a>) 
+href="../src/gsparam.h">gsparam.h</a>)
   <dd>This is a parameter list, which is used to read and set attributes in a
 device.  See the comments in <a href="../src/gsparam.h">gsparam.h</a>, and
 the <a href="#Parameters">description of the <b><tt>get_params</tt></b> and
@@ -827,20 +827,20 @@ errors defined in the PostScript language reference manuals.  The most
 common ones for drivers are:
 
 <blockquote><dl>
-<dt><b><tt>gs_error_invalidfileaccess</tt></b> 
+<dt><b><tt>gs_error_invalidfileaccess</tt></b>
 <dd>An attempt to open a file failed.
 
-<dt><b><tt>gs_error_ioerror</tt></b> 
+<dt><b><tt>gs_error_ioerror</tt></b>
 <dd>An error occurred in reading or writing a file.
 
-<dt><b><tt>gs_error_limitcheck</tt></b> 
+<dt><b><tt>gs_error_limitcheck</tt></b>
  <dd>An otherwise valid parameter value was too large for the
 implementation.
 
-<dt><b><tt>gs_error_rangecheck</tt></b> 
+<dt><b><tt>gs_error_rangecheck</tt></b>
 <dd>A parameter was outside the valid range.
 
-<dt><b><tt>gs_error_VMerror</tt></b> 
+<dt><b><tt>gs_error_VMerror</tt></b>
 <dd>An attempt to allocate memory failed.  (If this happens, the procedure
 should release all memory it allocated before it returns.)
 </dl></blockquote>
@@ -865,12 +865,12 @@ reading the code for existing drivers: driver procedures must not use
 <b><tt>malloc</tt></b> to allocate any storage that stays around after the
 procedure returns. Instead, they must use <b><tt>gs_malloc</tt></b> and
 <b><tt>gs_free</tt></b>, which have slightly different calling conventions.
-(The prototypes for these are in <a href="../src/gsmemory.h">gsmemory.h</a>, 
+(The prototypes for these are in <a href="../src/gsmemory.h">gsmemory.h</a>,
 which is included in <a href="../src/gx.h">gx.h</a>, which is included in <a
 href="../src/gdevprn.h">gdevprn.h</a>.) This is necessary so that
 Ghostscript can clean up all allocated memory before exiting, which is
 essential in environments that provide only single-address-space
-multi-tasking (some versions of Microsoft Windows). 
+multi-tasking (some versions of Microsoft Windows).
 
 <blockquote>
 <pre>char *gs_malloc(uint num_elements, uint element_size,
@@ -884,7 +884,7 @@ structures, <b><tt>num_elements</tt></b> is 1 andi
 <b><tt>element_size</tt></b> is <b><tt>sizeof</tt></b> the structure; for
 byte arrays, <b><tt>num_elements</tt></b> is the number of bytes and
 <b><tt>element_size</tt></b> is 1. Unlike <b><tt>calloc</tt></b>,
-<b><tt>gs_malloc</tt></b> does <b>not</b> clear the block of storage. 
+<b><tt>gs_malloc</tt></b> does <b>not</b> clear the block of storage.
 
 <p>
 The <b><tt>client_name</tt></b> is used for tracing and debugging.  It must
@@ -899,7 +899,7 @@ procedure in which the call occurs.
 <p>
 Unlike <b><tt>free</tt></b>, <b><tt>gs_free</tt></b> demands that
 <b><tt>num_elements</tt></b> and element_size be supplied. It also
-requires a client name, like <b><tt>gs_malloc</tt></b>. 
+requires a client name, like <b><tt>gs_malloc</tt></b>.
 
 <h3><a name="Driver_instance_allocation"></a>Driver instance allocation</h3>
 
@@ -915,7 +915,7 @@ devices that are not registered in this way, you must fill in the stype
 member in any dynamically allocated instances with a pointer to the same
 structure descriptor used to allocate the instance. For more information
 about structure descriptors, see <a href="../src/gsmemory.h">gsmemory.h</a>
-and <a href="../src/gsstruct.h">gsstruct.h</a>. 
+and <a href="../src/gsstruct.h">gsstruct.h</a>.
 
 <hr>
 
@@ -923,7 +923,7 @@ and <a href="../src/gsstruct.h">gsstruct.h</a>.
 
 <p>
 Printer drivers (which include drivers that write some kind of raster file)
-are especially simple to implement.  
+are especially simple to implement.
 The printer driver must implement a <b><tt>print_page</tt></b> or
 <b><tt>print_page_copies</tt></b> procedure.  There are macros in <a
 href="../src/gdevprn.h">gdevprn.h</a> that generate the device structure for
@@ -1074,7 +1074,7 @@ level at the time the instance was created.
 instance valid. This must be done before any output to the device. The
 default implementation does nothing. <b>NOTE</b>: Clients should never call
 a device's <b><tt>open_device</tt></b> procedure directly: they should
-always call <b><tt>gs_opendevice</tt></b> instead. 
+always call <b><tt>gs_opendevice</tt></b> instead.
 </dl>
 
 <dl>
@@ -1087,12 +1087,12 @@ default implementation allows copying the device prototype, but does not
 allow copying device instances, because instances may contain internal
 pointers that should not be shared between copies, and there is no way to
 determine this from outside the device. <b>NOTE</b>: Clients should never
-call a device's <b><tt>finish_copydevice</tt></b> procedure: this procedure 
-is only intended for use by <b><tt>gs_copydevice[2]</tt></b>. 
+call a device's <b><tt>finish_copydevice</tt></b> procedure: this procedure
+is only intended for use by <b><tt>gs_copydevice[2]</tt></b>.
 </dl>
 
 <dl>
-<dt><b><tt>void (*get_initial_matrix)(gx_device *, gs_matrix *)</tt></b> <b><em>[OPTIONAL]</em></b> 
+<dt><b><tt>void (*get_initial_matrix)(gx_device *, gs_matrix *)</tt></b> <b><em>[OPTIONAL]</em></b>
 <dd>Construct the initial transformation matrix mapping user coordinates
 (nominally 1/72 inch per unit) to device coordinates.  The default
 procedure computes this from width, height, and
@@ -1132,7 +1132,7 @@ printing and ejecting the page.
 to the device is no longer allowed. The default implementation does
 nothing.  <b>NOTE</b>: Clients should never call a device's
 <b><tt>close_device</tt></b> procedure directly: they should always call
-<b><tt>gs_closedevice</tt></b> instead. 
+<b><tt>gs_closedevice</tt></b> instead.
 </dl>
 <h3><a name="Color_mapping"></a>Color and alpha mapping</h3>
 
@@ -1144,12 +1144,12 @@ the driver's <b><tt>put_params</tt></b> procedure), the driver must call
 <b><tt>gx_device_decache_colors(dev)</tt></b>.
 
 <p>
-The <b><tt>map_rgb_color</tt></b>, <b><tt>map_color_rgb</tt></b>, and 
+The <b><tt>map_rgb_color</tt></b>, <b><tt>map_color_rgb</tt></b>, and
 <b><tt>map_cmyk_color</tt></b> are obsolete. They have been left
 in the device procedure list for backward compatibility. See the
 <b><tt>encode_color</tt></b> and <b><tt>decode_color</tt></b> procedures
 below. To insure that older device drivers are changed to use the new
-<b><tt>encode_color</tt></b> and <b><tt>decode_color</tt></b> 
+<b><tt>encode_color</tt></b> and <b><tt>decode_color</tt></b>
 procedures,
 the parameters for the older procedures have been changed to
 match the new procedures.  To minimize changes in devices that have
@@ -1202,7 +1202,7 @@ value are zero.
 
 <dl>
 <dt><b><tt>int get_color_comp_index(const gx_device&nbsp;* dev, const char * pname,
-int name_size, int src_index)</tt></b> <b><em>[OPTIONAL]</em></b> 
+int name_size, int src_index)</tt></b> <b><em>[OPTIONAL]</em></b>
 <dd>This procedure returns the device colorant number of the given name.
 The possible return values are -1, 0 to
 <b><tt>GX_DEVICE_COLOR_MAX_COMPONENTS - 1</tt></b>, or
@@ -1225,7 +1225,7 @@ supported by the device.
 
 <dl>
 <dt><b><tt>const gx_cm_color_map_procs&nbsp;* get_color_mapping_procs(const
-gx_device&nbsp;* dev)</tt></b> <b><em>[OPTIONAL]</em></b> 
+gx_device&nbsp;* dev)</tt></b> <b><em>[OPTIONAL]</em></b>
 <dd>This procedure returns a list of three procedures. These procedures
 are used to translate values in either Gray, RGB, or CMYK color spaces
 into device colorant values. A separate procedure is not required for the
@@ -1258,7 +1258,7 @@ must not return <b><tt>gx_no_color_index</tt></b> (all 1s).
 
 <dl>
 <dt><b><tt>int (*decode_color)(gx_device&nbsp;*, gx_color_index&nbsp;color,
-gx_color_value&nbsp;*&nbsp;CV)</tt></b> <b><em>[OPTIONAL]</em></b> 
+gx_color_value&nbsp;*&nbsp;CV)</tt></b> <b><em>[OPTIONAL]</em></b>
 <dd>This is the inverse of the <b><tt>encode_color</tt></b> procedure.
 Map a <b><tt>gx_color_index</tt></b> value to color values.  The default
 procedure unpacks bits from the <b><tt>gx_color_index</tt></b> value based upon
@@ -1281,9 +1281,9 @@ means fully opaque.  The default is to use the
 Note that if a driver implements <b><tt>map_rgb_alpha_color</tt></b>, it
 must also implement <b><tt>encode_color</tt></b>, and must implement them
 in such a way that
-<b><tt>map_rgb_alpha_color(dev,&nbsp;r,&nbsp;g,&nbsp;b,&nbsp;gx_max_color_value)</tt></b> 
+<b><tt>map_rgb_alpha_color(dev,&nbsp;r,&nbsp;g,&nbsp;b,&nbsp;gx_max_color_value)</tt></b>
 returns the same value as
-<b><tt>encode_color(dev,&nbsp;CV)</tt></b>. 
+<b><tt>encode_color(dev,&nbsp;CV)</tt></b>.
 </dl>
 
 <dl>
@@ -1302,8 +1302,8 @@ in such a way that the first 3 values returned by
 <b><tt>decode_color</tt></b>.
 
 <p>
-Note that only RGB devices currently support variable opacity; alpha is ignored 
-on other devices. The PDF 1.4 transparency features are supported on all devices. 
+Note that only RGB devices currently support variable opacity; alpha is ignored
+on other devices. The PDF 1.4 transparency features are supported on all devices.
 </dl>
 
 <dl>
@@ -1511,7 +1511,7 @@ be called.
 <dt><b><tt>int (*create_compositor)(dev_t&nbsp;*dev,
 gx_device_t&nbsp;**pcdev, const&nbsp;gs_composite_t&nbsp;*pcte,
 const&nbsp;gs_imager_state&nbsp;*pis, gs_memory_t&nbsp;*memory)</tt></b>
-<b><em>[OPTIONAL]</em></b> 
+<b><em>[OPTIONAL]</em></b>
 <dd>Create a new device (called a "compositing device" or "compositor")
 that will composite data written to it with the device's existing data,
 according to the compositing function defined by <b><tt>*pcte</tt></b>.
@@ -1525,13 +1525,13 @@ effectively ignores the compositing function.
 
 <li>"Leaf" devices that do imaging and have no special optimizations for
 compositing (for example, some memory devices) ask the
-<b><tt>gs_composite_t</tt></b> to create a default compositor. 
+<b><tt>gs_composite_t</tt></b> to create a default compositor.
 
-<li>Leaf devices that can implement some kinds of compositing operation 
+<li>Leaf devices that can implement some kinds of compositing operation
 efficiently (for example, monobit memory devices and RasterOp) inspect the
-type and values of <b><tt>*pcte</tt></b> to determine whether it specifies 
+type and values of <b><tt>*pcte</tt></b> to determine whether it specifies
 such an operation: if so, they create a specialized compositor, and if not,
-they ask the <b><tt>gs_composite_t</tt></b> to create a default compositor. 
+they ask the <b><tt>gs_composite_t</tt></b> to create a default compositor.
 </ul>
 
 <p>
@@ -1824,8 +1824,8 @@ possible 2&times;2&times;2 input values as follows:
 </table></blockquote>
 
 <p>
-Transparency affects the output in the following way. A source or texture 
-pixel is considered transparent if its value is all 1s (for instance, 1 for 
+Transparency affects the output in the following way. A source or texture
+pixel is considered transparent if its value is all 1s (for instance, 1 for
 bitmaps, <tt>0xffffff</tt> for 24-bit RGB pixmaps) <b><em>and</em></b> the
 corresponding transparency bit is set in the command. For each pixel, the
 result of the Boolean operation is written into the destination iff neither
@@ -1833,7 +1833,7 @@ the source nor the texture pixel is transparent. (Note that the HP
 RasterOp specification, on which this is based, specifies that if the
 source and texture are both all 1s and the command specifies transparent
 source and opaque texture, the result <b><em>should</em></b> be written in
-the output. We think this is an error in the documentation.) 
+the output. We think this is an error in the documentation.)
 
 <h5><a name="Compositing_notes"></a>Notes</h5>
 
@@ -1845,7 +1845,7 @@ native color representation, the implementation of <b><tt>copy_rop</tt></b>
 must convert to RGB or gray space, do the operation, and convert back (or
 do the equivalent of this). Here are the <b><tt>copy_rop</tt></b>
 equivalents of the most important previous imaging calls. We assume the
-declaration: 
+declaration:
 
 <blockquote><b><tt>
 static const gx_color_index white2[2] = { 1, 1 };
@@ -1927,9 +1927,9 @@ region is to the right of it.
 <dl>
 <dt><b><tt>int (*fill_trapezoid)(gx_device&nbsp;*dev, const&nbsp;
 gs_fixed_edge&nbsp;*left, const&nbsp;gs_fixed_edge&nbsp;*right,
-fixed&nbsp;ybot, fixed&nbsp;ytop, bool&nbsp;swap_axes, 
+fixed&nbsp;ybot, fixed&nbsp;ytop, bool&nbsp;swap_axes,
 const&nbsp;gx_drawing_color&nbsp;*pdcolor,
-gs_logical_operation_t&nbsp;lop)</tt></b> <b><em>[OPTIONAL]</em></b> 
+gs_logical_operation_t&nbsp;lop)</tt></b> <b><em>[OPTIONAL]</em></b>
 <dd>Fill a trapezoid. The bottom and top edges are parallel to the x
 axis, and are defined by <b><tt>ybot</tt></b> and <b><tt>ytop</tt></b>,
 respectively.  The left and right edges are defined by <b><tt>left</tt></b>
@@ -1941,7 +1941,7 @@ The y coordinates of these lines need not have any specific relation to
 that the filling algorithm can subdivide edges and still guarantee
 that the exact same pixels will be filled. If
 <b><tt>swap_axes</tt></b> is set, the meanings of X and Y are
-interchanged. 
+interchanged.
 </dl>
 <dt><b><tt>int (*fill_parallelogram)(gx_device&nbsp;*dev,
 fixed&nbsp;px, fixed&nbsp;py, fixed&nbsp;ax, fixed&nbsp;ay, fixed&nbsp;bx,
@@ -1985,7 +1985,7 @@ implement it.
 <h3><a name="Linear_color_drawing"></a>Linear color drawing</h3>
 
 <p>
-Linear color functions allow fast high quality rendering of 
+Linear color functions allow fast high quality rendering of
 shadings on continuous tone devices. They implement filling simple areas
 with a lineary varying color. These functions are not called if the device applies halftones,
 or uses a non-separable or a non-linear color model.
@@ -2012,7 +2012,7 @@ A color for each pixel within the triangle to be computed as a linear interpolat
 of vertex colors.
 <dd>
 The implementation may reject the request if the area or the color appears too complex
-for filling in a single action. For doing that the implementation returns 0 and must not 
+for filling in a single action. For doing that the implementation returns 0 and must not
 paint any pixel. In this case the graphics library will perform a subdivision of the area
 into smaller triangles and call the function again with smaller areas.
 <dd>
@@ -2024,7 +2024,7 @@ The graphics libary is smart enough to do that properly.
 <dd>
 <b><em>Important note :</em></b>
 The implementation must handle a special case, when only 2 colors are specified.
-It happens if <b><tt>p3</tt></b> one is <b><tt>NULL</tt></b>. 
+It happens if <b><tt>p3</tt></b> one is <b><tt>NULL</tt></b>.
 This means that the color does not depend on the X coordinate,
 i.e. it forms a linear gradient along the Y axis.
 The implementation must not reject (return 0) such cases.
@@ -2068,7 +2068,7 @@ when a decomposition into triangles appears undiserable.
 Rather the prototype can specify a bilinear color,
 we assume that the implementation handles linear colors only.
 This means that the implementation can ignore any of <b><tt> c0, c1, c2, c3 </tt></b>.
-The graphics library takes a special care of the color linearity 
+The graphics library takes a special care of the color linearity
 when calling this function. The reason for passing all 4 color arguments
 is to avoid color precision problems.
 <dd>
@@ -2081,7 +2081,7 @@ A linear color function is generated from it as <b><tt> gx_fill_trapezoid_ns_lc 
 with the following template parametres :
 
 <pre>
-#define LINEAR_COLOR 1 
+#define LINEAR_COLOR 1
 #define EDGE_TYPE gs_linear_color_edge
 #define FILL_ATTRS const gs_fill_attributes *
 #define CONTIGUOUS_FILL 0
@@ -2115,12 +2115,12 @@ Thus if the device implements <b><tt> fill_linear_color_triangle </tt></b> and
 this function may be left unimplemented.
 <dd>
 <b><tt>i</tt></b> and <b><tt>j</tt></b> specify device coordinates (indices)
-of the starting pixel of the scanline, <b><tt>w</tt></b> specifies the 
+of the starting pixel of the scanline, <b><tt>w</tt></b> specifies the
 width of the scanline, i.e. the number of pixels to be painted to the right from
 the starting pixel, including the starting pixel.
 <dd>
 <b><tt>c0</tt></b> specifies the color for the starting pixel
-as a vector of fraction values, each of which represents 
+as a vector of fraction values, each of which represents
 a color value in the interval <b><tt>[0,1]</tt></b>.
 <dd>
 <b><tt>c0_f</tt></b> specify a fraction part of the color for the starting pixel.
@@ -2631,7 +2631,7 @@ follows:
 <tr valign=top>	<td><b><tt>pis</tt></b>
 	<td>&nbsp;&nbsp;&nbsp;
 	<td>A pointer to an imager state.  All elements may be relevant,
-	    depending on how the text is rendered.	
+	    depending on how the text is rendered.
 <tr valign=top>	<td><b><tt>text</tt></b>
 	<td>&nbsp;
 	<td>A pointer to the structure that defines the text operation

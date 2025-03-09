@@ -9,4 +9,3 @@ _SEEK(int fd, long long o, int p)
 		l = -1;
 	return l;
 }
-

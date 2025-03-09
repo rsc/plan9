@@ -61,4 +61,3 @@ echo end
 echo $ENDSETUP
 
 for (i) echo $i Grabit
-

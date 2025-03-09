@@ -99,7 +99,7 @@ the
 .IR "play list" .
 .PP
 The selected music is displayed in the
-.I playlist 
+.I playlist
 window.
 The track currently playing is shown in the
 .I playing

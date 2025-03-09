@@ -217,7 +217,7 @@ nematch(void *p, char *s, char *start)
 	if (pmatch(p, s, start) == 1 && patlen > 0)
 		return 1;
 	patlen = -1;
-	patbeg = start; 
+	patbeg = start;
 	return 0;
 }
 /* in the parsing of regular expressions, metacharacters like . have */

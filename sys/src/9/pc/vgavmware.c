@@ -160,12 +160,12 @@ vmwarelinear(VGAscr* scr, int, int)
 			snprint(err, sizeof err, "unknown vmware pci did %.4ux",
 				p->did);
 			continue;
-			
+
 		case VMWARE1:
 			vm->ra = 0x4560;
 			vm->rd = 0x4560 + 4;
 			break;
-	
+
 		case VMWARE2:
 			vm->ra = p->mem[0].bar & ~3;
 			vm->rd = vm->ra + 1;

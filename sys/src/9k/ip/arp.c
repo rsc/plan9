@@ -683,4 +683,3 @@ rxmitproc(void *v)
 			tsleep(&arp->rxmtq, return0, 0, wakeupat);
 	}
 }
-

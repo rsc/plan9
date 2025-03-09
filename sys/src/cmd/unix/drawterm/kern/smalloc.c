@@ -15,4 +15,3 @@ malloc(ulong n)
 {
 	return mallocz(n, 1);
 }
-

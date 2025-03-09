@@ -30,7 +30,7 @@
  * where:
  *
  *    s[i] & 0x80 == 0x80 for i = 0, ..., n - 1,
- *    s[n] & 0x80 == 0x00 
+ *    s[n] & 0x80 == 0x00
  *
  * and
  *
@@ -60,7 +60,7 @@ extern  int     enc_u_size_uint(uint);
 #define enc_u_sizew(w)                                      \
     ( (uint)(w) < enc_u_lim_1b                              \
         ? 1                                                 \
-        : (uint)(w) < enc_u_lim_2b ? 2 : enc_u_size_uint(w) ) 
+        : (uint)(w) < enc_u_lim_2b ? 2 : enc_u_size_uint(w) )
 
 /* similarly, for a pair of values (frequently used for points) */
 #define enc_u_size2w(w1, w2)                        \

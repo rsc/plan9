@@ -277,7 +277,7 @@ _offset(int id, vlong off)
 /*
  * update the type of a global text or data symbol
  */
-static void 
+static void
 objupdate(int id, int type)
 {
 	Sym *s;

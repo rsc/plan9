@@ -743,4 +743,3 @@ VGAcur swcursor =
 	swload,
 	swmove,
 };
-

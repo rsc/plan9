@@ -3,7 +3,7 @@
 TARG=\
 	gpsfs\
 	gpsevermore\
-	
+
 OFILES=\
 	util.$O
 

@@ -36,5 +36,3 @@ cd /sys/src
 prompt=('test-ehime=; ' '	')
 fn cd
 rc -i
-
-

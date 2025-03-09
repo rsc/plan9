@@ -57,7 +57,7 @@ Pool*	mainmem = &pmainmem;
 Pool*	imagmem = &pimagmem;
 
 /*
- * because we can't print while we're holding the locks, 
+ * because we can't print while we're holding the locks,
  * we have the save the message and print it once we let go.
  */
 static void
@@ -135,7 +135,7 @@ mallocsummary(void)
 /* - except the code for smalloc(), which lives only in the kernel. */
 
 /*
- * Npadlong is the number of 32-bit longs to leave at the beginning of 
+ * Npadlong is the number of 32-bit longs to leave at the beginning of
  * each allocated buffer for our own bookkeeping.  We return to the callers
  * a pointer that points immediately after our bookkeeping area.  Incoming pointers
  * must be decremented by that much, and outgoing pointers incremented.
@@ -255,7 +255,7 @@ realloc(void *v, ulong size)
 		setrealloctag(nv, getcallerpc(&v));
 		if(v == nil)
 			setmalloctag(nv, getcallerpc(&v));
-	}		
+	}
 	return nv;
 }
 

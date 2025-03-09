@@ -788,7 +788,7 @@ png_init_read_transformations(png_structp png_ptr)
       {
          if (color_type == PNG_COLOR_TYPE_PALETTE)
          {
-           /* could skip if no transparency and 
+           /* could skip if no transparency and
            */
             png_color back, back_1;
             png_colorp palette = png_ptr->palette;

@@ -250,7 +250,7 @@ cgenrel(Node *n, Node *nn, int inrel)
 			gopcode(OAS, &nod2, Z, &nod);
 			gopcode(o, r, Z, &nod);
 			gopcode(OAS, &nod, Z, &nod2);
-	
+
 			regfree(&nod);
 			if(l->addable < INDEXED)
 				regfree(&nod2);
@@ -1148,7 +1148,7 @@ copy:
 	regalloc(&nod3, &regnode, Z);
 	gopcode(OAS, nodconst(w/c), Z, &nod3);
 	w %= c;
-	
+
 	pc1 = pc;
 	gmovm(&nod1, &nod4, 1);
 	gmovm(&nod4, &nod2, 1);

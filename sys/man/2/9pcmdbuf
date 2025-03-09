@@ -71,7 +71,7 @@ is equal to
 .IB cb -> f [0]
 or if
 .I cmd
-is 
+is
 .LR * .
 Once a matching
 .B Cmdtab

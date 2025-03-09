@@ -370,7 +370,7 @@ int
 #ifdef HAVE_PROTOTYPES
 fptreef(struct shf *shf, int indent, const char *fmt, ...)
 #else
-fptreef(shf, indent, fmt, va_alist) 
+fptreef(shf, indent, fmt, va_alist)
   struct shf *shf;
   int indent;
   const char *fmt;
@@ -380,7 +380,7 @@ fptreef(shf, indent, fmt, va_alist)
   va_list	va;
 
   SH_VA_START(va, fmt);
-  
+
   vfptreef(shf, indent, fmt, va);
   va_end(va);
   return 0;

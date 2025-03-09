@@ -100,7 +100,7 @@ is a punctuation character
 .I isprint
 .I c
 is a printing character, 0x20 (space)
-through 0x7E (tilde) 
+through 0x7E (tilde)
 .TP
 .I isgraph
 .I c

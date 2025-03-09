@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 artofcode LLC. All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -21,7 +21,7 @@
  * Since we need several statically defined variants of this algorithm,
  * we store it in .h file and include it several times into gxfill.c .
  * Configuration macros (template arguments) are :
- * 
+ *
  *  IS_SPOTAN - is the target device a spot analyzer ("spotan").
  *  PSEUDO_RASTERIZATION - use pseudo-rasterization.
  *  FILL_ADJUST - fill adjustment is not zero
@@ -145,13 +145,13 @@ TEMPLATE_spot_into_trapezoids (line_list *ll, fixed band_mask)
 	if (y >= y_limit)
 	    break;
 	/* Now look for line intersections before y1. */
-	covering_pixel_centers = COVERING_PIXEL_CENTERS(y, y1, 
-			    (!FILL_ADJUST ? 0 : fo.adjust_below), 
+	covering_pixel_centers = COVERING_PIXEL_CENTERS(y, y1,
+			    (!FILL_ADJUST ? 0 : fo.adjust_below),
 			    (!FILL_ADJUST ? 0 : fo.adjust_above));
 	if (y != y1) {
 	    intersect_al(ll, y, &y1, (covering_pixel_centers ? 1 : -1), all_bands); /* May change y1. */
-	    covering_pixel_centers = COVERING_PIXEL_CENTERS(y, y1, 
-			    (!FILL_ADJUST ? 0 : fo.adjust_below), 
+	    covering_pixel_centers = COVERING_PIXEL_CENTERS(y, y1,
+			    (!FILL_ADJUST ? 0 : fo.adjust_below),
 			    (!FILL_ADJUST ? 0 : fo.adjust_above));
 	}
 	/* Prepare dropout prevention. */
@@ -182,7 +182,7 @@ TEMPLATE_spot_into_trapezoids (line_list *ll, fixed band_mask)
 		inside += alp->direction;
 		if (INSIDE_PATH_P(inside, rule))	/* not about to go out */
 		    continue;
-		/* We just went from inside to outside, 
+		/* We just went from inside to outside,
 		   chech whether we'll immediately go inside. */
 		if (alp->next != NULL &&
 		    alp->x_current == alp->next->x_current &&
@@ -194,11 +194,11 @@ TEMPLATE_spot_into_trapezoids (line_list *ll, fixed band_mask)
 		       as we generate by this uniting :
 		       Due to arithmetic errors in x_current, x_next
 		       we can unite things, which really are not contacting.
-		       But this level of the topology precision is enough for 
-		       the glyph grid fitting. 
-		       Also note that 
-		       while a rasterization with dropout prevention 
-		       it may cause a shift when choosing a pixel 
+		       But this level of the topology precision is enough for
+		       the glyph grid fitting.
+		       Also note that
+		       while a rasterization with dropout prevention
+		       it may cause a shift when choosing a pixel
 		       to paint with a narrow trapezoid. */
 		    alp = alp->next;
 		    inside += alp->direction;
@@ -206,7 +206,7 @@ TEMPLATE_spot_into_trapezoids (line_list *ll, fixed band_mask)
 		}
 		/* We just went from inside to outside, so fill the region. */
 		INCR(band_fill);
-		if (FILL_ADJUST && !(flp->end.x == flp->start.x && alp->end.x == alp->start.x) && 
+		if (FILL_ADJUST && !(flp->end.x == flp->start.x && alp->end.x == alp->start.x) &&
 		    (fo.adjust_below | fo.adjust_above) != 0) {
 		    /* Assuming pseudo_rasterization = false. */
 		    if (FILL_DIRECT)
@@ -218,10 +218,10 @@ TEMPLATE_spot_into_trapezoids (line_list *ll, fixed band_mask)
 		    fixed ytop = min(y1, fo.pbox->q.y);
 
 		    if (IS_SPOTAN) {
-			/* We can't pass data through the device interface because 
+			/* We can't pass data through the device interface because
 			   we need to pass segment pointers. We're unhappy of that. */
-			code = gx_san_trap_store((gx_device_spot_analyzer *)fo.dev, 
-			    y, y1, flp->x_current, alp->x_current, flp->x_next, alp->x_next, 
+			code = gx_san_trap_store((gx_device_spot_analyzer *)fo.dev,
+			    y, y1, flp->x_current, alp->x_current, flp->x_next, alp->x_next,
 			    flp->pseg, alp->pseg, flp->direction, alp->direction);
 		    } else {
 			if (flp->end.x == flp->start.x && alp->end.x == alp->start.x) {
@@ -237,8 +237,8 @@ TEMPLATE_spot_into_trapezoids (line_list *ll, fixed band_mask)
 
 				if (PSEUDO_RASTERIZATION && xli == xi) {
 				    /*
-				    * The scan is empty but we should paint something 
-				    * against a dropout. Choose one of two pixels which 
+				    * The scan is empty but we should paint something
+				    * against a dropout. Choose one of two pixels which
 				    * is closer to the "axis".
 				    */
 				    fixed xx = int2fixed(xli);
@@ -272,7 +272,7 @@ TEMPLATE_spot_into_trapezoids (line_list *ll, fixed band_mask)
 				else
 				    code = gx_fill_trapezoid_cf_nd(fo.dev, &le, &re, ybot, ytop, flags, fo.pdevc, fo.lop);
 			    } else
-				code = fo.fill_trap(fo.dev, 
+				code = fo.fill_trap(fo.dev,
 					&le, &re, ybot, ytop, false, fo.pdevc, fo.lop);
 			} else
 			    code = 0;
@@ -342,7 +342,6 @@ TEMPLATE_spot_into_trapezoids (line_list *ll, fixed band_mask)
 	if (code < 0)
 	    return code;
 	return close_margins(fo.dev, ll, &ll->margin_set0);
-    } 
+    }
     return 0;
 }
-

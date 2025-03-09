@@ -44,4 +44,3 @@ Cipher cipher3des =
 	encrypt3des,
 	decrypt3des,
 };
-

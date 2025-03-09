@@ -828,7 +828,7 @@ by their equivalent in-line macros
 .CW BGETC
 and
 .CW BPUTC
-but 
+but
 the performance gain would be modest.
 For more information on
 .CW bio ,
@@ -934,7 +934,7 @@ and
 .I rune (2),
 and the paper,
 ``Hello world, or
-Καλημέρα κόσμε, or\ 
+Καλημέρα κόσμε, or\
 \f(Jpこんにちは 世界\f1'',
 by Rob Pike and
 Ken Thompson;
@@ -1078,7 +1078,7 @@ Some of these have been adopted in later ANSI C standards.
 First,
 .I structure
 .I displays
-permit 
+permit
 .CW struct
 expressions to be formed dynamically.
 Given these declarations:
@@ -1305,7 +1305,7 @@ Imagine a program has crashed mysteriously:
 Fatal server bug!
 failed to create default stipple
 X 106: suicide: sys: trap: fault read addr=0x0 pc=0x00105fb8
-% 
+%
 .P2
 When a process dies on Plan 9 it hangs in the `broken' state
 for debugging.
@@ -1316,7 +1316,7 @@ Attach a debugger to the process by naming its process id:
 
 /sys/lib/acid/port
 /sys/lib/acid/mips
-acid: 
+acid:
 .P2
 The
 .CW acid

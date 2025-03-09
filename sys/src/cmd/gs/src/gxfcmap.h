@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -316,12 +316,12 @@ void gs_cmap_lookups_enum_setup(gs_cmap_lookups_enum_t *penum,
 				const gs_cmap_t *pcmap,
 				const gs_cmap_lookups_enum_procs_t *procs);
 
-/* 
+/*
  * Check for identity CMap. Uses a fast check for special cases.
  */
 bool gs_cmap_is_identity(const gs_cmap_t *pcmap, int font_index_only);
 
-/* 
+/*
  * For a random CMap, compute whether it is identity.
  * It is not applicable to gs_cmap_ToUnicode_t due to
  * different sizes of domain keys and range values.

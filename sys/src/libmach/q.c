@@ -19,7 +19,7 @@
 #define FP_REG(x)	(R31+4+8*(x))
 
 #define	REGSIZE		sizeof(struct Ureg)
-#define	FPREGSIZE	(8*33)	
+#define	FPREGSIZE	(8*33)
 
 Reglist powerreglist[] = {
 	{"CAUSE",	REGOFF(cause),	RINT|RRDONLY,	'X'},

@@ -1,4 +1,4 @@
-@echo off 
+@echo off
 @rem $Id: pdfopt.bat,v 1.7 2003/04/02 23:45:47 alexcher Exp $
 @rem Convert PDF to "optimized" form.
 

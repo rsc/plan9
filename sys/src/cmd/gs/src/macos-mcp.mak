@@ -1,12 +1,12 @@
 #    Copyright (C) 1997-2003 artofcode LLC.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -196,7 +196,7 @@ COMPILE_INITS=0
 BAND_LIST_STORAGE=file
 
 # Choose which compression method to use when storing band lists in memory.
-# The choices are 'lzw' or 'zlib'.  
+# The choices are 'lzw' or 'zlib'.
 
 BAND_LIST_COMPRESSOR=zlib
 
@@ -324,7 +324,7 @@ include $(GLSRCDIR)/unix-end.mak
 gdevmac_h=$(GLSRC)gdevmac.h
 gdevmacttf_h=$(GLSRC)gdevmacttf.h
 
-macos_=$(GLOBJ)gdevmac.$(OBJ) 
+macos_=$(GLOBJ)gdevmac.$(OBJ)
 
 $(GLD)macos.dev: $(macos_) $(GLOBJ)gdevemap.$(OBJ)
 	$(SETDEV) $(PSD)macos $(macos_)
@@ -414,4 +414,3 @@ $(GS_XE): $(ld_tr) $(ECHOGS_XE) $(XE_ALL) $(CWPROJ_XML)
 # This has to come last so it won't be taken as the default target.
 $(AK):
 	if ( $(CCAUX) --version | egrep "^2\.7\.([01]|2(\.[^1-9]|$$))" >/dev/null ); then echo -Dconst= >$(AK); else echo -Wcast-qual -Wwrite-strings >$(AK); fi
-

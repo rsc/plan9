@@ -34,7 +34,7 @@ enum {
 
 void
 gpiosel(uint pin, int func)
-{	
+{
 	u32int *gp, *fsel;
 	int off;
 
@@ -108,4 +108,3 @@ gpioin(uint pin)
 	gp = (u32int*)GPIOREGS;
 	return (gp[Lev0 + pin/32] & (1 << (pin % 32))) != 0;
 }
-

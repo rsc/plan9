@@ -614,7 +614,7 @@ png_push_save_buffer(png_structp png_ptr)
       png_size_t new_max;
       png_bytep old_buffer;
 
-      if (png_ptr->save_buffer_size > PNG_SIZE_MAX - 
+      if (png_ptr->save_buffer_size > PNG_SIZE_MAX -
          (png_ptr->current_buffer_size + 256))
       {
         png_error(png_ptr, "Potential overflow of save_buffer");

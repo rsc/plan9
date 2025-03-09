@@ -1,12 +1,12 @@
 /* Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -105,7 +105,7 @@ ptr_ref_unmark(enum_ptr_t *pep, gc_state_t * ignored)
 
 /* Unmarking routine for ref objects. */
 private void
-refs_clear_marks(const gs_memory_t *cmem, 
+refs_clear_marks(const gs_memory_t *cmem,
 		 void /*obj_header_t */ *vptr, uint size,
 		 const gs_memory_struct_type_t * pstype)
 {
@@ -387,7 +387,7 @@ igc_reloc_refs(ref_packed * from, ref_packed * to, gc_state_t * gcst)
 {
     int min_trace = gcst->min_collect;
     ref_packed *rp = from;
-    bool do_all = gcst->relocating_untraced; 
+    bool do_all = gcst->relocating_untraced;
 
     vm_spaces spaces = gcst->spaces;
     const gs_memory_t *cmem = space_system->stable_memory;

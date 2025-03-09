@@ -46,11 +46,10 @@ case go
 	mountmedia=(mount /srv/fossil /n/distmedia)
 	distmediadir=/dist
 	export distmediadir mountmedia distmedia
-	
+
 case checkdone
 	if(! test -f /n/newfs/dist/plan9.iso.bz2) {
 		download=notdone
 		export download
 	}
 }
-

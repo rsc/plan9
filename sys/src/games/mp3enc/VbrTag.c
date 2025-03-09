@@ -84,7 +84,7 @@ void addVbr(VBR_seek_info_t * v, int bitrate)
 
     v->sum += bitrate;
     v->seen ++;
-    
+
     if (v->seen < v->want) {
         return;
     }
@@ -96,7 +96,7 @@ void addVbr(VBR_seek_info_t * v, int bitrate)
     }
     if (v->pos == v->size) {
         for (i = 1; i < v->size; i += 2) {
-            v->bag[i/2] = v->bag[i]; 
+            v->bag[i/2] = v->bag[i];
         }
         v->want *= 2;
         v->pos  /= 2;
@@ -107,10 +107,10 @@ void Xing_seek_table(VBR_seek_info_t * v, unsigned char *t)
 {
     int i, index;
     int seek_point;
-    
+
     if (v->pos <= 0)
         return;
-        
+
     for (i = 1; i < NUMTOCENTRIES; ++i) {
         float j = i/(float)NUMTOCENTRIES, act, sum;
         index = (int)(floor(j * v->pos));
@@ -129,7 +129,7 @@ void Xing_seek_table(VBR_seek_info_t * v, unsigned char *t)
 void print_seeking(unsigned char *t)
 {
     int i;
-    
+
     printf("seeking table ");
     for (i = 0; i < NUMTOCENTRIES; ++i) {
         printf(" %d ", t[i]);
@@ -152,7 +152,7 @@ void AddVbrFrame(lame_global_flags *gfp)
     lame_internal_flags *gfc = gfp->internal_flags;
 
     int kbps = bitrate_table[gfp->version][gfc->bitrate_index];
-    
+
     if (gfc->VBR_seek_table.bag == NULL) {
         gfc->VBR_seek_table.sum  = 0;
         gfc->VBR_seek_table.seen = 0;
@@ -166,7 +166,7 @@ void AddVbrFrame(lame_global_flags *gfp)
             gfc->VBR_seek_table.size = 0;
             ERRORF (gfc,"Error: can't allocate VbrFrames buffer\n");
             return;
-        }   
+        }
     }
     addVbr(&gfc->VBR_seek_table, kbps);
     gfp->nVbrNumFrames++;
@@ -304,7 +304,7 @@ int GetVbrTag(VBRTAGDATA *pTagData,  unsigned char *buf)
 		pTagData->vbr_scale = ExtractI4(buf); buf+=4;
 	}
 
-	pTagData->headersize = 
+	pTagData->headersize =
 	  ((h_id+1)*72000*h_bitrate) / pTagData->samprate;
 
 
@@ -392,7 +392,7 @@ int InitVbrTag(lame_global_flags *gfp)
 	  else
 	    bitrate = XING_BITRATE2;
 	}
-	gfp->TotalFrameSize= 
+	gfp->TotalFrameSize=
 	  ((gfp->version+1)*72000*bitrate) / gfp->out_samplerate;
 	tot = (gfp->nZeroStreamSize+VBRHEADERSIZE);
 	tot += 20;  /* extra 20 bytes for LAME & version string */
@@ -496,7 +496,7 @@ int PutVbrTag(lame_global_flags *gfp,FILE *fpStream,int nVbrScale)
 
 	/* Use as much of the info from the real frames in the
 	 * Xing header:  samplerate, channels, crc, etc...
-	 */ 
+	 */
 	if (gfp->version==1) {
 	  /* MPEG1 */
 	  pbtStreamBuffer[1]=abyte | (char) 0x0a;     /* was 0x0b; */
@@ -572,4 +572,3 @@ int PutVbrTag(lame_global_flags *gfp,FILE *fpStream,int nVbrScale)
 
 	return 0;       /* success */
 }
-

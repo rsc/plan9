@@ -75,14 +75,14 @@ colophon.ps:D:	/sys/lib/man/colophon
 %.ps:D:	%.ms
 	mac=(-ms)
 	if(~ $stem comp utf 9 contents) mac=(-ms -mnihongo)
-	{ echo $FONTS; cat $stem.ms } | pic | tbl | eqn | 
+	{ echo $FONTS; cat $stem.ms } | pic | tbl | eqn |
 		troff $mac | lp -dstdout > $target
 	cleanps $target
 
 %.trout:D:	%.ms
 	mac=(-ms)
 	if(~ $stem comp utf 9 contents) mac=($mac -mnihongo)
-	{ echo $FONTS; cat $stem.ms } | pic | tbl | eqn | 
+	{ echo $FONTS; cat $stem.ms } | pic | tbl | eqn |
 		troff $mac > $target
 
 html:V: $HTML
@@ -132,4 +132,3 @@ IGN=${IGNHTML:%=%.html} ${IGNHTML:%=%.install}
 
 $IGN:QV:
 	# nothing
-

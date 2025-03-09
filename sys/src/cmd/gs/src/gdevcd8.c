@@ -31,28 +31,28 @@
 
 /*
    A printer driver for the HP670, HP690, HP850, HP855
-   HP870, HP890, HP1100 and HP1600 color printers. 
+   HP870, HP890, HP1100 and HP1600 color printers.
 
    To be used with the Ghostscript printing system.
-   Please report all problems to uliw@erdw.ethz.ch 
+   Please report all problems to uliw@erdw.ethz.ch
 
    CREDITS: Much of the driver is based on ideas derived
             from the cdj550 driver of George Cameron.
-	    
+
 	    The support for the hp670, hp690, hp890
 	    and hp1600 was added by Martin Gerbershagen.
 */
 
-/* Note: Depending on how you transfered the files, 
+/* Note: Depending on how you transfered the files,
    you might need to remove some CR-codes used on intel-based machines:
 
    simply type:  unzip -a hp850.zip
 
-   to compile with gs5.x, simply add 
+   to compile with gs5.x, simply add
 
    DEVICE_DEVS4=cdj850.dev cdj670.dev cdj890.dev cdj1600.dev
 
-   to your makefile. 
+   to your makefile.
 
    BTW, it is always a good idea to read Make.htm found in the
    gs-distrib before attempting to recompile.....
@@ -76,7 +76,7 @@
    except -sDEVICE=cdj850, or -sDEVICE=CDJ890, or sDEVICE=CDJ670
    or -sDEVICE=CDJ1600
 
-   The hp690 is supported through the hp670 device, the hp855, hp870 
+   The hp690 is supported through the hp670 device, the hp855, hp870
    and the hp1100 through the hp850 device.
 
    The driver implements the following switches:
@@ -91,9 +91,9 @@
    for printing on special paper or transperencies.
    Please revert to the gamma functions in this case.
 
-   -dQuality=  -1 draft     
+   -dQuality=  -1 draft
    0 normal       [default]
-   1 presentation 
+   1 presentation
 
    -dRetStatus= 0 C-RET off
    1 C-RET on [default]
@@ -101,9 +101,9 @@
    -dMasterGamma= 3.0 [default = 1.0]
    __Note__: To take advantage of the calibrated color-transfer
    functions, be sure not to have any Gamma-Statements
-   left! If you need to (i.e. overhead sheets), 
-   you still can use the gamma-functions, but they will 
-   override the built-in calibration. To use gamma in the 
+   left! If you need to (i.e. overhead sheets),
+   you still can use the gamma-functions, but they will
+   override the built-in calibration. To use gamma in the
    traditional way, set MasterGamma to any value greater
    1.0 and less 10.0. To adjust individual gamma-values,
    you have to additionally set MasterGamma to a value
@@ -158,7 +158,7 @@
 
  */
 
-/* 25.08.97  Version 1.2. Resolved all but one of the 
+/* 25.08.97  Version 1.2. Resolved all but one of the
    known bugs, introduced a couple
    of perfomance improvements. Complete
    new color-transfer-function handling.
@@ -989,9 +989,9 @@ private int
 
 /* UNUSED
  *private int
- *test_scan (P4(int size, 
+ *test_scan (P4(int size,
  *            byte * current,
- *            byte * last, 
+ *            byte * last,
  *            byte * control));
  *private void
  *save_color_data(P3(int size,
@@ -2006,7 +2006,7 @@ init_data_structure(gx_device_printer * pdev,
     p += misc_vars->outbuff_size;
 
     /* ---------------------------------------------------------
-       now for the color pointers 
+       now for the color pointers
        --------------------------------------------------------- */
 
     data_ptrs->data_c[0] = data_ptrs->data_c[1] = data_ptrs->data_c[2] = p;
@@ -2361,7 +2361,7 @@ gdev_cmyk_map_cmyk_color(gx_device * pdev,
 {
 
 	gx_color_value cyan=cmyk[0], magenta=cmyk[1], yellow=cmyk[3], black=cmyk[4];
-	
+
     gx_color_index color;
 
     switch (pdev->color_info.depth) {
@@ -2398,7 +2398,7 @@ private gx_color_index
 gdev_cmyk_map_rgb_color(gx_device * pdev, gx_color_value rgb[3])
 {
  gx_color_value r=rgb[0], g=rgb[1], b=rgb[2];
- 
+
     if (gx_color_value_to_byte(r & g & b) == 0xff) {
 	return (gx_color_index) 0;	/* White */
     } else {
@@ -2646,14 +2646,14 @@ cdj_put_param_bpp(gx_device * pdev, gs_param_list * plist, int new_bpp,
 
  * private int
  * x_mul_div (int a, int b, int c)
- * { 
+ * {
  *   int result;
- *   
+ *
  *   result = (int) ((a * b) / c) ;
  *  return result;
  * }
- *   
- * private void 
+ *
+ * private void
  * save_color_data(int size,
  *              byte * current,
  *              byte * saved)
@@ -2664,30 +2664,30 @@ cdj_put_param_bpp(gx_device * pdev, gs_param_list * plist, int new_bpp,
  *   }
  *   return;
  * }
- * 
- * private int 
- * test_scan (int size, 
+ *
+ * private int
+ * test_scan (int size,
  *         byte * current,
- *         byte * last, 
+ *         byte * last,
  *         byte * control)
  *   {
  *   int error = 0;
  *   int i;
- *   
+ *
  *   for (i=0;i<size;i++){
  *     if (*control != *last){
  *       error = 1;
  *     }
  *     *control = *current;
- * 
+ *
  *     control++;
  *     last++;
  *     current++;
  *   }
  *   return error;
  * }
- * 
- * * Transform from cmy into hsv 
+ *
+ * * Transform from cmy into hsv
  * private void
  * cmy2hsv(int *c, int *m, int *y, int *h, int *s, int *v)
  * {
@@ -2695,21 +2695,21 @@ cdj_put_param_bpp(gx_device * pdev, gs_param_list * plist, int new_bpp,
  *   int r, g, b;
  *   int r1, g1, b1;
  *   int maxValue, minValue, diff;
- *   
+ *
  *   r = 255 - *c;
  *   g = 255 - *m;
  *   b = 255 - *y;
- *   
+ *
  *   maxValue = max(r, max(g,b));
  *   minValue = min(r,min(g,b));
  *   diff = maxValue - minValue;
  *   *v = maxValue;
- *   
+ *
  *   if (maxValue != 0)
  *     *s = x_mul_div(diff,255,maxValue);
  *   else
  *     *s = 0;
- *   
+ *
  *   if (*s == 0)
  *     {
  *       hue = 0;
@@ -2719,20 +2719,20 @@ cdj_put_param_bpp(gx_device * pdev, gs_param_list * plist, int new_bpp,
  *       r1 = x_mul_div(maxValue - r,255,diff);
  *       g1 = x_mul_div(maxValue - g,255,diff);
  *       b1 = x_mul_div(maxValue - b,255,diff);
- *       
+ *
  *       if (r == maxValue)
  *      hue = b1 - g1;
  *       else if (g == maxValue)
  *      hue = 510 + r1 - b1;
  *       else
  *      hue = 1020 + g1 - r1;
- *       
+ *
  *       if (hue < 0)
  *      hue += 1530;
  *     }
- *   
+ *
  *   *h = (hue + 3) / 6;
- * 
+ *
  *   return;
  * }
  * end of unused code */

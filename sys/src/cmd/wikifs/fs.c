@@ -308,7 +308,7 @@ fsopen(Req *r)
 		runlock(&maplock);
 		respond(r, nil);
 		break;
-		
+
 	case D1st:
 		if((wh = gethistory(qidnum(path))) == nil){
 			respond(r, "file does not exist");
@@ -321,7 +321,7 @@ fsopen(Req *r)
 		r->fid->qid = r->ofcall.qid;
 		respond(r, nil);
 		break;
-		
+
 	case D2nd:
 		respond(r, nil);
 		break;
@@ -579,7 +579,7 @@ fsread(Req *r)
 		dirread9p(r, rootgen, &b);
 		respond(r, nil);
 		return;
-		
+
 	case D1st:
 		if(a == nil || a->w == nil){
 			respond(r, "cannot happen (no wh)");
@@ -588,7 +588,7 @@ fsread(Req *r)
 		dirread9p(r, firstgen, &b);
 		respond(r, nil);
 		return;
-		
+
 	case D2nd:
 		dirread9p(r, secondgen, &b);
 		respond(r, nil);

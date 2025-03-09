@@ -1,12 +1,12 @@
 /* Copyright (C) 2004 Artifex Software Inc., artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -122,7 +122,7 @@ update_Separation_spot_equivalent_cmyk_colors(gx_device * pdev,
 {
     int i;
 
-    /* 
+    /*
      * Check if the color space's separation name matches any of the
      * separations for which we need an equivalent CMYK color.
      */
@@ -171,19 +171,19 @@ update_DeviceN_spot_equivalent_cmyk_colors(gx_device * pdev,
      * our capture logic does not work properly.  When present, the 'None'
      * components contain alternate color information.  However this info is
      * specified as part of the 'color' and not part of the color space.  Thus
-     * we do not have this data when this routine is called.  See the 
+     * we do not have this data when this routine is called.  See the
      * description of DeviceN color spaces in section 4.5 of the PDF spec.
      * In this situation we exit rather than produce invalid values.
      */
      for (j = 0; j < pcs->params.device_n.num_components; j++) {
 	pcs->params.device_n.get_colorname_string
-	    (pdev->memory, pcs->params.device_n.names[j],  
+	    (pdev->memory, pcs->params.device_n.names[j],
 	     &pcs_sep_name, &cs_sep_name_size);
 	if (compare_color_names("None", 4, pcs_sep_name, cs_sep_name_size))
 	    return;
     }
 
-    /* 
+    /*
      * Check if the color space's separation names matches any of the
      * separations for which we need an equivalent CMYK color.
      */
@@ -300,8 +300,8 @@ private cmap_proc_separation(cmap_separation_capture_cmyk_color);
 private cmap_proc_devicen(cmap_devicen_capture_cmyk_color);
 
 private const gx_color_map_procs cmap_capture_cmyk_color = {
-    cmap_gray_capture_cmyk_color, 
-    cmap_rgb_capture_cmyk_color, 
+    cmap_gray_capture_cmyk_color,
+    cmap_rgb_capture_cmyk_color,
     cmap_cmyk_capture_cmyk_color,
     cmap_rgb_alpha_capture_cmyk_color,
     cmap_separation_capture_cmyk_color,

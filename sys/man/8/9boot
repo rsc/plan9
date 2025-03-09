@@ -446,7 +446,7 @@ On ISO 9660 CDs,
 .I 9load
 treats the contents of a file named
 .B /bootdisk.img
-as a 
+as a
 .B 9fat
 partition,
 and it is assumed to contain the image of a FAT file system.

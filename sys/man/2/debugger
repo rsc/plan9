@@ -104,7 +104,7 @@ Each application is responsible for setting
 .I machdata
 to the address of the
 .I Machdata
-structure for the target architecture. 
+structure for the target architecture.
 Many of the functions described here are not
 called directly; instead, they are invoked
 indirectly through the
@@ -185,7 +185,7 @@ and
 .I fp
 are the program counter and frame pointer.
 .I S
-is the address of a 
+is the address of a
 .I Symbol
 structure, as defined in
 .IR symbol (2),
@@ -266,7 +266,7 @@ resolving the address.
 .PP
 .I Symoff
 converts a virtual address to a symbolic reference.  The
-string containing that reference is of 
+string containing that reference is of
 the form `name+offset', where `name' is the name of the
 nearest symbol with an address less than
 or equal to the target address and `offset' is the hexadecimal offset
@@ -315,7 +315,7 @@ or single precision, respectively.  If
 .I code
 is
 .BR F ,
-the contents of the specified register and 
+the contents of the specified register and
 the following register
 are interpreted as a double precision floating point
 number; this

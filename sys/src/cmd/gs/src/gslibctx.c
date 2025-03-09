@@ -11,8 +11,8 @@
 
 /*$Id: gslibctx.c,v 1.7 2004/12/08 21:35:13 stefan Exp $ */
 
-/* library context functionality for ghostscript 
- * api callers get a gs_main_instance 
+/* library context functionality for ghostscript
+ * api callers get a gs_main_instance
  */
 
 /* Capture stdin/out/err before gs.h redefines them. */
@@ -34,7 +34,7 @@ static gs_memory_t *mem_err_print = NULL;
 
 
 const gs_memory_t *
-gs_lib_ctx_get_non_gc_memory_t() 
+gs_lib_ctx_get_non_gc_memory_t()
 {
     return mem_err_print ? mem_err_print->non_gc_memory : NULL;
 }
@@ -44,19 +44,19 @@ int gs_lib_ctx_init( gs_memory_t *mem )
 {
     gs_lib_ctx_t *pio = 0;
 
-    if ( mem == 0 ) 
+    if ( mem == 0 )
 	return -1;  /* assert mem != 0 */
 
     mem_err_print = mem;
-    
-    if (mem->gs_lib_ctx) /* one time initialization */
-	return 0;  
 
-    pio = mem->gs_lib_ctx = 
-	(gs_lib_ctx_t*)gs_alloc_bytes_immovable(mem, 
-						sizeof(gs_lib_ctx_t), 
+    if (mem->gs_lib_ctx) /* one time initialization */
+	return 0;
+
+    pio = mem->gs_lib_ctx =
+	(gs_lib_ctx_t*)gs_alloc_bytes_immovable(mem,
+						sizeof(gs_lib_ctx_t),
 						"gs_lib_ctx_init");
-    if( pio == 0 ) 
+    if( pio == 0 )
 	return -1;
     pio->memory = mem;
 
@@ -105,7 +105,7 @@ int outwrite(const gs_memory_t *mem, const char *str, int len)
 }
 
 int errwrite(const char *str, int len)
-{    
+{
     int code;
     if (len == 0)
 	return 0;
@@ -137,5 +137,3 @@ void errflush(void)
         fflush(mem_err_print->gs_lib_ctx->fstderr);
     /* else nothing to flush */
 }
-
-

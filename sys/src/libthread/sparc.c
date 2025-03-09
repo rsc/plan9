@@ -24,4 +24,3 @@ _threadinitstack(Thread *t, void (*f)(void*), void *arg)
 	t->sched[JMPBUFPC] = (ulong)launchersparc+JMPBUFDPC;
 	t->sched[JMPBUFSP] = (ulong)tos;
 }
-

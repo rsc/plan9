@@ -49,7 +49,7 @@ probably_prime(mpint *n, int nrep)
 	mpright(nm1, k, q);	// q = (n-1)/2**k
 
 	for(rep = 0; rep < nrep; rep++){
-		
+
 		// x = random in [2, n-2]
 		r = mprand(nbits, prng, nil);
 		mpmod(r, nm1, x);

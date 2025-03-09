@@ -41,7 +41,7 @@ unlink(const char *path)
 				else {
 					p = strrchr(path, '/');
 					if(p == 0)
-						p = newelem; 
+						p = newelem;
 					else {
 						memmove(newname, path, p-path);
 						newname[p-path] = '/';
@@ -50,7 +50,7 @@ unlink(const char *path)
 					}
 				}
 				/* reopen remove on close */
-				fd = _OPEN(p, 64|(f->oflags)); 
+				fd = _OPEN(p, 64|(f->oflags));
 				if(fd < 0){
 					free(db2);
 					continue;

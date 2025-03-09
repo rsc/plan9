@@ -1006,7 +1006,7 @@ loop:
 		p->link = datap;
 		datap = p;
 		break;
-	
+
 	case ADATA:
 		if(p->from.sym == S) {
 			diag("DATA without a sym\n%P", p);

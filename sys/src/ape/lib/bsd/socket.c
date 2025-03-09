@@ -172,4 +172,3 @@ int setsockopt(int, int, int, void *, int)
 {
 	return 0;
 }
-

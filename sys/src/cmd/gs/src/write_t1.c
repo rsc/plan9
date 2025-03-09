@@ -98,7 +98,7 @@ static void write_subrs(FAPI_font* a_fapi_font,WRF_output* a_output)
 		WRF_wbyte(a_output,' ');
 		WRF_wint(a_output,length);
 		WRF_wstring(a_output," RD ");
-		
+
 		/* Get the subroutine into the buffer and encrypt it in place. */
 		buffer_size = a_output->m_limit - a_output->m_count;
 		if (buffer_size >= length)
@@ -123,7 +123,7 @@ static void write_private_dictionary(FAPI_font* a_fapi_font,WRF_output* a_output
 	/* Write 4 bytes that must encrypt to at least one character that cannot be a valid hexadecimal character. */
 	WRF_wstring(a_output,"XXXX");
 
-	/*+ to do: correct size of dictionary from 8. */	
+	/*+ to do: correct size of dictionary from 8. */
 	WRF_wstring(a_output,"dup /Private 8 dict dup begin\n");
 
 	WRF_wstring(a_output,"/MinFeature {16 16} def\n");
@@ -178,7 +178,7 @@ static void write_main_dictionary(FAPI_font* a_fapi_font,WRF_output* a_output)
 	WRF_wstring(a_output,"currentdict end\ncurrentfile eexec\n");
 	write_private_dictionary(a_fapi_font,a_output);
 	}
-	
+
 /**
 Write a Type 1 font in textual format and return its length in bytes.
 If a_buffer_size is less than the total length, only a_buffer_size bytes are written, but the total
@@ -192,7 +192,7 @@ long FF_serialize_type1_font(FAPI_font* a_fapi_font,unsigned char* a_buffer,long
 	{
 	WRF_output output;
 	WRF_init(&output,a_buffer,a_buffer_size);
-	
+
 	/* Leading comment identifying a Type 1 font. */
 	WRF_wstring(&output,"%!PS-AdobeFont-1\n");
 

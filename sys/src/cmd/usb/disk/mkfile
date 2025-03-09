@@ -38,4 +38,3 @@ $LIBD:V: $LIBDOFILES
 
 scsierrs.c: /sys/lib/scsicodes mkscsierrs
 	mkscsierrs >scsierrs.c
-

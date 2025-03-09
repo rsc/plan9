@@ -19,7 +19,7 @@ enum{
 	Lcr_stop = RBIT(5, uchar),
 	Lcr_wrdlenmask = RBIT(6, uchar) | RBIT(7, uchar),
 	Lcr_wrdlenshift = 0,
-	Lsr_tbre = RBIT(2, uchar),	
+	Lsr_tbre = RBIT(2, uchar),
 	Fcr_txreset = RBIT(5, uchar),
 	Fcr_rxreset = RBIT(6, uchar),
 	Iir_txempty = RBIT(5, uchar),
@@ -41,9 +41,9 @@ struct Saturnuart {
 	uchar	ier;			// Interrupt enable, divisor latch
 #define dlm	ier
 	uchar	iir;			// Interrupt identification, fifo control
-#define fcr	iir	
+#define fcr	iir
 	uchar	lcr;			// Line control register
-	uchar	f1;		
+	uchar	f1;
 	uchar	lsr;			// Line status register
 	ushort	f2;
 };
@@ -143,7 +143,7 @@ sustatus(Uart* uart, void* buf, long n, long offset)
 		"dev(%d) type(%d) framing(%d) overruns(%d)\n",
 
 		uart->baud,
-		uart->hup_dcd, 
+		uart->hup_dcd,
 		uart->hup_dsr,
 		Txsize,
 		(su->lcr & Lcr_pen)? ((su->lcr & Lcr_peven) ? 'e': 'o'): 'n',
@@ -231,7 +231,7 @@ sustop(Uart* uart, int stop)
 
 static int
 subits(Uart*uart, int n)
-{	
+{
 	Saturnuart *su;
 	uchar lcr;
 
@@ -253,7 +253,7 @@ subaud(Uart* uart, int baud)
 
 	if (uart->enabled){
 		su = ((UartData*)uart->regs)->su;
-	
+
 		if(baud <= 0)
 			return -1;
 
@@ -423,7 +423,7 @@ console(void)
 
 	consuart = uart;
 	uart->console = 1;
-} 
+}
 
 Saturnuart*uart = (Saturnuart*)UartAoffs;
 

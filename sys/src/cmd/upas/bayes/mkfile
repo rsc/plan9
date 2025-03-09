@@ -18,7 +18,7 @@ dfa.$O regcomp.$O regen.$O: dfa.h
 
 $O.msgtok: dfa.$O
 
-# msg database 
+# msg database
 msgdbx.$O msgdb.$O: msgdb.h
 
 # hash table creator/dumper
@@ -26,8 +26,6 @@ $O.msgdb: msgdbx.$O
 
 $O.msgclass: hash.$O msgdbx.$O
 
-$O.addhash: hash.$O 
+$O.addhash: hash.$O
 
 $O.bayes: hash.$O
-
-

@@ -197,7 +197,7 @@ An
 .B sprint
 (see
 .IR print (2))
-of 
+of
 .I fmt
 and the variable arg list yields a key template (see
 .IR factotum (4))
@@ -329,7 +329,7 @@ the key template and
 .BR cram ,
 and
 .BR chap
-expect it in the 
+expect it in the
 .B user
 field of the arg to
 .IR auth_response .

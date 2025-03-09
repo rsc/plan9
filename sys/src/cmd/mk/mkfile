@@ -35,4 +35,3 @@ UPDATE=\
 	${OFILES:%.$O=%.c}\
 
 </sys/src/cmd/mkone
-

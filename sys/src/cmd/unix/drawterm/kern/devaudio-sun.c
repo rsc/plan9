@@ -171,7 +171,7 @@ audiodevsetvol(int what, int left, int right)
 	audio_info_t info;
 	ulong x;
 	int l, r;
-	
+
 	if (afn == nil || cfn == nil)
 		audiodevinit();
 	if(cfd < 0 && (cfd = open(cfn, O_RDWR)) < 0) {
@@ -194,7 +194,7 @@ audiodevsetvol(int what, int left, int right)
 			setvolbal(l, right);
 		else if (right < 0)
 			setvolbal(left, r);
-		else 
+		else
 			setvolbal(left, right);
 		return;
 	}
@@ -253,7 +253,7 @@ audiodevwrite(void *v, int n)
 		p = buf;
 	} else
 		p = (uchar*)v;
-	
+
 	for(tot=0; tot<n; tot+=m)
 		if((m = write(afd, p+tot, n-tot)) <= 0)
 			oserror();

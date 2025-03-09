@@ -1,12 +1,12 @@
 /* Copyright (C) 1999, 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -296,7 +296,7 @@ pdf_open_document(gx_device_pdf * pdev)
 	pdev->binary_ok = !pdev->params.ASCII85EncodePages;
 	if (pdev->ForOPDFRead && pdev->OPDFReadProcsetPath.size) {
 	    int code, status;
-	    
+
 	    stream_write(s, (byte *)"%!PS-Adobe-2.0\r", 15);
 	    if (pdev->params.CompressPages || pdev->CompressEntireFile) {
 		/*  When CompressEntireFile is true and ASCII85EncodePages is false,
@@ -473,7 +473,7 @@ pdf_begin_encrypt(gx_device_pdf * pdev, stream **s, gs_id object_id)
     if (!pdev->KeyLength)
 	return 0;
     keylength = pdf_object_key(pdev, object_id, key);
-    ss = gs_alloc_struct(mem, stream_arcfour_state, 
+    ss = gs_alloc_struct(mem, stream_arcfour_state,
 		    s_arcfour_template.stype, "psdf_encrypt");
     if (ss == NULL)
 	return_error(gs_error_VMerror);
@@ -520,7 +520,7 @@ none_to_stream(gx_device_pdf * pdev)
     if (pdev->ResourcesBeforeUsage) {
 	pdf_resource_t *pres;
 
-	code = pdf_enter_substream(pdev, resourcePage, gs_no_id, &pres, 
+	code = pdf_enter_substream(pdev, resourcePage, gs_no_id, &pres,
 		    true, pdev->params.CompressPages);
 	if (code < 0)
 	    return code;
@@ -751,7 +751,7 @@ pdf_forget_resource(gx_device_pdf * pdev, pdf_resource_t *pres1, pdf_resource_ty
     }
 }
 
-private int 
+private int
 nocheck(gx_device_pdf * pdev, pdf_resource_t *pres0, pdf_resource_t *pres1)
 {
     return 1;
@@ -760,8 +760,8 @@ nocheck(gx_device_pdf * pdev, pdf_resource_t *pres0, pdf_resource_t *pres1)
 
 /* Substitute a resource with a same one. */
 int
-pdf_substitute_resource(gx_device_pdf *pdev, pdf_resource_t **ppres, 
-	pdf_resource_type_t rtype, 
+pdf_substitute_resource(gx_device_pdf *pdev, pdf_resource_t **ppres,
+	pdf_resource_type_t rtype,
 	int (*eq)(gx_device_pdf * pdev, pdf_resource_t *pres0, pdf_resource_t *pres1),
 	bool write)
 {
@@ -817,7 +817,7 @@ pdf_find_resource_by_resource_id(gx_device_pdf * pdev, pdf_resource_type_t rtype
     pdf_resource_t **pchain = pdev->resources[rtype].chains;
     pdf_resource_t *pres;
     int i;
-    
+
     for (i = 0; i < NUM_RESOURCE_CHAINS; i++) {
 	for (pres = pchain[i]; pres != 0; pres = pres->next) {
 	    if (pres->object->id == id)
@@ -837,7 +837,7 @@ pdf_find_same_resource(gx_device_pdf * pdev, pdf_resource_type_t rtype, pdf_reso
     pdf_resource_t *pres;
     cos_object_t *pco0 = (*ppres)->object;
     int i;
-    
+
     for (i = 0; i < NUM_RESOURCE_CHAINS; i++) {
 	for (pres = pchain[i]; pres != 0; pres = pres->next) {
 	    if (!pres->named && *ppres != pres) {
@@ -863,7 +863,7 @@ pdf_find_same_resource(gx_device_pdf * pdev, pdf_resource_type_t rtype, pdf_reso
 
 /* Drop resources by a condition. */
 void
-pdf_drop_resources(gx_device_pdf * pdev, pdf_resource_type_t rtype, 
+pdf_drop_resources(gx_device_pdf * pdev, pdf_resource_type_t rtype,
 	int (*cond)(gx_device_pdf * pdev, pdf_resource_t *pres))
 {
     pdf_resource_t **pchain = pdev->resources[rtype].chains;
@@ -904,11 +904,11 @@ pdf_print_resource_statistics(gx_device_pdf * pdev)
 	pdf_resource_t *pres;
 	const char *name = pdf_resource_type_names[rtype];
 	int i, n = 0;
-    
+
 	for (i = 0; i < NUM_RESOURCE_CHAINS; i++) {
 	    for (pres = pchain[i]; pres != 0; pres = pres->next, n++);
 	}
-	dprintf3("Resource type %d (%s) has %d instances.\n", rtype, 
+	dprintf3("Resource type %d (%s) has %d instances.\n", rtype,
 		(name ? name : ""), n);
     }
 }
@@ -1066,7 +1066,7 @@ pdf_write_resource_objects(gx_device_pdf *pdev, pdf_resource_type_t rtype)
 	pdf_resource_t *pres = pdev->resources[rtype].chains[j];
 
 	for (; pres != 0; pres = pres->next)
-	    if ((!pres->named || pdev->ForOPDFRead) 
+	    if ((!pres->named || pdev->ForOPDFRead)
 		&& !pres->object->written)
 		code = cos_write_object(pres->object, pdev);
 
@@ -1201,7 +1201,7 @@ pdf_copy_data(stream *s, FILE *file, long count, stream_arcfour_state *ss)
 {
     long left = count;
     byte buf[sbuf_size];
-    
+
     while (left > 0) {
 	uint copy = min(left, sbuf_size);
 
@@ -1214,11 +1214,11 @@ pdf_copy_data(stream *s, FILE *file, long count, stream_arcfour_state *ss)
 }
 
 
-/* Copy data from a temporary file to a stream, 
+/* Copy data from a temporary file to a stream,
    which may be targetted to the same file. */
 void
 pdf_copy_data_safe(stream *s, FILE *file, long position, long count)
-{   
+{
     long left = count;
 
     while (left > 0) {
@@ -1320,7 +1320,7 @@ int
 pdf_unclip(gx_device_pdf * pdev)
 {
     const int bottom = (pdev->ResourcesBeforeUsage ? 1 : 0);
-    /* When ResourcesBeforeUsage != 0, one sbstack element 
+    /* When ResourcesBeforeUsage != 0, one sbstack element
        appears from the page contents stream. */
 
     if (pdev->sbstack_depth <= bottom) {
@@ -1501,7 +1501,7 @@ private int
 pdf_scan_item(const gx_device_pdf * pdev, const byte * p, uint l, gs_id object_id)
 {
     const byte *q = p;
-    int n = l; 
+    int n = l;
 
     if (*q == ' ' || *q == 't' || *q == '\r' || *q == '\n')
 	return (l > 0 ? 1 : 0);
@@ -1676,7 +1676,7 @@ pdf_put_filters(cos_dict_t *pcd, gx_device_pdf *pdev, stream *s,
 private int
 pdf_flate_binary(gx_device_pdf *pdev, psdf_binary_writer *pbw)
 {
-    const stream_template *template = (pdev->CompatibilityLevel < 1.3 ? 
+    const stream_template *template = (pdev->CompatibilityLevel < 1.3 ?
 		    &s_LZWE_template : &s_zlibE_template);
     stream_state *st = s_alloc_state(pdev->pdf_memory, template->stype,
 				     "pdf_write_function");
@@ -1725,14 +1725,14 @@ pdf_append_data_stream_filters(gx_device_pdf *pdev, pdf_data_writer_t *pdw,
     if ((options & DATA_STREAM_BINARY) && !pdev->binary_ok)
 	filters |= USE_ASCII85;
     if (!(options & DATA_STREAM_NOLENGTH)) {
-	stream_puts(s, (pdev->CompatibilityLevel < 1.3 ? 
+	stream_puts(s, (pdev->CompatibilityLevel < 1.3 ?
 	    fnames1_2[filters] : fnames[filters]));
 	if (pdev->ResourcesBeforeUsage) {
 	    pdw->length_pos = stell(s) + 8;
 	    stream_puts(s, "/Length             >>stream\n");
 	    pdw->length_id = -1;
 	} else {
-	    pdw->length_pos = -1;		
+	    pdw->length_pos = -1;
 	    pdw->length_id = pdf_obj_ref(pdev);
 	    pprintld1(s, "/Length %ld 0 R>>stream\n", pdw->length_id);
 	}
@@ -1774,7 +1774,7 @@ pdf_begin_data_stream(gx_device_pdf *pdev, pdf_data_writer_t *pdw,
     pdw->binary.target = pdev->strm;
     pdw->binary.dev = (gx_device_psdf *)pdev;
     pdw->binary.strm = 0;		/* for GC in case of failure */
-    code = pdf_open_aside(pdev, resourceOther, gs_no_id, &pdw->pres, !object_id, 
+    code = pdf_open_aside(pdev, resourceOther, gs_no_id, &pdw->pres, !object_id,
 		options);
     if (object_id != 0)
 	pdf_reserve_object_id(pdev, pdw->pres, object_id);
@@ -1933,7 +1933,7 @@ pdf_function_aux(gx_device_pdf *pdev, const gs_function_t *pfn,
 	return code;
     return gs_function_get_params(pfn, (gs_param_list *)&rlist);
 }
-private int 
+private int
 functions_equal(gx_device_pdf * pdev, pdf_resource_t *pres0, pdf_resource_t *pres1)
 {
     return true;
@@ -1992,7 +1992,7 @@ pdf_write_font_bbox(gx_device_pdf *pdev, const gs_int_rect *pbox)
      * happens when the font contains only space characters.
      * Small bbox causes AR 4 to display a hairline. So we use
      * the full BBox.
-     */ 
+     */
     int x = pbox->q.x + ((pbox->p.x == pbox->q.x) ? 1000 : 0);
     int y = pbox->q.y + ((pbox->p.y == pbox->q.y) ? 1000 : 0);
 

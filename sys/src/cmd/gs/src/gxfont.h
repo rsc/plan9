@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1999, 2000, 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -150,7 +150,7 @@ typedef struct gs_glyph_info_s {
     gs_glyph *pieces;		/* pieces are stored here: the caller must */
 				/* preset pieces if INFO_PIECES is set. */
 #define GLYPH_INFO_OUTLINE_WIDTHS 32 /* return unmodified widths, see above */
-#define GLYPH_INFO_VVECTOR0 64	
+#define GLYPH_INFO_VVECTOR0 64
 #define GLYPH_INFO_VVECTOR1 128	/* must be VVECTOR0 << 1 */
 #define GLYPH_INFO_CDEVPROC 256	/* Allow CDevProc callout. */
 } gs_glyph_info_t;
@@ -261,7 +261,7 @@ typedef struct gs_font_procs_s {
      * Currently we do not handle requests, in which GLYPH_INFO_VVECTOR0
      * is set, but GLYPH_INFO_WIDTH0 is not. Same for GLYPH_INFO_VVECTOR1
      * and GLYPH_INFO_WIDTH1. Also requests, in which both GLYPH_INFO_WIDTH0 and
-     * GLYPH_INFO_WIDTH1 are set, may work wrongly. Such requests look never used 
+     * GLYPH_INFO_WIDTH1 are set, may work wrongly. Such requests look never used
      * and debugged, and the implementation code requires improvements.
      */
 

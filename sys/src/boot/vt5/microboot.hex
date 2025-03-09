@@ -66,4 +66,3 @@ warning: -D0x10000000 is ignored because of -R0x4
  fffffff8: fffe2100	(360)	WORD	$-122624,
  fffffffc: 4bfffef4	(273)	BR	,000a8(BRANCH)
 bootstart: warning: text segment wrapped past 0
-

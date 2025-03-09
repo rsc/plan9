@@ -11,7 +11,7 @@
 /*$Id: gs_dll_call.h,v 1.1 2004/08/04 19:36:12 stefan Exp $ */
 
 /* calling convention macros for windows style dlls.
- */ 
+ */
 #ifndef GS_DLL_CALL_H
 #define GS_DLL_CALL_H
 
@@ -60,7 +60,7 @@
 # define GSDLLCALLPTR * GSDLLCALL
 #else
 # define GSDLLAPIPTR GSDLLAPI *
-# define GSDLLCALLPTR GSDLLCALL * 
+# define GSDLLCALLPTR GSDLLCALL *
 #endif
 
 #endif /* GS_DLL_CALL_H */

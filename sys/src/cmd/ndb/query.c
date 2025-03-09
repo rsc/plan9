@@ -70,7 +70,7 @@ main(int argc, char **argv)
 	int reps = 1;
 	char *rattr = nil, *dbfile = nil;
 	Ndb *db;
-	
+
 	ARGBEGIN{
 	case 'a':
 		all++;

@@ -243,7 +243,7 @@ if(cli->chatty) fprint(2, "resend %lux %lud %lud\n", o->xid, t, o->t);
 			if(nout == 0)
 				a[1].op = CHANNOP;
 			break;
-			
+
 		case 2:	/* tag = <-flushchan */
 			for(i=0; i<nout; i++){
 				o = out[i];
@@ -371,7 +371,7 @@ sunClientClose(SunClient *cli)
 	chanfree(cli->timerchan);
 	free(cli);
 }
-	
+
 void
 sunClientFlushRpc(SunClient *cli, ulong tag)
 {

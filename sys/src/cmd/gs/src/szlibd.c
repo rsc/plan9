@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996, 1997, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -78,7 +78,7 @@ s_zlibD_process(stream_state * st, stream_cursor_read * pr,
     if (zs->total_in == 0 && zs->avail_in >= 10 && !memcmp(zs->next_in, jaws_empty, 10)) {
         /* JAWS PDF generator encodes empty stream as jaws_empty[].
          * The stream declares that the data block length is zero
-         * but zlib routines regard a zero length data block to be an error. 
+         * but zlib routines regard a zero length data block to be an error.
          */
         pr->ptr += 10;
         return EOFC;

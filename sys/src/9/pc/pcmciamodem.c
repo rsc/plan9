@@ -73,4 +73,4 @@ pcmciamodemlink(void)
 				modems[j], slot, isa.port, isa.irq);
 		}
 	}
-}	
+}

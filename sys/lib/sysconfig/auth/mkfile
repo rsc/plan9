@@ -5,7 +5,7 @@
 #	bootargs=local -B 4096
 #
 # 'From scratch' procedure:
-# 1) bring system up as a terminal: 
+# 1) bring system up as a terminal:
 #	boot /386/9pcdisk
 #	root is from 'il'
 #	login as 'bootes'

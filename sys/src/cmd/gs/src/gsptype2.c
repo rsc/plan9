@@ -1,12 +1,12 @@
 /* Copyright (C) 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -209,8 +209,8 @@ gs_pattern2_set_color(const gs_client_color * pcc, gs_state * pgs)
 
 /* Fill path or rect, and with a PatternType 2 color. */
 int
-gx_dc_pattern2_fill_path(const gx_device_color * pdevc, 
-                              gx_path * ppath, gs_fixed_rect * rect, 
+gx_dc_pattern2_fill_path(const gx_device_color * pdevc,
+                              gx_path * ppath, gs_fixed_rect * rect,
                               gx_device * dev)
 {
     gs_pattern2_instance_t *pinst =
@@ -254,7 +254,7 @@ gx_dc_pattern2_equal(const gx_device_color * pdevc1,
  */
 private void
 gx_dc_pattern2_save_dc(
-    const gx_device_color * pdevc, 
+    const gx_device_color * pdevc,
     gx_device_color_saved * psdc )
 {
     gs_pattern2_instance_t * pinst = (gs_pattern2_instance_t *)pdevc->ccolor.pattern;

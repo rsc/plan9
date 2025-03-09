@@ -15,7 +15,7 @@ save
 % In particular, if the document is being printed in landscape mode, we
 % have to rotate the cell by 90 degrees.  The dvips translator sets the
 % variable `isls' to be true in landscape mode, so we test for that.
-% 
+%
 /screen_angle
     /isls where
     { /isls get { 90 } { 0 } ifelse }
@@ -26,7 +26,7 @@ def
 
 % Increasing this number makes the screen finer (it isn't the actual
 % frequency).
-% 
+%
 /screen_frequency 10 def
 
 
@@ -58,23 +58,23 @@ bind for
 % This procedure takes the bounding box of a rectangle, and images
 % /fountainstring into it.
 /fountain
-  { 
+  {
     /ury exch def
     /urx exch def
     /lly exch def
     /llx exch def
     gsave
       llx lly translate
-      
+
       % Scale to the size of the rectangle.
       urx llx sub ury lly sub scale
 
       % The source image has one row of 256 8-bit values.
       1 256 8
-      
+
       % Map unit square to source.
       [1 0 0 -256 0 256]
-      
+
       % Image the string.
       { fountainstring } image
    grestore
@@ -83,7 +83,7 @@ bind def
 
 
 % Draw a line across the bottom for visual anchoring.
-% 
+%
 0 0 moveto
 logo_width 0 lineto stroke
 
@@ -111,7 +111,7 @@ newpath
 
 % Draw the background pattern, which is dark at the top and light at the
 % bottom.
-% 
+%
 0 0 logo_width logo_height fountain
 
 % Make the clipping path be `RIDT 91', twice.
@@ -124,12 +124,12 @@ newpath
 
 % Paint the pattern again, this time with light at the top and dark at
 % the bottom.
-% 
+%
 logo_width logo_height translate
 180 rotate
 0 0 logo_width logo_height fountain
 
-end 
+end
 restore
 
 % showpage

@@ -175,7 +175,7 @@ main()
 {
     gs_glyph g;
 	gs_char c;
-    gs_const_string str;	
+    gs_const_string str;
 
     /* Test with a short name. */
     g = gs_c_known_encode((gs_char)0237, 1); /* caron */

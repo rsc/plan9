@@ -594,7 +594,7 @@ gc82543multicast(void* arg, uchar* addr, int on)
 		ctlr->multimask[x] |= 1<<bit;
 	else
 		ctlr->multimask[x] &= ~(1<<bit);
-	
+
 	csr32w(ctlr, Mta+x*4, ctlr->multimask[x]);
 }
 

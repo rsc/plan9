@@ -30,7 +30,7 @@ ginit(void)
 	zprog.from.name = D_NONE;
 	zprog.from.reg = NREG;
 	zprog.to = zprog.from;
-	zprog.scond = 0xE;  
+	zprog.scond = 0xE;
 
 	regnode.op = OREGISTER;
 	regnode.class = CEXREG;

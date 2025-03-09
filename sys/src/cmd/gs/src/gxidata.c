@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -87,7 +87,7 @@ gx_image1_plane_data(gx_image_enum_common_t * info,
 
 	if (bit_planar) {
 	    /* Repack the bit planes into byte-wide samples. */
-	    
+
 	    buffer = penum->buffer;
 	    sourcex = 0;
 	    for (px = 0; px < num_planes; px += penum->bps)

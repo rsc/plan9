@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 1995, 1996, 1997, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -52,7 +52,7 @@
  * and this holds true for the graphic library as well.
  *
  * Note also that implementing a generalized halftone cache is not trivial,
- * as the device-specific representation of spot halftones depends on the 
+ * as the device-specific representation of spot halftones depends on the
  * default transformation for the device, and more generally the device
  * specific representation of halftones may depend on the sense of the device
  * (additive or subtract). Hence, a halftone cache would need to be keyed

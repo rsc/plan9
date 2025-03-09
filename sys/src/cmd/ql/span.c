@@ -114,7 +114,7 @@ span(void)
 		Bprint(&bso, "tsize = %lux\n", textsize);
 	Bflush(&bso);
 }
-		
+
 void
 xdefine(char *p, int t, long v)
 {
@@ -482,7 +482,7 @@ buildop(void)
 			i++;
 		oprange[r].stop = optab+i;
 		i--;
-		
+
 		switch(r)
 		{
 		default:
@@ -1009,7 +1009,7 @@ asmdyn()
 				t += 4;
 				t += sput(s->name);
 			}
-	
+
 	la = 0;
 	r = &rels;
 	n = r->n;

@@ -1,12 +1,12 @@
 /* Copyright (C) 1994 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -141,7 +141,7 @@ message_box(char *str, int icon)
 			 str, "gspmdrv.exe", 0, icon | MB_MOVEABLE | MB_OK);
 }
 
-void 
+void
 error_message(char *str)
 {
     WinMessageBox(HWND_DESKTOP, HWND_DESKTOP, str, "gspmdrv.exe", 0, MB_MOVEABLE | MB_ICONHAND | MB_OK);
@@ -152,7 +152,7 @@ error_message(char *str)
 /* This thread waits for the update event semaphore from gs.exe */
 /* then generates a WM_PAINT message for the bitmap */
 /* This thread must NOT call C library functions */
-VOID APIENTRY 
+VOID APIENTRY
 update_func(ULONG unused)
 {
     APIRET rc;
@@ -168,7 +168,7 @@ update_func(ULONG unused)
     }
 }
 
-VOID APIENTRY 
+VOID APIENTRY
 exit_func(ULONG code)
 {
     write_profile();
@@ -482,7 +482,7 @@ restore_window_position(SWP * pswp)
     return 0;
 }
 
-APIRET 
+APIRET
 init_display(int argc, char *argv[])
 {
     char buf[256];
@@ -527,7 +527,7 @@ init_display(int argc, char *argv[])
 }
 
 
-APIRET 
+APIRET
 init_bitmap(int argc, char *argv[])
 {
     char buf[256];
@@ -904,7 +904,7 @@ paint_bitmap(HPS ps, PRECTL prect, int scrollx, int scrolly)
 
 
 /* This is the window function */
-MRESULT EXPENTRY 
+MRESULT EXPENTRY
 ClientWndProc(HWND hwnd, ULONG mess,
 	      MPARAM mp1, MPARAM mp2)
 {
@@ -1231,7 +1231,7 @@ ClientWndProc(HWND hwnd, ULONG mess,
 
 
 /* About Dialog Box */
-MRESULT EXPENTRY 
+MRESULT EXPENTRY
 AboutDlgProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 {
     switch (msg) {

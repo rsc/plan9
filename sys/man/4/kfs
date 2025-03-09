@@ -69,7 +69,7 @@ Do not check the file system.
 Use
 .I file
 as the disk.
-The default is 
+The default is
 .BR /dev/sdE0/fs .
 .TP
 .BI "n " name
@@ -95,7 +95,7 @@ Post file descriptor zero in
 and read and write protocol messages on file descriptor one.
 .TP
 .B B
-Allocate 
+Allocate
 .I nbuf
 in-memory file system blocks.
 The default is as many as will fit in 10% of memory

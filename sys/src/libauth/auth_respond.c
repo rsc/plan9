@@ -34,7 +34,7 @@ auth_respond(void *chal, uint nchal, char *user, uint nuser, void *resp, uint nr
 
 	if((afd = open("/mnt/factotum/rpc", ORDWR)) < 0)
 		return -1;
-	
+
 	if((rpc = auth_allocrpc(afd)) == nil){
 		close(afd);
 		return -1;
@@ -69,5 +69,5 @@ auth_respond(void *chal, uint nchal, char *user, uint nuser, void *resp, uint nr
 	_freeattr(a);
 	close(afd);
 	auth_freerpc(rpc);
-	return nresp;	
+	return nresp;
 }

@@ -1,12 +1,12 @@
 #    Copyright (C) 1997-2002 artofcode LLC. All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -186,7 +186,7 @@ endif
 
 COMP:=$(COMP)/DECC/PREFIX=ALL/NESTED_INCLUDE=PRIMARY/NAMES=SHORTENED
 
-# Define any other compilation flags. 
+# Define any other compilation flags.
 # Including defines for A4 paper size
 
 ifdef A4_PAPER
@@ -455,7 +455,7 @@ $(GLOBJ)gp_stdia.$(OBJ): $(GLSRC)gp_stdia.c $(AK) $(stdio__h) $(time__h) $(unist
 
 # Interpreter AUX programs
 
-$(ECHOGS_XE) :  $(GLOBJ)echogs.$(OBJ) 
+$(ECHOGS_XE) :  $(GLOBJ)echogs.$(OBJ)
 	LINK/EXE=$@ $(GLOBJ)echogs.$(OBJ)
 
 $(GLOBJ)echogs.$(OBJ) :  $(GLSRC)echogs.c

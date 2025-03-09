@@ -1005,7 +1005,7 @@ buggery:
 				goto buggery;
 			break;
 		}
-	
+
 		switch(data[1]){		/* Interrupt Channel */
 		case 0x40:
 			ctlr->irq = 15;
@@ -1080,11 +1080,11 @@ mylexpnp(void)
 				x |= inb(cfg+CfgEISA+i)<<(i*8);
 			if(x != 0x0142B30A && x != 0x0242B30A)
 				continue;
-	
+
 			x = inb(cfg+0xC8C);
 			if((sdev = mylexprobe(mylexport[x & 0x07], -1)) == nil)
 				continue;
-	
+
 			if(head != nil)
 				tail->next = sdev;
 			else

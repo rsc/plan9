@@ -1,4 +1,4 @@
-@echo off 
+@echo off
 @rem $Id: dumphint.bat,v 1.1 2003/05/06 20:50:10 alexcher Exp $
 @rem Linearized PDF hint formatting utility.
 

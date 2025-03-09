@@ -15,12 +15,12 @@ fn oldway{
 		echo usage: window '''minx miny maxx maxy''' cmd args ...
 		exit usage
 	}
-	
+
 	checkwsys
-	
+
 	dir = /mnt/wsys
 	srv = $wsys
-	
+
 	rfork ne
 	{
 		if(x=`{cat /dev/ppid}; mount $srv $dir N`{{echo $x $1 }| sed 's/^ //g;s/ +/,/g'}){
@@ -67,7 +67,7 @@ if(~ $1 -m){
 	shift
 
 	checkwsys
-	
+
 	dir = /mnt/wsys
 	srv = $wsys
 	rfork ne

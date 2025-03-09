@@ -26,7 +26,7 @@ presents at
 .I mountpoint
 (default
 .BR /mnt/apm )
-an interface to the APM 1.2 BIOS 
+an interface to the APM 1.2 BIOS
 (see
 .IR apm (3))
 .I device
@@ -38,7 +38,7 @@ If a
 .I service
 is specified, the interface will be
 posted at
-.BI /srv/ service 
+.BI /srv/ service
 as well.
 .PP
 The directory contains the following files.
@@ -64,7 +64,7 @@ file is used to set power management modes for
 various parts of the system.
 Control messages are of the form
 .RI `` device " " verb ,''
-where 
+where
 .I device
 is one of
 .BR system ,
@@ -75,12 +75,12 @@ is one of
 .BR network ,
 and
 .BR pcmcia ,
-and 
+and
 .I verb is one of
 .BR enable ,
 .BR disable ,
 .BR standby ,
-and 
+and
 .BR on .
 .B Enable
 and

@@ -6,7 +6,7 @@
  *
  * DESCRIPTION
  *
- *	Underneath the reformatting and comment blocks which were added to 
+ *	Underneath the reformatting and comment blocks which were added to
  *	make it consistent with the rest of the code, you will find a
  *	modified version of Henry Specer's regular expression library.
  *	Henry's functions were modified to provide the minimal regular
@@ -40,15 +40,15 @@
  *     Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *     Henry Spencer, University of Torronto (henry@utzoo.edu)
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * $Log:	regexp.c,v $
  * Revision 1.2  89/02/12  10:05:39  mark
  * 1.2 release fixes
- * 
+ *
  * Revision 1.1  88/12/23  18:02:32  mark
  * Initial revision
- * 
+ *
  */
 
 /* Headers */
@@ -130,9 +130,9 @@ static char    *Ident = "$Id: regexp.c,v 1.2 89/02/12 10:05:39 mark Exp $";
  * BACK		Normal "nxt" pointers all implicitly point forward; BACK
  *		exists to make loop structures possible.
  *
- * STAR		complex '*', are implemented as circular BRANCH structures 
- *		using BACK.  Simple cases (one character per match) are 
- *		implemented with STAR for speed and to minimize recursive 
+ * STAR		complex '*', are implemented as circular BRANCH structures
+ *		using BACK.  Simple cases (one character per match) are
+ *		implemented with STAR for speed and to minimize recursive
  *		plunges.
  *
  * OPEN,CLOSE	...are numbered at compile time.
@@ -277,7 +277,7 @@ char           *exp;
 	 * ties in favor of later strings, since the regstart check works
 	 * with the beginning of the r.e. and avoiding duplication
 	 * strengthens checking.  Not a strong reason, but sufficient in the
-	 * absence of others. 
+	 * absence of others.
 	 */
 	if (flags & SPSTART) {
 	    longest = NULL;
@@ -405,9 +405,9 @@ int            *flagp;
 /*
  - regpiece - something followed by possible [*]
  *
- * Note that the branching code sequence used for * is somewhat optimized:  
- * they use the same NOTHING node as both the endmarker for their branch 
- * list and the body of the last branch.  It might seem that this node could 
+ * Note that the branching code sequence used for * is somewhat optimized:
+ * they use the same NOTHING node as both the endmarker for their branch
+ * list and the body of the last branch.  It might seem that this node could
  * be dispensed with entirely, but the endmarker role is not redundant.
  */
 static char *regpiece(flagp)
@@ -440,7 +440,7 @@ int            *flagp;
 	regoptail(ret, ret);	/* back */
 	regtail(ret, regnode(BRANCH));	/* or */
 	regtail(ret, regnode(NOTHING));	/* null. */
-    } 
+    }
     regparse++;
     if (ISMULT(*regparse))
 	FAIL("nested *");
@@ -851,13 +851,13 @@ char           *prog;
 	    }
 	    break;
 	case ANYOF:
-	    if (*reginput == '\0' || 
+	    if (*reginput == '\0' ||
 		 strchr(OPERAND(scan), *reginput) == (char *)NULL)
 		return (0);
 	    reginput++;
 	    break;
 	case ANYBUT:
-	    if (*reginput == '\0' || 
+	    if (*reginput == '\0' ||
 		 strchr(OPERAND(scan), *reginput) != (char *)NULL)
 		return (0);
 	    reginput++;
@@ -884,7 +884,7 @@ char           *prog;
 		if (regmatch(nxt)) {
 		    /*
 		     * Don't set startp if some later invocation of the same
-		     * parentheses already has. 
+		     * parentheses already has.
 		     */
 		    if (regstartp[no] == (char *)NULL)
 			regstartp[no] = save;
@@ -911,7 +911,7 @@ char           *prog;
 		if (regmatch(nxt)) {
 		    /*
 		     * Don't set endp if some later invocation of the same
-		     * parentheses already has. 
+		     * parentheses already has.
 		     */
 		    if (regendp[no] == (char *)NULL)
 			regendp[no] = save;
@@ -946,7 +946,7 @@ char           *prog;
 
 		/*
 		 * Lookahead to avoid useless match attempts when we know
-		 * what character comes next. 
+		 * what character comes next.
 		 */
 		nextch = '\0';
 		if (OP(nxt) == EXACTLY)
@@ -980,7 +980,7 @@ char           *prog;
 
     /*
      * We get here only if there's trouble -- normally "case END" is the
-     * terminating point. 
+     * terminating point.
      */
     regerror("corrupted pointers");
     return (0);
@@ -1274,7 +1274,7 @@ char           *dest;
     register int    len;
     extern char    *strncpy();
 
-    if (prog == (regexp *)NULL || 
+    if (prog == (regexp *)NULL ||
 	source == (char *)NULL || dest == (char *)NULL) {
 	regerror("NULL parm to regsub");
 	return;
@@ -1297,7 +1297,7 @@ char           *dest;
 	    if (c == '\\' && (*src == '\\' || *src == '&'))
 		c = *src++;
 	    *dst++ = c;
-	} else if (prog->startp[no] != (char *)NULL && 
+	} else if (prog->startp[no] != (char *)NULL &&
 		   prog->endp[no] != (char *)NULL) {
 	    len = prog->endp[no] - prog->startp[no];
 	    strncpy(dst, prog->startp[no], len);

@@ -34,4 +34,3 @@ $LIBU:
 $LIBD:V: $LIBDOFILES
 	ar vu $LIBD $newprereq
 	rm $newprereq
-

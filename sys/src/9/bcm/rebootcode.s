@@ -51,7 +51,7 @@ TEXT	main(SB), 1, $-4
 	MOVW	$_reloc(SB), R15
 
 TEXT _reloc(SB), $-4
-	
+
 	/* continue with reboot only on cpu0 */
 	CPUID(R2)
 	BEQ	bootcpu
@@ -85,7 +85,7 @@ dowfi:
 	MOVW	$0xCC(R7), R1	/* inter-core .startcpu mailboxes */
 	ADD	R2<<4, R1	/* mailbox for this core */
 	MOVW	0(R1), R8	/* content of mailbox */
-	CMP	$0, R8		
+	CMP	$0, R8
 	BEQ	dowfi		/* if zero, wait again */
 	BL	(R8)		/* call received address */
 	B	dowfi		/* shouldn't return */

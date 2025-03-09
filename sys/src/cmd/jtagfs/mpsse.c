@@ -93,7 +93,7 @@ mpsseflush(void *mdata)
 		Bwrite(&mpsse->bout, &s, sizeof s);
 	if(nb && Bflush(&mpsse->bout) == Beof)
 		r = -1;
-	
+
 	return r;
 }
 
@@ -155,11 +155,11 @@ mpsseterm(void *mdata)
 {
 	Mpsse *mpsse;
 	int r;
-	
+
 	mpsse = mdata;
 	r =  Bterm(&mpsse->bout);
 	free(mpsse);
-	
+
 	return r;
 }
 
@@ -188,7 +188,7 @@ msb2lsb(ulong msbl, int nbits)
 }
 
 /* how many clk bits takes to clock out a data bit */
-static int 
+static int
 tmsdata2clk(int nbits)
 {
 	return ((nbits + 6)/7) * 3;
@@ -205,12 +205,12 @@ dropbits(Mpsse *mpsse, int nbits)
 	nbi = nbits % 8;
 
 	assert(mpsse->nbits >= nbits);
-	
+
 	mpsse->nbits -= 8*nby;
 	mpsse->rb += nby;
 
 	mpsse->rbits = (mpsse->rbits + nbi) %8;
-	
+
 	mpsse->nbits -= nbi;
 }
 
@@ -222,7 +222,7 @@ runpath(JMedium *jmed, SmPath *pth, int isrd, int issend)
 	int nclkbits;
 	char cmd[128];
 	Mpsse *mpsse;
-	
+
 	mpsse = jmed->mdata;
 	lastbit = 0;
 	nclkbits = 0;
@@ -231,7 +231,7 @@ runpath(JMedium *jmed, SmPath *pth, int isrd, int issend)
 		mpsse->nbits--;
 		nclkbits = 1;
 	}
-	
+
 	while(pth->ptmslen != 0){
 		pref = takepathpref(pth, MaxNbitsT);
 		tmslsb = msb2lsb(pref.ptms, pref.ptmslen);
@@ -245,7 +245,7 @@ runpath(JMedium *jmed, SmPath *pth, int isrd, int issend)
 		else
 			snprint(cmd, sizeof(cmd), "TmsCsOut EdgeDown LSB B%#2.2ux %#2.2ux",
 				(uchar)pref.ptmslen, tmslsb);
-		
+
 		if(pushcmd(mpsse, cmd) < 0)
 			return -1;
 	}
@@ -277,7 +277,7 @@ sendbytes(Mpsse *mpsse, int nbytes, int op)
 		snprint(cmd, sizeof(cmd), "DataOut EdgeDown LSB %#2.2ux @",
 				nbytes);
 	else if( (op&ShiftIn) && (op&ShiftOut) )
-		
+
 		snprint(cmd, sizeof(cmd), "DataOutIn EdgeDown EdgeUp LSB %#2.2ux @",
 				nbytes);
 	else
@@ -314,7 +314,7 @@ sendbits(Mpsse *mpsse, int nbits, int op)
 		snprint(cmd, sizeof(cmd), "DataOut EdgeDown LSB B%#2.2ux %#2.2ux",
 				nbits, obyte);
 	else if( (op&ShiftIn) && (op&ShiftOut) )
-		
+
 		snprint(cmd, sizeof(cmd), "DataOutIn EdgeDown EdgeUp LSB B%#2.2ux %#2.2ux",
 				nbits, obyte);
 	else
@@ -422,7 +422,7 @@ mpsseregshift(JMedium *jmed, ShiftTDesc *req, ShiftRDesc *rep)
 
 	isrd = op&ShiftIn;
 
-	/* 	
+	/*
 	 *	May need to go to Pause to cross capture before starting
 	 *	May still have a trailing bit from last shifting
 	 */
@@ -557,7 +557,7 @@ newmpsse(int fd, int motherb)
 
 	mpsse->jtagfd = fd;
 	mpsse->motherb = motherb;
-	
+
 
 	bout = &mpsse->bout;
 
@@ -607,7 +607,7 @@ initmpsse(int fd, int motherb)
 		req.buf = buf;
 		req.nbits = InGuruLen;
 		req.op = ShiftOut;
-		
+
 		jmed->regshift(jmed, &req, nil);
 		req.reg = TapDR;
 		hleputs(buf, DrGuruTapctl);
@@ -645,4 +645,3 @@ resetmpsse(JMedium *jmed)
 	jmnew = initmpsse(mpsse.jtagfd, mpsse.motherb);
 	return jmnew;
 }
-

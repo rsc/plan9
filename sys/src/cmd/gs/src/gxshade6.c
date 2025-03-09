@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -17,7 +17,7 @@
 /* $Id: gxshade6.c,v 1.100 2005/05/25 15:57:58 igor Exp $ */
 /* Rendering for Coons and tensor patch shadings */
 /*
-   A contiguous non-overlapping decomposition 
+   A contiguous non-overlapping decomposition
    of a tensor shading into linear color triangles.
  */
 #include "memory_.h"
@@ -447,67 +447,67 @@ gs_shading_Tpp_fill_rectangle(const gs_shading_t * psh0, const gs_rect * rect,
     The target device assumes semi-open intrvals by X to be painted
     (See PLRM3, 7.5. Scan conversion details), i.e.
     it doesn't paint pixels which falls exactly to the right side.
-    Note that with raster devices the algorithm doesn't paint pixels, 
-    whigh are partially covered by the shading area, 
+    Note that with raster devices the algorithm doesn't paint pixels,
+    whigh are partially covered by the shading area,
     but which's centers are outside the area.
 
-    Pixels inside a monotonic part of the shading area are painted 
+    Pixels inside a monotonic part of the shading area are painted
     at once, but some exceptions may happen :
 
         - While flattening boundaries of a subpatch,
-	to keep the plane coverage contiguity we insert wedges 
+	to keep the plane coverage contiguity we insert wedges
 	between neighbor subpatches, which use a different
 	flattening factor. With non-monotonic curves
-	those wedges may overlap or be self-overlapping, and a pixel 
+	those wedges may overlap or be self-overlapping, and a pixel
 	is painted so many times as many wedges cover it. Fortunately
 	the area of most wedges is zero or extremily small.
 
 	- Since quazi-horizontal wedges may have a non-constant color,
 	they can't decompose into constant color trapezoids with
 	keeping the coverage contiguity. To represent them we
-	apply the XY plane transposition. But with the transposition 
+	apply the XY plane transposition. But with the transposition
 	a semiopen interval can met a non-transposed one,
-	so that some lines are not covered. Therefore we emulate 
-	closed intervals with expanding the transposed trapesoids in 
+	so that some lines are not covered. Therefore we emulate
+	closed intervals with expanding the transposed trapesoids in
 	fixed_epsilon, and pixels at that boundary may be painted twice.
 
-	- A boundary of a monotonic area can't compute in XY 
-	preciselly due to high order polynomial equations. 
-	Therefore the subdivision near the monotonity boundary 
+	- A boundary of a monotonic area can't compute in XY
+	preciselly due to high order polynomial equations.
+	Therefore the subdivision near the monotonity boundary
 	may paint some pixels twice within same monotonic part.
 
     Non-monotonic areas slow down due to a tinny subdivision required.
-    
-    The target device may be either raster or vector. 
+
+    The target device may be either raster or vector.
     Vector devices should preciselly pass trapezoids to the output.
-    Note that ends of sides of a trapesoid are not necessary 
+    Note that ends of sides of a trapesoid are not necessary
     the trapezoid's vertices. Converting this thing into
     an exact quadrangle may cause an arithmetic error,
     and the rounding must be done so that the coverage
-    contiguity is not lost. 
+    contiguity is not lost.
 
-    When a device passes a trapezoid to it's output, 
-    a regular rounding would keep the coverage contiguity, 
-    except for the transposed trapesoids. 
-    If a transposed trapezoid is being transposed back, 
+    When a device passes a trapezoid to it's output,
+    a regular rounding would keep the coverage contiguity,
+    except for the transposed trapesoids.
+    If a transposed trapezoid is being transposed back,
     it doesn't become a canonic trapezoid, and a further
     decomposition is neccessary. But rounding errors here
     would break the coverage contiguity at boundaries
     of the tansposed part of the area.
 
-    Devices, which have no transposed trapezoids and represent 
+    Devices, which have no transposed trapezoids and represent
     trapezoids only with 8 coordinates of vertices of the quadrangle
     (pclwrite is an example) may apply the backward transposition,
     and a clipping instead the further decomposition.
-    Note that many clip regions may appear for all wedges. 
-    Note that in some cases the adjustment of the right side to be 
+    Note that many clip regions may appear for all wedges.
+    Note that in some cases the adjustment of the right side to be
     withdrown before the backward transposition.
  */
- /* We believe that a multiplication of 32-bit integers with a 
-    64-bit result is performed by modern platforms performs 
-    in hardware level. Therefore we widely use it here, 
-    but we minimize the usage of a multiplication of longer integers. 
-    
+ /* We believe that a multiplication of 32-bit integers with a
+    64-bit result is performed by modern platforms performs
+    in hardware level. Therefore we widely use it here,
+    but we minimize the usage of a multiplication of longer integers.
+
     Unfortunately we do need a multiplication of long integers
     in intersection_of_small_bars, because solving the linear system
     requires tripple multiples of 'fixed'. Therefore we retain
@@ -537,8 +537,8 @@ wedge_vertex_list_elem_buffer_alloc(patch_fill_state_t *pfs)
     gs_memory_t *memory = pfs->pis->memory;
 
     pfs->wedge_vertex_list_elem_count_max = max_level * (1 << max_level);
-    pfs->wedge_vertex_list_elem_buffer = (wedge_vertex_list_elem_t *)gs_alloc_bytes(memory, 
-	    sizeof(wedge_vertex_list_elem_t) * pfs->wedge_vertex_list_elem_count_max, 
+    pfs->wedge_vertex_list_elem_buffer = (wedge_vertex_list_elem_t *)gs_alloc_bytes(memory,
+	    sizeof(wedge_vertex_list_elem_t) * pfs->wedge_vertex_list_elem_count_max,
 	    "alloc_wedge_vertex_list_elem_buffer");
     if (pfs->wedge_vertex_list_elem_buffer == NULL)
 	return_error(gs_error_VMerror);
@@ -552,7 +552,7 @@ wedge_vertex_list_elem_buffer_free(patch_fill_state_t *pfs)
 {
     gs_memory_t *memory = pfs->pis->memory;
 
-    gs_free_object(memory, pfs->wedge_vertex_list_elem_buffer, 
+    gs_free_object(memory, pfs->wedge_vertex_list_elem_buffer,
 		"wedge_vertex_list_elem_buffer_free");
     pfs->wedge_vertex_list_elem_buffer = NULL;
     pfs->free_wedge_vertex = NULL;
@@ -580,7 +580,7 @@ wedge_vertex_list_elem_release(patch_fill_state_t *pfs, wedge_vertex_list_elem_t
 }
 
 private inline void
-release_triangle_wedge_vertex_list_elem(patch_fill_state_t *pfs, 
+release_triangle_wedge_vertex_list_elem(patch_fill_state_t *pfs,
     wedge_vertex_list_elem_t *beg, wedge_vertex_list_elem_t *end)
 {
     wedge_vertex_list_elem_t *e = beg->next;
@@ -592,7 +592,7 @@ release_triangle_wedge_vertex_list_elem(patch_fill_state_t *pfs,
 }
 
 private inline void
-release_wedge_vertex_list_interval(patch_fill_state_t *pfs, 
+release_wedge_vertex_list_interval(patch_fill_state_t *pfs,
     wedge_vertex_list_elem_t *beg, wedge_vertex_list_elem_t *end)
 {
     wedge_vertex_list_elem_t *e = beg->next, *ee;
@@ -625,11 +625,11 @@ release_wedge_vertex_list(patch_fill_state_t *pfs, wedge_vertex_list_t *ll, int 
 }
 
 private inline wedge_vertex_list_elem_t *
-wedge_vertex_list_find(wedge_vertex_list_elem_t *beg, const wedge_vertex_list_elem_t *end, 
+wedge_vertex_list_find(wedge_vertex_list_elem_t *beg, const wedge_vertex_list_elem_t *end,
 	    int level)
 {
     wedge_vertex_list_elem_t *e = beg;
-    
+
     assert(beg != NULL && end != NULL);
     for (; e != end; e = e->next)
 	if (e->level == level)
@@ -647,20 +647,20 @@ private void
 draw_patch(const tensor_patch *p, bool interior, ulong rgbcolor)
 {
 #ifdef DEBUG
-#if 0 /* Disabled for a better view with a specific purpose. 
+#if 0 /* Disabled for a better view with a specific purpose.
 	 Feel free to enable fo needed. */
     int i, step = (interior ? 1 : 3);
 
     for (i = 0; i < 4; i += step) {
-	vd_curve(p->pole[i][0].x, p->pole[i][0].y, 
-		 p->pole[i][1].x, p->pole[i][1].y, 
-		 p->pole[i][2].x, p->pole[i][2].y, 
-		 p->pole[i][3].x, p->pole[i][3].y, 
+	vd_curve(p->pole[i][0].x, p->pole[i][0].y,
+		 p->pole[i][1].x, p->pole[i][1].y,
+		 p->pole[i][2].x, p->pole[i][2].y,
+		 p->pole[i][3].x, p->pole[i][3].y,
 		 0, rgbcolor);
-	vd_curve(p->pole[0][i].x, p->pole[0][i].y, 
-		 p->pole[1][i].x, p->pole[1][i].y, 
-		 p->pole[2][i].x, p->pole[2][i].y, 
-		 p->pole[3][i].x, p->pole[3][i].y, 
+	vd_curve(p->pole[0][i].x, p->pole[0][i].y,
+		 p->pole[1][i].x, p->pole[1][i].y,
+		 p->pole[2][i].x, p->pole[2][i].y,
+		 p->pole[3][i].x, p->pole[3][i].y,
 		 0, rgbcolor);
     }
 #endif
@@ -668,7 +668,7 @@ draw_patch(const tensor_patch *p, bool interior, ulong rgbcolor)
 }
 
 private inline void
-draw_triangle(const gs_fixed_point *p0, const gs_fixed_point *p1, 
+draw_triangle(const gs_fixed_point *p0, const gs_fixed_point *p1,
 		const gs_fixed_point *p2, ulong rgbcolor)
 {
 #ifdef DEBUG
@@ -682,7 +682,7 @@ private inline void
 draw_quadrangle(const quadrangle_patch *p, ulong rgbcolor)
 {
 #ifdef DEBUG
-	vd_quad(p->p[0][0]->p.x, p->p[0][0]->p.y, 
+	vd_quad(p->p[0][0]->p.x, p->p[0][0]->p.y,
 	    p->p[0][1]->p.x, p->p[0][1]->p.y,
 	    p->p[1][1]->p.x, p->p[1][1]->p.y,
 	    p->p[1][0]->p.x, p->p[1][0]->p.y,
@@ -691,7 +691,7 @@ draw_quadrangle(const quadrangle_patch *p, ulong rgbcolor)
 }
 
 private inline int
-curve_samples(patch_fill_state_t *pfs, 
+curve_samples(patch_fill_state_t *pfs,
 		const gs_fixed_point *pole, int pole_step, fixed fixed_flat)
 {
     curve_segment s;
@@ -704,7 +704,7 @@ curve_samples(patch_fill_state_t *pfs,
     s.pt.x = pole[pole_step * 3].x;
     s.pt.y = pole[pole_step * 3].y;
     k = gx_curve_log2_samples(pole[0].x, pole[0].y, &s, fixed_flat);
-    {	
+    {
 #	if LAZY_WEDGES || QUADRANGLES
 	    int k1;
 	    fixed L = any_abs(pole[1].x - pole[0].x) + any_abs(pole[1].y - pole[0].y) +
@@ -725,7 +725,7 @@ curve_samples(patch_fill_state_t *pfs,
     return 1 << k;
 }
 
-private bool 
+private bool
 intersection_of_small_bars(const gs_fixed_point q[4], int i0, int i1, int i2, int i3, fixed *ry, fixed *ey)
 {
     /* This function is only used with QUADRANGLES. */
@@ -748,22 +748,22 @@ intersection_of_small_bars(const gs_fixed_point q[4], int i0, int i1, int i2, in
     if (dx2 == dx3 && dy2 == dy3)
 	return false; /* Zero length bars are out of interest. */
     vp2a = (int64_t)dx1 * dy2;
-    vp2b = (int64_t)dy1 * dx2; 
+    vp2b = (int64_t)dy1 * dx2;
     /* vp2 = vp2a - vp2b; It can overflow int64_t, but we only need the sign. */
     if (vp2a > vp2b)
 	s2 = 1;
     else if (vp2a < vp2b)
 	s2 = -1;
-    else 
+    else
 	s2 = 0;
     vp3a = (int64_t)dx1 * dy3;
-    vp3b = (int64_t)dy1 * dx3; 
+    vp3b = (int64_t)dy1 * dx3;
     /* vp3 = vp3a - vp3b; It can overflow int64_t, but we only need the sign. */
     if (vp3a > vp3b)
 	s3 = 1;
     else if (vp3a < vp3b)
 	s3 = -1;
-    else 
+    else
 	s3 = 0;
     if (s2 == 0) {
 	if (s3 == 0)
@@ -789,10 +789,10 @@ intersection_of_small_bars(const gs_fixed_point q[4], int i0, int i1, int i2, in
 #	define USE_DOUBLE 0
 #	define USE_INT64_T (1 || !USE_DOUBLE)
 #	if USE_DOUBLE
-	{ 
+	{
 	    /* Assuming big bars. Not a good thing due to 'double'.  */
-	    /* The determinant can't compute in double due to 
-	       possible loss of all significant bits when subtracting the 
+	    /* The determinant can't compute in double due to
+	       possible loss of all significant bits when subtracting the
 	       trucnated prodicts. But after we subtract in int64_t,
 	       it converts to 'double' with a reasonable truncation. */
 	    double dy = dy1 * (double)mul / (double)det;
@@ -870,7 +870,7 @@ adjust_swapped_boundary(fixed *b, bool swap_axes)
 	    when computing pixel coverage, we should expand
 	    the right side of the area. Otherwise a dropout can happen :
 	    if the left neighbour is painted with !swap_axes,
-	    the left side of this area appears to be the left side 
+	    the left side of this area appears to be the left side
 	    of the neighbour area, and the side is not included
 	    into both areas.
 	 */
@@ -879,8 +879,8 @@ adjust_swapped_boundary(fixed *b, bool swap_axes)
 }
 
 private inline void
-make_trapezoid(const gs_fixed_point q[4], 
-	int vi0, int vi1, int vi2, int vi3, fixed ybot, fixed ytop, 
+make_trapezoid(const gs_fixed_point q[4],
+	int vi0, int vi1, int vi2, int vi3, fixed ybot, fixed ytop,
 	bool swap_axes, bool orient, gs_fixed_edge *le, gs_fixed_edge *re)
 {
     if (!orient) {
@@ -898,9 +898,9 @@ make_trapezoid(const gs_fixed_point q[4],
     adjust_swapped_boundary(&re->end.x, swap_axes);
 }
 
-private inline int 
-gx_shade_trapezoid(patch_fill_state_t *pfs, const gs_fixed_point q[4], 
-	int vi0, int vi1, int vi2, int vi3, fixed ybot0, fixed ytop0, 
+private inline int
+gx_shade_trapezoid(patch_fill_state_t *pfs, const gs_fixed_point q[4],
+	int vi0, int vi1, int vi2, int vi3, fixed ybot0, fixed ytop0,
 	bool swap_axes, const gx_device_color *pdevc, bool orient)
 {
     gs_fixed_edge le, re;
@@ -931,7 +931,7 @@ patch_color_to_device_color(const patch_fill_state_t *pfs, const patch_color_t *
     gs_client_color fcc;
     const gs_color_space *pcs = pfs->direct_space;
 
-    memcpy(fcc.paint.values, c->cc.paint.values, 
+    memcpy(fcc.paint.values, c->cc.paint.values,
 		sizeof(fcc.paint.values[0]) * pfs->num_components);
     return pcs->type->remap_color(&fcc, pcs, pdevc, pfs->pis,
 			      pfs->dev, gs_color_select_texture);
@@ -975,13 +975,13 @@ private inline int
 isnt_color_monotonic(const patch_fill_state_t *pfs, const patch_color_t *c0, const patch_color_t *c1)
 {   /* checks whether the color is monotonic in the n-dimensional interval,
        where n is the number of parameters in c0->t, c1->t.
-       returns : 0 = monotonic, 
-       bit 0 = not or don't know by t0, 
-       bit 1 = not or don't know by t1, 
+       returns : 0 = monotonic,
+       bit 0 = not or don't know by t0,
+       bit 1 = not or don't know by t1,
        <0 = error. */
     /* When pfs->Function is not set, the color is monotonic.
-       In this case do not call this function because 
-       it doesn't check whether pfs->Function is set. 
+       In this case do not call this function because
+       it doesn't check whether pfs->Function is set.
        Actually pfs->monotonic_color prevents that.
      */
     uint mask;
@@ -999,7 +999,7 @@ covers_pixel_centers(fixed ybot, fixed ytop)
 }
 
 private inline int
-constant_color_trapezoid(patch_fill_state_t *pfs, gs_fixed_edge *le, gs_fixed_edge *re, 
+constant_color_trapezoid(patch_fill_state_t *pfs, gs_fixed_edge *le, gs_fixed_edge *re,
 	fixed ybot, fixed ytop, bool swap_axes, const patch_color_t *c)
 {
     patch_color_t c1 = *c;
@@ -1023,7 +1023,7 @@ constant_color_trapezoid(patch_fill_state_t *pfs, gs_fixed_edge *le, gs_fixed_ed
 }
 
 private inline void
-dc2fc(const patch_fill_state_t *pfs, gx_color_index c, 
+dc2fc(const patch_fill_state_t *pfs, gx_color_index c,
 	    frac31 fc[GX_DEVICE_COLOR_MAX_COMPONENTS])
 {
     int j;
@@ -1076,7 +1076,7 @@ is_color_linear(const patch_fill_state_t *pfs, const patch_color_t *c0, const pa
     if (pfs->unlinear)
 	return 1; /* Disable this check. */
     else {
-	gs_direct_color_space *cs = 
+	gs_direct_color_space *cs =
 		    (gs_direct_color_space *)pfs->direct_space; /* break 'const'. */
 	int code;
 	float smoothness = max(pfs->smoothness, 1.0 / min_linear_grades);
@@ -1088,7 +1088,7 @@ is_color_linear(const patch_fill_state_t *pfs, const patch_color_t *c0, const pa
 
 	if (s > smoothness)
 	    return 0;
-	code = cs_is_linear(cs, pfs->pis, pfs->dev, 
+	code = cs_is_linear(cs, pfs->pis, pfs->dev,
 		&c0->cc, &c1->cc, NULL, NULL, smoothness - s);
 	if (code <= 0)
 	    return code;
@@ -1097,12 +1097,12 @@ is_color_linear(const patch_fill_state_t *pfs, const patch_color_t *c0, const pa
 }
 
 private int
-decompose_linear_color(patch_fill_state_t *pfs, gs_fixed_edge *le, gs_fixed_edge *re, 
-	fixed ybot, fixed ytop, bool swap_axes, const patch_color_t *c0, 
+decompose_linear_color(patch_fill_state_t *pfs, gs_fixed_edge *le, gs_fixed_edge *re,
+	fixed ybot, fixed ytop, bool swap_axes, const patch_color_t *c0,
 	const patch_color_t *c1, int level)
 {
     /* Assuming a very narrow trapezoid - ignore the transversal color variation. */
-    /* Assuming the XY span is restricted with curve_samples. 
+    /* Assuming the XY span is restricted with curve_samples.
        It is important for intersection_of_small_bars to compute faster. */
     int code;
     patch_color_t c;
@@ -1110,12 +1110,12 @@ decompose_linear_color(patch_fill_state_t *pfs, gs_fixed_edge *le, gs_fixed_edge
     if (level > 100)
 	return_error(gs_error_unregistered); /* Must not happen. */
     /* Use the recursive decomposition due to isnt_color_monotonic
-       based on fn_is_monotonic_proc_t is_monotonic, 
+       based on fn_is_monotonic_proc_t is_monotonic,
        which applies to intervals. */
     patch_interpolate_color(&c, c0, c1, pfs, 0.5);
     if (ytop - ybot < fixed_1 / 2) /* Prevent an infinite color decomposition. */
 	return constant_color_trapezoid(pfs, le, re, ybot, ytop, swap_axes, &c);
-    else {  
+    else {
 	bool monotonic_color_save = pfs->monotonic_color;
 	bool linear_color_save = pfs->linear_color;
 
@@ -1151,7 +1151,7 @@ decompose_linear_color(patch_fill_state_t *pfs, gs_fixed_edge *le, gs_fixed_edge
 	    }
 	    clip.p.y = max(clip.p.y, ybot);
 	    clip.q.y = min(clip.q.y, ytop);
-	    fa.clip = &clip; 
+	    fa.clip = &clip;
 	    fa.ht = NULL;
 	    fa.swap_axes = swap_axes;
 	    fa.lop = 0;
@@ -1166,8 +1166,8 @@ decompose_linear_color(patch_fill_state_t *pfs, gs_fixed_edge *le, gs_fixed_edge
 		if (code < 0)
 		    return code;
 		dc2fc(pfs, dc[1].colors.pure, fc[1]);
-		code = dev_proc(pdev, fill_linear_color_trapezoid)(pdev, &fa, 
-				&le->start, &le->end, &re->start, &re->end, 
+		code = dev_proc(pdev, fill_linear_color_trapezoid)(pdev, &fa,
+				&le->start, &le->end, &re->start, &re->end,
 				fc[0], fc[1], NULL, NULL);
 		if (code == 1) {
 		    pfs->monotonic_color = monotonic_color_save;
@@ -1176,11 +1176,11 @@ decompose_linear_color(patch_fill_state_t *pfs, gs_fixed_edge *le, gs_fixed_edge
 		}
 		if (code < 0)
 		    return code;
-		else /* code == 0, the device requested to decompose the area. */ 
+		else /* code == 0, the device requested to decompose the area. */
 		    return_error(gs_error_unregistered); /* Must not happen. */
 	    }
 	}
-	if (!pfs->unlinear || !pfs->linear_color || 
+	if (!pfs->unlinear || !pfs->linear_color ||
 		color_span(pfs, c0, c1) > pfs->smoothness) {
 	    fixed y = (ybot + ytop) / 2;
 
@@ -1195,9 +1195,9 @@ decompose_linear_color(patch_fill_state_t *pfs, gs_fixed_edge *le, gs_fixed_edge
     }
 }
 
-private inline int 
-linear_color_trapezoid(patch_fill_state_t *pfs, gs_fixed_point q[4], int i0, int i1, int i2, int i3, 
-		fixed ybot, fixed ytop, bool swap_axes, const patch_color_t *c0, const patch_color_t *c1, 
+private inline int
+linear_color_trapezoid(patch_fill_state_t *pfs, gs_fixed_point q[4], int i0, int i1, int i2, int i3,
+		fixed ybot, fixed ytop, bool swap_axes, const patch_color_t *c0, const patch_color_t *c1,
 		bool orient)
 {
     /* Assuming a very narrow trapezoid - ignore the transversal color change. */
@@ -1209,7 +1209,7 @@ linear_color_trapezoid(patch_fill_state_t *pfs, gs_fixed_point q[4], int i0, int
 
 private int
 wedge_trap_decompose(patch_fill_state_t *pfs, gs_fixed_point q[4],
-	fixed ybot, fixed ytop, const patch_color_t *c0, const patch_color_t *c1, 
+	fixed ybot, fixed ytop, const patch_color_t *c0, const patch_color_t *c1,
 	bool swap_axes, bool self_intersecting)
 {
     /* Assuming a very narrow trapezoid - ignore the transversal color change. */
@@ -1240,8 +1240,8 @@ wedge_trap_decompose(patch_fill_state_t *pfs, gs_fixed_point q[4],
 }
 
 private inline int
-fill_wedge_trap(patch_fill_state_t *pfs, const gs_fixed_point *p0, const gs_fixed_point *p1, 
-	    const gs_fixed_point *q0, const gs_fixed_point *q1, const patch_color_t *c0, const patch_color_t *c1, 
+fill_wedge_trap(patch_fill_state_t *pfs, const gs_fixed_point *p0, const gs_fixed_point *p1,
+	    const gs_fixed_point *q0, const gs_fixed_point *q1, const patch_color_t *c0, const patch_color_t *c1,
 	    bool swap_axes, bool self_intersecting)
 {
     /* We assume that the width of the wedge is close to zero,
@@ -1269,8 +1269,8 @@ private void
 split_curve_s(const gs_fixed_point *pole, gs_fixed_point *q0, gs_fixed_point *q1, int pole_step)
 {
     /*	This copies a code fragment from split_curve_midpoint,
-        substituting another data type. 
-     */				
+        substituting another data type.
+     */
     /*
      * We have to define midpoint carefully to avoid overflow.
      * (If it overflows, something really pathological is going
@@ -1340,7 +1340,7 @@ y_extreme_vertice(gs_fixed_point *q, const gs_fixed_point *p, int k, int minmax)
     for (i = 1; i < k; i++)
 	if ((p[i].y - r.y) * minmax > 0)
 	    r = p[i];
-    *q = r;	
+    *q = r;
 }
 
 private inline fixed
@@ -1399,7 +1399,7 @@ manhattan_dist(const gs_fixed_point *p0, const gs_fixed_point *p1)
 }
 
 private inline void
-create_wedge_vertex_list(patch_fill_state_t *pfs, wedge_vertex_list_t *l, 
+create_wedge_vertex_list(patch_fill_state_t *pfs, wedge_vertex_list_t *l,
 	const gs_fixed_point *p0, const gs_fixed_point *p1)
 {
     assert(l->end == NULL);
@@ -1420,9 +1420,9 @@ insert_wedge_vertex_list_elem(patch_fill_state_t *pfs, wedge_vertex_list_t *l, c
 {
     wedge_vertex_list_elem_t *e = wedge_vertex_list_elem_reserve(pfs);
 
-    /* We have got enough free elements due to the preliminary decomposition 
+    /* We have got enough free elements due to the preliminary decomposition
        of curves to LAZY_WEDGES_MAX_LEVEL, see curve_samples. */
-    assert(e != NULL); 
+    assert(e != NULL);
     assert(l->beg->next == l->end);
     assert(l->end->prev == l->beg);
     e->next = l->end;
@@ -1474,7 +1474,7 @@ open_wedge_median(patch_fill_state_t *pfs, wedge_vertex_list_t *l,
 	    e->divide_count++;
 	    return e;
 	} else {
-	    e = wedge_vertex_list_find(l->beg, l->end, 
+	    e = wedge_vertex_list_find(l->beg, l->end,
 			max(l->beg->level, l->end->level) + 1);
 	    assert(e != NULL);
 	    assert(e->p.x == pm->x && e->p.y == pm->y);
@@ -1485,8 +1485,8 @@ open_wedge_median(patch_fill_state_t *pfs, wedge_vertex_list_t *l,
 }
 
 private inline void
-make_wedge_median(patch_fill_state_t *pfs, wedge_vertex_list_t *l, 
-	wedge_vertex_list_t *l0, bool forth, 
+make_wedge_median(patch_fill_state_t *pfs, wedge_vertex_list_t *l,
+	wedge_vertex_list_t *l0, bool forth,
 	const gs_fixed_point *p0, const gs_fixed_point *p1, const gs_fixed_point *pm)
 {
     l->last_side = l0->last_side;
@@ -1529,7 +1529,7 @@ move_wedge(wedge_vertex_list_t *l, const wedge_vertex_list_t *l0, bool forth)
     }
 }
 
-private inline int 
+private inline int
 fill_triangle_wedge_aux(patch_fill_state_t *pfs,
 	    const shading_vertex_t *q0, const shading_vertex_t *q1, const shading_vertex_t *q2)
 {   int code;
@@ -1577,7 +1577,7 @@ fill_triangle_wedge_aux(patch_fill_state_t *pfs,
 
 private inline int
 try_device_linear_color(patch_fill_state_t *pfs, bool wedge,
-	const shading_vertex_t *p0, const shading_vertex_t *p1, 
+	const shading_vertex_t *p0, const shading_vertex_t *p1,
 	const shading_vertex_t *p2)
 {
     /*	Returns :
@@ -1591,7 +1591,7 @@ try_device_linear_color(patch_fill_state_t *pfs, bool wedge,
     if (pfs->unlinear)
 	return 2;
     if (!wedge) {
-	gs_direct_color_space *cs = 
+	gs_direct_color_space *cs =
 		(gs_direct_color_space *)pfs->direct_space; /* break 'const'. */
 	float smoothness = max(pfs->smoothness, 1.0 / min_linear_grades);
 	/* Restrict the smoothness with 1/min_linear_grades, because cs_is_linear
@@ -1612,7 +1612,7 @@ try_device_linear_color(patch_fill_state_t *pfs, bool wedge,
 	/* fixme: check an inner color ? */
 	s01 = max(s0, s1);
 	s012 = max(s01, s2);
-	code = cs_is_linear(cs, pfs->pis, pfs->dev, 
+	code = cs_is_linear(cs, pfs->pis, pfs->dev,
 			    &p0->c.cc, &p1->c.cc, &p2->c.cc, NULL, smoothness - s012);
 	if (code < 0)
 	    return code;
@@ -1648,24 +1648,24 @@ try_device_linear_color(patch_fill_state_t *pfs, bool wedge,
 	draw_triangle(&p0->p, &p1->p, &p2->p, RGB(255, 0, 0));
 	if (!VD_TRACE_DOWN)
 	    vd_disable;
-	code = dev_proc(pdev, fill_linear_color_triangle)(pdev, &fa, 
-			&p0->p, &p1->p, &p2->p, 
+	code = dev_proc(pdev, fill_linear_color_triangle)(pdev, &fa,
+			&p0->p, &p1->p, &p2->p,
 			fc[0], (wedge ? NULL : fc[1]), fc[2]);
 	vd_restore;
 	if (code == 1)
 	    return 0; /* The area is filled. */
 	if (code < 0)
 	    return code;
-	else /* code == 0, the device requested to decompose the area. */ 
+	else /* code == 0, the device requested to decompose the area. */
 	    return 1;
     }
 }
 
-private inline int 
+private inline int
 fill_triangle_wedge(patch_fill_state_t *pfs,
 	    const shading_vertex_t *q0, const shading_vertex_t *q1, const shading_vertex_t *q2)
 {
-    if ((int64_t)(q1->p.x - q0->p.x) * (q2->p.y - q0->p.y) == 
+    if ((int64_t)(q1->p.x - q0->p.x) * (q2->p.y - q0->p.y) ==
 	(int64_t)(q1->p.y - q0->p.y) * (q2->p.x - q0->p.x))
 	return 0; /* Zero area. */
     draw_triangle(&q0->p, &q1->p, &q2->p, RGB(255, 255, 0));
@@ -1679,8 +1679,8 @@ fill_triangle_wedge(patch_fill_state_t *pfs,
 }
 
 private inline int
-fill_triangle_wedge_from_list(patch_fill_state_t *pfs, 
-    const wedge_vertex_list_elem_t *beg, const wedge_vertex_list_elem_t *end, 
+fill_triangle_wedge_from_list(patch_fill_state_t *pfs,
+    const wedge_vertex_list_elem_t *beg, const wedge_vertex_list_elem_t *end,
     const wedge_vertex_list_elem_t *mid,
     const patch_color_t *c0, const patch_color_t *c1)
 {
@@ -1695,9 +1695,9 @@ fill_triangle_wedge_from_list(patch_fill_state_t *pfs,
     return fill_triangle_wedge(pfs, &p[0], &p[1], &p[2]);
 }
 
-private int 
-fill_wedge_from_list_rec(patch_fill_state_t *pfs, 
-	    wedge_vertex_list_elem_t *beg, const wedge_vertex_list_elem_t *end, 
+private int
+fill_wedge_from_list_rec(patch_fill_state_t *pfs,
+	    wedge_vertex_list_elem_t *beg, const wedge_vertex_list_elem_t *end,
 	    int level, const patch_color_t *c0, const patch_color_t *c1)
 {
     if (beg->next == end)
@@ -1732,11 +1732,11 @@ fill_wedge_from_list_rec(patch_fill_state_t *pfs,
     }
 }
 
-private int 
+private int
 fill_wedge_from_list(patch_fill_state_t *pfs, const wedge_vertex_list_t *l,
 	    const patch_color_t *c0, const patch_color_t *c1)
 {
-    return fill_wedge_from_list_rec(pfs, l->beg, l->end, 
+    return fill_wedge_from_list_rec(pfs, l->beg, l->end,
 		    max(l->beg->level, l->end->level), c0, c1);
 }
 
@@ -1755,7 +1755,7 @@ terminate_wedge_vertex_list(patch_fill_state_t *pfs, wedge_vertex_list_t *l,
 }
 
 private int
-wedge_by_triangles(patch_fill_state_t *pfs, int ka, 
+wedge_by_triangles(patch_fill_state_t *pfs, int ka,
 	const gs_fixed_point pole[4], const patch_color_t *c0, const patch_color_t *c1)
 {   /* Assuming ka >= 2, see fill_wedges. */
     gs_fixed_point q[2][4];
@@ -1793,7 +1793,7 @@ is_linear_color_applicable(const patch_fill_state_t *pfs)
 }
 
 int
-mesh_padding(patch_fill_state_t *pfs, const gs_fixed_point *p0, const gs_fixed_point *p1, 
+mesh_padding(patch_fill_state_t *pfs, const gs_fixed_point *p0, const gs_fixed_point *p1,
 	    const patch_color_t *c0, const patch_color_t *c1)
 {
     gs_fixed_point q0, q1;
@@ -1841,7 +1841,7 @@ mesh_padding(patch_fill_state_t *pfs, const gs_fixed_point *p0, const gs_fixed_p
     adjust_swapped_boundary(&re.start.x, swap_axes);
     adjust_swapped_boundary(&re.end.x, swap_axes);
     return decompose_linear_color(pfs, &le, &re, le.start.y, le.end.y, swap_axes, cc0, cc1, 0);
-    /* fixme : for a better performance and quality, we would like to 
+    /* fixme : for a better performance and quality, we would like to
        consider the bar as an oriented one and to know at what side of it the spot resides.
        If we know that, we could expand only to outside the spot.
        Note that if the boundary has a self-intersection,
@@ -1850,7 +1850,7 @@ mesh_padding(patch_fill_state_t *pfs, const gs_fixed_point *p0, const gs_fixed_p
 }
 
 private int
-fill_wedges_aux(patch_fill_state_t *pfs, int k, int ka, 
+fill_wedges_aux(patch_fill_state_t *pfs, int k, int ka,
 	const gs_fixed_point pole[4], const patch_color_t *c0, const patch_color_t *c1,
 	int wedge_type)
 {
@@ -1880,8 +1880,8 @@ fill_wedges_aux(patch_fill_state_t *pfs, int k, int ka,
 }
 
 private int
-fill_wedges(patch_fill_state_t *pfs, int k0, int k1, 
-	const gs_fixed_point *pole, int pole_step, 
+fill_wedges(patch_fill_state_t *pfs, int k0, int k1,
+	const gs_fixed_point *pole, int pole_step,
 	const patch_color_t *c0, const patch_color_t *c1, int wedge_type)
 {
     /* Generate wedges between 2 variants of a curve flattening. */
@@ -1927,7 +1927,7 @@ wrap_vertices_by_y(gs_fixed_point q[4], const gs_fixed_point s[4])
     q[3] = s[(i + 3) % 4];
 }
 
-private int 
+private int
 ordered_triangle(patch_fill_state_t *pfs, gs_fixed_edge *le, gs_fixed_edge *re, patch_color_t *c)
 {
     gs_fixed_edge ue;
@@ -1969,7 +1969,7 @@ ordered_triangle(patch_fill_state_t *pfs, gs_fixed_edge *le, gs_fixed_edge *re, 
     return code;
 }
 
-private int 
+private int
 constant_color_triangle(patch_fill_state_t *pfs,
 	const shading_vertex_t *p0, const shading_vertex_t *p1, const shading_vertex_t *p2)
 {
@@ -1986,7 +1986,7 @@ constant_color_triangle(patch_fill_state_t *pfs,
 	/* fixme : does optimizer compiler expand this cycle ? */
 	if (p0->p.y <= p1->p.y && p0->p.y <= p2->p.y) {
 	    le.start = re.start = p0->p;
-	    le.end = p1->p; 
+	    le.end = p1->p;
 	    re.end = p2->p;
 
 	    dx0 = le.end.x - le.start.x;
@@ -2004,10 +2004,10 @@ constant_color_triangle(patch_fill_state_t *pfs,
 }
 
 
-private int 
+private int
 constant_color_quadrangle(patch_fill_state_t *pfs, const quadrangle_patch *p, bool self_intersecting)
 {
-    /* Assuming the XY span is restricted with curve_samples. 
+    /* Assuming the XY span is restricted with curve_samples.
        It is important for intersection_of_small_bars to compute faster. */
     gs_fixed_point q[4];
     fixed ry, ey;
@@ -2027,7 +2027,7 @@ constant_color_quadrangle(patch_fill_state_t *pfs, const quadrangle_patch *p, bo
     {	gs_fixed_point qq[4];
 
 	make_vertices(qq, p);
-#	if 0 /* Swapping axes may improve the precision, 
+#	if 0 /* Swapping axes may improve the precision,
 		but slows down due to the area expantion needed
 		in gx_shade_trapezoid. */
 	    dx = span_x(qq, 4);
@@ -2200,7 +2200,7 @@ constant_color_quadrangle(patch_fill_state_t *pfs, const quadrangle_patch *p, bo
 }
 
 private inline void
-divide_quadrangle_by_v(patch_fill_state_t *pfs, quadrangle_patch *s0, quadrangle_patch *s1, 
+divide_quadrangle_by_v(patch_fill_state_t *pfs, quadrangle_patch *s0, quadrangle_patch *s1,
 	    shading_vertex_t q[2], const quadrangle_patch *p)
 {
     q[0].p.x = (p->p[0][0]->p.x + p->p[1][0]->p.x) / 2;
@@ -2218,7 +2218,7 @@ divide_quadrangle_by_v(patch_fill_state_t *pfs, quadrangle_patch *s0, quadrangle
 }
 
 private inline void
-divide_quadrangle_by_u(patch_fill_state_t *pfs, quadrangle_patch *s0, quadrangle_patch *s1, 
+divide_quadrangle_by_u(patch_fill_state_t *pfs, quadrangle_patch *s0, quadrangle_patch *s1,
 	    shading_vertex_t q[2], const quadrangle_patch *p)
 {
     q[0].p.x = (p->p[0][0]->p.x + p->p[0][1]->p.x) / 2;
@@ -2236,8 +2236,8 @@ divide_quadrangle_by_u(patch_fill_state_t *pfs, quadrangle_patch *s0, quadrangle
 }
 
 private inline int
-is_quadrangle_color_monotonic(const patch_fill_state_t *pfs, const quadrangle_patch *p, 
-			      bool *not_monotonic_by_u, bool *not_monotonic_by_v) 
+is_quadrangle_color_monotonic(const patch_fill_state_t *pfs, const quadrangle_patch *p,
+			      bool *not_monotonic_by_u, bool *not_monotonic_by_v)
 {   /* returns : 1 = monotonic, 0 = don't know, <0 = error. */
     int code;
 
@@ -2255,7 +2255,7 @@ private inline bool
 quadrangle_bbox_covers_pixel_centers(const quadrangle_patch *p)
 {
     fixed xbot, xtop, ybot, ytop;
-    
+
     xbot = min(min(p->p[0][0]->p.x, p->p[0][1]->p.x),
 	       min(p->p[1][0]->p.x, p->p[1][1]->p.x));
     xtop = max(max(p->p[0][0]->p.x, p->p[0][1]->p.x),
@@ -2272,7 +2272,7 @@ quadrangle_bbox_covers_pixel_centers(const quadrangle_patch *p)
 }
 
 private inline void
-divide_bar(patch_fill_state_t *pfs, 
+divide_bar(patch_fill_state_t *pfs,
 	const shading_vertex_t *p0, const shading_vertex_t *p1, int radix, shading_vertex_t *p)
 {
     p->p.x = (fixed)((int64_t)p0->p.x * (radix - 1) + p1->p.x) / radix;
@@ -2281,7 +2281,7 @@ divide_bar(patch_fill_state_t *pfs,
 }
 
 private inline void
-bbox_of_points(gs_fixed_rect *r, 
+bbox_of_points(gs_fixed_rect *r,
 	const gs_fixed_point *p0, const gs_fixed_point *p1,
 	const gs_fixed_point *p2, const gs_fixed_point *p3)
 {
@@ -2319,9 +2319,9 @@ bbox_of_points(gs_fixed_rect *r,
 	r->q.y = p3->y;
 }
 
-private int 
-triangle_by_4(patch_fill_state_t *pfs, 
-	const shading_vertex_t *p0, const shading_vertex_t *p1, const shading_vertex_t *p2, 
+private int
+triangle_by_4(patch_fill_state_t *pfs,
+	const shading_vertex_t *p0, const shading_vertex_t *p1, const shading_vertex_t *p2,
 	wedge_vertex_list_t *l01, wedge_vertex_list_t *l12, wedge_vertex_list_t *l20,
 	double cd, fixed sd)
 {
@@ -2330,7 +2330,7 @@ triangle_by_4(patch_fill_state_t *pfs,
     bool inside_save = pfs->inside;
     gs_fixed_rect r, r1;
     int code;
-    
+
     if (!pfs->inside) {
 	bbox_of_points(&r, &p0->p, &p1->p, &p2->p, NULL);
 	r1 = r;
@@ -2350,8 +2350,8 @@ triangle_by_4(patch_fill_state_t *pfs,
 		double d12 = color_span(pfs, &p2->c, &p1->c);
 		double d20 = color_span(pfs, &p0->c, &p2->c);
 
-		if (d01 <= pfs->smoothness / COLOR_CONTIGUITY && 
-		    d12 <= pfs->smoothness / COLOR_CONTIGUITY && 
+		if (d01 <= pfs->smoothness / COLOR_CONTIGUITY &&
+		    d12 <= pfs->smoothness / COLOR_CONTIGUITY &&
 		    d20 <= pfs->smoothness / COLOR_CONTIGUITY)
 		    return constant_color_triangle(pfs, p2, p0, p1);
 	    } else if (cd <= pfs->smoothness / COLOR_CONTIGUITY)
@@ -2365,7 +2365,7 @@ triangle_by_4(patch_fill_state_t *pfs,
 	    return code;
     }
     if (!pfs->inside) {
-	if (r.p.x == r1.p.x && r.p.y == r1.p.y && 
+	if (r.p.x == r1.p.x && r.p.y == r1.p.y &&
 	    r.q.x == r1.q.x && r.q.y == r1.q.y)
 	    pfs->inside = true;
     }
@@ -2431,8 +2431,8 @@ triangle_by_4(patch_fill_state_t *pfs,
     return 0;
 }
 
-private inline int 
-fill_triangle(patch_fill_state_t *pfs, 
+private inline int
+fill_triangle(patch_fill_state_t *pfs,
 	const shading_vertex_t *p0, const shading_vertex_t *p1, const shading_vertex_t *p2,
 	wedge_vertex_list_t *l01, wedge_vertex_list_t *l12, wedge_vertex_list_t *l20)
 {
@@ -2451,14 +2451,14 @@ fill_triangle(patch_fill_state_t *pfs,
 	double d12 = color_span(pfs, &p2->c, &p1->c);
 	double d20 = color_span(pfs, &p0->c, &p2->c);
 	double cd1 = max(d01, d12);
-	
+
 	cd = max(cd1, d20);
     }
     return triangle_by_4(pfs, p0, p1, p2, l01, l12, l20, cd, sd);
 }
 
-private int 
-small_mesh_triangle(patch_fill_state_t *pfs, 
+private int
+small_mesh_triangle(patch_fill_state_t *pfs,
 	const shading_vertex_t *p0, const shading_vertex_t *p1, const shading_vertex_t *p2)
 {
     int code;
@@ -2478,7 +2478,7 @@ small_mesh_triangle(patch_fill_state_t *pfs,
 }
 
 private int
-mesh_triangle_rec(patch_fill_state_t *pfs, 
+mesh_triangle_rec(patch_fill_state_t *pfs,
 	const shading_vertex_t *p0, const shading_vertex_t *p1, const shading_vertex_t *p2)
 {
     pfs->unlinear = !is_linear_color_applicable(pfs);
@@ -2489,12 +2489,12 @@ mesh_triangle_rec(patch_fill_state_t *pfs,
     else {
 	/* Subdivide into 4 triangles with 3 triangle non-lazy wedges.
 	   Doing so against the wedge_vertex_list_elem_buffer overflow.
-	   We could apply a smarter method, dividing long sides 
+	   We could apply a smarter method, dividing long sides
 	   with no wedges and short sides with lazy wedges.
-	   This needs to start wedges dynamically when 
-	   a side becomes short. We don't do so because the 
+	   This needs to start wedges dynamically when
+	   a side becomes short. We don't do so because the
 	   number of checks per call significantly increases
-	   and the logics is complicated, but the performance 
+	   and the logics is complicated, but the performance
 	   advantage appears small due to big meshes are rare.
 	 */
 	shading_vertex_t p01, p12, p20;
@@ -2526,12 +2526,12 @@ mesh_triangle_rec(patch_fill_state_t *pfs,
 }
 
 int
-mesh_triangle(patch_fill_state_t *pfs, 
+mesh_triangle(patch_fill_state_t *pfs,
 	const shading_vertex_t *p0, const shading_vertex_t *p1, const shading_vertex_t *p2)
 {
-    if ((*dev_proc(pfs->dev, pattern_manage))(pfs->dev, 
+    if ((*dev_proc(pfs->dev, pattern_manage))(pfs->dev,
 	    gs_no_id, NULL, pattern_manage__shading_area) > 0) {
-	/* Inform the device with the shading coverage area. 
+	/* Inform the device with the shading coverage area.
 	   First compute the sign of the area, because
 	   all areas to be clipped in same direction. */
 	gx_device *pdev = pfs->dev;
@@ -2560,7 +2560,7 @@ mesh_triangle(patch_fill_state_t *pfs,
     return mesh_triangle_rec(pfs, p0, p1, p2);
 }
 
-private inline int 
+private inline int
 triangles4(patch_fill_state_t *pfs, const quadrangle_patch *p, bool dummy_argument)
 {
     shading_vertex_t p0001, p1011, q;
@@ -2602,7 +2602,7 @@ triangles4(patch_fill_state_t *pfs, const quadrangle_patch *p, bool dummy_argume
     return 0;
 }
 
-private inline int 
+private inline int
 triangles2(patch_fill_state_t *pfs, const quadrangle_patch *p, bool dummy_argument)
 {
     wedge_vertex_list_t l;
@@ -2622,8 +2622,8 @@ triangles2(patch_fill_state_t *pfs, const quadrangle_patch *p, bool dummy_argume
     return 0;
 }
 
-private inline void 
-make_quadrangle(const tensor_patch *p, shading_vertex_t qq[2][2], 
+private inline void
+make_quadrangle(const tensor_patch *p, shading_vertex_t qq[2][2],
 	wedge_vertex_list_t l[4], quadrangle_patch *q)
 {
     qq[0][0].p = p->pole[0][0];
@@ -2686,7 +2686,7 @@ typedef enum {
 } color_change_type_t;
 
 private inline color_change_type_t
-quadrangle_color_change(const patch_fill_state_t *pfs, const quadrangle_patch *p, 
+quadrangle_color_change(const patch_fill_state_t *pfs, const quadrangle_patch *p,
 			bool is_big_u, bool is_big_v, bool *divide_u, bool *divide_v)
 {
     patch_color_t d0001, d1011, d;
@@ -2757,11 +2757,11 @@ quadrangle_color_change(const patch_fill_state_t *pfs, const quadrangle_patch *p
     return color_change_general;
 }
 
-private int 
+private int
 fill_quadrangle(patch_fill_state_t *pfs, const quadrangle_patch *p, bool big, int level)
 {
     /* The quadrangle is flattened enough by V and U, so ignore inner poles. */
-    /* Assuming the XY span is restricted with curve_samples. 
+    /* Assuming the XY span is restricted with curve_samples.
        It is important for intersection_of_small_bars to compute faster. */
     quadrangle_patch s0, s1;
     wedge_vertex_list_t l0, l1, l2;
@@ -2785,10 +2785,10 @@ fill_quadrangle(patch_fill_state_t *pfs, const quadrangle_patch *p, bool big, in
     }
     if (big) {
 	/* Likely 'big' is an unuseful rudiment due to curve_samples
-	   restricts lengthes. We keep it for a while because its implementation 
+	   restricts lengthes. We keep it for a while because its implementation
 	   isn't obvious and its time consumption is invisibly small.
 	 */
-	fixed size_u = max(max(any_abs(p->p[0][0]->p.x - p->p[0][1]->p.x), 
+	fixed size_u = max(max(any_abs(p->p[0][0]->p.x - p->p[0][1]->p.x),
 			       any_abs(p->p[1][0]->p.x - p->p[1][1]->p.x)),
 			   max(any_abs(p->p[0][0]->p.y - p->p[0][1]->p.y),
 			       any_abs(p->p[1][0]->p.y - p->p[1][1]->p.y)));
@@ -2803,7 +2803,7 @@ fill_quadrangle(patch_fill_state_t *pfs, const quadrangle_patch *p, bool big, in
 		   because we don't want int64_t in it. */
 		divide_v = true;
 	    } else if (size_u > pfs->max_small_coord) {
-		/* constant_color_quadrangle can't handle big self-intersecting areas, 
+		/* constant_color_quadrangle can't handle big self-intersecting areas,
 		   because we don't want int64_t in it. */
 		divide_u = true;
 	    } else
@@ -2827,8 +2827,8 @@ fill_quadrangle(patch_fill_state_t *pfs, const quadrangle_patch *p, bool big, in
 	if (d0010x > fixed_1 || d0111x > fixed_1 || d0010y > fixed_1 || d0111y > fixed_1)
 	    is_big_v = true;
 	else if (!is_big_u)
-	    return (QUADRANGLES || !pfs->maybe_self_intersecting ? 
-			constant_color_quadrangle : triangles4)(pfs, p, 
+	    return (QUADRANGLES || !pfs->maybe_self_intersecting ?
+			constant_color_quadrangle : triangles4)(pfs, p,
 			    pfs->maybe_self_intersecting);
 	if (!pfs->monotonic_color) {
 	    bool not_monotonic_by_u = false, not_monotonic_by_v = false;
@@ -2883,9 +2883,9 @@ fill_quadrangle(patch_fill_state_t *pfs, const quadrangle_patch *p, bool big, in
 	if (!pfs->linear_color) {
 	    /* go to divide. */
 	} else switch(quadrangle_color_change(pfs, p, is_big_u, is_big_v, &divide_u, &divide_v)) {
-	    case color_change_small: 
-		code = (QUADRANGLES || !pfs->maybe_self_intersecting ? 
-			    constant_color_quadrangle : triangles4)(pfs, p, 
+	    case color_change_small:
+		code = (QUADRANGLES || !pfs->maybe_self_intersecting ?
+			    constant_color_quadrangle : triangles4)(pfs, p,
 				pfs->maybe_self_intersecting);
 		pfs->monotonic_color = monotonic_color_save;
 		pfs->linear_color = linear_color_save;
@@ -2910,7 +2910,7 @@ fill_quadrangle(patch_fill_state_t *pfs, const quadrangle_patch *p, bool big, in
 	}
     }
     if (!pfs->inside) {
-	if (r.p.x == r1.p.x && r.p.y == r1.p.y && 
+	if (r.p.x == r1.p.x && r.p.y == r1.p.y &&
 	    r.q.x == r1.q.x && r.q.y == r1.q.y)
 	    pfs->inside = true;
     }
@@ -2992,9 +2992,9 @@ fill_quadrangle(patch_fill_state_t *pfs, const quadrangle_patch *p, bool big, in
 		return code;
 	    code = terminate_wedge_vertex_list(pfs, &l0, &s0.p[0][1]->c, &s0.p[1][1]->c);
 	}
-    } else 
-	code = (QUADRANGLES || !pfs->maybe_self_intersecting ? 
-		    constant_color_quadrangle : triangles4)(pfs, p, 
+    } else
+	code = (QUADRANGLES || !pfs->maybe_self_intersecting ?
+		    constant_color_quadrangle : triangles4)(pfs, p,
 			pfs->maybe_self_intersecting);
     pfs->monotonic_color = monotonic_color_save;
     pfs->linear_color = linear_color_save;
@@ -3038,7 +3038,7 @@ split_patch(patch_fill_state_t *pfs, tensor_patch *s0, tensor_patch *s1, const t
     s1->c[1][1] = p->c[1][1];
 }
 
-private int 
+private int
 decompose_stripe(patch_fill_state_t *pfs, const tensor_patch *p, int ku)
 {
     if (ku > 1) {
@@ -3084,7 +3084,7 @@ decompose_stripe(patch_fill_state_t *pfs, const tensor_patch *p, int ku)
     }
 }
 
-private int 
+private int
 fill_stripe(patch_fill_state_t *pfs, const tensor_patch *p)
 {
     /* The stripe is flattened enough by V, so ignore inner poles. */
@@ -3094,7 +3094,7 @@ fill_stripe(patch_fill_state_t *pfs, const tensor_patch *p)
        but the roundinmg errors would be too complicated due to
        the dependence on the direction. Note that neigbour
        patches may use the opposite direction for same bounding curve.
-       We apply the recursive dichotomy, in which 
+       We apply the recursive dichotomy, in which
        the rounding errors do not depend on the direction. */
     ku[0] = curve_samples(pfs, p->pole[0], 1, pfs->fixed_flat);
     ku[3] = curve_samples(pfs, p->pole[3], 1, pfs->fixed_flat);
@@ -3121,10 +3121,10 @@ fill_stripe(patch_fill_state_t *pfs, const tensor_patch *p)
 private inline bool
 is_curve_x_monotonic(const gs_fixed_point *pole, int pole_step)
 {   /* true = monotonic, false = don't know. */
-    return (pole[0 * pole_step].x <= pole[1 * pole_step].x && 
+    return (pole[0 * pole_step].x <= pole[1 * pole_step].x &&
 	    pole[1 * pole_step].x <= pole[2 * pole_step].x &&
 	    pole[2 * pole_step].x <= pole[3 * pole_step].x) ||
-	   (pole[0 * pole_step].x >= pole[1 * pole_step].x && 
+	   (pole[0 * pole_step].x >= pole[1 * pole_step].x &&
 	    pole[1 * pole_step].x >= pole[2 * pole_step].x &&
 	    pole[2 * pole_step].x >= pole[3 * pole_step].x);
 }
@@ -3132,10 +3132,10 @@ is_curve_x_monotonic(const gs_fixed_point *pole, int pole_step)
 private inline bool
 is_curve_y_monotonic(const gs_fixed_point *pole, int pole_step)
 {   /* true = monotonic, false = don't know. */
-    return (pole[0 * pole_step].y <= pole[1 * pole_step].y && 
+    return (pole[0 * pole_step].y <= pole[1 * pole_step].y &&
 	    pole[1 * pole_step].y <= pole[2 * pole_step].y &&
 	    pole[2 * pole_step].y <= pole[3 * pole_step].y) ||
-	   (pole[0 * pole_step].y >= pole[1 * pole_step].y && 
+	   (pole[0 * pole_step].y >= pole[1 * pole_step].y &&
 	    pole[1 * pole_step].y >= pole[2 * pole_step].y &&
 	    pole[2 * pole_step].y >= pole[3 * pole_step].y);
 }
@@ -3160,7 +3160,7 @@ vector_pair_orientation(const gs_fixed_point *p0, const gs_fixed_point *p1, cons
 
 private inline bool
 is_x_bended(const tensor_patch *p)
-{   
+{
     int sign = vector_pair_orientation(&p->pole[0][0], &p->pole[0][1], &p->pole[1][0]);
 
     if (neqs(&sign, vector_pair_orientation(&p->pole[0][1], &p->pole[0][2], &p->pole[1][1])))
@@ -3201,7 +3201,7 @@ is_x_bended(const tensor_patch *p)
 
 private inline bool
 is_y_bended(const tensor_patch *p)
-{   
+{
     int sign = vector_pair_orientation(&p->pole[0][0], &p->pole[1][0], &p->pole[0][1]);
 
     if (neqs(&sign, vector_pair_orientation(&p->pole[1][0], &p->pole[2][0], &p->pole[1][1])))
@@ -3252,7 +3252,7 @@ is_curve_x_small(const gs_fixed_point *pole, int pole_step, fixed fixed_flat)
 
     if(xmax - xmin <= fixed_1)
 	return true;
-    return false;	
+    return false;
 }
 
 private inline bool
@@ -3267,7 +3267,7 @@ is_curve_y_small(const gs_fixed_point *pole, int pole_step, fixed fixed_flat)
 
     if (ymax - ymin <= fixed_1)
 	return true;
-    return false;	
+    return false;
 }
 
 private inline bool
@@ -3292,7 +3292,7 @@ is_patch_narrow(const patch_fill_state_t *pfs, const tensor_patch *p)
     return true;
 }
 
-private int 
+private int
 fill_patch(patch_fill_state_t *pfs, const tensor_patch *p, int kv, int kv0, int kv1)
 {
     if (kv <= 1) {
@@ -3335,17 +3335,17 @@ fill_patch(patch_fill_state_t *pfs, const tensor_patch *p, int kv, int kv0, int 
 	/* fixme : To privide the precise filling order, we must
 	   decompose left and right wedges into pieces by intersections
 	   with stripes, and fill each piece with its stripe.
-	   A lazy wedge list would be fine for storing 
+	   A lazy wedge list would be fine for storing
 	   the necessary information.
 
 	   If the patch is created from a radial shading,
 	   the wedge color appears a constant, so the filling order
-	   isn't important. The order is important for other 
-	   self-overlapping patches, but the visible effect is 
+	   isn't important. The order is important for other
+	   self-overlapping patches, but the visible effect is
 	   just a slight norrowing the patch (as its lower layer appears
-	   visible through the upper layer near the side). 
+	   visible through the upper layer near the side).
 	   This kind of dropout isn't harmful, because
-	   contacring self-overlapping patches are painted 
+	   contacring self-overlapping patches are painted
 	   one after one by definition, so that a side coverage break
 	   appears unavoidable by definition.
 
@@ -3371,7 +3371,7 @@ patch_set_color(const patch_fill_state_t *pfs, patch_color_t *c, const float *cc
     if (pfs->Function) {
 	c->t[0] = cc[0];
 	c->t[1] = cc[1];
-    } else 
+    } else
 	memcpy(c->cc.paint.values, cc, sizeof(c->cc.paint.values[0]) * pfs->num_components);
 }
 
@@ -3449,8 +3449,8 @@ make_tensor_patch(const patch_fill_state_t *pfs, tensor_patch *p, const patch_cu
     }
 }
 
-int 
-gx_shade_background(gx_device *pdev, const gs_fixed_rect *rect, 
+int
+gx_shade_background(gx_device *pdev, const gs_fixed_rect *rect,
 	const gx_device_color *pdevc, gs_logical_operation_t log_op)
 {
     gs_fixed_edge le, re;
@@ -3488,9 +3488,9 @@ patch_fill(patch_fill_state_t *pfs, const patch_curve_t curve[4],
     make_tensor_patch(pfs, &p, curve, interior);
     pfs->unlinear = !is_linear_color_applicable(pfs);
     pfs->linear_color = false;
-    if ((*dev_proc(pfs->dev, pattern_manage))(pfs->dev, 
+    if ((*dev_proc(pfs->dev, pattern_manage))(pfs->dev,
 	    gs_no_id, NULL, pattern_manage__shading_area) > 0) {
-	/* Inform the device with the shading coverage area. 
+	/* Inform the device with the shading coverage area.
 	   First compute the sign of the area, because
 	   all areas to be clipped in same direction. */
 	gx_device *pdev = pfs->dev;
@@ -3518,12 +3518,12 @@ patch_fill(patch_fill_state_t *pfs, const patch_curve_t curve[4],
 	    for (i = k = 0; k < 4 && code >= 0; i = j, k++) {
 		j = (i + s) % 4, jj = (s == 1 ? i : j);
 		if (curve[jj].straight)
-		    code = gx_path_add_line(&path, curve[j].vertex.p.x, 
+		    code = gx_path_add_line(&path, curve[j].vertex.p.x,
 						curve[j].vertex.p.y);
 		else
-		    code = gx_path_add_curve(&path, curve[jj].control[l].x, curve[jj].control[l].y, 
+		    code = gx_path_add_curve(&path, curve[jj].control[l].x, curve[jj].control[l].y,
 						    curve[jj].control[(l + 1) & 1].x, curve[jj].control[(l + 1) & 1].y,
-						    curve[j].vertex.p.x, 
+						    curve[j].vertex.p.x,
 						    curve[j].vertex.p.y);
 	    }
 	    if (code >= 0)
@@ -3548,14 +3548,14 @@ patch_fill(patch_fill_state_t *pfs, const patch_curve_t curve[4],
 #   if NOFILL_TEST
 	dbg_nofill = false;
 #   endif
-    code = fill_wedges(pfs, ku[0], kum, p.pole[0], 1, &p.c[0][0], &p.c[0][1], 
+    code = fill_wedges(pfs, ku[0], kum, p.pole[0], 1, &p.c[0][0], &p.c[0][1],
 		interpatch_padding | inpatch_wedge);
     if (code >= 0) {
 	/* We would like to apply iterations for enumerating the kvm curve parts,
 	   but the roundinmg errors would be too complicated due to
 	   the dependence on the direction. Note that neigbour
 	   patches may use the opposite direction for same bounding curve.
-	   We apply the recursive dichotomy, in which 
+	   We apply the recursive dichotomy, in which
 	   the rounding errors do not depend on the direction. */
 #	if NOFILL_TEST
 	    dbg_nofill = false;
@@ -3565,7 +3565,7 @@ patch_fill(patch_fill_state_t *pfs, const patch_curve_t curve[4],
 	code = fill_patch(pfs, &p, kvm, kv[0], kv[3]);
     }
     if (code >= 0)
-	code = fill_wedges(pfs, ku[3], kum, p.pole[3], 1, &p.c[1][0], &p.c[1][1], 
+	code = fill_wedges(pfs, ku[3], kum, p.pole[3], 1, &p.c[1][0], &p.c[1][1],
 		interpatch_padding | inpatch_wedge);
     return code;
 }

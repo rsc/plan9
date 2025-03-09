@@ -55,7 +55,7 @@ cpuid(void)
 void
 cpuidprint(void)
 {
-	print("cpu0: %s, rev 0x%lux, cpu hz %lld, bus hz %ld\n", 
+	print("cpu0: %s, rev 0x%lux, cpu hz %lld, bus hz %ld\n",
 		cpuid(), getpvr()&0xffff, m->cpuhz, m->bushz);
 }
 
@@ -332,7 +332,7 @@ confinit(void)
 	/* Blast Board specific */
 	conf.mem[0].npage = (MEM1SIZE - pa)/BY2PG;
 	conf.mem[0].base = pa;
-	
+
 	conf.mem[1].npage = MEM2SIZE/BY2PG;
 	conf.mem[1].base = MEM2BASE;
 

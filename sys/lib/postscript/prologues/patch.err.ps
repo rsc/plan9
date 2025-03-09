@@ -1,6 +1,6 @@
 %!PS-Adobe
 % lib/ehandler.ps -- Downloaded Error Break-page handler
-% Copyright (c) 1984, 1985, 1986 Adobe Systems Incorporated. 
+% Copyright (c) 1984, 1985, 1986 Adobe Systems Incorporated.
 % All Rights Reserved.
 
 0000 % serverloop password
@@ -55,11 +55,11 @@ end %$brkpage
 errordict/handleerror
  {<< /PageSize [612 792] /ImagingBBox null >> setpagedevice
    systemdict begin $error begin $brkpage begin newerror
-   {/newerror false store 
+   {/newerror false store
     vmstatus pop pop 0 ne{grestoreall}if initgraphics courier setfont
     lmargin 720 moveto(ERROR: )prnt errorname prnt
     nl(OFFENDING COMMAND: )prnt/command load prnt
-    $error/ostack 
+    $error/ostack
     known{nl nl(STACK:)prnt nl nl $error/ostack get aload length{==}repeat}if
     systemdict/showpage get exec
     /newerror true store/OLDhandleerror load end end end exec}{end end end}

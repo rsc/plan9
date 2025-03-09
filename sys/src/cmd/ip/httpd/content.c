@@ -5,7 +5,7 @@
 #include "httpsrv.h"
 
 typedef struct Suffix	Suffix;
-struct Suffix 
+struct Suffix
 {
 	Suffix	*next;
 	char	*suffix;

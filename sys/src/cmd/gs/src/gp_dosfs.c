@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1993, 1996, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -75,7 +75,7 @@ const char gp_fmode_wb[] = "wb";
 
 uint gp_file_name_root(const char *fname, uint len)
 {   int i = 0;
-    
+
     if (len == 0)
 	return 0;
     if (len > 1 && fname[0] == '\\' && fname[1] == '\\') {
@@ -142,9 +142,9 @@ bool gp_file_name_is_empty_item_meanful(void)
 }
 
 gp_file_name_combine_result
-gp_file_name_combine(const char *prefix, uint plen, const char *fname, uint flen, 
+gp_file_name_combine(const char *prefix, uint plen, const char *fname, uint flen,
 		    bool no_sibling, char *buffer, uint *blen)
 {
-    return gp_file_name_combine_generic(prefix, plen, 
+    return gp_file_name_combine_generic(prefix, plen,
 	    fname, flen, no_sibling, buffer, blen);
 }

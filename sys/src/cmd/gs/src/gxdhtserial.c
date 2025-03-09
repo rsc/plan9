@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -75,7 +75,7 @@ typedef enum {
 private int
 gx_ht_write_tf(
     const gx_transfer_map * pmap,
-    byte *                  data,    
+    byte *                  data,
     uint *                  psize )
 {
     int                     req_size = 1;   /* minimum of one byte */
@@ -225,7 +225,7 @@ gx_ht_write_component(
      *
      * Calculate the size required.
      */
-    levels_size = porder->num_levels * sizeof(porder->levels[0]); 
+    levels_size = porder->num_levels * sizeof(porder->levels[0]);
     bits_size = porder->num_bits * porder->procs->bit_data_elt_size;
     req_size =   1          /* gx_ht_type_t */
                + enc_u_sizew(porder->width)

@@ -1,12 +1,12 @@
 %    Copyright (C) 1996-2003 artofcode LLC.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -144,12 +144,12 @@
   /Gdot /Gdotaccent
   /Ldot /Ldotaccent
   /Zdot /Zdotaccent
-  /cdot /cdotaccent 
-  /edot /edotaccent 
+  /cdot /cdotaccent
+  /edot /edotaccent
   /eoverdot /edotaccent
-  /gdot /gdotaccent 
+  /gdot /gdotaccent
   /ldot /ldotaccent
-  /zdot /zdotaccent 
+  /zdot /zdotaccent
 .dicttomark readonly def
 
 % Array used for fast pre-filling of cmap array
@@ -217,7 +217,7 @@
 /findname {
   TTFDEBUG { (findname: ) print dup =only  } if
   false 3 1 roll
-  1 index length 0 gt {	% check for zero length name table 
+  1 index length 0 gt {	% check for zero length name table
     0 1 3 index 2 getu16 1 sub {
 		% Stack: false table id index
       12 mul 6 add 2 index exch 12 getinterval
@@ -505,7 +505,7 @@
 /string_array_size  % <array|string> string_array_size <int>
 { dup type /stringtype eq {
     length
-  } { 
+  } {
     0 exch { length add } forall
   } ifelse
 } bind def
@@ -561,7 +561,7 @@
 	    postremap 1 index .knownget { exch pop } if
 	  } ifelse
 	} ifelse
-      } for ] 
+      } for ]
     }
     ifelse
   } bind
@@ -778,10 +778,10 @@ mark
 /.makesfnts {
   .readttdata
   /head tabdict /head get def
-  /post tabdict /post .knownget { 
-    dup 0 get /post_first_part exch def 
-  } { 
-    null 
+  /post tabdict /post .knownget {
+    dup 0 get /post_first_part exch def
+  } {
+    null
   } ifelse def
   load_stripped not {
     /locatable tabdict /loca get def
@@ -846,7 +846,7 @@ mark
     -1	% initial values for in order check
     0 1 numloca 1 sub {
       dup getloca dup
-      4 -1 roll lt { /needsort true def } if 
+      4 -1 roll lt { /needsort true def } if
       3 copy put exch pop
     } for pop		% discard inorder check value
     needsort {
@@ -1004,7 +1004,7 @@ mark
     /.pickcmap_with_xlatmap cvx /configurationerror signalerror
   } if
   false
-  .xlatmap_dict /TrueType get 
+  .xlatmap_dict /TrueType get
   dup length 2 sub 0 exch 2 exch {                       % bool [] i
     2 copy get                                           % bool [] i ()
     (.) search {                                         % bool [] i post match pre
@@ -1047,7 +1047,7 @@ mark
     1 index { exit } if
   } for                                                  % bool []
   pop                                                    % bool
-  not { 
+  not {
     QUIET not { (True Type font doesn't contain a charset listed in gs/lib/xlatmap.) = } if
     /.pickcmap_with_xlatmap cvx /invalidfont signalerror
   } if                                                   %
@@ -1060,9 +1060,9 @@ mark
   % a disk True Type font files, and use load_stripped
   % to check this regime. We would like to do so
   % while emulating a Type 42, but first the old code
-  % about handling them to be changed 
+  % about handling them to be changed
   % with adding a handling of a Decoding.
-  % fixme : A correct way to fix this is to implenent 
+  % fixme : A correct way to fix this is to implenent
   % the Type 42 emulation with gs_fntem.ps .
   % Also note that PDF embedded fonts probably don't need a xlatmap -
   % see PDF spec, "Encodings for True Type fonts".
@@ -1166,12 +1166,12 @@ mark
 /.fill_identity_cmap {             % () v
   1 index length 2 sub          % () v n-2
   0 2 3 2 roll {                % () v 0 2 n-1
-      3 copy exch               % () v i () i v 
+      3 copy exch               % () v i () i v
       -8 bitshift               % () v i () i v>>8
       put                       % () v i
       3 copy 1 add              % () v i () v i+1
       exch 255 and              % () v i () i+1 v&255
-      put                       % () v i 
+      put                       % () v i
       pop 1 add                 % () v+1
   } for
   pop
@@ -1231,7 +1231,7 @@ mark
   /file_table_pos file_table_pos
   /Decoding Decoding
   .dicttomark
-  end end 
+  end end
 } bind def
 
 % ---------------- PDF TrueType font loading ---------------- %
@@ -1248,7 +1248,7 @@ mark
 		% encoding.  Use the first one we find.
   0 1 2 index 2 getu16 1 sub {
 		% Stack: false plat+enc cmap index
-    8 mul 4 add 1 index exch 8 getinterval 
+    8 mul 4 add 1 index exch 8 getinterval
     dup 0 4 getinterval 3 index eq {
       4 getu32 1 index exch 1 index length 1 index sub getinterval
       4 -1 roll not 4 2 roll exit
@@ -1281,12 +1281,12 @@ mark
 {
   /.GS_extended_SymbolEncoding 256 array
   //.symbol_list {
-    exch 2 index 3 1 roll put  
+    exch 2 index 3 1 roll put
   } forall
   .defineencoding
 } bind exec
 
-/.addglyph    % <name> <glyph#> .addglyph <name> <glyph#> 
+/.addglyph    % <name> <glyph#> .addglyph <name> <glyph#>
               % <name> <glyph#> .addglyph -
 {
   dup cmapencoding length lt {
@@ -1302,7 +1302,7 @@ mark
 %   /CharStrings <charstrings>
 /.pdfmapchars {
   exch cmaparray /cmapencoding exch def
-  /CharStrings mark 
+  /CharStrings mark
 
   % Add glyphs of <chartoglyphmap>*<subcmap> :
   3 2 roll {
@@ -1335,11 +1335,11 @@ mark
 /.pdfcharkeys {
 	% The following algorithms are per the PDF Reference, Second Edition
 	% (PDF 1.3 reference manual).
-  
+
   is_symbolic {
     <00030001> .findcmap {
       %
-      % Adobe PDF spec says that symbolic fonts should contain exactly one 
+      % Adobe PDF spec says that symbolic fonts should contain exactly one
       % cmap subtable for Platform=1, Encoding=0.
       % Perhaps "Adobe Acrobat PDFWriter 4.0 for Windows" sometimes embeds
       % fonts with both subtables 3.1 and 1.0 (see comparefiles/159.pdf,
@@ -1350,7 +1350,7 @@ mark
       (   **** Warning: Embedded symbolic TT fonts should not contain a cmap for Platform=3 Encoding=1.\n)
         pdfformaterror
       TTFDEBUG { (Using cmap 3.1) = } if
-      AdobeGlyphList .pdfmapchars 
+      AdobeGlyphList .pdfmapchars
       /Encoding /WinAnsiEncoding .findencoding
     } {
       %
@@ -1406,7 +1406,7 @@ mark
 	      % use it apparently (empirically determined).
 	      <00030000> .findcmap {
 	        TTFDEBUG { (Adding cmap 3.0) = } if
-   		5 1 roll pop pop pop pop             
+   		5 1 roll pop pop pop pop
 		prebuilt_encoding null ne {
 		  prebuilt_encoding .invert_encoding .pdfmapchars
 		  /Encoding prebuilt_encoding
@@ -1423,15 +1423,15 @@ mark
   } {
     <00030001> .findcmap {
       TTFDEBUG { (Using cmap 3.1 for non-symbolic.) = } if
-      AdobeGlyphList .pdfmapchars 
+      AdobeGlyphList .pdfmapchars
       /Encoding /WinAnsiEncoding .findencoding
-        % WinAnsiEncoding is just a stub here. 
+        % WinAnsiEncoding is just a stub here.
         % It will be replaced with one from font resource,
         % because PDF spec requires it.
     } {
       <00010000> .findcmap {
         TTFDEBUG { (Using cmap 1.0 for non-symbolic.) = } if
-	.romanmacdict .pdfmapchars 
+	.romanmacdict .pdfmapchars
         /Encoding /MacRomanEncoding .findencoding
       } {
         % Apply the default algorithm for using the 'post'.

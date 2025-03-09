@@ -1,12 +1,12 @@
 %    Copyright (C) 1991, 1995, 1996, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -27,7 +27,7 @@
 %
 %	P
 %		Indicate the end of the page.
-% 
+%
 %	S <x> <y> (<string>) <width>
 %		Display a string.
 %
@@ -67,11 +67,11 @@
 
 %%  Additional modifications by David M. Jones
 %%  (dmjones@theory.lcs.mit.edu), December 23, 1997
-%%  
+%%
 %%  (a) Rewrote forall loop at the end of .show.write.  This fixes a
 %%      stack leakage problem, but the changes are more significant
-%%      than that.  
-%% 
+%%      than that.
+%%
 %%      .char.map includes the names of all characters in the
 %%      StandardEncoding, ISOLatin1Encoding, OT1Encoding and
 %%      T1Encoding vectors.  Thus, if the Encoding vector for the
@@ -89,25 +89,25 @@
 %%      fix (a) under my 1996 changes) completely obsolete, since
 %%      there's additional useful information I can extract in that
 %%      case.]
-%%      
+%%
 %%      Overall, this should provide better support for some documents
 %%      (e.g, DVILASER documents will no longer be translated into a
 %%      series of *'s) without breaking any other documents any worse
 %%      than they already were broken.
-%% 
+%%
 %%  (b) Fixed two bugs in dvips.df-tail: (1) changed "dup 127" to "dup
 %%      128" to fix fencepost error, and (2) gave each font it's own
 %%      FontName rather than having all fonts share the same name.
-%%  
+%%
 %%  (c) Added one further refinement to the heuristic for detecting
 %%      paragraph breaks: do not ever start a new paragraph after a
 %%      line ending in a hyphen.
-%% 
+%%
 %%  (d) Added a bunch of missing letters from the T1Encoding,
 %%      OT1Encoding and ISOLatin1Encoding vectors to .letter.chars to
 %%      improve hyphen-elimination algorithm.  This still won't help
 %%      if there's no useful Encoding vector.
-%% 
+%%
 %%  NOTE: A better solution to the problem of missing Encoding vectors
 %%  might be to redefine definefont to check whether the Encoding
 %%  vector is sensible and, if not, replace it by a default.  This
@@ -121,7 +121,7 @@
 %%* (dmjones@theory.lcs.mit.edu), June 25-July 8, 1996
 
 %%* Modifications:
-%%* 
+%%*
 %%* (a) added code to give better support for dvips files by providing
 %%*     FontBBox's, FontName's and Encoding vectors for downloaded
 %%*     bitmap fonts.  This is done by using dvips's start-hook to
@@ -129,7 +129,7 @@
 %%*     define its Type 3 bitmap fonts.  Thus, this change should
 %%*     provide better support for dvips-generated PS files without
 %%*     affecting the handling of other documents.
-%%* 
+%%*
 %%* (b) Fixed two bugs that could potentially affect any PS file, not
 %%*     just those created by dvips: (1) added missing "get" operator
 %%*     in .show.write and (2) fixed bug that caused a hyphen at the
@@ -137,9 +137,9 @@
 %%*     deleted.  Note that the first bug was a source of stack
 %%*     leakage, causing ps2ascii to run out of operand stack space
 %%*     occasionally.
-%%* 
+%%*
 %%*     Search for "%%* BF" to find these modifications.
-%%*     
+%%*
 %%* (c) Improved the heuristic for determining whether a line break
 %%*     has occurred and whether a line break represents a paragraph
 %%*     break.  Previously, any change in the vertical position caused
@@ -152,16 +152,16 @@
 %%*     comparing the vertical distance between the new line and the
 %%*     previous line to the vertical distance between the previous
 %%*     line and its predecessor.
-%%*     
+%%*
 %%* (d) Added a hook for renaming the files where stdout and stderr
 %%*     go.
-%%* 
+%%*
 %%* In general, my additions or changes to the code are described in
 %%* comments beginning with "%%*".  However, there are numerous other
 %%* places where I have either re-formatted code or added comments to
 %%* the code while I was trying to understand it.  These are usually
 %%* not specially marked.
-%%* 
+%%*
 
 /QUIET true def
 systemdict wcheck { systemdict } { userdict } ifelse begin
@@ -550,7 +550,7 @@ mark
     /Eogonek
     /Eth
     /Gbreve
-    /Germandbls 
+    /Germandbls
     /IJ
     /Iacute
     /Icircumflex
@@ -776,7 +776,7 @@ mark
 %%* just provide support for the two most popular text encodings, the
 %%* OT1 and T1 encodings, and just accept the fact that any font not
 %%* using one of those encodings will be rendered as gibberish.
-%%* 
+%%*
 %%* OT1 is Knuth's 7-bit encoding for the CMR text fonts, while T1
 %%* (aka the Cork encoding) is the 8-bit encoding used by the DC
 %%* fonts, a preliminary version of the proposed Extended Computer
@@ -784,7 +784,7 @@ mark
 %%* they differ in positions 8#000 through 8#040, 8#074, 8#076, 8#134,
 %%* 8#137, 8#173, 8#174, 8#175 and 8#177, so we can't use the same
 %%* vector for both.
-%%* 
+%%*
 %%* Of course, we also can't reliably tell the difference between an
 %%* OT1-encoded font and a T1-encoded font based on the information in
 %%* a dvips-created PostScript file.  As a best-guess solution, we'll
@@ -955,7 +955,7 @@ mark
     8#334 /Udieresis
     8#335 /Yacute
     8#336 /Thorn
-    8#337 /Germandbls 
+    8#337 /Germandbls
 
     8#340 /agrave
     8#341 /aacute
@@ -1144,9 +1144,9 @@ mark
   {
     /nn 9 dict N
     nn begin
-        %%  
+        %%
         %%  Choose an encoding based on the highest position occupied.
-        %%  
+        %%
         dup 128 gt { T1Encoding } { OT1Encoding } ifelse
         /Encoding X
         /FontType 3 N
@@ -1162,10 +1162,10 @@ mark
         %%  And let's throw in a FontName for good measure
         %%
         dup (    ) cvs
-        %%  
+        %%
         %%  Make sure each font gets it own private FontName.  -- dmj,
         %%  12/23/97
-        %%  
+        %%
         dup length string copy
         /FontName X
         /BuildChar {CharBuilder} N
@@ -1206,7 +1206,7 @@ mark
     } if
     put                         % puts char-data into BitMaps at index ctr
     /ctr ctr 1 add N
-%%  
+%%
 %%  Make sure the Font Bounding Box encloses the Bounding Box of the
 %%  current character
 %%
@@ -1227,12 +1227,12 @@ mark
     dup                     % calculate new urx
     dup 2 get
     ch-dx ch-width add
-    .max 
+    .max
     2 exch put
 
     dup 3 get               % calculate new ury
     ch-yoff
-    .max 
+    .max
     3 exch put
 
 } def
@@ -1308,7 +1308,7 @@ userdict /start-hook {
           }
           { pop
           }
-        ifelse 
+        ifelse
         .show.stdout exch writestring
       }
     ifelse
@@ -1324,11 +1324,11 @@ userdict /start-hook {
       {                         % x y string width
         2 index                 % x y string width y
         //.show.y .iget         % x y string width y old.y
-        %%* 
+        %%*
         %%* Replaced test "has y changed" by "has y changed by more
         %%* than the current font height" so that subscripts and
         %%* superscripts won't cause line/paragraph breaks
-        %%* 
+        %%*
          sub abs dup            % x y string width dy dy
          //.show.height .iget
          gt
@@ -1398,7 +1398,7 @@ userdict /start-hook {
             % newpar?
               { (\n\n) }        % Paragraph
               {                 % Line
-                                %%* 
+                                %%*
                                 %%* BF2: If last character on a line is
                                 %%* a hyphen, we omit the hyphen and
                                 %%* run the lines together.  Of
@@ -1429,12 +1429,12 @@ userdict /start-hook {
             //.show.last 0 get .hyphen eq { (-) //print } if
          }
         ifelse
-                                %%* 
+                                %%*
                                 %%* If have moved more than 1 point to
                                 %%* the right, interpret it as a
                                 %%* space?  This need to be looked at
                                 %%* more closely.
-                                %%* 
+                                %%*
         3 index                     % x y string width x
         //.show.x .iget 10 add gt   % x y string width bool
             { ( ) //print }

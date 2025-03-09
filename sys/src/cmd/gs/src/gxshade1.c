@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -115,7 +115,7 @@ Fb_fill_region(Fb_fill_state_t * pfs, const gs_fixed_rect *rect)
 }
 
 int
-gs_shading_Fb_fill_rectangle(const gs_shading_t * psh0, const gs_rect * rect, 
+gs_shading_Fb_fill_rectangle(const gs_shading_t * psh0, const gs_rect * rect,
 			     const gs_fixed_rect * rect_clip,
 			     gx_device * dev, gs_imager_state * pis)
 {
@@ -308,22 +308,22 @@ typedef struct R_fill_state_s {
 } R_fill_state_t;
 /****** NEED GC DESCRIPTOR ******/
 
-private int 
+private int
 R_tensor_annulus(patch_fill_state_t *pfs, const gs_rect *rect,
     double x0, double y0, double r0, double t0,
     double x1, double y1, double r1, double t1)
-{   
+{
     double dx = x1 - x0, dy = y1 - y0;
     double d = hypot(dx, dy);
     gs_point p0, p1, pc0, pc1;
     int k, j, code;
     bool inside = 0;
 
-    pc0.x = x0, pc0.y = y0; 
+    pc0.x = x0, pc0.y = y0;
     pc1.x = x1, pc1.y = y1;
     if (r0 + d <= r1 || r1 + d <= r0) {
-	/* One circle is inside another one. 
-	   Use any subdivision, 
+	/* One circle is inside another one.
+	   Use any subdivision,
 	   but don't depend on dx, dy, which may be too small. */
 	p0.x = 0, p0.y = -1;
 	/* Align stripes along radii for faster triangulation : */
@@ -343,7 +343,7 @@ R_tensor_annulus(patch_fill_state_t *pfs, const gs_rect *rect,
 		p0.x = -1, p0.y = 0;
 	}
     }
-    /* fixme: wish: cut invisible parts off. 
+    /* fixme: wish: cut invisible parts off.
        Note : when r0 != r1 the invisible part is not a half circle. */
     for (k = 0; k < 4; k++, p0 = p1) {
 	gs_point p[12];
@@ -368,15 +368,15 @@ R_tensor_annulus(patch_fill_state_t *pfs, const gs_rect *rect,
 	for (j = 0; j < 4; j++) {
 	    int jj = (j + inside) % 4;
 
-	    code = gs_point_transform2fixed(&pfs->pis->ctm, 
+	    code = gs_point_transform2fixed(&pfs->pis->ctm,
 			p[j * 3 + 0].x, p[j * 3 + 0].y, &curve[jj].vertex.p);
 	    if (code < 0)
 		return code;
-	    code = gs_point_transform2fixed(&pfs->pis->ctm, 
+	    code = gs_point_transform2fixed(&pfs->pis->ctm,
 			p[j * 3 + 1].x, p[j * 3 + 1].y, &curve[jj].control[0]);
 	    if (code < 0)
 		return code;
-	    code = gs_point_transform2fixed(&pfs->pis->ctm, 
+	    code = gs_point_transform2fixed(&pfs->pis->ctm,
 			p[j * 3 + 2].x, p[j * 3 + 2].y, &curve[jj].control[1]);
 	    if (code < 0)
 		return code;
@@ -397,16 +397,16 @@ R_tensor_annulus(patch_fill_state_t *pfs, const gs_rect *rect,
 
 
 private void
-R_outer_circle(patch_fill_state_t *pfs, const gs_rect *rect, 
-	double x0, double y0, double r0, 
-	double x1, double y1, double r1, 
+R_outer_circle(patch_fill_state_t *pfs, const gs_rect *rect,
+	double x0, double y0, double r0,
+	double x1, double y1, double r1,
 	double *x2, double *y2, double *r2)
 {
     double dx = x1 - x0, dy = y1 - y0;
     double sp, sq, s;
 
     /* Compute a cone circle, which contacts the rect externally. */
-    /* Don't bother with all 4 sides of the rect, 
+    /* Don't bother with all 4 sides of the rect,
        just do with the X or Y span only,
        so it's not an exact contact, sorry. */
     if (any_abs(dx) > any_abs(dy)) {
@@ -443,7 +443,7 @@ R_outer_circle(patch_fill_state_t *pfs, const gs_rect *rect,
     *y2 = y0 + (y1 - y0) * s;
 }
 
-private double 
+private double
 R_rect_radius(const gs_rect *rect, double x0, double y0)
 {
     double d, dd;
@@ -459,7 +459,7 @@ R_rect_radius(const gs_rect *rect, double x0, double y0)
 }
 
 private int
-R_fill_triangle_new(patch_fill_state_t *pfs, const gs_rect *rect, 
+R_fill_triangle_new(patch_fill_state_t *pfs, const gs_rect *rect,
     double x0, double y0, double x1, double y1, double x2, double y2, double t)
 {
     shading_vertex_t p0, p1, p2;
@@ -483,8 +483,8 @@ R_fill_triangle_new(patch_fill_state_t *pfs, const gs_rect *rect,
     return mesh_triangle(pfs, &p0, &p1, &p2);
 }
 
-private bool 
-R_is_covered(double ax, double ay, 
+private bool
+R_is_covered(double ax, double ay,
 	const gs_point *p0, const gs_point *p1, const gs_point *p)
 {
     double dx0 = p0->x - ax, dy0 = p0->y - ay;
@@ -498,7 +498,7 @@ R_is_covered(double ax, double ay,
 
 private int
 R_obtuse_cone(patch_fill_state_t *pfs, const gs_rect *rect,
-	double x0, double y0, double r0, 
+	double x0, double y0, double r0,
 	double x1, double y1, double r1, double t1, double r)
 {
     double dx = x1 - x0, dy = y1 - y0, dr = any_abs(r1 - r0);
@@ -533,7 +533,7 @@ R_obtuse_cone(patch_fill_state_t *pfs, const gs_rect *rect,
 	p1.x = ax - dx * g / d + dy * h / d;
 	p1.y = ay - dy * g / d - dx * h / d;
     }
-    /* Now we have 2 limited tangents, and 4 corners of the rect. 
+    /* Now we have 2 limited tangents, and 4 corners of the rect.
        Need to know what corners are covered. */
     cp[0].x = rect->p.x, cp[0].y = rect->p.y;
     cp[1].x = rect->q.x, cp[1].y = rect->p.y;
@@ -545,7 +545,7 @@ R_obtuse_cone(patch_fill_state_t *pfs, const gs_rect *rect,
     covered[3] = R_is_covered(ax, ay, &p0, &p1, &cp[3]);
     if (!covered[0] && !covered[1] && !covered[2] && !covered[3]) {
 	return R_fill_triangle_new(pfs, rect, ax, ay, p0.x, p0.y, p1.x, p1.y, t1);
-    } 
+    }
     if (!covered[0] && covered[1])
 	cp_start = 1;
     else if (!covered[1] && covered[2])
@@ -575,7 +575,7 @@ R_obtuse_cone(patch_fill_state_t *pfs, const gs_rect *rect,
 
 private int
 R_tensor_cone_apex(patch_fill_state_t *pfs, const gs_rect *rect,
-	double x0, double y0, double r0, 
+	double x0, double y0, double r0,
 	double x1, double y1, double r1, double t)
 {
     double as = r0 / (r0 - r1);
@@ -587,7 +587,7 @@ R_tensor_cone_apex(patch_fill_state_t *pfs, const gs_rect *rect,
 
 
 private int
-R_extensions(patch_fill_state_t *pfs, const gs_shading_R_t *psh, const gs_rect *rect, 
+R_extensions(patch_fill_state_t *pfs, const gs_shading_R_t *psh, const gs_rect *rect,
 	double t0, double t1, bool Extend0, bool Extend1)
 {
     float x0 = psh->params.Coords[0], y0 = psh->params.Coords[1];
@@ -706,7 +706,7 @@ gs_shading_R_fill_rectangle_aux(const gs_shading_t * psh0, const gs_rect * rect,
 
     gs_distance_transform(state.delta.x, state.delta.y, &ctm_only(pis), &dev_dpt);
     gs_distance_transform(state.dr, 0, &ctm_only(pis), &dev_dr);
-    
+
     dist_between_circles = hypot(x1-x0, y1-y0);
 
     state.dd = dd;
@@ -725,7 +725,7 @@ gs_shading_R_fill_rectangle_aux(const gs_shading_t * psh0, const gs_rect * rect,
 	floatp r0 = psh->params.Coords[2];
 	float x1 = psh->params.Coords[3], y1 = psh->params.Coords[4];
 	floatp r1 = psh->params.Coords[5];
-	
+
 	code = R_tensor_annulus(&pfs1, rect, x0, y0, r0, d0, x1, y1, r1, d1);
 	if (code < 0)
 	    return code;
@@ -737,7 +737,7 @@ int
 gs_shading_R_fill_rectangle(const gs_shading_t * psh0, const gs_rect * rect,
 			    const gs_fixed_rect * rect_clip,
 			    gx_device * dev, gs_imager_state * pis)
-{   
+{
     int code;
 
     if (VD_TRACE_RADIAL_PATCH && vd_allowed('s')) {

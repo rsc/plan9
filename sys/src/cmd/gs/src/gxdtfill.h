@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 artofcode LLC. All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -19,16 +19,16 @@
 
 /*
  * Since we need several statically defined variants of this agorithm,
- * we store it in .h file and include several times into gdevddrw.c and 
+ * we store it in .h file and include several times into gdevddrw.c and
  * into gxfill.h . Configuration flags (macros) are :
- * 
+ *
  *   GX_FILL_TRAPEZOID - a name of method
  *   CONTIGUOUS_FILL   - prevent dropouts in narrow trapezoids
  *   SWAP_AXES         - assume swapped axes
  *   FILL_DIRECT       - See LOOP_FILL_RECTANGLE_DIRECT.
  *   LINEAR_COLOR      - Fill with a linear color.
  *   EDGE_TYPE	       - a type of edge structure.
- *   FILL_ATTRS        - operation attributes. 
+ *   FILL_ATTRS        - operation attributes.
  */
 
 /*
@@ -40,10 +40,10 @@
  */
 
 /*
- * With CONTIGUOUS_FILL is off, 
+ * With CONTIGUOUS_FILL is off,
  * this algorithm paints pixels, which centers fall between
- * the left and the right side of the trapezoid, excluding the 
- * right side (see PLRM3, 7.5. Scan conversion details). 
+ * the left and the right side of the trapezoid, excluding the
+ * right side (see PLRM3, 7.5. Scan conversion details).
  * Particularly 0-width trapezoids are not painted.
  *
  * Similarly, it paints pixels, which centers
@@ -55,7 +55,7 @@
  * Particularly it may paint pixels on the right and on the top sides,
  * if they are necessary for the contiguity.
  *
- * With LINEAR_COLOR returns 1 if the gradient arithmetics overflows.. 
+ * With LINEAR_COLOR returns 1 if the gradient arithmetics overflows..
  */
 
 /*
@@ -84,12 +84,12 @@ trap_line represents the intersection coordinate as a rational value :
 
 Where 'e' is 'fixed_epsilon', 0.5 is 'fixed_half', and fl == l.fx / l.h, fr == - r.fx / r.h,
 e <= fl < 0, e <= fr < 0.
-Let 
+Let
 
     xl' := xl + 0.5
     xr' := xr + 0.5
 
-Then 
+Then
 
     xl = xl' - 0.5
     xr = xr' - 0.5
@@ -98,7 +98,7 @@ Then
     Xr = xr' - 0.5 + e - fr
 
     ceil(xl' - 0.5 + e - fl - 0.5) <= i < ceil(xr' - 0.5 + e - fr - 0.5)
-    
+
 which is equivalent to
 
     ceil(xl' + e - fl) - 1 <= i < ceil(xr' + e - fr) - 1
@@ -309,7 +309,7 @@ GX_FILL_TRAPEZOID (gx_device * dev, const EDGE_TYPE * left,
 #	if LINEAR_COLOR
 #	    ifdef DEBUG
 		if (check_gradient_overflow(left, right, num_components)) {
-		    /* The caller must care of. 
+		    /* The caller must care of.
 		       Checking it here looses some performance with triangles. */
 		    return_error(gs_error_unregistered);
 		}

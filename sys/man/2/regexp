@@ -73,7 +73,7 @@ and fills in the array
 with character pointers to the substrings of
 .I string
 that correspond to the
-parenthesized subexpressions of 
+parenthesized subexpressions of
 .IR exp :
 .BI match[ i ].sp
 points to the beginning and
@@ -97,15 +97,15 @@ are filled with zeros.
 Matches involving
 .LR * ,
 .LR + ,
-and 
+and
 .L ?
 are extended as far as possible.
-The number of array elements in 
+The number of array elements in
 .I match
 is given by
 .IR msize .
 The structure of elements of
-.I match 
+.I match
 is:
 .IP
 .EX
@@ -151,7 +151,7 @@ string delimited by
 .BI match[ n ].sp
 and
 .BI match[ n ].ep\f1.
-Each instance of 
+Each instance of
 .L &
 is replaced by the string delimited by
 .B match[0].sp
@@ -173,12 +173,12 @@ If the user supplied
 .I regerror
 returns rather than exits,
 .I regcomp
-will return 0. 
+will return 0.
 .PP
 .I Rregexec
 and
 .I rregsub
-are variants of 
+are variants of
 .I regexec
 and
 .I regsub
@@ -186,7 +186,7 @@ that use strings of
 .B Runes
 instead of strings of
 .BR chars .
-With these routines, the 
+With these routines, the
 .I rsp
 and
 .I rep
@@ -199,7 +199,7 @@ array elements should be used.
 .IR grep (1)
 .SH DIAGNOSTICS
 .I Regcomp
-returns 
+returns
 .B 0
 for an illegal expression
 or other failure.

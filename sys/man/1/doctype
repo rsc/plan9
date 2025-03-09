@@ -1,4 +1,4 @@
-.TH DOCTYPE 1 
+.TH DOCTYPE 1
 .SH NAME
 doctype \- intuit command line for formatting a document
 .SH SYNOPSIS
@@ -25,10 +25,10 @@ recognizes input for
 .IR troff (1),
 related preprocessors like
 .IR eqn (1),
-and the 
+and the
 .IR ms (6)
 and
-.I mm 
+.I mm
 macro packages.
 .PP
 Option
@@ -44,7 +44,7 @@ option is passed to
 .SH EXAMPLES
 .TP
 .L
-eval `{doctype chapter.?} | lp 
+eval `{doctype chapter.?} | lp
 Typeset files named
 .BR chapter.0 ,
 .BR chapter.1 ,
@@ -52,10 +52,10 @@ Typeset files named
 .SH SOURCE
 .B /rc/bin/doctype
 .SH SEE ALSO
-.IR troff (1), 
-.IR eqn (1), 
-.IR tbl (1), 
-.IR pic (1), 
+.IR troff (1),
+.IR eqn (1),
+.IR tbl (1),
+.IR pic (1),
 .IR grap (1),
 .IR ms (6),
 .IR man (6)

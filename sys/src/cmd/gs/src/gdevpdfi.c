@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 2000, 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -217,7 +217,7 @@ pdf_convert_image4_to_image1(gx_device_pdf *pdev,
 }
 
 private int
-pdf_begin_image_data_decoded(gx_device_pdf *pdev, int num_components, const gs_range_t *pranges, int i, 
+pdf_begin_image_data_decoded(gx_device_pdf *pdev, int num_components, const gs_range_t *pranges, int i,
 			     gs_pixel_image_t *pi, cos_value_t *cs_value, pdf_image_enum *pie)
 {
 
@@ -348,7 +348,7 @@ pdf_begin_typed_image(gx_device_pdf *pdev, const gs_imager_state * pis,
 	    gs_make_identity(&pim3a.ImageMatrix);
 	    if (pim3a.Width < pim3a.MaskDict.Width && pim3a.Width > 0) {
 		int sx = (pim3a.MaskDict.Width + pim3a.Width - 1) / pim3a.Width;
-		
+
 		gs_matrix_scale(&mi, 1.0 / sx, 1, &mi);
 		gs_matrix_scale(&pim3a.ImageMatrix, 1.0 / sx, 1, &pim3a.ImageMatrix);
 	    }
@@ -404,7 +404,7 @@ pdf_begin_typed_image(gx_device_pdf *pdev, const gs_imager_state * pis,
 	    /* Undo the pop of the NI stack if necessary. */
 	    if (pnamed)
 		cos_array_add_object(pdev->NI_stack, COS_OBJECT(pnamed));
-	    /* HACK: temporary patch the color space, to allow 
+	    /* HACK: temporary patch the color space, to allow
 	       pdf_prepare_imagemask to write the right color for the imagemask. */
 	    code = gs_gsave(pgs);
 	    if (code < 0)
@@ -430,21 +430,21 @@ pdf_begin_typed_image(gx_device_pdf *pdev, const gs_imager_state * pis,
 	    gs_make_identity(&m1);
 	    gs_matrix_invert(&pic->ImageMatrix, &mi);
 	    gs_matrix_multiply(&mi, &ctm_only(pis), &m);
-	    code = pdf_setup_masked_image_converter(pdev, mem, &m, &cvd, 
+	    code = pdf_setup_masked_image_converter(pdev, mem, &m, &cvd,
 				 true, 0, 0, pi4.Width, pi4.Height, false);
 	    if (code < 0)
 		return code;
 	    cvd->mdev.is_open = true; /* fixme: same as above. */
 	    cvd->mask->is_open = true; /* fixme: same as above. */
 	    cvd->mask_is_empty = false;
-	    code = (*dev_proc(cvd->mask, fill_rectangle))((gx_device *)cvd->mask, 
+	    code = (*dev_proc(cvd->mask, fill_rectangle))((gx_device *)cvd->mask,
 			0, 0, cvd->mask->width, cvd->mask->height, (gx_color_index)0);
 	    if (code < 0)
 		return code;
 	    gx_device_retain((gx_device *)cvd, true);
 	    gx_device_retain((gx_device *)cvd->mask, true);
 	    gs_make_identity(&pi4.ImageMatrix);
-	    code = gx_default_begin_typed_image((gx_device *)cvd, 
+	    code = gx_default_begin_typed_image((gx_device *)cvd,
 		pis, &m1, (gs_image_common_t *)&pi4, prect, pdcolor, NULL, mem, pinfo);
 	    if (code < 0)
 		return code;
@@ -477,7 +477,7 @@ pdf_begin_typed_image(gx_device_pdf *pdev, const gs_imager_state * pis,
 
     if (pdf_must_put_clip_path(pdev, pcpath))
 	code = pdf_unclip(pdev);
-    else 
+    else
 	code = pdf_open_page(pdev, PDF_IN_STREAM);
     if (code < 0)
 	return code;
@@ -511,7 +511,7 @@ pdf_begin_typed_image(gx_device_pdf *pdev, const gs_imager_state * pis,
     memset(pie, 0, sizeof(*pie)); /* cleanup entirely for GC to work in all cases. */
     *pinfo = (gx_image_enum_common_t *) pie;
     gx_image_enum_common_init(*pinfo, (const gs_data_image_t *) pim,
-		    ((pdev->CompatibilityLevel >= 1.3) ? 
+		    ((pdev->CompatibilityLevel >= 1.3) ?
 			    (context == PDF_IMAGE_TYPE3_MASK ?
 			    &pdf_image_object_enum_procs :
 			    &pdf_image_enum_procs) :
@@ -533,7 +533,7 @@ pdf_begin_typed_image(gx_device_pdf *pdev, const gs_imager_state * pis,
     else {
         double nbytes = (double)(((ulong) pie->width * pie->bits_per_pixel + 7) >> 3) *
 	    pie->num_planes * pie->rows_left;
-	
+
 	in_line &= (nbytes < pdev->MaxInlineImageSize);
     }
     if (rect.p.x != 0 || rect.p.y != 0 ||
@@ -567,7 +567,7 @@ pdf_begin_typed_image(gx_device_pdf *pdev, const gs_imager_state * pis,
 	}
     }
     pdf_image_writer_init(&pie->writer);
-    pie->writer.alt_writer_count = (in_line || 
+    pie->writer.alt_writer_count = (in_line ||
 				    (pim->Width <= 64 && pim->Height <= 64) ||
 				    pdev->transfer_not_identity ? 1 : 2);
     image[1] = image[0];
@@ -618,7 +618,7 @@ pdf_begin_typed_image(gx_device_pdf *pdev, const gs_imager_state * pis,
 	)
 	goto fail;
     if (convert_to_process_colors) {
-	code = psdf_setup_image_colors_filter(&pie->writer.binary[0], 
+	code = psdf_setup_image_colors_filter(&pie->writer.binary[0],
 		    (gx_device_psdf *)pdev, &image[0].pixel, pis,
 		    pdev->pcm_color_info_index);
 	if (code < 0)
@@ -639,7 +639,7 @@ pdf_begin_typed_image(gx_device_pdf *pdev, const gs_imager_state * pis,
 	} else if (code)
 	    goto fail;
 	else if (convert_to_process_colors) {
-	    code = psdf_setup_image_colors_filter(&pie->writer.binary[1], 
+	    code = psdf_setup_image_colors_filter(&pie->writer.binary[1],
 		    (gx_device_psdf *)pdev, &image[1].pixel, pis,
 		    pdev->pcm_color_info_index);
 	    if (code < 0)
@@ -653,8 +653,8 @@ pdf_begin_typed_image(gx_device_pdf *pdev, const gs_imager_state * pis,
   	    goto fail;
     }
     if (pie->writer.alt_writer_count == 2) {
-        psdf_setup_compression_chooser(&pie->writer.binary[2], 
-	     (gx_device_psdf *)pdev, pim->Width, pim->Height, 
+        psdf_setup_compression_chooser(&pie->writer.binary[2],
+	     (gx_device_psdf *)pdev, pim->Width, pim->Height,
 	     num_components, pim->BitsPerComponent);
 	pie->writer.alt_writer_count = 3;
     }
@@ -676,19 +676,19 @@ pdf_begin_typed_image(gx_device_pdf *pdev, const gs_imager_state * pis,
 				  pmat, pis, true);
 	if (code < 0)
   	    goto fail;
-        psdf_setup_image_to_mask_filter(&pie->writer.binary[i], 
-	     (gx_device_psdf *)pdev, pim->Width, pim->Height, 
+        psdf_setup_image_to_mask_filter(&pie->writer.binary[i],
+	     (gx_device_psdf *)pdev, pim->Width, pim->Height,
 	     num_components, pim->BitsPerComponent, image[i].type4.MaskColor);
-	code = pdf_begin_image_data_decoded(pdev, num_components, pranges, i, 
+	code = pdf_begin_image_data_decoded(pdev, num_components, pranges, i,
 			     &image[i].pixel, &cs_value, pie);
 	if (code < 0)
   	    goto fail;
 	++pie->writer.alt_writer_count;
 	/* Note : Possible values for alt_writer_count are 1,2,3, 4.
 	   1 means no alternative streams.
-	   2 means the main image stream and a mask stream while converting 
+	   2 means the main image stream and a mask stream while converting
 		   an Image Type 4.
-	   3 means the main image steram, alternative image compression stream, 
+	   3 means the main image steram, alternative image compression stream,
 		   and the compression chooser.
 	   4 meams 3 and a mask stream while convertingh an Image Type 4.
          */
@@ -771,7 +771,7 @@ pdf_image_plane_data_alt(gx_image_enum_common_t * info,
 		}
 		image_flip_planes(row, bit_planes, offset, flip_count,
 				  nplanes, pie->plane_depths[0]);
-		status = sputs(pie->writer.binary[alt_writer_index].strm, row, 
+		status = sputs(pie->writer.binary[alt_writer_index].strm, row,
 			       flipped_count, &ignore);
 		if (status < 0)
 		    break;
@@ -812,7 +812,7 @@ pdf_image_plane_data(gx_image_enum_common_t * info,
 }
 
 private int
-use_image_as_pattern(gx_device_pdf *pdev, pdf_resource_t *pres1, 
+use_image_as_pattern(gx_device_pdf *pdev, pdf_resource_t *pres1,
 		     const gs_matrix *pmat, gs_id id)
 {   /* See also dump_image in gdevpdfd.c . */
     gs_imager_state s;
@@ -837,7 +837,7 @@ use_image_as_pattern(gx_device_pdf *pdev, pdf_resource_t *pres1,
     inst.template.BBox.q.y = 1;
     inst.template.XStep = 2; /* Set 2 times bigger step against artifacts. */
     inst.template.YStep = 2;
-    code = (*dev_proc(pdev, pattern_manage))((gx_device *)pdev, 
+    code = (*dev_proc(pdev, pattern_manage))((gx_device *)pdev,
 	id, &inst, pattern_manage__start_accum);
     if (code >= 0)
 	pprintld1(pdev->strm, "/R%ld Do\n", pdf_resource_id(pres1));
@@ -845,10 +845,10 @@ use_image_as_pattern(gx_device_pdf *pdev, pdf_resource_t *pres1,
     if (code >= 0)
 	code = pdf_add_resource(pdev, pdev->substream_Resources, "/XObject", pres1);
     if (code >= 0)
-	code = (*dev_proc(pdev, pattern_manage))((gx_device *)pdev, 
+	code = (*dev_proc(pdev, pattern_manage))((gx_device *)pdev,
 	    id, &inst, pattern_manage__finish_accum);
     if (code >= 0)
-	code = (*dev_proc(pdev, pattern_manage))((gx_device *)pdev, 
+	code = (*dev_proc(pdev, pattern_manage))((gx_device *)pdev,
 	    id, &inst, pattern_manage__load);
     if (code >= 0) {
 	stream_puts(pdev->strm, "q ");
@@ -859,10 +859,10 @@ use_image_as_pattern(gx_device_pdf *pdev, pdf_resource_t *pres1,
 	pprintld1(pdev->strm, " cs /R%ld scn ", pdf_resource_id(pres));
     }
     if (code >= 0) {
-	/* The image offset weas broken in gx_begin_image3_generic, 
-	   (see 'origin' in there). 
-	   As a temporary hack use the offset of the image. 
-	   fixme : This isn't generally correct, 
+	/* The image offset weas broken in gx_begin_image3_generic,
+	   (see 'origin' in there).
+	   As a temporary hack use the offset of the image.
+	   fixme : This isn't generally correct,
 	   because the mask may be "transpozed" against the image. */
 	gs_matrix m = pdev->converting_image_matrix;
 
@@ -883,7 +883,7 @@ typedef enum {
 
 /* Close PDF image and do it. */
 private int
-pdf_end_and_do_image(gx_device_pdf *pdev, pdf_image_writer *piw, 
+pdf_end_and_do_image(gx_device_pdf *pdev, pdf_image_writer *piw,
 		     const gs_matrix *mat, gs_id ps_bitmap_id, pdf_image_usage_t do_image)
 {
     int code = pdf_end_write_image(pdev, piw);
@@ -901,7 +901,7 @@ pdf_end_and_do_image(gx_device_pdf *pdev, pdf_image_writer *piw,
 		char buf[20];
 
 		sprintf(buf, "%ld 0 R", pdev->image_mask_id);
-		code = cos_dict_put_string_copy((cos_dict_t *)pres->object, 
+		code = cos_dict_put_string_copy((cos_dict_t *)pres->object,
 			pdev->image_mask_is_SMask ? "/SMask" : "/Mask", buf);
 		if (code < 0)
 		    return code;
@@ -911,8 +911,8 @@ pdf_end_and_do_image(gx_device_pdf *pdev, pdf_image_writer *piw,
 	    else
 		code = pdf_do_image(pdev, pres, mat, true);
 	} else if (do_image == USE_AS_MASK) {
-	    /* Provide data for pdf_do_image_by_id, which will be called through 
-		use_image_as_pattern during the next call to this function. 
+	    /* Provide data for pdf_do_image_by_id, which will be called through
+		use_image_as_pattern during the next call to this function.
 		See pdf_do_image about the meaning of 'scale'. */
 	    const pdf_x_object_t *const pxo = (const pdf_x_object_t *)pres;
 
@@ -1041,13 +1041,13 @@ pdf_image3_make_mid(gx_device **pmidev, gx_device *dev, int width, int height,
 	gs_matrix m;
 	pdf_lcvd_t *cvd = NULL;
 	int code;
-        
+
 	gs_make_identity(&m);
-	code = pdf_setup_masked_image_converter(pdev, mem, &m, &cvd, 
+	code = pdf_setup_masked_image_converter(pdev, mem, &m, &cvd,
 					true, 0, 0, width, height, true);
 	if (code < 0)
 	    return code;
-	cvd->mask->target = (gx_device *)cvd; /* Temporary, just to communicate with 
+	cvd->mask->target = (gx_device *)cvd; /* Temporary, just to communicate with
 					 pdf_image3_make_mcde. The latter will reset it. */
 	cvd->mask_is_empty = false;
 	*pmidev = (gx_device *)cvd->mask;
@@ -1093,7 +1093,7 @@ pdf_image3_make_mcde(gx_device *dev, const gs_imager_state *pis,
 
     if (pdev->CompatibilityLevel < 1.3 && !pdev->PatternImagemask) {
 	/* pdf_image3_make_mid must set midev with a pdf_lcvd_t instance.*/
-	pdf_lcvd_t *cvd = (pdf_lcvd_t *)((gx_device_memory *)midev)->target; 
+	pdf_lcvd_t *cvd = (pdf_lcvd_t *)((gx_device_memory *)midev)->target;
 
 	((gx_device_memory *)midev)->target = NULL;
 	cvd->m = pdev->converting_image_matrix;
@@ -1111,8 +1111,8 @@ pdf_image3_make_mcde(gx_device *dev, const gs_imager_state *pis,
 	    ((gx_device_pdf *)dev, pis, pmat, pic, prect, pdcolor, pcpath, mem,
 	    pinfo, PDF_IMAGE_TYPE3_DATA);
     }
-    /* Due to equal image merging, we delay the adding of the "Mask" entry into 
-       a type 3 image dictionary until the mask is completed. 
+    /* Due to equal image merging, we delay the adding of the "Mask" entry into
+       a type 3 image dictionary until the mask is completed.
        Will do in pdf_end_and_do_image.*/
     return 0;
 }
@@ -1199,12 +1199,12 @@ pdf_image3x_make_mcde(gx_device *dev, const gs_imager_state *pis,
 pdf_resource_t *pdf_substitute_pattern(pdf_resource_t *pres)
 {
     pdf_pattern_t *ppat = (pdf_pattern_t *)pres;
-    
+
     return (pdf_resource_t *)(ppat->substitute != 0 ? ppat->substitute : ppat);
 }
 
 
-private int 
+private int
 check_unsubstituted2(gx_device_pdf * pdev, pdf_resource_t *pres0, pdf_resource_t *pres1)
 {
     pdf_pattern_t *ppat = (pdf_pattern_t *)pres0;
@@ -1212,7 +1212,7 @@ check_unsubstituted2(gx_device_pdf * pdev, pdf_resource_t *pres0, pdf_resource_t
     return ppat->substitute == NULL;
 }
 
-private int 
+private int
 check_unsubstituted1(gx_device_pdf * pdev, pdf_resource_t *pres0)
 {
     pdf_pattern_t *ppat = (pdf_pattern_t *)pres0;
@@ -1227,7 +1227,7 @@ check_unsubstituted1(gx_device_pdf * pdev, pdf_resource_t *pres0)
 int
 gdev_pdf_pattern_manage(gx_device *pdev1, gx_bitmap_id id,
 		gs_pattern1_instance_t *pinst, pattern_manage_t function)
-{   
+{
     gx_device_pdf *pdev = (gx_device_pdf *)pdev1;
     int code;
     pdf_resource_t *pres, *pres1;
@@ -1236,7 +1236,7 @@ gdev_pdf_pattern_manage(gx_device *pdev1, gx_bitmap_id id,
 	case pattern_manage__can_accum:
 	    return 1;
 	case pattern_manage__start_accum:
-	    code = pdf_enter_substream(pdev, resourcePattern, id, &pres, false, 
+	    code = pdf_enter_substream(pdev, resourcePattern, id, &pres, false,
 		    pdev->CompressFonts/* Have no better switch.*/);
 	    if (code < 0)
 		return code;
@@ -1253,7 +1253,7 @@ gdev_pdf_pattern_manage(gx_device *pdev1, gx_bitmap_id id,
 	    code = pdf_exit_substream(pdev);
 	    if (code < 0)
 		return code;
-	    if (pdev->substituted_pattern_count > 300 && 
+	    if (pdev->substituted_pattern_count > 300 &&
 		    pdev->substituted_pattern_drop_page != pdev->next_page) { /* arbitrary */
 		pdf_drop_resources(pdev, resourcePattern, check_unsubstituted1);
 		pdev->substituted_pattern_count = 0;
@@ -1289,4 +1289,3 @@ gdev_pdf_pattern_manage(gx_device *pdev1, gx_bitmap_id id,
     }
     return_error(gs_error_unregistered);
 }
-

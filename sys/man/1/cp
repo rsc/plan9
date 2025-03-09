@@ -1,4 +1,4 @@
-.TH CP 1 
+.TH CP 1
 .SH NAME
 cp, fcp, mv  \- copy, move files
 .SH SYNOPSIS
@@ -42,7 +42,7 @@ copy or move one or more
 .I files
 into a
 .I directory
-under their original file names, as if by a sequence of 
+under their original file names, as if by a sequence of
 commands in the first form.
 Thus
 .L "cp f1 f2 dir
@@ -54,7 +54,7 @@ copies the contents of plain
 .I file1
 to
 .IR file2 .
-The mode and owner of  
+The mode and owner of
 .I file2
 are preserved if it already
 exists; the mode of
@@ -95,7 +95,7 @@ moves
 .I file1
 to
 .IR file2 .
-If the files are in the same directory, 
+If the files are in the same directory,
 .I file1
 is just renamed;
 otherwise

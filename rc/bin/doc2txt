@@ -14,7 +14,7 @@ case 0
 case 1
 	file=$1
 }
-aux/olefs $file || { 
+aux/olefs $file || {
 	echo 'doc2txt: couldn''t mount word document' >[1=2]
 	rm -f /tmp/doc2txt.$pid
 	exit word

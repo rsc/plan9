@@ -1,12 +1,12 @@
 /* Copyright (C) 1993 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -18,7 +18,7 @@
 /*
   CIF output driver
 
-   The `Fake bitmapped device to estimate rendering time' 
+   The `Fake bitmapped device to estimate rendering time'
    slightly modified to produce CIF files from PostScript.
    So anyone can put a nice logo free on its chip!
    Frederic Petrot, petrot@masi.ibp.fr */
@@ -67,7 +67,7 @@ cif_print_page(gx_device_printer *pdev, FILE *prn_stream)
 	fprintf(prn_stream, "DS1 25 1;\n9 %s;\nLCP;\n", s);
 	gs_free(pdev->memory, s, length, 1, "cif_print_page(s)");
 
-   for (lnum = 0; lnum < pdev->height; lnum++) {   
+   for (lnum = 0; lnum < pdev->height; lnum++) {
       gdev_prn_copy_scan_lines(pdev, lnum, in, line_size);
       length = 0;
       for (scanline = 0; scanline < line_size; scanline++)

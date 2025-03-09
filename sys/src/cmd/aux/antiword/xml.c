@@ -11,7 +11,7 @@
 #include "antiword.h"
 
 
-#define vAddEndTagsUntil1(p,t)	vAddEndTagsUntil2(p,t,TAG_NOTAG)	
+#define vAddEndTagsUntil1(p,t)	vAddEndTagsUntil2(p,t,TAG_NOTAG)
 
 #if defined(DEBUG)
 #define vStackTrace()	__vStackTrace(__LINE__)

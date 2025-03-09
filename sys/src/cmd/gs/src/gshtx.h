@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -27,7 +27,7 @@
 
 /*
  * The stand-alone halftone structures are opaque, and are placed in an opaque
- * graphic state. 
+ * graphic state.
  */
 
 /* Alias type names */
@@ -81,7 +81,7 @@ typedef gs_mapping_closure_proc_t gs_ht_transfer_proc;	/* see gxtmap.h */
  *    Individual component halftones of a gs_ht structure must always be
  *    provided with transfer functions.
  *
- *    Releasing the gs_ht structure will NOT release the client data 
+ *    Releasing the gs_ht structure will NOT release the client data
  *    (the client must do that directly).
  */
 

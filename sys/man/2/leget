@@ -90,7 +90,7 @@ to point at the first byte after the integer.
 .IR ip (2)
 .SH BUGS
 .IR GBIT *
-and 
+and
 .IR PBIT *
 (from
 .IR fcall (2))

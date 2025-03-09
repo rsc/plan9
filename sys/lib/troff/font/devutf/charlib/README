@@ -13,4 +13,3 @@ The following PostScript variables are available:
 	size		actual font size - scaled up from ptsize
 
 Don't overuse this stuff!
-

@@ -2,8 +2,8 @@
 scale=100
 define m0 |
 [
-$2: box "\f(CWBuffer\fP" $1 ht 40 wid 88 with .nw at 0,40 
-box "\f(CWString\fP" "(cache)" ht 40 wid 72 with .nw at 104,40 
+$2: box "\f(CWBuffer\fP" $1 ht 40 wid 88 with .nw at 0,40
+box "\f(CWString\fP" "(cache)" ht 40 wid 72 with .nw at 104,40
 line left 16 from last box.w
 ] |
 
@@ -18,7 +18,7 @@ D1: m1 with .nw at 184,576
 D2: m1 with .nw at 0,576
 Mtranscript: m0("(transcript)", Buffer) with .nw at 0,640
 Mcontents: m0("(contents)", Contents) with .nw at 184,640
-F: box "\f(CWFile\fP" ht 40 wid 112 with .nw at 75,704 
+F: box "\f(CWFile\fP" ht 40 wid 112 with .nw at 75,704
 
 line from D2.n to Mtranscript.Buffer.s
 line from D1.n to Mcontents.Contents.s

@@ -78,13 +78,13 @@ rtcattach(char* spec)
 	return devattach('r', spec);
 }
 
-static Walkqid*	 
+static Walkqid*
 rtcwalk(Chan* c, Chan *nc, char** name, int nname)
 {
 	return devwalk(c, nc, name, nname, rtcdir, nelem(rtcdir), devgen);
 }
 
-static int	 
+static int
 rtcstat(Chan* c, uchar* dp, int n)
 {
 	return devstat(c, dp, n, rtcdir, nelem(rtcdir), devgen);
@@ -96,7 +96,7 @@ rtcopen(Chan* c, int omode)
 	return devopen(c, omode, rtcdir, nelem(rtcdir), devgen);
 }
 
-static void	 
+static void
 rtcclose(Chan*)
 {
 }
@@ -121,4 +121,3 @@ Dev fakertcdevtab = {
 	devremove,
 	devwstat,
 };
-

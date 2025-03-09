@@ -1,4 +1,4 @@
-.TH TWSI 3 
+.TH TWSI 3
 .SH NAME
 twsi - two-wire serial interface (TWSI) and inter-integrated circuit (I⁲C) interface
 .SH SYNOPSIS

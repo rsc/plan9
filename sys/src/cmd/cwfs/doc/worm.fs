@@ -45,7 +45,7 @@ for config mode hit a key within 5 seconds
 config: filsys main c{p(h0)0.25p(h2)0.25}f{p(h0)25.75p(h2)25.75}
 config: filsys dump o
 config: filsys other h3
-config: recover main 
+config: recover main
 config: ream other
 config: allow
 config: end
@@ -125,4 +125,4 @@ il: allocating il!66.120.90.189!23230
 rosewood as of Sun Sep  9 16:27:27 2001
         last boot Mon Sep 10 00:56:10 2001
 touch superblock 496118
-rosewood: 
+rosewood:

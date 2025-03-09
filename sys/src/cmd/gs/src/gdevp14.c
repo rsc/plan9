@@ -1,13 +1,13 @@
 /*
   Copyright (C) 2001-2004 artofcode LLC.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -214,7 +214,7 @@ const pdf14_device gs_pdf14_CMYK_device	= {
 };
 
 /* GC procedures */
-private	
+private
 ENUM_PTRS_WITH(pdf14_device_enum_ptrs, pdf14_device *pdev) return 0;
 case 0:	return ENUM_OBJ(pdev->ctx);
 case 1:	ENUM_RETURN(gx_device_enum_ptr(pdev->target));
@@ -263,7 +263,7 @@ pdf14_buf_new(gs_int_rect *rect, bool has_alpha_g, bool	has_shape,
     result->n_planes = n_planes;
     result->rowstride = rowstride;
     result->transfer_fn = NULL;
-    
+
     if (height < 0) {
 	/* Empty clipping - will skip all drawings. */
 	result->planestride = 0;
@@ -374,7 +374,7 @@ pdf14_push_transparency_group(pdf14_ctx	*ctx, gs_int_rect *rect,
        effects, but it still isn't correct. The pixel compositing code
        for non-isolated knockout groups gets pretty hairy, which is
        why this is here. */
-    if (knockout) 
+    if (knockout)
 	isolated = true;
 
     has_shape = tos->has_shape || tos->knockout;
@@ -413,7 +413,7 @@ pdf14_push_transparency_group(pdf14_ctx	*ctx, gs_int_rect *rect,
 	    int y;
 
 	    for (y = y0; y < y1; ++y) {
-		memcpy (buf_ptr, tos_ptr, width); 
+		memcpy (buf_ptr, tos_ptr, width);
 		buf_ptr += buf->rowstride;
 		tos_ptr += tos->rowstride;
 	    }
@@ -563,7 +563,7 @@ pdf14_pop_transparency_group(pdf14_ctx *ctx)
 						tos_ptr[x + tos_shape_offset],
 						shape);
 		}
-	    
+
 		/* Complement the results for subtractive color spaces */
 		if (additive) {
 		    for (i = 0; i < n_chan; ++i) {
@@ -688,7 +688,7 @@ pdf14_decode_color(gx_device * dev, gx_color_index color, gx_color_value * out)
 #ifdef DUMP_TO_PNG
 /* Dumps a planar RGBA image to	a PNG file. */
 private	int
-dump_planar_rgba(gs_memory_t *mem, 
+dump_planar_rgba(gs_memory_t *mem,
 		 const byte *buf, int width, int height, int rowstride, int planestride)
 {
     int rowbytes = width << 2;
@@ -1750,7 +1750,7 @@ pdf14_cmap_cmyk_direct(frac c, frac m, frac y, frac k, gx_device_color * pdc,
 	cv[i] = frac2cv(cm_comps[i]);
 
     color = dev_proc(dev, encode_color)(dev, cv);
-    if (color != gx_no_color_index) 
+    if (color != gx_no_color_index)
 	color_set_pure(pdc, color);
 }
 
@@ -1843,7 +1843,7 @@ pdf14_cmap_separation_direct(frac all, gx_device_color * pdc, const gs_imager_st
 
 
 private	void
-pdf14_cmap_devicen_direct(const	frac * pcc, 
+pdf14_cmap_devicen_direct(const	frac * pcc,
     gx_device_color * pdc, const gs_imager_state * pis, gx_device * dev,
     gs_color_select_t select)
 {
@@ -1995,7 +1995,7 @@ c_pdf14trans_write(const gs_composite_t	* pct, byte * data, uint * psize)
 	    *pbuf++ = pparams->blend_mode;
 	    put_value(pbuf, pparams->opacity.alpha);
 	    put_value(pbuf, pparams->shape.alpha);
-	    put_value(pbuf, pparams->bbox);	    
+	    put_value(pbuf, pparams->bbox);
 	    break;
 	case PDF14_INIT_TRANS_MASK:
 	    *pbuf++ = pparams->csel;
@@ -2584,7 +2584,7 @@ pdf14_clist_create_compositor(gx_device	* dev, gx_device ** pcdev,
 		{
 		    const gs_pdf14trans_params_t * pparams = &((const gs_pdf14trans_t *)pct)->params;
 
-		    if (pparams->Background_components != 0 && 
+		    if (pparams->Background_components != 0 &&
 			pparams->Background_components != pdev->color_info.num_components)
 			return_error(gs_error_rangecheck);
 		}

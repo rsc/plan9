@@ -38,7 +38,7 @@ typedef struct {
 	UINT8		BootpSrvName[64];
 	UINT8		BootpBootFile[128];
 	UINT32		DhcpMagik;
-	UINT8		DhcpOptions[56];		
+	UINT8		DhcpOptions[56];
 } EFI_PXE_BASE_CODE_DHCPV4_PACKET;
 
 typedef struct {
@@ -136,7 +136,7 @@ struct Tftp
 
 	int seq;
 	int eof;
-	
+
 	char pkt[2+2+Segsize];
 	char nul;
 };
@@ -185,9 +185,9 @@ enum {
 };
 
 static int
-udpread(EFI_IP_ADDRESS *sip, EFI_IP_ADDRESS *dip, 
-	EFI_PXE_BASE_CODE_UDP_PORT *sport, 
-	EFI_PXE_BASE_CODE_UDP_PORT dport, 
+udpread(EFI_IP_ADDRESS *sip, EFI_IP_ADDRESS *dip,
+	EFI_PXE_BASE_CODE_UDP_PORT *sport,
+	EFI_PXE_BASE_CODE_UDP_PORT dport,
 	int *len, void *data)
 {
 	UINTN size;
@@ -202,7 +202,7 @@ udpread(EFI_IP_ADDRESS *sip, EFI_IP_ADDRESS *dip,
 
 static int
 udpwrite(EFI_IP_ADDRESS *dip,
-	EFI_PXE_BASE_CODE_UDP_PORT sport, 
+	EFI_PXE_BASE_CODE_UDP_PORT sport,
 	EFI_PXE_BASE_CODE_UDP_PORT dport,
 	int len, void *data)
 {
@@ -351,7 +351,7 @@ parseipv6(uchar to[16], char *from)
 			}
 		} else if (p == from)
 			break;
-		from = p;		
+		from = p;
 	}
 	if(i < 16){
 		memmove(&to[elipsis+16-i], &to[elipsis], i-elipsis);

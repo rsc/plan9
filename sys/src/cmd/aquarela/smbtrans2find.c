@@ -116,7 +116,7 @@ populate(SmbSession *s, SmbDirCache *dc, Reprog *r, ushort informationlevel, ush
 	while (dc->i < dc->n && e < scount) {
 		ulong backup;
 		int rv;
-		
+
 		if (!smbmatch(dc->buf[dc->i].name, r)) {
 			dc->i++;
 			continue;
@@ -317,7 +317,7 @@ smbtrans2findnext2(SmbSession *s, SmbHeader *h)
 	}
 
 	populate(s, search->dc, search->rep, infolevel, flags, scount, &e, &nameoffset);
-	
+
 	eos = search->dc->i >= search->dc->n;
 	if ((flags & SMB_FIND_CLOSE) != 0 || ((flags & SMB_FIND_CLOSE_EOS) != 0 && eos))
 		smbsearchclose(s, search);

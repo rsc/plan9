@@ -48,7 +48,7 @@ typedef struct {
     unsigned short 	zsize;
     unsigned long 	min_color;
     unsigned long 	max_color;
-    unsigned long	wastebytes;	
+    unsigned long	wastebytes;
     char 		name[80];
     unsigned long	colormap;
 

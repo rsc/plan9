@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -66,7 +66,7 @@ const gx_device_color_type_t *const gx_dc_type_ht_binary =
 
 #define gx_dc_type_ht_binary (&gx_dc_type_data_ht_binary)
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(dc_ht_binary_enum_ptrs, gx_device_color *cptr) return 0;
 ENUM_PTR(0, gx_device_color, colors.binary.b_ht);
 case 1:
@@ -89,7 +89,7 @@ RELOC_PTRS_END
 
 /* Other GC procedures */
 private_st_ht_tiles();
-private 
+private
 ENUM_PTRS_BEGIN_PROC(ht_tiles_enum_ptrs)
 {
     return 0;
@@ -407,7 +407,7 @@ gx_dc_ht_binary_equal(const gx_device_color * pdevc1,
 }
 
 
-/* 
+/*
  * Flags to indicate the pieces of a binary halftone that are included
  * in its string representation. The first byte of the string holds this
  * set of flags.
@@ -430,7 +430,7 @@ private const int   dc_ht_binary_has_index = 0x08;
  *
  *  psdc        pointer ot saved version of last serialized color (for
  *              this band)
- *  
+ *
  *  dev         pointer to the current device, used to retrieve process
  *              color model information
  *

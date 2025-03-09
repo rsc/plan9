@@ -71,7 +71,7 @@ _cgamode3:
 	SW(rDI, _DI(SB))
 
 	MTSR(rAX, rES)
-	
+
 /*
  * Check for APM1.2 BIOS support.
  */

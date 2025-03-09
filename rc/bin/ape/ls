@@ -9,7 +9,7 @@
 # -L	follow symlinks
 # -R	recursive list
 # -U	unsorted (gnu)
-# 
+#
 # -a	include .files
 # -c	show ctime
 # -d	dirs

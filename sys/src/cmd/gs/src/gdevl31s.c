@@ -1,12 +1,12 @@
 /* Copyright (C) 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -42,7 +42,7 @@ const int width[2]      = {2528,
 
 /* These codes correspond to sequences of pixels with the same color.
  * After the code for a sequence < 64 pixels the color changes.
- * After the code for a sequence with 64 pixels the previous color continues. */ 
+ * After the code for a sequence with 64 pixels the previous color continues. */
 private struct {
 	uint bits;
 	uint length; /* number of valid bits */
@@ -66,7 +66,7 @@ private struct {
   {0x360, 12}, {0xb60, 12}, {0x5b0, 12}, {0xdb0, 12}, {0x2a0, 12}, {0xaa0, 12}, {0x6a0, 12}, {0xea0, 12},
   {0x260, 12}, {0xa60, 12}, {0x4a0, 12}, {0xca0, 12}, {0x240, 12}, {0xec0, 12}, {0x1c0, 12}, {0xe40, 12},
   {0x140, 12}, {0x1a0, 12}, {0x9a0, 12}, {0xd40, 12}, {0x340, 12}, {0x5a0, 12}, {0x660, 12}, {0xe60, 12},
-  {0x3c0, 10}}}; 
+  {0x3c0, 10}}};
 
 /* Define the default, maximum resolutions. */
 #ifndef X_DPI
@@ -80,7 +80,7 @@ private struct {
 private dev_proc_print_page_copies(lj3100sw_print_page_copies);
 private dev_proc_close_device(lj3100sw_close);
 
-private gx_device_procs prn_lj3100sw_procs = 
+private gx_device_procs prn_lj3100sw_procs =
     prn_params_procs(gdev_prn_open, gdev_prn_output_page, lj3100sw_close,
 	     gdev_prn_get_params, gdev_prn_put_params);
 

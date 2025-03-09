@@ -39,4 +39,3 @@ libmachdep.a:
 
 9ball.$O: 9ball.rc 9ball.ico
 	$(WINDRES) -i 9ball.rc -o 9ball.o
-

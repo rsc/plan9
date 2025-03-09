@@ -35,7 +35,7 @@ implemented abstractions
 it is possible to
 produce a small operating system that provides support for the largest systems
 on a variety of architectures and networks. The foundations of the system are
-built on two ideas: a per-process name space and a simple message-oriented 
+built on two ideas: a per-process name space and a simple message-oriented
 file system protocol.
 .AE
 .PP
@@ -147,7 +147,7 @@ The procedures map one-to-one with 9P message  types.
 Locally each channel has an associated data structure
 that holds a type field used to index
 a table of procedure calls, one set per file system type,
-analogous to selecting the method set for an object. 
+analogous to selecting the method set for an object.
 One kernel-resident file system, the
 .I
 mount device,
@@ -377,7 +377,7 @@ changes are independent.
 .PP
 Although there is no global name space,
 for a process to function sensibly the local name spaces must adhere
-to global conventions. 
+to global conventions.
 Nonetheless, the use of local name spaces is critical to the system.
 Both these ideas are illustrated by the use of the name space to
 handle heterogeneity.

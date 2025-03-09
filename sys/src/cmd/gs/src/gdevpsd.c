@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -92,7 +92,7 @@ typedef struct psd_device_s {
 } psd_device;
 
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(psd_device_enum_ptrs, psd_device *pdev)
 {
     if (index < pdev->devn_params.separations.num_separations)
@@ -232,7 +232,7 @@ private fixed_colorant_name DeviceRGBComponents[] = {
 private const gx_device_procs spot_rgb_procs = device_procs(get_psdrgb_color_mapping_procs);
 
 const psd_device gs_psdrgb_device =
-{   
+{
     psd_device_body(spot_rgb_procs, "psdrgb", 3, GX_CINFO_POLARITY_ADDITIVE, 24, 255, 255, "DeviceRGB"),
     /* devn_params specific parameters */
     { 8,	/* Bits per color - must match ncomp, depth, etc. above */
@@ -261,7 +261,7 @@ private const gx_device_procs spot_cmyk_procs
 		= device_procs(get_psd_color_mapping_procs);
 
 const psd_device gs_psdcmyk_device =
-{   
+{
     psd_device_body(spot_cmyk_procs, "psdcmyk", NC, GX_CINFO_POLARITY_SUBTRACTIVE, NC * 8, 255, 255, "DeviceCMYK"),
     /* devn_params specific parameters */
     { 8,	/* Bits per color - must match ncomp, depth, etc. above */
@@ -758,7 +758,7 @@ psd_put_params(gx_device * pdev, gs_param_list * plist)
 
 /*
  * This routine will check to see if the color component name  match those
- * that are available amoung the current device's color components.  
+ * that are available amoung the current device's color components.
  *
  * Parameters:
  *   dev - pointer to device data structure.
@@ -900,7 +900,7 @@ psd_write_header(psd_write_ctx *xc, psd_device *pdev)
     psd_write_32(xc, xc->width); /* Columns */
     psd_write_16(xc, 8); /* Depth - 1, 8 and 16 */
     psd_write_16(xc, (bits16) xc->base_bytes_pp); /* Mode - RGB=3, CMYK=4 */
-    
+
     /* Color Mode Data */
     psd_write_32(xc, 0); 	/* No color mode data */
 
@@ -911,10 +911,10 @@ psd_write_header(psd_write_ctx *xc, psd_device *pdev)
 	sep_num = xc->chnl_to_orig_sep[chan_idx] - NUM_CMYK_COMPONENTS;
 	separation_name = &(pdev->devn_params.separations.names[sep_num]);
 	chan_names_len += (separation_name->size + 1);
-    }    
+    }
     psd_write_32(xc, 12 + (chan_names_len + (chan_names_len % 2))
 			+ (12 + (14 * (xc->num_channels - xc->base_bytes_pp)))
-			+ 28); 
+			+ 28);
     psd_write(xc, (const byte *)"8BIM", 4);
     psd_write_16(xc, 1006); /* 0x03EE */
     psd_write_16(xc, 0); /* PString */
@@ -924,8 +924,8 @@ psd_write_header(psd_write_ctx *xc, psd_device *pdev)
 	separation_name = &(pdev->devn_params.separations.names[sep_num]);
 	psd_write_8(xc, (byte) separation_name->size);
 	psd_write(xc, separation_name->data, separation_name->size);
-    }    
-    if (chan_names_len % 2) 
+    }
+    if (chan_names_len % 2)
 	psd_write_8(xc, 0); /* pad */
 
     /* DisplayInfo - Colors for each spot channels */
@@ -977,7 +977,7 @@ psd_write_header(psd_write_ctx *xc, psd_device *pdev)
 }
 
 private void
-psd_calib_row(psd_write_ctx *xc, byte **tile_data, const byte *row, 
+psd_calib_row(psd_write_ctx *xc, byte **tile_data, const byte *row,
 		int channel, icmLuBase *luo)
 {
     int base_bytes_pp = xc->base_bytes_pp;
@@ -988,13 +988,13 @@ psd_calib_row(psd_write_ctx *xc, byte **tile_data, const byte *row,
     double in[MAX_CHAN], out[MAX_CHAN];
 
     luo->spaces(luo, NULL, &inn, NULL, &outn, NULL, NULL, NULL, NULL);
-	
+
     for (x = 0; x < xc->width; x++) {
 	if (channel < outn) {
 	    int plane_idx;
 
 	    for (plane_idx = 0; plane_idx < inn; plane_idx++)
-		in[plane_idx] = row[x*channels+plane_idx] * (1.0 / 255);	
+		in[plane_idx] = row[x*channels+plane_idx] * (1.0 / 255);
 
 	    (*tile_data)[x] = (int)(0.5 + 255 * out[channel]);
 	    luo->lookup(luo, out, in);
@@ -1062,7 +1062,7 @@ psd_write_image_data(psd_write_ctx *xc, gx_device_printer *pdev)
 		    }
 	        } else {
 		    psd_calib_row(xc, &sep_line, row, data_pos, luo);
-	        }	
+	        }
 	        psd_write(xc, sep_line, xc->width);
 	    } else {
 		if (chan_idx < NUM_CMYK_COMPONENTS) {
@@ -1071,7 +1071,7 @@ psd_write_image_data(psd_write_ctx *xc, gx_device_printer *pdev)
 		        sep_line[i] = 255;
 	            psd_write(xc, sep_line, xc->width);
 		}
-	    }	
+	    }
 	}
     }
 

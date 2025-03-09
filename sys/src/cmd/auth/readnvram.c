@@ -17,7 +17,7 @@ main(int, char **)
 	 * readnvram can return -1 meaning nvram wasn't written,
 	 * but safe still holds good data.
 	 */
-	if(readnvram(&safe, 0) < 0 && safe.authid[0] == '\0') 
+	if(readnvram(&safe, 0) < 0 && safe.authid[0] == '\0')
 		sysfatal("readnvram: %r");
 
 	/*
@@ -30,7 +30,7 @@ main(int, char **)
 		sysfatal("bad key");
 
 	fmtinstall('H', encodefmt);
-	print("key proto=p9sk1 user=%q dom=%q !hex=%.*H !password=______\n", 
+	print("key proto=p9sk1 user=%q dom=%q !hex=%.*H !password=______\n",
 		safe.authid, safe.authdom, DESKEYLEN, safe.machkey);
 	exits(0);
 }

@@ -110,7 +110,7 @@ apmevent(int e)
 
 	if(0 <= e && e < nelem(eventstr) && eventstr[e])
 		return eventstr[e];
-	
+
 	sprint(buf, "event 0x%ux", (uint)e);
 	return buf;
 }
@@ -272,7 +272,7 @@ acstatus(int a)
 {
 	return xstatus(acstatusstr, nelem(acstatusstr), a);
 }
-	  
+
 static int
 apmversion(Apm *apm)
 {
@@ -756,7 +756,7 @@ batteryread(Req *r)
 		p += snprint(p, ep-p, "%s %d %d\n",
 			batterystatus(apm.battery[i].status),
 			apm.battery[i].percent, apm.battery[i].time);
-	
+
 	readstr(r, buf);
 	respond(r, nil);
 }
@@ -880,9 +880,9 @@ ctlread(Req *r)
 
 	p += snprint(p, ep-p, "ac %s\n", acstatus(apm.acstatus));
 	p += snprint(p, ep-p, "capabilities");
-	if(apm.capabilities & CapStandby) 
+	if(apm.capabilities & CapStandby)
 		p += snprint(p, ep-p, " standby");
-	if(apm.capabilities & CapSuspend) 
+	if(apm.capabilities & CapSuspend)
 		p += snprint(p, ep-p, " suspend");
 	if(apm.capabilities & CapSlowCpu)
 		p += snprint(p, ep-p, " slowcpu");

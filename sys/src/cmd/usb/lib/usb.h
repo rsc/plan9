@@ -25,7 +25,7 @@ enum {
 
 	/* request type */
 	Rh2d	= 0<<7,		/* host to device */
-	Rd2h	= 1<<7,		/* device to host */ 
+	Rd2h	= 1<<7,		/* device to host */
 
 	Rstd	= 0<<5,		/* types */
 	Rclass	= 1<<5,
@@ -363,5 +363,3 @@ int	usbcmd(Dev *d, int type, int req, int value, int index, uchar *data, int cou
 
 
 extern int usbdebug;	/* more messages for bigger values */
-
-

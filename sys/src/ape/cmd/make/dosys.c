@@ -151,7 +151,7 @@ for(i=0, procp=procstack; i<nproc; ++i, ++procp)
 			if( WEXITSTATUS(status) )
 				printf("*** Error code %d", WEXITSTATUS(status) );
 			else	printf("*** Termination code %d", WTERMSIG(status));
-		
+
 			printf(procp->nohalt ? "(ignored)\n" : "\n");
 			fflush(stdout);
 			if(!keepgoing && !procp->nohalt)

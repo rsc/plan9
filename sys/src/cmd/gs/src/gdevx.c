@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -879,7 +879,7 @@ x_get_bits_rectangle(gx_device * dev, const gs_int_rect * prect,
 		) {
 		/*
 		 * The server has been nice enough to return an image in the
-		 * format we use.  
+		 * format we use.
 		 */
 		memcpy(dest, source, width_bytes);
 	    } else {

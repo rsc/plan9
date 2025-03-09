@@ -53,4 +53,3 @@ _renewthread(Relist *lp,	/* _relist to add to */
 	(++p)->inst = 0;
 	return p;
 }
-

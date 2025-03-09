@@ -256,4 +256,3 @@ xcom(Node *n)
 		break;
 	}
 }
-

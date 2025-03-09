@@ -1,12 +1,12 @@
 /* Copyright (C) 2001, Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -23,7 +23,7 @@
 #include <string.h>
 #include "gscdefs.h"		/* for gs_productfamily and gs_revision */
 
-/* We store registry named values under the key 
+/* We store registry named values under the key
  * "Software\\AFPL Ghostscript"
  * where "AFPL Ghostscript" is actually gs_productfamily.
  * Either HKEY_LOCAL_MACHINE or HKEY_CURRENT_USER will be used.
@@ -45,7 +45,7 @@ win_registry_key(char *buf, int len)
  * Get a named registry value from HKCU.
  * name, ptr, plen and return values are the same as in gp_getenv();
  */
-int 
+int
 win_get_reg_value(const char *name, char *ptr, int *plen)
 {
     HKEY hkey;
@@ -83,7 +83,7 @@ win_get_reg_value(const char *name, char *ptr, int *plen)
  * str = value of named value
  * Returns 0 on success.
  */
-int 
+int
 win_set_reg_value(const char *name, const char *value)
 {
     HKEY hkey;
@@ -97,11 +97,10 @@ win_set_reg_value(const char *name, const char *value)
 	rc = RegCreateKeyEx(HKEY_CURRENT_USER, key, 0, "", 0,
 	    KEY_ALL_ACCESS, NULL, &hkey, &dwDisposition);
     if (rc == ERROR_SUCCESS) {
-	rc = RegSetValueEx(hkey, name, 0, REG_SZ, 
+	rc = RegSetValueEx(hkey, name, 0, REG_SZ,
 		(CONST BYTE *)value, strlen(value)+1);
 	RegCloseKey(hkey);
     }
 
     return rc == ERROR_SUCCESS ? 0 : -1;
 }
-

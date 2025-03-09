@@ -62,7 +62,7 @@ int	memlexpose(Memimage *i, Rectangle r)
 .B
 int	memlhide(Memimage *i, Rectangle r)
 .PP
-.B 
+.B
 void	memltofront(Memimage *i)
 .PP
 .B

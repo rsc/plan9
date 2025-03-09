@@ -129,7 +129,7 @@ intrdisable(int irq, void (*f)(Ureg *, void *), void *a, int tbdf, char *name)
 	vno = hwvecno(irq, tbdf);
 	ilock(&vctllock);
 	pv = &vctl[vno];
-	while (*pv && 
+	while (*pv &&
 		  ((*pv)->irq != irq || (*pv)->tbdf != tbdf || (*pv)->f != f || (*pv)->a != a ||
 		   strcmp((*pv)->name, name)))
 		pv = &((*pv)->next);
@@ -137,7 +137,7 @@ intrdisable(int irq, void (*f)(Ureg *, void *), void *a, int tbdf, char *name)
 
 	v = *pv;
 	*pv = (*pv)->next;	/* Link out the entry */
-	
+
 	if(vctl[vno] == nil)
 		hwintrdisable(v);
 	iunlock(&vctllock);
@@ -577,7 +577,7 @@ forkchild(Proc *p, Ureg *ur)
 	cur = (Ureg*)(p->sched.sp+2*BY2WD);
 	memmove(cur, ur, sizeof(Ureg));
 	cur->r3 = 0;
-	
+
 	/* Things from bottom of syscall we never got to execute */
 	p->psstate = 0;
 	p->insyscall = 0;
@@ -593,8 +593,8 @@ userpc(void)
 }
 
 
-/* This routine must save the values of registers the user is not 
- * permitted to write from devproc and then restore the saved values 
+/* This routine must save the values of registers the user is not
+ * permitted to write from devproc and then restore the saved values
  * before returning
  */
 void
@@ -844,7 +844,7 @@ noted(Ureg* ureg, ulong arg0)
 		pprint("unknown noted arg 0x%lux\n", arg0);
 		up->lastnote.flag = NDebug;
 		/* fall through */
-		
+
 	case NDFLT:
 		if(up->lastnote.flag == NDebug)
 			pprint("suicide: %s\n", up->lastnote.msg);

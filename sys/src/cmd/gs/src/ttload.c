@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -22,7 +22,7 @@
  *
  *  ttload.c                                                    1.0
  *
- *    TrueType Tables Loader.                          
+ *    TrueType Tables Loader.
  *
  *  Copyright 1996-1998 by
  *  David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -97,7 +97,7 @@
 
     face->numGlyphs     = maxProfile->numGlyphs;
 
-    face->maxPoints     = MAX( maxProfile->maxCompositePoints, 
+    face->maxPoints     = MAX( maxProfile->maxCompositePoints,
                                maxProfile->maxPoints );
     face->maxContours   = MAX( maxProfile->maxCompositeContours,
                                maxProfile->maxContours );
@@ -105,7 +105,7 @@
                           maxProfile->maxComponentDepth;
 
     DebugTrace(font, "loaded\n");
-  
+
     return TT_Err_Ok;
   }
 
@@ -227,6 +227,3 @@
 
     return TT_Err_Ok;
   }
-
-
-

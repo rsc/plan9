@@ -361,7 +361,7 @@ bootpass(Boot *b, void *vbuf, int nbuf)
 			print("+%ld", GLLONG(ep->data));
 			length = b->ep - (char *)PADDR(GLLONG(ep->entry));
 			break;
-	
+
 		case READ9DATA:
 			ep = &b->exec;
 			bss = GLLONG(ep->bss);
@@ -430,7 +430,7 @@ Endofinput:
 		print("premature EOF\n");
 		b->state = FAILED;
 		return FAIL;
-	
+
 	case TRYBOOT:
 		delay(100);
 		syncall();

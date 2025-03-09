@@ -60,7 +60,7 @@ defn vtlock(l)
 		print("\tvtLock is held by ", t.pid\D, "\n");
 	} else if l.readers then
 		print("\tvtLock is held by ", l.readers\D, " readers\n");
-	else 
+	else
 		print("\tvtLock is not held!\n");
 }
 
@@ -186,7 +186,7 @@ defn
 block(b)
 {
 	local i;
-	
+
 	b = (Block)b;
 	print("b=(Block)", b\X, "\n");
 	print("\tref ", b.ref\D, " nlock ", b.nlock\D, "\n");

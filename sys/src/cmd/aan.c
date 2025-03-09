@@ -229,7 +229,7 @@ fromclient(void*)
 	static int outmsg;
 
 	do {
-		b = recvp(empty);	
+		b = recvp(empty);
 		if ((int)(b->hdr.nb = read(0, b->buf, Bufsize)) <= 0) {
 			if ((int)b->hdr.nb < 0)
 				dmessage(2, "fromclient; Cannot read 9P message; %r\n");
@@ -257,7 +257,7 @@ fromnet(void*)
 
 	while (!done) {
 		while (netfd < 0) {
-			dmessage(1, "fromnet; waiting for connection... (inmsg %d)\n", 
+			dmessage(1, "fromnet; waiting for connection... (inmsg %d)\n",
 					  inmsg);
 			sleep(1000);
 		}
@@ -299,7 +299,7 @@ fromnet(void*)
 			dmessage(1, "fromnet; skipping message %d, currently at %d\n",
 				b->hdr.msg, inmsg);
 			continue;
-		}			
+		}
 
 		/* Process the acked list. */
 		acked = b->hdr.acked - lastacked;
@@ -316,7 +316,7 @@ fromnet(void*)
 		lastacked = b->hdr.acked;
 		inmsg++;
 		showmsg(1, "fromnet", b);
-		if (writen(1, b->buf, len) < 0) 
+		if (writen(1, b->buf, len) < 0)
 			sysfatal("fromnet; cannot write to client; %r");
 	}
 	done = 1;
@@ -345,14 +345,14 @@ reconnect(void)
 	} else {
 		syslog(0, Logname, "waiting for connection on %s", devdir);
 		alarm(maxto * 1000);
- 		if ((lcfd = listen(devdir, ldir)) < 0) 
+ 		if ((lcfd = listen(devdir, ldir)) < 0)
 			sysfatal("reconnect; cannot listen; %r");
-	
+
 		if ((fd = accept(lcfd, ldir)) < 0)
 			sysfatal("reconnect; cannot accept; %r");
 		alarm(0);
 		close(lcfd);
-		
+
 		ep = getendpoints(ldir);
 		dmessage(1, "rsys '%s'\n", ep->rsys);
 		syslog(0, Logname, "connected from %s", ep->rsys);
@@ -391,8 +391,8 @@ showmsg(int level, char *s, Buf *b)
 		dmessage(level, "%s; b == nil\n", s);
 		return;
 	}
-	dmessage(level, "%s;  (len %d) %X %X %X %X %X %X %X %X %X (%p)\n", s, 
-		b->hdr.nb, 
+	dmessage(level, "%s;  (len %d) %X %X %X %X %X %X %X %X %X (%p)\n", s,
+		b->hdr.nb,
 		b->buf[0], b->buf[1], b->buf[2],
 		b->buf[3], b->buf[4], b->buf[5],
 		b->buf[6], b->buf[7], b->buf[8], b);
@@ -404,7 +404,7 @@ writen(int fd, uchar *buf, int nb)
 	int n, len = nb;
 
 	while (nb > 0) {
-		if (fd < 0) 
+		if (fd < 0)
 			return -1;
 		if ((n = write(fd, buf, nb)) < 0) {
 			dmessage(1, "writen; Write failed; %r\n");
@@ -431,9 +431,9 @@ timerproc(void *x)
 static void
 dmessage(int level, char *fmt, ...)
 {
-	va_list arg; 
+	va_list arg;
 
-	if (level > debug) 
+	if (level > debug)
 		return;
 	va_start(arg, fmt);
 	vfprint(2, fmt, arg);

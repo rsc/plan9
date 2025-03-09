@@ -281,7 +281,7 @@ addtojar(Jar *jar, char *line, int ondisk)
 	Cookie c;
 	int i, j, nf, *pint;
 	char *f[20], *attr, *val, **pstr;
-	
+
 	memset(&c, 0, sizeof c);
 	c.expire = ~0;
 	c.ondisk = ondisk;
@@ -353,7 +353,7 @@ dumpjar(Jar *jar, char *desc)
 
 	print("%s\n", desc);
 	print("\tin memory:\n");
-	
+
 	for(i=0; i<jar->nc; i++)
 		print("\t%K%s%s%s\n", &jar->c[i],
 			jar->c[i].ondisk ? " ondisk" : "",
@@ -503,7 +503,7 @@ closejar(Jar *jar)
 		freecookie(&jar->c[i]);
 
 	free(jar->file);
-	free(jar);	
+	free(jar);
 }
 
 /*
@@ -564,7 +564,7 @@ iscookiematch(Cookie *c, char *dom, char *path, uint now)
 		&& (c->expire == 0 || c->expire >= now);
 }
 
-/* 
+/*
  * Produce a subjar of matching cookies.
  * Secure cookies are only included if secure is set.
  */
@@ -913,7 +913,7 @@ skipvalue(char *s, int isns)
 }
 
 /*
- * RMID=80b186bb64c03c65fab767f8; expires=Monday, 10-Feb-2003 04:44:39 GMT; 
+ * RMID=80b186bb64c03c65fab767f8; expires=Monday, 10-Feb-2003 04:44:39 GMT;
  *	path=/; domain=.nytimes.com
  */
 static char*
@@ -1010,7 +1010,7 @@ parsecookie(Cookie *c, char *p, char **e, int isns, char *dom, char *path)
 			*t = '\0';
 		if((t = strrchr(c->path, '/')) != 0)
 			*t = '\0';
-	}	
+	}
 	c->netscapestyle = isns;
 	*e = p;
 

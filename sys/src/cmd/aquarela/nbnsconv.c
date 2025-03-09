@@ -311,4 +311,3 @@ nbnsconvS2M(NbnsMessage *s, uchar *ap, int nap)
 	p += n;
 	return p - ap;
 }
-

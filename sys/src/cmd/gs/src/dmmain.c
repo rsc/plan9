@@ -1,12 +1,12 @@
 /* Copyright (C) 2003-2004 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -86,13 +86,13 @@ static int GSDLLCALL gsdll_poll(void *handle);
 static int display_open(void *handle, void *device);
 static int display_preclose(void *handle, void *device);
 static int display_close(void *handle, void *device);
-static int display_presize(void *handle, void *device, int width, int height, 
+static int display_presize(void *handle, void *device, int width, int height,
     int raster, unsigned int format);
-static int display_size(void *handle, void *device, int width, int height, 
+static int display_size(void *handle, void *device, int width, int height,
     int raster, unsigned int format, unsigned char *pimage);
 static int display_sync(void *handle, void *device);
 static int display_page(void *handle, void *device, int copies, int flush);
-static int display_update(void *handle, void *device, 
+static int display_update(void *handle, void *device,
     int x, int y, int w, int h);
 
 static size_t get_input(void *ptr, size_t size);
@@ -217,7 +217,7 @@ static int display_close(void *handle, void *device)
 
 /* Device is about to be resized. */
 /* Resize will only occur if this function returns 0. */
-static int display_presize(void *handle, void *device, int width, int height, 
+static int display_presize(void *handle, void *device, int width, int height,
     int raster, unsigned int format)
 {
     /* Check for correct format (32-bit RGB), fatal error if not */
@@ -230,10 +230,10 @@ static int display_presize(void *handle, void *device, int width, int height,
 
     return 0;
 }
-   
+
 /* Device has been resized. */
 /* New pointer to raster returned in pimage */
-static int display_size(void *handle, void *device, int width, int height, 
+static int display_size(void *handle, void *device, int width, int height,
     int raster, unsigned int format, unsigned char *pimage)
 {
     PixMapPtr pixmap;
@@ -275,7 +275,7 @@ static int display_size(void *handle, void *device, int width, int height,
     window_invalidate(img->windowRef);
     return gsdll_poll(handle);
 }
-   
+
 /* flushpage */
 static int display_sync(void *handle, void *device)
 {
@@ -298,7 +298,7 @@ static int display_page(void *handle, void *device, int copies, int flush)
 
 /* Poll the caller for cooperative multitasking. */
 /* If this function is NULL, polling is not needed */
-static int display_update(void *handle, void *device, 
+static int display_update(void *handle, void *device,
     int x, int y, int w, int h)
 {
     UInt64 t1;
@@ -334,7 +334,7 @@ static int display_update(void *handle, void *device,
     return gsdll_poll(handle);
 }
 
-display_callback display = { 
+display_callback display = {
     sizeof(display_callback),
     DISPLAY_VERSION_MAJOR,
     DISPLAY_VERSION_MINOR,
@@ -425,7 +425,7 @@ static size_t get_input(void *ptr, size_t size)
                 stdin_bufsize = charswaiting;
                 memcpy(stdin_buf, text, stdin_bufsize);
                 SIOUXselstart += charswaiting;
-                
+
                 text = stdin_buf;
                 while (text = memchr(text, '\r', charswaiting - (text - stdin_buf)))
                     *text = '\n';
@@ -669,13 +669,13 @@ void main(void)
     code = gsapi_init_with_args(instance, argc, argv);
     if (code == 0)
        code = gsapi_run_string(instance, start_string, 0, &exit_code);
-    else 
+    else
     {
        printf("Failed to initialize. Error %d.\n", code);
        fflush(stdout);
     }
     code = gsapi_exit(instance);
-    if (code != 0) 
+    if (code != 0)
     {
        printf("Failed to terminate. Error %d.\n", code);
        fflush(stdout);
@@ -713,7 +713,7 @@ void main(void)
 void doEvents(EventRecord *eventStrucPtr)
 {
     WindowRef      windowRef;
-  
+
     if (eventStrucPtr->what == mouseDown &&
         FindWindow(eventStrucPtr->where,&windowRef) == inMenuBar)
         SelectWindow(SIOUXTextWindow->window);
@@ -822,7 +822,7 @@ void doUpdate(EventRecord *eventStrucPtr)
     WindowRef windowRef;
 
     windowRef = (WindowRef) eventStrucPtr->message;
-  
+
     window_adjust_scrollbars(windowRef);
 
     BeginUpdate(windowRef);
@@ -841,7 +841,7 @@ void doUpdateWindow(EventRecord *eventStrucPtr)
     PixMapHandle srcPixmapHdl, destPixmapHdl;
     RGBColor     grayColour = { 0xC000,0xC000,0xC000 };
     SInt32  hScroll, vScroll;
-  
+
     windowRef = (WindowRef) eventStrucPtr->message;
     img = (IMAGE*)GetWRefCon(windowRef);
     srcPixmapHdl = img->pixmapHdl;
@@ -878,13 +878,13 @@ void doUpdateWindow(EventRecord *eventStrucPtr)
             destRect.bottom = pixmap->bounds.bottom;
         }
         DisposePixPat(hdlPixPat);
-    
+
         srcRect = destRect;
         srcRect.left += hScroll;
         srcRect.right += hScroll;
         srcRect.top += vScroll;
         srcRect.bottom += vScroll;
-    
+
         CopyBits((BitMap*)*srcPixmapHdl, (BitMap*)*destPixmapHdl,
                  &srcRect, &destRect, srcCopy, NULL);
     }
@@ -966,7 +966,7 @@ pascal void actionFunctionScroll(ControlRef controlRef,ControlPartCode controlPa
                 oldControlValue = controlValue;
                 controlMax = GetControl32BitMaximum(controlRef);
                 controlValue = oldControlValue - scrollDistance;
-  
+
                 if(controlValue < 0)
                     controlValue = 0;
                 else if(controlValue > controlMax)
@@ -999,4 +999,3 @@ OSErr quitAppEventHandler(AppleEvent *appEvent,AppleEvent *reply,SInt32 handlerR
 }
 
 /*********************************************************************/
-

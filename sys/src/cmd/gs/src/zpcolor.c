@@ -1,12 +1,12 @@
 /* Copyright (C) 1994, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -210,7 +210,7 @@ pattern_paint_prepare(i_ctx_t *i_ctx_p)
 
     check_estack(6);
     if (pgs->have_pattern_streams) {
-	code = dev_proc(cdev, pattern_manage)(cdev, pinst->id, pinst, 
+	code = dev_proc(cdev, pattern_manage)(cdev, pinst->id, pinst,
 				pattern_manage__can_accum);
 	if (code < 0)
 	    return code;
@@ -228,7 +228,7 @@ pattern_paint_prepare(i_ctx_t *i_ctx_p)
 	    return code;
 	}
     } else {
-	code = gx_pattern_cache_add_dummy_entry((gs_imager_state *)igs, 
+	code = gx_pattern_cache_add_dummy_entry((gs_imager_state *)igs,
 		    pinst, cdev->color_info.depth);
 	if (code < 0)
 	    return code;
@@ -259,7 +259,7 @@ pattern_paint_prepare(i_ctx_t *i_ctx_p)
 	    gs_grestore(pgs);
 	    return code;
 	}
-	code = dev_proc(cdev, pattern_manage)(cdev, pinst->id, pinst, 
+	code = dev_proc(cdev, pattern_manage)(cdev, pinst->id, pinst,
 				pattern_manage__start_accum);
 	if (code < 0) {
 	    gs_grestore(pgs);
@@ -307,7 +307,7 @@ pattern_paint_finish(i_ctx_t *i_ctx_p)
 private int
 pattern_paint_cleanup(i_ctx_t *i_ctx_p)
 {
-    gx_device_pattern_accum *const pdev = 
+    gx_device_pattern_accum *const pdev =
 	r_ptr(esp + 2, gx_device_pattern_accum);
     int code;
 
@@ -318,9 +318,9 @@ pattern_paint_cleanup(i_ctx_t *i_ctx_p)
     code = gs_grestore(igs);
     if (pdev == NULL) {
 	gx_device *cdev = gs_currentdevice_inline(igs);
-	int code1 = dev_proc(cdev, pattern_manage)(cdev, gx_no_bitmap_id, NULL, 
+	int code1 = dev_proc(cdev, pattern_manage)(cdev, gx_no_bitmap_id, NULL,
 				pattern_manage__finish_accum);
-	
+
 	if (code == 0 && code1 < 0)
 	    code = code1;
     }

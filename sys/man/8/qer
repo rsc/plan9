@@ -1,4 +1,4 @@
-.TH QER 8 
+.TH QER 8
 .SH NAME
 qer, runq \- queue management for spooled files
 .SH SYNOPSIS
@@ -134,7 +134,7 @@ a data file younger than one hour will not be processed if its
 error file exists and was last modified within the preceding 10 minutes.
 A data file older than one hour will not be processed if its error
 file exists and was last modified within the preceding hour.
-The 
+The
 .B -E
 flag causes all files to be reprocessed regardless of
 the file times.

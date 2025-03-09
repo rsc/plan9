@@ -7,7 +7,7 @@ enum {
 	Minchunk	= 128,
 	Maxchunk	= 8192,
 	Splitmask	= (1<<8)-1,
-	
+
 };
 
 static u32int geartab[] = {
@@ -81,7 +81,7 @@ addblk(Dtab *dt, void *buf, int len, int off, u64int h)
 			if(db[i].buf != nil)
 				addblk(dt, db[i].buf, db[i].len, db[i].off, db[i].hash);
 		free(db);
-	}		
+	}
 }
 
 static Dblock*
@@ -129,7 +129,7 @@ dtinit(Dtab *dt, Object *obj)
 	uchar *s, *e;
 	u64int h;
 	vlong n, o;
-	
+
 	o = 0;
 	s = (uchar*)obj->data;
 	e = s + obj->size;
@@ -198,7 +198,7 @@ deltify(Object *obj, Dtab *dt, int *pnd)
 	Dblock *b;
 	uchar *s, *e;
 	vlong n, o;
-	
+
 	o = 0;
 	d = nil;
 	s = (uchar*)obj->data;

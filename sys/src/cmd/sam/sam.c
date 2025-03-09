@@ -38,7 +38,7 @@ void main(int argc, char *argv[])
 	int i;
 	String *t;
 	char *termargs[10], **ap;
-	
+
 	ap = termargs;
 	*ap++ = "samterm";
 	ARGBEGIN{
@@ -66,7 +66,7 @@ void main(int argc, char *argv[])
 		break;
 	}ARGEND
 	*ap = nil;
-	
+
 	Strinit(&cmdstr);
 	Strinit0(&lastpat);
 	Strinit0(&lastregexp);

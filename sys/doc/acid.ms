@@ -12,7 +12,7 @@ philw@plan9.bell-labs.com
 Introduction
 .PP
 Acid is a general purpose, source level symbolic debugger.
-The debugger is built around a simple command language. 
+The debugger is built around a simple command language.
 The command language, distinct from the language of the program being debugged,
 provides a flexible user interface that allows the debugger
 interface to be customized for a specific application or architecture.
@@ -34,7 +34,7 @@ at the interactive prompt.
 .PP
 Acid allows the execution of a program to be controlled by operating on its
 state while it is stopped and by monitoring and controlling its execution
-when it is running. Each program action that causes a change 
+when it is running. Each program action that causes a change
 of execution state is reflected by the execution
 of an Acid function, which may be user defined.
 A library of default functions provides the functionality of a normal debugger.
@@ -145,10 +145,10 @@ routine is called to print the status of the program. The function
 .CW stk
 prints a C stack trace of the current process. It is implemented using
 a builtin Acid function that returns the stack trace as a list; the code
-that formats the information is all written in Acid. 
+that formats the information is all written in Acid.
 The Acid variable
 .CW PC
-holds the address of the 
+holds the address of the
 cell where the current value of the processor register
 .CW PC
 is stored. By indirecting through
@@ -208,7 +208,7 @@ are assigned the format code
 which specifies 32-bit hexadecimal.
 Printing a variable with this code yields the output
 .CW 0x00123456 .
-The format code of a variable may be changed from the default by using the 
+The format code of a variable may be changed from the default by using the
 builtin function
 .CW fmt .
 This function takes two arguments, an expression and a format code. After
@@ -224,7 +224,7 @@ in the variable. For example:
 .P1
 acid: x=10
 acid: print(x)
-0x0000000a 
+0x0000000a
 acid: x = fmt(x, 'D')
 acid: print(x, fmt(x, 'X'))
 10 0x0000000a
@@ -374,7 +374,7 @@ Each map contains one or more quadruples (\c
 .I f \|),
 defining a segment named
 .I t
-(usually 
+(usually
 .CW text ,
 .CW data ,
 .CW regs ,
@@ -414,7 +414,7 @@ is then
 .PP
 Usually,
 the text and initialized data of a program
-are mapped by segments called 
+are mapped by segments called
 .CW text
 and
 .CW data .
@@ -423,7 +423,7 @@ these data are
 not mapped by the data segment.
 The text segment is mapped similarly in the memory image of
 a normal (i.e., non-kernel) process.
-However, the segment called 
+However, the segment called
 .CW *data
 maps memory from the beginning to the end of the program's data space.
 This region contains the program's static data, the bss, the
@@ -467,7 +467,7 @@ Expressions
 .PP
 Operators have the same
 binding and precedence as in C.
-For operators of equal precedence, expressions are evaluated from left to right. 
+For operators of equal precedence, expressions are evaluated from left to right.
 .SH 1
 Boolean expressions
 .PP
@@ -550,12 +550,12 @@ evaluates to the rest.
 acid: head {}
 {}
 acid: head {1, 2, 3, 4}
-0x00000001 
+0x00000001
 acid: tail {1, 2, 3, 4}
 {0x00000002 , 0x00000003 , 0x00000004 }
 .P2
 The first operand of
-.CW append 
+.CW append
 and
 .CW delete
 must be an expression that yields a
@@ -570,7 +570,7 @@ supplied to
 .CW delete
 must evaluate to an integer;
 .CW delete
-removes the 
+removes the
 .I n 'th
 item from the list, where
 .I n
@@ -599,7 +599,7 @@ Operators
 		postfix-expression \f(CW[\fP expression \f(CW]\fP
 		postfix-expression \f(CW(\fP argument-list \f(CW)\fP
 		postfix-expression \f(CW.\fP tag
-		postfix-expression \f(CW->\fP tag 
+		postfix-expression \f(CW->\fP tag
 		postfix-expression \f(CW++\fP
 		postfix-expression \f(CW--\fP
 
@@ -626,7 +626,7 @@ it is assumed to be the base address of an array in the memory image.
 The index offsets into this array; the size of the array members is
 determined by the format associated with the
 .I postfix-expression .
-If the 
+If the
 .I postfix-expression
 yields a
 .I string
@@ -711,10 +711,10 @@ type.
 	cast-expression:
 		unary-expression
 		unary-expression \f(CW\e\fP format-char
-		\f(CW(\fP complex-name \f(CW)\fP unary-expression		
+		\f(CW(\fP complex-name \f(CW)\fP unary-expression
 .DE
 A unary expression may be preceded by a cast. The cast has the effect of
-associating the value of 
+associating the value of
 .I unary-expression
 with a complex type structure.
 The result may then be dereferenced using the
@@ -773,7 +773,7 @@ builtin function.
 .DE
 These operate on
 .I integer
-and 
+and
 .I float
 types and perform the expected operations:
 .CW *
@@ -790,7 +790,7 @@ modulus.
 .DE
 These operators perform as expected for
 .I integer
-and 
+and
 .I float
 operands.
 Unlike in C,
@@ -808,7 +808,7 @@ If both operands are of either
 .I string
 or
 .I list
-type then addition is defined as concatenation. 
+type then addition is defined as concatenation.
 Adding a string and an integer is treated as concatenation
 with the Unicode character corresponding to the integer.
 Subtraction is undefined for strings and lists.
@@ -914,7 +914,7 @@ the
 .CW then
 is executed, otherwise the statement after the
 .CW else
-is executed. The 
+is executed. The
 .CW else
 portion may be omitted.
 .DS
@@ -1031,7 +1031,7 @@ The notation
 .CW {}
 is used to denote the empty list, which is the default value of a function that
 does not execute a
-.CW return 
+.CW return
 statement.
 The type and number of parameters for each function are specified in the
 description; where a parameter can be of any type it is specified as type
@@ -1456,7 +1456,7 @@ program the string
 is returned.
 .Ex
 acid: print("Now at ", pcfile(*PC), ":", pcline(*PC))
-Now at ls.c:46 
+Now at ls.c:46
 .Ee
 .\"
 .\"
@@ -1488,7 +1488,7 @@ When the interpreter is executing, output is buffered and flushed every
 accepts a maximum of 512 arguments.
 .Ex
 acid: print(10, "decimal ", 10\eD, "octal ", 10\eo)
-0x0000000a decimal 10 octal 000000000012 
+0x0000000a decimal 10 octal 000000000012
 acid: print({1, 2, 3})
 {0x00000001 , 0x00000002 , 0x00000003 }
 acid: print(main, main\ea, "\et", @main\ei)
@@ -1572,7 +1572,7 @@ system call
 .CW regexp
 matches the
 .I pattern
-string supplied as its first argument with the 
+string supplied as its first argument with the
 .I string
 supplied as its second.
 If the pattern matches the result is the value 1, otherwise 0.
@@ -1586,7 +1586,7 @@ acid: print(regexp(".*bar", "foobar"))
 .Ip \f(CW{}\fP setproc integer "Set debugger focus
 .CW setproc
 selects the default process used for memory and control operations. It effectively
-shifts the focus of control between processes. The 
+shifts the focus of control between processes. The
 .I integer
 argument specifies the pid of the process to look at.
 The variable
@@ -1723,7 +1723,7 @@ The arguments to
 are the current value of the program counter, the current value of the
 stack pointer, and the address of the link register. All three parameters
 must be integers.
-The setting of 
+The setting of
 .I linkreg
 is architecture dependent. On the MIPS linkreg is set to the address of saved
 .CW R31 ,
@@ -1735,7 +1735,7 @@ is not used, but must point to valid memory.
 .Ex
 acid: print(strace(*PC, *SP, linkreg))
 {{0x0000141c, 0xc0000f74,
-{{"s", 0x0000004d}, {"multi", 0x00000000}}, 
+{{"s", 0x0000004d}, {"multi", 0x00000000}},
 {{"db", 0x00000000}, {"fd", 0x000010a4},
 {"n", 0x00000001}, {"i", 0x00009824}}}}
 .Ee
@@ -2026,9 +2026,9 @@ uses
 to fetch each object.
 .Ex
 acid: dump(main+35, 4, "X2bi")
-0x00001043: 0x0c8fa700 108 143 lwc2 r0,0x528f(R4) 
-0x0000104d: 0xa9006811   0   0 swc3 r0,0x0(R24) 
-0x00001057: 0x2724e800   4  37 ADD  $-0x51,R23,R31 
+0x00001043: 0x0c8fa700 108 143 lwc2 r0,0x528f(R4)
+0x0000104d: 0xa9006811   0   0 swc3 r0,0x0(R24)
+0x00001057: 0x2724e800   4  37 ADD  $-0x51,R23,R31
 0x00001061: 0xa200688d   6   0 NOOP
 0x0000106b: 0x2710c000   7   0 BREAK
 .Ee
@@ -2189,7 +2189,7 @@ The format string can be any combination of format characters, each preceded
 by an optional count.
 .Ex
 acid: mem(bdata+0x326, "2c2Xb")
-P = 0xa94bc464 0x3e5ae44d  19 
+P = 0xa94bc464 0x3e5ae44d  19
 .Ee
 .\"
 .\"
@@ -2228,7 +2228,7 @@ acid: next()
 60: breakpoint	Binit+0x4 MOVW	R31,0x0(R29)
 60: breakpoint	Binit+0x8 MOVW	f+8(FP),R4
 binit.c:93
- 88	
+ 88
  89	int
  90	Binit(Biobuf *bp, int f, int mode)
  91	{
@@ -2397,15 +2397,15 @@ to locate the required source files.
 acid: src(*PC)
 ls.c:47
  42	Biobuf	bin;
- 43	
+ 43
  44	#define		HUNK	50
- 45	
+ 45
  46	void
 >47	main(int argc, char *argv[])
  48	{
  49		int i, fd;
  50		char buf[64];
- 51	
+ 51
  52		Binit(&bin, 1, OWRITE);
 .Ee
 .\"

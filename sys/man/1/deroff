@@ -1,4 +1,4 @@
-.TH DEROFF 1 
+.TH DEROFF 1
 .SH NAME
 deroff, delatex \- remove formatting requests
 .SH SYNOPSIS
@@ -64,7 +64,7 @@ requests.
 .PD0
 .TP
 .B -mm
-Remove titles, attachments, etc., as well as ordinary 
+Remove titles, attachments, etc., as well as ordinary
 .IR troff
 constructs, from
 .IR ms (6)
@@ -95,7 +95,7 @@ files.
 .br
 .B /sys/src/cmd/tex/local/delatex.c
 .SH "SEE ALSO"
-.IR troff (1), 
+.IR troff (1),
 .IR tex (1),
 .IR spell (1)
 .SH BUGS
@@ -111,7 +111,7 @@ when the popular
 .L $$
 delimiters for
 .I eqn
-are in effect. 
+are in effect.
 .PP
 Text inside macros is emitted at place of
 definition, not place of call.

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -23,8 +23,8 @@
    try my very best, but i have some work to do.
 
    Ludger Kunz           |    ____________|Tel.: 02371/566-230
-   FernUniversitaet Hagen|   /| /   / \   |FAX:  02371/52212           
-   Lehrgebiet ES         |  / |/   /_  \  |EMAIL:                      
+   FernUniversitaet Hagen|   /| /   / \   |FAX:  02371/52212
+   Lehrgebiet ES         |  / |/   /_  \  |EMAIL:
    Frauenstuhlweg 31     | /  |\  /     \ |ludger.kunz@fernuni-hagen.de
    58644 Iserlohn        |/___|_\/_______\|
  */

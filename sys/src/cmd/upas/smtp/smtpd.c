@@ -1748,4 +1748,3 @@ bomb_out:
 	if (s_resp2_64)
 		s_free(s_resp2_64);
 }
-

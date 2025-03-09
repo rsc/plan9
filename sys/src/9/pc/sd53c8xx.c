@@ -378,7 +378,7 @@ oprint(char *format, ...)
 		debuglast = debugbuf;
 	debuglast = vseprint(debuglast, debugbuf + (DEBUGSIZE - 1), format, (&format + 1));
 	splx(s);
-	iflush();	
+	iflush();
 }
 #endif
 
@@ -390,11 +390,11 @@ oprint(char *format, ...)
  * is really a 0, and then it tries to reference the Dsa at address 0.
  * To address this, we use a sentinel dsa that links back to itself
  * and has state A_STATE_END.  If the card takes an iteration or
- * two to notice that the state says A_STATE_END, that's no big 
+ * two to notice that the state says A_STATE_END, that's no big
  * deal.  Clearly this isn't the right approach, but I'm just
  * stumped.  Even with this, we occasionally get prints about
  * "WSR set", usually with about the same frequency that the
- * card used to walk past 0. 
+ * card used to walk past 0.
  */
 static Dsa *dsaend;
 
@@ -402,7 +402,7 @@ static Dsa*
 dsaallocnew(Controller *c)
 {
 	Dsa *d;
-	
+
 	/* c->dsalist must be ilocked */
 	d = xalloc(sizeof *d);
 	if (d == nil)
@@ -424,7 +424,7 @@ dsaalloc(Controller *c, int target, int lun)
 	if ((d = c->dsalist.freechain) != 0) {
 		if (DEBUG(1))
 			IPRINT(PRINTPREFIX "%d/%d: reused dsa %lux\n", target, lun, (ulong)d);
-	} else {	
+	} else {
 		d = dsaallocnew(c);
 		if (DEBUG(1))
 			IPRINT(PRINTPREFIX "%d/%d: allocated dsa %lux\n", target, lun, (ulong)d);
@@ -452,7 +452,7 @@ dsadump(Controller *c)
 {
 	Dsa *d;
 	u32int *a;
-	
+
 	iprint("dsa controller list: c=%p head=%.8lux\n", c, legetl(c->dsalist.head));
 	for(d=KPTR(legetl(c->dsalist.head)); d != dsaend; d=KPTR(legetl(d->next))){
 		if(d == (void*)-1){
@@ -474,7 +474,7 @@ dsadump(Controller *c)
 	a = KPTR(c->scriptpa+E_issue_test_begin);
 	e = KPTR(c->scriptpa+E_issue_test_end);
 	iprint("issue_test code (at offset %.8ux):\n", E_issue_test_begin);
-	
+
 	i = 0;
 	for(; a<e; a++){
 		iprint(" %.8ux", *a);
@@ -538,7 +538,7 @@ dumpncrregs(Controller *c, int intr)
 			KPRINT("\n");
 		}
 	}
-}	
+}
 
 static int
 chooserate(Controller *c, int tpf, int *scfp, int *xferpp)
@@ -1241,7 +1241,7 @@ sd53c8xxinterrupt(Ureg *ur, void *a)
 	else{
 		dsa = nil;
 		/*
-		 * happens at startup on some cards but we 
+		 * happens at startup on some cards but we
 		 * don't actually deref dsa because none of the
 		 * flags we are about are set.
 		 * still, print in case that changes and we're
@@ -1276,7 +1276,7 @@ sd53c8xxinterrupt(Ureg *ur, void *a)
 				/*
 				 * though this is a failure in the residue, there may have been blocks
 				 * as well. if so, dmablks will not have been zeroed, since the state
-				 * was not saved by the microcode. 
+				 * was not saved by the microcode.
 				 */
 				dbc = read_mismatch_recover(c, n, dsa);
 				tbc = legetl(dsa->data_buf.dbc) - dbc;
@@ -1350,7 +1350,7 @@ sd53c8xxinterrupt(Ureg *ur, void *a)
 				 * 2. It's not SCSI-II compliant. The new phase will be other
 				 *    than message_in. We should also indicate that the device
 				 *    is asynchronous, if it's the SDTR that got ignored
-				 * 
+				 *
 				 * For now, if the phase switch is not to message_in, and
 				 * and it happens after IDENTIFY and before SDTR, we
 				 * notify the negotiation state machine.
@@ -1581,7 +1581,7 @@ sd53c8xxinterrupt(Ureg *ur, void *a)
 		/*else*/ if (dstat & Iid) {
 			int i, target, lun;
 			ulong addr, dbc, *v;
-			
+
 			addr = legetl(n->dsp);
 			if(dsa){
 				target = dsa->target;
@@ -1602,7 +1602,7 @@ sd53c8xxinterrupt(Ureg *ur, void *a)
 			addr &= ~63;
 			v = (ulong*)addr;
 			for(i=0; i<8; i++){
-				IPRINT("%.8lux: %.8lux %.8lux %.8lux %.8lux\n", 
+				IPRINT("%.8lux: %.8lux %.8lux %.8lux %.8lux\n",
 					addr, v[0], v[1], v[2], v[3]);
 				addr += 4*4;
 				v += 4;
@@ -1834,7 +1834,7 @@ docheck:
 			dumpwritedata(r->data, r->dlen);
 	}
 
-	setmovedata(&d->status_buf, DMASEG(&d->status), 1);	
+	setmovedata(&d->status_buf, DMASEG(&d->status), 1);
 
 	d->p9status = SDnostatus;
 	d->parityerror = 0;
@@ -2212,7 +2212,7 @@ buggery:
 		else
 			sdev->nunit = MAXTARGET;
 		ctlr->sdev = sdev;
-		
+
 		if(head != nil)
 			tail->next = sdev;
 		else

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -187,7 +187,7 @@ init_gradient(trap_gradient *g, const gs_fill_attributes *fa,
 	}
 	for (i = 0; i < num_components; i++) {
 	    g->num[i] = e->c1[i] - e->c0[i];
-	    c = (int64_t)g->num[i] * (uint32_t)(ybot - 
+	    c = (int64_t)g->num[i] * (uint32_t)(ybot -
 		    (ends_from_fa ? fa->ystart : e->start.y));
 	    d = (int32_t)(c / g->den);
 	    g->c[i] = e->c0[i] + d;
@@ -230,7 +230,7 @@ check_gradient_overflow(const gs_linear_color_edge *le, const gs_linear_color_ed
 	/* A wedge doesn't use a gradient by X. */
 	return false;
     } else {
-	/* Check whether set_x_gradient, fill_linear_color_scanline can overflow. 
+	/* Check whether set_x_gradient, fill_linear_color_scanline can overflow.
 
 	   dev_proc(dev, fill_linear_color_scanline) can perform its computation in 32-bit fractions,
 	   so we assume it never overflows. Devices which implement it with no this
@@ -250,10 +250,10 @@ check_gradient_overflow(const gs_linear_color_edge *le, const gs_linear_color_ed
 
 
 private inline int
-set_x_gradient_nowedge(trap_gradient *xg, const trap_gradient *lg, const trap_gradient *rg, 
+set_x_gradient_nowedge(trap_gradient *xg, const trap_gradient *lg, const trap_gradient *rg,
 	     const trap_line *l, const trap_line *r, int il, int ir, int num_components)
 {
-    /* Ignoring the ending coordinats fractions, 
+    /* Ignoring the ending coordinats fractions,
        so the gridient is slightly shifted to the left (in <1 'fixed' unit). */
     int32_t xl = l->x - (l->xf == -l->h ? 1 : 0) - fixed_half; /* Revert the GX_FILL_TRAPEZOID shift. */
     int32_t xr = r->x - (r->xf == -r->h ? 1 : 0) - fixed_half; /* Revert the GX_FILL_TRAPEZOID shift. */
@@ -268,10 +268,10 @@ set_x_gradient_nowedge(trap_gradient *xg, const trap_gradient *lg, const trap_gr
 #   endif
     xg->den = fixed2int(x1 - x0);
     for (i = 0; i < num_components; i++) {
-	/* Ignoring the ending colors fractions, 
+	/* Ignoring the ending colors fractions,
 	   so the color gets a slightly smaller value
-	   (in <1 'frac31' unit), but it's not important due to 
-	   the further conversion to [0, 1 << cinfo->comp_bits[j]], 
+	   (in <1 'frac31' unit), but it's not important due to
+	   the further conversion to [0, 1 << cinfo->comp_bits[j]],
 	   which drops the fraction anyway. */
 	int32_t cl = lg->c[i];
 	int32_t cr = rg->c[i];
@@ -279,11 +279,11 @@ set_x_gradient_nowedge(trap_gradient *xg, const trap_gradient *lg, const trap_gr
 	int32_t c1 = (int32_t)(cl + ((int64_t)cr - cl) * (x1 - xl) / (xr - xl));
 
 	xg->c[i] = c0;
-	xg->f[i] = 0; /* Insufficient bits to compute it better. 
+	xg->f[i] = 0; /* Insufficient bits to compute it better.
 	                 The color so the color gets a slightly smaller value
-			 (in <1 'frac31' unit), but it's not important due to 
-			 the further conversion to [0, 1 << cinfo->comp_bits[j]], 
-			 which drops the fraction anyway. 
+			 (in <1 'frac31' unit), but it's not important due to
+			 the further conversion to [0, 1 << cinfo->comp_bits[j]],
+			 which drops the fraction anyway.
 			 So setting 0 appears pretty good and fast. */
 	xg->num[i] = c1 - c0;
     }
@@ -291,7 +291,7 @@ set_x_gradient_nowedge(trap_gradient *xg, const trap_gradient *lg, const trap_gr
 }
 
 private inline int
-set_x_gradient(trap_gradient *xg, const trap_gradient *lg, const trap_gradient *rg, 
+set_x_gradient(trap_gradient *xg, const trap_gradient *lg, const trap_gradient *rg,
 	     const trap_line *l, const trap_line *r, int il, int ir, int num_components)
 {
     if (lg->den == 0 || rg->den == 0) {
@@ -325,7 +325,7 @@ set_x_gradient(trap_gradient *xg, const trap_gradient *lg, const trap_gradient *
 #define FILL_DIRECT 1
 #include "gxdtfill.h"
 #undef GX_FILL_TRAPEZOID
-#undef CONTIGUOUS_FILL 
+#undef CONTIGUOUS_FILL
 #undef SWAP_AXES
 #undef FILL_DIRECT
 
@@ -335,7 +335,7 @@ set_x_gradient(trap_gradient *xg, const trap_gradient *lg, const trap_gradient *
 #define FILL_DIRECT 0
 #include "gxdtfill.h"
 #undef GX_FILL_TRAPEZOID
-#undef CONTIGUOUS_FILL 
+#undef CONTIGUOUS_FILL
 #undef SWAP_AXES
 #undef FILL_DIRECT
 
@@ -345,7 +345,7 @@ set_x_gradient(trap_gradient *xg, const trap_gradient *lg, const trap_gradient *
 #define FILL_DIRECT 1
 #include "gxdtfill.h"
 #undef GX_FILL_TRAPEZOID
-#undef CONTIGUOUS_FILL 
+#undef CONTIGUOUS_FILL
 #undef SWAP_AXES
 #undef FILL_DIRECT
 
@@ -355,7 +355,7 @@ set_x_gradient(trap_gradient *xg, const trap_gradient *lg, const trap_gradient *
 #define FILL_DIRECT 0
 #include "gxdtfill.h"
 #undef GX_FILL_TRAPEZOID
-#undef CONTIGUOUS_FILL 
+#undef CONTIGUOUS_FILL
 #undef SWAP_AXES
 #undef FILL_DIRECT
 
@@ -365,7 +365,7 @@ set_x_gradient(trap_gradient *xg, const trap_gradient *lg, const trap_gradient *
 #define FILL_DIRECT 1
 #include "gxdtfill.h"
 #undef GX_FILL_TRAPEZOID
-#undef CONTIGUOUS_FILL 
+#undef CONTIGUOUS_FILL
 #undef SWAP_AXES
 #undef FILL_DIRECT
 
@@ -375,7 +375,7 @@ set_x_gradient(trap_gradient *xg, const trap_gradient *lg, const trap_gradient *
 #define FILL_DIRECT 0
 #include "gxdtfill.h"
 #undef GX_FILL_TRAPEZOID
-#undef CONTIGUOUS_FILL 
+#undef CONTIGUOUS_FILL
 #undef SWAP_AXES
 #undef FILL_DIRECT
 
@@ -393,7 +393,7 @@ set_x_gradient(trap_gradient *xg, const trap_gradient *lg, const trap_gradient *
 #define FILL_DIRECT 1
 #include "gxdtfill.h"
 #undef GX_FILL_TRAPEZOID
-#undef CONTIGUOUS_FILL 
+#undef CONTIGUOUS_FILL
 #undef SWAP_AXES
 #undef FILL_DIRECT
 
@@ -403,7 +403,7 @@ set_x_gradient(trap_gradient *xg, const trap_gradient *lg, const trap_gradient *
 #define FILL_DIRECT 1
 #include "gxdtfill.h"
 #undef GX_FILL_TRAPEZOID
-#undef CONTIGUOUS_FILL 
+#undef CONTIGUOUS_FILL
 #undef SWAP_AXES
 #undef FILL_DIRECT
 
@@ -420,12 +420,12 @@ gx_default_fill_trapezoid(gx_device * dev, const gs_fixed_edge * left,
     bool fill_direct = color_writes_pure(pdevc, lop);
 
     if (swap_axes) {
-	if (fill_direct)	
+	if (fill_direct)
 	    return gx_fill_trapezoid_as_fd(dev, left, right, ybot, ytop, 0, pdevc, lop);
 	else
 	    return gx_fill_trapezoid_as_nd(dev, left, right, ybot, ytop, 0, pdevc, lop);
     } else {
-	if (fill_direct)	
+	if (fill_direct)
 	    return gx_fill_trapezoid_ns_fd(dev, left, right, ybot, ytop, 0, pdevc, lop);
 	else
 	    return gx_fill_trapezoid_ns_nd(dev, left, right, ybot, ytop, 0, pdevc, lop);
@@ -450,7 +450,7 @@ fill_linear_color_trapezoid_nocheck(gx_device *dev, const gs_fill_attributes *fa
     fixed y13 = min(le->end.y, re->end.y), ymax = min(y13, fa->clip->q.y);
     int code;
 
-    code = (fa->swap_axes ? gx_fill_trapezoid_as_lc : gx_fill_trapezoid_ns_lc)(dev, 
+    code = (fa->swap_axes ? gx_fill_trapezoid_as_lc : gx_fill_trapezoid_ns_lc)(dev,
 	    le, re, ymin, ymax, 0, NULL, fa);
     if (code < 0)
 	return code;
@@ -465,15 +465,15 @@ fill_linear_color_trapezoid_nocheck(gx_device *dev, const gs_fill_attributes *fa
 
     This implemetation actually handles a bilinear color,
     in which the generatrix keeps a parallelizm to the X axis.
-    In general a bilinear function doesn't keep the generatrix parallelizm, 
+    In general a bilinear function doesn't keep the generatrix parallelizm,
     so the caller must decompose/approximate such functions.
 
-    Return values : 
+    Return values :
     1 - success;
     0 - Too big. The area isn't filled. The client must decompose the area.
     <0 - error.
  */
-int 
+int
 gx_default_fill_linear_color_trapezoid(gx_device *dev, const gs_fill_attributes *fa,
 	const gs_fixed_point *p0, const gs_fixed_point *p1,
 	const gs_fixed_point *p2, const gs_fixed_point *p3,
@@ -498,7 +498,7 @@ gx_default_fill_linear_color_trapezoid(gx_device *dev, const gs_fill_attributes 
     return fill_linear_color_trapezoid_nocheck(dev, fa, &le, &re);
 }
 
-private inline int 
+private inline int
 fill_linear_color_triangle(gx_device *dev, const gs_fill_attributes *fa,
 	const gs_fixed_point *p0, const gs_fixed_point *p1,
 	const gs_fixed_point *p2,
@@ -554,7 +554,7 @@ fill_linear_color_triangle(gx_device *dev, const gs_fill_attributes *fa,
 }
 
 /*  Fill a triangle with a linear color. */
-int 
+int
 gx_default_fill_linear_color_triangle(gx_device *dev, const gs_fill_attributes *fa,
 	const gs_fixed_point *p0, const gs_fixed_point *p1,
 	const gs_fixed_point *p2,
@@ -562,12 +562,12 @@ gx_default_fill_linear_color_triangle(gx_device *dev, const gs_fill_attributes *
 {
     fixed dx1 = p1->x - p0->x, dy1 = p1->y - p0->y;
     fixed dx2 = p2->x - p0->x, dy2 = p2->y - p0->y;
-    
+
     if ((int64_t)dx1 * dy2 < (int64_t)dx2 * dy1) {
 	const gs_fixed_point *p = p1;
 	const frac31 *c = c1;
-	
-	p1 = p2; 
+
+	p1 = p2;
 	p2 = p;
 	c1 = c2;
 	c2 = c;
@@ -827,7 +827,7 @@ gx_default_draw_line(gx_device * dev,
 /* GC structures for image enumerator */
 public_st_gx_image_enum_common();
 
-private 
+private
 ENUM_PTRS_WITH(image_enum_common_enum_ptrs, gx_image_enum_common_t *eptr)
     return 0;
 case 0: return ENUM_OBJ(gx_device_enum_ptr(eptr->dev));

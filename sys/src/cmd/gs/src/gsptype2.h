@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -91,8 +91,8 @@ void gs_pattern2_init(gs_pattern2_template_t *);
 bool gx_dc_is_pattern2_color(const gx_device_color *pdevc);
 
 /* Fill path or rect, and with a PatternType 2 color. */
-int gx_dc_pattern2_fill_path(const gx_device_color * pdevc, 
-			      gx_path * ppath, gs_fixed_rect * rect, 
+int gx_dc_pattern2_fill_path(const gx_device_color * pdevc,
+			      gx_path * ppath, gs_fixed_rect * rect,
 			      gx_device * dev);
 
 /* Set the 'shfill' flag to a PatternType 2 pattern instance. */

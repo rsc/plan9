@@ -126,7 +126,7 @@ x86wdenable(void)
 		wrmsr(0xC2, 0);
 
 		lapicnmienable();
-	
+
 		evntsel = 0x00130000|0x79;
 		wrmsr(0xC1, -t);
 		wrmsr(0x186, 0x00400000|evntsel);
@@ -135,12 +135,12 @@ x86wdenable(void)
 		rdmsr(0x1A0, &r);
 		if(!(r & 0x0000000000000080LL))
 			return;
-	
+
 		for(i = 0; i < 18; i++)
 			wrmsr(0x300+i, 0);		/* perfctr */
 		for(i = 0; i < 18; i++)
 			wrmsr(0x360+i, 0);		/* ccr */
-	
+
 		for(i = 0; i < 31; i++)
 			wrmsr(0x3A0+i, 0);		/* escr */
 		for(i = 0; i < 6; i++)
@@ -149,14 +149,14 @@ x86wdenable(void)
 			wrmsr(0x3C8+i, 0);		/* escr */
 		for(i = 0; i < 2; i++)
 			wrmsr(0x3E0+i, 0);		/* escr */
-	
+
 		if(!(r & 0x0000000000001000LL)){
 			for(i = 0; i < 2; i++)
 				wrmsr(0x3F1+i, 0);	/* pebs */
 		}
-	
+
 		lapicnmienable();
-	
+
 		wrmsr(0x3B8, 0x000000007E00000CLL);	/* escr0 */
 		r = 0x0000000004FF8000ULL;
 		wrmsr(0x36C, r);			/* cccr0 */
@@ -170,9 +170,9 @@ x86wdenable(void)
 		 */
 		for(i = 0; i < 8; i++)
 			wrmsr(0xC0010000+i, 0);
-	
+
 		lapicnmienable();
-	
+
 		evntsel = 0x00130000|0x76;
 		wrmsr(0xC0010004, -t);
 		wrmsr(0xC0010000, 0x00400000|evntsel);

@@ -5,4 +5,3 @@
 TEXT	getcallerpc(SB), $0
 	MOV	0(SP), RARG
 	RET
-

@@ -8,4 +8,3 @@ and listed in a special map file (which can be selected using the
 -m option). See example.map and comments in download.c for examples
 of map files. By default map files and font files are in *hostfontdir.
 It's initialized using HOSTDIR (file ../common/path.h).
-

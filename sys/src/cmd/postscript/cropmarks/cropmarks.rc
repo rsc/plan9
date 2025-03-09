@@ -10,7 +10,7 @@
 #
 # What's here was written quickly and will likely be very different
 # in our next release. It should be part of a more general program!!
-# 
+#
 
 POSTLIB=/sys/lib/postscript/prologues
 PROLOGUE=$POSTLIB/cropmarks.ps

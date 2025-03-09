@@ -1,12 +1,12 @@
 #    Copyright (C) 1997, 2001 artofcode LLC.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -219,7 +219,7 @@ CCLD=$(CC)
 GCFLAGS=-Wall -Wstrict-prototypes -Wmissing-declarations -Wmissing-prototypes \
 	-fno-builtin -fno-common -DHAVE_STDINT_H
 
-# Define the added flags for standard, debugging, profiling 
+# Define the added flags for standard, debugging, profiling
 # and shared object builds.
 
 CFLAGS_STANDARD=
@@ -358,7 +358,7 @@ FILE_IMPLEMENTATION=stdio
 
 STDIO_IMPLEMENTATION=c
 
-# Override the default device.  This is set to 'display' by 
+# Override the default device.  This is set to 'display' by
 # unix-dll.mak when building a shared object.
 DISPLAY_DEV=
 
@@ -441,4 +441,3 @@ include $(GLSRCDIR)/unixlink.mak
 include $(GLSRCDIR)/macos-fw.mak
 include $(GLSRCDIR)/unix-end.mak
 include $(GLSRCDIR)/unixinst.mak
-

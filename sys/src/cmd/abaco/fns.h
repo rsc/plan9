@@ -82,4 +82,3 @@ Window* makenewwindow(Page *);
 Line* linewhich(Lay *, Point);
 Box* pttobox(Line *, Point);
 Box* boxwhich(Lay *, Point);
-

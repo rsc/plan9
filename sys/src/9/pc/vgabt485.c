@@ -112,7 +112,7 @@ bt485disable(VGAscr*)
 	uchar r;
 
 	/*
-	 * Disable 
+	 * Disable
 	 *	cursor mode 3;
 	 *	cursor control enable for Bt485 DAC;
 	 *	the hardware cursor external operation mode.

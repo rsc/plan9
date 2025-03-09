@@ -12,8 +12,8 @@
 #include "/sys/src/9/kw/arm.h"
 #include "mmu.h"
 
-/* 
- *	Read, paying special atention to anything called 
+/*
+ *	Read, paying special atention to anything called
  *	embedded-ice/debug of the arm core, normally
  *	there is a chapter called Debug or Debugging and some
  *	details sprinkled around.
@@ -29,7 +29,7 @@
 
 
 /*
- *	BUG: print pack and unpack could be generated automatically 
+ *	BUG: print pack and unpack could be generated automatically
  *	except for the wild endianness of the instr. Minilanguage?
  */
 
@@ -39,7 +39,7 @@ printech1(EiceChain1 *ec1, char *s, int ssz)
 	char *e, *te;
 
 	te = s + ssz -1;
-	
+
 	e = seprint(s, te, "rwdata: %#8.8ux\n", ec1->rwdata);
 	e = seprint(e, te, "wptandbkpt: %1.1d\n", ec1->wptandbkpt);
 	e = seprint(e, te, "sysspeed: %1.1d\n", ec1->sysspeed);
@@ -61,7 +61,7 @@ packech1(Chain *ch, EiceChain1 *ec1)
 	putbits(ch, &lec.rwdata, RWDataSz);
 	putbits(ch, &unused, 1);
 	putbits(ch, &lec.wptandbkpt, WpTanDBKptSz);
-	
+
 	putbits(ch, &ec1->sysspeed, SysSpeedSz);
 	putbits(ch, &lec.instr, InstrSz);
 
@@ -95,7 +95,7 @@ printech2(EiceChain2 *ec2, char *s, int ssz)
 	char *e, *te;
 
 	te = s + ssz -1;
-	
+
 	e = seprint(s, te, "data: %#8.8ux\n", ec2->data);
 	e = seprint(e, te, "addr: %#2.2ux\n", ec2->addr);
 	e = seprint(e, te, "rw: %1.1d\n", ec2->rw);
@@ -121,7 +121,7 @@ packech2(Chain *ch, EiceChain2 *ec2)
 		return -1;
 
 	hleputl(&lec.data, ec2->data);
-	
+
 	putbits(ch, &lec.data, DataSz);
 	putbits(ch, &ec2->addr, AddrSz);
 	putbits(ch, &ec2->rw, RWSz);
@@ -151,7 +151,7 @@ printwp(EiceWp *wp, char *s, int ssz)
 	char *e, *te;
 
 	te = s + ssz -1;
-	
+
 	e = seprint(s, te, "addrval: %#8.8ux\n", wp->addrval);
 	e = seprint(e, te, "addmsk: %#8.8ux\n", wp->addrmsk);
 	e = seprint(e, te, "dataval: %#8.8ux\n", wp->dataval);
@@ -168,7 +168,7 @@ printregs(EiceRegs *regs, char *s, int ssz)
 	char *e, *te, i;
 
 	te = s + ssz -1;
-	
+
 	e = seprint(s, te, "debug: %#2.2ux\n", regs->debug);
 	e = seprint(e, te, "debsts: %#2.2ux\n", regs->debsts);
 	e = seprint(e, te, "veccat: %#2.2ux\n", regs->veccat);
@@ -393,7 +393,7 @@ armgetexec(JMedium *jmed, int nregs, u32int *regs, u32int inst)
 	replies = mallocz(nregs*sizeof(ShiftRDesc), 1);
 	if(replies == nil)
 		sysfatal("read, no mem %r");
-	buf = mallocz(EiceCh1Len+ShiftMarg, 1);	
+	buf = mallocz(EiceCh1Len+ShiftMarg, 1);
 	if(buf == nil)
 		sysfatal("read, no mem %r");
 	armgofetch(jmed, inst, 0);
@@ -418,7 +418,7 @@ armgetexec(JMedium *jmed, int nregs, u32int *regs, u32int inst)
 			return -1;
 		regs[i] = *(u32int *)buf;
 		dprint(Darm, "Read [%d]: %#8.8ux\n", i, regs[i]);
-	}	
+	}
 	armgofetch(jmed, ARMNOP, 0);
 	/* INST in writeback stage */
 	armgofetch(jmed, ARMNOP, 0);
@@ -571,7 +571,7 @@ armsavectxt(JMedium *jmed, ArmCtxt *ctxt)
 	res = setchain(jmed, 0, 1);
 	if(res < 0)
 		goto Error;
-	
+
 	res = armgetregs(jmed, 0xffff, ctxt->r);
 	if(res < 0)
 		goto Error;
@@ -841,11 +841,11 @@ icewaitentry(JMedium *jmed, ArmCtxt *ctxt)
 	res = icewaitdebug(jmed);
 	if(res < 0)
 		return -1;
-	
+
 	res = setchain(jmed, ChNoCommit, 1);
 	if(res < 0)
 		return -1;
-	
+
 	/*	BUG: should change to Arm from Thumb or Jazelle, adjust, keep PC.
 	 *	If I ever come down to doing this, Remember to repeat Thumb inst
 	 *	to be endian independant...

@@ -22,7 +22,7 @@ struct	Fcall
 	char	*aname;		/* Tattach, Tauth */
 
 
-	u32int	perm;		/* Tcreate */ 
+	u32int	perm;		/* Tcreate */
 	char	*name;		/* Tcreate */
 	uchar	mode;		/* Tcreate, Topen */
 

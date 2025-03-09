@@ -21,9 +21,9 @@ records a null terminated string describing the error in a per-process buffer.
 swaps the contents of that buffer with the contents of the array
 .IR err .
 .I Errstr
-will write at most 
+will write at most
 .I nerr
-bytes into 
+bytes into
 .IR err ;
 if the per-process error string does not fit,
 it is silently truncated at a UTF character boundary.
@@ -38,7 +38,7 @@ libraries to set the return value for the next call to
 The per-process buffer is
 .B ERRMAX
 bytes long.  Any error string provided by the user will
-be truncated at 
+be truncated at
 .B ERRMAX-1
 bytes.
 .B ERRMAX

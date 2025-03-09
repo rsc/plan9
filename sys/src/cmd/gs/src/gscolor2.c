@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -185,7 +185,7 @@ indexed_table_size(const gs_color_space *pcs)
 			  &pcs->params.indexed.base_space);
 
 }
-private 
+private
 ENUM_PTRS_WITH(cs_Indexed_enum_ptrs, gs_color_space *pcs)
 {
     return ENUM_USING(*pcs->params.indexed.base_space.type->stype,
@@ -501,7 +501,7 @@ gs_cspace_indexed_lookup(const gs_indexed_params *pip, int index,
 
 /* ---------------- Serialization. -------------------------------- */
 
-private int 
+private int
 gx_serialize_Indexed(const gs_color_space * pcs, stream * s)
 {
     const gs_indexed_params * p = &pcs->params.indexed;
@@ -520,14 +520,14 @@ gx_serialize_Indexed(const gs_color_space * pcs, stream * s)
     if (code < 0)
 	return code;
     if (p->use_proc) {
-	code = sputs(s, (const byte *)&p->lookup.map->num_values, 
+	code = sputs(s, (const byte *)&p->lookup.map->num_values,
 		sizeof(p->lookup.map->num_values), &n);
 	if (code < 0)
 	    return code;
-	code = sputs(s, (const byte *)&p->lookup.map->values[0], 
+	code = sputs(s, (const byte *)&p->lookup.map->values[0],
 		sizeof(p->lookup.map->values[0]) * p->lookup.map->num_values, &n);
     } else {
-	code = sputs(s, (const byte *)&p->lookup.table.size, 
+	code = sputs(s, (const byte *)&p->lookup.table.size,
 			sizeof(p->lookup.table.size), &n);
 	if (code < 0)
 	    return code;
@@ -544,7 +544,7 @@ gx_serialize_Indexed(const gs_color_space * pcs, stream * s)
  * The primary reason is to include DefaultGray, DefaultRGB, DefaultCMYK into PDF.
  * Should be called for each page that requires the resource.
  * Redundant calls per page with same cspace id are allowed.
- * Redundant calls per page with different cspace id are are allowed but 
+ * Redundant calls per page with different cspace id are are allowed but
  * highly undesirable.
  * No need to call it with color spaces explicitly referred by the document,
  * because they are included automatically.

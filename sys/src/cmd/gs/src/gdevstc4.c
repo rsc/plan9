@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -19,13 +19,13 @@
 
 /***
      This file holds a byte-Implementation of the Floyd-Steinberg error
-     diffusion-algorithm. This algorithm is an alternative for high quality 
+     diffusion-algorithm. This algorithm is an alternative for high quality
      printing in conjunction with the PostScript-Header stcolor.ps:
 
           gs -sDEVICE=stcolor -sDithering=fs2 <other options> stcolor.ps ...
 
      THIS ALGORIHM WAS WRITTEN BY STEVEN SINGER (S.Singer@ph.surrey.ac.uk)
-     AS PART OF escp2cfs2. 
+     AS PART OF escp2cfs2.
      THIS IMPLEMENTATION INCORPORATES ONLY FEW CHANGES TO THE ORIGINAL CODE.
 
  ***/
@@ -33,7 +33,7 @@
 #include "gdevstc.h"
 
 /*
- * escp2c_pick best scans for best matching color 
+ * escp2c_pick best scans for best matching color
  */
 private byte *
 escp2c_pick_best(byte *col)
@@ -133,7 +133,7 @@ escp2c_conv_stc(byte *p, byte *q, int i)
 /*
  * Main routine of the algorithm
  */
-int 
+int
 stc_fs2(stcolor_device *sd,int npixel,byte *in,byte *buf,byte *out)
 {
    int fullcolor_line_size = npixel*3;
@@ -218,7 +218,7 @@ stc_fs2(stcolor_device *sd,int npixel,byte *in,byte *buf,byte *out)
 	else
 	{
 	    for(p = in+fullcolor_line_size-1,
-		q = buf+fullcolor_line_size+2, i=fullcolor_line_size; 
+		q = buf+fullcolor_line_size+2, i=fullcolor_line_size;
                 i; i-=3)
 	    {
 		cp = escp2c_pick_best(p-2) + 2;
@@ -257,7 +257,7 @@ stc_fs2(stcolor_device *sd,int npixel,byte *in,byte *buf,byte *out)
 	    q[2] = bb[2];
 	    dir = 1;
 	}
-	
+
     escp2c_conv_stc(in, out, fullcolor_line_size);
 
 /*    ------------------------------------------------------------------- */

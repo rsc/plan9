@@ -513,4 +513,3 @@ VGAcur vganeomagiccur = {
 	neomagiccurload,
 	neomagiccurmove,
 };
-

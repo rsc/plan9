@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -84,7 +84,7 @@ alloc_size_is_ok(gs_memory_type_ptr_t stype)
  * are allocated outside GC space, they reference objects within it.
  */
 public_st_ref_memory();
-private 
+private
 ENUM_PTRS_BEGIN(ref_memory_enum_ptrs) return 0;
 ENUM_PTR3(0, gs_ref_memory_t, streams, names_array, changes);
 ENUM_PTR(3, gs_ref_memory_t, saved);
@@ -1061,7 +1061,7 @@ compute_free_objects(gs_ref_memory_t * mem)
     }
     return unused;
 }
-    
+
 /* Allocate an object from the large-block freelist. */
 private obj_header_t *	/* rets obj if allocated, else 0 */
 large_freelist_alloc(gs_ref_memory_t *mem, uint size)
@@ -1234,7 +1234,7 @@ alloc_obj(gs_ref_memory_t *mem, ulong lsize, gs_memory_type_ptr_t pstype,
 	    /* Add another chunk. */
 	    chunk_t *cp =
 		alloc_add_chunk(mem, (ulong)mem->chunk_size, "chunk");
-			
+
 	    if (cp) {
 		/* mem->pcc == cp, mem->cc == *mem->pcc. */
 		ptr = (obj_header_t *)cp->cbot;
@@ -1531,7 +1531,7 @@ trim_obj(gs_ref_memory_t *mem, obj_header_t *obj, uint size, chunk_t *cp)
 	/* excess piece will be "lost" memory */
 	mem->lost.objects += excess_size + sizeof(obj_header_t);
     }
-}    
+}
 
 /* ================ Roots ================ */
 
@@ -1653,7 +1653,7 @@ alloc_acquire_chunk(gs_ref_memory_t * mem, ulong csize, bool has_strings,
 #endif
     cp = gs_raw_alloc_struct_immovable(parent, &st_chunk, cname);
 
-    if( mem->gc_status.psignal != 0) {  
+    if( mem->gc_status.psignal != 0) {
 	/* we have a garbage collector */
 	if ((ulong) (mem->allocated) >= mem->limit) {
 	    mem->gc_status.requested += csize;
@@ -2073,7 +2073,7 @@ debug_dump_chunk(const gs_memory_t *mem, const chunk_t * cp, const dump_control_
 	debug_print_object(mem, pre + 1, control);
     END_OBJECTS_SCAN_NO_ABORT
 }
-void 
+void
 debug_print_chunk(const gs_memory_t *mem, const chunk_t * cp)
 {
     dump_control_t control;
@@ -2115,8 +2115,8 @@ debug_find_pointers(const gs_ref_memory_t *mem, const void *target)
 	    enum_ptr_t eptr;
 
 	    if (proc)		/* doesn't trace refs */
-		for (; (*proc)((const gs_memory_t *)mem, pre + 1, size, index, 
-			       &eptr, pre->o_type, NULL); 
+		for (; (*proc)((const gs_memory_t *)mem, pre + 1, size, index,
+			       &eptr, pre->o_type, NULL);
 		     ++index)
 		    if (eptr.ptr == target) {
 			dprintf1("Index %d in", index);

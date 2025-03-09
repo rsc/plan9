@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -271,7 +271,7 @@ fn_build_float_array(const ref * op, const char *kstr, bool required,
 
 	if (ptr == 0)
 	    return_error(e_VMerror);
-	code = dict_float_array_check_param(mem, op, kstr, size, 
+	code = dict_float_array_check_param(mem, op, kstr, size,
 					    ptr, NULL,
 					    0, e_rangecheck);
 	if (code < 0 || (even && (code & 1) != 0)) {
@@ -311,8 +311,8 @@ fn_build_float_array_forced(const ref * op, const char *kstr, bool required,
 
     if (ptr == 0)
         return_error(e_VMerror);
-    if(r_is_array(par) )    
-        code = dict_float_array_check_param(mem, op, kstr, 
+    if(r_is_array(par) )
+        code = dict_float_array_check_param(mem, op, kstr,
 					    size, ptr, NULL,
 					    0, e_rangecheck);
     else {
@@ -322,7 +322,7 @@ fn_build_float_array_forced(const ref * op, const char *kstr, bool required,
     }
 
     if (code < 0 ) {
-        gs_free_object(mem, ptr, kstr);                          
+        gs_free_object(mem, ptr, kstr);
         return code;
     }
     *pparray = ptr;

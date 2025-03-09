@@ -86,7 +86,7 @@ atimes(char *ar)
 	int fd, i;
 	char buf[BIGBLOCK];
 	Dir *d;
-	
+
 	fd = open(ar, OREAD);
 	if(fd < 0)
 		return;

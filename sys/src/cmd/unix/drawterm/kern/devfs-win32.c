@@ -88,7 +88,7 @@ lastelem(Chan *c)
 		return t;
 	return t+1;
 }
-	
+
 static Chan*
 fsattach(char *spec)
 {
@@ -185,7 +185,7 @@ fswalk(Chan *c, Chan *nc, char **name, int nname)
 	wq->nqid = i;
 	return wq;
 }
-	
+
 static int
 fsstat(Chan *c, uchar *buf, int n)
 {
@@ -229,7 +229,7 @@ fsopen(Chan *c, int mode)
 	case 1:
 	case 1|16:
 		break;
-	case 2:	
+	case 2:
 	case 0|16:
 	case 2|16:
 		break;
@@ -254,7 +254,7 @@ fsopen(Chan *c, int mode)
 		uif->dir = opendir(path);
 		if(uif->dir == 0)
 			error(strerror(errno));
-	}	
+	}
 	else {
 		if(mode & OTRUNC)
 			m |= O_TRUNC;
@@ -435,7 +435,7 @@ fswstat(Chan *c, uchar *buf, int n)
 
 	if (convM2D(buf, n, &d, strs) != n)
 		error(Ebadstat);
-	
+
 	fspath(c, 0, old);
 	if(stat(old, &stbuf) < 0)
 		error(strerror(errno));
@@ -499,7 +499,7 @@ fsqid(char *p, struct stat *st)
 	h = 0;
 	while(*p != '\0')
 		h += *p++ * 13;
-	
+
 	q.path = (vlong)qdev[dev]<<32;
 	q.path |= h;
 	q.vers = st->st_mtime;
@@ -666,7 +666,7 @@ opendir(char *p)
 	DIR *d;
 	char path[MAX_PATH];
 
-	
+
 	snprint(path, sizeof(path), "%s/*.*", p);
 
 	d = mallocz(sizeof(DIR), 1);

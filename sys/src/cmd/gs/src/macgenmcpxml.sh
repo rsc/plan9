@@ -96,7 +96,7 @@ WriteValueSetting()
 {
     SETTINGNAME=$1
     VALUE=$2
-    
+
     echo "<SETTING><NAME>$SETTINGNAME</NAME><VALUE>$VALUE</VALUE></SETTING>"
 }
 
@@ -111,7 +111,7 @@ WritePathSetting()
     PATH=$2
     PATHFORMAT=$3
     PATHROOT=$4
-    
+
     echo "<SETTING>"
         echo "<SETTING><NAME>$SETTINGNAME</NAME>"
             echo "<SETTING><NAME>Path</NAME><VALUE>$PATH</VALUE></SETTING>"
@@ -130,9 +130,9 @@ WriteSETTINGLIST()
 {
     TARGETNAME=$1
     OUTPUTNAME=$2
-    
+
     echo "<SETTINGLIST>"
-        
+
         echo "<!-- Settings for "Target Settings" panel -->"
         WriteValueSetting Linker "MacOS PPC Linker"
         WriteValueSetting PreLinker ""
@@ -144,7 +144,7 @@ WriteSETTINGLIST()
             echo "<SETTING><NAME>PathRoot</NAME><VALUE>Project</VALUE></SETTING>"
         echo "</SETTING>"
         WriteValueSetting SaveEntriesUsingRelativePaths false
-        
+
         echo "<!-- Settings for "Access Paths" panel -->"
         WriteValueSetting AlwaysSearchUserPaths false
         WriteValueSetting InterpretDOSAndUnixPaths true
@@ -162,13 +162,13 @@ WriteSETTINGLIST()
             WritePathSetting SearchPath ":" MacOS CodeWarrior
             WritePathSetting SearchPath ":" MacOS Project
         echo "</SETTING>"
-        
+
         echo "<!-- Settings for "Build Extras" panel -->"
         WriteValueSetting CacheModDates true
 	WriteValueSetting ActivateBrowser true
 	WriteValueSetting DumpBrowserInfo false
 	WriteValueSetting CacheSubprojects true
-        
+
 	echo "<!-- Settings for "PPC Project" panel -->"
 	WriteValueSetting MWProject_PPC_type SharedLibrary
 	WriteValueSetting MWProject_PPC_outfile "$OUTPUTNAME"
@@ -186,7 +186,7 @@ WriteSETTINGLIST()
 	WriteValueSetting MWProject_PPC_rsrcflags 0
 	WriteValueSetting MWProject_PPC_rsrcstore 0
 	WriteValueSetting MWProject_PPC_rsrcmerge 0
-        
+
 	echo "<!-- Settings for "C/C++ Compiler" panel -->"
 	WriteValueSetting MWFrontEnd_C_cplusplus 0
 	WriteValueSetting MWFrontEnd_C_checkprotos 0
@@ -195,7 +195,7 @@ WriteSETTINGLIST()
 	WriteValueSetting MWFrontEnd_C_onlystdkeywords 0
 	WriteValueSetting MWFrontEnd_C_enumsalwaysint 0
 	WriteValueSetting MWFrontEnd_C_mpwpointerstyle 1
-	
+
 	# install the carbon prefix file for carbon targets
 	if test "$OUTPUTNAME" = "GhostscriptLib Carbon"; then
 	  if test "$TARGETNAME" = "GhostscriptLib Carbon (Debug)"; then
@@ -210,7 +210,7 @@ WriteSETTINGLIST()
 	    WriteValueSetting MWFrontEnd_C_prefixname
 	  fi
 	fi
-	
+
 	WriteValueSetting MWFrontEnd_C_ansistrict 0
 	WriteValueSetting MWFrontEnd_C_mpwcnewline 0
 	WriteValueSetting MWFrontEnd_C_wchar_type 1
@@ -230,7 +230,7 @@ WriteSETTINGLIST()
 	WriteValueSetting MWFrontEnd_C_ecplusplus 0
 	WriteValueSetting MWFrontEnd_C_objective_c 0
 	WriteValueSetting MWFrontEnd_C_defer_codegen 0
-        
+
 	echo "<!-- Settings for "C/C++ Warnings" panel -->"
 	WriteValueSetting MWWarning_C_warn_illpragma 1
 	WriteValueSetting MWWarning_C_warn_emptydecl 0
@@ -244,7 +244,7 @@ WriteSETTINGLIST()
 	WriteValueSetting MWWarning_C_warn_implicitconv 0
 	WriteValueSetting MWWarning_C_warn_notinlined 0
 	WriteValueSetting MWWarning_C_warn_structclass 0
-        
+
 	echo "<!-- Settings for "PPC CodeGen" panel -->"
 	WriteValueSetting MWCodeGen_PPC_structalignment PPC
 	WriteValueSetting MWCodeGen_PPC_tracebacktables Inline
@@ -259,11 +259,11 @@ WriteSETTINGLIST()
 	WriteValueSetting MWCodeGen_PPC_altivec 0
 	WriteValueSetting MWCodeGen_PPC_vectortocdata 0
 	WriteValueSetting MWCodeGen_PPC_vrsave 0
-	
+
 	echo "<!-- Settings for "PPC Global Optimizer" panel -->"
 	WriteValueSetting GlobalOptimizer_PPC_optimizationlevel Level0
 	WriteValueSetting GlobalOptimizer_PPC_optfor Speed
-        
+
 	echo "<!-- Settings for "PPC Linker" panel -->"
 	WriteValueSetting MWLinker_PPC_linksym 1
 	WriteValueSetting MWLinker_PPC_symfullpath 1
@@ -275,7 +275,7 @@ WriteSETTINGLIST()
 	WriteValueSetting MWLinker_PPC_initname "__initialize"
 	WriteValueSetting MWLinker_PPC_mainname ""
 	WriteValueSetting MWLinker_PPC_termname "__terminate"
-        
+
 	echo "<!-- Settings for "PPC PEF" panel -->"
 	WriteValueSetting MWPEF_exports Pragma
 	WriteValueSetting MWPEF_libfolder 0
@@ -287,7 +287,7 @@ WriteSETTINGLIST()
 	WriteValueSetting MWPEF_currentversion 0
 	WriteValueSetting MWPEF_fragmentname ""
 	WriteValueSetting MWPEF_collapsereloads 0
-        
+
     echo "</SETTINGLIST>"
 }
 
@@ -300,25 +300,25 @@ WriteTARGET()
     TARGETNAME=$1
     OUTPUTNAME=$2
     shift 2
-    
+
     echo "<TARGET>"
-        
+
         echo "<NAME>$TARGETNAME</NAME>"
-        
+
         WriteSETTINGLIST "$TARGETNAME" "$OUTPUTNAME"
-        
+
         echo "<FILELIST>"
             for file in "$@"; do
                 WriteFILE "$file"
             done
         echo "</FILELIST>"
-        
+
         echo "<LINKORDER>"
             for file in "$@"; do
                 WriteFILEREF "$file"
             done
         echo "</LINKORDER>"
-        
+
     echo "</TARGET>"
 }
 
@@ -331,13 +331,13 @@ WriteGROUP()
     GROUPNAME=$1
     TARGETNAME=$2
     shift 2
-    
+
     echo "<GROUP><NAME>$GROUPNAME</NAME>"
-        
+
         for file in "$@"; do
             WriteFILEREF "$file" "$TARGETNAME"
         done
-        
+
     echo "</GROUP>"
 }
 
@@ -372,7 +372,7 @@ CLASSICLIBS="MSL_All_PPC.Lib InterfaceLib FontManager MathLib"
 CLASSICLIBS="$CLASSICLIBS TextCommon UnicodeConverter UTCUtils"
 
 #####
-# 
+#
 #####
 
 GSNAME="GhostscriptLib"
@@ -386,23 +386,23 @@ CARBONFINALTARGETNAME="$CARBONGSNAME (Final)"
 WriteXMLHeader
 
 echo "<PROJECT>"
-    
+
     echo "<TARGETLIST>"
     WriteTARGET "$CARBONDEBUGTARGETNAME" "$CARBONGSNAME" $CFILES $LIBS $CARBONLIBS
     WriteTARGET "$CLASSICDEBUGTARGETNAME" "$CLASSICGSNAME" $CFILES $LIBS $CLASSICLIBS
     echo "</TARGETLIST>"
-    
+
     echo "<TARGETORDER>"
         echo "<ORDEREDTARGET><NAME>$CARBONDEBUGTARGETNAME</NAME></ORDEREDTARGET>"
         echo "<ORDEREDTARGET><NAME>$CLASSICDEBUGTARGETNAME</NAME></ORDEREDTARGET>"
     echo "</TARGETORDER>"
-    
+
     echo "<GROUPLIST>"
         WriteGROUP "Ghostscript Sources" "$CARBONDEBUGTARGETNAME" $CFILES
 #        WriteGROUP "Libraries" "$CARBONDEBUGTARGETNAME" $LIBS $CARBONLIBS $CLASSICLIBS
 #        WriteGROUP "Libraries" "$CARBONDEBUGTARGETNAME" "console.stubs.c" "MSL ShLibRuntime.Lib" "MSL RuntimePPC.Lib" "MSL C.Carbon.Lib" "CarbonLib" "MSL C.PPC.Lib" "InterfaceLib" "FontManager" "MathLib"
 
-# nb: this code doesn't work if there are spaces in the library filenames        
+# nb: this code doesn't work if there are spaces in the library filenames
         echo "<GROUP><NAME>Libraries</NAME>"
 	for lib in $LIBS; do
             WriteFILEREF "$lib" "$CARBONDEBUGTARGETNAME"
@@ -415,7 +415,7 @@ echo "<PROJECT>"
             WriteFILEREF "$lib" "$CLASSICDEBUGTARGETNAME"
 	done
         echo "</GROUP>"
-        
+
     echo "</GROUPLIST>"
 
 echo "</PROJECT>"

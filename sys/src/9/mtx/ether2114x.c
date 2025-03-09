@@ -42,7 +42,7 @@ enum {					/* CRS0 - Bus Mode */
 	Tap		= 0x000E0000,	/* Transmit Automatic Polling (field) */
 	Dbo		= 0x00100000,	/* Descriptor Byte Ordering Mode */
 	Rml		= 0x00200000,	/* Read Multiple */
-}; 
+};
 
 enum {					/* CSR[57] - Status and Interrupt Enable */
 	Ti		= 0x00000001,	/* Transmit Interrupt */
@@ -863,7 +863,7 @@ typephylink(Ctlr* ctlr, uchar*)
 	    		miir(ctlr, ctlr->curphyad, Anar),
 			miir(ctlr, ctlr->curphyad, Anlpar),
 			an);
-	
+
 		if(an & 0x0100)
 			x = 0x4000;
 		else if(an & 0x0080)
@@ -1117,7 +1117,7 @@ type0mode(Ctlr* ctlr, uchar* block, int wait)
 
 	csr6 = Sc|Mbo|Hbd|Ca|Sb|TrMODE;
 debug("type0: medium 0x%uX, fd %d: 0x%2.2uX 0x%2.2uX 0x%2.2uX 0x%2.2uX\n",
-    ctlr->medium, ctlr->fd, block[0], block[1], block[2], block[3]); 
+    ctlr->medium, ctlr->fd, block[0], block[1], block[2], block[3]);
 	switch(block[0]){
 	default:
 		break;
@@ -1453,7 +1453,7 @@ srom(Ctlr* ctlr)
 		}
 		else{
 			debug("type0: 0x%2.2uX 0x%2.2uX 0x%2.2uX 0x%2.2uX\n",
-				p[0], p[1], p[2], p[3]); 
+				p[0], p[1], p[2], p[3]);
 			if(ctlr->sct != 0x0800 && *p == (ctlr->sct & 0xFF))
 				ctlr->sctk = k;
 			p += 4;
@@ -1623,12 +1623,12 @@ ether->irq = 2;		/* arrrrrgh */
 			if(cistrcmp(mediatable[x], ether->opt[i]))
 				continue;
 			ctlr->medium = x;
-	
+
 			switch(ctlr->medium){
 			default:
 				ctlr->fd = 0;
 				break;
-	
+
 			case 0x04:		/* 10BASE-TFD */
 			case 0x05:		/* 100BASE-TXFD */
 			case 0x08:		/* 100BASE-FXFD */

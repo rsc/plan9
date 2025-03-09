@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -560,7 +560,7 @@ gx_pattern_cache_add_entry(gs_imager_state * pis,
 /* Add a dummy Pattern cache entry.  Stubs a pattern tile for interpreter when
    device handles high level patterns. */
 int
-gx_pattern_cache_add_dummy_entry(gs_imager_state *pis, 
+gx_pattern_cache_add_dummy_entry(gs_imager_state *pis,
 	    gs_pattern1_instance_t *pinst, int depth)
 {
     gx_color_tile *ctile;

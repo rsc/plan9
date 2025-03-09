@@ -89,7 +89,7 @@ struct Voldesc {
 	ulong mpathloc;
 
 	/* root of file tree */
-	Direc root;	
+	Direc root;
 };
 
 /*
@@ -118,7 +118,7 @@ struct Cdimg {
 	Direc *bootdirec;
 	char *bootimage;
 	char *loader;
-	
+
 	Biobuf brd;
 	Biobuf bwr;
 
@@ -409,7 +409,7 @@ int Cputisodir(Cdimg*, Direc*, int, int, int);
 int Cputjolietdir(Cdimg*, Direc*, int, int, int);
 void Cputendvd(Cdimg*);
 
-enum { 
+enum {
 	Blocksize = 2048,
 	Ndirblock = 16,		/* directory blocks allocated at once */
 

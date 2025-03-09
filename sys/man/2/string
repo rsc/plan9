@@ -82,12 +82,12 @@ void		s_freeinstack(Sinstack *stack)
 char*	s_rdinstack(Sinstack *stack, String *to)
 .SH DESCRIPTION
 .PP
-These routines manipulate extensible strings.  
+These routines manipulate extensible strings.
 The basic type is
 .BR String ,
 which points to an array of characters.  The string
 maintains pointers to the beginning and end of the allocated
-array.  In addition a finger pointer keeps track of where 
+array.  In addition a finger pointer keeps track of where
 parsing will start (for
 .IR s_parse )
 or new characters will be added (for
@@ -192,12 +192,12 @@ followed by an
 copies the next white space terminated token from
 .I s1
 to
-the end of 
+the end of
 .IR s2 .
 White space is defined as space, tab,
 and newline.  Both single and double quoted strings are treated as
 a single token.  The bounding quotes are not copied.
-There is no escape mechanism. 
+There is no escape mechanism.
 .PP
 .I S_tolower
 converts all

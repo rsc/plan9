@@ -40,4 +40,3 @@ smbdircachefree(SmbDirCache **cp)
 		*cp = nil;
 	}
 }
-

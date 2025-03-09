@@ -22,7 +22,7 @@ faxsend(Modem *m, int argc, char *argv[])
 	default:
 		r = seterror(m, Enoanswer);
 		return r;
-		
+
 	}
 
 	xonoff(m, 1);
@@ -103,7 +103,7 @@ faxsend(Modem *m, int argc, char *argv[])
 					verbose("%c", buf[0]);
 					r = seterror(m, Eproto);
 					goto buggery;
-				
+
 				}
 			}
 			if(c < 0)

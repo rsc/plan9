@@ -369,4 +369,3 @@ Version 3.1	11/15/88
 21: New in the misc directory is sample lp support from Maryann Csaszar and a
     simple program that converts host resident font files obtained from a Macintosh
     to a format that works on Unix.
-

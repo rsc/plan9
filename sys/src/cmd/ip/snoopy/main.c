@@ -293,7 +293,7 @@ struct pcap_pkthdr {
 };
 
 /*
- *  pcap trace header 
+ *  pcap trace header
  */
 void
 pcaphdr(void)
@@ -303,7 +303,7 @@ pcaphdr(void)
 	hdr.magic = TCPDUMP_MAGIC;
 	hdr.version_major = PCAP_VERSION_MAJOR;
 	hdr.version_minor = PCAP_VERSION_MINOR;
-  
+
 	hdr.thiszone = 0;
 	hdr.snaplen = 1500;
 	hdr.sigfigs = 0;
@@ -674,7 +674,7 @@ _compile(Filter *f, Proto *last)
 	case '=':
 		if(last == nil)
 			sysfatal("internal error: compilewalk: badly formed tree");
-		
+
 		if(last->compile == nil)
 			sysfatal("unknown %s field: %s", f->pr->name, f->s);
 		(*last->compile)(f);
@@ -851,7 +851,7 @@ cat(void)
 {
 	char buf[1024];
 	int n;
-	
+
 	while((n = read(0, buf, sizeof buf)) > 0)
 		write(1, buf, n);
 }
@@ -861,10 +861,10 @@ void
 startmc(void)
 {
 	int p[2];
-	
+
 	if(fd1 == -1)
 		fd1 = dup(1, -1);
-	
+
 	if(pipe(p) < 0)
 		return;
 	switch(fork()){
@@ -903,7 +903,7 @@ printhelp(char *name)
 	Mux *m;
 	Field *f;
 	char fmt[40];
-	
+
 	if(name == nil){
 		print("protocols:\n");
 		startmc();
@@ -912,13 +912,13 @@ printhelp(char *name)
 		stopmc();
 		return;
 	}
-	
+
 	pr = findproto(name);
 	if(pr == nil){
 		print("unknown protocol %s\n", name);
 		return;
 	}
-	
+
 	if(pr->field){
 		print("%s's filter attributes:\n", pr->name);
 		len = 0;

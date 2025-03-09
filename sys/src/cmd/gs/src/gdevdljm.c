@@ -2,11 +2,11 @@
 
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -121,9 +121,9 @@ dljet_mono_print_page_copies(gx_device_printer * pdev, FILE * prn_stream,
 	}
     }
     /* Put out per-page initialization. */
-    if (features & PCL_CAN_SET_PAPER_SIZE){ 
-        fprintf(prn_stream, "\033&l%dA", paper_size); 
-    } 
+    if (features & PCL_CAN_SET_PAPER_SIZE){
+        fprintf(prn_stream, "\033&l%dA", paper_size);
+    }
     fputs("\033&l0o0l0E", prn_stream);
     fputs(page_init, prn_stream);
     fprintf(prn_stream, "\033&l%dX", num_copies);	/* # of copies */

@@ -72,7 +72,7 @@ hello(char *dest)
 		fprint(2, "can't dial %s: %r\n", dest);
 		exits("dialing");
 	}
-		
+
 	Binit(&ctlin, ctlfd, OREAD);
 
 	/* remember network for the data connections */
@@ -832,7 +832,7 @@ createdir(Node *node)
 {
 	if(changedir(node->parent) < 0)
 		return -1;
-	
+
 	sendrequest("MKD", node->d->name);
 	if(getreply(&ctlin, msg, sizeof(msg), 0) != Success)
 		return -1;
@@ -1051,7 +1051,7 @@ removefile(Node *node)
 {
 	if(changedir(node->parent) < 0)
 		return -1;
-	
+
 	sendrequest("DELE", s_to_c(node->remname));
 	if(getreply(&ctlin, msg, sizeof(msg), 0) != Success)
 		return -1;
@@ -1066,7 +1066,7 @@ removedir(Node *node)
 {
 	if(changedir(node->parent) < 0)
 		return -1;
-	
+
 	sendrequest("RMD", s_to_c(node->remname));
 	if(getreply(&ctlin, msg, sizeof(msg), 0) != Success)
 		return -1;
@@ -1552,7 +1552,7 @@ reallocdir(Dir *d, int dofree)
 		d->gid = d->uid;
 	if(d->muid == nil)
 		d->muid = d->uid;
-	
+
 	utf = fromlatin1(d->name);
 	if(utf != nil)
 		d->name = utf;

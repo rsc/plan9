@@ -181,7 +181,7 @@ startwithdirfromroute(Route *r, int* dl, int n)
 {
 	Step *s;
 	int *p;
-	
+
 	if (r == nil || dl == nil)
 		return dl;
 

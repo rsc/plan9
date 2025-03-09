@@ -1,12 +1,12 @@
 #    Copyright (C) 1995-2003 artofcode LLC.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -792,7 +792,7 @@ $(PSD)macroman.dev : $(INT_MAK) $(ECHOGS_XE) $(PSLIB)gs_mro_e.ps
 	$(SETMOD) $(PSD)macroman -ps gs_mro_e
 
 $(PSD)macglyph.dev : $(INT_MAK) $(ECHOGS_XE) $(PSLIB)gs_mgl_e.ps\
- $(PSD)macroman.dev 
+ $(PSD)macroman.dev
 	$(SETMOD) $(PSD)macglyph -include $(PSD)macroman -ps gs_mgl_e
 
 # Native TrueType support
@@ -804,7 +804,7 @@ $(PSD)ttfont.dev : $(INT_MAK) $(ECHOGS_XE) $(PSD)macglyph.dev $(PSD)type42.dev
 type42read_=$(PSOBJ)zchar42.$(OBJ) $(PSOBJ)zcharout.$(OBJ) $(PSOBJ)zfont42.$(OBJ)
 $(PSD)type42.dev : $(INT_MAK) $(ECHOGS_XE) $(type42read_) $(GLD)ttflib.dev
 	$(SETMOD) $(PSD)type42 $(type42read_)
-	$(ADDMOD) $(PSD)type42 -include $(GLD)ttflib	
+	$(ADDMOD) $(PSD)type42 -include $(GLD)ttflib
 	$(ADDMOD) $(PSD)type42 -oper zchar42 zfont42
 	$(ADDMOD) $(PSD)type42 -ps gs_typ42
 
@@ -1857,9 +1857,9 @@ $(PSOBJ)zfapi.$(OBJ) : $(PSSRC)zfapi.c $(OP) $(math__h) $(memory__h) $(string__h
 # UFST bridge :
 
 UFST_LIB=$(UFST_ROOT)$(D)rts$(D)lib$(D)
-UFST_INC0=$(I_)$(UFST_ROOT)$(D)sys$(D)inc$(_I) $(I_)$(UFST_ROOT)$(D)rts$(D)inc$(_I) 
+UFST_INC0=$(I_)$(UFST_ROOT)$(D)sys$(D)inc$(_I) $(I_)$(UFST_ROOT)$(D)rts$(D)inc$(_I)
 UFST_INC1=$(UFST_INC0) $(I_)$(UFST_ROOT)$(D)rts$(D)psi$(_I)
-UFST_INC2=$(UFST_INC1) $(I_)$(UFST_ROOT)$(D)rts$(D)fco$(_I) 
+UFST_INC2=$(UFST_INC1) $(I_)$(UFST_ROOT)$(D)rts$(D)fco$(_I)
 UFST_INC3=$(UFST_INC2) $(I_)$(UFST_ROOT)$(D)rts$(D)gray$(_I)
 UFST_INC=$(UFST_INC3) $(I_)$(UFST_ROOT)$(D)rts$(D)tt$(_I)
 
@@ -1918,7 +1918,7 @@ $(PSOBJ)fapi_ft.$(OBJ) : $(PSSRC)fapi_ft.c $(AK)\
 	$(PSCC) $(FT_CFLAGS) $(FT_INC) $(PSO_)fapi_ft.$(OBJ) $(C_) $(PSSRC)fapi_ft.c
 
 $(PSOBJ)write_t1.$(OBJ) : $(PSSRC)write_t1.c $(AK)\
- $(wrfont_h) $(write_t1_h) 
+ $(wrfont_h) $(write_t1_h)
 	$(PSCC) $(FT_CFLAGS) $(FT_INC) $(PSO_)write_t1.$(OBJ) $(C_) $(PSSRC)write_t1.c
 
 $(PSOBJ)write_t2.$(OBJ) : $(PSSRC)write_t2.c $(AK)\

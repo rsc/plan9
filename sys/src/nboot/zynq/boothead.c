@@ -53,7 +53,7 @@ main(int argc, char **argv)
 		sysfatal("read: %r");
 	close(fd);
 	memset(head, 0, sizeof(head));
-	
+
 	u32(0x20, 0xaa995566);
 	u32(0x24, 0x584C4E58);
 	u32(0x30, sizeof(head));
@@ -64,7 +64,7 @@ main(int argc, char **argv)
 		ck += gu32(i);
 	u32(0x48, ~ck);
 	u32(0xa0, -1);
-	
+
 	write(1, head, sizeof(head));
 	write(1, data, sz);
 	exits(nil);

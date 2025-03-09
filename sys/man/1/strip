@@ -18,7 +18,7 @@ and the directory it is in.
 .PP
 If the
 .B -o
-flag is given, 
+flag is given,
 the single input file
 .I file
 is stripped and the result written to

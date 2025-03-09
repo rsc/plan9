@@ -1,12 +1,12 @@
 %    Copyright (C) 2000 artofcode LLC.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -28,7 +28,7 @@ languagelevel 2 .setlanguagelevel
 { dup type /dicttype eq { dup /StaticFilePos known } { false } ifelse
 } bind def
 
-/append_string    % <scratch> <index> <string> append_string <scratch> <index> 
+/append_string    % <scratch> <index> <string> append_string <scratch> <index>
 {
    dup length 3 index 3 index 2 index getinterval   % (scratch) index (string) l (scr_substr)
    3 2 roll exch copy pop add                       % (scratch) index'
@@ -120,7 +120,7 @@ mark
 end  % MappedCategoryRedefiner
 end  % the temporary dictionary for local binding.
 
-/.BeginResource  % <instance_name> BeginResource <instance_name> 
+/.BeginResource  % <instance_name> BeginResource <instance_name>
 %     Puts a record dictionary to dstack.
 {
   STRESDEBUG { (Static resource ) print dup =string cvs print } if
@@ -128,7 +128,7 @@ end  % the temporary dictionary for local binding.
   currentfile =string readline pop dup length 0 exch 10 .min getinterval (%% Replace) ne {
     % We are in COMPILE_INITS=1 .
     4 dict begin
-    /StaticFilePos exch def    
+    /StaticFilePos exch def
   } {
     % We are in COMPILE_INITS=0 .
     pop

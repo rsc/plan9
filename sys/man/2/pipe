@@ -33,7 +33,7 @@ and
 .I write
 calls.
 The bytes placed on a pipe
-by one 
+by one
 .I write
 are contiguous even if many processes are writing.
 Write boundaries are preserved: each read terminates

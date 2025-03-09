@@ -74,7 +74,7 @@ muxenab=0x10
 #VCO freq 326.4MHz
 spurconfig=0x3
 
-AvVmidIQcal=0x2,0xa8 
+AvVmidIQcal=0x2,0xa8
 
 #SW based desense - Enable by default
 #i.e using glitich statistcs as critria to change crsmin
@@ -86,4 +86,3 @@ edoffthd20ul=-68
 #/* EDTHRESH adjust offset once ACI active */
 edonthd20l_adj=2
 edoffthd20ul_adj=2
-

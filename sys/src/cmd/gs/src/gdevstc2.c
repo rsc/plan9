@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -40,11 +40,11 @@
 #include <stdlib.h>     /* for rand */
 
 /*
-   Both algorithms require an error-buffer of 
+   Both algorithms require an error-buffer of
 
        3 + 3*num_components +1*scan long-items.
 
-   and must consequently set up to work with longs. 
+   and must consequently set up to work with longs.
    It is just a Floyd-Steinberg-algorithm applied to each component.
 
  */
@@ -71,8 +71,8 @@ static const byte  *const pixelconversion[5] = {
    NULL, grayvals, NULL, rgbvals, cmykvals};
 
 
-int 
-stc_fs(stcolor_device *sdev,int npixel,byte *bin,byte *bbuf,byte *out) 
+int
+stc_fs(stcolor_device *sdev,int npixel,byte *bin,byte *bbuf,byte *out)
 {
 
      long *in  = (long *) bin;
@@ -225,8 +225,8 @@ stc_fs(stcolor_device *sdev,int npixel,byte *bin,byte *bbuf,byte *out)
  * Experimental CMYK-Algorithm
  */
 
-int 
-stc_fscmyk(stcolor_device *sdev,int npixel,byte *bin,byte *bbuf,byte *out) 
+int
+stc_fscmyk(stcolor_device *sdev,int npixel,byte *bin,byte *bbuf,byte *out)
 {
       long *in  = (long *) bin;
       long *buf = (long *) bbuf;
@@ -383,7 +383,7 @@ stc_fscmyk(stcolor_device *sdev,int npixel,byte *bin,byte *bbuf,byte *out)
      offset = sdev->stc.dither->minmax[0];
      scale -= offset;
      if(sdev->stc.flags & STCDFLAG1) {
-        buf[2] = (long)((sdev->stc.extv[0][sdev->stc.sizv[0]-1] - 
+        buf[2] = (long)((sdev->stc.extv[0][sdev->stc.sizv[0]-1] -
 		sdev->stc.extv[0][0]) * scale / 2.0 + offset);
      } else {
         if((offset+0.5*scale) > 0.0) buf[2] = (long)(offset + 0.5*scale + 0.5);

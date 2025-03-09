@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -365,15 +365,15 @@ gdev_vector_update_color(gx_device_vector * vdev,
 			      const gs_imager_state * pis,
 			      const gx_drawing_color * pdcolor,
 			      gx_hl_saved_color *sc,
-			      int (*setcolor) (gx_device_vector * vdev, 
-			                       const gs_imager_state * pis, 
+			      int (*setcolor) (gx_device_vector * vdev,
+			                       const gs_imager_state * pis,
 					       const gx_drawing_color * pdc))
 {
     gx_hl_saved_color temp;
     int code;
     bool hl_color = (*vdev_proc(vdev, can_handle_hl_color)) (vdev, pis, pdcolor);
     const gs_imager_state *pis_for_hl_color = (hl_color ? pis : NULL);
-    
+
     gx_hld_save_color(pis_for_hl_color, pdcolor, &temp);
     if (gx_hld_saved_color_equal(&temp, sc))
 	return 0;
@@ -390,13 +390,13 @@ gdev_vector_update_fill_color(gx_device_vector * vdev,
 			      const gs_imager_state * pis,
 			      const gx_drawing_color * pdcolor)
 {
-    return gdev_vector_update_color(vdev, pis, pdcolor, &vdev->saved_fill_color, 
+    return gdev_vector_update_color(vdev, pis, pdcolor, &vdev->saved_fill_color,
                                     vdev_proc(vdev, setfillcolor));
 }
 
 /* Update the state for filling a region. */
 private int
-update_fill(gx_device_vector * vdev, const gs_imager_state * pis, 
+update_fill(gx_device_vector * vdev, const gs_imager_state * pis,
 	    const gx_drawing_color * pdcolor, gs_logical_operation_t lop)
 {
     int code = gdev_vector_update_fill_color(vdev, pis, pdcolor);
@@ -517,7 +517,7 @@ gdev_vector_prepare_stroke(gx_device_vector * vdev,
 	}
     }
     if (pdcolor) {
-	int code = gdev_vector_update_color(vdev, pis, pdcolor, 
+	int code = gdev_vector_update_color(vdev, pis, pdcolor,
 		    &vdev->saved_stroke_color, vdev_proc(vdev, setstrokecolor));
 
 	if (code < 0)
@@ -814,7 +814,7 @@ gdev_vector_close_file(gx_device_vector * vdev)
     vdev->file = 0;
     err = ferror(f);
     /* We prevented sclose from closing the file. */
-    if (gx_device_close_output_file((gx_device *)vdev, vdev->fname, f) != 0 
+    if (gx_device_close_output_file((gx_device *)vdev, vdev->fname, f) != 0
 	|| err != 0)
 	return_error(gs_error_ioerror);
     return 0;
@@ -966,7 +966,7 @@ gdev_vector_put_params(gx_device * dev, gs_param_list * plist)
 	    		(dev->is_open && vdev->strm != 0 &&
 		       stell(vdev->strm) != 0)
 		       )
-		ecode = (dev->LockSafetyParams) ? gs_error_invalidaccess : 
+		ecode = (dev->LockSafetyParams) ? gs_error_invalidaccess :
 				gs_error_rangecheck;
 	    else
 		break;

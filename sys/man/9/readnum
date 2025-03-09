@@ -53,6 +53,6 @@ can be the global constant
 for 32-bit integers;
 the largest
 .I size
-allowed is 64 bytes. 
+allowed is 64 bytes.
 .SH SOURCE
 .B /sys/src/9/port/devcons.c

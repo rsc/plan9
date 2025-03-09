@@ -421,7 +421,7 @@ out with a single
 copy command.
 There is no backup system as such;
 instead, because the dump
-is in the file name space, 
+is in the file name space,
 backup problems can be solved with
 standard tools
 such as
@@ -912,7 +912,7 @@ process in a series of flags and bits in private memory,
 the kernel
 presents a text string in the file named
 .CW status
-in the 
+in the
 .CW /proc
 file system associated with each process.
 The Plan 9
@@ -1318,7 +1318,7 @@ All operations on files supply a fid to identify an object in the remote file sy
 .PP
 The 9P protocol defines 17 messages, providing
 means to authenticate users, navigate fids around
-a file system hierarchy, copy fids, perform I/O, change file attributes, 
+a file system hierarchy, copy fids, perform I/O, change file attributes,
 and create and delete files.
 Its complete specification is in Section 5 of the Programmer's Manual [9man].
 Here is the procedure to gain access to the name hierarchy supplied by a server.
@@ -1430,7 +1430,7 @@ Every time a walk succeeds in moving a channel to a new location in the name spa
 the mount table is consulted to see if a `from' channel matches the new name; if
 so the `to' channel is cloned and substituted for the original.
 Union directories are implemented by converting the `to'
-channel into a list of channels: 
+channel into a list of channels:
 a successful walk to a union directory returns a `to' channel that forms
 the head of
 a list of channels, each representing a component directory
@@ -1461,7 +1461,7 @@ device numbers;
 the qid is analogous to the i-number.
 The device and type
 connect the channel to a device driver and the qid
-identifies the file within that device. 
+identifies the file within that device.
 If the file recovered from a walk has the same type, device, and qid path
 as an entry in the mount table, they are the same file and the
 corresponding substitution from the mount table is made.
@@ -1804,7 +1804,7 @@ Finally, it reattaches to all relevant file servers using the
 authentication protocol to identify itself as Peter.
 In this case, the CPU server is a client of the file server and performs the
 client portion of the authentication exchange on behalf of Peter.
-The authentication server will give the process tickets to 
+The authentication server will give the process tickets to
 accomplish this only if the CPU server's administrative user name is allowed to
 .I "speak for"
 Peter.

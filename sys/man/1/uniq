@@ -53,7 +53,7 @@ Fields are skipped before characters.
 .SH SOURCE
 .B /sys/src/cmd/uniq.c
 .SH "SEE ALSO"
-.IR sort (1) 
+.IR sort (1)
 .SH BUGS
-Field selection and comparison should be compatible with 
+Field selection and comparison should be compatible with
 .IR sort (1).

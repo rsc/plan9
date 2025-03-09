@@ -33,4 +33,3 @@ fmtprint(Fmt *f, char *fmt, ...)
 	va_end(va);
 	return n;
 }
-

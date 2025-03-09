@@ -1,12 +1,12 @@
 /* Copyright (C) 1996-2001 Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -99,7 +99,7 @@ static int GSDLLCALL gsdll_poll(void *handle)
 /*********************************************************************/
 
 /* new dll display device */
-/* 
+/*
 #define DISPLAY_DEBUG
  */
 
@@ -152,29 +152,29 @@ static int display_close(void *handle, void *device)
 
 /* Device is about to be resized. */
 /* Resize will only occur if this function returns 0. */
-static int display_presize(void *handle, void *device, int width, int height, 
+static int display_presize(void *handle, void *device, int width, int height,
 	int raster, unsigned int format)
 {
 #ifdef DISPLAY_DEBUG
     char buf[256];
     sprintf(buf, "display_presize(0x%x, 0x%x, width=%d height=%d raster=%d\n\
-  format=%d)\n", 
+  format=%d)\n",
        handle, device, width, height, raster, format);
     text_puts(tw, buf);
 #endif
     return 0;
 }
-   
+
 /* Device has been resized. */
 /* New pointer to raster returned in pimage */
-static int display_size(void *handle, void *device, int width, int height, 
+static int display_size(void *handle, void *device, int width, int height,
 	int raster, unsigned int format, unsigned char *pimage)
 {
     IMAGE *img;
 #ifdef DISPLAY_DEBUG
     char buf[256];
     sprintf(buf, "display_size(0x%x, 0x%x, width=%d height=%d raster=%d\n\
-  format=%d image=0x%x)\n", 
+  format=%d image=0x%x)\n",
        handle, device, width, height, raster, format, pimage);
     text_puts(tw, buf);
 #endif
@@ -183,7 +183,7 @@ static int display_size(void *handle, void *device, int width, int height,
     image_updatesize(img);
     return 0;
 }
-   
+
 /* flushpage */
 static int display_sync(void *handle, void *device)
 {
@@ -205,7 +205,7 @@ static int display_page(void *handle, void *device, int copies, int flush)
     IMAGE *img;
 #ifdef DISPLAY_DEBUG
     char buf[256];
-    sprintf(buf, "display_page(0x%x, 0x%x, copies=%d flush=%d)\n", 
+    sprintf(buf, "display_page(0x%x, 0x%x, copies=%d flush=%d)\n",
 	handle, device, copies, flush);
     text_puts(tw, buf);
 #endif
@@ -216,7 +216,7 @@ static int display_page(void *handle, void *device, int copies, int flush)
 
 /* Poll the caller for cooperative multitasking. */
 /* If this function is NULL, polling is not needed */
-static int display_update(void *handle, void *device, 
+static int display_update(void *handle, void *device,
     int x, int y, int w, int h)
 {
     IMAGE *img;
@@ -225,14 +225,14 @@ static int display_update(void *handle, void *device,
     return poll();
 }
 
-int display_separation(void *handle, void *device, 
+int display_separation(void *handle, void *device,
    int comp_num, const char *name,
    unsigned short c, unsigned short m,
    unsigned short y, unsigned short k)
 {
     IMAGE *img;
 #ifdef DISPLAY_DEBUG
-    fprintf(stdout, "display_separation(0x%x, 0x%x, %d '%s' %d,%d,%d,%d)\n", 
+    fprintf(stdout, "display_separation(0x%x, 0x%x, %d '%s' %d,%d,%d,%d)\n",
 	handle, device, comp_num, name, (int)c, (int)m, (int)y, (int)k);
 #endif
     img = image_find(handle, device);
@@ -241,7 +241,7 @@ int display_separation(void *handle, void *device,
     return 0;
 }
 
-display_callback display = { 
+display_callback display = {
     sizeof(display_callback),
     DISPLAY_VERSION_MAJOR,
     DISPLAY_VERSION_MINOR,
@@ -296,27 +296,27 @@ int new_main(int argc, char *argv[])
     gsdll.set_display_callback(instance, &display);
 
     /* insert display device defaults as first arguments */
-    {   int format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | 
+    {   int format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_1 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
 	HDC hdc = GetDC(NULL);	/* get hdc for desktop */
 	int depth = GetDeviceCaps(hdc, PLANES) * GetDeviceCaps(hdc, BITSPIXEL);
 	sprintf(ddpi, "-dDisplayResolution=%d", GetDeviceCaps(hdc, LOGPIXELSY));
         ReleaseDC(NULL, hdc);
 	if (depth == 32)
- 	    format = DISPLAY_COLORS_RGB | DISPLAY_UNUSED_LAST | 
+ 	    format = DISPLAY_COLORS_RGB | DISPLAY_UNUSED_LAST |
 		DISPLAY_DEPTH_8 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
 	else if (depth == 16)
- 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | 
+ 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_16 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST |
 		DISPLAY_NATIVE_555;
 	else if (depth > 8)
- 	    format = DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | 
+ 	    format = DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_8 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
 	else if (depth >= 8)
- 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | 
+ 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_8 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
 	else if (depth >= 4)
- 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | 
+ 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_4 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
         sprintf(dformat, "-dDisplayFormat=%d", format);
     }
@@ -365,7 +365,7 @@ int new_main(int argc, char *argv[])
 	default:
 	    exit_status = 255;
     }
-    
+
     return exit_status;
 }
 
@@ -383,7 +383,7 @@ set_font(void)
     fontsize = GetPrivateProfileInt(szIniSection, "FontSize", 10, szIniName);
 
     /* set font */
-    text_font(tw, fontname, fontsize); 
+    text_font(tw, fontname, fontsize);
 
     /* write ini file */
     WritePrivateProfileString(szIniSection, "FontName", fontname, szIniName);
@@ -391,7 +391,7 @@ set_font(void)
     WritePrivateProfileString(szIniSection, "FontSize", buf, szIniName);
 }
 
-int PASCAL 
+int PASCAL
 WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int cmdShow)
 {
     int dll_exit_status;
@@ -408,12 +408,12 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int cmd
     char winposbuf[256];
     int len = sizeof(winposbuf);
     int x, y, cx, cy;
- 
+
     /* copy the hInstance into a variable so it can be used */
     ghInstance = hInstance;
 
     if (hPrevInstance) {
-	MessageBox((HWND)NULL,"Can't run twice", szAppName, 
+	MessageBox((HWND)NULL,"Can't run twice", szAppName,
 		MB_ICONHAND | MB_OK);
 	return FALSE;
     }
@@ -423,11 +423,11 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int cmd
      *    "arg1 arg2" if called with CreateProcess(NULL, command, ...)
      *    "arg2"      if called with CreateProcess(command, args, ...)
      * GetCommandLine() returns
-     *    ""gswin32c.exe" arg1 arg2" 
+     *    ""gswin32c.exe" arg1 arg2"
      *          if called with CreateProcess(NULL, command, ...)
-     *    "  arg1 arg2"      
+     *    "  arg1 arg2"
      *          if called with CreateProcess(command, args, ...)
-     * Consequently we must use GetCommandLine() 
+     * Consequently we must use GetCommandLine()
      */
     p = GetCommandLine();
 
@@ -437,7 +437,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int cmd
 	fprintf(stdout, "Insufficient memory in WinMain()\n");
 	return 1;
     }
-   
+
     /* Parse command line handling quotes. */
     d = args;
     while (*p) {
@@ -455,7 +455,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int cmd
 		while ((*p) && (*p != '\042'))
 		    *d++ =*p++;
 	    }
-	    else 
+	    else
 		*d++ = *p;
 	    if (*p)
 		p++;
@@ -476,7 +476,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int cmd
 
     tw = text_new();
     if (tw == NULL) {
-	MessageBox((HWND)NULL, "Can't create text window", 
+	MessageBox((HWND)NULL, "Can't create text window",
 		szAppName, MB_OK | MB_ICONSTOP);
  	return 1;
     }
@@ -501,7 +501,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int cmd
     hwndtext = text_get_handle(tw);
 
     dll_exit_status = new_main(argc, argv);
-    
+
     if (dll_exit_status && !tw->quitnow) {
 	/* display error message in text window */
 	MSG msg;
@@ -528,6 +528,3 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int cmd
 
     return dll_exit_status;
 }
-
-
-

@@ -799,7 +799,7 @@ vGetNotesInfo(FILE *pFile, const pps_info_type *pPPS,
  */
 void
 vPrepareFootnoteText(FILE *pFile)
-{ 
+{
 	footnote_local_type	*pCurr;
 	size_t		tFootnote;
 

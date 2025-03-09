@@ -126,7 +126,7 @@ into screen fonts and character numbers
 .SH SOURCE
 .B /sys/src/cmd/proof
 .SH SEE ALSO
-.IR lp (1), 
+.IR lp (1),
 .IR gs (1),
 .IR page (1)
 .br

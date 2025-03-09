@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -51,7 +51,7 @@ private const gx_image_enum_procs_t image1_enum_procs = {
 };
 
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(image_enum_enum_ptrs, gx_image_enum *eptr)
 {
     int bps;
@@ -536,7 +536,7 @@ gx_image_enum_begin(gx_device * dev, const gs_imager_state * pis,
 	{   sample_unpack_1, sample_unpack_2,
 	    sample_unpack_4, sample_unpack_8,
 	    0, 0
-	}, 
+	},
 	{   sample_unpack_1_interleaved, sample_unpack_2_interleaved,
 	    sample_unpack_4_interleaved, sample_unpack_8_interleaved,
 	    0, 0

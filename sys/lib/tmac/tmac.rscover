@@ -19,7 +19,7 @@
 .if !"\\$9"" \\$9
 ..
 .ds AZ \f(HBA\h'-.2m'T\h'-.15m'\s-3&\s0\h'-.15m'T\fP
-.	\"S1 - tm style 
+.	\"S1 - tm style
 .de S1
 .br
 .sp |.5i

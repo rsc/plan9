@@ -34,7 +34,7 @@ struct Tftp
 
 	int seq;
 	int eof;
-	
+
 	char pkt[2+2+Segsize];
 	char nul;
 };
@@ -116,7 +116,7 @@ unload(void)
 	static uchar shutdown[] = { 0x05, 0x070, 0x02, 0 };
 	uchar *o;
 
-	for(o = shutdown; *o; o++){ 
+	for(o = shutdown; *o; o++){
 		memset(&buf, 0, sizeof(buf));
 		if(pxecall(*o, &buf))
 			break;

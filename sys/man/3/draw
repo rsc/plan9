@@ -1,4 +1,4 @@
-.TH DRAW 3 
+.TH DRAW 3
 .SH NAME
 draw \- screen graphics
 .SH SYNOPSIS
@@ -26,7 +26,7 @@ void	BPLONG(uchar *p, ulong v)
 .SH DESCRIPTION
 The
 .I draw
-device serves a three-level file system 
+device serves a three-level file system
 providing an interface to the graphics facilities of the system.
 Each client of the device connects by opening
 .B /dev/draw/new
@@ -51,9 +51,9 @@ and the
 .BR min.y ,
 .BR max.x ,
 and
-.B max.y 
-of the clipping rectangle. 
-The channel format string is described in 
+.B max.y
+of the clipping rectangle.
+The channel format string is described in
 .IR image (6),
 and the other fields are decimal numbers.
 .PP
@@ -67,22 +67,22 @@ and
 .B refresh
 files associated with the connection.
 .PP
-Via the 
+Via the
 .B ctl
 and
-.B draw 
+.B draw
 files, the
 .I draw
-device provides access to 
+device provides access to
 images and font caches
 in its private storage,
-as described in 
+as described in
 .IR graphics (2).
 Each image is identified by a 4-byte integer, its
 .IR id .
 .PP
 Reading the
-.B ctl 
+.B ctl
 file yields 12 strings formatted as in
 .BR /dev/draw/new ,
 but for the current image rather
@@ -92,16 +92,16 @@ binary image id to the
 .B ctl
 file.
 .PP
-A process can write messages to 
+A process can write messages to
 .B data
 to allocate and free images, fonts, and subfonts;
 read or write portions of the images;
 and draw line segments and character
 strings in the images.
 All graphics requests are clipped to their images.
-Some messages return a response to be recovered by 
+Some messages return a response to be recovered by
 reading the
-.B data 
+.B data
 file.
 .PP
 The format of messages written to
@@ -122,7 +122,7 @@ retrieve values from a character buffer.
 Points are two four-byte numbers:
 .IR x ,
 .IR y .
-Rectangles are four four-byte numbers: min 
+Rectangles are four four-byte numbers: min
 .IR x ,
 min
 .IR y ,
@@ -136,7 +136,7 @@ the distinction between identifier and actual image, screen, or font
 is not made, so that
 ``the object
 .IR id ''
-should be interpreted as 
+should be interpreted as
 ``the object with identifier
 .IR id ''.
 The definitions of constants used in the description below can be found in
@@ -168,13 +168,13 @@ with data from image
 .IR fillid .
 If the
 .I public
-byte is non-zero, the screen can 
+byte is non-zero, the screen can
 be accessed from other processes
 using the
 .B publicscreen
 interface.
 .HP
-.B b 
+.B b
 .IR id [4]
 .IR screenid [4]
 .IR refresh [1]
@@ -184,18 +184,18 @@ interface.
 .IR clipr [4*4]
 .IR color [4]
 .br
-Allocate an image with a given 
-.I id 
+Allocate an image with a given
+.I id
 on the
 screen named by
 .IR screenid .
 The image will have rectangle
-.I r 
+.I r
 and clipping rectangle
 .IR clipr .
-If 
+If
 .I repl
-is non-zero, the image's replicate 
+is non-zero, the image's replicate
 bit will be set (see
 .IR draw (2)).
 .IP
@@ -204,13 +204,13 @@ specifies the method to be used to draw the window
 when it is uncovered.
 .B Refbackup
 causes the server to maintain a backing store,
-.B Refnone 
+.B Refnone
 does not refresh the image,
 and
 .B Refmesg
 causes a message to be sent via
 the
-.B refresh 
+.B refresh
 file
 .RI ( q.v. ).
 .IP
@@ -240,7 +240,7 @@ channels of the color that the new image should
 be initially filled with.
 The red channel is in the highest 8 bits, and
 the alpha in the lowest.
-Note that color is always in this format, independent of 
+Note that color is always in this format, independent of
 the image format.
 .HP
 .B c
@@ -248,7 +248,7 @@ the image format.
 .IR repl [1]
 .IR clipr [4*4]
 .br
-Change the replicate bit and clipping rectangle of the 
+Change the replicate bit and clipping rectangle of the
 image
 .IR dstid .
 This overrides whatever settings were specified in
@@ -262,14 +262,14 @@ the allocate message.
 .IR srcp [2*4]
 .IR maskp [2*4]
 .br
-Use the 
+Use the
 .B draw
-operator to combine the rectangle 
+operator to combine the rectangle
 .I dstr
-of 
+of
 image
-.I dstid 
-with a 
+.I dstid
+with a
 rectangle of image
 .IR srcid ,
 using a rectangle of image
@@ -281,7 +281,7 @@ the upper left corner
 in image
 .I dstid
 corresponds to
-the point 
+the point
 .I srcp
 in image
 .I srcid
@@ -326,7 +326,7 @@ The ellipse is drawn using the image
 with
 the point
 .I sp
-in 
+in
 .I src
 aligned with
 .I c
@@ -337,11 +337,11 @@ The ellipse is drawn with thickness
 .IP
 If the high bit of
 .I alpha
-is set, 
+is set,
 only the arc of the ellipse from degree angles
 .I alpha
 to
-.I phi 
+.I phi
 is drawn.
 For the purposes of drawing the arc,
 .I alpha
@@ -364,8 +364,8 @@ Draws an ellipse or arc as the
 message, but rather than outlining it, fills
 the corresponding sector using the image
 .IR srcid .
-The 
-.I thick 
+The
+.I thick
 field is ignored, but must be non-negative.
 .HP
 .B f
@@ -388,7 +388,7 @@ Windows on the screen must be freed separately.
 .br
 Treat the image
 .I id
-as a font cache of 
+as a font cache of
 .I n
 character cells, each with
 ascent
@@ -450,16 +450,16 @@ in
 .I srcid
 aligns with
 .I p0
-in 
+in
 .IR dstid .
-The 
+The
 .I end0
 and
 .I end1
 fields specify whether the corresponding
 line end should be a square, a disc,
 or an arrow head.
-See 
+See
 .I line
 in
 .IR draw (2)
@@ -471,15 +471,15 @@ for more details.
 .IR j [1]
 .IR name [ j ]
 .br
-If 
+If
 .I in
 is non-zero, associate the image
 .I id
 with the string
 .IR name .
-If 
+If
 .I in
-is zero and 
+is zero and
 .I name
 already corresponds to the
 image
@@ -491,7 +491,7 @@ the association is deleted.
 .IR j [1]
 .IR name [ j ]
 .br
-Introduce the identifier 
+Introduce the identifier
 .I id
 to correspond to the image named
 by the string
@@ -502,7 +502,7 @@ by the string
 .IR r.min [2*4]
 .IR scr [2*4]
 .br
-Position the window 
+Position the window
 .I id
 so that its upper left corner is at the
 point
@@ -550,7 +550,7 @@ in
 aligns with the first point
 in the list
 .IR dp .
-The polygon need not be closed: 
+The polygon need not be closed:
 .I end0
 and
 .I end1
@@ -614,8 +614,8 @@ in image
 .br
 Draw in the image
 .I dstid
-the text string specified by the 
-.I n 
+the text string specified by the
+.I n
 cache
 .I indices
 into font
@@ -635,7 +635,7 @@ with
 in
 .IR dstid.
 All drawing is confined to the clipping rectangle
-.I clipr 
+.I clipr
 in
 .IR dstid .
 .HP
@@ -651,7 +651,7 @@ in
 .IR bp [2*4]
 .IR n*(index [2])
 .br
-Like the string drawing 
+Like the string drawing
 .B s
 command, but fill the background of each character
 with pixels from image
@@ -661,9 +661,9 @@ The image
 is translated so that the point
 .I bp
 aligns with the
-point 
+point
 .I dp
-in 
+in
 .IR dstid .
 .HP
 .B S
@@ -681,7 +681,7 @@ for its associated image.
 .IR n [2]
 .IR n*id [4]
 .br
-Send 
+Send
 .I n
 windows to the top (if
 .I t
@@ -709,23 +709,23 @@ Flush changes from a soft screen, if any, to the display buffer.
 .IR r [4*4]
 .IR buf [x*1]
 .br
-Replace the rectangle 
+Replace the rectangle
 .I r
 of pixels in image
 .I id
-with the pixel data in 
+with the pixel data in
 .IR buf .
 The pixel data must be in the format dictated by
 .IR id 's
 image channel descriptor (see
 .IR image (6)).
-The 
+The
 .B y
 message uses uncompressed data,
 while the
 .B Y
-message uses compressed data. 
-In either case, 
+message uses compressed data.
+In either case,
 it is an error to include more data than necessary.
 .PP
 Reading the
@@ -737,10 +737,10 @@ The first is an index into the map, and the remaining three are
 the red, green, and blue values associated with that index.
 The color map can be changed by writing entries in the
 above format to
-the 
+the
 .B colormap
 file.
-Note that changing the system color map 
+Note that changing the system color map
 does not change the color map used for
 calculations involving
 .B m8
@@ -778,13 +778,13 @@ only when the protocol is mishandled by the application.
 .IR Errstr (2)
 will report details.
 .SH BUGS
-The 
+The
 .B Refmesg
 refresh method is not fully implemented.
 .br
 The
 .B colormap
-files only reference the system color map, and as 
+files only reference the system color map, and as
 such should be called
 .B /dev/colormap
 rather than

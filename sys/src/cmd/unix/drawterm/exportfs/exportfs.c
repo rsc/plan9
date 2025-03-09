@@ -79,7 +79,7 @@ exportfs(int fd, int msgsz)
 		r = getsbuf();
 		if(r == 0)
 			fatal("Out of service buffers");
-			
+
 		DEBUG(DFD, "read9p...");
 		n = read9pmsg(netfd, r->buf, messagesize);
 		if(n <= 0)
@@ -115,7 +115,7 @@ reply(Fcall *r, Fcall *t, char *err)
 		t->type = Rerror;
 		t->ename = err;
 	}
-	else 
+	else
 		t->type = r->type + 1;
 
 if(0) iprint("-> %F\n", t);
@@ -170,7 +170,7 @@ freefid(int nr)
 		l = &f->next;
 	}
 
-	return 0;	
+	return 0;
 }
 
 Fid *
@@ -203,7 +203,7 @@ newfid(int nr)
 	new->fid = -1;
 	new->mid = 0;
 
-	return new;	
+	return new;
 }
 
 Fsrpc *
@@ -503,9 +503,8 @@ fatal(char *s, ...)
 //		postnote(PNPROC, m->pid, "kill");
 
 	DEBUG(DFD, "%s\n", buf);
-	if (s) 
+	if (s)
 		sysfatal(buf);
 	else
 		sysfatal("");
 }
-

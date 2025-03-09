@@ -43,7 +43,7 @@ struct RMap {
 	Lock;
 };
 
-/* 
+/*
  * Memory allocation tracking.
  */
 static Map mapupa[16];
@@ -79,7 +79,7 @@ mapprint(RMap *rmap)
 {
 	Map *mp;
 
-	print("%s\n", rmap->name);	
+	print("%s\n", rmap->name);
 	for(mp = rmap->map; mp->size; mp++)
 		print("\t%8.8luX %8.8luX (%lud)\n", mp->addr, mp->addr+mp->size, mp->size);
 }
@@ -213,7 +213,7 @@ void*
 rampage(void)
 {
 	ulong m;
-	
+
 	m = mapalloc(&rmapram, 0, BY2PG, BY2PG);
 	if(m == 0)
 		return nil;
@@ -432,7 +432,7 @@ ramscan(ulong maxmem)
 	map = 0;
 	x = 0x12345678;
 	memset(nvalid, 0, sizeof(nvalid));
-	
+
 	/*
 	 * Can't map memory to KADDR(pa) when we're walking because
 	 * can only use KADDR for relatively low addresses.
@@ -585,7 +585,7 @@ static int
 emapcmp(const void *va, const void *vb)
 {
 	Emap *a, *b;
-	
+
 	a = (Emap*)va;
 	b = (Emap*)vb;
 	if(a->base < b->base)
@@ -604,7 +604,7 @@ map(ulong base, ulong len, int type)
 {
 	ulong e, n;
 	ulong *table, flags, maxkpa;
-	
+
 	/*
 	 * Split any call crossing MemMin to make below simpler.
 	 */
@@ -613,7 +613,7 @@ map(ulong base, ulong len, int type)
 		map(base, n, type);
 		map(MemMin, len-n, type);
 	}
-	
+
 	/*
 	 * Let lowraminit and umbscan hash out the low MemMin.
 	 */
@@ -628,7 +628,7 @@ map(ulong base, ulong len, int type)
 		map(16*MB, len-(16*MB-base), MemUPA);
 		return;
 	}
-	
+
 	/*
 	 * Memory below CPU0END is reserved for the kernel
 	 * and already mapped.
@@ -640,7 +640,7 @@ map(ulong base, ulong len, int type)
 		map(PADDR(CPU0END), len-n, type);
 		return;
 	}
-	
+
 	/*
 	 * Memory between KTZERO and end is the kernel itself
 	 * and is already mapped.
@@ -656,7 +656,7 @@ map(ulong base, ulong len, int type)
 		map(PADDR(PGROUND((ulong)end)), len-n, type);
 		return;
 	}
-	
+
 	/*
 	 * Now we have a simple case.
 	 */
@@ -679,7 +679,7 @@ map(ulong base, ulong len, int type)
 		flags = 0;
 		break;
 	}
-	
+
 	/*
 	 * bottom MemMin is already mapped - just twiddle flags.
 	 * (not currently used - see above)
@@ -692,7 +692,7 @@ map(ulong base, ulong len, int type)
 			table[PTX(base)] |= flags;
 		return;
 	}
-	
+
 	/*
 	 * Only map from KZERO to 2^32.
 	 */
@@ -739,7 +739,7 @@ e820scan(void)
 	}
 	if(nemap == 0)
 		return -1;
-	
+
 	qsort(emap, nemap, sizeof emap[0], emapcmp);
 
 	if(getconf("*noe820print") == nil){
@@ -754,7 +754,7 @@ e820scan(void)
 	}
 
 	last = 0;
-	for(i=0; i<nemap; i++){	
+	for(i=0; i<nemap; i++){
 		e = &emap[i];
 		/*
 		 * pull out the info but only about the low 32 bits...
@@ -827,7 +827,7 @@ meminit(void)
 		cm->base = mp->addr;
 		cm->npage = mp->size/BY2PG;
 	}
-	
+
 	lost = 0;
 	for(; i<nelem(mapram); i++)
 		lost += rmapram.map[i].size;
@@ -923,7 +923,7 @@ void
 upareserve(ulong pa, int size)
 {
 	ulong a;
-	
+
 	a = mapalloc(&rmapupa, pa, size, 0);
 	if(a != pa){
 		/*
@@ -942,4 +942,3 @@ memorysummary(void)
 {
 	memdebug();
 }
-

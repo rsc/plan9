@@ -26,7 +26,7 @@ enum {
 };
 
 /*
- * Default boot block prints an error message and reboots. 
+ * Default boot block prints an error message and reboots.
  */
 static int ndefmbr = Toffset;
 static char defmbr[512] = {
@@ -198,6 +198,6 @@ main(int argc, char **argv)
 		fatal("seek to MBR sector: %r\n");
 	if(write(disk->wfd, mbr, nmbr) != nmbr)
 		fatal("writing MBR: %r");
-	
+
 	exits(0);
 }

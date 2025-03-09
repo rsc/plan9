@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -110,9 +110,9 @@ typedef struct gx_device_vector_procs_s {
     int (*setlogop) (gx_device_vector * vdev, gs_logical_operation_t lop,
 		     gs_logical_operation_t diff);
     /* Other state */
-    bool (*can_handle_hl_color) (gx_device_vector * vdev, const gs_imager_state * pis, 
+    bool (*can_handle_hl_color) (gx_device_vector * vdev, const gs_imager_state * pis,
                          const gx_drawing_color * pdc);
-    int (*setfillcolor) (gx_device_vector * vdev, const gs_imager_state * pis, 
+    int (*setfillcolor) (gx_device_vector * vdev, const gs_imager_state * pis,
                          const gx_drawing_color * pdc);
     int (*setstrokecolor) (gx_device_vector * vdev, const gs_imager_state * pis,
                            const gx_drawing_color * pdc);

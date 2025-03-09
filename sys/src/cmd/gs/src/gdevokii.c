@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1992, 1995 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -35,7 +35,7 @@
  * The simple minded accounting used here keep track of when the
  * page actually advances assumes the printer starts in a "power on"
  * state.
- * 
+ *
  * Supported resolutions are:
  *
  *    60x72      60x144
@@ -92,9 +92,9 @@ private int
 okiibm_print_page1(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
   const char *init_string, int init_length,
   const char *end_string, int end_length)
-{	
+{
 	static const char graphics_modes_9[5] =
-	{	
+	{
 	-1, 0 /*60*/, 1 /*120*/, -1, 3 /*240*/
 	};
 
@@ -117,9 +117,9 @@ okiibm_print_page1(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 
 	/* Check allocations */
 	if ( buf1 == 0 || buf2 == 0 )
-	{	if ( buf1 ) 
+	{	if ( buf1 )
 		  gs_free(pdev->memory, (char *)buf1, in_size, 1, "okiibm_print_page(buf1)");
-		if ( buf2 ) 
+		if ( buf2 )
 		  gs_free(pdev->memory, (char *)buf2, in_size, 1, "okiibm_print_page(buf2)");
 		return_error(gs_error_VMerror);
 	}
@@ -129,7 +129,7 @@ okiibm_print_page1(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 
 	/* Print lines of graphics */
 	while ( lnum < pdev->height )
-	{	
+	{
 		byte *in_data;
 		byte *inp;
 		byte *in_end;
@@ -141,7 +141,7 @@ okiibm_print_page1(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 		if ( in_data[0] == 0 &&
 		     !memcmp((char *)in_data, (char *)in_data + 1, line_size - 1)
 		   )
-	    	{	
+	    	{
 			lnum++;
 			skip += 2 / in_y_mult;
 			continue;
@@ -163,7 +163,7 @@ okiibm_print_page1(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 		}
 		skip = skip / 2 * 3;
 		while ( skip > 255 )
-		{	
+		{
 			fputs("\033J\377", prn_stream);
 			skip -= 255;
 		}
@@ -211,10 +211,10 @@ okiibm_print_page1(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 		    out_end = out;
 		    inp = in;
 		    in_end = inp + line_size;
-    
+
     	            for ( ; inp < in_end; inp++, out_end += 8 )
-    	            { 
-    		        gdev_prn_transpose_8x8(inp + (ypass * 8 * line_size), 
+    	            {
+    		        gdev_prn_transpose_8x8(inp + (ypass * 8 * line_size),
 					       line_size, out_end, 1);
 		    }
 		    /* Remove trailing 0s. */
@@ -258,7 +258,7 @@ okiibm_print_page1(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 private void
 okiibm_output_run(byte *data, int count, int y_mult,
   char start_graphics, FILE *prn_stream, int pass)
-{	
+{
 	int xcount = count / y_mult;
 
 	fputc(033, prn_stream);
@@ -270,7 +270,7 @@ okiibm_output_run(byte *data, int count, int y_mult,
 		fwrite(data, 1, count, prn_stream);
 	}
 	else
-	{	
+	{
 		/* Only write every other column of y_mult bytes. */
 		int which = pass;
 		register byte *dp = data;
@@ -317,8 +317,8 @@ okiibm_print_page(gx_device_printer *pdev, FILE *prn_stream)
 		        sizeof(okiibm_two_direct) );
 		end_length += sizeof(okiibm_two_direct);
 	}
-	
-	return okiibm_print_page1( pdev, prn_stream, 
+
+	return okiibm_print_page1( pdev, prn_stream,
 				   pdev->y_pixels_per_inch > 72 ? 1 : 0,
 				   init_string, init_length,
 				   end_string, end_length );

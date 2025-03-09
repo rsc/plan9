@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -775,7 +775,7 @@ gdev_psdf_put_params(gx_device * dev, gs_param_list * plist)
     ecode = code = param_read_bool(plist, "LockDistillerParams",
   				   &params.LockDistillerParams);
     if (!(pdev->params.LockDistillerParams && params.LockDistillerParams)) {
-  
+
 	/* General parameters. */
 
 	code = gs_param_read_items(plist, &params, psdf_param_items);

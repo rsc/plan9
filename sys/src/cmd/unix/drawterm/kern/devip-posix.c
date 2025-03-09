@@ -184,7 +184,7 @@ so_bind(int fd, int su, unsigned short port, unsigned char *addr)
 				break;
 			}
 
-			if(bind(fd, (struct sockaddr*)&ss, addrlen(&ss)) >= 0)	
+			if(bind(fd, (struct sockaddr*)&ss, addrlen(&ss)) >= 0)
 				return;
 		}
 		oserror();

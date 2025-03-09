@@ -2,7 +2,7 @@
 .SH NAME
 snap, snapfs \- create and mount process snapshots
 .SH SYNOPSIS
-.B snap 
+.B snap
 [
 .B -o
 .I file
@@ -14,7 +14,7 @@ snap, snapfs \- create and mount process snapshots
 .B -a
 ]
 [
-.B -m 
+.B -m
 .I mtpt
 ]
 [
@@ -24,20 +24,20 @@ snap, snapfs \- create and mount process snapshots
 .I file...
 .SH DESCRIPTION
 .I Snap
-and 
+and
 .I snapfs
 allow one to save and restore (static) process images,
 usually for debugging
 on a different machine or at a different time.
 .PP
 .I Snap
-writes a snapshot 
-(see 
+writes a snapshot
+(see
 .IR snap (6))
 of the named processes to
-.I file 
+.I file
 (default standard output).
-If 
+If
 .I pid
 is a text string
 rather than a process id,
@@ -53,10 +53,10 @@ recreates the
 .B /proc
 directories for the processes in the snapshot.
 By default, it mounts the new directories
-into 
+into
 .B /proc
 before the current entries.
-The 
+The
 .B -m
 option can be used to specify
 an alternate mountpoint,
@@ -64,7 +64,7 @@ while
 .B -a
 will cause it to mount the new directories
 after the current entries.
-The 
+The
 .B -s
 option causes it to serve requests via
 .BI /srv/ service.

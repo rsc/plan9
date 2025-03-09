@@ -20,7 +20,7 @@ it is a sequence of text lines
 the astart and astop are byte offsets in the disk file.
 they are the offsets to the ArenaHead and the end of the Arena block.
 
-ArenaHead 
+ArenaHead
 [base points here in the C code]
 size bytes
 	Clumps
@@ -100,7 +100,7 @@ but that's what they're called.
 the index is split into index sections, which are put on different disks
 to get parallelism of disk heads.  each index section holds some number
 of hash buckets, each in its own disk block.  collectively the index sections
-hold ix->buckets between them. 
+hold ix->buckets between them.
 
 the top 32-bits of the score is used to assign scores to buckets.
 div = ceil(2³² / ix->buckets) is the amount of 32-bit score space per bucket.
@@ -113,7 +113,7 @@ then load that block from the index section.  it's an IBucket.
 
 the IBucket has ib.n IEntry structures in it, sorted by score and then by type.
 do the lookup and get an IEntry.  the ia.addr will be a logical address
-that you then use to get the 
+that you then use to get the
 
 ISect
 	magic[4] 0xD15C5EC7
@@ -146,4 +146,3 @@ and the like).
 
 actually the last 8k of the 256k (that is, at offset 248kB) can hold
 a venti config file to help during bootstrap of the venti file server.
-

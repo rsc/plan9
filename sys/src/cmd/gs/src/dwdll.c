@@ -1,12 +1,12 @@
 /* Copyright (C) 1996-2000 Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -80,7 +80,7 @@ gsapi_revision_t rv;
 
     /* DLL is now loaded */
     /* Get pointers to functions */
-    gsdll->revision = (PFN_gsapi_revision) GetProcAddress(gsdll->hmodule, 
+    gsdll->revision = (PFN_gsapi_revision) GetProcAddress(gsdll->hmodule,
 	"gsapi_revision");
     if (gsdll->revision == NULL) {
 	strncpy(last_error, "Can't find gsapi_revision\n", len-1);
@@ -102,7 +102,7 @@ gsapi_revision_t rv;
     }
 
     /* continue loading other functions */
-    gsdll->new_instance = (PFN_gsapi_new_instance) GetProcAddress(gsdll->hmodule, 
+    gsdll->new_instance = (PFN_gsapi_new_instance) GetProcAddress(gsdll->hmodule,
 	"gsapi_new_instance");
     if (gsdll->new_instance == NULL) {
 	strncpy(last_error, "Can't find gsapi_new_instance\n", len-1);
@@ -110,7 +110,7 @@ gsapi_revision_t rv;
 	return 1;
     }
 
-    gsdll->delete_instance = (PFN_gsapi_delete_instance) GetProcAddress(gsdll->hmodule, 
+    gsdll->delete_instance = (PFN_gsapi_delete_instance) GetProcAddress(gsdll->hmodule,
 	"gsapi_delete_instance");
     if (gsdll->delete_instance == NULL) {
 	strncpy(last_error, "Can't find gsapi_delete_instance\n", len-1);
@@ -118,7 +118,7 @@ gsapi_revision_t rv;
 	return 1;
     }
 
-    gsdll->set_stdio = (PFN_gsapi_set_stdio) GetProcAddress(gsdll->hmodule, 
+    gsdll->set_stdio = (PFN_gsapi_set_stdio) GetProcAddress(gsdll->hmodule,
 	"gsapi_set_stdio");
     if (gsdll->set_stdio == NULL) {
 	strncpy(last_error, "Can't find gsapi_set_stdio\n", len-1);
@@ -126,7 +126,7 @@ gsapi_revision_t rv;
 	return 1;
     }
 
-    gsdll->set_poll = (PFN_gsapi_set_poll) GetProcAddress(gsdll->hmodule, 
+    gsdll->set_poll = (PFN_gsapi_set_poll) GetProcAddress(gsdll->hmodule,
 	"gsapi_set_poll");
     if (gsdll->set_poll == NULL) {
 	strncpy(last_error, "Can't find gsapi_set_poll\n", len-1);
@@ -134,7 +134,7 @@ gsapi_revision_t rv;
 	return 1;
     }
 
-    gsdll->set_display_callback = (PFN_gsapi_set_display_callback) 
+    gsdll->set_display_callback = (PFN_gsapi_set_display_callback)
 	GetProcAddress(gsdll->hmodule, "gsapi_set_display_callback");
     if (gsdll->set_display_callback == NULL) {
 	strncpy(last_error, "Can't find gsapi_set_display_callback\n", len-1);
@@ -142,7 +142,7 @@ gsapi_revision_t rv;
 	return 1;
     }
 
-    gsdll->init_with_args = (PFN_gsapi_init_with_args) 
+    gsdll->init_with_args = (PFN_gsapi_init_with_args)
 	GetProcAddress(gsdll->hmodule, "gsapi_init_with_args");
     if (gsdll->init_with_args == NULL) {
 	strncpy(last_error, "Can't find gsapi_init_with_args\n", len-1);
@@ -150,7 +150,7 @@ gsapi_revision_t rv;
 	return 1;
     }
 
-    gsdll->run_string = (PFN_gsapi_run_string) GetProcAddress(gsdll->hmodule, 
+    gsdll->run_string = (PFN_gsapi_run_string) GetProcAddress(gsdll->hmodule,
 	"gsapi_run_string");
     if (gsdll->run_string == NULL) {
 	strncpy(last_error, "Can't find gsapi_run_string\n", len-1);
@@ -158,7 +158,7 @@ gsapi_revision_t rv;
 	return 1;
     }
 
-    gsdll->exit = (PFN_gsapi_exit) GetProcAddress(gsdll->hmodule, 
+    gsdll->exit = (PFN_gsapi_exit) GetProcAddress(gsdll->hmodule,
 	"gsapi_exit");
     if (gsdll->exit == NULL) {
 	strncpy(last_error, "Can't find gsapi_exit\n", len-1);
@@ -166,7 +166,7 @@ gsapi_revision_t rv;
 	return 1;
     }
 
-    gsdll->set_visual_tracer = (PFN_gsapi_set_visual_tracer) 
+    gsdll->set_visual_tracer = (PFN_gsapi_set_visual_tracer)
         GetProcAddress(gsdll->hmodule, "gsapi_set_visual_tracer");
     if (gsdll->set_visual_tracer == NULL) {
 	strncpy(last_error, "Can't find gsapi_set_visual_tracer\n", len-1);
@@ -195,5 +195,3 @@ void unload_dll(GSDLL *gsdll)
 	    FreeLibrary(gsdll->hmodule);
     gsdll->hmodule = NULL;
 }
-
-

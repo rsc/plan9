@@ -324,7 +324,7 @@ rwakeup(Rendez *r)
 	 * take off wait and put on front of queue
 	 * put on front so guys that have been waiting will not get starved
 	 */
-	
+
 	if(!r->l)
 		abort();
 	lock(&r->l->lock);
@@ -360,4 +360,3 @@ rwakeupall(Rendez *r)
 		;
 	return i;
 }
-

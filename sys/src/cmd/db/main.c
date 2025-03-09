@@ -84,7 +84,7 @@ main(int argc, char **argv)
 					if(q)
 						*q = 0;
 					sprint(b1, "/%s/9%s", cpu, p);
-				
+
 				}
 			}else
 				sprint(b1, "/proc/%s/text", argv[0]);

@@ -113,7 +113,7 @@ enc_u_get_uint(uint * pval, const byte * ptr)
         shift += enc_u_shift;
     }
     *pval = uval | (tmp_val << shift);
-    
+
     return ptr;
 }
 

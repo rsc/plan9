@@ -123,7 +123,7 @@ void
 dosysr1(Node *r, Node*)
 {
 	extern int sysr1(void);
-	
+
 	r->op = OCONST;
 	r->type = TINT;
 	r->fmt = 'D';
@@ -560,7 +560,7 @@ doaccess(Node *r, Node *args)
 
 	r->op = OCONST;
 	r->type = TINT;
-	r->ival = 0;		
+	r->ival = 0;
 	if(access(res.string->string, 4) == 0)
 		r->ival = 1;
 }
@@ -691,7 +691,7 @@ static int
 acidfmt(char *fmt, char *buf, int blen)
 {
 	char *r, *w, *e;
-	
+
 	w = buf;
 	e = buf+blen;
 	for(r=fmt; *r; r++){
@@ -829,7 +829,7 @@ map(Node *r, Node *args)
 			i = findseg(m, ent);
 		}
 		if(i < 0)
-			error("%s is not a map entry", ent);	
+			error("%s is not a map entry", ent);
 		l = l->next;
 		if(l->type != TINT)
 			error("map entry not int");
@@ -861,7 +861,7 @@ map(Node *r, Node *args)
 	}
 }
 
-void 
+void
 flatten(Node **av, Node *n)
 {
 	if(n == 0)
@@ -1242,7 +1242,7 @@ pcfile(Node *r, Node *args)
 	if(p == 0)
 		error("pcfile(addr): funny file %s", buf);
 	*p = '\0';
-	r->string = strnode(buf);	
+	r->string = strnode(buf);
 }
 
 void
@@ -1267,7 +1267,7 @@ pcline(Node *r, Node *args)
 	p = strrchr(buf, ':');
 	if(p == 0)
 		error("pcline(addr): funny file %s", buf);
-	r->ival = strtol(p+1, 0, 0);	
+	r->ival = strtol(p+1, 0, 0);
 }
 
 void fmtof(Node *r, Node *args)

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989-2003 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -29,7 +29,7 @@
 #include "gxfill.h"
 #include "vdtrace.h"
 
-#define INTERTRAP_STEM_BUG 0 /* We're not sure that 1 gives a 
+#define INTERTRAP_STEM_BUG 0 /* We're not sure that 1 gives a
                                 better painting with neighbour serifs.
 				Need more testing.
 				0 is compatible to the old code. */
@@ -66,7 +66,7 @@ private margin * alloc_margin(line_list * ll)
 	++ ll->local_margin_alloc_count;
     } else {
 	m = gs_alloc_struct(ll->memory, margin, &st_margin, "filling contiguity margin");
-	/* The allocation happens only if ll->local_margins[MAX_LOCAL_ACTIVE] 
+	/* The allocation happens only if ll->local_margins[MAX_LOCAL_ACTIVE]
 	   is exceeded. We believe it does very seldom. */
     }
     return m;
@@ -147,7 +147,7 @@ private int store_margin(line_list * ll, margin_set * set, int ii0, int ii1)
 	    /* m1 points to a non-contacting at left. */
 	}
 	/* Remove elements from m0->next to m1->prev, excluding the latter.
-	   m0 may be NULL if we riched list start. 
+	   m0 may be NULL if we riched list start.
 	   m1 may be NULL if we riched list end. */
 	mb = (m0 == 0 ? set->margin_list : m0->next);
 	if (mb != 0 && mb != m1) {
@@ -172,7 +172,7 @@ private int store_margin(line_list * ll, margin_set * set, int ii0, int ii1)
 		    /* 'prev' links are not used in ll->free_margin_list. */
 		}
 	    }
-	} 
+	}
 	me = (m0 == 0 ? set->margin_list : m0->next);
 	if (me == 0)
 	    m0 = m0; /* Already set. */
@@ -219,7 +219,7 @@ private inline fixed Y_AT_X(active_line *alp, fixed xp)
 {   return alp->start.y + fixed_mult_quo(xp - alp->start.x,  alp->diff.y, alp->diff.x);
 }
 
-private int margin_boundary(line_list * ll, margin_set * set, active_line * alp, 
+private int margin_boundary(line_list * ll, margin_set * set, active_line * alp,
 			    fixed xx0, fixed xx1, fixed yy0, fixed yy1, int dir, fixed y0, fixed y1)
 {   section *sect = set->sect;
     fixed x0, x1, xmin, xmax;
@@ -315,7 +315,7 @@ int continue_margin_common(line_list * ll, margin_set * set, active_line * flp, 
 
 	int i0 = fixed2int(xmin) - ll->bbox_left, i;
 	int i1 = fixed2int_ceiling(xmax) - ll->bbox_left;
-   
+
 	for (i = i0; i < i1; i++) {
 	    section *s = &sect[i];
 	    int x_pixel = int2fixed(i + ll->bbox_left);
@@ -384,12 +384,12 @@ int margin_interior(line_list * ll, active_line * flp, active_line * alp, fixed 
     return 0;
 }
 
-private inline int process_h_sect(line_list * ll, margin_set * set, active_line * hlp0, 
+private inline int process_h_sect(line_list * ll, margin_set * set, active_line * hlp0,
     active_line * plp, active_line * flp, int side, fixed y0, fixed y1)
 {
     active_line *hlp = hlp0;
     fixed y = hlp->start.y;
-    fixed x0 = (plp != 0 ? (y == y0 ? plp->x_current : y == y1 ? plp->x_next : AL_X_AT_Y(plp, y)) 
+    fixed x0 = (plp != 0 ? (y == y0 ? plp->x_current : y == y1 ? plp->x_next : AL_X_AT_Y(plp, y))
 			 : int2fixed(ll->bbox_left));
     fixed x1 = (flp != 0 ? (y == y0 ? flp->x_current : y == y1 ? flp->x_next : AL_X_AT_Y(flp, y))
                          : int2fixed(ll->bbox_left + ll->bbox_width));
@@ -406,10 +406,10 @@ private inline int process_h_sect(line_list * ll, margin_set * set, active_line 
 		return code;
 	}
     }
-    return 0;	
+    return 0;
 }
 
-private inline int process_h_side(line_list * ll, margin_set * set, active_line * hlp, 
+private inline int process_h_side(line_list * ll, margin_set * set, active_line * hlp,
     active_line * plp, active_line * flp, active_line * alp, int side, fixed y0, fixed y1)
 {   if (plp != 0 || flp != 0 || (plp == 0 && flp == 0 && alp == 0)) {
 	/* We don't know here, whether the opposite (-) side is painted with
@@ -429,7 +429,7 @@ private inline int process_h_side(line_list * ll, margin_set * set, active_line 
     return 0;
 }
 
-private inline int process_h_list(line_list * ll, active_line * hlp, active_line * plp, 
+private inline int process_h_list(line_list * ll, active_line * hlp, active_line * plp,
     active_line * flp, active_line * alp, int side, fixed y0, fixed y1)
 {   fixed y = hlp->start.y;
 
@@ -450,7 +450,7 @@ private inline int process_h_list(line_list * ll, active_line * hlp, active_line
 
 int process_h_lists(line_list * ll, active_line * plp, active_line * flp, active_line * alp,
 		    fixed y0, fixed y1)
-{   
+{
     if (y0 == y1) {
 	/*  fixme : Must not happen. Remove. */
 	return 0;
@@ -473,8 +473,8 @@ int process_h_lists(line_list * ll, active_line * plp, active_line * flp, active
 private inline int compute_padding(section *s)
 {
     return (s->y0 < 0 || s->y1 < 0 ? -2 : /* contacts a trapezoid - don't paint */
-	    s->y1 < fixed_half ? 0 : 
-	    s->y0 > fixed_half ? 1 : 
+	    s->y1 < fixed_half ? 0 :
+	    s->y0 > fixed_half ? 1 :
 	    fixed_half - s->y0 < s->y1 - fixed_half ? 1 : 0);
 }
 
@@ -491,9 +491,9 @@ private int fill_margin(gx_device * dev, const line_list * ll, margin_set *ms, i
     for (i = i0; i < i1; i++) {
 	int y0 = sect[i].y0, y1 = sect[i].y1, hh;
 
-	if (y0 == -1) 
+	if (y0 == -1)
 	    y0 = 0;
-	if (y1 == -1) 
+	if (y1 == -1)
 	    y1 = fixed_scale - 1;
 	hh = compute_padding(&sect[i]);
 #	if ADJUST_SERIF
@@ -504,7 +504,7 @@ private int fill_margin(gx_device * dev, const line_list * ll, margin_set *ms, i
 
 			hh = hhh;
 		    } else if (i == i1 - 1 && i > i0)
-			hh = h; 
+			hh = h;
 		    /* We could optimize it with moving outside the cycle.
 		     * Delaying the optimization until the code is well tested.
 		     */
@@ -519,7 +519,7 @@ private int fill_margin(gx_device * dev, const line_list * ll, margin_set *ms, i
 			 */
 #			if INTERTRAP_STEM_BUG
 			/* A bug in the old code. */
-			if (i > i0 && i + 1 < i1 && hh == -2 && 
+			if (i > i0 && i + 1 < i1 && hh == -2 &&
 				compute_padding(&sect[i - 1]) == -2) {
 			    /* It can be either a thin stem going from left to up or down
 			       (See 'r' in 01-001.ps in 'General', ppmraw, 72dpi),
@@ -536,12 +536,12 @@ private int fill_margin(gx_device * dev, const line_list * ll, margin_set *ms, i
 			hh = h;
 #			if INTERTRAP_STEM_BUG
 			/* A bug in the old code. */
-			if (i > i0 && i + 1 < i1 && hh == -2 && 
+			if (i > i0 && i + 1 < i1 && hh == -2 &&
 				compute_padding(&sect[i - 1]) == -2) {
 			    /* It can be either a thin stem going from right to up or down
 			       (See 'r' in 01-001.ps in 'General', ppmraw, 72dpi),
 			       or a serif from the right.
-			       Since it is between 2 trapezoids, it is better to paint it. 
+			       Since it is between 2 trapezoids, it is better to paint it.
 			       against a dropout. */
 			    DO_NOTHING;
 			}
@@ -575,33 +575,33 @@ private int fill_margin(gx_device * dev, const line_list * ll, margin_set *ms, i
  *  We either suppress a serif or move it up or down for 1 pixel.
  *  If we would paint it as an entire pixel where it occures, it looks too big
  *  relatively to the character size. Besides, a stem end may
- *  be placed a little bit below the baseline, and our dropout prevention 
+ *  be placed a little bit below the baseline, and our dropout prevention
  *  method desides to paint a pixel below baseline, so that it looks
  *  fallen down (or fallen up in the case of character top).
- *  
+ *
  *  We assume that contacting margins are merged in margin_list.
  *  This implies that areas outside a margin are not painted
  *  (Only useful without CHECK_SPOT_CONTIGUITY).
  *
  *  With no CHECK_SPOT_CONTIGUITY we can't perfectly handle the case when 2 serifs
  *  contact each another inside a margin interior (such as Serif 'n').
- *  Since we don't know the contiguty, we misrecognize them as a stem and 
+ *  Since we don't know the contiguty, we misrecognize them as a stem and
  *  leave them as they are (possibly still fallen down or up).
  *
  *  CHECK_SPOT_CONTIGUITY computes the contiguity of the intersection of the spot
  *  and the section window. It allows to recognize contacting serifs properly.
  *
- *  If a serif isn't painted with regular trapezoids, 
+ *  If a serif isn't painted with regular trapezoids,
  *  it appears a small one, so we don't need to measure its size.
  *  This heuristic isn't perfect, but it is very fast.
  *  Meanwhile with CHECK_SPOT_CONTIGUITY we actually have something
  *  like a bbox for a small serif, and a rough estimation is possible.
- * 
+ *
  *  We believe that in normal cases this stuff should work idle,
- *  because a perfect rendering should either use anti-aliasing 
+ *  because a perfect rendering should either use anti-aliasing
  *  (so that the character isn't small in the subpixel grid),
  *  and/or the path must be well fitted into the grid. So please consider
- *  this code as an attempt to do our best for the case of a 
+ *  this code as an attempt to do our best for the case of a
  *  non-well-setup rendering.
  */
 }
@@ -633,6 +633,3 @@ int start_margin_set(gx_device * dev, line_list * ll, fixed y0)
     ll->margin_set0.y = ym;
     return code;
 }
-
-
-

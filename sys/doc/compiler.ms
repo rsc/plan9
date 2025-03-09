@@ -376,7 +376,7 @@ to be laid out in memory tightly packed in successive bytes, disregarding
 the usual alignment rules.
 Accessing such data can cause faults.
 .LP
-Similarly, 
+Similarly,
 .CW #pragma
 .CW profile
 .CW off
@@ -393,7 +393,7 @@ causes subsequently declared functions, until
 or
 .CW 1 ),
 to be marked as unprofiled.
-Such functions will not be profiled when 
+Such functions will not be profiled when
 profiling is enabled for the rest of the program.
 .LP
 Two

@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -356,7 +356,7 @@ private gx_color_index
 ppm_map_rgb_color(gx_device * pdev, const gx_color_value cv[])
 {
     gx_device_pbm * const bdev = (gx_device_pbm *)pdev;
-    gx_color_index color = 
+    gx_color_index color =
 	    gx_old_default_rgb_map_rgb_color(pdev, cv[0], cv[1], cv[2]);
     uint bpc = pdev->color_info.depth / 3;
     gx_color_index mask =
@@ -516,7 +516,7 @@ pnm_copy_alpha(gx_device * pdev, const byte * data, int data_x,
 
 /* Begin processing an image, noting whether we may generate some */
 /* non-black/white colors in the process. */
-private int 
+private int
 pnm_begin_typed_image(gx_device *dev,
                       const gs_imager_state *pis, const gs_matrix *pmat,
                       const gs_image_common_t *pim, const gs_int_rect *prect,
@@ -526,7 +526,7 @@ pnm_begin_typed_image(gx_device *dev,
 {
     gx_device_pbm * const bdev = (gx_device_pbm *)dev;
 
-    /* Conservatively guesses whether this operation causes color usage 
+    /* Conservatively guesses whether this operation causes color usage
        that might not be otherwise captured by ppm_map_color_rgb. */
     if (pim && pim->type) {
 	switch (pim->type->index) {
@@ -538,7 +538,7 @@ pnm_begin_typed_image(gx_device *dev,
 		if (gs_color_space_get_index(pim1->ColorSpace) == gs_color_space_index_DeviceGray) {
 		    if (pim1->BitsPerComponent > 1)
 			bdev->uses_color |= 1;
-		} else 
+		} else
 		    bdev->uses_color = 2;
 	    }
 	    break;
@@ -549,7 +549,7 @@ pnm_begin_typed_image(gx_device *dev,
 	}
     }
     /* Forward to saved routine */
-    return (*bdev->save_begin_typed_image)(dev, pis, pmat, pim, prect, 
+    return (*bdev->save_begin_typed_image)(dev, pis, pmat, pim, prect,
 					   pdcolor, pcpath, memory, pinfo);
 }
 

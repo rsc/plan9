@@ -14,7 +14,7 @@ BEGIN{
 			names[name] = name
 			alias[name i] = name
 			nalias[name] = ++i
-			
+
 		}
 		if(/^Alias:/){
 			a = tolower($2)

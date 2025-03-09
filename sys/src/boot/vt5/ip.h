@@ -12,7 +12,7 @@ struct Udphdr
 	uchar	frag[2];	/* Fragment information */
 
 	/* Udp pseudo ip really starts here */
-	uchar	ttl;	
+	uchar	ttl;
 	uchar	udpproto;	/* Protocol */
 	uchar	udpplen[2];	/* Header plus data length */
 	uchar	udpsrc[4];	/* Ip source */
@@ -46,7 +46,7 @@ struct Etherhdr
 enum
 {
 	IP_VER		= 0x40,
-	IP_HLEN		= 0x05,			
+	IP_HLEN		= 0x05,
  	UDP_EHSIZE	= 22,
 	UDP_PHDRSIZE	= 12,
 	UDP_HDRSIZE	= 20,

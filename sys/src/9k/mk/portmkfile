@@ -128,7 +128,7 @@ clean:V:
 	rm -f *.[$OS] *.root.[cs] *.out *.m *.acid errstr.h init.h
 	mk $ARCH.clean
 	@{cd ../root; mk clean}
-	if(test -d ./root) @{cd ./root; mk -f ../../root/mkfile clean}; status=''	
+	if(test -d ./root) @{cd ./root; mk -f ../../root/mkfile clean}; status=''
 
 nuke:V:	clean
 	mk $ARCH.nuke

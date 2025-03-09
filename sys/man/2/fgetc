@@ -178,7 +178,7 @@ is the same, writing to
 .PP
 .I Fread
 reads from the named input
-.IR stream 
+.IR stream
 at most
 .I nitems
 of data of size
@@ -204,7 +204,7 @@ It returns the number of items actually written.
 .SH SOURCE
 .B /sys/src/libstdio
 .SH "SEE ALSO"
-.IR read (2), 
+.IR read (2),
 .IR fopen (2),
 .IR bio (2)
 .SH BUGS

@@ -9,7 +9,7 @@ static stdebug = 1;
 /*
 	!8c -FVw tap.c
 	!8l -o tap tap.8
-	!tap > /tmp/l 
+	!tap > /tmp/l
 */
 
 static char *stnames[] = {
@@ -112,7 +112,7 @@ findpath(int origin, int dest)
 	memost = 0;
 	if(origin == dest)
 		return *paths;
-	
+
 	for(i = 0; i < NStates; i++){
 		for(j = 0; j < np; j++){
 			nc = 0;
@@ -135,7 +135,7 @@ findpath(int origin, int dest)
 				else
 					ip = np++;
 				paths[ip] = newp;
-	
+
 			}
 		}
 	}
@@ -150,7 +150,7 @@ concatpath(SmPath *p1, SmPath *p2)
 {
 	ulong msk;
 	assert(p1->ptmslen < 8*sizeof(p1->ptms));
-		
+
 	msk = (1 << p2->ptmslen)-1;
 	p1->ptms = (p1->ptms << p2->ptmslen)|(p2->ptms & msk);
 	p1->ptmslen += p2->ptmslen;
@@ -206,7 +206,7 @@ moveto(TapSm *sm, int dest)
 
 static ulong
 pathpref(SmPath *pth, int nbits)
-{	
+{
 	ulong msk;
 	assert(pth->ptmslen >= nbits);
 
@@ -264,6 +264,6 @@ main(int, char *[])
 	sm.state = TapUnknown;
 	pth = pathto(&sm, TapExit2DR);
 	dumppath(&pth);
-	
+
 }
 */

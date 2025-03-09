@@ -68,10 +68,10 @@ tapshift(JMedium *jmed, ShiftTDesc *req, ShiftRDesc *rep, int tapidx)
 			else if(req->reg == TapIR){
 				if(i == tapidx)
 					getbits(req->buf, ch, ch->e - ch->b);
-				else 
+				else
 					getbits(&ones, ch, jmed->taps[tapidx].irlen);
 			}
 		}
-	
+
 	return 0;
 }

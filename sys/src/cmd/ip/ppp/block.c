@@ -55,7 +55,7 @@ allocb(int len)
 
 	len += PAD;
 	sz = (len>>BPOW)&(NLIST-1);
-	
+
 	qlock(&area);
 	l = &area.list[sz];
 	for(bp = *l; bp; bp = bp->flist) {
@@ -228,7 +228,7 @@ padb(Block *bp, int n)
 		nbp->next = bp;
 		return nbp;
 	}
-} 
+}
 
 Block *
 btrim(Block *bp, int offset, int len)

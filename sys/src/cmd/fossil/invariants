@@ -63,7 +63,7 @@ Since no pointers to $b# or $b'# were modified,
 .LP
 $"BlockRemoveLink" (b -> bb)# removes from block $b# the pointer to $bb#
 .IP
-Zeroing a pointer only restricts the preconditions on the 
+Zeroing a pointer only restricts the preconditions on the
 invariants, so it's always okay.
 By (iii), if $b# is not
 .CW BsCopied
@@ -101,7 +101,7 @@ Since $bb sub 1# is a copy of $bb sub 0#, (v) is satisfied.
 $"BlockSetLink" (b -> "nil" , "oldRoot" )# changes a nil pointer to point
 at a snapshot root.
 .IP (i)
-Invariant (i) is broken, but the 
+Invariant (i) is broken, but the
 .CW snap
 field in the entry will be used to make sure
 we don't access the snapshot after it has been reclaimed.

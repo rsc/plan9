@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -205,7 +205,7 @@ zdefineusername(i_ctx_t *i_ctx_p)
 	if (code < 0)
 	    return code;
     }
-    if (array_get(imemory, user_names_p, 
+    if (array_get(imemory, user_names_p,
 		  op[-1].value.intval, &uname) >= 0) {
 	switch (r_type(&uname)) {
 	    case t_null:

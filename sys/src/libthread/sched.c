@@ -84,10 +84,10 @@ needstack(int n)
 	int x;
 	Proc *p;
 	Thread *t;
-	
+
 	p = _threadgetproc();
 	t = p->thread;
-	
+
 	if((uchar*)&x - n < (uchar*)t->stk){
 		fprint(2, "%s %lud: &x=%p n=%d t->stk=%p\n",
 			argv0, _tos->pid, &x, n, t->stk);
@@ -186,4 +186,3 @@ yield(void)
 {
 	_sched();
 }
-

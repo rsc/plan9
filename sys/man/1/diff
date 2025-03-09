@@ -1,11 +1,11 @@
-.TH DIFF 1 
+.TH DIFF 1
 .SH NAME
 diff \- differential file comparator
 .SH SYNOPSIS
 .B diff
 [
 .B -abcefmnrw
-] 
+]
 .I file1 ... file2
 .SH DESCRIPTION
 .I Diff
@@ -16,7 +16,7 @@ is a directory,
 then a file in that directory with basename the same as that of
 the other file is used.
 If both files are directories, similarly named files in the
-two directories are compared by the method of 
+two directories are compared by the method of
 .I diff
 for text
 files and
@@ -24,16 +24,16 @@ files and
 otherwise.
 If more than two file names are given, then each argument is compared
 to the last argument as above.
-The 
+The
 .B -r
 option causes
 .I diff
 to process similarly named subdirectories recursively.
-When processing more than one file, 
+When processing more than one file,
 .I diff
 prefixes file differences with a single line
 listing the two differing files, in the form of
-a 
+a
 .I diff
 command line.
 The
@@ -63,11 +63,11 @@ into
 The numbers after the letters pertain to
 .IR file2 .
 In fact, by exchanging `a' for `d' and reading backward
-one may ascertain equally how to convert 
+one may ascertain equally how to convert
 .I file2
 into
 .IR file1 .
-As in 
+As in
 .IR ed ,
 identical pairs where
 .I n1
@@ -80,7 +80,7 @@ or
 are abbreviated as a single number.
 .PP
 Following each of these lines come all the lines that are
-affected in the first file flagged by `<', 
+affected in the first file flagged by `<',
 then all the lines that are affected in the second file
 flagged by `>'.
 .PP
@@ -96,9 +96,9 @@ before applying the difference algorithm.
 .PP
 The
 .B -n
-option prefixes each range with 
+option prefixes each range with
 .IB file : \fR
-and inserts a space around the 
+and inserts a space around the
 .BR a ,
 .BR c ,
 and
@@ -108,7 +108,7 @@ The
 .B -e
 option produces a script of
 .I "a, c"
-and 
+and
 .I d
 commands for the editor
 .IR ed ,
@@ -160,7 +160,7 @@ differences.
 Exit status is the empty string
 for no differences,
 .L some
-for some, 
+for some,
 and
 .L error
 for trouble.

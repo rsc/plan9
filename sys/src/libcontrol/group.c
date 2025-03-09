@@ -74,7 +74,7 @@ static void
 groupctl(Control *c, CParse *cp)
 {
 	int cmd, i, n;
-	
+
 	Rectangle r;
 	Group *g;
 

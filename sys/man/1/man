@@ -31,7 +31,7 @@ pages marked (2S), for example,
 belong to chapter 2.
 If no
 .I section
-is specified, pages 
+is specified, pages
 in all sections are printed.
 Any name from the
 .SM NAME
@@ -48,7 +48,7 @@ Print the pages on the standard output using
 .B -b
 Print the pages using
 .I nroff
-and send them to 
+and send them to
 .IR plumber (4)
 for display in the editor.
 .TP

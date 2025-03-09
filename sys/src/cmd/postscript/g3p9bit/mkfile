@@ -11,4 +11,3 @@ HFILES=wtab btab
 BIN=$POSTBIN
 
 </sys/src/cmd/mkone
-

@@ -2,7 +2,7 @@
 !include ..\$(SYSHOST)\mkhost
 !include ..\$(OBJDIR)\makefile
 
-CC_LOCAL=  
+CC_LOCAL=
 
 dotodir=.
 

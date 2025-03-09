@@ -195,7 +195,7 @@ iounused(int start, int end)
 	for(m = iomap.m; m; m = m->next){
 		if(start >= m->start && start < m->end
 		|| start <= m->start && end > m->start)
-			return 0; 
+			return 0;
 	}
 	return 1;
 }

@@ -282,7 +282,7 @@ findpredecessor(Avl *a)
 			a = a->p;
 		return a->p;
 	}
-}		
+}
 
 static Avl*
 findsuccessor(Avl *a)
@@ -412,4 +412,3 @@ walkavl(Avl *t, void (*f)(Avl*, void*), void *v)
 	f(t, v);
 	walkavl(t->n[1], f, v);
 }
-

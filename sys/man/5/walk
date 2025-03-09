@@ -1,4 +1,4 @@
-.TH WALK 5 
+.TH WALK 5
 .SH NAME
 walk \- descend a directory hierarchy
 .SH SYNOPSIS
@@ -17,9 +17,9 @@ walk \- descend a directory hierarchy
 .IR nwqid [2]
 .IR nwqid *( qid [13])
 .SH DESCRIPTION
-The 
+The
 .B walk
-request carries as arguments an existing 
+request carries as arguments an existing
 .IR fid
 and a proposed
 .I newfid

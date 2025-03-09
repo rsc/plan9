@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -655,7 +655,7 @@ cie_cache3_set_interpolation(gx_cie_vector_cache3_t * pvc)
     /* Iterate over output components. */
     for (j = 0; j < 3; ++j) {
 	/* Iterate over sub-caches. */
-	cie_interpolation_range_t *p = 
+	cie_interpolation_range_t *p =
 		&pvc->caches[0].vecs.params.interpolation_ranges[j];
         cie_cached_value rmin = p->rmin, rmax = p->rmax;
 
@@ -1187,7 +1187,7 @@ gs_cie_jc_complete(const gs_imager_state *pis, const gs_color_space *pcs)
  * Compute the source and destination WhitePoint and BlackPoint for
  * the TransformPQR procedure.
  */
-int 
+int
 gs_cie_compute_points_sd(gx_cie_joint_caches *pjc,
 			 const gs_cie_common * pcie,
 			 const gs_cie_render * pcrd)

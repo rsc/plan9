@@ -41,9 +41,9 @@ Bconv(Fmt *fp)
 }
 
 char *extra [] = {
-	".EQ", ".NE", ".CS", ".CC", 
-	".MI", ".PL", ".VS", ".VC", 
-	".HI", ".LS", ".GE", ".LT", 
+	".EQ", ".NE", ".CS", ".CC",
+	".MI", ".PL", ".VS", ".VC",
+	".HI", ".LS", ".GE", ".LT",
 	".GT", ".LE", "", ".NV",
 };
 
@@ -56,7 +56,7 @@ Pconv(Fmt *fp)
 
 	p = va_arg(fp->args, Prog*);
 	a = p->as;
-	s = p->scond; 
+	s = p->scond;
 	strcpy(sc, extra[s & C_SCOND]);
 	if(s & C_SBIT)
 		strcat(sc, ".S");

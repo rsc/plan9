@@ -401,7 +401,7 @@ Table I. \f(CWSam\fP commands
 _
 .ft
 .sp .4
-\f1Text commands\fP	
+\f1Text commands\fP
 .sp .4
 _
 .sp .4
@@ -415,7 +415,7 @@ t \f2address\fP	Copy text in dot after address
 .sp .4
 _
 .sp .4
-\f1Display commands\fP	
+\f1Display commands\fP
 .sp .4
 _
 .sp .2
@@ -435,7 +435,7 @@ D \f2file-list\fP	Delete named files from \f(CWsam\fP
 .sp .4
 _
 .sp .4
-\f1I/O commands\fP	
+\f1I/O commands\fP
 .sp .4
 _
 .sp .2
@@ -450,7 +450,7 @@ f \f2filename\fP	Set file name and print new menu line
 .sp .4
 _
 .sp .4
-\f1Loops and conditionals\fP	
+\f1Loops and conditionals\fP
 .sp .4
 _
 .sp .2
@@ -463,7 +463,7 @@ v/\f2regexp\fP/ \f2command\fP	If dot does not contain a match of regexp, run com
 .sp .4
 _
 .sp .4
-\f1Miscellany\fP	
+\f1Miscellany\fP
 .sp .4
 _
 .sp .2
@@ -657,7 +657,7 @@ Table II. \f(CWSam\fP addresses
 _
 .ft
 .sp .4
-\f1Simple addresses\fP	
+\f1Simple addresses\fP
 .sp .4
 _
 .sp .2
@@ -672,7 +672,7 @@ $	The null string at the end of the file
 .sp .4
 _
 .sp .4
-\f1Compound addresses\fP	
+\f1Compound addresses\fP
 .sp .4
 _
 .sp .2
@@ -1046,7 +1046,7 @@ to describe the format of the input text, or to handle newline-free text.
 The use of regular expressions to describe the structure of a piece
 of text rather than its contents, as in the
 .CW x
-command, 
+command,
 has been given a name:
 .I
 structural regular expressions.
@@ -1623,8 +1623,8 @@ address(ap, a, sign)
 		case '$':
 			a.r.p1=a.r.p2=a.f->nbytes;
 			break;
-		case '"':	
-			a=matchfile(a, ap->aregexp)->dot; 
+		case '"':
+			a=matchfile(a, ap->aregexp)->dot;
 			break;
 		case ',':
 			a2=address(ap->right, a, 0);
@@ -1895,7 +1895,7 @@ Traditionally, C programs have
 passed structures by reference, but implicit allocation on
 the stack is easier to use.
 Structure passing is a relatively new feature of C
-(it is not in the 
+(it is not in the
 standard reference manual for C\u\s-4\&14\s+4\d), and is poorly supported in most
 commercial C compilers.
 It's convenient and expressive, though,
@@ -2584,7 +2584,7 @@ However, when multi-file changes are being made, or when
 more than one window is open on a file,
 it may be necessary to update partially obscured windows.
 .PP
-There are three cases: the window is 
+There are three cases: the window is
 fully visible, invisible (fully obscured), or partially visible.
 If fully visible, the
 .CW Bitmap

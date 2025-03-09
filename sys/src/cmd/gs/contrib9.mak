@@ -33,4 +33,3 @@ $(DD)cdj1600.dev : $(cdeskjet8_) $(DD)page.dev
 $(GLOBJ)gdevcd8.$(OBJ) : $(GLSRC)gdevcd8.c $(PDEVH) $(math__h)\
  $(gsparam_h) $(gxlum_h) $(gdevpcl_h)
 	$(GLCC) $(GLO_)gdevcd8.$(OBJ) $(C_) $(GLSRC)gdevcd8.c
-

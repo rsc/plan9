@@ -94,7 +94,7 @@ Dirtab procdir[] =
 	"text",		{Qtext},	0,			0000,
 	"wait",		{Qwait},	0,			0400,
 	"profile",	{Qprofile},	0,			0400,
-	"syscall",	{Qsyscall},	0,			0400,	
+	"syscall",	{Qsyscall},	0,			0400,
 };
 
 static
@@ -341,7 +341,7 @@ procopen(Chan *c, int omode)
 		return devopen(c, omode, 0, 0, procgen);
 
 	if(QID(c->qid) == Qtrace){
-		if (omode != OREAD) 
+		if (omode != OREAD)
 			error(Eperm);
 		lock(&tlock);
 		if (waserror()){
@@ -366,7 +366,7 @@ procopen(Chan *c, int omode)
 		c->offset = 0;
 		return c;
 	}
-		
+
 	p = proctab(SLOT(c->qid));
 	qlock(&p->debug);
 	if(waserror()){
@@ -417,7 +417,7 @@ procopen(Chan *c, int omode)
 	case Qwait:
 	case Qregs:
 	case Qfpregs:
-	case Qsyscall:	
+	case Qsyscall:
 		nonone(p);
 		break;
 
@@ -470,7 +470,7 @@ procwstat(Chan *c, uchar *db, int n)
 
 	if(QID(c->qid) == Qtrace)
 		return devwstat(c, db, n);
-		
+
 	p = proctab(SLOT(c->qid));
 	nonone(p);
 	d = nil;
@@ -685,7 +685,7 @@ procread(Chan *c, void *va, long n, vlong off)
 	Segment *sg, *s;
 	Ureg kur;
 	Waitq *wq;
-	
+
 	a = va;
 	offset = off;
 
@@ -701,9 +701,9 @@ procread(Chan *c, void *va, long n, vlong off)
 		if(navail > n / sizeof(Traceevent))
 			navail = n / sizeof(Traceevent);
 		while(navail > 0) {
-			ne = ((tconsumed & Emask) + navail > Nevents)? 
+			ne = ((tconsumed & Emask) + navail > Nevents)?
 					Nevents - (tconsumed & Emask): navail;
-			memmove(rptr, &tevents[tconsumed & Emask], 
+			memmove(rptr, &tevents[tconsumed & Emask],
 					ne * sizeof(Traceevent));
 
 			tconsumed += ne;

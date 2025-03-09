@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -90,7 +90,7 @@ zread(i_ctx_t *i_ctx_p)
     } else {
 	pop(1);		/* Adjust ostack back from preparatory 'pop' */
 	op--;
-	if (ch == EOFC) 
+	if (ch == EOFC)
 	make_bool(op, 0);
     else
 	return handle_read_status(i_ctx_p, ch, op, NULL, zread);
@@ -661,9 +661,9 @@ zfilename(i_ctx_t *i_ctx_p)
 	return_error(e_VMerror);
     memcpy(str, fname.data, fname.size);
     push(1);			/* can't fail */
-    make_const_string( op - 1 , 
-		      a_all | imemory_space((const struct gs_ref_memory_s*) imemory), 
-		      fname.size, 
+    make_const_string( op - 1 ,
+		      a_all | imemory_space((const struct gs_ref_memory_s*) imemory),
+		      fname.size,
 		      str);
     make_true(op);
     return 0;

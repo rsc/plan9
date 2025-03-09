@@ -1,12 +1,12 @@
 /* Copyright (C) 1990, 1991, 1993 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -140,7 +140,7 @@ static const char paramt[12] = {0x61, 0x50, 0x52, 0x0f, 0x19, 0x06,
 
 /* Type and macro for frame buffer pointers. */
 /*** Intimately tied to the 80x86 (x<2) addressing architecture. ***/
-typedef byte far *fb_ptr; 
+typedef byte far *fb_ptr;
 #  define mk_fb_ptr(x, y)\
     (fb_ptr)((regen) + ((0x2000 * ((y) % 4) + (90 * ((y) >> 2))) + ((int)(x) >> 3)))
 
@@ -182,8 +182,8 @@ herc_open(gx_device *dev)
 	outportb(graph_config,3);
 	for(i=0;i<sizeof(paramg);i++)
 	{
-		outport2(seq_addr,i,paramg[i]); 
-		
+		outport2(seq_addr,i,paramg[i]);
+
 	}
 	outportb(graph_mode,0x0a);	/* set page 0 */
 	for(i=0;i<0x3FFFL;i++)	/* clear the screen */
@@ -237,7 +237,7 @@ herc_copy_mono(gx_device *dev,
 #define write_byte(ptr, bits)\
   *ptr = ((bits | zmask) & (*ptr | (bits & omask)))
 
-	invert = (czero == 1 || cone == 0 ? -1 : 0); 
+	invert = (czero == 1 || cone == 0 ? -1 : 0);
 /*	invert = (czero == 1 || cone == 1 ? -1 : 0); */
 	zmask = (czero == 0 || cone == 0 ? 0 : -1);
 	omask = (czero == 1 || cone == 1 ? -1 : 0);
@@ -267,9 +267,9 @@ herc_copy_mono(gx_device *dev,
 			register int bits = *bptr ^ invert;	/* first partial byte */
 
 			count = w;
-						
+
 			write_byte_masked(optr, bits, mask);
-			
+
 			/* Do full bytes. */
 
 			while ((count -= 8) >= 0)
@@ -280,7 +280,7 @@ herc_copy_mono(gx_device *dev,
 				write_byte(optr, bits);
 			}
 			/* Do last byte */
-			
+
 			if (count > -8)
 			{
 				bits = *++bptr ^ invert;
@@ -298,7 +298,7 @@ herc_copy_mono(gx_device *dev,
 	{
 		int skew = (sleft - dleft) & 7;
 		int cskew = 8 - skew;
-		
+
 		while (--h >= 0)
 		{
 			const byte *bptr = params.src;
@@ -306,13 +306,13 @@ herc_copy_mono(gx_device *dev,
 			register int bits;
 
 			count = w;
-						
+
 			/* Do the first partial byte */
-			
+
 			if (sleft >= dleft)
 			{
 				bits = *bptr >> skew;
-			}	
+			}
 			else /* ( sleft < dleft ) */
 			{
 				bits = *bptr++ << cskew;
@@ -324,9 +324,9 @@ herc_copy_mono(gx_device *dev,
 			count -= dleft;
 			params.x_pos += 8;
 			optr = mk_fb_ptr(params.x_pos,params.y_pos);
-			
+
 			/* Do full bytes. */
-			
+
 			while ( count >= 8 )
 			{
 				bits = *bptr++ << cskew;
@@ -337,9 +337,9 @@ herc_copy_mono(gx_device *dev,
 				params.x_pos += 8;
 				optr = mk_fb_ptr(params.x_pos,params.y_pos);
 			}
-			
+
 			/* Do last byte */
-			
+
 			if (count > 0)
 			{
 				bits = *bptr++ << cskew;
@@ -400,11 +400,11 @@ herc_fill_rectangle(gx_device *dev, int x, int y, int w, int h,
 	if (color)
 	{
 		/* here to set pixels */
-		
+
 		if (xlen == -1)
 		{
 			/* special for rectangles that fit in a byte */
-			
+
 			d = led & red;
 			for(; h >= 0; h--, ptr = mk_fb_ptr(x,params.y_pos))
 			{
@@ -413,9 +413,9 @@ herc_fill_rectangle(gx_device *dev, int x, int y, int w, int h,
 			}
 			return 0;
 		}
-		
+
 		/* normal fill */
-		
+
 		xloc = params.x_pos >> 3;
 		for(; h >= 0; h--, ptr = mk_fb_ptr(x,params.y_pos))
 		{	register int x_count = xlen;
@@ -445,7 +445,7 @@ herc_fill_rectangle(gx_device *dev, int x, int y, int w, int h,
 	if (xlen == -1)
 	{
 		/* special for rectangles that fit in a byte */
-		
+
 		d = led | red;
 		for(; h >= 0; h--, ptr  = mk_fb_ptr(x,params.y_pos))
 			{
@@ -456,7 +456,7 @@ herc_fill_rectangle(gx_device *dev, int x, int y, int w, int h,
 	}
 
 	/* normal fill */
-		
+
 	xloc = x >> 3;
 	for(; h >= 0; h--, ptr = mk_fb_ptr(x,params.y_pos))
 	{	register int x_count = xlen;

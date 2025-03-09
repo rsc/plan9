@@ -33,4 +33,4 @@ if not
 			1,/^AP Top News$/d
 			/^\* __$/,$d
 			/^Subscribe to Newsday home delivery/,$d
-		' 
+		'

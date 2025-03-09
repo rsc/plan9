@@ -1,12 +1,12 @@
 /* Copyright (C) 1999, 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -562,7 +562,7 @@ cff_write_Top_common(cff_writer_t *pcw, gs_font_base *pbfont,
   	) {
   	/* An omitted FontBBox is equivalent to an empty one. */
  	/*
- 	 * Since Acrobat Reader 4 on Solaris doesn't like 
+ 	 * Since Acrobat Reader 4 on Solaris doesn't like
  	 * an omitted FontBBox, we copy it here from
  	 * the font descriptor, because the base font
  	 * is allowed to omit it's FontBBox.
@@ -758,7 +758,7 @@ cff_write_Private(cff_writer_t *pcw, uint Subrs_offset,
 #define PUT_FLOAT_TABLE(member, op)\
     cff_put_real_deltarray(pcw, pfont->data.member.values,\
 			   pfont->data.member.count, op)
-				
+
     PUT_FLOAT_TABLE(BlueValues, PRIVATE_BlueValues);
     PUT_FLOAT_TABLE(OtherBlues, PRIVATE_OtherBlues);
     PUT_FLOAT_TABLE(FamilyBlues, PRIVATE_FamilyBlues);
@@ -1161,7 +1161,7 @@ psf_write_type2_font(stream *s, gs_font_type1 *pfont, int options,
 		    number_of_glyphs * sizeof(glyph), "psf_write_type2_font");
     number_of_strings = number_of_glyphs + MAX_CFF_MISC_STRINGS;
     std_string_items = (cff_string_item_t *)gs_alloc_bytes(pfont->memory,
-		    (MAX_CFF_STD_STRINGS + number_of_strings) * sizeof(cff_string_item_t), 
+		    (MAX_CFF_STD_STRINGS + number_of_strings) * sizeof(cff_string_item_t),
 		    "psf_write_type2_font");
     if (std_string_items == NULL || subset.glyphs.subset_data == NULL)
 	return_error(gs_error_VMerror);

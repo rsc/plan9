@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -141,9 +141,9 @@ gx_concretize_CIEDEFG(const gs_client_color * pc, const gs_color_space * pcs,
 	    (range).rmin) \
     )
     /* Scale the abc[] frac values to RangeABC cie_cached result */
-    vec3.u = SCALE_TO_RANGE(pcie->RangeABC.ranges[0], abc[0]); 
-    vec3.v = SCALE_TO_RANGE(pcie->RangeABC.ranges[1], abc[1]); 
-    vec3.w = SCALE_TO_RANGE(pcie->RangeABC.ranges[2], abc[2]); 
+    vec3.u = SCALE_TO_RANGE(pcie->RangeABC.ranges[0], abc[0]);
+    vec3.v = SCALE_TO_RANGE(pcie->RangeABC.ranges[1], abc[1]);
+    vec3.w = SCALE_TO_RANGE(pcie->RangeABC.ranges[2], abc[2]);
     /* Apply DecodeABC and MatrixABC. */
     if (!pis->cie_joint_caches->skipDecodeABC)
 	cie_lookup_map3(&vec3 /* ABC => LMN */, &pcie->caches.DecodeABC,
@@ -195,9 +195,9 @@ gx_concretize_CIEDEF(const gs_client_color * pc, const gs_color_space * pcs,
     /* Apply Table. */
     gx_color_interpolate_linear(hij, &pcie->Table, abc);
     /* Scale the abc[] frac values to RangeABC cie_cached result */
-    vec3.u = SCALE_TO_RANGE(pcie->RangeABC.ranges[0], abc[0]); 
-    vec3.v = SCALE_TO_RANGE(pcie->RangeABC.ranges[1], abc[1]); 
-    vec3.w = SCALE_TO_RANGE(pcie->RangeABC.ranges[2], abc[2]); 
+    vec3.u = SCALE_TO_RANGE(pcie->RangeABC.ranges[0], abc[0]);
+    vec3.v = SCALE_TO_RANGE(pcie->RangeABC.ranges[1], abc[1]);
+    vec3.w = SCALE_TO_RANGE(pcie->RangeABC.ranges[2], abc[2]);
     /* Apply DecodeABC and MatrixABC. */
     if (!pis->cie_joint_caches->skipDecodeABC)
 	cie_lookup_map3(&vec3 /* ABC => LMN */, &pcie->caches.DecodeABC,

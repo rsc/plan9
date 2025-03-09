@@ -124,7 +124,7 @@ usage(char *name)
 	exits("usage");
 }
 
-void 
+void
 eresized(int new){
 	if(new && getwindow(display, Refnone) < 0) {
 		sysfatal("can't reattach to window");
@@ -159,17 +159,17 @@ main(int argc, char *argv[]){
 			usage(argv0);
 		break;
 	}ARGEND
-	
+
 	switch(argc) {
-	case 1: 
-			start=""; 
-			pattern=argv[0]; 
+	case 1:
+			start="";
+			pattern=argv[0];
 			break;
-	case 2: 
-			start=argv[0]; 
-			pattern=argv[1]; 
+	case 2:
+			start=argv[0];
+			pattern=argv[1];
 			break;
-	default: 
+	default:
 			usage(argv0);
 	}
 	sum=0;

@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -458,7 +458,7 @@ gs_shading_fill_path(const gs_shading_t *psh, /*const*/ gx_path *ppath,
     gx_device_clip path_dev;
     int code = 0;
 
-    if ((*dev_proc(dev, pattern_manage))(dev, 
+    if ((*dev_proc(dev, pattern_manage))(dev,
 			gs_no_id, NULL, pattern_manage__shading_area) == 0) {
 	path_clip = gx_cpath_alloc(mem, "shading_fill_path(path_clip)");
 	if (path_clip == 0) {
@@ -565,7 +565,6 @@ int
 gs_shading_fill_path_adjusted(const gs_shading_t *psh, /*const*/ gx_path *ppath,
 		     const gs_fixed_rect *prect, gx_device *orig_dev,
 		     gs_imager_state *pis, bool fill_background)
-{   
+{
     return  gs_shading_fill_path(psh, ppath, prect, orig_dev, pis, fill_background);
 }
-

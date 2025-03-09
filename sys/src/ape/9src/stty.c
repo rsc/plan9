@@ -85,7 +85,7 @@ ctlchar(char c)
 		buf[1] = '@'+c;
 		buf[2] = '\0';
 		return buf;
-	}	
+	}
 	buf[0] = c;
 	buf[1] = '\0';
 	return buf;

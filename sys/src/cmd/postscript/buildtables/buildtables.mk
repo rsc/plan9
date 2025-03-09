@@ -61,4 +61,3 @@ changes :
 	    -e "s'^.ds dQ.*'.ds dQ $(POSTLIB)'" \
 	buildtables.1 >XXX.1; \
 	mv XXX.1 buildtables.1
-

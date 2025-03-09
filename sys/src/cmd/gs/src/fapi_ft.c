@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996, 1997, 1998, 1999, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -259,7 +259,7 @@ Load a glyph and optionally rasterize it. Return its metrics in a_metrics.
 If a_bitmap is true convert the glyph to a bitmap.
 */
 static FAPI_retcode load_glyph(FAPI_font* a_fapi_font,const FAPI_char_ref *a_char_ref,
-							   FAPI_metrics* a_metrics,FT_Glyph* a_glyph,bool a_bitmap)	 
+							   FAPI_metrics* a_metrics,FT_Glyph* a_glyph,bool a_bitmap)
 	{
     FT_Error ft_error = 0;
 	FF_face* face = (FF_face*)a_fapi_font->server_font_data;
@@ -337,7 +337,7 @@ static FAPI_retcode load_glyph(FAPI_font* a_fapi_font,const FAPI_char_ref *a_cha
     if (!ft_error && a_glyph)
 	    ft_error = FT_Get_Glyph(ft_face->glyph,a_glyph);
     return ft_to_gs_error(ft_error);
-	} 
+	}
 
 /**
 Ensure that the rasterizer is open.
@@ -484,7 +484,7 @@ static FAPI_retcode get_scaled_font(FAPI_server* a_server,FAPI_font* a_font,int 
 			if (!ft_error && ft_face)
 				ft_error = FT_Select_Charmap(ft_face,ft_encoding_unicode);
 			}
-		
+
 		/* Load a typeface from a representation in GhostScript's memory. */
 		else
 			{
@@ -524,7 +524,7 @@ static FAPI_retcode get_scaled_font(FAPI_server* a_server,FAPI_font* a_font,int 
 				}
 
 			/* It must be type 42 (see code in FAPI_FF_get_glyph in zfapi.c). */
-			else 
+			else
 				{
 				/* Get the length of the TrueType data. */
 				open_args.memory_size = a_font->get_long(a_font,FAPI_FONT_FEATURE_TT_size,0);
@@ -571,7 +571,7 @@ static FAPI_retcode get_scaled_font(FAPI_server* a_server,FAPI_font* a_font,int 
 			a_font->server_font_data = face;
 			}
 		else
-			a_font->server_font_data = NULL;	
+			a_font->server_font_data = NULL;
 		}
 
 	/*
@@ -620,7 +620,7 @@ static FAPI_retcode get_scaled_font(FAPI_server* a_server,FAPI_font* a_font,int 
 		first row at the bottom. That is what GhostScript needs.
 		*/
 		FT_Matrix_Multiply(&ft_reflection,&ft_transform);
-		
+
 		FT_Set_Transform(face->m_ft_face,&ft_transform,NULL);
 		}
 

@@ -1977,7 +1977,7 @@ tinit(void)
 		urk("trel", nelem(trel), p->code);
 		trel[p->code] = p->value;
 	}
-	
+
 	/* 32-bit defaults */
 	typeword = typechlp;
 	typeswitch = typechl;

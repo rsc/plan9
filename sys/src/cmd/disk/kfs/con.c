@@ -269,7 +269,7 @@ cmd_rename(void)
 		if(err = con_remove(FID2)){
 			cprint("can't remove file: %s\n", errstring[err]);
 			return;
-		}		
+		}
 	}else{
 		cname(nxelem);
 		if(strchr(nxelem, '/')){
@@ -289,7 +289,7 @@ cmd_rename(void)
 			if(err = con_wstat(FID2, stat))
 				cprint("can't move file: %s\n", errstring[err]);
 		}
-	}	
+	}
 }
 
 void
@@ -541,7 +541,7 @@ void
 cmd_noneattach(void)
 {
 	allownone = !allownone;
-	if(allownone) 
+	if(allownone)
 		cprint("none can attach to new connections\n");
 	else
 		cprint("none can only attach on authenticated connections\n");

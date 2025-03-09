@@ -47,4 +47,3 @@ readcert(char *filename, int *pcertlen)
 	}
 	return binary;
 }
-

@@ -141,7 +141,7 @@ main(int argc, char **argv)
 	char buf[12], *mnt, *srv, *mbname;
 	int fd, p[2], mb;
 	uchar *deb;
-	
+
 	deb = nil;
 	mb = Sheeva;
 	mbname = nil;
@@ -185,7 +185,7 @@ main(int argc, char **argv)
 	fs.jmed = initmpsse(fd, mb);
 	if(fs.jmed == nil)
 		fatal("jtag initialization %r");
-	
+
 	if(pipe(p) < 0)
 		fatal("pipe failed");
 
@@ -193,7 +193,7 @@ main(int argc, char **argv)
 	case 0:
 		fsrun(&fs, p[0]);
 		exits(nil);
-	case -1:	
+	case -1:
 		fatal("fork failed");
 	}
 
@@ -394,7 +394,7 @@ static uvlong
 nm2qpath(char *name)
 {
 	int i;
-	
+
 	for(i = 0; entries[i].name != nil; i++)
 		if(strcmp(name, entries[i].name) == 0)
 			return entries[i].path;
@@ -576,7 +576,7 @@ readbytes(JMedium *jmed, u32int startaddr, u32int nbytes, u32int dataoff, Fcall 
 
 }
 
-/* 
+/*
  *	BUG: This is horrifyingly slow, could be made much (10x)
  *	faster using load multiple/store multiple
  * 	both on memory and while reading back the registers.
@@ -593,9 +593,9 @@ readmem(Fs *fs, Fcall *rpc)
 	int res;
 
 	count = (u32int)rpc->count;
-	
+
 	addr = (u32int)rpc->offset;
-	dprint(Dfs, "[%#8.8ux, %ud] =?\n", 
+	dprint(Dfs, "[%#8.8ux, %ud] =?\n",
 				addr, count);
 
 	prenb = 0;
@@ -626,7 +626,7 @@ readmem(Fs *fs, Fcall *rpc)
 		dprint(Dfs, "%d[%#8.8ux] = %#8.8ux \n",
 				i, addr+i, data);
 	}
-	
+
 	dprint(Dfs, "readmem: end of aligned\n");
 	/* The end is not aligned */
 	if((count-prenb) & 0x3U){
@@ -676,7 +676,7 @@ writemem(Fs *fs, Fcall *rpc)
 
 	count = rpc->count;
 	addr = rpc->offset;
-	
+
 	prenb = 0;
 	nb = 0;
 	/* not aligned offset */
@@ -786,7 +786,7 @@ fsread(Fs *fs, Fcall *rpc)
 				rpc->count += dostat(entries[i].path,
 					rpc->count+(uchar*)rpc->data, count-rpc->count);
 		}
-		
+
 		putfid(fs, f);
 		if(off == 0 && rpc->count <= BIT16SZ)
 			return "directory read count too small";
@@ -1031,7 +1031,7 @@ vecval(char *conds)
 				vcregval |= vmode[j].mode;
 		}
 	}
-	
+
 	return vcregval;
 }
 /* if running, stop, set catch, start, else, set catch, not start*/
@@ -1078,7 +1078,7 @@ cmdbreakpoint(JMedium *jmed, u32int addr, u32int mask)
 	int res, wasdebug;
 
 	wasdebug = ctxt.debug;
-	if(!wasdebug){	
+	if(!wasdebug){
 		if(ctxt.debugreas != BreakReas && ctxt.debugreas != NoReas){
 			werrstr("already waiting debug");
 			return -1;
@@ -1268,7 +1268,7 @@ runcmd(Fs *fs, char *data, int count)
 	}
 
 	if(t->index != CMreset && t->index != CMcpuid &&
-		t->index != CMdebug && 
+		t->index != CMdebug &&
 		checkcpuid(fs->jmed) < 0)
 		return -1;
 
@@ -1316,7 +1316,7 @@ runcmd(Fs *fs, char *data, int count)
 			res = -1;
 			goto Exit;
 		}
-	
+
 		dprint(Dfs, "breakpoint addr %#8.8ux mask %#8.8ux\n", addr, msk);
 		res = cmdbreakpoint(fs->jmed, addr, msk);
 		break;
@@ -1379,7 +1379,7 @@ setkregs(Fs *fs, Fcall *rpc)
 			return -1;
 		nb += sizeof(u32int);
 	}
-		
+
 	if(ctxt.spsr != lc.spsr){
 		res = armsetexec(jmed, 1, &ctxt.spsr, ARMLDMIA|0x0001);
 		if(res < 0)
@@ -1389,7 +1389,7 @@ setkregs(Fs *fs, Fcall *rpc)
 			return -1;
 		nb += sizeof(u32int);
 	}
-		
+
 
 
 	/* last I update the registers */

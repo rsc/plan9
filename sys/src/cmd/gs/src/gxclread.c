@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -464,7 +464,7 @@ clist_render_rectangle(gx_device_clist *cdev, const gs_int_rect *prect,
 
 /* Playback the band file, taking the indicated action w/ its contents. */
 private int
-clist_playback_file_bands(clist_playback_action action, 
+clist_playback_file_bands(clist_playback_action action,
 			  gx_device_clist_reader *cdev,
 			  gx_band_page_info_t *page_info, gx_device *target,
 			  int band_first, int band_last, int x0, int y0)
@@ -475,7 +475,7 @@ clist_playback_file_bands(clist_playback_action action,
 
     /* We have to pick some allocator for rendering.... */
     gs_memory_t *mem =cdev->memory;
- 
+
     stream_band_read_state rs;
 
     /* setup stream */

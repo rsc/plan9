@@ -131,7 +131,7 @@ for(s = filename ; *s!='\0' && *s!='(' &&  *s!=')' ; ++s)
 if(*s != '\0')
 	return lookarch(filename);
 
-if(stat(filename,&buf) < 0) 
+if(stat(filename,&buf) < 0)
 	return 0;
 else	return buf.st_mtime;
 }

@@ -99,7 +99,7 @@ readcons(char *prompt, char *def, int raw)
 				fprint(fdout, "\n%s[%s]: ", prompt, def);
 			else
 				fprint(fdout, "\n%s: ", prompt);
-			
+
 			s[0] = 0;
 		} else {
 			s = estrappend(s, "%c", line[0]);
@@ -107,4 +107,3 @@ readcons(char *prompt, char *def, int raw)
 	}
 	return nil; /* not reached */
 }
-

@@ -135,7 +135,7 @@ unthwackadd(Unthwack *ut, uchar *src, int nsrc, ulong seq)
 	tslot = unthwackinsert(ut, nsrc, seq);
 	if(tslot < 0)
 		return -1;
-	
+
 	memmove(ut->blocks[tslot].data, src, nsrc);
 
 	return nsrc;

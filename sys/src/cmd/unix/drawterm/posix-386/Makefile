@@ -24,4 +24,3 @@ md5block.s: md5block.spp
 
 sha1block.s: sha1block.spp
 	gcc -E - < sha1block.spp >sha1block.s
-

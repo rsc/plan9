@@ -4,7 +4,7 @@ s=/n/dist/dist/replica
 serverroot=/n/dist
 serverlog=$s/plan9.log
 serverproto=$s/plan9.proto
-fn servermount { status='' } 
+fn servermount { status='' }
 fn serverupdate { status='' }
 
 if ( ! test -e /srv/boot && ! test -e /srv/kfs ) {
@@ -13,8 +13,8 @@ if ( ! test -e /srv/boot && ! test -e /srv/kfs ) {
 }
 
 if (test -e /srv/fscons) {
-	if ( ! test -w /srv/fscons ) { 
-		echo 'error: no write access to /srv/fscons, make sure you are the host owner' 
+	if ( ! test -w /srv/fscons ) {
+		echo 'error: no write access to /srv/fscons, make sure you are the host owner'
 		exit 'no write access to /srv/fscons'
 	}
 

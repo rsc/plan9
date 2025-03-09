@@ -429,7 +429,7 @@ filsyswalk(Filsys *fs, Xfid *x, Fid *f)
 				dir = dirtab;
 				goto Accept;
 			}
-		
+
 			if(snarffd>=0 && strcmp(x->wname[i], "snarf")==0)
 				break;	/* don't serve /dev/snarf if it's provided in the environment */
 			id = WIN(f->qid);
@@ -492,7 +492,7 @@ filsysopen(Filsys *fs, Xfid *x, Fid *f)
 	}
 	if(((f->dir->perm&~(DMDIR|DMAPPEND))&m) != m)
 		goto Deny;
-		
+
 	sendp(x->c, xfidopen);
 	return nil;
 

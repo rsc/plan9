@@ -43,4 +43,3 @@ server.$O: queue.h
 queue.$O: queue.h
 
 CFLAGS=$CFLAGS -I.
-

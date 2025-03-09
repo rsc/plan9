@@ -46,7 +46,7 @@ lockinit(void)
 		arch = R4K;
 		break;
 	}
-	
+
 }
 
 void
@@ -91,7 +91,7 @@ retry:
 			while(lk->val)
 				;
 		}
-	}	
+	}
 }
 
 int
@@ -131,7 +131,7 @@ retry:
 		return 0;
 	default:
 		return 0;
-	}	
+	}
 }
 
 void
@@ -173,5 +173,5 @@ retry:
 		return 1;
 	default:
 		return 0;
-	}	
+	}
 }

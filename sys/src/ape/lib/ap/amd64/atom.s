@@ -63,4 +63,3 @@ _cas64r0:
 TEXT mfence(SB),0,$0
 	MFENCE
 	RET
-

@@ -129,8 +129,8 @@ struct Conv {
 
 	Stats	lstats;
 	Stats	rstats;
-	
-	ulong	lastrecv;	// time last packet was received 
+
+	ulong	lastrecv;	// time last packet was received
 	ulong	timeout;
 	int		retries;
 
@@ -346,7 +346,7 @@ sdpinit(void)
 {
 	int i;
 	Dirtab *dt;
-	
+
 	// setup dirtab with non directory entries
 	for(i=0; i<nelem(sdpdirtab); i++) {
 		dt = sdpdirtab + i;
@@ -387,7 +387,7 @@ sdpattach(char* spec)
 		snprint(buf, sizeof(buf), "sdpackproc%d", dev);
 		kproc(buf, sdpackproc, sdp);
 	}
-	
+
 	return c;
 }
 
@@ -457,7 +457,7 @@ sdpopen(Chan* ch, int omode)
 			if(c->dataopen == 1)
 			if(c->readproc != nil)
 				postnote(c->readproc, 1, "interrupt", 0);
-		} else if(TYPE(ch->qid) == Qcontrol) {	
+		} else if(TYPE(ch->qid) == Qcontrol) {
 			c->controlopen++;
 		}
 		qunlock(c);
@@ -608,7 +608,7 @@ sdpwrite(Chan *ch, void *a, long n, vlong off)
 	char *p;
 	Conv *c;
 	Block *b;
-	
+
 	USED(off);
 	switch(TYPE(ch->qid)) {
 	default:
@@ -731,7 +731,7 @@ sdpgen(Chan *c, char*, Dirtab*, int, int s, Dir *dp)
 	default:
 		// non directory entries end up here
 		if(c->qid.type & QTDIR)
-			panic("sdpgen: unexpected directory");	
+			panic("sdpgen: unexpected directory");
 		if(s != 0)
 			return -1;
 		dt = dirtab[TYPE(c->qid)];
@@ -1024,7 +1024,7 @@ convderef(Conv *c)
 	assert(c->controlopen == 0);
 if(0)print("convderef: %d: ref == 0!\n", c->id);
 	c->state = CFree;
-	if(c->chan) {	
+	if(c->chan) {
 		cclose(c->chan);
 		c->chan = nil;
 	}
@@ -1184,7 +1184,7 @@ conviput(Conv *c, Block *b, int control)
 		freeb(b);
 		return nil;
 	}
-	
+
 	type = b->rp[0] >> 4;
 	subtype = b->rp[0] & 0xf;
 	b->rp += 1;
@@ -1436,7 +1436,7 @@ convicontrol(Conv *c, int subtype, Block *b)
 	if(BLEN(b) < 4)
 		return;
 	cseq = nhgetl(b->rp);
-	
+
 	switch(subtype){
 	case ControlMesg:
 		if(cseq == c->in.controlseq) {
@@ -1528,7 +1528,7 @@ static void
 convoput(Conv *c, int type, int subtype, Block *b)
 {
 	int pad;
-	
+
 	c->lstats.outPackets++;
 	/* Make room for sdp trailer */
 	if(c->out.cipherblklen > 1)
@@ -1555,7 +1555,7 @@ convoput(Conv *c, int type, int subtype, Block *b)
 	b->rp[1] = c->out.seq>>16;
 	b->rp[2] = c->out.seq>>8;
 	b->rp[3] = c->out.seq;
-	
+
 	if(c->out.cipher)
 		(*c->out.cipher)(&c->out, b->rp+4, BLEN(b)-4);
 
@@ -1564,7 +1564,7 @@ convoput(Conv *c, int type, int subtype, Block *b)
 		b->wp += c->out.authlen;
 		(*c->out.auth)(&c->out, b->rp, BLEN(b));
 	}
-	
+
 	convwriteblock(c, b);
 }
 
@@ -1854,7 +1854,7 @@ setsecret(OneWay *ow, char *secret)
 {
 	char *p;
 	int i, c;
-	
+
 	i = 0;
 	memset(ow->secret, 0, sizeof(ow->secret));
 	for(p=secret; *p; p++) {
@@ -2005,7 +2005,7 @@ descipherinit(Conv *c)
 	int n = c->cipher->keylen;
 
 	cipherfree(c);
-	
+
 	if(n > sizeof(key))
 		n = sizeof(key);
 
@@ -2018,7 +2018,7 @@ descipherinit(Conv *c)
 	c->in.cipher = desdecrypt;
 	c->in.cipherstate = smalloc(sizeof(DESstate));
 	setupDESstate(c->in.cipherstate, key, ivec);
-	
+
 	/* out */
 	memset(key, 0, sizeof(key));
 	setkey(key, n, &c->out, "cipher");
@@ -2072,7 +2072,7 @@ rc4decrypt(OneWay *ow, uchar *p, int n)
 		}
 	} else if(d > 0) {
 //print("missing packet: %uld %ld\n", seq, d);
-		// this link is hosed 
+		// this link is hosed
 		if(d > RC4forward)
 			return 0;
 		cr->lgseq = seq;
@@ -2214,7 +2214,7 @@ md5authinit(Conv *c)
 	setkey(c->in.authstate, keylen, &c->in, "auth");
 	c->in.authlen = 12;
 	c->in.auth = md5auth;
-	
+
 	/* out */
 	c->out.authstate = smalloc(16);
 	memset(c->out.authstate, 0, 16);

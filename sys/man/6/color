@@ -140,9 +140,9 @@ To maintain a constant external representation,
 the
 .IR draw (3)
 interface
-as well as the 
-various graphics libraries represent colors 
-by 32-bit numbers, as described in 
+as well as the
+various graphics libraries represent colors
+by 32-bit numbers, as described in
 .IR color (2).
 .SH "SEE ALSO"
 .IR color (2),

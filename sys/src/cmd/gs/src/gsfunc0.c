@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -25,11 +25,11 @@
 #include "gxfunc.h"
 #include "stream.h"
 
-#define POLE_CACHE_DEBUG 0      /* A temporary development technology need. 
+#define POLE_CACHE_DEBUG 0      /* A temporary development technology need.
 				   Remove after the beta testing. */
-#define POLE_CACHE_GENERIC_1D 1 /* A temporary development technology need. 
+#define POLE_CACHE_GENERIC_1D 1 /* A temporary development technology need.
 				   Didn't decide yet - see fn_Sd_evaluate_cubic_cached_1d. */
-#define POLE_CACHE_IGNORE 0     /* A temporary development technology need. 
+#define POLE_CACHE_IGNORE 0     /* A temporary development technology need.
 				   Remove after the beta testing. */
 
 #if POLE_CACHE_DEBUG
@@ -191,7 +191,7 @@ interpolate_cubic(floatp x, floatp f0, floatp f1, floatp f2, floatp f3)
      * The parameter 'a' affects the contribution of the high-frequency
      * components.  The abovementioned source suggests a = -0.5.
      */
-#define a (-0.5) 
+#define a (-0.5)
 #define SQR(v) ((v) * (v))
 #define CUBE(v) ((v) * (v) * (v))
     const double xm1 = x - 1, m2x = 2 - x, m3x = 3 - x;
@@ -326,7 +326,7 @@ top:
     }
 }
 
-private inline double 
+private inline double
 fn_Sd_encode(const gs_function_Sd_t *pfn, int i, double sample)
 {
     float d0, d1, r0, r1;
@@ -425,7 +425,7 @@ fn_Sd_evaluate_general(const gs_function_t * pfn_common, const float *in, float 
 static const double double_stub = 1e90;
 
 private inline void
-fn_make_cubic_poles(double *p, double f0, double f1, double f2, double f3, 
+fn_make_cubic_poles(double *p, double f0, double f1, double f2, double f3,
 	    const int pole_step_minor)
 {   /* The following is poles of the polinomial,
        which represents interpolate_cubic in [1,2]. */
@@ -448,26 +448,26 @@ fn_make_poles(double *p, const int pole_step, int power, int bias)
 	case 2:
 	    /* bias may be be 0 or 1. */
 	    /* Duplicate the beginning or the ending pole (the old code compatible). */
-	    fn_make_cubic_poles(p + pole_step * bias, 
-		    p[pole_step * 0], p[pole_step * bias], 
-		    p[pole_step * (1 + bias)], p[pole_step * 2], 
+	    fn_make_cubic_poles(p + pole_step * bias,
+		    p[pole_step * 0], p[pole_step * bias],
+		    p[pole_step * (1 + bias)], p[pole_step * 2],
 		    pole_step_minor);
 	    break;
 	case 3:
 	    /* bias must be 1. */
-	    fn_make_cubic_poles(p + pole_step * bias, 
-		    p[pole_step * 0], p[pole_step * 1], p[pole_step * 2], p[pole_step * 3], 
+	    fn_make_cubic_poles(p + pole_step * bias,
+		    p[pole_step * 0], p[pole_step * 1], p[pole_step * 2], p[pole_step * 3],
 		    pole_step_minor);
 	    break;
 	default: /* Must not happen. */
-	   DO_NOTHING; 
+	   DO_NOTHING;
     }
 }
 
 /* Evaluate a Sampled function.
    A cubic interpolation with a pole cache.
    Allows a fast check for extreme suspection. */
-/* This implementation is a particular case of 1 dimension. 
+/* This implementation is a particular case of 1 dimension.
    maybe we'll use as an optimisation of the generic case,
    so keep it for a while. */
 private int
@@ -509,7 +509,7 @@ fn_Sd_evaluate_cubic_cached_1d(const gs_function_Sd_t *pfn, const float *in, flo
     } else {
 	if (p[1 * pole_step_minor] == double_stub) {
 	    for (k = 0; k < pfn->params.n; k++)
-		fn_make_poles(&pfn->params.pole[ib * pole_step + k], pole_step, 
+		fn_make_poles(&pfn->params.pole[ib * pole_step + k], pole_step,
 			ie - ib - 1, i0 - ib);
 	}
 	t1 = 1 - t0;
@@ -557,7 +557,7 @@ index_span(const gs_function_Sd_t *pfn, int *I, double *T, int ii, int *Ii, int 
 	*ib = max(*Ii - 1, 0);
 	*ie = min(pfn->params.Size[ii], *Ii + 3);
     } else {
-	*ib = *Ii; 
+	*ib = *Ii;
 	*ie = *Ii + 1;
     }
 }
@@ -602,7 +602,7 @@ interpolate_vector(const gs_function_Sd_t *pfn, int offset, int pole_step, int p
 }
 
 private inline void
-interpolate_tensors(const gs_function_Sd_t *pfn, int *I, double *T, 
+interpolate_tensors(const gs_function_Sd_t *pfn, int *I, double *T,
 	int offset, int pole_step, int power, int bias, int ii)
 {
     if (ii < 0)
@@ -612,17 +612,17 @@ interpolate_tensors(const gs_function_Sd_t *pfn, int *I, double *T,
 	int Ii = I[ii];
 
 	if (T[ii] == 0) {
-	    interpolate_tensors(pfn, I, T, offset + Ii * s, pole_step, power, bias, ii - 1);	
+	    interpolate_tensors(pfn, I, T, offset + Ii * s, pole_step, power, bias, ii - 1);
 	} else {
 	    int l;
 
-	    for (l = 0; l < 4; l++) 
-		interpolate_tensors(pfn, I, T, offset + Ii * s + l * s / 3, pole_step, power, bias, ii - 1);	
+	    for (l = 0; l < 4; l++)
+		interpolate_tensors(pfn, I, T, offset + Ii * s + l * s / 3, pole_step, power, bias, ii - 1);
 	}
     }
 }
 
-private inline bool 
+private inline bool
 is_tensor_done(const gs_function_Sd_t *pfn, int *I, double *T, int a_offset, int ii)
 {
     /* Check an inner pole of the cell. */
@@ -648,10 +648,10 @@ make_interpolation_tensor(const gs_function_Sd_t *pfn, int *I, double *T,
        Suppose we have a 4x4x4...x4 hypercube of nodes, and we want to build
        a multicubic interpolation function for the inner 2x2x2...x2 hypercube.
        We represent the multicubic function with a tensor of Besier poles,
-       and the size of the tensor is 4x4x....x4. Note that the outer corners 
+       and the size of the tensor is 4x4x....x4. Note that the outer corners
        of the tensor are equal to the corners of the 2x2x...x2 hypercube.
 
-       We organized the 'pole' array so that a tensor of a cell 
+       We organized the 'pole' array so that a tensor of a cell
        occupies the cell, and tensors for neighbour cells have a common hyperplane.
 
        For a 1-dimentional case the let the nodes are p0, p1, p2, p3,
@@ -659,31 +659,31 @@ make_interpolation_tensor(const gs_function_Sd_t *pfn, int *I, double *T,
        We choose a cubic approximation, in which tangents at nodes p1, p2
        are parallel to (p2 - p0) and (p3 - p1) correspondingly.
        (Well, this doesn't give a the minimal curvity, but likely it is
-       what Adobe implementations do, see the bug 687352, 
+       what Adobe implementations do, see the bug 687352,
        and we agree that it's some reasonable).
 
        For a 2-dimensional case we apply the 1-dimentional case through
        the first dimension, and then construct a surface by varying the
        second coordinate as a parameter. It gives a bicubic surface,
-       and the result doesn't depend on the order of coordinates 
+       and the result doesn't depend on the order of coordinates
        (I proved the latter with Matematica 3.0).
        Then we know that an interpolation by one coordinate and
        a differentiation by another coordinate are interchangeble operators.
-       Due to that poles of the interpolated function are same as 
+       Due to that poles of the interpolated function are same as
        interpolated poles of the function (well, we didn't spend time
-       for a strong proof, but this fact was confirmed with testing the 
+       for a strong proof, but this fact was confirmed with testing the
        implementation with POLE_CACHE_DEBUG).
 
-       Then we apply the 2-dimentional considerations recursively 
+       Then we apply the 2-dimentional considerations recursively
        to all dimensions. This is exactly what this function does.
 
        When the source node array have an insufficient nomber of nodes
-       along a dimension, we duplicate ending nodes. This solution is done 
-       choosen to the compatibility to the old code, but definitely 
+       along a dimension, we duplicate ending nodes. This solution is done
+       choosen to the compatibility to the old code, but definitely
        there exists a better one.
      */
     int code;
-    
+
     if (ii < 0) {
 	if (POLE_CACHE_IGNORE || *(pfn->params.pole + a_offset) == double_stub) {
 	    code = load_vector(pfn, a_offset, s_offset);
@@ -698,13 +698,13 @@ make_interpolation_tensor(const gs_function_Sd_t *pfn, int *I, double *T,
 	index_span(pfn, I, T, ii, &Ii, &ib, &ie);
 	if (POLE_CACHE_IGNORE || !is_tensor_done(pfn, I, T, a_offset, ii)) {
 	    for (i = ib; i < ie; i++) {
-		code = make_interpolation_tensor(pfn, I, T, 
+		code = make_interpolation_tensor(pfn, I, T,
 				a_offset + i * sa, s_offset + i * ss, ii - 1);
 		if (code < 0)
 		    return code;
 	    }
 	    if (T[ii] != 0)
-		interpolate_tensors(pfn, I, T, a_offset + ib * sa, sa, ie - ib - 1, 
+		interpolate_tensors(pfn, I, T, a_offset + ib * sa, sa, ie - ib - 1,
 				Ii - ib, ii - 1);
 	}
     }
@@ -836,7 +836,7 @@ fn_Sd_evaluate(const gs_function_t * pfn_common, const float *in, float *out)
 /* Map a function subdomain to the sample index subdomain. */
 private inline int
 get_scaled_range(const gs_function_Sd_t *const pfn,
-		   const float *lower, const float *upper, 
+		   const float *lower, const float *upper,
 		   int i, float *pw0, float *pw1)
 {
     float d0 = pfn->params.Domain[i * 2 + 0], d1 = pfn->params.Domain[i * 2 + 1];
@@ -888,11 +888,11 @@ copy_poles(const gs_function_Sd_t *pfn, int *I, double *T0, double *T1, int a_of
     sa = pfn->params.array_step[ii];
     if (ii == 0) {
 	for (i = 0; i < ei; i++)
-	    *(pole + p_offset + i * pole_step) = 
+	    *(pole + p_offset + i * pole_step) =
 		    *(pfn->params.pole + a_offset + I[ii] * sa + i * (sa / order));
     } else {
 	for (i = 0; i < ei; i++) {
-	    code = copy_poles(pfn, I, T0, T1, a_offset + I[ii] * sa + i * (sa / order), ii - 1, 
+	    code = copy_poles(pfn, I, T0, T1, a_offset + I[ii] * sa + i * (sa / order), ii - 1,
 			    pole, p_offset + i * pole_step, pole_step / 4);
 	    if (code < 0)
 		return code;
@@ -915,11 +915,11 @@ subcurve(double *pole, int pole_step, double t0, double t1)
 #define Power2(a) (a) * (a)
 #define Power3(a) (a) * (a) * (a)
     pole[pole_step * 0] = t0*(t0*(q3*t0 - 3*q2*t01) + 3*q1*Power2(t01)) - q0*Power3(t01);
-    pole[pole_step * 1] = q1*t01*(-2*t0 - t1 + 3*t0*t1) + t0*(q2*t0 + 2*q2*t1 - 
+    pole[pole_step * 1] = q1*t01*(-2*t0 - t1 + 3*t0*t1) + t0*(q2*t0 + 2*q2*t1 -
 			    3*q2*t0*t1 + q3*t0*t1) - q0*t11*Power2(t01);
-    pole[pole_step * 2] = t1*(2*q2*t0 + q2*t1 - 3*q2*t0*t1 + q3*t0*t1) + 
+    pole[pole_step * 2] = t1*(2*q2*t0 + q2*t1 - 3*q2*t0*t1 + q3*t0*t1) +
 			    q1*(-t0 - 2*t1 + 3*t0*t1)*t11 - q0*t01*Power2(t11);
-    pole[pole_step * 3] = t1*(t1*(3*q2 - 3*q2*t1 + q3*t1) + 
+    pole[pole_step * 3] = t1*(t1*(3*q2 - 3*q2*t1 + q3*t1) +
 			    3*q1*Power2(t11)) - q0*Power3(t11);
 #undef Power2
 #undef Power3
@@ -940,7 +940,7 @@ subline(double *pole, int pole_step, double t0, double t1)
 }
 
 private void
-clamp_poles(double *T0, double *T1, int ii, int i, double * pole, 
+clamp_poles(double *T0, double *T1, int ii, int i, double * pole,
 		int p_offset, int pole_step, int pole_step_i, int order)
 {
     if (ii < 0) {
@@ -954,7 +954,7 @@ clamp_poles(double *T0, double *T1, int ii, int i, double * pole,
 	int j, ei = (T0[ii] == T1[ii] ? 1 : order + 1);
 
 	for (j = 0; j < ei; j++)
-	    clamp_poles(T0, T1, ii - 1, i, pole, p_offset + j * pole_step, 
+	    clamp_poles(T0, T1, ii - 1, i, pole, p_offset + j * pole_step,
 			    pole_step / 4, pole_step_i, order);
     }
 }
@@ -973,8 +973,8 @@ curve_monotonity(double *pole, int pole_step)
 	return 1;
     if (p0 >= p1 && p1 >= p2 && p2 >= p3)
 	return 2;
-    /* Maybe not monotonic. 
-       Don't want to solve quadratic equations, so return "don't know". 
+    /* Maybe not monotonic.
+       Don't want to solve quadratic equations, so return "don't know".
        This case should be rare.
      */
     return 3;
@@ -993,10 +993,10 @@ line_monotonity(double *pole, int pole_step)
     return 0;
 }
 
-private int /* 3 bits per guide : 3 - non-monotonic or don't know, 
-		    2 - decreesing, 0 - constant, 1 - increasing. 
+private int /* 3 bits per guide : 3 - non-monotonic or don't know,
+		    2 - decreesing, 0 - constant, 1 - increasing.
 		    The number of guides is order+1. */
-tensor_dimension_monotonity(const double *T0, const double *T1, int ii, int i0, double *pole, 
+tensor_dimension_monotonity(const double *T0, const double *T1, int ii, int i0, double *pole,
 		int p_offset, int pole_step, int pole_step_i, int order)
 {
     if (ii < 0) {
@@ -1006,19 +1006,19 @@ tensor_dimension_monotonity(const double *T0, const double *T1, int ii, int i0, 
 	    return line_monotonity(pole + p_offset, pole_step_i);
     } else if (i0 == ii) {
 	/* Delay the dimension till the end, and adjust pole_step. */
-	return tensor_dimension_monotonity(T0, T1, ii - 1, i0, pole, p_offset, 
+	return tensor_dimension_monotonity(T0, T1, ii - 1, i0, pole, p_offset,
 			    pole_step / 4, pole_step, order);
     } else {
 	int j, ei = (T0[ii] == T1[ii] ? 1 : order + 1), m = 0, mm;
 
 	for (j = 0; j < ei; j++) {
-	    mm = tensor_dimension_monotonity(T0, T1, ii - 1, i0, pole, p_offset + j * pole_step, 
+	    mm = tensor_dimension_monotonity(T0, T1, ii - 1, i0, pole, p_offset + j * pole_step,
 			    pole_step/ 4, pole_step_i, order);
 	    m |= mm << (j * 3);
 	    if (mm == 3) {
-		/* If one guide is not monotonic, the dimension is not monotonic. 
+		/* If one guide is not monotonic, the dimension is not monotonic.
 		   Can return early. */
-		break; 
+		break;
 	    }
 	}
 	return m;
@@ -1027,11 +1027,11 @@ tensor_dimension_monotonity(const double *T0, const double *T1, int ii, int i0, 
 
 private inline int
 is_tensor_monotonic_by_dimension(const gs_function_Sd_t *pfn, int *I, double *T0, double *T1, int i0, int k,
-		    uint *mask /* 3 bits per guide : 3 - non-monotonic or don't know, 
-		    2 - decreesing, 0 - constant, 1 - increasing. 
+		    uint *mask /* 3 bits per guide : 3 - non-monotonic or don't know,
+		    2 - decreesing, 0 - constant, 1 - increasing.
 		    The number of guides is order+1. */)
 {
-    double pole[4*4*4]; /* For a while restricting with 3-in cubic functions. 
+    double pole[4*4*4]; /* For a while restricting with 3-in cubic functions.
                  More arguments need a bigger buffer, but the rest of code is same. */
     int i, code, ii = pfn->params.m - 1;
     double TT0[3], TT1[3];
@@ -1054,13 +1054,13 @@ is_tensor_monotonic_by_dimension(const gs_function_Sd_t *pfn, int *I, double *T0
 	} else
 	    TT1[i] = 0;
     }
-    *mask = tensor_dimension_monotonity(TT0, TT1, ii, i0, pole, 0, 
+    *mask = tensor_dimension_monotonity(TT0, TT1, ii, i0, pole, 0,
 			count_of(pole) / 4, -1, pfn->params.Order);
     return 0;
 }
 
 private int /* error code */
-is_lattice_monotonic_by_dimension(const gs_function_Sd_t *pfn, const double *T0, const double *T1, 
+is_lattice_monotonic_by_dimension(const gs_function_Sd_t *pfn, const double *T0, const double *T1,
 	int *I, double *S0, double *S1, int ii, int i0, int k,
 	uint *mask /* 3 bits per guide : 1 - non-monotonic or don't know, 0 - monotonic;
 		      The number of guides is order+1. */)
@@ -1100,9 +1100,9 @@ is_lattice_monotonic_by_dimension(const gs_function_Sd_t *pfn, const double *T0,
 }
 
 private inline int /* error code */
-is_lattice_monotonic(const gs_function_Sd_t *pfn, const double *T0, const double *T1, 
+is_lattice_monotonic(const gs_function_Sd_t *pfn, const double *T0, const double *T1,
 	 int *I, double *S0, double *S1,
-	 int k, uint *mask /* 1 bit per dimension : 1 - non-monotonic or don't know, 
+	 int k, uint *mask /* 1 bit per dimension : 1 - non-monotonic or don't know,
 		      0 - monotonic. */)
 {
     uint m, mm = 0;
@@ -1121,10 +1121,10 @@ is_lattice_monotonic(const gs_function_Sd_t *pfn, const double *T0, const double
     return 0;
 }
 
-private int /* 3 bits per result : 3 - non-monotonic or don't know, 		    
+private int /* 3 bits per result : 3 - non-monotonic or don't know,
 	       2 - decreesing, 0 - constant, 1 - increasing,
 	       <0 - error. */
-fn_Sd_1arg_linear_monotonic_rec(const gs_function_Sd_t *const pfn, int i0, int i1, 
+fn_Sd_1arg_linear_monotonic_rec(const gs_function_Sd_t *const pfn, int i0, int i1,
 				const double *V0, const double *V1)
 {
     if (i1 - i0 <= 1) {
@@ -1152,7 +1152,7 @@ fn_Sd_1arg_linear_monotonic_rec(const gs_function_Sd_t *const pfn, int i0, int i
 	cod1 = fn_Sd_1arg_linear_monotonic_rec(pfn, ii, i1, VV, V1);
 	if (cod1 < 0)
 	    return cod1;
-	return code | cod1;	
+	return code | cod1;
     }
 }
 
@@ -1188,14 +1188,14 @@ fn_Sd_1arg_linear_monotonic(const gs_function_Sd_t *const pfn, double T0, double
 /* Test whether a Sampled function is monotonic. */
 private int /* 1 = monotonic, 0 = not or don't know, <0 = error. */
 fn_Sd_is_monotonic_aux(const gs_function_Sd_t *const pfn,
-		   const float *lower, const float *upper, 
-		   uint *mask /* 1 bit per dimension : 1 - non-monotonic or don't know, 
+		   const float *lower, const float *upper,
+		   uint *mask /* 1 bit per dimension : 1 - non-monotonic or don't know,
 		      0 - monotonic. */)
 {
     int i, code, ii = pfn->params.m - 1;
     int I[4];
     double T0[count_of(I)], T1[count_of(I)];
-    double S0[count_of(I)], S1[count_of(I)]; 
+    double S0[count_of(I)], S1[count_of(I)];
     uint m, mm, m1;
 #   if DEBUG_Sd_1arg
     int code1, mask1;
@@ -1235,7 +1235,7 @@ fn_Sd_is_monotonic_aux(const gs_function_Sd_t *const pfn,
 	    return code;
 	mm |= m;
 	if (mm == m1) /* Don't return early - shadings need to know about all dimensions. */
-	    break; 
+	    break;
     }
 #   if DEBUG_Sd_1arg
 	if (mask1 != mm)
@@ -1486,9 +1486,9 @@ gs_function_Sd_init(gs_function_t ** ppfn,
 	if (pfn->params.m == 1 && pfn->params.Order == 1 && pfn->params.n <= MAX_FAST_COMPS && !DEBUG_Sd_1arg) {
 	    /* Won't use pole cache. Call fn_Sd_1arg_linear_monotonic instead. */
 	} else {
-	    pfn->params.array_step = (int *)gs_alloc_byte_array(mem, 
+	    pfn->params.array_step = (int *)gs_alloc_byte_array(mem,
 				    max_Sd_m, sizeof(int), "gs_function_Sd_init");
-	    pfn->params.stream_step = (int *)gs_alloc_byte_array(mem, 
+	    pfn->params.stream_step = (int *)gs_alloc_byte_array(mem,
 				    max_Sd_m, sizeof(int), "gs_function_Sd_init");
 	    if (pfn->params.array_step == NULL || pfn->params.stream_step == NULL)
 		return_error(gs_error_VMerror);
@@ -1502,7 +1502,7 @@ gs_function_Sd_init(gs_function_t ** ppfn,
 		pfn->params.stream_step[i] = ss;
 		ss = pfn->params.Size[i] * ss;
 	    }
-	    pfn->params.pole = (double *)gs_alloc_byte_array(mem, 
+	    pfn->params.pole = (double *)gs_alloc_byte_array(mem,
 				    sa, sizeof(double), "gs_function_Sd_init");
 	    if (pfn->params.pole == NULL)
 		return_error(gs_error_VMerror);

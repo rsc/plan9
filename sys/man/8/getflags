@@ -14,18 +14,18 @@ This variable should be a list of comma-separated options.
 Each option can be a single letter, indicating that it does
 not take arguments, or a letter followed by the space-separated
 names of its arguments.
-.I Getflags 
-prints an 
+.I Getflags
+prints an
 .IR rc (1)
 script on standard output which initializes the
 environment variable
 .BI $flag x
-for every option mentioned in 
+for every option mentioned in
 .BR $flagfmt .
 If the option is not present on the command-line, the script
 sets that option's flag variable to an empty list.
 Otherwise, the script sets that option's flag variable with
-a list containing the option's arguments or, 
+a list containing the option's arguments or,
 if the option takes no arguments,
 with the string
 .BR 1 .

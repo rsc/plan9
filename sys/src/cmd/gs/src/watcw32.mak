@@ -1,12 +1,12 @@
 #    Copyright (C) 1991-2000 Aladdin Enterprises.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -17,7 +17,7 @@
 # watcw32.mak
 # makefile for Watcom C++ v??, Windows NT or Windows 95 platform.
 #   Does NOT build gs16spl.exe, which is 16-bit and is used under Win32s.
-#   Someone with access to the Watcom 16-bit documentation will need to 
+#   Someone with access to the Watcom 16-bit documentation will need to
 #   do this.
 # Created 1997-02-23 by Russell Lang from MSVC++ 4.0 makefile.
 # Major revisions 1999-07-26 by Ray Johnston.
@@ -411,31 +411,31 @@ $(GLGENDIR)\ccf32.tr: $(TOP_MAKEFILES)
 	echo $(GENOPT) -I$(INCDIR) -DCHECK_INTERRUPTS -D_Windows -D__WIN32__ -D_WATCOM_ > $(GLGENDIR)\ccf32.tr
 
 $(ECHOGS_XE): $(GLSRC)echogs.c
-	$(CCAUX) $(GLSRC)echogs.c $(O_)$(GLOBJ)echogs.obj 
+	$(CCAUX) $(GLSRC)echogs.c $(O_)$(GLOBJ)echogs.obj
 	$(LINK) FILE $(GLOBJ)echogs.obj NAME $(ECHOGS_XE)
 
 # Don't create genarch if it's not needed
 !ifdef GENARCH_XE
 $(GENARCH_XE): $(GLSRC)genarch.c $(GENARCH_DEPS) $(GLGENDIR)\ccf32.tr
-	$(CCAUX) $(GLSRC)genarch.c @$(GLGENDIR)\ccf32.tr $(O_)$(GLOBJ)genarch.obj 
+	$(CCAUX) $(GLSRC)genarch.c @$(GLGENDIR)\ccf32.tr $(O_)$(GLOBJ)genarch.obj
 	$(LINK) FILE $(GLOBJ)genarch.obj NAME $(GENARCH_XE)
 !endif
 
 $(GENCONF_XE): $(GLSRC)genconf.c $(GENCONF_DEPS)
-	$(CCAUX) $(GLSRC)genconf.c $(O_)$(GLOBJ)genconf.obj 
+	$(CCAUX) $(GLSRC)genconf.c $(O_)$(GLOBJ)genconf.obj
 	$(LINK) FILE $(GLOBJ)genconf.obj NAME $(GENCONF_XE)
 
 $(GENDEV_XE): $(GLSRC)gendev.c $(GENDEV_DEPS)
-	$(CCAUX) $(GLSRC)gendev.c $(O_)$(GLOBJ)gendev.obj 
+	$(CCAUX) $(GLSRC)gendev.c $(O_)$(GLOBJ)gendev.obj
 	$(LINK) FILE $(GLOBJ)gendev.obj NAME $(GENDEV_XE)
 
 $(GENHT_XE): $(GLSRC)genht.c $(GENHT_DEPS)
-	$(CCAUX) $(GENHT_CFLAGS) $(GLSRC)genht.c $(O_)$(GLOBJ)genht.obj 
+	$(CCAUX) $(GENHT_CFLAGS) $(GLSRC)genht.c $(O_)$(GLOBJ)genht.obj
 	$(LINK) FILE $(GLOBJ)genht.obj NAME $(GENHT_XE)
 
 # PSSRC and PSOBJ aren't defined yet, so we spell out the definitions.
 $(GENINIT_XE): $(PSSRCDIR)$(D)geninit.c $(GENINIT_DEPS)
-	$(CCAUX) $(PSSRCDIR)$(D)geninit.c $(O_)$(PSOBJDIR)$(D)geninit.obj 
+	$(CCAUX) $(PSSRCDIR)$(D)geninit.c $(O_)$(PSOBJDIR)$(D)geninit.obj
 	$(LINK) FILE $(GLOBJ)geninit.obj NAME $(GENINIT_XE)
 
 # -------------------------------- Library -------------------------------- #
@@ -490,7 +490,7 @@ $(GSCONSOLE_XE): $(OBJC) $(PSOBJ)$(GS).res $(PSSRCDIR)\dw32c.def \
 	$(LINK) system nt option map $(LCT) Name $(GSCONSOLE_XE) File $(OBJCLINK) Library $(PSOBJ)$(GSDLL).lib
 
 # The big DLL
-$(GSDLL_DLL): $(GS_ALL) $(DEVS_ALL) $(PSOBJ)gsdll.$(OBJ) $(GLOBJ)gp_mktmp.obj $(PSOBJ)$(GSDLL).res 
+$(GSDLL_DLL): $(GS_ALL) $(DEVS_ALL) $(PSOBJ)gsdll.$(OBJ) $(GLOBJ)gp_mktmp.obj $(PSOBJ)$(GSDLL).res
 	$(LINK) system nt_dll initinstance terminstance $(LCT) Name $(GSDLL_DLL) File $(GLOBJ)gsdll.obj, $(GLOBJ)gp_mktmp.obj @$(ld_tr) @$(PSSRC)gsdll32w.lnk
 
 $(PSOBJ)$(GSDLL).lib: $(GSDLL_DLL)
@@ -500,11 +500,11 @@ $(PSOBJ)$(GSDLL).lib: $(GSDLL_DLL)
 !else
 # The big graphical EXE
 $(GS_XE): $(GSCONSOLE_XE) $(GS_ALL) $(DEVS_ALL) $(PSOBJ)gsdll.$(OBJ) $(GLOBJ)gp_mktmp.obj $(DWOBJNO) $(PSOBJ)$(GS).res $(PSOBJ)dwmain32.def
-	$(LINK) option map $(LCT) Name $(GS) File $(GLOBJ)gsdll,$(GLOBJ)gp_mktmp.obj, $(DWOBJNOLINK) @$(ld_tr) 
+	$(LINK) option map $(LCT) Name $(GS) File $(GLOBJ)gsdll,$(GLOBJ)gp_mktmp.obj, $(DWOBJNOLINK) @$(ld_tr)
 
 # The big console mode EXE
 $(GSCONSOLE_XE):  $(GS_ALL) $(DEVS_ALL) $(PSOBJ)gsdll.$(OBJ) $(GLOBJ)gp_mktmp.obj $(OBJCNO) $(PSOBJ)$(GS).res $(PSSRCDIR)\dw32c.def
-	$(LINK) option map $(LCT) Name $(GSCONSOLE_XE) File $(GLOBJ)gsdll, $(GLOBJ)gp_mktmp.obj, $(OBJCNOLINK) @$(ld_tr) 
+	$(LINK) option map $(LCT) Name $(GSCONSOLE_XE) File $(GLOBJ)gsdll, $(GLOBJ)gp_mktmp.obj, $(OBJCNOLINK) @$(ld_tr)
 !endif
 
 # end of makefile

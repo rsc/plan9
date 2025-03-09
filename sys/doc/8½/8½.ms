@@ -50,7 +50,7 @@ called 8½.
 8½ provides, on black-and-white, grey-scale, or color displays,
 the services required of a modern window system, including
 programmability and support for remote graphics.
-The entire system, including the default program that runs in the 
+The entire system, including the default program that runs in the
 window \(em the equivalent of
 .CW xterm
 [Far89] with `cutting and pasting' between windows \(em
@@ -432,7 +432,7 @@ The format of the message is:
 4 bytes of y, low byte first
 .DE
 As in all shared data structures in Plan 9,
-the order of every byte in the message is defined 
+the order of every byte in the message is defined
 so all clients can execute the same code to unpack the message
 into a local data structure.
 .PP

@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -691,7 +691,7 @@ in:				/* Initialize for a new page. */
 		if (state.color_is_alpha) {
 		    if (!(op & 8))
 			depth = *cbp++;
-		} else 
+		} else
 		    depth = cdev->color_info.depth;
 	      copy:cmd_getw(state.rect.x, cbp);
 		cmd_getw(state.rect.y, cbp);
@@ -1533,7 +1533,7 @@ idata:			data_size = 0;
     if (code < 0)
 	return_error(code);
     /* Check whether we have more pages to process. */
-    if (playback_action != playback_action_setup && 
+    if (playback_action != playback_action_setup &&
 	(cbp < cbuf.end || !seofp(s))
 	)
 	goto in;

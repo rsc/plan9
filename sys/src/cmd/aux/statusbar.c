@@ -77,7 +77,7 @@ drawbar(void)
 
 	if(lastp != p){
 		sprint(buf, "%d%%", p);
-		
+
 		stringbg(screen, addpt(screen->r.min, Pt(Dx(rbar)-30, 4)), text, ZP, display->defaultfont, buf, light, ZP);
 		lastp = p;
 	}
@@ -175,7 +175,7 @@ main(int argc, char **argv)
 	int lfd;
 
 	p = "0,0,200,60";
-	
+
 	ARGBEGIN{
 	case 'w':
 		p = ARGF();

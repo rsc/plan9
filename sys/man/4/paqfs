@@ -36,7 +36,7 @@ a small persistent storage device, such as a flash ROM.
 It does not authenticate its clients and assumes each group
 has a single member with the same name.
 .PP
-Options to 
+Options to
 .I paqfs
 are:
 .TP
@@ -88,12 +88,12 @@ in to the filesystem.
 Verify the integrity of the
 .IR paqfile .
 Before mounting the file system, the
-entire file is parsed and the 
+entire file is parsed and the
 .I sha1
 checksum of the file system data is compared to the checksum embedded in the file.
 This option enables the use of
 .I paqfs
-with files that consist of a 
+with files that consist of a
 .I paq
 file system concatenated with additional data.
 .SH SOURCE

@@ -85,7 +85,7 @@ noted(Ureg* cur, uintptr arg0)
 		up->lastnote.flag = NDebug;
 		/*FALLTHROUGH*/
 	case NDFLT:
-		if(up->lastnote.flag == NDebug){ 
+		if(up->lastnote.flag == NDebug){
 			qunlock(&up->debug);
 			pprint("suicide: %s\n", up->lastnote.msg);
 		}
@@ -139,7 +139,7 @@ notify(Ureg* ureg)
 		splhi();
 		return 0;
 	}
-		
+
 	if(up->notify == nil){
 		qunlock(&up->debug);
 		pexit(n->msg, n->flag != NDebug);
@@ -307,7 +307,7 @@ sysprocsetup(Proc* p)
 	fpusysprocsetup(p);
 }
 
-/* 
+/*
  *  Craft a return frame which will cause the child to pop out of
  *  the scheduler in user mode with the return register zero.  Set
  *  pc to point to a l.s return function.

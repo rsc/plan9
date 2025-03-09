@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -65,7 +65,7 @@ gx_device_free_local(gx_device *dev)
 }
 
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(device_forward_enum_ptrs, gx_device_forward *fdev) return 0;
 case 0: ENUM_RETURN(gx_device_enum_ptr(fdev->target));
 ENUM_PTRS_END
@@ -401,7 +401,7 @@ gs_setdevice_no_init(gs_state * pgs, gx_device * dev)
     /*
      * Just set the device, possibly changing color space but no other
      * device parameters.
-     * 
+     *
      * Make sure we don't close the device if dev == pgs->device
      * This could be done by allowing the rc_assign to close the
      * old 'dev' if the rc goes to 0 (via the device structure's
@@ -578,8 +578,8 @@ private void
 gx_device_TrayOrientationRotate(gx_device *dev)
 {
   if ( dev->TrayOrientation == 90 || dev->TrayOrientation == 270) {
-    /* page sizes don't rotate, height and width do rotate 
-     * HWResolution, HWSize, and MediaSize parameters interact, 
+    /* page sizes don't rotate, height and width do rotate
+     * HWResolution, HWSize, and MediaSize parameters interact,
      * and must be set before TrayOrientation
      */
     int tmp = dev->height;
@@ -794,7 +794,7 @@ gx_parse_output_file_name(gs_parsed_file_name_t *pfn, const char **pfmt,
 	    pfn->len = fnlen;
 	    pfn->fname = fname;
 	    code = gx_parse_output_format(pfn, pfmt);
-	} 
+	}
 	if (code < 0)
 	    return code;
     }

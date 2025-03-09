@@ -167,11 +167,11 @@ i8250status(Uart* uart, void* buf, long n, long offset)
 		"dev(%d) type(%d) framing(%d) overruns(%d)%s%s%s%s\n",
 
 		uart->baud,
-		uart->hup_dcd, 
+		uart->hup_dcd,
 		(msr & Dsr) != 0,
 		uart->hup_dsr,
 		(lcr & WlsMASK) + 5,
-		(ier & Ems) != 0, 
+		(ier & Ems) != 0,
 		(lcr & Pen) ? ((lcr & Eps) ? 'e': 'o'): 'n',
 		(mcr & Rts) != 0,
 		(lcr & Stb) ? 2: 1,
@@ -180,7 +180,7 @@ i8250status(Uart* uart, void* buf, long n, long offset)
 		uart->dev,
 		uart->type,
 		uart->ferr,
-		uart->oerr, 
+		uart->oerr,
 		(msr & Cts) ? " cts": "",
 		(msr & Dsr) ? " dsr": "",
 		(msr & Dcd) ? " dcd": "",
@@ -214,7 +214,7 @@ i8250fifo(Uart* uart, int on)
 			csr8r(ctlr, Iir);
 			csr8r(ctlr, Rbr);
 		}
-  
+
 		ctlr->fena = 0;
 		if(on){
 			csr8w(ctlr, Fcr, FIFO4|FIFOena);
@@ -623,7 +623,7 @@ i8250console(void)
 		break;
 	case 1:
 		uart = &i8250uart[1];
-		break;	
+		break;
 	}
 
 	uartctl(uart, "b9600 l8 pn s1");
@@ -633,4 +633,4 @@ i8250console(void)
 
 	consuart = uart;
 	uart->console = 1;
-} 
+}

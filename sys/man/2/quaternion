@@ -96,7 +96,7 @@ Return
 the length of a quaternion.
 .TP
 .B qunit
-Return a unit quaternion 
+Return a unit quaternion
 .RI ( length=1 )
 with components proportional to
 .IR q 's.

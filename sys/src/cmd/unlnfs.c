@@ -80,7 +80,7 @@ rename(char *d, char *old, char *new)
 		fprint(2, "unlnfs: cannot rename %s to %s: %r\n", p, new);
 	free(p);
 }
-	
+
 void
 long2short(char shortname[ENCLEN+1], char *longname)
 {

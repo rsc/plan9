@@ -347,7 +347,7 @@ moreprolog(str)
  * up being copied to the output file and FALSE will be returned to the caller.
  * The first call (made from reverse()) looks for ENDPROLOG. Any other call comes
  * from readpages() and will be looking for the ENDSETUP comment.
- * 
+ *
  */
 
     len = strlen(FORMSPERPAGE);
@@ -524,4 +524,3 @@ trailer()
 }   /* End of trailer */
 
 /*****************************************************************************/
-

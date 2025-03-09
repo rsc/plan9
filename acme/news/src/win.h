@@ -72,4 +72,3 @@ extern	char*	egrow(char*, char*, char*);
 extern	char*	eappend(char*, char*, char*);
 extern	void		error(char*, ...);
 extern	int		tokenizec(char*, char**, int, char*);
-

@@ -2,11 +2,11 @@
 
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -132,7 +132,7 @@ int text_getpos(TW *tw, int *px, int *py, int *pcx, int *pcy);
 
 /* Set pre drag and post drag strings
  * If a file is dropped on the window, the following will
- * be poked into the keyboard buffer: 
+ * be poked into the keyboard buffer:
  *   the pre_drag string
  *   the file name
  *   the post_drag string

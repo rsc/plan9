@@ -43,4 +43,3 @@ grep -v 'CITY FORECAST MENU' |
 tr -d '' |
 sed 's/ *$//' |
 uniq
-

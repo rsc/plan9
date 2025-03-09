@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -165,51 +165,51 @@ typedef struct pdf_glyph_widths_s {
 int pdf_font_orig_matrix(const gs_font *font, gs_matrix *pmat);
 int font_orig_scale(const gs_font *font, double *sx);
 
-/* 
- * Check the Encoding compatibility 
+/*
+ * Check the Encoding compatibility
  */
-bool pdf_check_encoding_compatibility(const pdf_font_resource_t *pdfont, 
+bool pdf_check_encoding_compatibility(const pdf_font_resource_t *pdfont,
 		const pdf_char_glyph_pair_t *pairs, int num_chars);
 
 /*
  * Create or find a font resource object for a text.
  */
 int
-pdf_obtain_font_resource(pdf_text_enum_t *penum, 
+pdf_obtain_font_resource(pdf_text_enum_t *penum,
 		const gs_string *pstr, pdf_font_resource_t **ppdfont);
 
 /*
  * Create or find a font resource object for a glyphshow text.
  */
-int pdf_obtain_font_resource_unencoded(pdf_text_enum_t *penum, 
+int pdf_obtain_font_resource_unencoded(pdf_text_enum_t *penum,
 	    const gs_string *pstr, pdf_font_resource_t **ppdfont, const gs_glyph *gdata);
 
 /*
  * Create or find a CID font resource object for a glyph set.
  */
-int pdf_obtain_cidfont_resource(gx_device_pdf *pdev, gs_font *subfont, 
-			    pdf_font_resource_t **ppdsubf, 
+int pdf_obtain_cidfont_resource(gx_device_pdf *pdev, gs_font *subfont,
+			    pdf_font_resource_t **ppdsubf,
 			    pdf_char_glyph_pairs_t *cgp);
 
 /*
  * Create or find a parent Type 0 font resource object for a CID font resource.
  */
-int pdf_obtain_parent_type0_font_resource(gx_device_pdf *pdev, pdf_font_resource_t *pdsubf, 
+int pdf_obtain_parent_type0_font_resource(gx_device_pdf *pdev, pdf_font_resource_t *pdsubf,
 		const gs_const_string *CMapName, pdf_font_resource_t **pdfont);
 
 /*
  * Retrive font resource attached to a font.
  * allocating glyph_usage and real_widths on request.
  */
-int pdf_attached_font_resource(gx_device_pdf *pdev, gs_font *font,  
+int pdf_attached_font_resource(gx_device_pdf *pdev, gs_font *font,
 			   pdf_font_resource_t **pdfont, byte **glyph_usage,
 			   double **real_widths, int *num_chars, int *num_widths);
 
 /*
  * Attach font resource to a font.
  */
-int pdf_attach_font_resource(gx_device_pdf *pdev, gs_font *font, 
-			 pdf_font_resource_t *pdfont); 
+int pdf_attach_font_resource(gx_device_pdf *pdev, gs_font *font,
+			 pdf_font_resource_t *pdfont);
 
 /*
  * Create a font resource object for a gs_font of Type 3.
@@ -300,12 +300,12 @@ int process_text_modify_width(pdf_text_enum_t *pte, gs_font *font,
 			  const gs_const_string *pstr,
 			  gs_point *pdpt);
 
-/* 
+/*
  * Add char code pair to ToUnicode CMap,
  * creating the CMap on neccessity.
  */
 int
-pdf_add_ToUnicode(gx_device_pdf *pdev, gs_font *font, pdf_font_resource_t *pdfont, 
+pdf_add_ToUnicode(gx_device_pdf *pdev, gs_font *font, pdf_font_resource_t *pdfont,
 		  gs_glyph glyph, gs_char ch);
 
 /*

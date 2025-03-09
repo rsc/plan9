@@ -35,7 +35,7 @@ and the
 .I mode
 given as argument
 (default
-.BR 640x480x1 ), 
+.BR 640x480x1 ),
 .I vga
 uses the database of known VGA controllers and monitors in
 .B /lib/vgadb
@@ -49,7 +49,7 @@ The options are:
 .BI -b " bios-string"
 use the VGA database entry corresponding to
 .I bios-string
-(e.g. 
+(e.g.
 \fL0xC0045="Stealth 64 DRAM Vers. 2.02"\fR)
 rather than looking for identifying strings in the BIOS
 memory.
@@ -93,7 +93,7 @@ print a trace of the functions called.
 print a verbose trace of the functions called.
 .TP
 .BI -x " file"
-use 
+use
 .I file
 as the VGA database rather than
 .BR /lib/vgadb .
@@ -107,7 +107,7 @@ is of the form
 and
 .I Z
 are numbers specifying the display height, width, and depth respectively.
-The mode must appear in 
+The mode must appear in
 .B /lib/vgadb
 as a value for one of the monitor entries.
 The usual modes are
@@ -143,7 +143,7 @@ Also, if our VGA controller can't be found in
 will try the VESA calls.
 There are no entries for the
 .B vesa
-monitor in 
+monitor in
 .IR vgadb .
 For a list of available VESA modes, use
 .IP
@@ -208,7 +208,7 @@ VGA configuration file.
 .SH BUGS
 .B Aux/vga
 makes every effort possible to verify that the mode it is about
-to load is valid and will bail out with an error message 
+to load is valid and will bail out with an error message
 before setting any registers if it encounters a problem.
 However, things can go wrong, especially when playing with a
 new VGA controller or monitor setting.

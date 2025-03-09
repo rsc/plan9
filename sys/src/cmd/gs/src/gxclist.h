@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -80,7 +80,7 @@ typedef struct gx_placed_page_s {
     gx_saved_page *page;
     gs_int_point offset;
 } gx_placed_page;
-  
+
 /*
  * Define a procedure to cause some bandlist memory to be freed up,
  * probably by rendering current bandlist contents.
@@ -334,7 +334,7 @@ int clist_setup_params(gx_device *dev);
 /*
  * Render a rectangle to a client-supplied image.  This implements
  * gdev_prn_render_rectangle for devices that are using banding.
- * 
+ *
  * Note that clist_render_rectangle only guarantees to render *at least* the
  * requested rectangle to bdev, offset by (-prect->p.x, -prect->p.y):
  * anything it does to avoid rendering regions outside the rectangle is

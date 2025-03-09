@@ -1,12 +1,12 @@
 /* Copyright (C) 1994, 1997, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -198,7 +198,7 @@ jpeg_alloc(j_common_ptr cinfo, size_t size, const char *info)
 {
     jpeg_compress_data *jcd = cinfo2jcd(cinfo);
     gs_memory_t *mem = jcd->memory;
-    
+
     jpeg_block_t *p = gs_alloc_struct_immovable(mem, jpeg_block_t,
     			&st_jpeg_block, "jpeg_alloc(block)");
     void *data = gs_alloc_bytes_immovable(mem, size, info);

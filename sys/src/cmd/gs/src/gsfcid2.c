@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -279,7 +279,7 @@ gs_cmap_from_type42_cmap(gs_cmap_t **ppcmap, gs_font_type42 *pfont,
     {
 	uint cmap_count;
 	uint i;
-	
+
 	ACCESS(origin + 2, 2, ttdata);
 	cmap_count = U16(ttdata);
 	for (i = 0; i < cmap_count; ++i) {

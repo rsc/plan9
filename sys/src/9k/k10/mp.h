@@ -82,4 +82,3 @@ enum {
 	ApicLEVEL	= 0x00008000,
 	ApicIMASK	= 0x00010000,	/* [16] Interrupt Mask */
 };
-

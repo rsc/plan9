@@ -84,7 +84,7 @@ sys_errstr(void)
 	memio(errbuf, str, OERRLEN, MemWrite);
 	strcpy(errbuf, "no error");
 	reg.r[REGRET] = 0;
-	
+
 }
 
 void
@@ -103,11 +103,11 @@ syserrstr(void)
 	memio(errbuf, str, n, MemWrite);
 	strcpy(errbuf, "no error");
 	reg.r[REGRET] = n;
-	
+
 }
 void
 sysbind(void)
-{ 
+{
 	ulong pname, pold, flags;
 	char name[1024], old[1024];
 	int n;
@@ -151,12 +151,12 @@ sysfd2path(void)
 	else
 		memio(errbuf, str, n, MemWrite);
 	reg.r[REGRET] = n;
-	
+
 }
 
 void
 syschdir(void)
-{ 
+{
 	char file[1024];
 	int n;
 	ulong name;
@@ -165,7 +165,7 @@ syschdir(void)
 	memio(file, name, sizeof(file), MemReadstring);
 	if(sysdbg)
 		itrace("chdir(0x%lux='%s', 0x%lux)", name, file);
-	
+
 	n = chdir(file);
 	if(n < 0)
 		errstr(errbuf, sizeof errbuf);
@@ -235,7 +235,7 @@ sysopen(void)
 	name = getmem_w(reg.r[13]+4);
 	mode = getmem_w(reg.r[13]+8);
 	memio(file, name, sizeof(file), MemReadstring);
-	
+
 	n = open(file, mode);
 	if(n < 0)
 		errstr(errbuf, sizeof errbuf);
@@ -320,7 +320,7 @@ sysseek(void)
 
 	v = seek(fd, v, mode);
 	if(v < 0)
-		errstr(errbuf, sizeof errbuf);	
+		errstr(errbuf, sizeof errbuf);
 
 	putmem_v(retp, v);
 }
@@ -339,7 +339,7 @@ sysoseek(void)
 
 	n = seek(fd, off, mode);
 	if(n < 0)
-		errstr(errbuf, sizeof errbuf);	
+		errstr(errbuf, sizeof errbuf);
 
 	reg.r[REGRET] = n;
 }
@@ -356,7 +356,7 @@ syssleep(void)
 
 	n = sleep(len);
 	if(n < 0)
-		errstr(errbuf, sizeof errbuf);	
+		errstr(errbuf, sizeof errbuf);
 
 	reg.r[REGRET] = n;
 }
@@ -401,7 +401,7 @@ sysstat(void)
 		itrace("stat(0x%lux='%s', 0x%lux, 0x%lux)", name, nambuf, edir, n);
 	if(n > sizeof buf)
 		errstr(errbuf, sizeof errbuf);
-	else{	
+	else{
 		n = stat(nambuf, buf, n);
 		if(n < 0)
 			errstr(errbuf, sizeof errbuf);
@@ -475,7 +475,7 @@ syswrite(vlong offset)
 	buf = memio(0, a, size, MemRead);
 	n = pwrite(fd, buf, size, offset);
 	if(n < 0)
-		errstr(errbuf, sizeof errbuf);	
+		errstr(errbuf, sizeof errbuf);
 
 	if(sysdbg)
 		itrace("write(%d, %lux, %d, 0x%llx) = %d", fd, a, size, offset, n);
@@ -530,7 +530,7 @@ syscreate(void)
 	memio(file, name, sizeof(file), MemReadstring);
 	if(sysdbg)
 		itrace("create(0x%lux='%s', 0x%lux, 0x%lux)", name, file, mode, perm);
-	
+
 	n = create(file, mode, perm);
 	if(n < 0)
 		errstr(errbuf, sizeof errbuf);
@@ -564,9 +564,9 @@ sysbrk_(void)
 		s->end = addr;
 		nsize = ((s->end-s->base)/BY2PG)*sizeof(uchar*);
 		s->table = erealloc(s->table, osize, nsize);
-	}	
+	}
 
-	reg.r[REGRET] = 0;	
+	reg.r[REGRET] = 0;
 }
 
 void

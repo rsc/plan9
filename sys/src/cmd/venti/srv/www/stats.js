@@ -45,7 +45,7 @@ graphname = new Array(
 	"arg=icachewrite&graph=diff",
 		"icache writes/second",
 
-	"arg=isectreadbyte&graph=diff",	
+	"arg=isectreadbyte&graph=diff",
 		"isect read bytes/second",
 	"arg=isectwritebyte&graph=diff",
 		"isect write bytes/second",
@@ -104,12 +104,12 @@ column0 = new Array(
 	"arg=apartreadbyte&graph=diff",
 	"arg=apartwritebyte&graph=diff",
 	"arg=sumreadbyte&graph=diff",
-	
+
 	"!bloom filter",
 	"arg=bloomhit&graph=pctdiff&arg2=bloomlookup&max=100",
 	"arg=bloomfalsemiss&graph=pctdiff&arg2=bloomlookup&max=100",
 	"arg=bloomones&graph=pct&arg2=bloombits&max=100",
-	
+
 	"END"
 )
 
@@ -120,17 +120,17 @@ column1 = new Array(
 	"arg=icachehit&graph=pctdiff&arg2=icachelookup&max=100",
 	"arg=icachewrite&graph=diff",
 	"arg=icacheprefetch&graph=diff",
-	
+
 	"!dcache",
 	"arg=dcachedirty&graph=pct&arg2=dcachesize&max=100",
 	"arg=dcachehit&graph=pctdiff&arg2=dcachelookup&max=100",
 	"arg=dcachelookup&graph=diff",
 	"arg=dcachewrite&graph=diff",
-	
+
 	"!lump cache",
 	"arg=lcachehit&graph=pctdiff&arg2=lcachelookup&max=100",
 	"arg=lcachewrite&graph=diff",
-	
+
 	"END"
 )
 
@@ -142,7 +142,7 @@ column2 = new Array(
 	"arg=dcachestall",
 	"arg=dblockstall",
 	"arg=lumpstall",
-	
+
 	"!timings",
 	"arg=bloomlookuptime&graph=divdiff&arg2=bloomlookup",
 	"arg=icachelookuptime&graph=divdiff&arg2=icachelookup",
@@ -154,7 +154,7 @@ column2 = new Array(
 	"arg=rpcreaduncachedtime&graph=divdiff&arg2=rpcreaduncached",
 	"arg=rpcwritenewtime&graph=divdiff&arg2=rpcwritenew",
 	"arg=rpcwriteoldtime&graph=divdiff&arg2=rpcwriteold",
-	
+
 	"END"
 )
 
@@ -227,7 +227,7 @@ function redraw() {
 
 function redrawgraphs() {
 	var t = document.getElementById("statgraphs")
-	
+
 	cleartable(t)
 	for(var i=0; i<4; i++)
 		t.insertRow(i)
@@ -235,7 +235,7 @@ function redrawgraphs() {
 	graphrow(t.rows[0], 3, biggraph, 86400, 900, 30, 0, " &ndash; showing 24 hours")
 	graphrow(t.rows[1], 3, biggraph, 3600, 900, 30, 1, " &ndash; showing 1 hour")
 	t.rows[2].innerHTML = "<td height=10></td>"
-	
+
 	var r = t.rows[3]
 	graphtable(r.insertCell(0), column0, col0info, 0)
 	graphtable(r.insertCell(1), column1, col1info, 2)
@@ -280,7 +280,7 @@ function xpos(obj) {
 		x = obj.x
 	return x
 }
-		
+
 function ypos(obj) {
 	var y = 0
 	if(obj.fixedy)
@@ -317,7 +317,7 @@ function columnclick(e) {
 
 function findgraph(x, y) {
 	var g
-	
+
 	if(g = findgraphin(x, y, "column2", col2info))
 		return g
 	if(g = findgraphin(x, y, "column1", col1info))

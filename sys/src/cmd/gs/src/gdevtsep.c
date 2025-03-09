@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 2000 Aladdin Enterprises, 2004 Artifex Software Inc.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -257,7 +257,7 @@ typedef struct tiffsep_device_s {
 } tiffsep_device;
 
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(tiffsep_device_enum_ptrs, tiffsep_device *pdev)
 {
     if (index < pdev->devn_params.separations.num_separations)
@@ -393,7 +393,7 @@ gs_private_st_composite_final(st_tiffsep_device, tiffsep_device,
 private const gx_device_procs spot_cmyk_procs = device_procs;
 
 const tiffsep_device gs_tiffsep_device =
-{   
+{
     tiffsep_device_body(spot_cmyk_procs, "tiffsep", NC, GX_CINFO_POLARITY_SUBTRACTIVE, NC * 8, MAX_COLOR_VALUE, MAX_COLOR_VALUE, "DeviceCMYK"),
     /* devn_params specific parameters */
     { 8,		/* Bits per color - must match ncomp, depth, etc. above */
@@ -530,7 +530,7 @@ tiffsep_put_params(gx_device * pdev, gs_param_list * plist)
 
 /*
  * This routine will check to see if the color component name  match those
- * that are available amoung the current device's color components.  
+ * that are available amoung the current device's color components.
  *
  * Parameters:
  *   dev - pointer to device data structure.
@@ -612,7 +612,7 @@ create_separation_file_name(tiffsep_device * pdev, char * buffer,
 	sep_num -= pdev->devn_params.num_std_colorant_names;
 #define USE_SEPARATION_NAME 0	/* See comments before copy_separation_name */
 #if USE_SEPARATION_NAME
-        copy_separation_name(pdev, buffer + base_filename_length, 
+        copy_separation_name(pdev, buffer + base_filename_length,
 	    max_size - SUFFIX_SIZE, sep_num);
 #else
 		/* Max of 10 chars in %d format */
@@ -683,7 +683,7 @@ build_comp_to_sep_map(tiffsep_device * pdev, short * map_comp_to_sep)
 
     for (sep_num = 0; sep_num < num_std_colorants + num_sep; sep_num++) {
 	int comp_num = pdev->devn_params.separation_order_map[sep_num];
-    
+
 	if (comp_num >= 0 && comp_num < GX_DEVICE_COLOR_MAX_COMPONENTS)
 	    map_comp_to_sep[comp_num] = sep_num;
     }
@@ -855,7 +855,7 @@ tiffsep_print_page(gx_device_printer * pdev, FILE * file)
 
     /* Print the names of the spot colors */
     for (sep_num = 0; sep_num < num_spot; sep_num++) {
-        copy_separation_name(tfdev, name, 
+        copy_separation_name(tfdev, name,
 	    MAX_FILE_NAME_SIZE - base_filename_length - SUFFIX_SIZE, sep_num);
 	dlprintf1("%%%%SeparationName: %s\n", name);
     }
@@ -866,7 +866,7 @@ tiffsep_print_page(gx_device_printer * pdev, FILE * file)
     */
     code = gx_parse_output_file_name(&parsed, &fmt,
 		    			tfdev->fname, strlen(tfdev->fname));
-    
+
     /* Write the page directory for the CMYK equivalent file. */
     pdev->color_info.depth = 32;	/* Create directory for 32 bit cmyk */
     code = gdev_tiff_begin_page(pdev, &tfdev->tiff_comp, file,
@@ -883,7 +883,7 @@ tiffsep_print_page(gx_device_printer * pdev, FILE * file)
 					num_std_colorants, num_order, num_spot);
     for (comp_num = 0; comp_num < num_comp; comp_num++ ) {
 	int sep_num = map_comp_to_sep[comp_num];
-	
+
 	code = create_separation_file_name(tfdev, name,
 					MAX_FILE_NAME_SIZE, sep_num);
 	if (code < 0)
@@ -950,7 +950,7 @@ tiffsep_print_page(gx_device_printer * pdev, FILE * file)
             for (comp_num = 0; comp_num < num_comp; comp_num++ ) {
 		byte * src = row + comp_num;
 		byte * dest = sep_line;
-		
+
 		for (pixel = 0; pixel < width; pixel++, dest++, src += bytes_pp)
 		    *dest = MAX_COLOR_VALUE - *src;    /* Gray is additive */
 	        fwrite((char *)sep_line, width, 1, tfdev->sep_file[comp_num]);

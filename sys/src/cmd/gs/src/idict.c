@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1996, 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -420,7 +420,7 @@ dict_find_string(const ref * pdref, const char *kstr, ref ** ppvalue)
     if ( pdref != 0 ) {
 	dict *pdict = pdref->value.pdict;
 
-	if ((code = name_ref(dict_mem(pdict), 
+	if ((code = name_ref(dict_mem(pdict),
 			     (const byte *)kstr, strlen(kstr), &kname, -1)) < 0)
 	    return code;
 	return dict_find(pdref, &kname, ppvalue);

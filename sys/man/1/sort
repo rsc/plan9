@@ -1,4 +1,4 @@
-.TH SORT 1 
+.TH SORT 1
 .SH NAME
 sort \- sort and/or merge files
 .SH SYNOPSIS
@@ -106,8 +106,8 @@ is sorted by arithmetic value.
 .TP
 .B -g
 Numbers, like
-.B -n 
-but with optional 
+.B -n
+but with optional
 .BR e -style
 exponents, are sorted by value.
 .TP
@@ -235,7 +235,7 @@ unique representative from a set of equal lines predictable.
 .TP
 .L
 grep -n '^' input | sort -t: +1f +0n | sed 's/[0-9]*://'
-A stable sort: input lines that compare equal will 
+A stable sort: input lines that compare equal will
 come out in their original order.
 .SH FILES
 .BI /tmp/sort. <pid>.<ordinal>

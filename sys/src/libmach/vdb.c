@@ -949,27 +949,27 @@ cop0(Instr *i)
 	}
 	else if (i->rs >= 0x10) {
 		switch (i->cofun) {
-	
+
 		case 1:
 			m = "TLBR";
 			break;
-	
+
 		case 2:
 			m = "TLBWI";
 			break;
-	
+
 		case 6:
 			m = "TLBWR";
 			break;
-	
+
 		case 8:
 			m = "TLBP";
 			break;
-	
+
 		case 16:
 			m = "RFE";
 			break;
-	
+
 		case 24:
 			m = "ERET";
 			break;

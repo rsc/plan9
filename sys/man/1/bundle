@@ -43,8 +43,8 @@ cd gift; rc horse; mk
 .SH SOURCE
 .B /rc/bin/bundle
 .SH SEE ALSO
-.IR ar (1), 
-.IR tar (1), 
+.IR ar (1),
+.IR tar (1),
 .IR mail (1)
 .SH BUGS
 .I Bundle

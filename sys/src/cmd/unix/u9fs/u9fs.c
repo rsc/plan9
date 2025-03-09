@@ -622,7 +622,7 @@ plan9mode(struct stat *st)
 	return ((ulong)modebyte(st)<<24) | (st->st_mode & 0777);
 }
 
-/* 
+/*
  * this is for chmod, so don't worry about S_IFDIR
  */
 mode_t
@@ -949,7 +949,7 @@ rwstat(Fcall *rx, Fcall *tx)
 	 * The casting is necessary because d.mode is ulong and might,
 	 * on some systems, be 64 bits.  We only want to compare the
 	 * bottom 32 bits, since that's all that gets sent in the protocol.
-	 * 
+	 *
 	 * Same situation for d.mtime and d.length (although that last check
 	 * is admittedly superfluous, given the current lack of 128-bit machines).
 	 */
@@ -967,7 +967,7 @@ rwstat(Fcall *rx, Fcall *tx)
 		if(groupchange(fid->u, gid2user(gid), &e) < 0){
 			seterror(tx, e);
 			return;
-		}		
+		}
 	}
 
 	if((u32int)d.mode != (u32int)~0 && (((d.mode&DMDIR)!=0) ^ (S_ISDIR(fid->st.st_mode)!=0))){
@@ -1447,9 +1447,9 @@ groupchange(User *u, User *g, char **ep)
 
 
 /*
- * An attempt to enforce permissions by looking at the 
+ * An attempt to enforce permissions by looking at the
  * file system.  Separation of checking permission and
- * actually performing the action is a terrible idea, of 
+ * actually performing the action is a terrible idea, of
  * course, so we use setreuid for most of the permission
  * enforcement.  This is here only so we can give errors
  * on open(ORCLOSE) in some cases.

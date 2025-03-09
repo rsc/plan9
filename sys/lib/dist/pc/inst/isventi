@@ -10,4 +10,3 @@ if(! cmp -s <{dd -quiet 1 -if $arg -bs 1024 -iseek 248 |
 	dd -quiet 1 -bs 13 -count 1} <{echo 'venti config'})
 	exit noconfig
 exit 0
-

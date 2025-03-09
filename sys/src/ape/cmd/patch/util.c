@@ -401,7 +401,7 @@ version_get (filename, cs, exists, readonly, getbuf, filestat)
       if (stat (filename, filestat) != 0)
 	pfatal ("%s", filename);
     }
-  
+
   return 1;
 }
 

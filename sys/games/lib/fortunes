@@ -1,6 +1,6 @@
 login: 
 	case '\7': *((char *)(384*1024L+062)) = 2;	/* beep */
-        Welcome to VAX/VMS Version 1.60    
+        Welcome to VAX/VMS Version 1.60
     ON ENDFILE(SYSIN)  GO TO ADATHIBA;  /* FILE-VEGE VIZSGALATA */
    Tape dump of all filesystems taken this afternoon.
 "Analysis" is "design" spelled backwards.
@@ -588,7 +588,7 @@ How sharper than a serpent's tooth it is to have a thankless child.
 How the elephant got into my pyjamas I'll never know.  -Marx, Animal Crackers
 How wonderful opera would be if there were no singers.
 How you look depends on where you go.
-Human beings are the only animals of which I am thoroughly and cravenly afraid. 
+Human beings are the only animals of which I am thoroughly and cravenly afraid.
 Human kind cannot bear very much reality. -T.S. Eliot
 Hypocrisy is the tribute vice pays to virtue.
 Hypothesize and test.
@@ -714,7 +714,7 @@ If it's not broken, don't fix it.
 If it's not worth doing, it's not worth doing well.
 If it's worth doing well, it's worth doing.
 If more is better then too much is just enough.
-If music be the breakfast food of love, kindly do not disturb until lunch time. 
+If music be the breakfast food of love, kindly do not disturb until lunch time.
 If some day it should happen that a victim must be found, I've got a little list, I've got a little list.
 If the "medium is the message" then the message of low-bandwidth timesharing is "blah". -- Alan Kay
 If the check is truly in the mail, it is surely made out to someone else.
@@ -2251,7 +2251,7 @@ Never wear your best pants when you go to fight for freedom.
 On average, pantyhose wearers buy three pairs per month.
 Hello new user, welcome to the Sun computing environment
 If you have any questions about your Sun workstation, please call CORNET 624-2772
-"Coma" is not the sort of name I'd use if I were striving to present a professional image. -M Horton 
+"Coma" is not the sort of name I'd use if I were striving to present a professional image. -M Horton
 Facts are stupid things.  -R.W. Reagan
 sendmail[94] AA00493: SYSERR: net hang reading from coma: Connection timed out during greeting wait with coma
 In the last 100 years man's capability started to grow exponentially, to literally explode. -E. E. Sumner
@@ -2292,7 +2292,7 @@ We are tied down to a language that makes up in obscurity what it lacks in style
 Those who don't remember history are doomed to forget it
 		Relf Test Passed.
 Vegetarianism is harmless enough, though it is apt to fill a man with wind and self-righteousness.  -Sir Robert Hutchinson
-SQUASH, do not crush (seen on a vegetable crate) 
+SQUASH, do not crush (seen on a vegetable crate)
 A factor of 3000 is actually significant - Andrew Hume
 The difference between languages is what makes a language different.
 seqno is 21, should be 21
@@ -3257,8 +3257,8 @@ If something could be done about cache misses, programs would run about twice as
 mount: mount /srv/boot /n/bootes: permission denied
 Kudos to everyone on the WKSH Team!
 the application "unknown" has unexpectedly quit, because of sys.
-BUSINESS UNIT NEWS: 
-   o UNIX System Labs launches a torrent of announcements 
+BUSINESS UNIT NEWS:
+   o UNIX System Labs launches a torrent of announcements
 /bin/ls: exec header invalid
 If you wish to vote "No opinion" on any topic, you must cancel gut.wksh and execute gut instead.
 Huiswants es.
@@ -3356,7 +3356,7 @@ T-shirt: Mom and Dad invented OOP in the 70's and all I got was C++
   DEC OSF/1 V1.2 Worksystem Software (Rev. 10) The installation software has successfully installed your system.
 BD-445G (red compact car) lights no longer on
 Checking system endianess...                    Big endian
-Subject: **  PROCESS CHANGE ALERT  **********************   ERROR:(-)input line 8:LI:no lists active     Distribution: ihlpb!pca-usi5e 
+Subject: **  PROCESS CHANGE ALERT  **********************   ERROR:(-)input line 8:LI:no lists active     Distribution: ihlpb!pca-usi5e
 If Dennis Ritchie were the man who developed Modula-2 then C would be long forgotten. -Tarjei Jensen
 From --rw-rw-rw- Sun Aug 15 04:21:17 EDT 1993
 If you're smart you'll remain ignorant - bobf
@@ -3493,8 +3493,8 @@ This program cannot be run in DOS mode.
 Your mouse has moved. Windows NT must be restarted for the change to take effect. Reboot now?
 Millenium parties/with loud music, lights and joy;/then, how cold!
 Stupid programmer,/think ahead next time, when the/power's back.
-Windows 98 is/compliant with minor bugs,/store water!  
-Hire more programmers/for Y2k Bug now -- Oops,/lights are out! 
+Windows 98 is/compliant with minor bugs,/store water!
+Hire more programmers/for Y2k Bug now -- Oops,/lights are out!
 Y2k is just/a scam for consultants -- hey/Martial law!
 Two digits lost,/the railroad switch spills coal --/scavengers!
 UX:cancel: WARNING: Request "SPARCprinterII-64" is done. TO FIX: It is too late to do anything with it.
@@ -3517,7 +3517,7 @@ FOR FASTER SERVICE, PLEASE CALL US WITH YOUR REFILLS 24 HOURS IN ADVANCE
 Anthrax is cool. - Tad Hunt
 (never claims generated from LTL formulae are stutter-closed)
 /text/plain00charsetUTF-80 you stuff by snail,
-War in the Clinton era is just P.R. by other means.  - Michael Hirschorn 
+War in the Clinton era is just P.R. by other means.  - Michael Hirschorn
 If I can see a bit further it is because I stand on the shoulders of Hungarians. - Mathematician Paul Winkler
 I don't want any yes-men around me. I want everybody to tell me the truth even if it costs them their jobs. - Sam Goldwyn
 We do not need phones, we have a lot of messenger boys - British Scientist in 1876
@@ -3560,7 +3560,7 @@ Don't meddle in the mouth. - Mark V. Shaney
 Will the call be routed on the same switch or will it go out over a truck to another switch?
 I may be a bad woman, but I'm awfully good company. - Fanny Brice
 apmd[105]: On-line: * * * (100% unknown)
-P.P.S. Thanks for helping make BUY.COM the #l online computer retailer. 
+P.P.S. Thanks for helping make BUY.COM the #l online computer retailer.
 I hope some animal never bores a hole in my head and lays its eggs in my brain, because later you might think you're having a good idea but it's just eggs hatching. - Jack Handey
 I only lie to the ones I don't like, the ones who ask stupid questions.
 The proofs of the associative, commutative, and distributive laws for the integers are exercises in induction which might be called ``Peano playing.''  - An algebra textbook
@@ -3650,7 +3650,7 @@ A woman is only a woman, but I'm awfully good company.  - Bill Gates
 It is most enjoyable to talk with you.
 Lucky Numbers 12, 14, 19, 24, 36, 43
 Lucky Numbers `{seq 100}
-junk: 644 mode. Remove ? (yes/no)[no] : 
+junk: 644 mode. Remove ? (yes/no)[no] :
 Pharr is about a day and a half.
 OBJECTS IN MIRROR ARE CLOSER THAN THEY APPEAR
 I found VC++ GUI programming more grief than COBOL using cards!  :-)
@@ -3689,7 +3689,7 @@ The gun law in Queensland is as follows: if you run out of petrol don't run out 
 America? Astounding! All because of a fellow named Columbus and poor navigation!
 Warning: MS SQL message: Login failed for user 'webreadonly'. Reason: Not associated with a trusted SQL Server connection. (severity 14) in C:\Inetpub\www.escient.com\buy.php on line 136
 uname: not super user
-2001.08.30=11:45:58.88-0400 transcript/666/12016387293 nutmeg[667] transcript: Daisy:  Please say, Daisy its David or David.  Or say, Daisy its me, so I know who you are.  
+2001.08.30=11:45:58.88-0400 transcript/666/12016387293 nutmeg[667] transcript: Daisy:  Please say, Daisy its David or David.  Or say, Daisy its me, so I know who you are.
 Does anyone have Richard Stallman's phone number?  I want to call him and tell him exactly what I think of his software.  Criticism wants to be free.  -dhog
 Devil Duckie, when you float, it's like I'm bathing in a flaming moat!
 Djahavagooweegend?
@@ -3853,13 +3853,13 @@ c++ -O2 -fno-exceptions -fno-check-new -Wall -pedantic -W -Wpointer-arith -Wmiss
 Please browse the site to see our full range of services, we can remain customer focused and goal-directed, innovate and be an inside-out organization which facilitates sticky web-readiness transforming turnkey eyeballs to brand 24/365 paradigms with benchmark turnkey channels implementing viral e-services and dot-com action-items while we take that action item off-line and raise a red flag and remember touch base as you think about the red tape outside of the box and seize B2B e-tailers and re-envisioneer innovative partnerships that evolve dot-com initiatives delivering synergistic earballs to incentivize. - www.anadrom.net
 If you're calling to report a death, please press or say, "One".
 i'm running windows xp under vmware in a vnc on linux being viewed from plan 9. (got that?) - rob
-User: support@games.yahoo.com send to you mail with virus.  Please check mail in attach ! 
+User: support@games.yahoo.com send to you mail with virus.  Please check mail in attach !
 Subject: I NEED YOUR ASSISTANT
 Lucent's motto: Let's make things harder
 MOZILLA_FIVE_HOME=/opt/netscape-6.2.3-us
 If you haven't heard of XML yet, you must be living under a rock!  - Programming in the .NET Environment
 The second line computes the sinus of the result.  - Programming in the .NET Environment
-Where would Christianity be if Jesus got eight to fifteen years, with time off for good behavior? -- New York Senator James H. Donovan on capital punishment. 
+Where would Christianity be if Jesus got eight to fifteen years, with time off for good behavior? -- New York Senator James H. Donovan on capital punishment.
 rsc            5202    0:00   0:00 1710768K Rendez   8.portmapd
 http://www.fortunecookieadvertising.com
 A short stranger will soon enter your life.
@@ -4047,7 +4047,7 @@ Linux is good if you want to run Apache or compile the kernel.  Every other appl
 /etc/bash.bashrc:	alias unmount='echo "Error: Try the command: umount" 1>&2; false'
 Book-burning is such an ugly phrase.  I prefer to think of it as "English lit".  - Larry Hollister
 panic: bad rob
-	ulong	when;			/* may underflow in clock(); must be signed */ 
+	ulong	when;			/* may underflow in clock(); must be signed */
 There is no interest in a WWW browser.  This fad is clearly not going to have any staying power.  - plan.9@research.att.com, Oct 22 1994
 the representation of characters, but not the character set itself, was changed this weekend.  we believe that the representation we are using now will become the one used by unix-like systems everywhere.  - rob's news about utf-8, sep 6 1992
 Linux: the world's best text adventure game.
@@ -4219,7 +4219,7 @@ Nothing is more hateful to wisdom than excessive cleverness - Seneca (according 
 Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away. - Antoine de Saint-Exupery
   bucket = Buckets + pe; /* bucket = &(Buckets[pe]); */
 Those who can do, those who can't write and those who can't write make ezines. - Sape
-Command (m for help): 
+Command (m for help):
 `the dreaded Wordstar, the Wordprocessor that Time joined the Foreign Legion to Forget.' - Verity Stob
 Please contact nicfae@realtek.com.tw for singing NDA form.
 /home/jmk/.wvdial.conf<Warn>: Ignoring malformed input line: ";Do NOT edit this file by hand!"
@@ -4230,7 +4230,7 @@ Your IP address is: <? echo getenv('REMOTE_ADDR'); ?>. By continuing to browse t
 You chose to apply Shadow Ram extend feature, while you knew it was risky. If the system hangs during boot, please restart the system and come here to change the setting.
 An amateur thinks it's really funny if you dress a man up as an old lady, put him in a wheelchair, and give the wheelchair a push that sends it spinning down a slope towards a stone wall. For a pro, it's got to be a real old lady. - Groucho Marx.
 Error Code: -2147483648
-Pardon the abruptness of this letter; it is due to its exigency. 
+Pardon the abruptness of this letter; it is due to its exigency.
 The source of the money is legal and authoritative.
 Please note that I do not intend to waste my time and yours.
 The Internet is still a fascination to me.
@@ -4314,7 +4314,7 @@ DSM Terminator [ ABORT ] Finished [ 0 request(s) + 0 call(s) distributed in 5ms]
 Microsoft Office PowerPoint has encountered a problem and cannot exit.  We are sorry for the inconvenience.
 dd: argument 18446744073709551615 out of range
 A policeman's job is only easy in a police state. - Orson Welles
-Dear {FULLNAME}, This email was sent to {RECIPIENTS}. 
+Dear {FULLNAME}, This email was sent to {RECIPIENTS}.
 Grammar... The difference between knowing your shit, and knowing you're shit.
 The custom error module does not recognize this error.
 The U.S. government has to get out of the business of fucking with encryption standards.  - Richard Clarke

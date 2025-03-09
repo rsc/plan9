@@ -61,7 +61,7 @@ psline(int x0, int y0, int x1, int y1, char *color)
 		if (y1 - y0  <= HH+20)
 		{	y1 = y0+20; /* close enough to horizontal - looks better */
 		}
- 
+
 		fprintf(pfd, ".c create line %d %d %d %d -fill %s -tags mesg -width %d\n",
 			xscale*(x0+1)*WW-20, yscale*y0+20+10,
 			xm,                  yscale*y0+20+10, color, LW);

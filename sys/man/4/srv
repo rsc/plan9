@@ -1,4 +1,4 @@
-.TH SRV 4 
+.TH SRV 4
 .SH NAME
 srv, srvold9p, 9fs, srvssh \- start network file service
 .SH SYNOPSIS
@@ -108,7 +108,7 @@ Option
 suppresses complaints if the
 .B /srv
 file already exists.
-The 
+The
 .BR a ,
 .BR b ,
 .BR c ,
@@ -187,7 +187,7 @@ script; examine it to see what local conventions apply.
 is an
 .IR rc (1)
 command that
-connects to a remote Unix system via 
+connects to a remote Unix system via
 .IR ssh (1)
 and starts
 .IR u9fs (4).

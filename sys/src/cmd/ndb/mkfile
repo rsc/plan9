@@ -98,4 +98,3 @@ update:V:
 	T=`{echo $TARG|sed 's/( |$)/.update /g'}
 	mk 'UPDATEFLAGS='$"UPDATEFLAGS $T
 	update $UPDATEFLAGS mkfile
-

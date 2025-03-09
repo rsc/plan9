@@ -1,12 +1,12 @@
 #    Copyright (C) 1997, 2000 Aladdin Enterprises. All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -204,7 +204,7 @@ SW_DEBUG=/NODEBUG/NOOPTIMIZE
 
 SW_PLATFORM=/DECC/PREFIX=ALL/NESTED_INCLUDE=PRIMARY/name=(as_is,short)/nowarn
 
-# Define any other compilation flags. 
+# Define any other compilation flags.
 # Including defines for A4 paper size
 
 .ifdef A4_PAPER
@@ -458,7 +458,7 @@ JBIG2_EXTRA_OBJS=$(JBIG2OBJDIR)$(D)snprintf.$(OBJ)
 .include $(GLSRCDIR)contrib.mak
 
 
-# ----------------------------- Main program ------------------------------ 
+# ----------------------------- Main program ------------------------------
 
 macro :
 .ifdef A4_PAPER
@@ -497,7 +497,7 @@ openvms__=$(GLOBJ)gp_getnv.$(OBJ) $(GLOBJ)gp_vms.$(OBJ) $(GLOBJ)gp_stdia.$(OBJ)
 $(GLGEN)openvms_.dev : $(openvms__) $(GLGEN)nosync.dev
 	$(SETMOD) $(GLGEN)openvms_ $(openvms__) -include $(GLGEN)nosync
 
-$(ECHOGS_XE) :  $(GLOBJDIR)echogs.$(OBJ) 
+$(ECHOGS_XE) :  $(GLOBJDIR)echogs.$(OBJ)
 $(GENARCH_XE) : $(GLOBJDIR)genarch.$(OBJ)
 $(GENCONF_XE) : $(GLOBJDIR)genconf.$(OBJ)
 $(GENDEV_XE) : $(GLOBJDIR)gendev.$(OBJ)

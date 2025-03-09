@@ -61,7 +61,7 @@ mmuinit(void *a)
 	l1[L1X(PHYSDRAM)] = PHYSDRAM|Dom0|L1AP(Krw)|Section|L1ptedramattrs;
 
 	/*
-	 * map i/o registers 
+	 * map i/o registers
 	 */
 	va = VIRTIO;
 	for(pa = soc.physio; pa < soc.physio+IOSIZE; pa += MiB){
@@ -81,7 +81,7 @@ mmuinit(void *a)
 	va = VIRTIO + 0x600000;
 	pa = soc.physio - 0x2000000 + 0x400000;
 	l1[L1X(va)] = pa|Dom0|L1AP(Krw)|Section|L1noexec;
-	
+
 	/*
 	 * double map exception vectors near top of virtual memory
 	 */

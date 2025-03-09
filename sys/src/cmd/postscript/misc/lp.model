@@ -63,4 +63,3 @@ if [ "$bannerflag" = "ON" ]
         fi
 rm -f /tmp/ban.$$
 exit 0
-

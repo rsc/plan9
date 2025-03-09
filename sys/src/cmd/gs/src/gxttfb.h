@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1995, 1997, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -42,10 +42,10 @@ struct gx_ttfReader_s {
     gs_glyph_data_t glyph_data;
     /*  When TT interpreter is invoked, a font and the TT interpreter instance
 	may use different memory allocators (local and global correspondingly).
-	Since we don't want to change Free Type function prototypes, 
+	Since we don't want to change Free Type function prototypes,
 	we place the gx_ttfReader instance into the global memory,
 	to provide an access to it through TExecution_Context.
-	Due to that, the fields 'pfont' and 'glyph_data' may contain pointers from global 
+	Due to that, the fields 'pfont' and 'glyph_data' may contain pointers from global
 	to local memory. They must be NULL when a garbager is invoked.
 	We reset them whan the TT interpreter exits.
      */
@@ -59,8 +59,8 @@ void ttfFont__destroy(ttfFont *this, gs_font_dir *dir);
 int ttfFont__Open_aux(ttfFont *this, ttfInterpreter *tti, gx_ttfReader *r, gs_font_type42 *pfont,
     	       const gs_matrix * char_tm, const gs_log2_scale_point *log2_scale,
 	       bool design_grid);
-int gx_ttf_outline(ttfFont *ttf, gx_ttfReader *r, gs_font_type42 *pfont, int glyph_index, 
-	const gs_matrix *m, const gs_log2_scale_point * pscale, 
+int gx_ttf_outline(ttfFont *ttf, gx_ttfReader *r, gs_font_type42 *pfont, int glyph_index,
+	const gs_matrix *m, const gs_log2_scale_point * pscale,
 	gx_path *path, bool grid_fit);
 
 #endif /* gxttfb_INCLUDED */

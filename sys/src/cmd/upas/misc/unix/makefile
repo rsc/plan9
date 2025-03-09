@@ -41,4 +41,3 @@ mail: mail.o ../config/config.o
 clean:
 	-rm -f *.[oOa] core a.out *.sL notify
 	-rm -f sed.file mail
-

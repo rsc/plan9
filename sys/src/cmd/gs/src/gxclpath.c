@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -135,7 +135,7 @@ cmd_put_drawing_color(gx_device_clist_writer * cldev, gx_clist_state * pcls,
      *  length of serialized device color (enc_u_sizew(dc_size))
      *  the serialized device color itself (dc_size)
      */
-    di = gx_get_dc_type_index(pdcolor); 
+    di = gx_get_dc_type_index(pdcolor);
     code = pdcolor->type->write( pdcolor,
                                  psdc,
                                  (gx_device *)cldev,

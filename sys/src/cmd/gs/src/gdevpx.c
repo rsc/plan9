@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -56,8 +56,8 @@ typedef struct gx_device_pclxl_s {
     /* Additional state information */
     pxeMediaSize_t media_size;
     bool ManualFeed;            /* map ps setpage commands to pxl */
-    bool ManualFeed_set;         
-    int  MediaPosition;         
+    bool ManualFeed_set;
+    int  MediaPosition;
     int  MediaPosition_set;
     gx_path_type_t fill_rule;	/* ...winding_number or ...even_odd  */
     gx_path_type_t clip_rule;	/* ditto */
@@ -288,7 +288,7 @@ pclxl_set_paints(gx_device_pclxl * xdev, gx_path_type_t type)
 
     if (!(type & gx_path_type_fill) &&
 	(color_is_set(&xdev->saved_fill_color.saved_dev_color) ||
-	!gx_dc_is_null(&xdev->saved_fill_color.saved_dev_color) 
+	!gx_dc_is_null(&xdev->saved_fill_color.saved_dev_color)
 	)
 	) {
 	static const byte nac_[] = {
@@ -785,11 +785,11 @@ pclxl_beginpage(gx_device_vector * vdev)
 
     px_write_page_header(s, (const gx_device *)vdev);
 
-    if (xdev->ManualFeed_set && xdev->ManualFeed) 
+    if (xdev->ManualFeed_set && xdev->ManualFeed)
 	media_source = 2;
     else if (xdev->MediaPosition_set && xdev->MediaPosition >= 0 )
 	media_source = xdev->MediaPosition;
- 
+
     px_write_select_media(s, (const gx_device *)vdev, &xdev->media_size, &media_source );
 
     spputc(s, pxtBeginPage);
@@ -898,14 +898,14 @@ pclxl_setlogop(gx_device_vector * vdev, gs_logical_operation_t lop,
 }
 
 private int
-pclxl_can_handle_hl_color(gx_device_vector * vdev, const gs_imager_state * pis, 
+pclxl_can_handle_hl_color(gx_device_vector * vdev, const gs_imager_state * pis,
                    const gx_drawing_color * pdc)
 {
     return false;
 }
 
 private int
-pclxl_setfillcolor(gx_device_vector * vdev, const gs_imager_state * pis, 
+pclxl_setfillcolor(gx_device_vector * vdev, const gs_imager_state * pis,
                    const gx_drawing_color * pdc)
 {
     gx_device_pclxl *const xdev = (gx_device_pclxl *)vdev;
@@ -914,7 +914,7 @@ pclxl_setfillcolor(gx_device_vector * vdev, const gs_imager_state * pis,
 }
 
 private int
-pclxl_setstrokecolor(gx_device_vector * vdev, const gs_imager_state * pis, 
+pclxl_setstrokecolor(gx_device_vector * vdev, const gs_imager_state * pis,
                      const gx_drawing_color * pdc)
 {
     gx_device_pclxl *const xdev = (gx_device_pclxl *)vdev;
@@ -1460,7 +1460,7 @@ pclxl_begin_image(gx_device * dev,
 	    const byte *palette = (const byte *)
 		(pim->Decode[0] ? "\377\000" : "\000\377");
 
-	    code = gdev_vector_update_fill_color(vdev, 
+	    code = gdev_vector_update_fill_color(vdev,
 	                             NULL, /* use process color */
 				     pdcolor);
 	    if (code < 0)
@@ -1640,11 +1640,11 @@ pclxl_put_params(gx_device * dev, gs_param_list * plist)
     bool MediaPosition_set = false;
 
     code = param_read_bool(plist, "ManualFeed", &ManualFeed);
-    if (code == 0) 
+    if (code == 0)
 	ManualFeed_set = true;
     if (code >= 0) {
 	code = param_read_int(plist, "%MediaSource", &MediaPosition);
-	if (code == 0) 
+	if (code == 0)
 	    MediaPosition_set = true;
 	else if (code < 0) {
 	    if (param_read_null(plist, "%MediaSource") == 0) {

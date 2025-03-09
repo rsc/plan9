@@ -14,7 +14,7 @@ realemu \- software emulation of /dev/realmode
 ]
 .SH DESCRIPTION
 .PP
-Originally, kernel provided 
+Originally, kernel provided
 .B /dev/realmode
 files with the
 .IR arch (3)

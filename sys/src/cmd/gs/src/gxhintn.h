@@ -1,12 +1,12 @@
 /* Copyright (C) 1990, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -183,9 +183,9 @@ int  t1_hinter__set_mapping(t1_hinter * this, gs_matrix_fixed * ctm,
 			int log2_pixels_x, int log2_pixels_y,
 			int log2_subpixels_x, int log2_subpixels_y,
 			fixed origin_x, fixed origin_y, bool align_to_pixels);
-int  t1_hinter__set_font_data(t1_hinter * this, int FontType, gs_type1_data *pdata, 
+int  t1_hinter__set_font_data(t1_hinter * this, int FontType, gs_type1_data *pdata,
 			bool no_grid_fitting);
-int  t1_hinter__set_font42_data(t1_hinter * this, int FontType, gs_type42_data *pdata, 
+int  t1_hinter__set_font42_data(t1_hinter * this, int FontType, gs_type42_data *pdata,
 			bool no_grid_fitting);
 
 int  t1_hinter__sbw(t1_hinter * this, fixed sbx, fixed sby, fixed wx,  fixed wy);

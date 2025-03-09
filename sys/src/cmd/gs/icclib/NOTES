@@ -40,7 +40,7 @@ The recognized entries in the dictionary are:
                             the relationship Range[2 * i] <= Range[2 * i + 1].
                             The i'th component of a color, c[i], is
                             constrained such that:
- 
+
                                 Range[2 * i] <= c[i] <= Range[2 * i + 1]
 
                             If this entry is not provided, its default value
@@ -307,4 +307,3 @@ Additional notes by Jan Stoeckenius:
    ICCBased color spaces in PDF. Essentially all CIEBased color spaces
    could be handled in this manner (via sample and generation of a lookup
    table).
-

@@ -1,12 +1,12 @@
 /* Copyright (C) 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -102,7 +102,7 @@ private int
 cmap_put_code_map(const gs_memory_t *mem,
 		  stream *s, int which, const gs_cmap_t *pcmap,
 		  const cmap_operators_t *pcmo,
-		  psf_put_name_chars_proc_t put_name_chars, 
+		  psf_put_name_chars_proc_t put_name_chars,
 		  int font_index_only)
 {
     /* For simplicity, produce one entry for each lookup range. */
@@ -200,7 +200,7 @@ cmap_put_code_map(const gs_memory_t *mem,
 
 /* Write a CMap in its standard (source) format. */
 int
-psf_write_cmap(const gs_memory_t *mem, 
+psf_write_cmap(const gs_memory_t *mem,
 	       stream *s, const gs_cmap_t *pcmap,
 	       psf_put_name_chars_proc_t put_name_chars,
 	       const gs_const_string *alt_cmap_name, int font_index_only)
@@ -318,4 +318,3 @@ psf_write_cmap(const gs_memory_t *mem,
 
     return 0;
 }
-

@@ -6,7 +6,7 @@ aliasmail \-  expand system wide mail aliases
 .I arg ...
 .SH DESCRIPTION
 .PP
-.I Aliasmail 
+.I Aliasmail
 expands mail aliases, its arguments, according to alias files.
 .I Aliasmail
 is normally invoked by a rule in the
@@ -58,4 +58,3 @@ names of system alias files
 .IR send (8),
 .IR smtp (8),
 .IR upasfs (4)
-

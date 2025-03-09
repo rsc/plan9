@@ -324,7 +324,7 @@ fbcc(ulong ir)
 	if(ba && anul) {
 		reg.pc = npc-4;
 		anulled++;
-		return;	
+		return;
 	}
 	reg.ir = ifetch(reg.pc+4);
 	delay(npc);

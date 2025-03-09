@@ -47,7 +47,7 @@ clean:V:
 	rm -f *.[$OS] [$OS].$TARG smtpd.tab.c rfc822.tab.c y.tab.? y.debug $TARG
 
 ../common/libcommon.a$O:
-	@{ 	
+	@{
 		cd ../common
 		mk
 	}

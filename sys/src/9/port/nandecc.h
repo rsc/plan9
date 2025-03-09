@@ -8,4 +8,3 @@ typedef enum NandEccError {
 ulong nandecc(uchar buf[256]);
 NandEccError nandecccorrect(uchar buf[256], ulong calcecc, ulong *storedecc,
 	int reportbad);
-

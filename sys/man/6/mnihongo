@@ -6,16 +6,16 @@ mnihongo \- macros for typesetting Japanese
 .I ...
 .SH DESCRIPTION
 .I Mnihongo
-provides a simple 
+provides a simple
 .IR troff (1)
-post-processor that formats Unicode characters that 
+post-processor that formats Unicode characters that
 might be Japanese text.
 It looks up the characters in the bitmap font
 .B /lib/font/bit/pelm/unicode.9x24.font
 and generates bitmap images embedded in the output.
 .PP
 During troff processing, widths of the Japanese characters
-are taken from the troff font 
+are taken from the troff font
 .BR Jp ,
 which is at best a simple approximation to the truth.
 .SH FILES

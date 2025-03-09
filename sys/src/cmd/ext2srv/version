@@ -5,10 +5,10 @@ on trouve le numero de version sur les 2 premières lignes du
 fichier ext2subs.c.
 
 
-Version 0.1 : 
+Version 0.1 :
 
 1)	il n'ya plus de copie d'inode
-	tous les iobuf utilisés dans un fonction 
+	tous les iobuf utilisés dans un fonction
 	sont libérés. Un getbuf() => Un putbuf.
 
 2)	Tous dans les iobufs : super, group desc et bitmaps

@@ -7,4 +7,3 @@ segfree(void *va, unsigned long len)
 {
 	return _SEGFREE(va, len);
 }
-

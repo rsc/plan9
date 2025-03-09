@@ -41,7 +41,7 @@ on disparate kinds of hardware.
 The character set of Plan 9 is Unicode, which
 covers most of the world's major scripts.
 The system has its own programming languages:
-a dialect of C with simple inheritance, a simplified shell, 
+a dialect of C with simple inheritance, a simplified shell,
 and a CSP-like concurrent language, Alef.
 An ANSI-POSIX emulator (APE) admits unreconstructed Unix code.
 .PP

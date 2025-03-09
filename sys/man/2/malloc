@@ -70,14 +70,14 @@ The contents of the space returned by
 .I malloc
 are undefined.
 .I Mallocz
-behaves as 
+behaves as
 .IR malloc ,
-except that if 
+except that if
 .I clr
 is non-zero, the memory returned will be zeroed.
 .PP
 .I Mallocalign
-allocates a block of at least 
+allocates a block of at least
 .I size
 bytes of memory respecting alignment contraints.
 If
@@ -143,7 +143,7 @@ The memory allocator maintains two word-sized fields
 associated with each block, the ``malloc tag'' and the ``realloc tag''.
 By convention, the malloc tag is the PC that allocated the block,
 and the realloc tag the PC that last reallocated the block.
-These may be set or examined with 
+These may be set or examined with
 .IR setmalloctag ,
 .IR getmalloctag ,
 .IR setrealloctag ,
@@ -157,8 +157,8 @@ these tags will be set properly.
 If a custom allocator wrapper is used,
 the allocator wrapper can set the tags
 itself (usually by passing the result of
-.IR getcallerpc (2) 
-to 
+.IR getcallerpc (2)
+to
 .IR setmalloctag )
 to provide more useful information about
 the source of allocation.
@@ -210,7 +210,7 @@ once they are freed;
 .B poolcheck(mainmem)
 will then detect writes to freed blocks.
 .PP
-The 
+The
 .I trump
 library for
 .I acid

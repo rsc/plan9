@@ -1,7 +1,7 @@
 #pragma	src	"/sys/src/libip"
 #pragma	lib	"libip.a"
 
-enum 
+enum
 {
 	IPaddrlen=	16,
 	IPv4addrlen=	4,
@@ -45,7 +45,7 @@ struct Ipv6rp
 	int	reachtime;
 	int	rxmitra;
 	int	ttl;
-	int	routerlt;	
+	int	routerlt;
 };
 
 /* actual interface */
@@ -141,7 +141,7 @@ struct Icmp6hdr {
 /*
  *  user level udp headers with control message "headers"
  */
-enum 
+enum
 {
 	Udphdrsize=	52,	/* size of a Udphdr */
 };

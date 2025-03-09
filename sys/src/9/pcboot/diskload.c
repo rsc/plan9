@@ -15,7 +15,7 @@
 #include	"../port/sd.h"
 
 /* from <libc.h> */
-#define	DIRMAX	(sizeof(Dir)+STATMAX)	/* max length of Dir structure */ 
+#define	DIRMAX	(sizeof(Dir)+STATMAX)	/* max length of Dir structure */
 #define	STATMAX	65535U	/* max length of machine-independent stat structure */
 
 enum {

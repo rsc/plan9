@@ -91,9 +91,9 @@ drawmap(int i)
 		draw(screen, map[i].r, lightblue, nil, ZP);
 
 	_string(screen, addpt(map[i].r.min, Pt(2,0)), display->black, ZP,
-		font, map[i].name, nil, strlen(map[i].name), 
+		font, map[i].name, nil, strlen(map[i].name),
 		map[i].r, nil, ZP, SoverD);
-	border(screen, map[i].r, 1, display->black, ZP);	
+	border(screen, map[i].r, 1, display->black, ZP);
 }
 
 void
@@ -226,7 +226,7 @@ main(int argc, char **argv)
 			map[argc].current = 0;
 			nmap++;
 		}
-	} else 
+	} else
 		init();
 
 	initdraw(0, 0, "kbmap");
@@ -253,4 +253,3 @@ main(int argc, char **argv)
 		}
 	}
 }
-

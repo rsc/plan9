@@ -131,4 +131,3 @@ CRTres*	crtin(CRTpre*, mpint*);			// convert mpint to residues
 void	crtout(CRTpre*, CRTres*, mpint*);	// convert residues to mpint
 void	crtprefree(CRTpre*);
 void	crtresfree(CRTres*);
-

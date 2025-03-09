@@ -13,7 +13,7 @@ char *cookiefile;
 char *mtpt = "/mnt/web";
 char *service;
 
-Ctl globalctl = 
+Ctl globalctl =
 {
 	1,	/* accept cookies */
 	1,	/* send cookies */

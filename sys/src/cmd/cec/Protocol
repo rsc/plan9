@@ -3,9 +3,9 @@ Coraid Ethernet Console (cec)
 Abstract
 
 The Coraid Ethernet Console (cec) implements a bidirectional conversation
-over raw ethernet frames with provisions for retransmission and discovery.  
+over raw ethernet frames with provisions for retransmission and discovery.
 Like serial consoles, each machine has a single shared interface per service
-type,  but any number connections can be made from any machine connected to 
+type,  but any number connections can be made from any machine connected to
 the same physical network.  The communications from the various connections
 will be interleaved.  The first implementation of cec is for console communications
 to Coraid appliances.
@@ -82,12 +82,12 @@ send to the server, up to 255 bytes.  Typically, however, each keystroke
 is sent in a seperate packet.  The len field is the length of the
 data.
 
-The server responds to a Tdata message with a Tack message with the 
+The server responds to a Tdata message with a Tack message with the
 same seq sequence number.
 
 5.  Closing the connection.  Treset
 
-Either the server of the client may send a Treset message to close the 
+Either the server of the client may send a Treset message to close the
 connection.  There is no response to a Treset message, however any
-information associated with that connection (conntag) is discarded 
+information associated with that connection (conntag) is discarded
 when the Treset message is recieved.

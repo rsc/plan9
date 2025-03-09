@@ -12,7 +12,7 @@ if(! ~ $safefile *contrib*)
 
 fn html {
 	echo Content-Type: text/html
-	echo 
+	echo
 }
 fn head {
 	sed -n '1,/END HEADER/p' /usr/web/plan9/sources.html | translate
@@ -30,7 +30,7 @@ if(test -f $1){
 		len=`{ls -l $1 | awk '{print $6}'}
 		echo Content-Type: $type
 		echo Content-Length: $len
-		echo 
+		echo
 		cat $1
 		exit 0
 	}

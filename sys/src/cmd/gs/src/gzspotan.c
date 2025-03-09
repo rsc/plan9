@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -17,7 +17,7 @@
 /*$Id: gzspotan.c,v 1.14 2005/05/12 02:01:32 alexcher Exp $ */
 /* A spot analyzer device implementation. */
 /*
-    This implements a spot topology analyzis and 
+    This implements a spot topology analyzis and
     stem recognition for True Type grid fitting.
 */
 #include "gx.h"
@@ -86,7 +86,7 @@ trap_reserve(gx_device_spot_analyzer *padev)
     } else {
 	if (padev->trap_buffer_count > 10000)
 	    return NULL;
-	t = gs_alloc_struct(padev->memory, gx_san_trap, 
+	t = gs_alloc_struct(padev->memory, gx_san_trap,
 		&st_san_trap, "trap_reserve");
 	if (t == NULL)
 	    return NULL;
@@ -111,7 +111,7 @@ cont_reserve(gx_device_spot_analyzer *padev)
     } else {
 	if (padev->cont_buffer_count > 10000)
 	    return NULL;
-	t = gs_alloc_struct(padev->memory, gx_san_trap_contact, 
+	t = gs_alloc_struct(padev->memory, gx_san_trap_contact,
 		&st_san_trap_contact, "cont_reserve");
 	if (t == NULL)
 	    return NULL;
@@ -207,7 +207,7 @@ private inline bool
 trap_is_last(const gx_san_trap *list, const gx_san_trap *t)
 {
     /* Assuming a non-empty cyclic list, and the anchor points to the first element.  */
-    return t->next == list; 
+    return t->next == list;
 }
 
 /* ---------------------The device ---------------------------- */
@@ -331,16 +331,16 @@ try_unite_last_trap(gx_device_spot_analyzer *padev, fixed xlbot)
     if (padev->bot_band != NULL && padev->top_band != NULL) {
 	gx_san_trap *last = band_list_last(padev->top_band);
 	gx_san_trap *t = padev->bot_current;
-	/* If the last trapezoid is a prolongation of its bottom contact, 
+	/* If the last trapezoid is a prolongation of its bottom contact,
 	   unite it and release the last trapezoid and the last contact. */
-	if (t != NULL && t->upper != NULL && last->xrbot < xlbot && 
+	if (t != NULL && t->upper != NULL && last->xrbot < xlbot &&
 		(last->prev == last || last->prev->xrbot < last->xlbot)) {
 	    if ((t->next == NULL || t->xrtop < t->next->xltop) &&
 	        (t->upper->next == t->upper &&
 		    t->l == last->l && t->r == last->r)) {
 		if (padev->bot_current == t)
 		    padev->bot_current = (t == band_list_last(padev->bot_band) ? NULL : t->next);
-		assert(t->upper->upper == last); 
+		assert(t->upper->upper == last);
 		band_list_remove(&padev->top_band, last);
 		band_list_remove(&padev->bot_band, t);
 		band_list_insert_last(&padev->top_band, t);
@@ -349,7 +349,7 @@ try_unite_last_trap(gx_device_spot_analyzer *padev, fixed xlbot)
 		t->xrtop = last->xrtop;
 		t->rightmost &= last->rightmost;
 		t->leftmost &= last->leftmost;
-		vd_quad(t->xlbot, t->ybot, t->xrbot, t->ybot, 
+		vd_quad(t->xlbot, t->ybot, t->xrbot, t->ybot,
 			t->xrtop, t->ytop, t->xltop, t->ytop, 1, VD_TRAP_U_COLOR);
 		trap_unreserve(padev, last);
 		cont_unreserve(padev, t->upper);
@@ -359,13 +359,13 @@ try_unite_last_trap(gx_device_spot_analyzer *padev, fixed xlbot)
     }
 }
 
-private inline double 
+private inline double
 trap_area(gx_san_trap *t)
 {
     return (double)(t->xrbot - t->xlbot + t->xrtop - t->xltop) * (t->ytop - t->ybot) / 2;
 }
 
-private inline double 
+private inline double
 trap_axis_length(gx_san_trap *t)
 {
     double xbot = (t->xlbot + t->xrbot) / 2.0;
@@ -411,7 +411,7 @@ gx_san__obtain(gs_memory_t *mem, gx_device_spot_analyzer **ppadev)
 	(*ppadev)->lock++;
 	return 0;
     }
-    padev = gs_alloc_struct(mem, gx_device_spot_analyzer, 
+    padev = gs_alloc_struct(mem, gx_device_spot_analyzer,
 		&st_device_spot_analyzer, "gx_san__obtain");
     if (padev == 0)
 	return_error(gs_error_VMerror);
@@ -447,7 +447,7 @@ gx_san__release(gx_device_spot_analyzer **ppadev)
 }
 
 /* Start accumulating a path. */
-void 
+void
 gx_san_begin(gx_device_spot_analyzer *padev)
 {
     padev->bot_band = NULL;
@@ -460,7 +460,7 @@ gx_san_begin(gx_device_spot_analyzer *padev)
 /* Store a tarpezoid. */
 /* Assumes an Y-band scanning order with increasing X inside a band. */
 int
-gx_san_trap_store(gx_device_spot_analyzer *padev, 
+gx_san_trap_store(gx_device_spot_analyzer *padev,
     fixed ybot, fixed ytop, fixed xlbot, fixed xrbot, fixed xltop, fixed xrtop,
     const segment *l, const segment *r, int dir_l, int dir_r)
 {
@@ -498,7 +498,7 @@ gx_san_trap_store(gx_device_spot_analyzer *padev,
     last->fork = 0;
     last->visited = false;
     last->leftmost = last->rightmost = true;
-    vd_quad(last->xlbot, last->ybot, last->xrbot, last->ybot, 
+    vd_quad(last->xlbot, last->ybot, last->xrbot, last->ybot,
 	    last->xrtop, last->ytop, last->xltop, last->ytop, 1, VD_TRAP_N_COLOR);
     if (padev->top_band != NULL) {
 	padev->top_band->rightmost = false;
@@ -521,7 +521,7 @@ gx_san_trap_store(gx_device_spot_analyzer *padev,
 	    cont->lower = t;
 	    cont->upper = last;
 	    vd_bar((t->xltop + t->xrtop + t->xlbot + t->xrbot) / 4, (t->ytop + t->ybot) / 2,
-		   (last->xltop + last->xrtop + last->xlbot + last->xrbot) / 4, 
+		   (last->xltop + last->xrtop + last->xlbot + last->xrbot) / 4,
 		   (last->ytop + last->ybot) / 2, 0, VD_CONT_COLOR);
 	    cont_list_insert_last(&t->upper, cont);
 	    last->fork++;
@@ -542,7 +542,7 @@ gx_san_trap_store(gx_device_spot_analyzer *padev,
 
 
 /* Finish accumulating a path. */
-void 
+void
 gx_san_end(const gx_device_spot_analyzer *padev)
 {
 }
@@ -577,11 +577,11 @@ hint_by_trap(gx_device_spot_analyzer *padev, int side_mask,
     }
     if (best_trap != NULL) {
 	/* Make a stem section hint at_top of best_trap : */
-	sect.yl = at_top ? best_trap->ytop : best_trap->ybot; 
+	sect.yl = at_top ? best_trap->ytop : best_trap->ybot;
 	sect.yr = sect.yl;
-	sect.xl = at_top ? best_trap->xltop : best_trap->xlbot; 
+	sect.xl = at_top ? best_trap->xltop : best_trap->xlbot;
 	sect.xr = at_top ? best_trap->xrtop : best_trap->xrbot;
-	sect.l = best_trap->l; 
+	sect.l = best_trap->l;
 	sect.r = best_trap->r;
 	vd_bar(sect.xl, sect.yl, sect.xr, sect.yr, 0, VD_HINT_COLOR);
 	code = handler(client_data, &sect);
@@ -592,7 +592,7 @@ hint_by_trap(gx_device_spot_analyzer *padev, int side_mask,
 }
 
 private inline void
-choose_by_vector(fixed x0, fixed y0, fixed x1, fixed y1, const segment *s, 
+choose_by_vector(fixed x0, fixed y0, fixed x1, fixed y1, const segment *s,
 	double *slope, double *len, const segment **store_segm, fixed *store_x, fixed *store_y)
 {
     if (y0 != y1) {
@@ -610,13 +610,13 @@ choose_by_vector(fixed x0, fixed y0, fixed x1, fixed y1, const segment *s,
 }
 
 private inline void
-choose_by_tangent(const segment *p, const segment *s, 
+choose_by_tangent(const segment *p, const segment *s,
 	double *slope, double *len, const segment **store_segm, fixed *store_x, fixed *store_y,
 	fixed ybot, fixed ytop)
 {
     if (s->type == s_curve) {
 	const curve_segment *c = (const curve_segment *)s;
-	vd_curve(p->pt.x, p->pt.y, c->p1.x, c->p1.y, c->p2.x, c->p2.y, 
+	vd_curve(p->pt.x, p->pt.y, c->p1.x, c->p1.y, c->p2.x, c->p2.y,
 		 s->pt.x, s->pt.y, 0, VD_HINT_COLOR);
 	if (ybot <= p->pt.y && p->pt.y <= ytop)
 	    choose_by_vector(c->p1.x, c->p1.y, p->pt.x, p->pt.y, s, slope, len, store_segm, store_x, store_y);
@@ -628,7 +628,7 @@ choose_by_tangent(const segment *p, const segment *s,
     }
 }
 
-private gx_san_trap * 
+private gx_san_trap *
 upper_neighbour(gx_san_trap *t0, int left_right)
 {
     gx_san_trap_contact *cont = t0->upper, *c0 = cont, *c;
@@ -655,7 +655,7 @@ hint_by_tangent(gx_device_spot_analyzer *padev, int side_mask,
     const segment *s, *p;
     int left_right = (side_mask & 1 ? 0 : 1);
     int code;
-    
+
     sect.l = sect.r = NULL;
     sect.xl = t0->xltop; /* only for vdtrace. */
     sect.xr = t0->xrtop; /* only for vdtrace. */
@@ -679,7 +679,7 @@ hint_by_tangent(gx_device_spot_analyzer *padev, int side_mask,
 	if (t == t1)
 	    break;
     }
-    if ((sect.l != NULL  || !(side_mask & 1)) && 
+    if ((sect.l != NULL  || !(side_mask & 1)) &&
 	(sect.r != NULL  || !(side_mask & 2))) {
 	const int w = 3;
 
@@ -702,8 +702,8 @@ hint_by_tangent(gx_device_spot_analyzer *padev, int side_mask,
 }
 
 /* Generate stems. */
-private int 
-gx_san_generate_stems_aux(gx_device_spot_analyzer *padev, 
+private int
+gx_san_generate_stems_aux(gx_device_spot_analyzer *padev,
 		bool overall_hints, void *client_data,
 		int (*handler)(void *client_data, gx_san_sect *ss))
 {
@@ -713,7 +713,7 @@ gx_san_generate_stems_aux(gx_device_spot_analyzer *padev,
 
     /* Overall hints : */
     /* An overall hint designates an outer side of a glyph,
-       being nearly parallel to a coordinate axis. 
+       being nearly parallel to a coordinate axis.
        It aligns a stem end rather than stem sides.
        See t1_hinter__overall_hstem.
      */
@@ -758,7 +758,7 @@ gx_san_generate_stems_aux(gx_device_spot_analyzer *padev,
 		gx_san_trap_contact *cont = t0->upper;
 		gx_san_trap *t1 = t0, *t;
 		double area = 0, length = 0, ave_width;
-		
+
 		while(cont != NULL && cont->next == cont /* <= 1 descendent. */) {
 		    gx_san_trap *t = cont->upper;
 
@@ -775,7 +775,7 @@ gx_san_generate_stems_aux(gx_device_spot_analyzer *padev,
 		    t1->visited = true;
 		}
 		/* We've got a stem suspection from t0 to t1. */
-		vd_quad(t0->xlbot, t0->ybot, t0->xrbot, t0->ybot, 
+		vd_quad(t0->xlbot, t0->ybot, t0->xrbot, t0->ybot,
 			t1->xrtop, t1->ytop, t1->xltop, t1->ytop, 1, VD_STEM_COLOR);
 		for (t = t0; ; t = t->upper->upper) {
 		    length += trap_axis_length(t);
@@ -786,7 +786,7 @@ gx_san_generate_stems_aux(gx_device_spot_analyzer *padev,
 		ave_width = area / length;
 		if (length > ave_width / ( 2.0 /* arbitrary */)) {
 		    /* We've got a stem from t0 to t1. */
-		    int code = (by_trap ? hint_by_trap : hint_by_tangent)(padev, 
+		    int code = (by_trap ? hint_by_trap : hint_by_tangent)(padev,
 			3, client_data, t0, t1, ave_width, handler);
 
 		    if (code < 0)
@@ -799,8 +799,8 @@ gx_san_generate_stems_aux(gx_device_spot_analyzer *padev,
     return 0;
 }
 
-int 
-gx_san_generate_stems(gx_device_spot_analyzer *padev, 
+int
+gx_san_generate_stems(gx_device_spot_analyzer *padev,
 		bool overall_hints, void *client_data,
 		int (*handler)(void *client_data, gx_san_sect *ss))
 {

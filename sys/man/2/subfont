@@ -207,7 +207,7 @@ in
 takes as argument a
 .B Subfont
 .I s
-and returns a pointer to a 
+and returns a pointer to a
 .B Font
 that maps the character images in
 .I s

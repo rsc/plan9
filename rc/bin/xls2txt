@@ -14,7 +14,7 @@ case 0
 case 1
 	file=$1
 }
-aux/olefs $file || { 
+aux/olefs $file || {
 	echo 'xls2txt: couldn''t mount excel document' >[1=2]
 	rm -f /tmp/xls2txt.$pid
 	exit word
@@ -29,4 +29,3 @@ if(! test -f /mnt/doc/Workbook) {
 aux/msexceltables /mnt/doc/Workbook
 unmount /mnt/doc
 rm -f /tmp/xls2txt.$pid
-

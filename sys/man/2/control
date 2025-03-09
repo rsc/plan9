@@ -689,7 +689,7 @@ The valid alignments are words with obvious interpretations:
 .BR centerleft ,
 .BR center ,
 .BR centerright ,
-.BR lowerleft, 
+.BR lowerleft,
 .BR lowercenter ,
 and
 .BR lowerright .
@@ -748,7 +748,7 @@ prints the name of the
 .BR Control ;
 the rest the value.
 Any supplied format string must be type-equivalent to the default for that
-.BR Control . 
+.BR Control .
 .TP
 .BI image " name
 .TP
@@ -1566,7 +1566,7 @@ When a format string is defined, the tab control reports which tab
 is selected using the format string (which must print a
 .B char*
 and an
-.BR int ). 
+.BR int ).
 .TP
 .BI image " color
 Color between member controls.

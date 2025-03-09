@@ -16,7 +16,7 @@
 
 /* $Id: gsiorom.c,v 1.2 2005/10/04 06:30:02 ray Exp $ */
 /* %rom% IODevice implementation for a compressed in-memory filesystem */
- 
+
 /*
  * This file implements a special %rom% IODevice designed for embedded
  * use. It accesses a compressed filesytem image which may be stored
@@ -65,8 +65,8 @@ gs_private_st_simple(st_romfs_state, struct romfs_state_s, "romfs_state");
 private int
 iodev_rom_init(gx_io_device *iodev, gs_memory_t *mem)
 {
-    romfs_state *state = gs_alloc_struct(mem, romfs_state, 
-                                              &st_romfs_state, 
+    romfs_state *state = gs_alloc_struct(mem, romfs_state,
+                                              &st_romfs_state,
                                               "iodev_rom_init(state)");
     if (!state)
 	return gs_error_VMerror;

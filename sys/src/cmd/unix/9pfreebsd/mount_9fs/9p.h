@@ -63,7 +63,7 @@ struct	u9fsreq {
 			char	chal[U9FS_CHALLEN];		/* Tsession/Rsession */
 		} u3;
 		struct {
-			u_int32_t	perm;		/* Tcreate */ 
+			u_int32_t	perm;		/* Tcreate */
 			short	newfid;		/* Tclone, Tclwalk */
 			char	name[U9FS_NAMELEN];	/* Twalk, Tclwalk, Tcreate */
 			char	mode;		/* Tcreate, Topen */

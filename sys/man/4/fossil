@@ -116,7 +116,7 @@ The snapshots in
 are ephemeral: eventually they are deleted
 to reclaim the disk space they occupy.
 Long-lasting snapshots stored on a Venti server
-are kept in 
+are kept in
 .B /archive
 and also named from the date (though not the time) of the snapshot:
 .BI /archive/ yyyy / mmdds \fR,
@@ -243,7 +243,7 @@ See
 for more information.
 .TP
 .BI -f " file
-Read and execute console commands stored in the Fossil disk 
+Read and execute console commands stored in the Fossil disk
 .IR file .
 .I Conf
 .RI ( q.v. )
@@ -388,7 +388,7 @@ If the
 .B -w
 flag is given,
 .I conf
-reads a new configuration from 
+reads a new configuration from
 .I config
 (or else from standard input)
 and writes it to the disk.
@@ -404,7 +404,7 @@ The disk is just a convenient place to store configuration
 information.
 .PP
 .I Last
-prints the vac score that resulted after the most recent archival snapshot 
+prints the vac score that resulted after the most recent archival snapshot
 of the fossil in
 .I file.
 .SH EXAMPLES

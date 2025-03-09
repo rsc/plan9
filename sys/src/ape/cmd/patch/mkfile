@@ -38,4 +38,3 @@ CC=pcc -c
 CFLAGS=-B -p -D_POSIX_SOURCE \
 	-D_BSD_EXTENSION -I. -DHAVE_CONFIG_H \
 	-Ded_PROGRAM="/bin/ed"
-

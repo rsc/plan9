@@ -9,7 +9,7 @@
 enum{
 	Linktarget = 0x13,
 };
-	
+
 /*
  *  read and crack the card information structure enough to set
  *  important parameters like power
@@ -196,7 +196,7 @@ tcfig(PCMslot *pp, Cisdat *cis, int )
 		print("tcfig: too many configuration registers\n");
 		return;
 	}
-	
+
 	pp->cfg[pp->ncfg].caddr = getlong(cis, rasize);
 	pp->cfg[pp->ncfg].cpresent = getlong(cis, rmsize);
 	pp->ncfg++;

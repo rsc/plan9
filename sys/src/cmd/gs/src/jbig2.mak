@@ -1,12 +1,12 @@
 #    Copyright (C) 2003 artofcode LLC.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -108,7 +108,7 @@ $(JBIG2GEN)libjbig2_0.dev : $(TOP_MAKEFILES) $(JBIG2_MAK) $(ECHOGS_XE) $(libjbig
 	$(SETMOD) $(JBIG2GEN)libjbig2_0 $(libjbig2_OBJS1)
 	$(ADDMOD) $(JBIG2GEN)libjbig2_0 $(libjbig2_OBJS2)
 
-# explicit rules for building the source files. 
+# explicit rules for building the source files.
 
 $(JBIG2OBJ)snprintf.$(OBJ) : $(JBIG2SRC)snprintf.c $(JBIG2DEP)
 	$(JBIG2_CC) $(JBIG2O_)snprintf.$(OBJ) $(C_) $(JBIG2SRC)snprintf.c
@@ -136,7 +136,7 @@ $(JBIG2OBJ)jbig2_generic.$(OBJ) : $(JBIG2SRC)jbig2_generic.c $(libjbig2_HDRS) $(
 
 $(JBIG2OBJ)jbig2_refinement.$(OBJ) : $(JBIG2SRC)jbig2_refinement.c $(libjbig2_HDRS) $(JBIG2DEP)
 	$(JBIG2_CC) $(JBIG2O_)jbig2_refinement.$(OBJ) $(C_) $(JBIG2SRC)jbig2_refinement.c
- 
+
 $(JBIG2OBJ)jbig2_huffman.$(OBJ) : $(JBIG2SRC)jbig2_huffman.c $(libjbig2_HDRS) $(JBIG2DEP)
 	$(JBIG2_CC) $(JBIG2O_)jbig2_huffman.$(OBJ) $(C_) $(JBIG2SRC)jbig2_huffman.c
 
@@ -172,4 +172,3 @@ $(JBIG2OBJ)jbig2dec.$(OBJ) : $(JBIG2SRC)jbig2dec.c $(libjbig2_HDRS) $(JBIG2DEP)
 
 $(JBIG2OBJ)sha1.$(OBJ) : $(JBIG2SRC)sha1.c $(libjbig2_HDRS) $(JBIG2DEP)
 	$(JBIG2_CC) $(JBIG2O_)sha1.$(OBJ) $(C_) $(JBIG2SRC)sha1.c
-

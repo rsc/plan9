@@ -1,12 +1,12 @@
 /* Copyright (C) 1996 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -70,7 +70,7 @@ typedef struct gs_state_client_procs_s {
     gs_state_free_proc_t free;
     gs_state_copy_for_proc_t copy_for;
 } gs_state_client_procs;
-void gs_state_set_client(gs_state *, void *, const gs_state_client_procs *, 
+void gs_state_set_client(gs_state *, void *, const gs_state_client_procs *,
 			    bool client_has_pattern_streams);
 
 /* gzstate.h redefines the following: */

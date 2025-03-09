@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -35,7 +35,7 @@
    to the path adjustment in the filling algorithm.
    The expansion is an emulation of Adobe's trapping.
    The value specifies the width of paddings.
-   We did some testing of Adobe RIP, and it looks as applying 
+   We did some testing of Adobe RIP, and it looks as applying
    same logicks as for clipping - any part of pixel inside.
    Therefore the expansion should be half pixel size.
  */
@@ -49,7 +49,7 @@
 /* This mode delays creating wedges for a boundary until
    both neoghbour areas are painted. At that moment we can know
    all subdivision points for both right and left areas,
-   and skip wedges for common points. Therefore the number of wadges 
+   and skip wedges for common points. Therefore the number of wadges
    dramatically reduces, causing a significant speedup.
    The LAZY_WEDGES 0 mode was not systematically tested.
  */
@@ -93,10 +93,10 @@ struct wedge_vertex_list_elem_s {
 };
 typedef struct {
     bool last_side;
-    wedge_vertex_list_elem_t *beg, *end;    
+    wedge_vertex_list_elem_t *beg, *end;
 } wedge_vertex_list_t;
 
-#define LAZY_WEDGES_MAX_LEVEL 9 /* memory consumption is 
+#define LAZY_WEDGES_MAX_LEVEL 9 /* memory consumption is
     sizeof(wedge_vertex_list_elem_t) * LAZY_WEDGES_MAX_LEVEL * (1 << LAZY_WEDGES_MAX_LEVEL) */
 
 /* Define the common state for rendering Coons and tensor patches. */
@@ -148,10 +148,10 @@ int mesh_init_fill_state(mesh_fill_state_t * pfs,
 int init_patch_fill_state(patch_fill_state_t *pfs);
 void term_patch_fill_state(patch_fill_state_t *pfs);
 
-int mesh_triangle(patch_fill_state_t *pfs, 
+int mesh_triangle(patch_fill_state_t *pfs,
     const shading_vertex_t *p0, const shading_vertex_t *p1, const shading_vertex_t *p2);
 
-int mesh_padding(patch_fill_state_t *pfs, const gs_fixed_point *p0, const gs_fixed_point *p1, 
+int mesh_padding(patch_fill_state_t *pfs, const gs_fixed_point *p0, const gs_fixed_point *p1,
 	    const patch_color_t *c0, const patch_color_t *c1);
 
 int patch_fill(patch_fill_state_t * pfs, const patch_curve_t curve[4],
@@ -164,7 +164,7 @@ void wedge_vertex_list_elem_buffer_free(patch_fill_state_t *pfs);
 
 void patch_resolve_color(patch_color_t * ppcr, const patch_fill_state_t *pfs);
 
-int gx_shade_background(gx_device *pdev, const gs_fixed_rect *rect, 
+int gx_shade_background(gx_device *pdev, const gs_fixed_rect *rect,
 	const gx_device_color *pdevc, gs_logical_operation_t log_op);
 
 #endif /* gxshade4_INCLUDED */

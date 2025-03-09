@@ -788,7 +788,7 @@ The process of type
 can complete its first send action, but it blocks on the
 second, because the channel is now filled to capacity.
 The process of type
-.CW B 
+.CW B
 can then retrieve the first message and complete.
 At this point
 .CW A
@@ -1209,7 +1209,7 @@ active proctype Dijkstra()
 		sema!p; count = 0
 	:: (count == 0) ->
 		sema?v; count = 1
-	od	
+	od
 }
 .P2
 .P1
@@ -1450,7 +1450,7 @@ end:	do
 		sema!p; count = 0
 	:: (count == 0) ->
 		sema?v; count = 1
-	od	
+	od
 }
 .P2
 The label
@@ -1496,7 +1496,7 @@ end:	do
 progress:	sema!p; count = 0
 	:: (count == 0) ->
 		sema?v; count = 1
-	od	
+	od
 }
 .P2
 If more than one state carries a progress label,
@@ -1626,7 +1626,7 @@ is true in
 or if
 .CW p
 is true in
-.CW s0 
+.CW s0
 and
 .CW pUq
 holds for the remainder of the sequence after

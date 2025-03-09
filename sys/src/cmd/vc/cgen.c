@@ -212,7 +212,7 @@ cgen(Node *n, Node *nn)
 			gopcode(OAS, &nod2, Z, &nod);
 			gopcode(o, r, Z, &nod);
 			gopcode(OAS, &nod, Z, &nod2);
-	
+
 			regfree(&nod);
 			if(l->addable < INDEXED)
 				regfree(&nod2);
@@ -1137,7 +1137,7 @@ copy:
 
 	regalloc(&nod3, &regnode, Z);
 	layout(&nod1, &nod2, w%c, w/c, &nod3);
-	
+
 	pc1 = pc;
 	layout(&nod1, &nod2, c, 0, Z);
 
@@ -1146,7 +1146,7 @@ copy:
 	gopcode(OADD, nodconst(c*SZ_LONG), Z, &nod1);
 	nod2.op = OREGISTER;
 	gopcode(OADD, nodconst(c*SZ_LONG), Z, &nod2);
-	
+
 	gopcode(OEQ, &nod3, Z, Z);
 	p->as = ABGTZ;
 	patch(p, pc1);

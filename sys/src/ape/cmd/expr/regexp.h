@@ -298,7 +298,7 @@ register char *lp, *ep;
 			if(*lp++ != c)
 				return(0);
 		curlp = lp;
-		while(size--) 
+		while(size--)
 			if(*lp++ != c)
 				break;
 		if(size < 0)

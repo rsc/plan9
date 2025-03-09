@@ -77,7 +77,7 @@ Remove
 and place its blocks on the free list.
 .TP
 .BI "clri " file
-Remove 
+Remove
 .I file
 but do not place the blocks on the free list.
 This command can be used to remove files that have duplicated blocks.
@@ -175,7 +175,7 @@ write all of the blocks that are touched.
 .PD
 .TP
 .BI listen " [address]
-Start a listener to serve the network at 
+Start a listener to serve the network at
 .IR address ,
 default
 .BR tcp!*!564 .
@@ -206,7 +206,7 @@ able to dial your server and attach as
 .BR none .
 The
 .B noneattach
-command toggles whether 
+command toggles whether
 .B none
 can attach without such a chaperone.
 .PD

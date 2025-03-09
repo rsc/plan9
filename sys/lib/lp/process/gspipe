@@ -17,7 +17,7 @@ case *
 GSTMPFILE=/tmp/gsp^$pid
 GSOPT=('-sDEVICE='^$GSDEVICE '-sOUTPUTFILE='$GSTMPFILE -dSAFER -dNOPAUSE -dQUIET -dBATCH)
 
-gs $GSOPT - >/dev/null 
+gs $GSOPT - >/dev/null
 
 cat $GSTMPFILE
 rm -f $GSTMPFILE

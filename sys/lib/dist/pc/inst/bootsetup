@@ -8,7 +8,7 @@ case go
 	echo
 	echo 'Initializing Plan 9 FAT configuration partition (9fat)'
 	echo
-	
+
 	fat=(/dev/sd*/9fat)
 	fat=$fat(1)
 	disk=`{echo $fat | sed 's:/dev/::;s:/9fat::'}
@@ -112,7 +112,7 @@ case go
 	didbootsetup=1
 	export didbootsetup
 	prompt 'Enable boot method' floppy plan9 win9x winnt
-	
+
 	if(! boot$rd){
 		didbootsetup=$oldbootsetup
 		export didbootsetup

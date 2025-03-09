@@ -58,7 +58,7 @@ enum {					/* Cr */
 	Sta		= 0x02,		/* start */
 	Txp		= 0x04,		/* transmit packet */
 	Rd0		= 0x08,		/* remote DMA command */
-	Rd1		= 0x10,	
+	Rd1		= 0x10,
 	Rd2		= 0x20,
 	RdREAD		= Rd0,		/* remote read */
 	RdWRITE		= Rd1,		/* remote write */
@@ -290,7 +290,7 @@ top:
 		regw(ctlr, Rsar0, crda & 0xFF);
 		regw(ctlr, Rsar1, (crda>>8) & 0xFF);
 		regw(ctlr, Cr, Page0|RdREAD|Sta);
-	
+
 		for(timo=0;; timo++){
 			if(timo > 10000){
 				print("ether8390: dummyrr timeout; assuming nodummyrr\n");
@@ -305,12 +305,12 @@ top:
 				 * the registers are correct.
 				 */
 				regw(ctlr, Cr, Page0|RdWRITE|Sta);
-	
+
 				crda = regr(ctlr, Crda0);
 				crda |= regr(ctlr, Crda1)<<8;
 				if(crda != to)
 					panic("crda write %lud to %lud\n", crda, to);
-	
+
 				break;
 			}
 		}
@@ -772,7 +772,7 @@ dp8390reset(Ether* ether)
 	 * This is the initialisation procedure described
 	 * as 'mandatory' in the datasheet, with references
 	 * to the 3C503 technical reference manual.
-	 */ 
+	 */
 	disable(ctlr);
 	if(ctlr->width != 1)
 		regw(ctlr, Dcr, Ft4WORD|Ls|Wts);

@@ -1,12 +1,12 @@
 /* Copyright (C) 1994, 1995, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -28,7 +28,7 @@ void debug_print_ref_packed(const gs_memory_t *mem, const ref_packed *);
 
 /* Dump regions of memory. */
 void debug_dump_one_ref(const gs_memory_t *mem, const ref *);
-void debug_dump_refs(const gs_memory_t *mem, 
+void debug_dump_refs(const gs_memory_t *mem,
 		     const ref * from, uint size, const char *msg);
 void debug_dump_array(const gs_memory_t *mem, const ref * array);
 
@@ -37,7 +37,7 @@ void debug_dump_array(const gs_memory_t *mem, const ref * array);
 typedef struct ref_stack_s ref_stack_t;	/* also defined in isdata.h */
 #  define ref_stack_DEFINED
 #endif
-void debug_dump_stack(const gs_memory_t *mem, 
+void debug_dump_stack(const gs_memory_t *mem,
 		      const ref_stack_t * pstack, const char *msg);
 
 #endif /* idebug_INCLUDED */

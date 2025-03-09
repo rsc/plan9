@@ -105,7 +105,7 @@ struct VGAscr {
 
 	ulong	io;				/* device specific registers */
 	ulong	*mmio;
-	
+
 	ulong	colormap[Pcolours][3];
 	int	palettedepth;
 

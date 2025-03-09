@@ -3,7 +3,7 @@
 swap \- establish a swap file
 .SH SYNOPSIS
 .B swap
-.I file 
+.I file
 .SH DESCRIPTION
 .I Swap
 establishes a file or device for the system to swap on.

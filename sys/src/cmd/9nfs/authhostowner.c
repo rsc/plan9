@@ -1,6 +1,6 @@
 #include "all.h"
 
-enum { 
+enum {
 	ARgiveup = 100,
 };
 
@@ -236,4 +236,3 @@ out:
 
 	return rv;
 }
-

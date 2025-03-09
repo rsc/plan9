@@ -485,7 +485,7 @@ mntstat(Chan *c, uchar *dp, int n)
 	if(r->reply.nstat > n){
 		/*
 		 * 12/31/2002 RSC
-		 * 
+		 *
 		 * This should be nstat-2, which is the first two
 		 * bytes of the stat buffer.  But dirstat and dirfstat
 		 * depended on getting the full nstat (they didn't

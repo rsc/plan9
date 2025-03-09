@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -69,10 +69,10 @@ gx_curve_log2_samples(fixed x0, fixed y0, const curve_segment * pc,
 	    k++, m >>= 1;
     } else {
 	const fixed
-	      x12 = pc->p1.x - pc->p2.x, y12 = pc->p1.y - pc->p2.y, 
+	      x12 = pc->p1.x - pc->p2.x, y12 = pc->p1.y - pc->p2.y,
 	      dx0 = x0 - pc->p1.x - x12, dy0 = y0 - pc->p1.y - y12,
-	      dx1 = x12 - pc->p2.x + pc->pt.x, dy1 = y12 - pc->p2.y + pc->pt.y, 
-	      adx0 = any_abs(dx0), ady0 = any_abs(dy0), 
+	      dx1 = x12 - pc->p2.x + pc->pt.x, dy1 = y12 - pc->p2.y + pc->pt.y,
+	      adx0 = any_abs(dx0), ady0 = any_abs(dy0),
 	      adx1 = any_abs(dx1), ady1 = any_abs(dy1);
 	fixed
 	    d = max(adx0, adx1) + max(ady0, ady1);
@@ -139,7 +139,7 @@ split_curve_midpoint(fixed x0, fixed y0, const curve_segment * pc,
 private inline void
 print_points(const gs_fixed_point *points, int count)
 {
-#ifdef DEBUG    
+#ifdef DEBUG
     int i;
 
     if (!gs_debug_c('3'))
@@ -151,17 +151,17 @@ print_points(const gs_fixed_point *points, int count)
 
 
 bool
-curve_coeffs_ranged(fixed x0, fixed x1, fixed x2, fixed x3, 
-		    fixed y0, fixed y1, fixed y2, fixed y3, 
-		    fixed *ax, fixed *bx, fixed *cx, 
-		    fixed *ay, fixed *by, fixed *cy, 
+curve_coeffs_ranged(fixed x0, fixed x1, fixed x2, fixed x3,
+		    fixed y0, fixed y1, fixed y2, fixed y3,
+		    fixed *ax, fixed *bx, fixed *cx,
+		    fixed *ay, fixed *by, fixed *cy,
 		    int k)
 {
     fixed x01, x12, y01, y12;
 
-    curve_points_to_coefficients(x0, x1, x2, x3, 
+    curve_points_to_coefficients(x0, x1, x2, x3,
 				 *ax, *bx, *cx, x01, x12);
-    curve_points_to_coefficients(y0, y1, y2, y3, 
+    curve_points_to_coefficients(y0, y1, y2, y3,
 				 *ay, *by, *cy, y01, y12);
 #   define max_fast (max_fixed / 6)
 #   define min_fast (-max_fast)
@@ -178,11 +178,11 @@ curve_coeffs_ranged(fixed x0, fixed x1, fixed x2, fixed x3,
     return true;
 }
 
-/*  Initialize the iterator. 
+/*  Initialize the iterator.
     Momotonic curves with non-zero length are only allowed.
  */
 bool
-gx_flattened_iterator__init(gx_flattened_iterator *this, 
+gx_flattened_iterator__init(gx_flattened_iterator *this,
 	    fixed x0, fixed y0, const curve_segment *pc, int k)
 {
     /* Note : Immediately after the ininialization it keeps an invalid (zero length) segment. */
@@ -199,8 +199,8 @@ gx_flattened_iterator__init(gx_flattened_iterator *this,
     this->x3 = pc->pt.x;
     this->y3 = pc->pt.y;
     if (!curve_coeffs_ranged(this->x0, x1, x2, this->x3,
-			     this->y0, y1, y2, this->y3, 
-			     &this->ax, &this->bx, &this->cx, 
+			     this->y0, y1, y2, this->y3,
+			     &this->ax, &this->bx, &this->cx,
 			     &this->ay, &this->by, &this->cy, k))
 	return false;
     this->curve = true;
@@ -218,7 +218,7 @@ gx_flattened_iterator__init(gx_flattened_iterator *this,
 #   endif
     if (k == -1) {
 	/* A special hook for gx_subdivide_curve_rec.
-	   Only checked the range. 
+	   Only checked the range.
 	   Returning with no initialization. */
 	return true;
     }
@@ -268,7 +268,7 @@ gx_flattened_iterator__init(gx_flattened_iterator *this,
     return true;
 }
 
-private inline bool 
+private inline bool
 check_diff_overflow(fixed v0, fixed v1)
 {
     if (v0 < v1) {
@@ -283,7 +283,7 @@ check_diff_overflow(fixed v0, fixed v1)
 
 /*  Initialize the iterator with a line. */
 bool
-gx_flattened_iterator__init_line(gx_flattened_iterator *this, 
+gx_flattened_iterator__init_line(gx_flattened_iterator *this,
 	    fixed x0, fixed y0, fixed x1, fixed y1)
 {
     bool ox = check_diff_overflow(x0, x1);
@@ -294,8 +294,8 @@ gx_flattened_iterator__init_line(gx_flattened_iterator *this,
     this->x3 = x1;
     this->y3 = y1;
     if (ox || oy) {
-	/* Subdivide a long line into 2 segments, because the filling algorithm 
-	   and the stroking algorithm need to compute differences 
+	/* Subdivide a long line into 2 segments, because the filling algorithm
+	   and the stroking algorithm need to compute differences
 	   of coordinates of end points. */
 	/* Note : the result of subdivision may be not strongly colinear. */
 	this->ax = this->bx = 0;
@@ -502,7 +502,7 @@ gx_flattened_iterator__switch_to_backscan(gx_flattened_iterator *this, bool not_
 #define max_points 50		/* arbitrary */
 
 private int
-generate_segments(gx_path * ppath, const gs_fixed_point *points, 
+generate_segments(gx_path * ppath, const gs_fixed_point *points,
 		    int count, segment_notes notes)
 {
     /* vd_moveto(ppath->position.x, ppath->position.y); */
@@ -525,14 +525,14 @@ generate_segments(gx_path * ppath, const gs_fixed_point *points,
 }
 
 private int
-gx_subdivide_curve_rec(gx_flattened_iterator *this, 
+gx_subdivide_curve_rec(gx_flattened_iterator *this,
 		  gx_path * ppath, int k, curve_segment * pc,
 		  segment_notes notes, gs_fixed_point *points)
 {
     int code;
 
 top :
-    if (!gx_flattened_iterator__init(this, 
+    if (!gx_flattened_iterator__init(this,
 		ppath->position.x, ppath->position.y, pc, k)) {
 	/* Curve is too long.  Break into two pieces and recur. */
 	curve_segment cseg;
@@ -546,7 +546,7 @@ top :
 	goto top;
     } else if (k == -1) {
 	/* fixme : Don't need to init the iterator. Just wanted to check in_range. */
-	return gx_path_add_curve_notes(ppath, pc->p1.x, pc->p1.y, pc->p2.x, pc->p2.y, 
+	return gx_path_add_curve_notes(ppath, pc->p1.x, pc->p1.y, pc->p2.x, pc->p2.y,
 			pc->pt.x, pc->pt.y, notes);
     } else {
 	gs_fixed_point *ppt = points;
@@ -593,5 +593,3 @@ gx_subdivide_curve(gx_path * ppath, int k, curve_segment * pc, segment_notes not
 }
 
 #undef max_points
-
-

@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -22,7 +22,7 @@
 
 #include "iplugin.h"
 
-typedef int FracInt; /* A fractional integer with statically unknown number of fraction bits. 
+typedef int FracInt; /* A fractional integer with statically unknown number of fraction bits.
                         The number of bits depends on plugin and is being specified in
                         FAPI_server::frac_shift.
                      */
@@ -39,21 +39,21 @@ typedef enum {
     FAPI_FONT_FEATURE_UnderlineThickness,
     FAPI_FONT_FEATURE_FontType,
     FAPI_FONT_FEATURE_FontBBox,
-    FAPI_FONT_FEATURE_BlueValues_count, 
+    FAPI_FONT_FEATURE_BlueValues_count,
     FAPI_FONT_FEATURE_BlueValues,
-    FAPI_FONT_FEATURE_OtherBlues_count, 
+    FAPI_FONT_FEATURE_OtherBlues_count,
     FAPI_FONT_FEATURE_OtherBlues,
-    FAPI_FONT_FEATURE_FamilyBlues_count, 
+    FAPI_FONT_FEATURE_FamilyBlues_count,
     FAPI_FONT_FEATURE_FamilyBlues,
-    FAPI_FONT_FEATURE_FamilyOtherBlues_count, 
+    FAPI_FONT_FEATURE_FamilyOtherBlues_count,
     FAPI_FONT_FEATURE_FamilyOtherBlues,
     FAPI_FONT_FEATURE_BlueShift,
     FAPI_FONT_FEATURE_BlueFuzz,
     FAPI_FONT_FEATURE_StdHW,
     FAPI_FONT_FEATURE_StdVW,
-    FAPI_FONT_FEATURE_StemSnapH_count, 
+    FAPI_FONT_FEATURE_StemSnapH_count,
     FAPI_FONT_FEATURE_StemSnapH,
-    FAPI_FONT_FEATURE_StemSnapV_count, 
+    FAPI_FONT_FEATURE_StemSnapV_count,
     FAPI_FONT_FEATURE_StemSnapV,
     FAPI_FONT_FEATURE_ForceBold,
     FAPI_FONT_FEATURE_LanguageGroup,
@@ -77,7 +77,7 @@ typedef struct {
     unsigned int char_name_length;
     FAPI_metrics_type metrics_type;
     FracInt sb_x, sb_y, aw_x, aw_y; /* replaced PS metrics. */
-    int metrics_scale; /* Scale for replaced PS metrics. 
+    int metrics_scale; /* Scale for replaced PS metrics.
 		          Zero means "em box size". */
 } FAPI_char_ref;
 
@@ -117,10 +117,10 @@ struct FAPI_path_s {
 };
 
 typedef struct FAPI_font_scale_s {
-    FracInt matrix[6]; 
-    FracInt HWResolution[2]; 
+    FracInt matrix[6];
+    FracInt HWResolution[2];
     int subpixels[2];
-    bool align_to_pixels; 
+    bool align_to_pixels;
 } FAPI_font_scale;
 
 typedef struct FAPI_metrics_s {
@@ -184,7 +184,7 @@ struct FAPI_server_s {
     /*  Due to the interpreter fallback with CDevProc,
         get_char_raster_metrics leaves some data kept by the server,
 	so taht get_char_raster uses them and release_char_data releases them.
-        Therefore calls from GS to these functions must not 
+        Therefore calls from GS to these functions must not
         interfer with different characters.
     */
 };

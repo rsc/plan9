@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -1124,7 +1124,7 @@ bbox_image_planes_wanted(const gx_image_enum_common_t * info, byte *wanted)
 {
     /* This is only used if target_info != 0. */
     const bbox_image_enum *pbe = (const bbox_image_enum *)info;
-    
+
     return gx_image_planes_wanted(pbe->target_info, wanted);
 }
 
@@ -1231,4 +1231,3 @@ bbox_text_begin(gx_device * dev, gs_imager_state * pis,
 
     return code;
 }
-

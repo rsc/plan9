@@ -144,7 +144,7 @@ screenload(Rectangle r, int depth, uchar *p, Point pt, int step)
 		return;
 	if(rectclip(&r, Rect(0, 0, winr.right-winr.left, winr.bottom-winr.top))==0)
 		return;
-	
+
 	lock(&gdilock);
 
 	hdc = GetDC(window);
@@ -164,7 +164,7 @@ screenload(Rectangle r, int depth, uchar *p, Point pt, int step)
 	ReleaseDC(window, hdc);
 
 	GdiFlush();
- 
+
 	unlock(&gdilock);
 }
 
@@ -496,7 +496,7 @@ setcursor(void)
 	and = mallocz(h*w, 1);
 	memset(and, 0xff, h*w);
 	xor = mallocz(h*w, 1);
-	
+
 	lock(&cursor.lk);
 	for(y=0,sp=cursor.set,cp=cursor.clr; y<16; y++) {
 		for(x=0; x<2; x++) {
@@ -547,7 +547,7 @@ clipreadunicode(HANDLE h)
 	Rune *p;
 	int n;
 	uchar *q;
-	
+
 	p = GlobalLock(h);
 	n = wstrutflen(p)+1;
 	q = malloc(n);
@@ -565,7 +565,7 @@ clipreadutf(HANDLE h)
 	p = GlobalLock(h);
 	p = strdup(p);
 	GlobalUnlock(h);
-	
+
 	return p;
 }
 
@@ -588,7 +588,7 @@ clipread(void)
 		oserror();
 		p = strdup("");
 	}
-	
+
 	CloseClipboard();
 	return p;
 }
@@ -632,7 +632,7 @@ clipwrite(char *buf)
 	memcpy(p, buf, n);
 	p[n] = 0;
 	GlobalUnlock(h);
-	
+
 	SetClipboardData(CF_TEXT, h);
 
 	CloseClipboard();

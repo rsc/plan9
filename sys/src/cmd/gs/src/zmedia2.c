@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -184,11 +184,11 @@ zmatchmedia(i_ctx_t *i_ctx_p)
 		0 : .001;
 
 	    /* We have a match. Save the match in case no better match is found */
-	    if (r_has_type(&match.match_key, t_null)) 
+	    if (r_has_type(&match.match_key, t_null))
 		match.match_key = aelt.key;
 	    /*
-	     * If it is a better match than the current best it supersedes it 
-	     * regardless of priority. If the match is the same, then update 
+	     * If it is a better match than the current best it supersedes it
+	     * regardless of priority. If the match is the same, then update
 	     * to the current only if the key value is lower.
 	     */
 	    if (best_mismatch + mepos_penalty <= mbest) {
@@ -253,7 +253,7 @@ zmatchpagesize(i_ctx_t *i_ctx_p)
     }
     check_type(op[-1], t_boolean);
     roll = op[-1].value.boolval;
-    code = zmatch_page_size(imemory, 
+    code = zmatch_page_size(imemory,
 			    op - 5, op - 4, (int)op[-3].value.intval,
 			    orient, roll,
 			    &ignore_mismatch, &mat, &media_size);
@@ -357,11 +357,11 @@ match_page_size(const gs_point * request, const gs_rect * medium, int policy,
 	gs_make_identity(pmat);
 	*pmsize = *request;
     } else {
-        int fit_direct  = rx - medium->p.x >= -5 && rx - medium->q.x <= 5 
+        int fit_direct  = rx - medium->p.x >= -5 && rx - medium->q.x <= 5
                        && ry - medium->p.y >= -5 && ry - medium->q.y <= 5;
-	int fit_rotated = rx - medium->p.y >= -5 && rx - medium->q.y <= 5 
+	int fit_rotated = rx - medium->p.y >= -5 && rx - medium->q.y <= 5
                        && ry - medium->p.x >= -5 && ry - medium->q.x <= 5;
-        
+
 	/* Fudge matches from a non-standard page size match (4 element array) */
 	/* as worse than an exact match from a standard (2 element array), but */
 	/* better than for a rotated match to a standard pagesize. This should */
@@ -382,14 +382,14 @@ match_page_size(const gs_point * request, const gs_rect * medium, int policy,
 
 	    make_adjustment_matrix(request, medium, pmat, false, (rotate + 1) & 2);
 	    *best_mismatch = fabs((medium->p.x - rx) * (medium->q.x - rx)) +
-	    			fabs((medium->p.y - ry) * (medium->q.y - ry)) + 
+	    			fabs((medium->p.y - ry) * (medium->q.y - ry)) +
             			    (pmat->xx == 0.0 || (rotate & 1) == 1 ? 0.01 : 0);	/* rotated */
         } else if ( fit_rotated ) {
             int rotate = (orient < 0 ? 1 : orient);
 
 	    make_adjustment_matrix(request, medium, pmat, false, rotate | 1);
 	    *best_mismatch = fabs((medium->p.y - rx) * (medium->q.y - rx)) +
-	    			fabs((medium->p.x - ry) * (medium->q.x - ry)) + 
+	    			fabs((medium->p.x - ry) * (medium->q.x - ry)) +
             			    (pmat->xx == 0.0 || (rotate & 1) == 1 ? 0.01 : 0);	/* rotated */
         } else {
 	    int rotate =
@@ -421,7 +421,7 @@ match_page_size(const gs_point * request, const gs_rect * medium, int policy,
 	        make_adjustment_matrix(request, medium, pmat, !larger, rotate);
 	    else {
 	        gs_rect req_rect;
-                if(rotate & 1) { 
+                if(rotate & 1) {
                     req_rect.p.x = ry;
                     req_rect.p.y = rx;
                 } else {
@@ -453,14 +453,14 @@ match_page_size(const gs_point * request, const gs_rect * medium, int policy,
  * we must adjust its size in that dimension to match the request.
  * We recognize this by an unreasonably small medium->p.{x,y}.
  */
-private void 
+private void
 make_adjustment_matrix(const gs_point * request, const gs_rect * medium,
 		       gs_matrix * pmat, bool scale, int rotate)
 {
     double rx = request->x, ry = request->y;
     double mx = medium->q.x, my = medium->q.y;
 
-    /* Rotate the request if necessary. */ 
+    /* Rotate the request if necessary. */
     if (rotate & 1) {
 	double temp = rx;
 
@@ -484,14 +484,14 @@ make_adjustment_matrix(const gs_point * request, const gs_rect * medium,
 	    /* else leave my == medium->q.y, i.e., the maximum */
     }
 
-    /* Translate to align the centers. */ 
+    /* Translate to align the centers. */
     gs_make_translation(mx / 2, my / 2, pmat);
 
-    /* Rotate if needed. */ 
+    /* Rotate if needed. */
     if (rotate)
 	gs_matrix_rotate(pmat, 90.0 * rotate, pmat);
 
-    /* Scale if needed. */ 
+    /* Scale if needed. */
     if (scale) {
 	double xfactor = mx / rx;
 	double yfactor = my / ry;
@@ -500,8 +500,8 @@ make_adjustment_matrix(const gs_point * request, const gs_rect * medium,
 	if (factor < 1)
 	    gs_matrix_scale(pmat, factor, factor, pmat);
     }
-    /* Now translate the origin back, */ 
-    /* using the original, unswapped request. */ 
+    /* Now translate the origin back, */
+    /* using the original, unswapped request. */
     gs_matrix_translate(pmat, -request->x / 2, -request->y / 2, pmat);
 }
 #undef MIN_MEDIA_SIZE

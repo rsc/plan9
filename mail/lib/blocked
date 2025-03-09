@@ -25,4 +25,3 @@ block	255.255.255.255/32
 
 *block	aol.com!makemoneyfast
 *allow	cse.psu.edu!owner-9fans			#hi scott
-

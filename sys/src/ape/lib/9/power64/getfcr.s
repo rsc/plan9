@@ -25,4 +25,3 @@ TEXT	setfsr(SB), $8
 	MOVFL	F3, FPSCR
 	ISYNC
 	RETURN
-

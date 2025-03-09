@@ -78,7 +78,7 @@ struct Dev
 enum
 {
 	Devmask=	(Ndev-1)<<8,
-	
+
 	Qlvl1=		0,
 	Qlvl2=		1,
 	Qclone=		2,
@@ -135,7 +135,7 @@ struct Type
 /*
  *  Fax setup summary
  *
- *	FCLASS=2	- set to service class 2, i.e., one where the fax handles timing 
+ *	FCLASS=2	- set to service class 2, i.e., one where the fax handles timing
  *	FTBC=0		- ???
  *	FREL=1		- ???
  *	FCQ=1		- receive copy quality checking enabled
@@ -158,7 +158,7 @@ Type typetab[] =
 
  {	"ATT2400",	"ATI9",	"E2400",	"Rockwell",
 	"AT\\N3",	/* auto reliable (MNP, fall back to none) */
-	0,	
+	0,
 	0,
 	0,
 	0,
@@ -167,7 +167,7 @@ Type typetab[] =
 
  {	"ATT14400",	"ATI9",	"E14400",	"Rockwell",
 	0,
-	0,	
+	0,
 	0,
 	0,
 	0,
@@ -194,7 +194,7 @@ Type typetab[] =
 
  {	"VOCAL",	"ATI6",	"144DPL+FAX",	"Rockwell",
 	"AT\\N3",	/* auto reliable (V.42, fall back to MNP, fall back to none) */
-	"AT%C3\\J0",	/* negotiate for compression, don't change port baud rate */	
+	"AT%C3\\J0",	/* negotiate for compression, don't change port baud rate */
 	0,
 	0,
  	"AT+FCLASS=2\rAT+FTBC=0\rAT+FREL=1\rAT+FCQ=1\rAT+FBOR=1\rAT+FCR=1",
@@ -1347,7 +1347,7 @@ dialout(Dev *d, char *number)
 	}
 
 	syslog(0, LOGFILE, "dialing %s speed=%d %s", number, speed, fax==Ok?"fax":"");
-	
+
 	err = modemtype(d, speed, fax == Ok);
 	if(err)
 		return err;

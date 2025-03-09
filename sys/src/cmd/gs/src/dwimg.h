@@ -2,11 +2,11 @@
 
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -80,7 +80,7 @@ extern IMAGE *first_image;
 IMAGE *image_find(void *handle, void *device);
 IMAGE *image_new(void *handle, void *device);
 void image_delete(IMAGE *img);
-int image_size(IMAGE *img, int new_width, int new_height, int new_raster, 
+int image_size(IMAGE *img, int new_width, int new_height, int new_raster,
    unsigned int new_format, void *pimage);
 
 /* GUI thread only */
@@ -88,7 +88,7 @@ void image_open(IMAGE *img);
 void image_close(IMAGE *img);
 void image_sync(IMAGE *img);
 void image_page(IMAGE *img);
-void image_presize(IMAGE *img, int new_width, int new_height, int new_raster, 
+void image_presize(IMAGE *img, int new_width, int new_height, int new_raster,
    unsigned int new_format);
 void image_poll(IMAGE *img);
 void image_updatesize(IMAGE *img);

@@ -566,7 +566,7 @@ gitwalk1(Fid *fid, char *name, Qid *q)
 
 	e = nil;
 	aux = fid->aux;
-	
+
 	q->vers = 0;
 	if(strcmp(name, "..") == 0){
 		popcrumb(aux);
@@ -575,7 +575,7 @@ gitwalk1(Fid *fid, char *name, Qid *q)
 		fid->qid = *q;
 		return nil;
 	}
-	
+
 	aux->crumb = realloc(aux->crumb, (aux->ncrumb + 1) * sizeof(Crumb));
 	aux->ncrumb++;
 	c = crumb(aux, 0);
@@ -584,7 +584,7 @@ gitwalk1(Fid *fid, char *name, Qid *q)
 	c->mode = o->mode;
 	c->mtime = o->mtime;
 		c->obj = o->obj ? ref(o->obj) : nil;
-	
+
 	switch(QDIR(&fid->qid)){
 	case Qroot:
 		if(strcmp(name, "HEAD") == 0){

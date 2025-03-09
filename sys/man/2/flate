@@ -154,7 +154,7 @@ The possible values are
 .IR FlateInputFail ,
 .IR FlateOutputFail ,
 .IR FlateCorrupted ,
-and 
+and
 .IR FlateInternal .
 .I Flateerr
 converts the number into a printable message.
@@ -166,7 +166,7 @@ the successful return value for
 .IR deflatezlib ,
 .IR inflateinit ,
 .IR inflate ,
-and 
+and
 .IR inflatezlib .
 The block functions return the number of bytes produced when they succeed.
 .PP

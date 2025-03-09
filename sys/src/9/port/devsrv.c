@@ -342,7 +342,7 @@ Dev srvdevtab = {
 	"srv",
 
 	devreset,
-	srvinit,	
+	srvinit,
 	devshutdown,
 	srvattach,
 	srvwalk,

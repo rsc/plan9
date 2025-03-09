@@ -8,7 +8,7 @@ case go
 		devs=$devs^ether
 	if(test -f '#t'/eia? >[2]/dev/null)
 		devs=$devs^ppp
-	
+
 	switch($devs){
 	case ''
 		echo
@@ -16,21 +16,21 @@ case go
 		echo 'Please use a local copy of the distribution archive.'
 		echo
 		ifc=none
-	
+
 	case ppp
 		echo
 		echo 'No ethernet card was detected, but there is a serial port or modem.'
 		echo 'We will configure PPP.'
 		echo
 		ifc=ppp
-	
+
 	case ether
 		echo
 		echo 'No serial port or modem detected, but there is an ethernet card.'
 		echo 'We will configure the ethernet.'
 		echo
 		ifc=ether
-	
+
 	case etherppp
 		echo
 		echo 'You can connect to the internet via'
@@ -39,10 +39,10 @@ case go
 		prompt 'Interface to use' ether ppp
 		ifc=$rd
 	}
-	
+
 	ipinterface=$ifc
 	export ipinterface
-	
+
 	switch($ifc) {
 	case ether
 		exec configether go

@@ -85,7 +85,7 @@ cleanname(char *name)
 			*d++ = *s++;
 		if(*s == 0)
 			break;
-		
+
 		*d++ = *s++;
 	}
 	*d = 0;

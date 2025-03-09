@@ -29,4 +29,3 @@ sysexits(ulong *arg)
 	pexit(status, 1);
 	return 0;		/* not reached */
 }
-

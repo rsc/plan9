@@ -32,17 +32,17 @@
  *     Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice is duplicated in all such 
- * forms and that any documentation, advertising materials, and other 
- * materials related to such distribution and use acknowledge that the 
- * software was developed * by Mark H. Colburn and sponsored by The 
- * USENIX Association. 
+ * provided that the above copyright notice is duplicated in all such
+ * forms and that any documentation, advertising materials, and other
+ * materials related to such distribution and use acknowledge that the
+ * software was developed * by Mark H. Colburn and sponsored by The
+ * USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -51,10 +51,10 @@
  * $Log:	pax.c,v $
  * Revision 1.2  89/02/12  10:05:17  mark
  * 1.2 release fixes
- * 
+ *
  * Revision 1.1  88/12/23  18:02:23  mark
  * Initial revision
- * 
+ *
  */
 
 #ifndef lint
@@ -141,7 +141,7 @@ static OFFSET   pax_optsize();
  * PARAMETERS
  *
  *	int argc	- count of user supplied arguments
- *	char **argv	- user supplied arguments 
+ *	char **argv	- user supplied arguments
  *
  * RETURNS
  *
@@ -200,14 +200,14 @@ char          **argv;
  *
  * PARAMETERS
  *
- *    int ac		- A count of arguments in av.  Should be passed argc 
+ *    int ac		- A count of arguments in av.  Should be passed argc
  *			  from main
- *    char **av		- A pointer to an argument list.  Should be passed 
+ *    char **av		- A pointer to an argument list.  Should be passed
  *			  argv from main
  *
  * RETURNS
  *
- *    Normally returns 0.  If an error occurs, -1 is returned 
+ *    Normally returns 0.  If an error occurs, -1 is returned
  *    and state is set to reflect the error.
  *
  */
@@ -292,7 +292,7 @@ char          **av;		/* arguments */
 	    } else {
 		f_list = 0;
 		f_extract = 1;
-	    } 
+	    }
 	    msgfile=stderr;
 	    break;
 	case 's':
@@ -318,7 +318,7 @@ char          **av;		/* arguments */
 	    } else {
 		f_list = 0;
 		f_create = 1;
-	    } 
+	    }
 	    msgfile=stderr;
 	    break;
 	case 'x':
@@ -382,13 +382,13 @@ char          **av;		/* arguments */
  *
  * DESCRIPTION
  *
- * 	reads the first block of the archive and determines the archive 
- *	type from the data.  If the archive type cannot be determined, 
+ * 	reads the first block of the archive and determines the archive
+ *	type from the data.  If the archive type cannot be determined,
  *	processing stops, and a 1 is returned to the caller.  If verbose
  *	mode is on, then the archive type will be printed on the standard
  *	error device as it is determined.
  *
- * FIXME 
+ * FIXME
  *
  *	be able to understand TAR and CPIO magic numbers
  */
@@ -426,7 +426,7 @@ void get_archive_type()
  *
  * DESCRIPTION
  *
- * 	Recognizes suffixes for blocks (512-bytes), k-bytes and megabytes.  
+ * 	Recognizes suffixes for blocks (512-bytes), k-bytes and megabytes.
  * 	Also handles simple expressions containing '+' for addition.
  *
  * PARAMETERS
@@ -435,7 +435,7 @@ void get_archive_type()
  *
  * RETURNS
  *
- *    Normally returns the value represented by the expression in the 
+ *    Normally returns the value represented by the expression in the
  *    the string.
  *
  * ERRORS

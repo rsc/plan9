@@ -1,12 +1,12 @@
 /* Copyright (C) 1990, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -92,7 +92,7 @@ gs_type1_interpret(gs_type1_state * pcis, const gs_glyph_data_t *pgd,
 			    pcis->scale.x.log2_unit, pcis->scale.x.log2_unit,
 			    pcis->scale.x.log2_unit - pcis->log2_subpixels.x,
 			    pcis->scale.y.log2_unit - pcis->log2_subpixels.y,
-			    pcis->origin.x, pcis->origin.y, 
+			    pcis->origin.x, pcis->origin.y,
 			    gs_currentaligntopixels(pfont->dir));
 	    if (code < 0)
 	    	return code;
@@ -404,7 +404,7 @@ rsbw:		/* Give the caller the opportunity to intervene. */
 			    /* and the argument count off the stack. */
 			    switch (*pindex = fixed2int_var(*csp)) {
 				case 0:
-				    {	
+				    {
 					fixed fheight = csp[-4];
 					/* Assume the next two opcodes */
 					/* are `pop' `pop'.  Unfortunately, some */

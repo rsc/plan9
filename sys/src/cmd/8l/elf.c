@@ -162,14 +162,14 @@ elf64phdr(void (*putl)(long), void (*putll)(vlong), ulong type, uvlong off,
 	uvlong vaddr, uvlong paddr, uvlong filesz, uvlong memsz, ulong prots,
 	uvlong align)
 {
-	putl(type);		
-	putl(prots);		
-	putll(off);		
-	putll(vaddr);	
-	putll(paddr);	
-	putll(filesz);	
-	putll(memsz);	
-	putll(align);		
+	putl(type);
+	putl(prots);
+	putll(off);
+	putll(vaddr);
+	putll(paddr);
+	putll(filesz);
+	putll(memsz);
+	putll(align);
 }
 
 void

@@ -64,12 +64,12 @@ enum {
 	FhIsr		= 0x010,	/* second interrupt status */
 
 	Reset		= 0x020,
-		
+
 	Rev		= 0x028,	/* hardware revision */
 
 	EepromIo	= 0x02c,	/* EEPROM i/o register */
 	EepromGp	= 0x030,
-		
+
 	OtpromGp	= 0x034,
 		DevSelOtp	= 1<<16,
 		RelativeAccess	= 1<<17,
@@ -90,7 +90,7 @@ enum {
 	GpDrv	= 0x050,
 		GpDrvCalV6	= 1<<2,
 		GpDrv1X2	= 1<<3,
-		GpDrvRadioIqInvert	= 1<<7, 
+		GpDrvRadioIqInvert	= 1<<7,
 
 	Led		= 0x094,
 		LedBsmCtrl	= 1<<5,
@@ -1136,7 +1136,7 @@ initring(Ctlr *ctlr)
 	if(ctlr->kwpage == nil)
 		ctlr->kwpage = mallocalign(4096, 4096, 0, 0);
 	if(ctlr->kwpage == nil)
-		return "no memory for kwpage";		
+		return "no memory for kwpage";
 	memset(ctlr->kwpage, 0, 4096);
 
 	return nil;
@@ -1172,7 +1172,7 @@ reset(Ctlr *ctlr)
 		 * solve a stability issue related to noisy DC2DC line
 		 * in the silicon of 1000 Series.
 		 */
-		prphwrite(ctlr, ApmgDigitalSvr, 
+		prphwrite(ctlr, ApmgDigitalSvr,
 			(prphread(ctlr, ApmgDigitalSvr) & ~(0xf<<5)) | (3<<5));
 	}
 	nicunlock(ctlr);
@@ -1194,9 +1194,9 @@ reset(Ctlr *ctlr)
 	csr32w(ctlr, FhRxBase, PCIWADDR(ctlr->rx.p) >> 8);
 	csr32w(ctlr, FhStatusWptr, PCIWADDR(ctlr->rx.s) >> 4);
 	csr32w(ctlr, FhRxConfig,
-		FhRxConfigEna | 
+		FhRxConfigEna |
 		FhRxConfigIgnRxfEmpty |
-		FhRxConfigIrqDstHost | 
+		FhRxConfigIrqDstHost |
 		FhRxConfigSingleFrame |
 		(Nrxlog << FhRxConfigNrbdShift));
 	csr32w(ctlr, FhRxWptr, (Nrx-1) & ~7);
@@ -2419,12 +2419,12 @@ static void
 iwlpci(void)
 {
 	Pcidev *pdev;
-	
+
 	pdev = nil;
 	while(pdev = pcimatch(pdev, 0, 0)) {
 		Ctlr *ctlr;
 		void *mem;
-		
+
 		if(pdev->ccrb != 2 || pdev->ccru != 0x80)
 			continue;
 		if(pdev->vid != 0x8086)
@@ -2504,7 +2504,7 @@ static int
 iwlpnp(Ether* edev)
 {
 	Ctlr *ctlr;
-	
+
 	if(iwlhead == nil)
 		iwlpci();
 again:
@@ -2538,7 +2538,7 @@ again:
 		edev->ctlr = nil;
 		goto again;
 	}
-	
+
 	return 0;
 }
 

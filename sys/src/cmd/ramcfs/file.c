@@ -70,7 +70,7 @@ fbwrite(Icache *ic, Ibuf *b, char *a, ulong off, int len)
 		wrinode = 1;
 		goto dowrite;
 	}
-	
+
 	/*
  	 *  is it an indirect block?
 	 */
@@ -192,7 +192,7 @@ fpget(Icache *ic, Ibuf *b, ulong off)
 	 */
 	if(p->bno == Notabno)
 		return 0;
-	
+
 	/*
  	 *  if it's a direct block, life is easy?
 	 */

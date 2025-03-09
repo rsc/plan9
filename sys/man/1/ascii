@@ -1,4 +1,4 @@
-.TH ASCII 1 
+.TH ASCII 1
 .SH NAME
 ascii, unicode \- interpret ASCII, Unicode characters
 .SH SYNOPSIS
@@ -40,7 +40,7 @@ ascii, unicode \- interpret ASCII, Unicode characters
 .SH DESCRIPTION
 .I Ascii
 prints the
-.SM ASCII 
+.SM ASCII
 values corresponding to characters and
 .I vice
 .IR versa ;
@@ -66,7 +66,7 @@ prints a table of the character set in the specified base.
 Characters of
 .I text
 are converted to their
-.SM ASCII 
+.SM ASCII
 values, one per line. If, however, the first
 .I text
 argument is a valid number in the specified base, conversion
@@ -131,7 +131,7 @@ values of characters.
 .TP
 .B "ascii -d"
 Print the
-.SM ASCII 
+.SM ASCII
 table base 10.
 .TP
 .B "unicode p"

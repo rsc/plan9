@@ -839,7 +839,7 @@ gmove(Node *f, Node *t)
 			a = AMOVQ;
 		}
 		break;
-	
+
 	case CASE(	TIND,	TCHAR):
 	case CASE(	TIND,	TUCHAR):
 	case CASE(	TIND,	TSHORT):
@@ -869,7 +869,7 @@ gmove(Node *f, Node *t)
 			f->vconst &= 0xffffffffU;
 			a = AMOVL;
 		}
-		break;	
+		break;
 
 	case CASE(	TIND,	TIND):
 	case CASE(	TIND,	TVLONG):
@@ -1496,8 +1496,8 @@ exreg(Type *t)
 
 schar	ewidth[NTYPE] =
 {
-	-1,		/*[TXXX]*/	
-	SZ_CHAR,	/*[TCHAR]*/	
+	-1,		/*[TXXX]*/
+	SZ_CHAR,	/*[TCHAR]*/
 	SZ_CHAR,	/*[TUCHAR]*/
 	SZ_SHORT,	/*[TSHORT]*/
 	SZ_SHORT,	/*[TUSHORT]*/
@@ -1521,10 +1521,10 @@ long	ncast[NTYPE] =
 {
 	0,				/*[TXXX]*/
 	BCHAR|BUCHAR,			/*[TCHAR]*/
-	BCHAR|BUCHAR,			/*[TUCHAR]*/	
+	BCHAR|BUCHAR,			/*[TUCHAR]*/
 	BSHORT|BUSHORT,			/*[TSHORT]*/
 	BSHORT|BUSHORT,			/*[TUSHORT]*/
-	BINT|BUINT|BLONG|BULONG,	/*[TINT]*/		
+	BINT|BUINT|BLONG|BULONG,	/*[TINT]*/
 	BINT|BUINT|BLONG|BULONG,	/*[TUINT]*/
 	BINT|BUINT|BLONG|BULONG,	/*[TLONG]*/
 	BINT|BUINT|BLONG|BULONG,	/*[TULONG]*/

@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -208,7 +208,7 @@ private const char *const standard_cmap_names[] = {
 };
 
 private int
-attach_cmap_resource(gx_device_pdf *pdev, pdf_font_resource_t *pdfont, 
+attach_cmap_resource(gx_device_pdf *pdev, pdf_font_resource_t *pdfont,
 		const gs_cmap_t *pcmap, int font_index_only)
 {
     const char *const *pcmn =
@@ -226,7 +226,7 @@ attach_cmap_resource(gx_device_pdf *pdev, pdf_font_resource_t *pdfont,
 	    !memcmp(*pcmn, pcmap->CMapName.data, pcmap->CMapName.size))
 	    break;
     if (*pcmn == 0) {
-	/* 
+	/*
 	 * PScript5.dll Version 5.2 creates identity CMaps with
 	 * instandard name. Check this specially here
 	 * and later replace with a standard name.
@@ -279,7 +279,7 @@ attach_cmap_resource(gx_device_pdf *pdev, pdf_font_resource_t *pdfont,
 	    return_error(gs_error_VMerror);
 	memcpy(chars, pcmap->CMapName.data, size);
 	if (is_identity)
-	    strcpy(pdfont->u.type0.Encoding_name, 
+	    strcpy(pdfont->u.type0.Encoding_name,
 		    (pcmap->WMode ? "/Identity-V" : "/Identity-H"));
 	else
 	    sprintf(pdfont->u.type0.Encoding_name, "%ld 0 R",
@@ -373,7 +373,7 @@ scan_cmap_text(pdf_text_enum_t *pte)
 		font_index0 = font_index;
 		subfont0 = subfont;
 	    }
-	    code = pdf_attached_font_resource(pdev, (gs_font *)subfont, &pdsubf, 
+	    code = pdf_attached_font_resource(pdev, (gs_font *)subfont, &pdsubf,
 				       &glyph_usage, &real_widths, &char_cache_size, &width_cache_size);
 	    if (code < 0)
 		return code;
@@ -387,7 +387,7 @@ scan_cmap_text(pdf_text_enum_t *pte)
 	    {
 		pdf_font_resource_t *pdfont;
 
-		code = pdf_obtain_parent_type0_font_resource(pdev, pdsubf, 
+		code = pdf_obtain_parent_type0_font_resource(pdev, pdsubf,
 				&font->data.CMap->CMapName, &pdfont);
 		if (code < 0)
 		    return code;
@@ -403,7 +403,7 @@ scan_cmap_text(pdf_text_enum_t *pte)
 		    return code;
 	    }
 	    /* We can't check pdsubf->used[cid >> 3] here,
-	       because it mixed data for different values of WMode. 
+	       because it mixed data for different values of WMode.
 	       Perhaps pdf_font_used_glyph returns fast with reused glyphs.
 	     */
 	    code = pdf_font_used_glyph(pfd, glyph, (gs_font_base *)subfont);
@@ -466,8 +466,8 @@ scan_cmap_text(pdf_text_enum_t *pte)
 	    if (wmode)
 		pdsubf->u.cidfont.used2[cid >> 3] |= 0x80 >> (cid & 7);
 	    if (pte->cdevproc_callout) {
-		 /* Only handle a single character because its width is stored 
-		    into pte->cdevproc_result, and process_text_modify_width neds it. 
+		 /* Only handle a single character because its width is stored
+		    into pte->cdevproc_result, and process_text_modify_width neds it.
 		    fixme: next time take from w, v, real_widths. */
 		break_index = scan.index;
 		break_xy_index = scan.xy_index;
@@ -490,17 +490,17 @@ scan_cmap_text(pdf_text_enum_t *pte)
 	    code = gs_matrix_multiply(&subfont0->FontMatrix, &m1, &m2);
 	    if (code < 0)
 		return code;
-	    code = gs_matrix_multiply(&m2, &font->FontMatrix, &m3); 
+	    code = gs_matrix_multiply(&m2, &font->FontMatrix, &m3);
 	    /* We thought that it should be gs_matrix_multiply(&font->FontMatrix, &m2, &m3); */
 	    if (code < 0)
 		return code;
-	    code = pdf_obtain_parent_type0_font_resource(pdev, pdsubf0, 
+	    code = pdf_obtain_parent_type0_font_resource(pdev, pdsubf0,
 			    &font->data.CMap->CMapName, &pdfont);
 	    if (code < 0)
 		return code;
 	    if (!pdfont->u.type0.Encoding_name[0]) {
 		/*
-		 * If pdfont->u.type0.Encoding_name is set, 
+		 * If pdfont->u.type0.Encoding_name is set,
 		 * a CMap resource is already attached.
 		 * See attach_cmap_resource.
 		 */
@@ -512,8 +512,8 @@ scan_cmap_text(pdf_text_enum_t *pte)
 	    code = pdf_update_text_state(&text_state, (pdf_text_enum_t *)pte, pdfont, &m3);
 	    if (code < 0)
 		return code;
-	    /* process_text_modify_width breaks text parameters. 
-	       We would like to improve it someday. 
+	    /* process_text_modify_width breaks text parameters.
+	       We would like to improve it someday.
 	       Now save them locally and restore after the call. */
 	    save_text = pte->text;
 	    str.data = scan.text.data.bytes + index;
@@ -541,7 +541,7 @@ scan_cmap_text(pdf_text_enum_t *pte)
 	    code = pdf_shift_text_currentpoint(pte, &wxy);
 	    if (code < 0)
 		return code;
-	} 
+	}
 	pdf_text_release_cgp(pte);
 	index = break_index;
 	xy_index = break_xy_index;
@@ -624,7 +624,7 @@ process_cid_text(gs_text_enum_t *pte, void *vbuf, uint bsize)
 
 	    if (gnum & ~0xffffL)
 		return_error(gs_error_rangecheck);
-	    *pchars++ = (byte)(gnum >> 8);  
+	    *pchars++ = (byte)(gnum >> 8);
 	    *pchars++ = (byte)gnum;
 	}
     }
@@ -646,7 +646,7 @@ process_cid_text(gs_text_enum_t *pte, void *vbuf, uint bsize)
     /* Create the CMap and Type 0 font if they don't exist already. */
 
     if (pdsubf->u.cidfont.glyphshow_font_id != 0)
- 	font0 = (gs_font_type0 *)gs_find_font_by_id(font->dir, 
+ 	font0 = (gs_font_type0 *)gs_find_font_by_id(font->dir,
  		    pdsubf->u.cidfont.glyphshow_font_id, &scaled_font->FontMatrix);
     if (font0 == NULL) {
   	code = gs_font_type0_from_cidfont(&font0, font, font->WMode,

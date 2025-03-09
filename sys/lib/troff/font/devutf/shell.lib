@@ -1235,4 +1235,3 @@ Description() {
 	echo "BuildDescCharset"
 	echo "(\\\\n) Print"
 }
-

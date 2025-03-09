@@ -211,4 +211,3 @@ i8259off(void)
 	outb(Int0aux, 0xFF);
 	outb(Int1aux, 0xFF);
 }
-

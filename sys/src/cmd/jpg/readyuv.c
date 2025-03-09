@@ -58,7 +58,7 @@ looksize(char *file, vlong size, int *pixels, int *lines, int *bits)
 }
 
 
-static int 
+static int
 clip(int x)
 {
 	x >>= (Shift+2); // +2 as we assume all input images are 10 bit
@@ -211,5 +211,3 @@ readyuv(int fd, int colorspace)
 	Bterm(&b);
 	return a;
 }
-
-

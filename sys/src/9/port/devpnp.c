@@ -317,7 +317,7 @@ pnpreset(void)
 		if(strlen(s) < 8 || s[7] != '.' || s[0] < 'A' || s[0] > 'Z' || s[1] < 'A' || s[1] > 'Z' || s[2] < 'A' || s[2] > 'Z') {
 bad:
 			print("pnp%d: bad conf string %s\n", csn, s);
-			continue;	
+			continue;
 		}
 		i1 = s[0]-'A'+1;
 		i2 = s[1]-'A'+1;

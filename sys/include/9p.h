@@ -209,7 +209,7 @@ struct Srv {
 	QLock	rlock;
 	uchar*	wbuf;
 	QLock	wlock;
-	
+
 	char*	addr;
 };
 
@@ -240,7 +240,7 @@ enum {
 
 void		readstr(Req*, char*);
 void		readbuf(Req*, void*, long);
-void		walkandclone(Req*, char*(*walk1)(Fid*,char*,void*), 
+void		walkandclone(Req*, char*(*walk1)(Fid*,char*,void*),
 			char*(*clone)(Fid*,Fid*,void*), void*);
 
 void		auth9p(Req*);
@@ -250,4 +250,3 @@ void		authdestroy(Fid*);
 int		authattach(Req*);
 
 extern void (*_forker)(void (*)(void*), void*, int);
-

@@ -61,7 +61,7 @@ are equivalent to writes of
 .I dev
 and reads and writes of
 .IB console ctl
-and 
+and
 .IB console stat
 are equivalent to reads and writes of
 .IB dev ctl
@@ -81,7 +81,7 @@ to all readers of
 .IR console .
 Therefore, many users can
 .IR con (1)
-to a 
+to a
 .IR console ,
 see all output, and enter commands.
 .PP
@@ -148,7 +148,7 @@ If
 .B vlad
 then closes,
 .B boris
-and 
+and
 .B barney
 will read:
 .PP
@@ -212,8 +212,8 @@ fornaxctl
 % clog /mnt/consoles/bootes /sys/log/bootes &
 .EE
 .PP
-The console server's default name space must 
-mount the consoles for 
+The console server's default name space must
+mount the consoles for
 .I C
 to import.
 This can be arranged by adding

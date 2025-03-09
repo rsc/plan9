@@ -1,5 +1,5 @@
 /****************************************************************
- 
+
   The author of this software (_dtoa, strtod) is David M. Gay.
   Please send bug reports to
 	David M. Gay

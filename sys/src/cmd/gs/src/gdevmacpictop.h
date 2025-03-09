@@ -1,4 +1,4 @@
-/* Copyright (C) 1997-2002 artofcode LLC.  All rights reserved.                     
+/* Copyright (C) 1997-2002 artofcode LLC.  All rights reserved.
 
   This software is provided AS-IS with no warranty, either express or
   implied.

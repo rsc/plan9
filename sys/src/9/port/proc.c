@@ -128,7 +128,7 @@ sched(void)
 		 * Don't delay if the process is Moribund.
 		 * It called sched to die.
 		 * But do sched eventually.  This avoids a missing unlock
-		 * from hanging the entire kernel. 
+		 * from hanging the entire kernel.
 		 * But don't reschedule procs holding palloc or procalloc.
 		 * Those are far too important to be holding while asleep.
 		 *
@@ -235,11 +235,11 @@ preempted(void)
  * The cpu time average is a decaying average that lasts
  * about D clock ticks.  D is chosen to be approximately
  * the cpu time of a cpu-intensive "quick job".  A job has to run
- * for approximately D clock ticks before we home in on its 
+ * for approximately D clock ticks before we home in on its
  * actual cpu usage.  Thus if you manage to get in and get out
  * quickly, you won't be penalized during your burst.  Once you
  * start using your share of the cpu for more than about D
- * clock ticks though, your p->cpu hits 1000 (1.0) and you end up 
+ * clock ticks though, your p->cpu hits 1000 (1.0) and you end up
  * below all the other quick jobs.  Interactive tasks, because
  * they basically always use less than their fair share of cpu,
  * will be rewarded.
@@ -249,18 +249,18 @@ preempted(void)
  *
  *	cpu = cpu * (D-1)/D
  *
- * n times, yielding 
- * 
+ * n times, yielding
+ *
  *	cpu = cpu * ((D-1)/D)^n
  *
- * but D is big enough that this is approximately 
+ * but D is big enough that this is approximately
  *
  * 	cpu = cpu * (D-n)/D
  *
  * so we use that instead.
- * 
+ *
  * If the process has been running, we apply the filter to
- * 1 - cpu, yielding a similar equation.  Note that cpu is 
+ * 1 - cpu, yielding a similar equation.  Note that cpu is
  * stored in fixed point (* 1000).
  *
  * Updatecpu must be called before changing up, in order
@@ -301,9 +301,9 @@ updatecpu(Proc *p)
  * On average, p has used p->cpu of a cpu recently.
  * Its fair share is conf.nmach/m->load of a cpu.  If it has been getting
  * too much, penalize it.  If it has been getting not enough, reward it.
- * I don't think you can get much more than your fair share that 
+ * I don't think you can get much more than your fair share that
  * often, so most of the queues are for using less.  Having a priority
- * of 3 means you're just right.  Having a higher priority (up to p->basepri) 
+ * of 3 means you're just right.  Having a higher priority (up to p->basepri)
  * means you're not using as much as you could.
  */
 int
@@ -421,7 +421,7 @@ ready(Proc *p)
 
 	/*
 	 * since the 386 is short of registers, m always contains the constant
-	 * MACHADDR, not MACHP(m->machno); see ../pc/dat.h.  so we can't just 
+	 * MACHADDR, not MACHP(m->machno); see ../pc/dat.h.  so we can't just
 	 * compare addresses with m.
 	 */
 	if(up != p && (p->wired == nil || p->wired == MACHP(m->machno)))
@@ -447,7 +447,7 @@ yield(void)
 {
 	if(anyready()){
 		/* pretend we just used 1/2 tick */
-		up->lastupdate -= Scaling/2;  
+		up->lastupdate -= Scaling/2;
 		sched();
 	}
 }
@@ -490,7 +490,7 @@ another:
 		}
 	}
 }
-	
+
 
 /*
  *  pick a process to run
@@ -509,7 +509,7 @@ runproc(void)
 	/* cooperative scheduling until the clock ticks */
 	/*
 	 * since the 386 is short of registers, m always contains the constant
-	 * MACHADDR, not MACHP(m->machno); see ../pc/dat.h.  so we can't just 
+	 * MACHADDR, not MACHP(m->machno); see ../pc/dat.h.  so we can't just
 	 * compare addresses with m.
 	 */
 	if((p=m->readied) && p->mach==0 && p->state==Ready
@@ -689,7 +689,7 @@ newproc(void)
 		p->procctl = Proc_tracesyscall;
 	else
 		p->procctl = 0;
-	p->syscalltrace = 0;	
+	p->syscalltrace = 0;
 	p->notepending = 0;
 	p->ureg = 0;
 	p->privatemem = 0;

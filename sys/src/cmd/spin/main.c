@@ -958,7 +958,7 @@ samecase:			if (buzzed != 0)
 					break;
 #if 0
 				  case 'w': /* conflicts with bitstate runtime arg */
-					verbose += 64; 
+					verbose += 64;
 					break;
 #endif
 				  case 'W':
@@ -995,7 +995,7 @@ samecase:			if (buzzed != 0)
 		case 'S': separate = atoi(&argv[1][2]); /* S1 or S2 */
 			  /* generate code for separate compilation */
 			  analyze = 1; break;
-		case 's': 
+		case 's':
 			  if (strcmp(&argv[1][1], "simulate") == 0)
 			  {	break; /* ignore */
 			  }
@@ -1024,7 +1024,7 @@ samecase:			if (buzzed != 0)
 			  }
 			  buzzed = 1;	/* implies also -a -o3 */
 			  pan_runtime = "-d";
-			  analyze = 1; 
+			  analyze = 1;
 			  usedopts += optimizations('3');
 			  break;
 		case 'X': xspin = notabs = 1;
@@ -1377,7 +1377,7 @@ nn(Lextok *s, int t, Lextok *ll, Lextok *rl)
 				if (separate == 2) {
 				printf("spin: warning, make sure that the S1 model\n");
 				printf("      also polls channel '%s' in its claim\n",
-				n->sym->name); 
+				n->sym->name);
 			}	}
 			forbidden = 0;
 			break;
@@ -1421,7 +1421,7 @@ rem_lab(Symbol *a, Lextok *b, Symbol *c)	/* proctype name, pid, label name */
 	   'p' -sym-> _p               'q' -sym-> c (label name)
 	   /                           /
 	 '?' -sym-> a (proctype)     NAME -sym-> a (proctype name)
-	 / 
+	 /
 	b (pid expr)
 #endif
 }
@@ -1446,7 +1446,7 @@ rem_var(Symbol *a, Lextok *b, Symbol *c, Lextok *ndx)
 	    / \______  possible arrayindex on c
 	   /
 	 '?' -sym-> a (proctype)
-	 / 
+	 /
 	b (pid expr)
 #endif
 }
@@ -1561,5 +1561,3 @@ explain(int n)
 	case UNLESS:	fprintf(fd, "%sunless",	Keyword); break;
 	}
 }
-
-

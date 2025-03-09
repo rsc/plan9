@@ -57,10 +57,9 @@ main(int argc, char **argv)
 		if(fd < 0)
 			sysfatal("could not open %s: %r", out);
 	}
-		
+
 	Binit(&bout, fd, OWRITE);
 	Bwritehash(&bout, &hash);
 	Bterm(&bout);
 	exits(0);
 }
-

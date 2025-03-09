@@ -366,6 +366,6 @@ TEXT bootfile(SB), $0
 
 /* "PBS..." */
 TEXT confidence(SB), $0
-	BYTE $'P'; BYTE $'B'; BYTE $'S'; BYTE $'1'; 
+	BYTE $'P'; BYTE $'B'; BYTE $'S'; BYTE $'1';
 	BYTE $'.'; BYTE $'.'; BYTE $'.';
 	BYTE $'\z';

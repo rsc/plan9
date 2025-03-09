@@ -1,4 +1,4 @@
-%    Copyright (C) 1996, 1997 Geoffrey Keating. 
+%    Copyright (C) 1996, 1997 Geoffrey Keating.
 % This file may be freely distributed with or without modifications,
 % so long as proper attribution is given and copyright notices are
 % not removed.
@@ -19,7 +19,7 @@ pdfdict begin
 % Older ghostscript versions do not have .pdftoken, so we use 'token' instead.
 /.pdftoken where { pop } { /.pdftoken /token load def } ifelse
 
-% An implementation of an algorithm compatible with the RSA Data Security 
+% An implementation of an algorithm compatible with the RSA Data Security
 % Inc. RC4 stream encryption algorithm.
 
 % <string> rc4setkey <dict>
@@ -72,7 +72,7 @@ pdfdict begin
   exch 512 string
    % stack: <key> <stream> <string>
   { readstring pop rc4 exch pop } aload pop
-   8 array astore cvx 0 () /SubFileDecode filter 
+   8 array astore cvx 0 () /SubFileDecode filter
 } bind def
 
 % MD5 derived from RFC 1321, "The MD5 Message-Digest Algorithm",
@@ -131,7 +131,7 @@ pdfdict begin
   /a/b/c/d 4 i 3 and roll [ /d/c/b/a ] { exch def } forall
 
   t C [
-    a F i -4 bitshift get exec 
+    a F i -4 bitshift get exec
     a A /x r -8 bitshift /get A T i get A
     W { 1 32 bitshift 1 sub /and } if
     /dup r 31 and /bitshift /exch r 31 and 32 sub /bitshift /or
@@ -149,16 +149,16 @@ pdfdict begin
 
 % If we could put t into a _packed_ array, its memory requirements
 % would go from about 13k to about 4k. Unfortunately, we'd need around
-% 1600 stack positions, around 3 times what we can expect to have 
+% 1600 stack positions, around 3 times what we can expect to have
 % available---and if that kind of memory is available, we don't really
 % need to pack t. Sigh.
 
-% In fact, it's worse than that. You can't even determine what t will 
+% In fact, it's worse than that. You can't even determine what t will
 % be and write it in directly (something like
-% { /a c d xor b and d xor a md5add x 0 get md5add -680876936 md5add dup 7 
+% { /a c d xor b and d xor a md5add x 0 get md5add -680876936 md5add dup 7
 %   bitshift exch -25 bitshift or b md5add def /d b c xor a ...
 % ) because the scanner uses the operand stack to accumulate procedures.
-% So the only way to have md5transform as a single procedure is the above 
+% So the only way to have md5transform as a single procedure is the above
 % trick.
 
 W /md5transform t end cvx bind def
@@ -166,7 +166,7 @@ W /md5transform t end cvx bind def
 % Unfortunately, PostScript & its imitators convert large
 % integers to floating-point. Worse, the fp representation probably
 % won't have 32 significant bits.
-% This procedure accounts for about 35% of the total time on 32-bit 
+% This procedure accounts for about 35% of the total time on 32-bit
 % machines.
 not {
   /md5add {
@@ -175,7 +175,7 @@ not {
       { add }
       % if both are positive or negative
       { 16#80000000 xor add 16#80000000 xor }
-      % same as subtracting (or adding) 2^31 and then subtracting (or 
+      % same as subtracting (or adding) 2^31 and then subtracting (or
       % adding) it back.
     ifelse
   } bind def
@@ -217,7 +217,7 @@ not {
     b md5add /b exch def
     a md5add /a exch def
   } for
-  
+
   16 string
   [ [ a b c d ] { 3 { dup -8 bitshift } repeat } forall ]
   0 1 15 {
@@ -267,9 +267,9 @@ not {
     }
    if
    () pdf_pad_key pdf_try_key
-    { /FileKey exch def } 
+    { /FileKey exch def }
     { /PDFPassword where
-       { PDFPassword pdf_pad_key pdf_try_key 
+       { PDFPassword pdf_pad_key pdf_try_key
 	  { true }
 	  { PDFPassword pdf_pad_key md5 0 5 getinterval rc4setkey
 	    Trailer /Encrypt oget /O oget dup length string copy
@@ -344,7 +344,7 @@ not {
    /loop cvx 2 packedarray cvx
     { stopped /PDFsource } aload pop
    PDFsource
-    { store { stop } if } aload pop .packtomark cvx 
+    { store { stop } if } aload pop .packtomark cvx
    /PDFsource 3 -1 roll store exec
  } bind def
 
@@ -371,7 +371,7 @@ not {
 /pdf_decrypt_stream
  { 3 index /StreamKey known
    {
-      exch 
+      exch
 	% Stack: readdata? dict parms filternames file/string
       3 index /Length oget () /SubFileDecode filter
       3 index /StreamKey get rc4decodefilter

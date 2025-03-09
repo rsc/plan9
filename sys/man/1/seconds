@@ -1,4 +1,4 @@
-.TH SECONDS 1 
+.TH SECONDS 1
 .SH NAME
 seconds \- convert human-readable date (and time) to seconds since epoch
 .SH SYNOPSIS

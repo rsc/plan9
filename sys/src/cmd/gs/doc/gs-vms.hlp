@@ -148,10 +148,10 @@
  borderColor
   The name of the border color (default = black).
 
- geometry 
+ geometry
   The window size and placement, WxH+X+Y (default is NULL).
 
- xResolution 
+ xResolution
   The number of x pixels per inch (default is computed from
   WidthOfScreen and WidthMMOfScreen).
 
@@ -191,7 +191,7 @@
  contain any whitespace.
 
   -Dname
-  -dname 
+  -dname
  Define a name in systemdict with value=null.
 
   -Sname=string
@@ -199,7 +199,7 @@
  Define a name in systemdict with a given string as value.  This is
  different from -d.  For example, -dname=35 is equivalent to the
  program fragment
-      /name 35 def 
+      /name 35 def
  whereas -sname=35 is equivalent to
       /name (35) def
 

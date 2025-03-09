@@ -655,7 +655,7 @@ pingnfsserver(addr, version, sotype)
 				     pertry, &so);
 	if (clp == NULL)
 		return rpc_createerr.cf_stat;
-	
+
 	try.tv_sec = 10;
 	try.tv_usec = 0;
 	stat = clnt_call(clp, NFSPROC_NULL,
@@ -673,7 +673,7 @@ int load_9uid(struct u9fs_args * nfsargsp)
   int nusers, siz, n;
   struct p9user * p9p, * p9alloc;
 
-  if( (fd = fopen("/etc/9uid.conf", "r")) == 0 ) 
+  if( (fd = fopen("/etc/9uid.conf", "r")) == 0 )
     errx(1, "fopen");
 
   siz = 128;
@@ -682,7 +682,7 @@ int load_9uid(struct u9fs_args * nfsargsp)
 
   nusers = 0;
   p9p = p9alloc;
-  while(1) {    
+  while(1) {
     if( nusers < siz ) {
       if ( fgets(line, 80, fd) == 0 )
 	break;
@@ -701,10 +701,10 @@ int load_9uid(struct u9fs_args * nfsargsp)
       siz <<= 1;
     }
   }
-  
+
   nfsargsp->nusers = nusers;
   nfsargsp->users = p9alloc;
-  
+
   return 0;
 }
 
@@ -758,7 +758,7 @@ void gethostaddr(char * hostp, struct sockaddr_in * saddr)
 			warnx("bad net address %s", hostp);
 		}
 	} else if ((hp = gethostbyname(hostp)) != NULL)
-		memmove(&saddr->sin_addr, hp->h_addr, 
+		memmove(&saddr->sin_addr, hp->h_addr,
 		    MIN(hp->h_length, sizeof(saddr->sin_addr)));
 	else {
 		warnx("can't get net id for host");
@@ -839,7 +839,7 @@ getnfsargs(spec, nfsargsp)
 			warnx("can't reverse resolve net address");
 			return (0);
 		}
-		memmove(&saddr.sin_addr, hp->h_addr, 
+		memmove(&saddr.sin_addr, hp->h_addr,
 		    MIN(hp->h_length, sizeof(saddr.sin_addr)));
 		strncpy(inst, hp->h_name, INST_SZ);
 		inst[INST_SZ - 1] = '\0';
@@ -971,7 +971,7 @@ tryagain:
 #endif
 	nfsargsp->fhsize = nfhret.fhsize;
 	nfsargsp->hostname = nam;
-	
+
 	load_9key(nfsargsp);
 	if( load_9uid(nfsargsp) )
 	  errx(1, "can't load 9uid.conf");
@@ -1042,4 +1042,3 @@ usage()
 "                 [-t timeout] [-w writesize] [-x retrans] rhost:path node");
 	exit(1);
 }
-

@@ -502,7 +502,7 @@ opbittest(Cpu *cpu, Inst *i)
 	n &= s-1;
 	m = 1<<n;
 	if(a & m)
-		cpu->reg[RFL] |= CF;			
+		cpu->reg[RFL] |= CF;
 	else
 		cpu->reg[RFL] &= ~CF;
 	switch(i->op){
@@ -805,7 +805,7 @@ opidiv(Cpu *cpu, Inst *i)
 
 	aw(ra, r);
 	aw(qa, q);
-}	
+}
 
 static int
 cctrue(Cpu *cpu, Inst *i)

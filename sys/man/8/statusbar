@@ -49,7 +49,7 @@ The
 .B -v
 option to
 .IR hget (1)
-.\" and the 
+.\" and the
 .\" .B -d
 .\" option to
 .\" .IR venti/fmtarenas

@@ -229,7 +229,7 @@ putpage(Page *p)
 
 	if(p->image && p->image != &swapimage)
 		pagechaintail(p);
-	else 
+	else
 		pagechainhead(p);
 
 	if(palloc.r.p != 0)
@@ -283,7 +283,7 @@ retry:
 		uncachepage(p);
 		return 1;
 	}
-		
+
 
 	/* don't dup pages with no image */
 	if(p->ref == 0 || p->image == nil || p->image->notext)
@@ -327,7 +327,7 @@ retry:
 /*
 * XXX - here's a bug? - np is on the freelist but it's not really free.
 * when we unlock palloc someone else can come in, decide to
-* use np, and then try to lock it.  they succeed after we've 
+* use np, and then try to lock it.  they succeed after we've
 * run copypage and cachepage and unlock(np).  then what?
 * they call pageunchain before locking(np), so it's removed
 * from the freelist, but still in the cache because of
@@ -550,14 +550,14 @@ checkpagerefs(void)
 	int s;
 	ulong i, np, nwrong;
 	ulong *ref;
-	
+
 	np = palloc.user;
 	ref = malloc(np*sizeof ref[0]);
 	if(ref == nil){
 		print("checkpagerefs: out of memory\n");
 		return;
 	}
-	
+
 	/*
 	 * This may not be exact if there are other processes
 	 * holding refs to pages on their stacks.  The hope is
@@ -571,7 +571,7 @@ checkpagerefs(void)
 	nwrong = 0;
 	for(i=0; i<np; i++){
 		if(palloc.pages[i].ref != ref[i]){
-			iprint("page %#.8lux ref %d actual %lud\n", 
+			iprint("page %#.8lux ref %d actual %lud\n",
 				palloc.pages[i].pa, palloc.pages[i].ref, ref[i]);
 			ref[i] = 1;
 			nwrong++;
@@ -649,4 +649,3 @@ portcountpagerefs(ulong *ref, int print)
 		}
 	}
 }
-

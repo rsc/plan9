@@ -1,12 +1,12 @@
 %    Copyright (C) 1993, 1994, 1995, 1997 Aladdin Enterprises.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -433,7 +433,7 @@ currentdict readonly end pop		% pcldict
      /uw uurx ullx sub def
      /uh uury ully sub def
    grestore
-   DEBUG 
+   DEBUG
     { (rmatrix: ) print matrix currentmatrix ==
       (rFontBBox: ) print [rllx rlly rurx rury] ==
       (uFontBBox: ) print [ullx ully uurx uury] ==
@@ -446,7 +446,7 @@ currentdict readonly end pop		% pcldict
 
    mark cachestatus   /upper exch def
    cleartomark 0 setcachelimit
-   
+
 	% Write the font header.
 
    writefontheader

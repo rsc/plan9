@@ -52,7 +52,7 @@ TEXT saveregs(SB), $0
 	POPL AX
 	POPL AX
 	POPL AX
-	
+
 	PUSHL	AX
 	PUSHL	BX
 	PUSHL	CX
@@ -78,7 +78,7 @@ TEXT restoreregs(SB), $0
 	PUSHL	AX
 	PUSHL	AX
 	ADDL	$32, SP
-	
+
 	XCHGL	32(SP), AX	/* swap return PC and saved flags */
 	XCHGL	0(SP), AX
 	XCHGL	32(SP), AX
@@ -96,7 +96,7 @@ TEXT restoreregs(SB), $0
 /*
  * Assumed to be in protected mode at time of call.
  * Switch to real mode, execute an interrupt, and
- * then switch back to protected mode.  
+ * then switch back to protected mode.
  *
  * Assumes:
  *	- no device interrupts are going to come in
@@ -125,7 +125,7 @@ TEXT physcode(SB), $0
 	MOVL	SP, AX
 	MOVL	$RMSTACK, SP
 	PUSHL	AX
-	
+
 	/* paranoia: make sure modified INT & JMPFAR instr.s are seen below */
 	BYTE $0x0f; BYTE $0xae; BYTE $0xf8	/* SFENCE */
 	BYTE $0x0f; BYTE $0xae; BYTE $0xe8	/* LFENCE */
@@ -230,7 +230,7 @@ TEXT realmodeintrinst(SB), $0
 	/* re-enter protected mode and jump to 32-bit code */
 	OPSIZE; MOVL $1, AX
 	OPSIZE; MOVL AX, CR0
-	
+
 /*	JMPFAR	SELECTOR(KESEG, SELGDT, 0):$again32bit(SB) /**/
 	 OPSIZE
 	 BYTE $0xEA
@@ -255,7 +255,7 @@ TEXT again32bit(SB), $0
 TEXT again32kzero(SB), $0
 	/* breathe a sigh of relief - back in 32-bit protected mode */
 
-	/* switch to old stack */	
+	/* switch to old stack */
 	PUSHL	AX	/* match popl below for 8l */
 	MOVL	$(RMSTACK-4), SP
 	POPL	SP

@@ -35,7 +35,7 @@ leak, kmem, umem \- help find memory leaks
 examines the named processes, which
 should be sharing their data and bss segments,
 for memory leaks.
-It uses a mark and sweep-style algorithm to 
+It uses a mark and sweep-style algorithm to
 determine which allocated blocks are no longer
 reachable from the set of root pointers.
 The set of root pointers is created by looking through
@@ -47,7 +47,7 @@ prints, for each block, a line with seven space-separated fields:
 the string
 .BR block ,
 the address of the block,
-the size of the block, 
+the size of the block,
 the first two words of the block,
 and the function names represented by the first two words of the block.
 Usually, the first two words of the block
@@ -61,13 +61,13 @@ If the
 or the
 .B -c
 option is given,
-.I leak 
+.I leak
 will instead present a sequence of
 .IR acid (1)
 commands that show each leaky allocation site.
 With
 .B -s
-a comment appears next to each command to 
+a comment appears next to each command to
 indicate how many lost blocks were allocated
 at that point in the program.
 With
@@ -80,14 +80,14 @@ overall total number of bytes.
 If the
 .B -a
 option is given,
-.I leak 
+.I leak
 will print information as decribed above,
 but for all allocated blocks,
 not only leaked ones.
 If the
 .B -d
 option is given,
-.I leak 
+.I leak
 will print information as decribed above,
 but for all free blocks,
 i.e. those freed,
@@ -129,7 +129,7 @@ Completely free
 .I "white
 Padding to fill out the image.
 .PD
-The bright pixels representing headers help in 
+The bright pixels representing headers help in
 counting the number of blocks.
 Magnifying the images with
 .IR lens (1)
@@ -142,7 +142,7 @@ with that name.
 .PP
 The
 .B -f
-option specifies a binary to go on the 
+option specifies a binary to go on the
 .IR acid (1)
 command-line used to inspect the
 processes, and is only necessary
@@ -152,12 +152,12 @@ from stripped binaries.
 .I Umem
 prints a summary of all allocated blocks in the process with id
 .IR pid .
-Each line of the summary gives the count and total size of 
+Each line of the summary gives the count and total size of
 blocks allocated at an allocation point.
 The list is sorted by count in decreasing order.
 .I Umem
-prints summarizes all allocations, not just 
-memory leaks, but it is faster and requires less memory than 
+prints summarizes all allocations, not just
+memory leaks, but it is faster and requires less memory than
 .I leak .
 .PP
 .I Kmem
@@ -165,10 +165,10 @@ is like
 .I umem
 but prints a summary for the running kernel.
 .SH EXAMPLES
-List lost blocks in 
+List lost blocks in
 .IR 8.out .
 This depends on the fact that there is only
-once instance of 
+once instance of
 .I 8.out
 running; if there were more, the output of
 .B "leak -s 8.out
@@ -217,7 +217,7 @@ in
 and
 .I kmem
 depend on the internal structure of the
-libc pool memory allocator (see 
+libc pool memory allocator (see
 .IR pool (2)).
 Since the ANSI/POSIX environment uses a different
 allocator,

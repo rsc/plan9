@@ -1,4 +1,4 @@
-.TH ATTACH 5 
+.TH ATTACH 5
 .SH NAME
 attach, auth \- messages to establish a connection
 .SH SYNOPSIS

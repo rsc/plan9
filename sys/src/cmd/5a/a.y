@@ -258,7 +258,7 @@ inst:
 /*
  * MULA hi,lo,r1,r2
  */
-|	LTYPEN cond reg ',' reg ',' reg ',' spreg 
+|	LTYPEN cond reg ',' reg ',' reg ',' spreg
 	{
 		$7.type = D_REGREG;
 		$7.offset = $9;

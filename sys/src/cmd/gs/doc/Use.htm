@@ -236,7 +236,7 @@ On other systems the executable may have a different name:
         <td>&nbsp;<td><b><tt>gsos2</tt></b>
 </table></blockquote>
 
- 
+
 <h2><a name="Output_device"></a>Selecting an output device</h2>
 
 <p>
@@ -565,7 +565,7 @@ devices that do have this parameter.
 <dd>Sets the page size to the CropBox rather than the MediaBox.
 Some files have a CropBox that is smaller than the MediaBox and
 may include white space, registration or cutting marks outside
-the CropBox.  Using this option will set the page size 
+the CropBox.  Using this option will set the page size
 appropriately for a viewer.
 </dl>
 
@@ -600,18 +600,18 @@ Ghostscript is still useful as a sanity-check for invalid files.
 <h3><a name="PDF_stdin"></a>PDF files from standard input</h3>
 
 <p>
-The PDF language, unlike the PostScript language, inherently requires 
+The PDF language, unlike the PostScript language, inherently requires
 random access to the file.
-If you provide PDF to standard input using the 
+If you provide PDF to standard input using the
 special filename <a href="#Pipes">'<tt>-</tt>'</a>,
-Ghostscript will copy it to a temporary file before interpreting the PDF. 
+Ghostscript will copy it to a temporary file before interpreting the PDF.
 
 <h2><a name="EPS"></a>Using Ghostscript with EPS files</h2>
 <p>
-Encapsulated PostScript (EPS) files are intended to be incorporated 
-in other PostScript documents and may not display or print on their 
+Encapsulated PostScript (EPS) files are intended to be incorporated
+in other PostScript documents and may not display or print on their
 own.  An EPS file must conform to the Document Structuring Conventions,
-must include a <b><tt>%%BoundingBox</tt></b> line to indicate the 
+must include a <b><tt>%%BoundingBox</tt></b> line to indicate the
 rectangle in which it will draw, must not use PostScript commands
 which will interfere with the document importing the EPS,
 and can have either zero pages or one page.
@@ -646,48 +646,48 @@ implementation of Ghostscript or its output devices.
 </i></blockquote>
 
 <p>
-With devices which use a subtractive process color model, both PostScript 
-and PDF allow the drawing of objects using colorants (inks) for one or more planes 
-without affecting the data for the remaining colorants. Thus the inks for one 
-object may <b><tt>overprint</tt></b> the inks for another object. In some cases 
-this produces a transparency like effect. (The effects of overprinting should 
+With devices which use a subtractive process color model, both PostScript
+and PDF allow the drawing of objects using colorants (inks) for one or more planes
+without affecting the data for the remaining colorants. Thus the inks for one
+object may <b><tt>overprint</tt></b> the inks for another object. In some cases
+this produces a transparency like effect. (The effects of overprinting should
 not be confused with the PDF 1.4 blending operations which are supported for
-all output devices.) Overprinting is not allowed for devices with an additive 
-process color model. With files that use overprinting, the appearance of the 
-resulting image can differ between devices which produce RGB output versus devices 
-which produce CMYK output. Ghostscript automatically overprints (if needed) 
-when the output device uses a subtractive process color model. For example, 
-if the file is using overprinting, differences can be seen in the appearance 
+all output devices.) Overprinting is not allowed for devices with an additive
+process color model. With files that use overprinting, the appearance of the
+resulting image can differ between devices which produce RGB output versus devices
+which produce CMYK output. Ghostscript automatically overprints (if needed)
+when the output device uses a subtractive process color model. For example,
+if the file is using overprinting, differences can be seen in the appearance
 of the output from the <a href="Devices.htm#TIFF">tiff24nc and tiff32nc devices</a>
-which use an RGB and a CMYK process color models. 
+which use an RGB and a CMYK process color models.
 
 <p>
-Most of the Ghostscript <a href="Devices.htm">output devices</a> do not have 
-file formats which support spot colors. Instead spot colors are converted using 
-the tint transform function contained within the color space definition.. However 
-there are several devices which have support for spot colors. The PSD format 
-(Adobe Photoshop) produced by the <a href="Devices.htm#PSD">psdcmyk device</a> 
-contains both the raster data plus an equivalent CMYK color for each spot color. 
-This allows Photoshop to simulate the appearance of the spot colors. The <a href="Devices.htm#display_device">display 
-device (MS Windows, OS/2, gtk+)</a> can be used with different color models: 
-Gray, RGB, CMYK only, or CMYK plus spot colors (separation). The display device, 
-when using its CMYK plus spot color (separation) mode, also uses an equivalent 
+Most of the Ghostscript <a href="Devices.htm">output devices</a> do not have
+file formats which support spot colors. Instead spot colors are converted using
+the tint transform function contained within the color space definition.. However
+there are several devices which have support for spot colors. The PSD format
+(Adobe Photoshop) produced by the <a href="Devices.htm#PSD">psdcmyk device</a>
+contains both the raster data plus an equivalent CMYK color for each spot color.
+This allows Photoshop to simulate the appearance of the spot colors. The <a href="Devices.htm#display_device">display
+device (MS Windows, OS/2, gtk+)</a> can be used with different color models:
+Gray, RGB, CMYK only, or CMYK plus spot colors (separation). The display device,
+when using its CMYK plus spot color (separation) mode, also uses an equivalent
 CMYK color to simulate the appearance of the spot color. The
-<a href="Devices.htm#TIFF">tiffsep 
-device</a> creates output files for each separation (CMYK and any spot colors 
-present). It also creates a composite CMYK file using an equivalent CMYK color 
+<a href="Devices.htm#TIFF">tiffsep
+device</a> creates output files for each separation (CMYK and any spot colors
+present). It also creates a composite CMYK file using an equivalent CMYK color
 to simulate the appearance of spot colors. The
-<a href="Devices.htm#XCF">xcfcmyk device</a> 
-creates output files with spot colors placed in separate alpha channels. (The 
+<a href="Devices.htm#XCF">xcfcmyk device</a>
+creates output files with spot colors placed in separate alpha channels. (The
 XCF file format does not currently directly support spot colors.)
 
 <p>
-Overprinting with spot colors is not allowed if the tint transform function 
-is being used to convert spot colors. Thus if spot colors are used with overprinting, 
-then the appearance of the result can differ between output devices. One result 
-would be obtained with a CMYK only device and another would be obtained with 
-a CMYK plus spot color device. In a worst case situation where a file has overprinting 
-with both process (CMYK) and spot colors, it is possible to get three different 
+Overprinting with spot colors is not allowed if the tint transform function
+is being used to convert spot colors. Thus if spot colors are used with overprinting,
+then the appearance of the result can differ between output devices. One result
+would be obtained with a CMYK only device and another would be obtained with
+a CMYK plus spot color device. In a worst case situation where a file has overprinting
+with both process (CMYK) and spot colors, it is possible to get three different
 appearances for the same input file using the
 <a href="Devices.htm#TIFF">tiff24nc</a> (RGB),
 <a href="Devices.htm#TIFF">tiff32nc</a> (CMYK), and
@@ -788,14 +788,14 @@ specifies an absolute path. The user may set it as explained in
 If the user doesn't set the system parameter <b><tt>GenericResourceDir</tt></b>,
 Ghostscript creates a default value for it with
 attaching the string <b><tt>../Resource</tt></b>
-to directory paths explained in 
+to directory paths explained in
 <a href="#Finding_files">How Ghostscript finds files</a>,
 except the current directory.
 The first successful combination is used.
 
 <p>
 If the value of the system parameter <b><tt>GenericResourceDir</tt></b>
-is an absolute path (the default), 
+is an absolute path (the default),
 Ghostscript assumes a single resource directory.
 It concatenates :
 
@@ -827,7 +827,7 @@ For example, if the value of the system parameter <b><tt>GenericResourceDir</tt>
 is the string  <b><tt>../Resource/</tt></b>
 (or its equivalent in the file path syntax of the underlying platform),
 Ghostscript searches for <b><tt>../Resource/CMap/Identity-H</tt></b>
-from all directories listed in 
+from all directories listed in
 <a href="#Finding_files">How Ghostscript finds files</a>.
 So in this example, if the user on a Windows platform specifies
 the command line option <b><tt>-I.;../gs/lib;c:/gs8.50/lib</tt></b>,
@@ -835,17 +835,17 @@ Ghostscript searches for <b><tt>../gs/Resource/CMap/Identity-H</tt></b> and
 then for <tt><b>c:/gs8.50/Resource/CMap/Identity-H</b></tt>.
 
 <p>
-To get a proper platform dependent syntax Ghostscript inserts 
+To get a proper platform dependent syntax Ghostscript inserts
 the value of the system parameter
 <b><tt>GenericResourcePathSep</tt></b> (initially
 "<b><tt>/</tt></b>" on Unix and Windows, "<b><tt>:</tt></b>" on MacOS,
 "<b><tt>.</tt></b>" or "<b><tt>]</tt></b>" on OpenVMS).
 The string <b><tt>../Resource</tt></b> is replaced with a
-platform dependent equivalent. 
+platform dependent equivalent.
 
 <p>
 In the case of multiple resource directories,
-the default <b><tt>ResourceFileName</tt></b> procedure retrieves either a path 
+the default <b><tt>ResourceFileName</tt></b> procedure retrieves either a path
 to the first avaliable resource, or if the resource is not available it
 returns a path starting with <b><tt>GenericResourceDir</tt></b>.
 Consequently Postscript installers of Postscript resources
@@ -938,7 +938,7 @@ from among the standard 35 fonts.
 </ul>
 
 <p>
-<a href="#CIDFonts">CID fonts</a> (e.g. Chinese, Japanese and Korean) 
+<a href="#CIDFonts">CID fonts</a> (e.g. Chinese, Japanese and Korean)
 are found using a different method.
 
 <blockquote><table cellpadding=0 cellspacing=0>
@@ -1105,11 +1105,11 @@ third edition, for details.
 CID font resources are a different kind of PostScript resource from fonts.
 In particular, they cannot be used as regular fonts.
 CID font resources must first be combined with a CMap resource, which
-defines specific codes for glyphs, before it can be used as a font. This 
+defines specific codes for glyphs, before it can be used as a font. This
 allows the reuse of a collection of glyphs with different encodings.
 
 <p>
-The simplest method to request a font composed of a CID font resource 
+The simplest method to request a font composed of a CID font resource
 and a CMap resource in a PostScript document is
 <blockquote><b><tt>
 /CIDFont-CMap findfont
@@ -1131,7 +1131,7 @@ on the search path or font path.
 
 <p>
 Substitution of CID font resources is controlled by the Ghostscript
-configuration file <b><tt>lib/cidfmap</tt></b>, 
+configuration file <b><tt>lib/cidfmap</tt></b>,
 which defines a CID font resource map.
 The file forms a table of records, each of which should use one of two formats,
 explained below. Users may modify <b><tt>lib/cidfmap</tt></b> to configure
@@ -1169,7 +1169,7 @@ Where <b><tt>keys&amp;values</tt></b> are explained in the table below.
 <tr valign="top">       <td><b><tt>/Path</tt></b>
         <td>string
         <td>A path to a TrueType font file.  This must be an absolute path.
-        If using <b><tt><a href="#Safer">-dSAFER</a></tt></b>, the directory 
+        If using <b><tt><a href="#Safer">-dSAFER</a></tt></b>, the directory
         containing the font file must be on one of the permitted paths.
 <tr valign="top">       <td><b><tt>/FileType</tt></b>
         <td>name
@@ -1219,8 +1219,8 @@ Note that the font file path uses Postscript syntax for strings.
 Due to that backslashes must be represented as a double backslash each.
 
 <p>
-Note that loading truetype fonts directly from 
-<b>><tt>/Resources/CIDFont</tt></b> is no longer supported. 
+Note that loading truetype fonts directly from
+<b>><tt>/Resources/CIDFont</tt></b> is no longer supported.
 There is no reliable way to generate a character ordering for truetype
 fonts. The 7.0x versions of Ghostscript supported this by assuming a Japanese
 character ordering. This is replaced in the 8.0x and later releases with the more
@@ -1229,12 +1229,12 @@ general <b><tt>cidfmap</tt></b> mechanism.
 <p>
 The PDF specification requires CID font files to be embedded,
 however some documents omit them. As a workaround
-the PDF interpreter applies an additional substitution method when 
+the PDF interpreter applies an additional substitution method when
 a requested CID font resource is not embedded and it is not available.
 It takes values of the keys <b><tt>Registry</tt></b> and <b><tt>Ordering</tt></b>
 from the <b><tt>CIDFontSystem</tt></b> dictionary,
 and concatenates them with a dash inserted.
-For example, if a PDF CID font resource specifies 
+For example, if a PDF CID font resource specifies
 <blockquote><b><tt>
 /CIDSystemInfo &lt;&lt; /Registry (Adobe) /Ordering (CNS1) /Supplement 1 &gt;&gt;
 </tt></b></blockquote>
@@ -1246,17 +1246,17 @@ Add a proper record to <b><tt>lib/cidfmap</tt></b> to provide it.
 
 <p>
 Please note that when a PDF font resource specifies
-<blockquote><b><tt> 
+<blockquote><b><tt>
 /Registry (Adobe) /Ordering (Identity)
 </tt></b></blockquote>
 there is no way to determine the language properly.
-If the CID font file is not embedded, the <b><tt>Adobe-Identity</tt></b> 
+If the CID font file is not embedded, the <b><tt>Adobe-Identity</tt></b>
 record depends on the document and a correct record isn't possible when
 a document refers to multiple Far East languages.
 In the latter case add individual records for specific CID font names used in the document.
 
 <p>
-Consequently, if you want to handle any PDF document with 
+Consequently, if you want to handle any PDF document with
 non-embedded CID fonts (which isn't a correct PDF),
 you need to create a suitable <b><tt>lib/cidfmap</tt></b> by hand,
 possibly a specific one for each document.
@@ -1836,11 +1836,11 @@ expands <b><tt>@</tt></b><em>filename</em> arguments.
 <dd>These are not really switches: they tell Ghostscript to read from
 standard input, which is coming from a file or a pipe,
 with or without buffering.
-On some systems, Ghostscript may read the input one character at a time, 
-which is useful for programs such as ghostview that generate input for 
-Ghostscript dynamically and watch for some response, but can slow processing. 
-If performance is significantly slower than with a named file, 
-try '<tt>-_</tt>' which always reads the input in blocks. 
+On some systems, Ghostscript may read the input one character at a time,
+which is useful for programs such as ghostview that generate input for
+Ghostscript dynamically and watch for some response, but can slow processing.
+If performance is significantly slower than with a named file,
+try '<tt>-_</tt>' which always reads the input in blocks.
 However, '<tt>-</tt>' is equivalent on most systems.
 </dl>
 
@@ -2071,7 +2071,7 @@ For more information see the description of the user parameter
 
 <dl>
 <dt><b><tt>-dUseCIEColor</tt></b>
-<dd>Set UseCIEColor in the page device dictionary, remapping device-dependent 
+<dd>Set UseCIEColor in the page device dictionary, remapping device-dependent
 color values through a CIE color space. This can can improve conversion
 of CMYK documents to RGB.
 </dl>
@@ -2259,11 +2259,11 @@ of using the normal intelligent substitution algorithm.  Also, in this
 case, the font returned by <b><tt>findfont</tt></b> is the actual font
 named <em>fontname</em>, not a copy of the font with its
 <b><tt>FontName</tt></b> changed to the requested one.
-THIS OPTION SHOULD NOT BE USED WITH HIGH LEVEL DEVICES, such as 
-<b><tt>pdfwrite</tt></b>, because it prevents such devices from 
+THIS OPTION SHOULD NOT BE USED WITH HIGH LEVEL DEVICES, such as
+<b><tt>pdfwrite</tt></b>, because it prevents such devices from
 providing the original font names in the output document. The
 font specified (<em>fontname</em>) will be embedded instead,
-limiting all future users of the document to the same approximate 
+limiting all future users of the document to the same approximate
 rendering.
 </dl>
 
@@ -2277,7 +2277,7 @@ The value is platform dependent. It must end with a directory separator.
 Adobe specifies <b><tt>GenericResourceDir</tt></b> to be an absolute path
 to a single resource directory. Ghostscript instead maintains
 multiple resource directories and uses an extended method for finding
-resources, which is explained in  
+resources, which is explained in
 <a href="PS_resources">"Finding PostScript Level 2 resources"</a>.
 <p>
 Due to the extended search method, Ghostscript uses <b><tt>GenericResourceDir</tt></b>
@@ -2351,7 +2351,7 @@ currently necessary when redirecting device output to standard output.
 
 <dl>
 <dt><b><tt>-sstdout=</tt></b><em>filename</em>
-<dd>Redirect PostScript <b><tt>%stdout</tt></b> to a file or 
+<dd>Redirect PostScript <b><tt>%stdout</tt></b> to a file or
 <b><tt>stderr</tt></b>, to avoid it being mixed with device stdout.
 To redirect stdout to stderr use <b><tt>-sstdout=%stderr</tt></b>.
 To cancel redirection of stdout use <b><tt>-sstdout=%stdout</tt></b>
@@ -2393,19 +2393,19 @@ device, as described above.
 
 <dl>
 <dt><b><tt>-dEPSCrop</tt></b>
-<dd>Crop an EPS file to the bounding box.  
+<dd>Crop an EPS file to the bounding box.
 This is useful when converting an EPS file to a bitmap.
 </dl>
 
 <dl>
 <dt><b><tt>-dEPSFitPage</tt></b>
-<dd>Resize an EPS file to fit the page.  
+<dd>Resize an EPS file to fit the page.
 This is useful for enlarging an EPS file to fit the paper size when printing.
 </dl>
 
 <dl>
 <dt><b><tt>-dNOEPS</tt></b>
-<dd>Prevent special processing of EPS files.  
+<dd>Prevent special processing of EPS files.
 This is useful when EPS files have incorrect Document
 Structuring Convention comments.
 </dl>
@@ -2422,14 +2422,14 @@ for <a href="Language.htm#bindnow"><tt>.bindnow</tt></a> for more information
 on using this feature.
 </dl>
 
-<dl> 
-<dt><b><tt>-dDOPDFMARKS</tt></b> 
-<dd>Causes <b><tt>pdfmark</tt></b> to be called for bookmarks, 
-annotations, links and cropbox when processing PDF files. 
-Normally, <b><tt>pdfmark</tt></b> is only called for these types 
-for PostScript files or when the output device requests it 
-(e.g. pdfwrite device). 
-</dl> 
+<dl>
+<dt><b><tt>-dDOPDFMARKS</tt></b>
+<dd>Causes <b><tt>pdfmark</tt></b> to be called for bookmarks,
+annotations, links and cropbox when processing PDF files.
+Normally, <b><tt>pdfmark</tt></b> is only called for these types
+for PostScript files or when the output device requests it
+(e.g. pdfwrite device).
+</dl>
 
 <dl>
 <dt><b><tt>-dJOBSERVER</tt></b>
@@ -2563,7 +2563,7 @@ dramatically improve performance on files that have a lot of bitmap images.
 If you are using Chinese, Japanese, or other fonts with very large character
 sets, adding the following sequence of switches before the first file name
 may dramatically improve performance at the cost of an additional 2-3 Mb of
-memory: <b><tt>-c&nbsp;3000000&nbsp;setvmthreshold&nbsp;-f</tt></b>. This 
+memory: <b><tt>-c&nbsp;3000000&nbsp;setvmthreshold&nbsp;-f</tt></b>. This
 can also be useful in processing large documents when using a high-level
 output device (like pdfwrite) that maintains significant internal state.
 In fact, the <a href="Language.htm#.setpdfwrite"><tt>.setpdfwrite</tt></a>
@@ -2629,7 +2629,7 @@ The information here describing is probably interesting only to developers.
 There are several debugging switches that are detected by the interpreter.
 These switches are available whether or not Ghostscript was built with the
 DEBUG macro defined to the compiler (refer to <a href="Make.htm#Debugging">
-building a debugging configuration</a>). 
+building a debugging configuration</a>).
 
 <p>Previous to 8.10, there was a single DEBUG flag, enabled with <b><tt>-dDEBUG
 </tt></b> on the command line. Now there are several debugging flags to allow
@@ -2642,7 +2642,7 @@ needed to investigate particular areas. For backward compatibilty, the
   <tr><td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<td>&nbsp;
   <tr><td><b><tt>-dCCFONTDEBUG</tt></b><td><td>Compiled Fonts
   <tr><td><b><tt>-dCFFDEBUG</tt></b><td><td>CFF Fonts
-  <tr><td><b><tt>-dCMAPDEBUG</tt></b><td><td>CMAP 
+  <tr><td><b><tt>-dCMAPDEBUG</tt></b><td><td>CMAP
   <tr><td><b><tt>-dDOCIEDEBUG</tt></b><td><td>CIE color
   <tr><td><b><tt>-dEPSDEBUG</tt></b><td><td>EPS handling
   <tr><td><b><tt>-dFAPIDEBUG</tt></b><td><td>Font API
@@ -2849,14 +2849,14 @@ storage with a marker (a1, c1, and f1 respectively)
 <dt><b><tt>S</tt></b><dd>the stroking algorithm
 </dl>
 </table>
-  
+
 <h4><a name="Visual_trace"></a>Visual Trace</h4>
 
 <p>
 Visual Trace allows to view internal Ghostscript data in a graphical form
 while execution of C code.  Special
 <a href="Lib.htm#Visual_trace">instructions</a> to be inserted into
-C code for generating the output. Client application 
+C code for generating the output. Client application
 rasterizes it into a window.
 
 <p>

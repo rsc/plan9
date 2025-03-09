@@ -42,7 +42,7 @@ enum{
 
 	OpDiv5ClkEnab = 0x8b,
 	OpDiv5ClkDisab = 0x8a,
-	
+
 
 	/* MCU host emulation */
 	OpModLong = 0x01,			/* addrH addrL */
@@ -128,7 +128,7 @@ static char *inst[] = {
 	[Loop]			"Loop",
 	[BreakLoop]		"BreakLoop",
 	[ILast]			nil,
-	
+
 };
 
 
@@ -159,7 +159,7 @@ dataopcode(Inst *inst, int instid, int issh, int islsb)
 			opcode |= OpModInFalling;
 		break;
 	}
-	
+
 	opcode |= inst->hasresp? OpModIn : 0;
 	opcode |= issh? OpModShort : 0;
 	opcode |= islsb? OpModLSB : 0;
@@ -183,7 +183,7 @@ opcode(Inst *inst, int instid)
 			werrstr("should not have edge");
 			return OpBad;
 		}
-	
+
 	switch(instid){
 	case DataOutIn:
 	case DataOut:
@@ -392,7 +392,7 @@ setdata(Inst *inst, char *nm, char *p, char *te, int bdlen)
 		inst->datasz = bdlen;
 		return 0;
 	}
-	
+
 	if(te != p)
 		p[strlen(p)] = ' '; /* untokenize */
 
@@ -447,7 +447,7 @@ enum{
 
 static int
 setimm(Inst *inst, int imm, int kindsz)
-{	
+{
 	int isl, immh, imml;
 
 	isl = imm&~0xff;
@@ -472,7 +472,7 @@ parseinst(int instid, char *pars, char *idname)
 	char tf;
 	int i, ntok, tnf, dlen, bdlen, imm, ndata;
 	Inst *inst;
-	
+
 	tf = '\0';
 	dlen = bdlen = 0;
 	err = "";
@@ -486,10 +486,10 @@ parseinst(int instid, char *pars, char *idname)
 		werrstr("%s: bad nr param %d!=%d", idname, tnf, ntok);
 		return nil;
 	}
-	
+
 	for(i = 0; i < tnf; i++){
 		tf = idesc[instid].desc[i];
-		switch(tf){	
+		switch(tf){
 		case ParLen:
 			dlen = datalen(inst, tok[i]);
 			if(dlen < 0){
@@ -586,13 +586,13 @@ parseinst(int instid, char *pars, char *idname)
 			err = "bad param";
 			goto Err;
 		}
-		
+
 		if(bdlen > MaxDataSz || (inst->isshort && dlen > 8)){
 			err = "len too big";
 			goto Err;
 		}
 	}
-	
+
 	setlen(inst, dlen);
 	inst->hasresp = hasresp(instid);
 	inst->opcode = opcode(inst, instid);
@@ -604,7 +604,7 @@ parseinst(int instid, char *pars, char *idname)
 Err:
 	werrstr("inst:%s, nf:%d, ftype:%c, fval:%s:%s\n", idname, i, tf, tok[i], err);
 	free(inst);
-	return nil;	
+	return nil;
 }
 
 static Inst *
@@ -688,7 +688,7 @@ sdumpinst(char *s, int ssz, Inst *inst)
 			return;
 	}
 
-	if(inst->lensz != 0){	
+	if(inst->lensz != 0){
 		e = seprint(e, te, "lensz: %d\n", inst->lensz);
 		if(e >= te)
 			return;
@@ -817,4 +817,3 @@ pushcmdwdata(Mpsse *mpsse, char *ln, uchar *buf, int buflen)
 	free(inst);
 	return res;
 }
-

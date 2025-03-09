@@ -8,7 +8,7 @@ Mon Feb 12 13:06:35: cpu0: 267MHz GenuineIntel PentiumII (cpuid: AX 0x0634 DX 0x
 Mon Feb 12 13:06:36: ether0: i82557: 100Mbps port 0xec00 irq 10: 00a0c90ac853
 Mon Feb 12 13:06:37: scsi#0: buslogic: port 0x334 irq 11
 Mon Feb 12 13:06:37: scsi#1: buslogic: port 0x330 irq 15
-Mon Feb 12 13:06:39: 
+Mon Feb 12 13:06:39:
 Mon Feb 12 13:06:39: iobufinit
 Mon Feb 12 13:06:39: bank[0]: base 0x0009fc00, limit 0x0009fc00
 Mon Feb 12 13:06:39: bank[1]: base 0x01298130, limit 0x10000000
@@ -90,7 +90,7 @@ Mon Feb 12 13:07:02: data transfer 2 #08 0.0
 Mon Feb 12 13:07:02: data transfer 3 #08 0.0
 Mon Feb 12 13:07:02: 	shelves r0-r237
 Mon Feb 12 13:07:02: 	load   r0 drive w2
-Mon Feb 12 13:07:10: scsi#0.2: HP      C1113F          1.129807307965    8XMO  
+Mon Feb 12 13:07:10: scsi#0.2: HP      C1113F          1.129807307965    8XMO
 Mon Feb 12 13:07:10: 	worm l0: drive w2
 Mon Feb 12 13:07:10: 		1263471 blocks at 2048 bytes each
 Mon Feb 12 13:07:10: 		157934 logical blocks at 16384 bytes each
@@ -151,7 +151,7 @@ Mon Feb 12 13:07:25: 582 uids read, 189 groups used
 Mon Feb 12 13:07:25: emelie as of Wed May  3 12:58:03 2006
 Mon Feb 12 13:07:25: 	last boot Mon Feb 12 13:06:03 2007
 Mon Feb 12 13:07:25: 	load   r226 drive w3
-Mon Feb 12 13:07:33: scsi#0.3: HP      C1113J          1.129809312612    8XMO  
+Mon Feb 12 13:07:33: scsi#0.3: HP      C1113J          1.129809312612    8XMO
 Mon Feb 12 13:07:33: 	worm l226: drive w3
 Mon Feb 12 13:07:33: 		1263471 blocks at 2048 bytes each
 Mon Feb 12 13:07:33: 		157934 logical blocks at 16384 bytes each

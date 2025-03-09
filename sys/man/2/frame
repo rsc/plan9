@@ -152,7 +152,7 @@ at the end of the
 .B Frame
 after calling
 .I frdelete
-(q.v.). 
+(q.v.).
 .PP
 There are no routines in the library to allocate
 .BR Frames ;

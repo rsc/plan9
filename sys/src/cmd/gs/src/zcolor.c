@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -63,7 +63,7 @@ pattern_instance_uses_base_space(const gs_pattern_instance_t * pinst)
  * other parameters will be numeric.
  *
  * Note that the results of this operator differ slightly from those of
- * most currentcolor implementations. If a color component value is 
+ * most currentcolor implementations. If a color component value is
  * integral (e.g.: 0, 1), it will be pushed on the stack as an integer.
  * Most currentcolor implementations, including the earlier
  * implementation in Ghostscript, would push real objects for all
@@ -130,13 +130,13 @@ zcurrentcolorspace(i_ctx_t * i_ctx_p)
     push(1);
     if ( gs_color_space_get_index(igs->color_space) == gs_color_space_index_DeviceGray ) {
         ref gray, graystr;
-        ref csa = istate->colorspace.array; 
-        if (array_get(imemory, &csa, 0, &gray) >= 0 && 
-            r_has_type(&gray, t_name) && 
+        ref csa = istate->colorspace.array;
+        if (array_get(imemory, &csa, 0, &gray) >= 0 &&
+            r_has_type(&gray, t_name) &&
 	    (name_string_ref(imemory, &gray, &graystr),
 	    r_size(&graystr) == 10 &&
 	    !memcmp(graystr.value.bytes, "DeviceGray", 10))) {
-            
+
             *op = istate->colorspace.array;
         } else {
 	    int code = ialloc_ref_array(op, a_all, 1, "currentcolorspace");
@@ -224,7 +224,7 @@ zsetcolor(i_ctx_t * i_ctx_p)
 
     /* gather the numeric operands */
     float_params(op - num_offset, n_numeric_comps, cc.paint.values);
- 
+
     /* pass the color to the graphic library */
     if ((code = gs_setcolor(igs, &cc)) >= 0) {
 
@@ -290,7 +290,7 @@ zincludecolorspace(i_ctx_t * i_ctx_p)
  * color space substitution will have been accomplished before this
  * operator is called.
  *
- * The use of an integer to indicate the specific color space is 
+ * The use of an integer to indicate the specific color space is
  * historical and on the whole not particularly desirable, as it ties
  * the PostScript code to a specific enumeration. This may be modified
  * in the future.
@@ -475,7 +475,7 @@ zcolor_remap_color(i_ctx_t *i_ctx_p)
     return 0;
 }
 
-/* 
+/*
  * <param1> ... <paramN> .color_test <param1> ... <paramN>
  *
  * encode and decode color to allow mapping to be tested.
@@ -508,7 +508,7 @@ zcolor_test(i_ctx_t *i_ctx_p)
     return 0;
 }
 
-/* 
+/*
  * <levels> .color_test_all <value0> ... <valueN>
  *
  * Test encode/decode color procedures for a range of values.
@@ -535,7 +535,7 @@ zcolor_test_all(i_ctx_t *i_ctx_p)
     int i, j, k;
     int finished = 0;
 
-    if (ncomp == 1) 
+    if (ncomp == 1)
 	acceptable_error = gx_max_color_value / dev->color_info.max_gray + 1;
     else
 	acceptable_error = gx_max_color_value / dev->color_info.max_color + 1;
@@ -546,17 +546,17 @@ zcolor_test_all(i_ctx_t *i_ctx_p)
         return_error(e_typecheck);
     steps = osp[0].value.intval;
     for (i = 0; i < ncomp; i++) {
-        counter[i] = 0; 
+        counter[i] = 0;
 	cvbad[i] = 0;
     }
 
     dprintf1("Number of components = %d\n", ncomp);
     dprintf1("Depth = %d\n", dev->color_info.depth);
-    dprintf2("max_gray = %d   dither_grays = %d\n", 
+    dprintf2("max_gray = %d   dither_grays = %d\n",
 	dev->color_info.max_gray, dev->color_info.dither_grays);
-    dprintf2("max_color = %d   dither_colors = %d\n", 
+    dprintf2("max_color = %d   dither_colors = %d\n",
  	dev->color_info.max_color, dev->color_info.dither_colors);
-    dprintf1("polarity = %s\n", 
+    dprintf1("polarity = %s\n",
       dev->color_info.polarity == GX_CINFO_POLARITY_ADDITIVE ? "Additive" :
       dev->color_info.polarity == GX_CINFO_POLARITY_SUBTRACTIVE ?"Subtractive":
       "Unknown");
@@ -566,7 +566,7 @@ zcolor_test_all(i_ctx_t *i_ctx_p)
     color = (*dev_proc(dev, encode_color)) (dev, cv);
     dprintf1("Zero color index:  %8x\n", color);
 
-    dprintf1("separable_and_linear = %s\n", 
+    dprintf1("separable_and_linear = %s\n",
       linsep == GX_CINFO_SEP_LIN_NONE ? "No" :
       linsep == GX_CINFO_SEP_LIN ? "Yes" :
       "Unknown");
@@ -641,13 +641,13 @@ zcolor_test_all(i_ctx_t *i_ctx_p)
 	    finished = 1;
     }
 
-    dprintf2("Maximum error %g %s\n", 
+    dprintf2("Maximum error %g %s\n",
 	(float)maxerror / (float)gx_max_color_value,
 	maxerror <= acceptable_error ? "is Ok" :
 	maxerror <= 3*acceptable_error/2 ? "is POOR" : "FAILED");
 
     if (linsep)
-      dprintf2("Maximum linear_and_separable error %g %s\n", 
+      dprintf2("Maximum linear_and_separable error %g %s\n",
 	(float)lsmaxerror / (float)gx_max_color_value,
 	lsmaxerror <= acceptable_error ? "is Ok" :
 	lsmaxerror <= 3*acceptable_error/2 ? "is POOR" : "FAILED");
@@ -664,7 +664,7 @@ zcolor_test_all(i_ctx_t *i_ctx_p)
 
 /* ------ Initialization procedure ------ */
 
-const op_def    zcolor_op_defs[] = 
+const op_def    zcolor_op_defs[] =
 {
     { "0currentcolor", zcurrentcolor },
     { "0currentcolorspace", zcurrentcolorspace },

@@ -158,7 +158,7 @@ initstk(int argc, char *argv[])
 	putmem_w(tos + 4*4 + 2*sizeof(ulong) + 3*sizeof(uvlong), getpid());
 
 	/* Build exec stack */
-	size = strlen(file)+1+BY2WD+BY2WD+BY2WD;	
+	size = strlen(file)+1+BY2WD+BY2WD+BY2WD;
 	for(i = 0; i < argc; i++)
 		size += strlen(argv[i])+BY2WD+1;
 
@@ -176,7 +176,7 @@ initstk(int argc, char *argv[])
 	ap = sp+((argc+1)*BY2WD)+BY2WD;
 	putmem_w(sp, ap);
 	sp += BY2WD;
-	
+
 	/* Build argv[0] string into stack */
 	for(p = file; *p; p++)
 		putmem_b(ap++, *p);
@@ -221,7 +221,7 @@ itrace(char *fmt, ...)
 	va_start(arg, fmt);
 	vseprint(buf, buf+sizeof(buf), fmt, arg);
 	va_end(arg);
-	Bprint(bioout, "%8lux %.8lux %2d %s\n", reg.ar, reg.ir, reg.class, buf);	
+	Bprint(bioout, "%8lux %.8lux %2d %s\n", reg.ar, reg.ir, reg.class, buf);
 }
 
 void

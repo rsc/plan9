@@ -34,9 +34,9 @@ mkfiles need only
 list the components
 and include the appropriate
 generic
-mkfile 
+mkfile
 to do the work.
-More complex 
+More complex
 mkfiles
 may supply additional rules
 to augment, modify, or override the generic rules.
@@ -303,7 +303,7 @@ executable using the normal set of rules is
 trivial: a list of some files followed by the
 inclusion of
 .I mkone.
-For example, 
+For example,
 .CW /sys/src/cmd/diff/mkfile
 contains:
 .P1
@@ -451,7 +451,7 @@ example the
 .CW all
 target produces executables
 .CW $O.alpha
-and 
+and
 .CW $O.beta .
 .LP
 The
@@ -462,7 +462,7 @@ executable:
 .TS
 lw(1i) lw(3.8i).
 \f(CW$O.progname\fP	T{
-Builds executable 
+Builds executable
 \f(CW$O.\fP\fIprogname\fP
 in the current directory.  When the target
 architecture is not the current architecture
@@ -492,7 +492,7 @@ The
 generic mkfile builds a local library.
 Since this form of mkfile constructs no
 executable, the
-.CW TARG 
+.CW TARG
 and
 .CW BIN
 variables are not needed.  Instead, the

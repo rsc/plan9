@@ -202,7 +202,7 @@ atomically decrements the
 .B Ref
 and returns zero if the resulting value is zero, non-zero otherwise.
 .SH EXAMPLE
-Implement a buffered single-element channel using 
+Implement a buffered single-element channel using
 .I rsleep
 and
 .IR rwakeup :
@@ -264,13 +264,13 @@ recv(Chan *c)
 }
 .EE
 .LP
-Note that the 
+Note that the
 .B QLock
 protecting the
 .B Chan
 is the same
 .B QLock
-used for the 
+used for the
 .BR Rendez ;
 this ensures that wakeups are not missed.
 .SH SOURCE

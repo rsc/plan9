@@ -1,12 +1,12 @@
 /* Copyright (C) 1989-2003 artofcode LLC. All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -179,7 +179,7 @@ typedef struct gs_memory_s gs_memory_t;
 #define dpf errprintf
 #define epf errprintf
 
-/* To allow stdout and stderr to be redirected, all stdout goes 
+/* To allow stdout and stderr to be redirected, all stdout goes
  * though outwrite and all stderr goes through errwrite.
  */
 int outwrite(const gs_memory_t *mem, const char *str, int len);

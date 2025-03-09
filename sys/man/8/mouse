@@ -22,7 +22,7 @@ its type and then configures the port and the
 mouse to be used to control the cursor.
 .PP
 .I Port
-can be either a port number (e.g. 
+can be either a port number (e.g.
 .B 0
 or
 .BR 1 )
@@ -116,5 +116,3 @@ when running
 it is difficult restart
 .IR rio (1)
 if it has exited.
-
-

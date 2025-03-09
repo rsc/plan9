@@ -71,7 +71,7 @@ checkhash(int fd, vlong sz, Hash *hcomp)
 	char buf[Pktmax];
 	vlong n, r;
 	int nr;
-	
+
 	if(sz < 28){
 		werrstr("undersize packfile");
 		return -1;
@@ -114,7 +114,7 @@ mkoutpath(char *path)
 			if(fd == -1)
 				return -1;
 			close(fd);
-		}		
+		}
 		*p = '/';
 	}
 	return 0;
@@ -254,7 +254,7 @@ fetchpack(Conn *c)
 		if((o = readobject(have[i])) == nil)
 			sysfatal("missing object we should have: %H", have[i]);
 		osadd(&hadobj, o);
-		unref(o);	
+		unref(o);
 		n = snprint(buf, sizeof(buf), "have %H\n", have[i]);
 		if(writepkt(c, buf, n + 1) == -1)
 			sysfatal("could not send have for %H", have[i]);

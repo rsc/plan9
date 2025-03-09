@@ -7,7 +7,7 @@ rdbfs \- remote kernel debugging file system
 .B -d
 ]
 [
-.B -p 
+.B -p
 .I pid
 ]
 [
@@ -23,14 +23,14 @@ rdbfs \- remote kernel debugging file system
 ]
 .SH DESCRIPTION
 .I Rdbfs
-presents in 
+presents in
 .BI /proc/ pid
 (default
 .BR /proc/1 )
 a set of process files for debugging
-a kernel over the serial line 
+a kernel over the serial line
 .I device
-(default 
+(default
 .BR /dev/eia0 ).
 If the
 .B -s
@@ -42,7 +42,7 @@ will post its channel in
 .IR srv (3)),
 allowing the session to be shared or reattached later.
 .PP
-The 
+The
 .B text
 file presented is just a copy of
 .I text
@@ -57,13 +57,13 @@ using
 Kernels can be remotely debugged  only when they are
 suspended and serving
 a textual debugging protocol over their serial lines.
-Typing 
+Typing
 .RB `` ^t^td ''
 .RB (control- t ", control-" t ", d)"
 at the console will cause the kernel to enter
 this mode when it `panics'.
-Typing 
-.RB `` ^t^tD '' 
+Typing
+.RB `` ^t^tD ''
 causes the kernel to enter this mode immediately.
 .PP
 Because the debugging protocol is textual, a console

@@ -1,4 +1,4 @@
-/* Philippe Anel <philippe.anel@noos.fr> 
+/* Philippe Anel <philippe.anel@noos.fr>
 	- 2001-08-12 : First release.
 	- 2001-08-15 : Added G450, with source code "adapted from" from Xfree86 4.1.0
 	- 2001-08-23 : Added 'palettedepth 8' and a few 'ultradebug' ...
@@ -19,7 +19,7 @@
 	- Jean Mehat (the man who introduced me into the world of plan9).
 	- Nicolas Stojanovic.
 		... and for those who wrote plan9 of course ... :)
-*/	
+*/
 
 #include <u.h>
 #include <libc.h>
@@ -36,7 +36,7 @@ static int	 ultradebug = 0;
 enum {
 	Kilo			= 1024,
 	Meg			= 1024*1024,
-	
+
 	MATROX			= 0x102B,	/* pci chip manufacturer */
 	MGA550			= 0x2527, /* pci chip device ids */
 	MGA4XX			= 0x0525,
@@ -56,7 +56,7 @@ enum {
 
 	STATUS0			= 0x1FC2,	/* Input Status 0 */
 	STATUS1			= 0x1FDA,	/* Input Status 1 */
-	
+
 	SEQIDX			= 0x1FC4,	/* Sequencer Index */
 	SEQDATA			= 0x1FC5,	/* Sequencer Data */
 
@@ -71,7 +71,7 @@ enum {
 
 	CRTCEXTIDX		= 0x1FDE,	/* CRTC Extension Index */
 	CRTCEXTDATA		= 0x1FDF,	/* CRTC Extension Data */
-	
+
 	RAMDACIDX		= 0x3C00,	/* RAMDAC registers Index */
 	RAMDACDATA		= 0x3C0A,	/* RAMDAC Indexed Data */
 	RAMDACPALDATA		= 0x3C01,
@@ -84,7 +84,7 @@ enum {
 	C2_CTL			= 0X3C10,
 	MGA_STATUS		= 0X1E14,
 	Z_DEPTH_ORG		= 0X1C0C,
-	
+
  	/* ... */
 	Seq_ClockingMode =	0x01,
 		Dotmode =		(1<<0),
@@ -113,12 +113,12 @@ enum {
 
 	Dac_Xpixpllstat =	0x4f,
 		Pixlock = 		(1<<6),
-	
+
 	Dac_Xpixpllan =		0x45,
 	Dac_Xpixpllbn =		0x49,
 	Dac_Xpixpllcn  =	0x4d,
 
-	Dac_Xpixpllam =		0x44, 
+	Dac_Xpixpllam =		0x44,
 	Dac_Xpixpllbm =		0x48,
 	Dac_Xpixpllcm =		0x4c,
 
@@ -171,7 +171,7 @@ typedef struct {
 	Pcidev*	pci;
 	int	devid;
 	int	revid;
-	
+
 	uchar*	mmio;
 	uchar*	mmfb;
 	int	fbsize;
@@ -199,8 +199,8 @@ typedef struct {
 	uchar	maskkey;
 	ulong	maxpclk;
 
-	uchar	graphics[9];	
-	uchar	attribute[0x14];	
+	uchar	graphics[9];
+	uchar	attribute[0x14];
 	uchar	sequencer[5];
 	uchar	crtc[0x19];
 	uchar	crtcext[9];
@@ -258,7 +258,7 @@ typedef struct {
 	ulong	crtcprotect;
 	ulong	winsize;
 	ulong	winfreq;
-	
+
 	ulong	mgaapsize;
 } Mga;
 
@@ -482,7 +482,7 @@ mapmga4xx(Vga* vga, Ctlr* ctlr)
 
 	if(write(f, "type mga4xx", 11) != 11)
 		error("%s: can't set mga type\n", ctlr->name);
-	
+
 	m = segattach(0, "mga4xxmmio", 0, 16*Kilo);
 	if(m == (void*)-1)
 		error("%s: can't attach mga4xxmmio segment\n", ctlr->name);
@@ -527,7 +527,7 @@ snarf(Vga* vga, Ctlr* ctlr)
 
 		rid = pcicfgr8(pci, PciRID); // PciRID = 0x08
 
-		trace("%s: G%d%d0 rev %d\n", ctlr->name, 
+		trace("%s: G%d%d0 rev %d\n", ctlr->name,
 			2*(pci->did==MGA200)
 			+4*(pci->did==MGA4XX)
 			+5*(pci->did==MGA550),
@@ -535,12 +535,12 @@ snarf(Vga* vga, Ctlr* ctlr)
 			rid&~0x80);
 		i = pcicfgr32(pci, PCfgMgaDevCtrl);
 		if ((i & 2) != 2)
-			error("%s: Memory Space not enabled ... Aborting ...\n", ctlr->name);	
+			error("%s: Memory Space not enabled ... Aborting ...\n", ctlr->name);
 
 		vga->private = alloc(sizeof(Mga));
 		mga = (Mga*)vga->private;
 		mga->devid = 	pci->did;
-		mga->revid =	rid;	
+		mga->revid =	rid;
 		mga->pci = 	pci;
 
 		mapmga4xx(vga, ctlr);
@@ -585,7 +585,7 @@ options(Vga* vga, Ctlr* ctlr)
 
 /* ************************************************************ */
 
-static void 
+static void
 G450ApplyPFactor(Mga*, uchar ucP, ulong *pulFIn)
 {
 	if(!(ucP & 0x40))
@@ -595,7 +595,7 @@ G450ApplyPFactor(Mga*, uchar ucP, ulong *pulFIn)
 }
 
 
-static void 
+static void
 G450RemovePFactor(Mga*, uchar ucP, ulong *pulFIn)
 {
 	if(!(ucP & 0x40))
@@ -604,7 +604,7 @@ G450RemovePFactor(Mga*, uchar ucP, ulong *pulFIn)
 	}
 }
 
-static void 
+static void
 G450CalculVCO(Mga*, ulong ulMNP, ulong *pulF)
 {
 	uchar ucM, ucN;
@@ -617,7 +617,7 @@ G450CalculVCO(Mga*, ulong ulMNP, ulong *pulF)
 }
 
 
-static void 
+static void
 G450CalculDeltaFreq(Mga*, ulong ulF1, ulong ulF2, ulong *pulDelta)
 {
 	if(ulF2 < ulF1)
@@ -631,7 +631,7 @@ G450CalculDeltaFreq(Mga*, ulong ulF1, ulong ulF2, ulong *pulDelta)
 	trace("G450CalculDeltaFreq: ulF1 %ld, ulF2 %ld, pulDelta %ld\n", ulF1, ulF2, *pulDelta);
 }
 
-static void 
+static void
 G450FindNextPLLParam(Mga* mga, ulong ulFout, ulong *pulPLLMNP)
 {
 	uchar ucM, ucN, ucP, ucS;
@@ -697,7 +697,7 @@ G450FindNextPLLParam(Mga* mga, ulong ulFout, ulong *pulPLLMNP)
 	}
 }
 
-static void 
+static void
 G450FindFirstPLLParam(Mga* mga, ulong ulFout, ulong *pulPLLMNP)
 {
 	uchar ucP;
@@ -738,17 +738,17 @@ G450FindFirstPLLParam(Mga* mga, ulong ulFout, ulong *pulPLLMNP)
 }
 
 
-static void 
+static void
 G450WriteMNP(Mga* mga, ulong ulMNP)
 {
 	if (0) trace("G450WriteMNP : 0x%lx\n", ulMNP);
 	dacset(mga, Dac_Xpixpllcm, (uchar)(ulMNP >> 16), 0xff);
-	dacset(mga, Dac_Xpixpllcn, (uchar)(ulMNP >>  8), 0xff);   
-	dacset(mga, Dac_Xpixpllcp, (uchar)ulMNP, 0xff);   
+	dacset(mga, Dac_Xpixpllcn, (uchar)(ulMNP >>  8), 0xff);
+	dacset(mga, Dac_Xpixpllcp, (uchar)ulMNP, 0xff);
 }
 
 
-static void 
+static void
 G450CompareMNP(Mga* mga, ulong ulFout, ulong ulMNP1,
 			    ulong ulMNP2, long *pulResult)
 {
@@ -789,17 +789,17 @@ G450CompareMNP(Mga* mga, ulong ulFout, ulong ulMNP1,
 }
 
 
-static void 
+static void
 G450IsPllLocked(Mga* mga, int *lpbLocked)
 {
 	ulong ulFallBackCounter, ulLockCount, ulCount;
 	uchar  ucPLLStatus;
 
 	/* Pixel PLL */
-	mgawrite8(mga, 0x3c00, 0x4f);    
+	mgawrite8(mga, 0x3c00, 0x4f);
 	ulFallBackCounter = 0;
 
-	do 
+	do
 	{
 		ucPLLStatus = mgaread8(mga, 0x3c0a);
 		if (0) trace("ucPLLStatus[1] : 0x%x\n", ucPLLStatus);
@@ -823,8 +823,8 @@ G450IsPllLocked(Mga* mga, int *lpbLocked)
 	*lpbLocked = ulLockCount >= 90;
 }
 
-static void 
-G450SetPLLFreq(Mga* mga, long f_out) 
+static void
+G450SetPLLFreq(Mga* mga, long f_out)
 {
 	int bFoundValidPLL;
 	int bLocked;
@@ -904,50 +904,50 @@ G450SetPLLFreq(Mga* mga, long f_out)
 			{
 				G450WriteMNP(mga, ulTryMNP - 0x300);
 				G450IsPllLocked(mga, &bLocked);
-			}     
+			}
 
 			if(bLocked)
 			{
 				G450WriteMNP(mga, ulTryMNP + 0x300);
 				G450IsPllLocked(mga, &bLocked);
-			}     
+			}
 
 			if(bLocked)
 			{
 				G450WriteMNP(mga, ulTryMNP - 0x200);
 				G450IsPllLocked(mga, &bLocked);
-			}     
+			}
 
 			if(bLocked)
 			{
 				G450WriteMNP(mga, ulTryMNP + 0x200);
 				G450IsPllLocked(mga, &bLocked);
-			}     
+			}
 
 			if(bLocked)
 			{
 				G450WriteMNP(mga, ulTryMNP - 0x100);
 				G450IsPllLocked(mga, &bLocked);
-			}     
+			}
 
 			if(bLocked)
 			{
 				G450WriteMNP(mga, ulTryMNP + 0x100);
 				G450IsPllLocked(mga, &bLocked);
-			}     
+			}
 
 			if(bLocked)
 			{
 				G450WriteMNP(mga, ulTryMNP);
 				G450IsPllLocked(mga, &bLocked);
-			}     
+			}
 			else if(!ulMNP)
 			{
 				G450WriteMNP(mga, ulTryMNP);
 				G450IsPllLocked(mga, &bLocked);
 				if(bLocked)
 				{
-					ulMNP = ulMNPTable[ulIndex]; 
+					ulMNP = ulMNPTable[ulIndex];
 				}
 				bLocked = FALSE;
 			}
@@ -991,7 +991,7 @@ g400_calcclock(Mga* mga, long Fneeded)
 	int		pixpll_p_max;
 	double 	Ferr, Fcalc;
 	int		m, n, p;
-	
+
 	if (mga->devid == MGA4XX || mga->devid == MGA550) {
 		/* These values are taken from Matrox G400 Specification - p 4-91 */
 		Fref     		= 27000000.0;
@@ -1019,7 +1019,7 @@ g400_calcclock(Mga* mga, long Fneeded)
 	Ferr = Fneeded;
 	for ( m = pixpll_m_min ; m <= pixpll_m_max ; m++ )
 		for ( n = pixpll_n_min; n <= pixpll_n_max; n++ )
-		{ 
+		{
 			Fcalc = Fref * (n + 1) / (m + 1) ;
 
 			/*
@@ -1031,29 +1031,29 @@ g400_calcclock(Mga* mga, long Fneeded)
 				mga->pixpll_n = n;
 			}
 		}
-	
+
 	Fvco = Fref * (mga->pixpll_n + 1) / (mga->pixpll_m + 1);
 
 	if (mga->devid == MGA4XX || mga->devid == MGA550) {
 		if ( (50000000.0 <= Fvco) && (Fvco < 110000000.0) )
-			mga->pixpll_p |= 0;	
+			mga->pixpll_p |= 0;
 		if ( (110000000.0 <= Fvco) && (Fvco < 170000000.0) )
-			mga->pixpll_p |= (1<<3);	
+			mga->pixpll_p |= (1<<3);
 		if ( (170000000.0 <= Fvco) && (Fvco < 240000000.0) )
-			mga->pixpll_p |= (2<<3);	
+			mga->pixpll_p |= (2<<3);
 		if ( (300000000.0 <= Fvco) )
-			mga->pixpll_p |= (3<<3);	
+			mga->pixpll_p |= (3<<3);
 	} else {
 		if ( (50000000.0 <= Fvco) && (Fvco < 100000000.0) )
-			mga->pixpll_p |= 0;	
+			mga->pixpll_p |= 0;
 		if ( (100000000.0 <= Fvco) && (Fvco < 140000000.0) )
-			mga->pixpll_p |= (1<<3);	
+			mga->pixpll_p |= (1<<3);
 		if ( (140000000.0 <= Fvco) && (Fvco < 180000000.0) )
-			mga->pixpll_p |= (2<<3);	
+			mga->pixpll_p |= (2<<3);
 		if ( (250000000.0 <= Fvco) )
-			mga->pixpll_p |= (3<<3);	
+			mga->pixpll_p |= (3<<3);
 	}
-	
+
 	Fpll = Fvco / (p + 1);
 
 	return Fpll;
@@ -1084,7 +1084,7 @@ init(Vga* vga, Ctlr* ctlr)
 	 */
 
 	switch(mode->z) {
-	case 8: 
+	case 8:
 		bppShift = 0;
 		break;
 	case 16:
@@ -1125,13 +1125,13 @@ init(Vga* vga, Ctlr* ctlr)
 		mga->maxpclk	= 250000000;
 
 	if (mode->frequency < 50000)
-		error("mga: Too little Frequency %d : Minimum supported by PLL is %d\n", 
+		error("mga: Too little Frequency %d : Minimum supported by PLL is %d\n",
 			mode->frequency, 50000);
 
 	if (mode->frequency > mga->maxpclk)
 		error("mga: Too big Frequency %d : Maximum supported by PLL is %ld\n",
 			mode->frequency, mga->maxpclk);
-	
+
 	trace("mga: revision ID is %x\n", mga->revid);
 	if ((mga->devid == MGA200) || ((mga->devid == MGA4XX) && (mga->revid & 0x80) == 0x00)) {
 		/* Is it G200/G400 or G450 ? */
@@ -1200,7 +1200,7 @@ init(Vga* vga, Ctlr* ctlr)
 
 	mga->mgamode = 		1;
 	mga->scale   =		(mode->z == 24) ? ((1 << bppShift)*3)-1 : (1 << bppShift)-1;
-	
+
 	mga->crtcprotect =      1;
 	mga->winsize = 		0;
 	mga->winfreq = 		0;
@@ -1279,7 +1279,7 @@ init(Vga* vga, Ctlr* ctlr)
 		      mga->vsyncstr,
 		      mga->vsyncend,
 		      mga->linecomp
-		      );	
+		      );
 
 	mga->crtc[0x00] = 0xff & mga->htotal;
 
@@ -1287,15 +1287,15 @@ init(Vga* vga, Ctlr* ctlr)
 
 	mga->crtc[0x02] = 0xff & mga->hblkstr;
 
-	mga->crtc[0x03] = (0x1f & mga->hblkend) 
+	mga->crtc[0x03] = (0x1f & mga->hblkend)
 		| ((0x03 & mga->hdispskew) << 5)
 		| 0x80	/* cf 3-304 */
 		;
 
 	mga->crtc[0x04] = 0xff & mga->hsyncstr;
 
-	mga->crtc[0x05] = (0x1f & mga->hsyncend) 
-		| ((0x03 & mga->hsyncdel) << 5) 
+	mga->crtc[0x05] = (0x1f & mga->hsyncend)
+		| ((0x03 & mga->hsyncdel) << 5)
 		| ((0x01 & (mga->hblkend >> 5)) << 7)
 		;
 
@@ -1312,11 +1312,11 @@ init(Vga* vga, Ctlr* ctlr)
 	  ;
 	mga->crtc[0x07] = 0xff & t;
 
-	mga->crtc[0x08] = (0x1f & mga->prowscan) 
+	mga->crtc[0x08] = (0x1f & mga->prowscan)
 		| ((0x03 & mga->bytepan) << 5)
 		;
 
-	mga->crtc[0x09] = (0x1f & mga->maxscan) 
+	mga->crtc[0x09] = (0x1f & mga->maxscan)
 		| ((0x01 & (mga->vblkstr >> 9)) << 5)
 		| ((0x01 & (mga->linecomp >> 9)) << 6)
 		| ((0x01 & mga->conv2t4) << 7)
@@ -1365,7 +1365,7 @@ init(Vga* vga, Ctlr* ctlr)
 		;
 
 	mga->crtc[0x18] = 0xff & mga->linecomp;
-	
+
 	mga->crtcext[0] = (0x0f & (mga->startadd >> 16))
 		| ((0x03 & (mga->offset >> 8)) << 4)
 		| ((0x01 & (mga->startadd >> 20)) << 6)
@@ -1415,13 +1415,13 @@ init(Vga* vga, Ctlr* ctlr)
 	mga->sequencer[3] = 0;
 	mga->sequencer[4] = 0x02;
 
-	/* Graphic Control registers are ignored when not using 0xA0000 aperture */	
+	/* Graphic Control registers are ignored when not using 0xA0000 aperture */
 	for (i = 0; i < 9; i++)
-		mga->graphics[i] = 0;	
+		mga->graphics[i] = 0;
 
 	/* The Attribute Controler is not available in Power Graphics mode */
 	for (i = 0; i < 0x15; i++)
-		mga->attribute[i] = i;	
+		mga->attribute[i] = i;
 
 	/* disable vga load (want to do fields in different order) */
 	for(c = vga->link; c; c = c->link)
@@ -1497,7 +1497,7 @@ load(Vga* vga, Ctlr* ctlr)
 	/* Disable the PIXCLK and set Pixel clock source to Pixel Clock PLL */
 	dacset(mga, Dac_Xpixclkctrl, Pixclkdis | 0x01, 0x3);
 
-	/* Disable mapping of the memory */ 
+	/* Disable mapping of the memory */
 	miscset(mga, 0, Misc_rammapen);
 
 	/* Enable 8 bit palette */
@@ -1513,7 +1513,7 @@ load(Vga* vga, Ctlr* ctlr)
 	for (i = 0; i < 50; i++)
 		mgaread32(mga, MGA_STATUS);
 
-	if ((mga->devid == MGA200) || ((mga->devid == MGA4XX) && (mga->revid & 0x80) == 0x00)) { 
+	if ((mga->devid == MGA200) || ((mga->devid == MGA4XX) && (mga->revid & 0x80) == 0x00)) {
 		dacset(mga, Dac_Xpixpllcm, mga->pixpll_m, 0xff);
 		dacset(mga, Dac_Xpixpllcn, mga->pixpll_n, 0xff);
 		dacset(mga, Dac_Xpixpllcp, mga->pixpll_p, 0xff);
@@ -1544,18 +1544,18 @@ load(Vga* vga, Ctlr* ctlr)
 	/* Set Video Mode */
 	switch (mode->z) {
 	case 8:
-		dacset(mga, Dac_Xmulctrl, _8bitsPerPixel, ColorDepth);	
+		dacset(mga, Dac_Xmulctrl, _8bitsPerPixel, ColorDepth);
 		break;
 	case 16:
-		dacset(mga, Dac_Xmulctrl, _16bitsPerPixel, ColorDepth);	
+		dacset(mga, Dac_Xmulctrl, _16bitsPerPixel, ColorDepth);
 		break;
 	case 24:
-		dacset(mga, Dac_Xmulctrl, _24bitsPerPixel, ColorDepth);	
+		dacset(mga, Dac_Xmulctrl, _24bitsPerPixel, ColorDepth);
 		break;
 	case 32:
 		dacset(mga, Dac_Xmulctrl, _32bitsPerPixel, ColorDepth);
 		break;
-	default: 
+	default:
 		error("Unsupported depth %d\n", mode->z);
 	}
 

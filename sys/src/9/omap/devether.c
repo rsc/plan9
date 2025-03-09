@@ -268,7 +268,7 @@ etherwrite(Chan* chan, void* buf, long n, vlong)
 		free(cb);
 		if(ether->ctl!=nil)
 			return ether->ctl(ether,buf,n);
-			
+
 		error(Ebadctl);
 	}
 

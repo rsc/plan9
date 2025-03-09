@@ -1294,7 +1294,7 @@ refers to any character
 .CW :
 and newline; the negation operator
 .CW ^
-excludes newline from the list of characters.) 
+excludes newline from the list of characters.)
 Again,
 .CW /usr/games/fortune
 is run once for each

@@ -20,7 +20,7 @@ enum{
 	Cereset,
 	Celoaded,
 	Cerunning,
-	
+
 	Qdir = 0,
 	Qctl,
 	Qce,
@@ -113,7 +113,7 @@ cegen(Chan*c, char*, Dirtab*, int, int i, Dir*dp)
 
 		if (--i >= Ndsp)
 			return -1;
-	
+
 		mkqid(&qid, QID(Qce, i), 0, QTFILE);
 		snprint(up->genbuf, sizeof(up->genbuf), "ce%d", i);
 		devdir(c, qid, up->genbuf, 0, eve, 0644, dp);
@@ -155,7 +155,7 @@ ceread(Chan*c, void*a, long n, vlong)
 	switch(TYPE(c->qid)){
 	case Qdir:
 		return devdirread(c, a, n, 0, 0, cegen);
-	
+
 	default:
 		error("unsupported operation");
 	}

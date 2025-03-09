@@ -86,7 +86,7 @@ dial(char *dest, char *local, char *dir, int *cfdp)
 		memmove(net, slp, strlen(slp)+1);
 	} else
 		strcpy(netdir, "/net");
- 
+
 
 	/* call the connection server */
 	sprintf(csname, "%s/cs", netdir);

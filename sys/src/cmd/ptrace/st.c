@@ -13,7 +13,7 @@
  * There is a Proc per process, with an array of indexes in graph[]
  * for events that changed state. These are usually log of the
  * size of the trace for the process.
- * 
+ *
  * For browsing, each proc is noted with the row used and
  * the first and last slots in Proc.state shown in the current view.
  * This narrows the events to be considered for a plot.
@@ -459,4 +459,3 @@ makeprocs(void)
 		Bprint(bout, "\n\n");
 	}
 }
-

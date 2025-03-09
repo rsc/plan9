@@ -1245,7 +1245,7 @@ fpinit(Ureg *)
 
 /*
  * called from trap.c's CCPU case, only to deal with user-mode
- * instruction faults.  
+ * instruction faults.
  *
  * libc/mips/lock.c reads FCR0 to determine what kind of system
  * this is (and thus if it can use LL/SC or must use some

@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -362,7 +362,7 @@ wts_print_j_jump(const gx_wts_cell_params_j_t *wcpj, const char *name,
 }
 
 private void
-wts_j_add_jump(const gx_wts_cell_params_j_t *wcpj, double *pu, double *pv, 
+wts_j_add_jump(const gx_wts_cell_params_j_t *wcpj, double *pu, double *pv,
 	       double pa, int xa, int ya)
 {
     double jump_u = wcpj->ufast_a * xa + wcpj->uslow_a * ya;
@@ -442,7 +442,7 @@ wts_set_scr_jxi_try(gx_wts_cell_params_j_t *wcpj, int m, double qb,
     wts_vec_set(&a, (int)floor(uf * m + 0.5), (int)floor(vf * m + 0.5), 1, 0);
     if (a.u == 0 && a.v == 0)
 	return qb + 1;
-	
+
     ufj = a.u / (double)m;
     vfj = a.v / (double)m;
     /* (ufj, vfj) = movement in UV space from (0, 1) in XY space */
@@ -825,7 +825,7 @@ gs_wts_screen_enum_j_currentpoint(gs_wts_screen_enum_t *self,
 {
     gs_wts_screen_enum_j_t *z = (gs_wts_screen_enum_j_t *)self;
     const gx_wts_cell_params_j_t *wcpj = z->wcpj;
-    
+
     int x, y;
     double u, v;
 
@@ -884,7 +884,7 @@ gs_wts_screen_enum_h_currentpoint(gs_wts_screen_enum_t *self,
 {
     gs_wts_screen_enum_h_t *z = (gs_wts_screen_enum_h_t *)self;
     const gx_wts_cell_params_h_t *wcph = z->wcph;
-    
+
     int x, y;
     double u, v;
 
@@ -1170,7 +1170,7 @@ wts_sort_blue(gs_wts_screen_enum_t *wse)
 #endif
 	    for (j = i + 1; j < size; j++)
 		*pcell[j] -= gmin;
-	    
+
 	}
     }
 

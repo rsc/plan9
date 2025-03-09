@@ -107,4 +107,3 @@ flog(char *fmt, ...)
 	va_end(arg);
 	logbufappend(&logbuf, buf);
 }
-

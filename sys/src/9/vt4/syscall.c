@@ -353,7 +353,7 @@ sysprocsetup(Proc* p)
 	fpusysprocsetup(p);
 }
 
-/* 
+/*
  *  Craft a return frame which will cause the child to pop out of
  *  the scheduler in user mode with the return register zero.  Set
  *  pc to point to a l.s return function.

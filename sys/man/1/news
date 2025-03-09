@@ -37,7 +37,7 @@ select particular news items.
 To post a news item, create a file in
 .BR  /lib/news .
 .PP
-You may arrange to receive news automatically by 
+You may arrange to receive news automatically by
 registering your mail address in
 .BR /sys/lib/subscribers .
 A daemon mails recent news

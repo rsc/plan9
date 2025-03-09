@@ -16,7 +16,7 @@ do
 	shift
 done
 
-if [ $# -eq 2 ] 
+if [ $# -eq 2 ]
 then
     outfile=$2
 elif [ $# -eq 1 ]

@@ -53,12 +53,12 @@ struct Ether {
 	RingBuf *tb;			/* software transmit buffers */
 
 	ushort	rh;			/* first receive buffer belonging to host */
-	ushort	ri;			/* first receive buffer belonging to card */	
+	ushort	ri;			/* first receive buffer belonging to card */
 
-	ushort	th;			/* first transmit buffer belonging to host */	
+	ushort	th;			/* first transmit buffer belonging to host */
 	ushort	ti;			/* first transmit buffer belonging to card */
 	ushort	tbusy;			/* transmitter is busy */
-	ushort	mbps;			/* zero means link down */	
+	ushort	mbps;			/* zero means link down */
 };
 
 extern void etherrloop(Ether*, Etherpkt*, long);

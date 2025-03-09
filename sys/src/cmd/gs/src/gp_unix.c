@@ -1,12 +1,12 @@
 /* Copyright (C) 1989-2003 artofcode LLC. All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -73,7 +73,7 @@ gp_strerror(int errnum)
 /* we don't try to implemented this since it requires support */
 /* for Apple's HFS(+) filesystem */
 int
-gp_read_macresource(byte *buf, const char *filename, 
+gp_read_macresource(byte *buf, const char *filename,
                     const uint type, const ushort id)
 {
     return 0;
@@ -169,22 +169,22 @@ gp_close_printer(FILE * pfile, const char *fname)
 }
 
 /* ------ Font enumeration ------ */
- 
+
  /* This is used to query the native os for a list of font names and
   * corresponding paths. The general idea is to save the hassle of
   * building a custom fontmap file.
   */
- 
+
 void *gp_enumerate_fonts_init(gs_memory_t *mem)
 {
     return NULL;
 }
-         
+
 int gp_enumerate_fonts_next(void *enum_state, char **fontname, char **path)
 {
     return 0;
 }
-                         
+
 void gp_enumerate_fonts_free(void *enum_state)
 {
-}           
+}

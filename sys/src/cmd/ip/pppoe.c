@@ -571,7 +571,7 @@ findtag(uchar *pkt, int tagtype, int *plen, int skip)
 		}
 		sz += 2+2+len;
 	}
-	return nil;	
+	return nil;
 }
 
 void
@@ -639,7 +639,7 @@ dumppkt(uchar *pkt)
 	ph = (Pppoehdr*)(pkt+EtherHdrSz);
 	et = nhgets(eh->type);
 
-	fprint(2, "%E -> %E type 0x%x\n", 
+	fprint(2, "%E -> %E type 0x%x\n",
 		eh->src, eh->dst, et);
 	switch(et){
 	case EtherPppoeDiscovery:

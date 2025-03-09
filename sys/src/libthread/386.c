@@ -21,4 +21,3 @@ _threadinitstack(Thread *t, void (*f)(void*), void *arg)
 	t->sched[JMPBUFPC] = (ulong)launcher386+JMPBUFDPC;
 	t->sched[JMPBUFSP] = (ulong)tos - 8;		/* old PC and new PC */
 }
-

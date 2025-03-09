@@ -62,4 +62,3 @@ _makestrinttab(Rune** a, int n)
 	}
 	return ans;
 }
-

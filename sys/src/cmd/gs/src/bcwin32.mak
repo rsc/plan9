@@ -1,12 +1,12 @@
 #    Copyright (C) 1989-1999 Aladdin Enterprises.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -213,9 +213,9 @@ PSD=$(PSGENDIR)\$(NUL)
 #   so if you want to use the current directory, use an explicit '.'.
 
 # Rod Webster (rodw)
-# If C++Builder is later than 4 then you need to 
-# define BUILDER_VERSION explicity uisng BUILDER_VERSION=5 because 
-# C++Builder 4 and above all use Make Version 5.2 so point we can no 
+# If C++Builder is later than 4 then you need to
+# define BUILDER_VERSION explicity uisng BUILDER_VERSION=5 because
+# C++Builder 4 and above all use Make Version 5.2 so point we can no
 # longer tell the Compiler version from the __MAKE__ version number.
 
 !ifndef BUILDER_VERSION
@@ -393,7 +393,7 @@ PCFBASM=
 # Make sure we get the right default target for make.
 
 # Rod Webster (rodw)
-# CBuilder 5 does not support 16 bit compilation 
+# CBuilder 5 does not support 16 bit compilation
 # so add conditional to skip attempts to build 16 bit version
 !if $(BUILDER_VERSION) !=5
 dosdefault: default $(BINDIR)\gs16spl.exe
@@ -635,7 +635,7 @@ $(GSCONSOLE_XE):  $(GS_ALL) $(DEVS_ALL)\
 
 # Access to 16 spooler from Win32s
 # Rod Webster (rodw)
-# CBuilder 5 does not support 16 bit compilation 
+# CBuilder 5 does not support 16 bit compilation
 # so add conditional to skip attempts to build 16 bit version
 !if $(BUILDER_VERSION !=5)
 
@@ -692,4 +692,3 @@ $(PSOBJ)dwuninst.res
 
 
 # end of makefile
-

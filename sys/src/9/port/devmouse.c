@@ -823,4 +823,3 @@ mouseresize(void)
 	mouse.resize++;
 	wakeup(&mouse.r);
 }
-

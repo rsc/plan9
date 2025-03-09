@@ -610,7 +610,7 @@ attach(Ether* ether)
 	 */
 	if(ctlr->cbfn != nil)
 		intrackcb(ctlr->cbfn);
-		
+
 	/*
 	 * Prime the busmaster channel for receiving directly into a
 	 * receive packet buffer if necessary.
@@ -1001,7 +1001,7 @@ interrupt(Ureg*, void* arg)
 			COMMAND(port, SelectRegisterWindow, Wdiagnostic);
 			x = ins(port+FifoDiagnostic);
 			COMMAND(port, SelectRegisterWindow, Wop);
-	
+
 			if (status == 0xFFFF && x == 0xFFFF && ejectable(ctlr->did)) {
 				print("#l%d: Card ejected?\n", ether->ctlrno);
 				iunlock(&ctlr->wlock);
@@ -1479,7 +1479,7 @@ tcm59Xpci(void)
 		if(!(p->mem[0].bar & 0x01))
 			continue;
 		port = p->mem[0].bar & ~0x01;
-		if((port = ioalloc((port == 0)? -1: port,  p->mem[0].size, 
+		if((port = ioalloc((port == 0)? -1: port,  p->mem[0].size,
 					  0, "tcm59Xpci")) < 0){
 			print("tcm59Xpci: port 0x%uX in use\n", port);
 			continue;
@@ -1922,7 +1922,7 @@ etherelnk3reset(Ether* ether)
 			if(cistrcmp(p, media[j].name) == 0)
 				ctlr->xcvr = media[j].xcvr;
 	}
-	
+
 	/*
 	 * forgive me, but i am weak
 	 */

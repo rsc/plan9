@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -53,7 +53,7 @@ private const uint MAX_TEMP_BITMAP_BITS = 80000;
 public_st_gs_show_enum();
 extern_st(st_gs_text_enum);
 extern_st(st_gs_state);		/* only for testing */
-private 
+private
 ENUM_PTRS_BEGIN(show_enum_enum_ptrs)
      return ENUM_USING(st_gs_text_enum, vptr, size, index - 5);
 ENUM_PTR(0, gs_show_enum, pgs);
@@ -223,7 +223,7 @@ gx_hld_stringwidth_begin(gs_imager_state * pis, gx_path **path)
     gs_state *pgs = (gs_state *)pis;
     extern_st(st_gs_state);
     int code;
-    
+
     if (gs_object_type(pis->memory, pis) != &st_gs_state)
 	return_error(gs_error_unregistered);
     code = gs_gsave(pgs);
@@ -335,13 +335,13 @@ set_char_width(gs_show_enum *penum, gs_state *pgs, floatp wx, floatp wy)
 
     if (penum->width_status != sws_none && penum->width_status != sws_retry)
 	return_error(gs_error_undefined);
-    if (penum->fstack.depth > 0 && 
+    if (penum->fstack.depth > 0 &&
 	penum->fstack.items[penum->fstack.depth].font->FontType == ft_CID_encrypted) {
     	/* We must not convert advance width with a CID font leaf's FontMatrix,
 	   because CDevProc is attached to the CID font rather than to its leaf.
 	   But show_state_setup sets CTM with the leaf's matrix.
 	   Compensate it here with inverse FontMatrix of the leaf.
-	   ( We would like to do without an inverse transform, but 
+	   ( We would like to do without an inverse transform, but
 	     we don't like to extend general gs_state or gs_show_enum
 	     for this particular reason. ) */
 	const gx_font_stack_item_t *pfsi = &penum->fstack.items[penum->fstack.depth];
@@ -351,7 +351,7 @@ set_char_width(gs_show_enum *penum, gs_state *pgs, floatp wx, floatp wy)
 		&gs_cid0_indexed_font(pfsi->font, pfsi->index)->FontMatrix, &p);
 	if (code < 0)
 	    return code;
-	wx = p.x; 
+	wx = p.x;
 	wy = p.y;
     }
     if ((code = gs_distance_transform2fixed(&pgs->ctm, wx, wy, &penum->wxy)) < 0)
@@ -370,12 +370,12 @@ set_char_width(gs_show_enum *penum, gs_state *pgs, floatp wx, floatp wy)
 }
 
 void
-gx_compute_text_oversampling(const gs_show_enum * penum, const gs_font *pfont, 
+gx_compute_text_oversampling(const gs_show_enum * penum, const gs_font *pfont,
                              int alpha_bits, gs_log2_scale_point *p_log2_scale)
 {
     gs_log2_scale_point log2_scale;
 
-    if (alpha_bits == 1) 
+    if (alpha_bits == 1)
 	log2_scale.x = log2_scale.y = 0;
     else if (pfont->PaintType != 0) {
 	/* Don't oversample artificially stroked fonts. */
@@ -392,13 +392,13 @@ gx_compute_text_oversampling(const gs_show_enum * penum, const gs_font *pfont,
 	excess = log2_scale.x + log2_scale.y - alpha_bits;
 	while (excess > 0) {
 	    if (log2_scale.y > 0) {
-		log2_scale.y --; 
+		log2_scale.y --;
 		excess--;
 		if (excess == 0)
 		    break;
 	    }
 	    if (log2_scale.x > 0) {
-		log2_scale.x --; 
+		log2_scale.x --;
 		excess--;
 	    }
 	}
@@ -408,14 +408,14 @@ gx_compute_text_oversampling(const gs_show_enum * penum, const gs_font *pfont,
 
 /* Compute glyph raster parameters */
 private int
-compute_glyph_raster_params(gs_show_enum *penum, bool in_setcachedevice, int *alpha_bits, 
+compute_glyph_raster_params(gs_show_enum *penum, bool in_setcachedevice, int *alpha_bits,
 		    int *depth,
                     gs_fixed_point *subpix_origin, gs_log2_scale_point *log2_scale)
 {
     gs_state *pgs = penum->pgs;
     gx_device *dev = gs_currentdevice_inline(pgs);
     int code;
-    
+
     *alpha_bits = (*dev_proc(dev, get_alpha_bits)) (dev, go_text);
     if (in_setcachedevice) {
 	/* current point should already be in penum->origin */
@@ -433,7 +433,7 @@ compute_glyph_raster_params(gs_show_enum *penum, bool in_setcachedevice, int *al
     else
 	gx_compute_text_oversampling(penum, penum->current_font, *alpha_bits, log2_scale);
     /*	We never oversample over the device alpha_bits,
-     * so that we don't need to scale down. Perhaps it may happen 
+     * so that we don't need to scale down. Perhaps it may happen
      * that we underuse alpha_bits due to a big character raster,
      * so we must compute log2_depth more accurately :
      */
@@ -585,7 +585,7 @@ set_cache_device(gs_show_enum * penum, gs_state * pgs, floatp llx, floatp lly,
 	    /* too big for cache or no cache */
 	    gx_path box_path;
 
-	    if (penum->current_font->FontType != ft_user_defined && 
+	    if (penum->current_font->FontType != ft_user_defined &&
 		penum->current_font->FontType != ft_CID_user_defined) {
 		/* Most fonts don't paint outside bbox,
 		   so render with no clipping. */
@@ -606,7 +606,7 @@ set_cache_device(gs_show_enum * penum, gs_state * pgs, floatp llx, floatp lly,
 	    code = gx_cpath_clip(pgs, pgs->clip_path, &box_path, gx_rule_winding_number);
 	    gx_path_free(&box_path, "set_cache_device");
 	    pgs->in_cachedevice = CACHE_DEVICE_NONE_AND_CLIP;
-	    return 0;		
+	    return 0;
 	}
 	/* The mins handle transposed coordinate systems.... */
 	/* Truncate the offsets to avoid artifacts later. */
@@ -739,7 +739,7 @@ continue_kshow(gs_show_enum * penum)
 {   int code;
     gs_state *pgs = penum->pgs;
 
-    if (pgs->font != penum->orig_font) 
+    if (pgs->font != penum->orig_font)
 	gs_setfont(pgs, penum->orig_font);
 
     code = show_state_setup(penum);
@@ -760,7 +760,7 @@ show_update(gs_show_enum * penum)
     /* Update position for last character */
     switch (penum->width_status) {
 	case sws_none:
-        case sws_retry:	  
+        case sws_retry:
 	    /* Adobe interpreters assume a character width of 0, */
 	    /* even though the documentation says this is an error.... */
 	    penum->wxy.x = penum->wxy.y = 0;
@@ -782,7 +782,7 @@ show_update(gs_show_enum * penum)
 	    }
 	    {   cached_fm_pair *pair;
 
-		code = gx_lookup_fm_pair(pgs->font, &char_tm_only(pgs), 
+		code = gx_lookup_fm_pair(pgs->font, &char_tm_only(pgs),
 			    &penum->log2_scale, penum->charpath_flag != cpm_show, &pair);
 		if (code < 0)
 		    return code;
@@ -822,7 +822,7 @@ private int
 show_fast_move(gs_state * pgs, gs_fixed_point * pwxy)
 {
     return gs_moveto_aux((gs_imager_state *)pgs, pgs->path,
-			      pgs->current_point.x + fixed2float(pwxy->x), 
+			      pgs->current_point.x + fixed2float(pwxy->x),
 			      pgs->current_point.y + fixed2float(pwxy->y));
 }
 
@@ -974,21 +974,21 @@ show_proceed(gs_show_enum * penum)
 		    } else
     			SET_CURRENT_GLYPH(penum, glyph);
 		    penum->is_pure_color = gs_color_writes_pure(penum->pgs); /* Save
-		                 this data for compute_glyph_raster_params to work 
-				 independently on the color change in BuildChar. 
-				 Doing it here because cshow proc may modify 
+		                 this data for compute_glyph_raster_params to work
+				 independently on the color change in BuildChar.
+				 Doing it here because cshow proc may modify
 				 the graphic state.
 				 */
 		    {
 			int alpha_bits, depth;
 			gs_fixed_point subpix_origin;
 
-			code = compute_glyph_raster_params(penum, false, 
+			code = compute_glyph_raster_params(penum, false,
 				    &alpha_bits, &depth, &subpix_origin, &log2_scale);
 			if (code < 0)
 			    return code;
 			if (pair == 0) {
-			    code = gx_lookup_fm_pair(pfont, &char_tm_only(pgs), &log2_scale, 
+			    code = gx_lookup_fm_pair(pfont, &char_tm_only(pgs), &log2_scale,
 				penum->charpath_flag != cpm_show, &pair);
 			    if (code < 0)
 				return code;

@@ -243,7 +243,7 @@ If
 .IB fp ->r
 is a verb (rather than a flag),
 .I fn
-should use 
+should use
 .B Fmt->args
 to fetch its argument from the list,
 then format it, and return zero.

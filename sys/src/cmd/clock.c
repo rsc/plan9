@@ -98,5 +98,5 @@ main(int, char**)
 		} else if(key == timer) {
 			redraw(screen);
 		}
-	}	
+	}
 }

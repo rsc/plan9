@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1992, 1993, 1996, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -124,8 +124,8 @@ jetp3852_print_page(gx_device_printer *pdev, FILE *prn_stream)
 				 }
 				/* Skip blank lines if any */
 				if ( num_blank_lines > 0 )
-				   {	
-					if (lnum == 0) 
+				   {
+					if (lnum == 0)
 					  { /* Skip down the page from the top */
      					 /* set line spacing = 1/8 inch */
 	   				fputs("\0330",prn_stream);
@@ -143,7 +143,7 @@ jetp3852_print_page(gx_device_printer *pdev, FILE *prn_stream)
 						  fputs("\033e\377",prn_stream);
 						  num_blank_lines -= 255;
 						  }
-						vtp = num_blank_lines; 
+						vtp = num_blank_lines;
 						fprintf(prn_stream,"\033e%c",vtp);
 						num_blank_lines = 0;
 					 }
@@ -164,8 +164,8 @@ jetp3852_print_page(gx_device_printer *pdev, FILE *prn_stream)
 				fputc('\000',prn_stream);
    			fputs("\124\124",prn_stream);
 
-				for ( row = plane_data + LINE_SIZE * 2, i = 0; 
-				      i < 3; row -= LINE_SIZE, i++ )     
+				for ( row = plane_data + LINE_SIZE * 2, i = 0;
+				      i < 3; row -= LINE_SIZE, i++ )
 				{	int jj;
 				   byte ctemp;
 				   odp = row;
@@ -182,7 +182,7 @@ jetp3852_print_page(gx_device_printer *pdev, FILE *prn_stream)
 	   }
 
 	/* eject page */
- 	fputs("\014", prn_stream);  
+ 	fputs("\014", prn_stream);
 
 	return 0;
 }

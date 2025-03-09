@@ -117,7 +117,7 @@ struct	Filter
 {
 	ulong	count;			/* count and old count kept separate */
 	ulong	oldcount;		/* so interrput can read them */
-	Float	filter[3];		/* filters for 1m 10m 100m */ 
+	Float	filter[3];		/* filters for 1m 10m 100m */
 };
 
 struct	Filta

@@ -225,7 +225,7 @@ void
 chandevshutdown(void)
 {
 	int i;
-	
+
 	/* shutdown in reverse order */
 	for(i=0; devtab[i] != nil; i++)
 		;
@@ -272,7 +272,7 @@ newchan(void)
 	memset(&c->mqid, 0, sizeof(c->mqid));
 	c->path = 0;
 	c->ismtpt = 0;
-	
+
 	return c;
 }
 
@@ -294,7 +294,7 @@ newpath(char *s)
 	incref(&npath);
 
 	/*
-	 * Cannot use newpath for arbitrary names because the mtpt 
+	 * Cannot use newpath for arbitrary names because the mtpt
 	 * array will not be populated correctly.  The names #/ and / are
 	 * allowed, but other names with / in them draw warnings.
 	 */
@@ -312,17 +312,17 @@ copypath(Path *p)
 {
 	int i;
 	Path *pp;
-	
+
 	pp = smalloc(sizeof(Path));
 	pp->ref = 1;
 	incref(&npath);
 	DBG("copypath %s %p => %p\n", p->s, p, pp);
-	
+
 	pp->len = p->len;
 	pp->alen = p->alen;
 	pp->s = smalloc(p->alen);
 	memmove(pp->s, p->s, p->len+1);
-	
+
 	pp->mlen = p->mlen;
 	pp->malen = p->malen;
 	pp->mtpt = smalloc(p->malen*sizeof pp->mtpt[0]);
@@ -339,7 +339,7 @@ void
 pathclose(Path *p)
 {
 	int i;
-	
+
 	if(p == nil)
 		return;
 //XXX
@@ -390,7 +390,7 @@ static Path*
 uniquepath(Path *p)
 {
 	Path *new;
-	
+
 	if(p->ref > 1){
 		/* copy on write */
 		new = copypath(p);
@@ -539,7 +539,7 @@ ccloseq(Chan *c)
 	unlock(&clunkq.l);
 
 	if(!wakeup(&clunkq.r))
-		kproc("closeproc", closeproc, nil);	
+		kproc("closeproc", closeproc, nil);
 }
 
 static int
@@ -666,7 +666,7 @@ cmount(Chan **newp, Chan *old, int flag, char *spec)
 	mh = new->umh;
 
 	/*
-	 * Not allowed to bind when the old directory is itself a union. 
+	 * Not allowed to bind when the old directory is itself a union.
 	 * (Maybe it should be allowed, but I don't see what the semantics
 	 * would be.)
 	 *
@@ -674,12 +674,12 @@ cmount(Chan **newp, Chan *old, int flag, char *spec)
 	 * simple mount points, so that things like
 	 *	mount -c fd /root
 	 *	bind -c /root /
-	 * work.  
-	 * 
+	 * work.
+	 *
 	 * The check of mount->mflag allows things like
 	 *	mount fd /root
 	 *	bind -c /root /
-	 * 
+	 *
 	 * This is far more complicated than it should be, but I don't
 	 * see an easier way at the moment.
 	 */
@@ -771,7 +771,7 @@ cunmount(Chan *mnt, Chan *mounted)
 		print("cunmount newp extra umh %p has %p\n", mnt, mnt->umh);
 
 	/*
-	 * It _can_ happen that mounted->umh is non-nil, 
+	 * It _can_ happen that mounted->umh is non-nil,
 	 * because mounted is the result of namec(Aopen)
 	 * (see sysfile.c:/^sysunmount).
 	 * If we open a union directory, it will have a umh.
@@ -1019,7 +1019,7 @@ walk(Chan **cp, char **names, int nnames, int nomount, int *nerror)
 
 		if(!dotdot && !nomount && !didmount)
 			domount(&c, &mh, &path);
-		
+
 		type = c->type;
 		dev = c->dev;
 
@@ -1223,10 +1223,10 @@ parsename(char *aname, Elemlist *e)
 		*slash++ = '\0';
 		name = slash;
 	}
-	
+
 	if(0 && chandebug){
 		int i;
-		
+
 		print("parsename %s:", e->name);
 		for(i=0; i<=e->nelems; i++)
 			print(" %d", e->off[i]);
@@ -1257,7 +1257,7 @@ namelenerror(char *aname, int len, char *err)
 	 */
 	errlen = strlen(err);
 	if(len < ERRMAX/3 || len+errlen < 2*ERRMAX/3)
-		snprint(up->genbuf, sizeof up->genbuf, "%.*s", 
+		snprint(up->genbuf, sizeof up->genbuf, "%.*s",
 			utfnlen(aname, len), aname);
 	else{
 		/*
@@ -1286,7 +1286,7 @@ namelenerror(char *aname, int len, char *err)
 		}
 		snprint(up->genbuf, sizeof up->genbuf, "...%.*s",
 			utfnlen(name, ename-name), name);
-	}				
+	}
 	snprint(up->errstr, ERRMAX, "%#q %s", up->genbuf, err);
 	nexterror();
 }
@@ -1346,7 +1346,7 @@ namec(char *aname, int amode, int omode, ulong perm)
 		c = up->slash;
 		incref(c);
 		break;
-	
+
 	case '#':
 		nomount = 1;
 		up->genbuf[0] = '\0';
@@ -1556,11 +1556,11 @@ if(c->umh != nil){
 		 * The semantics of the create(2) system call are that if the
 		 * file exists and can be written, it is to be opened with truncation.
 		 * On the other hand, the create(5) message fails if the file exists.
-		 * If we get two create(2) calls happening simultaneously, 
-		 * they might both get here and send create(5) messages, but only 
+		 * If we get two create(2) calls happening simultaneously,
+		 * they might both get here and send create(5) messages, but only
 		 * one of the messages will succeed.  To provide the expected create(2)
 		 * semantics, the call with the failed message needs to try the above
-		 * walk again, opening for truncation.  This correctly solves the 
+		 * walk again, opening for truncation.  This correctly solves the
 		 * create/create race, in the sense that any observable outcome can
 		 * be explained as one happening before the other.
 		 * The create/create race is quite common.  For example, it happens
@@ -1570,7 +1570,7 @@ if(c->umh != nil){
 		 * The implementation still admits a create/create/remove race:
 		 * (A) walk to file, fails
 		 * (B) walk to file, fails
-		 * (A) create file, succeeds, returns 
+		 * (A) create file, succeeds, returns
 		 * (B) create file, fails
 		 * (A) remove file, succeeds, returns
 		 * (B) walk to file, return failure.
@@ -1697,7 +1697,7 @@ char isfrog[256]={
  * The parameter dup flags whether the string should be copied
  * out of user space before being scanned the second time.
  * (Otherwise a malicious thread could remove the NUL, causing us
- * to access unchecked addresses.) 
+ * to access unchecked addresses.)
  */
 static char*
 validname0(char *aname, int slashok, int dup, ulong pc)
@@ -1727,7 +1727,7 @@ validname0(char *aname, int slashok, int dup, ulong pc)
 		name = s;
 		setmalloctag(s, pc);
 	}
-	
+
 	while(*name){
 		/* all characters above '~' are ok */
 		c = *(uchar*)name;
@@ -1780,7 +1780,7 @@ isdir(Chan *c)
  * The mount list is deleted when we cunmount.
  * The RWlock ensures that nothing is using the mount list at that time.
  *
- * It is okay to replace c->mh with whatever you want as 
+ * It is okay to replace c->mh with whatever you want as
  * long as you are sure you have a unique reference to it.
  *
  * This comment might belong somewhere else.
@@ -1793,4 +1793,3 @@ putmhead(Mhead *m)
 		free(m);
 	}
 }
-

@@ -17,7 +17,7 @@ clgd542xpageset(VGAscr*, int page)
 {
 	uchar gr09;
 	int opage;
-	
+
 	if(vgaxi(Seqx, 0x07) & 0xF0)
 		page = 0;
 	gr09 = vgaxi(Grx, 0x09);
@@ -61,7 +61,7 @@ clgd542xenable(VGAscr* scr)
 {
 	uchar sr12;
 	int mem, x;
- 
+
 	/*
 	 * Disable the cursor.
 	 */
@@ -251,7 +251,7 @@ clgd542xmove(VGAscr* scr, Point p)
 		index = 1;
 	}
 	vgaxo(Seqx, 0x13, index<<2);
-	
+
 	vgaxo(Seqx, 0x10|((x & 0x07)<<5), (x>>3) & 0xFF);
 	vgaxo(Seqx, 0x11|((y & 0x07)<<5), (y>>3) & 0xFF);
 

@@ -1,12 +1,12 @@
 /* Copyright (C) 1994, 1997, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -158,7 +158,7 @@ zexD(i_ctx_t *i_ctx_p)
 		pss->binary_to_hex = 0;
 	    }
 	    state.record_left = pss->record_left;
-	} 
+	}
     }
     return filter_read(i_ctx_p, code, &s_exD_template, (stream_state *)&state, 0);
 }

@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1993, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -88,7 +88,7 @@ pc_8bit_map_color_rgb(gx_device * dev, gx_color_index color,
      gx_max_color_value - (gx_max_color_value / 5),
      gx_max_color_value
     };
-    
+
 #define icolor (uint)color
     if (icolor >= 216) {
 	prgb[0] = prgb[1] = prgb[2] = 0;

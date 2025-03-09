@@ -217,7 +217,7 @@ reset(Ether* ether)
 
 	*ercr = Ercr_rxenab|Ercr_auienab|(Nrx-1);
 	*eimr = Ei_rxdone|Ei_txretry|Ei_txdone;
-	
+
 	iprint("reset: ercr %.4uX\n", *ercr);
 	return 0;
 }
@@ -227,4 +227,3 @@ ethersaturnlink(void)
 {
 	addethercard("saturn", reset);
 }
-

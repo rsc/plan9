@@ -16,7 +16,7 @@ void	postnote(Proc *p, int dolock, char *n, int flag)
 creates a new kernel process
 to run the function
 .IR func ,
-which is invoked as 
+which is invoked as
 .BR "(*func)(arg)" .
 The string
 .I name
@@ -42,7 +42,7 @@ although it can send a software interrupt using
 .IR postnote .
 .I Note
 is a null string on normal termination, or
-the cause of 
+the cause of
 If
 .I freemem
 is non-zero,

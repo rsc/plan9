@@ -166,7 +166,7 @@ sys	- sys sys
 		wiki	- sys sys
 			+	- sys sys
 	log	- sys sys
-		*	a666 sys sys 
+		*	a666 sys sys
 		timesync.d	d775 sys sys
 		httpd	- sys sys
 			*	a666 sys sys
@@ -184,4 +184,3 @@ dist	- sys sys
 		cd	- sys sys
 		network	- sys sys
 		plan9.proto	- sys sys
-

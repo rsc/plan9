@@ -49,7 +49,7 @@ smbbufferinit(void *base, void *bdata, ulong blen)
 	SmbBuffer *b;
 	b = smbemalloc(sizeof(*b));
 	b->buf = base;
-	b->flags = STRUCT;	
+	b->flags = STRUCT;
 	b->rn = (uchar *)bdata - (uchar *)base;
 	b->wn = b->rn + blen;
 	b->realmaxlen = b->maxlen = b->wn;

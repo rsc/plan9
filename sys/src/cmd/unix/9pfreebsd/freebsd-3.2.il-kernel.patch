@@ -12,10 +12,10 @@ diff -N -c -r /usr/src/sys/9fs/9auth.c ./9fs/9auth.c
 + #include <sys/malloc.h>
 + #include <sys/mbuf.h>
 + #include <sys/uio.h>
-+ 
++
 + #include <9fs/9p.h>
 + #include <9fs/9auth.h>
-+ 
++
 + #define	N2HCHAR(x)		x = *p++
 + #define	N2HSHORT(x)	x = (p[0] | (p[1]<<8)); p += 2
 + #define	N2HLONG(x)		x = (p[0] | (p[1]<<8) |\
@@ -25,7 +25,7 @@ diff -N -c -r /usr/src/sys/9fs/9auth.c ./9fs/9auth.c
 + 				((u_int64_t)(p[4] | (p[5]<<8) |\
 + 					(p[6]<<16) | (p[7]<<24)) << 32); p += 8
 + #define	N2HSTRING(x,n)	bcopy(p, x, n); p += n
-+ 
++
 + #define	H2NCHAR(x)	*p++ = x
 + #define	H2NSHORT(x)	p[0]=x; p[1]=x>>8; p += 2
 + #define	H2NLONG(x)		p[0]=x; p[1]=x>>8; p[2]=x>>16; p[3]=x>>24; p += 4
@@ -35,17 +35,17 @@ diff -N -c -r /usr/src/sys/9fs/9auth.c ./9fs/9auth.c
 + 			p[6]=x>>48;	p[7]=x>>56;\
 + 			p += 8
 + #define	H2NSTRING(x,n)	bcopy(x, p, n); p += n
-+ 
++
 + static int u9auth_send __P((struct socket *so, struct mbuf *top, struct proc *p));
 + static int u9auth_recv __P((struct socket *so, struct mbuf **mp, struct proc *p));
-+ 
++
 + static int u9auth_count = 0;
-+ 
++
 + static int u9auth_tr2m(struct u9auth_ticketreq *f, char *ap)
 + {
 + 	int n;
 + 	u_char *p;
-+ 
++
 + 	p = (u_char*)ap;
 +         H2NCHAR(f->type);
 + 	H2NSTRING(f->authid, U9FS_NAMELEN);
@@ -56,50 +56,50 @@ diff -N -c -r /usr/src/sys/9fs/9auth.c ./9fs/9auth.c
 + 	n = p - (u_char*)ap;
 + 	return n;
 + }
-+ 
++
 + static struct mbuf * u9auth_m_tr2m(struct u9auth_ticketreq * tktq)
 + {
 +   register struct mbuf *m;
 +   char * ap;
 +   int sz = 141;
-+ 
++
 +   MGETHDR(m, M_WAIT, MT_DATA);
 +   if( sz > MHLEN )
 +     MCLGET(m, M_WAIT);
 +   m->m_len = 0;
-+ 
++
 +   if ( M_TRAILINGSPACE(m) < sz )
 +     panic("u9auth_m_tr2m");
-+   
++
 +   ap = mtod(m, char *);
 +   m->m_len = u9auth_tr2m(tktq, ap);
 +   m->m_pkthdr.len = m->m_len;
-+ 
++
 +   return (m);
 + }
-+ 
++
 + static int
 + u9auth_send(so, top, p)
 + 	register struct socket *so;
 + 	register struct mbuf *top;
 + 	register struct proc *p;
-+ 	
++
 + {
 +   int error, soflags, flags;
-+   
++
 +   soflags = so->so_proto->pr_flags;
 +   if (so->so_type == SOCK_SEQPACKET)
 +     flags = MSG_EOR;
 +   else
 +     flags = 0;
-+   
++
 +   error = so->so_proto->pr_usrreqs->pru_sosend(so, 0, 0, top, 0, flags, p);
-+ 
++
 +   return (error);
 + }
-+ 
++
 + static int
-+ u9auth_recv(so, mp, p)	
++ u9auth_recv(so, mp, p)
 +      register struct socket * so;
 +      register struct mbuf **mp;
 +      struct proc *p;
@@ -107,10 +107,10 @@ diff -N -c -r /usr/src/sys/9fs/9auth.c ./9fs/9auth.c
 +   struct uio auio;
 +   u_int32_t len;
 +   int error = 0, sotype, rcvflg;
-+ 
++
 +   *mp = 0;
 +   sotype = so->so_type;
-+   
++
 +   /*
 +    * For reliable protocols, lock against other senders/receivers
 +    * in case a reconnect is necessary.
@@ -130,20 +130,20 @@ diff -N -c -r /usr/src/sys/9fs/9auth.c ./9fs/9auth.c
 + 				(so, 0, &auio, mp,
 + 				(struct mbuf **)0, &rcvflg);
 + 		} while (error == EWOULDBLOCK);
-+ 		len -= auio.uio_resid;    
++ 		len -= auio.uio_resid;
 +   }
 +   if (error) {
 +     m_freem(*mp);
 +     *mp = 0;
 +   }
-+   return (error);  
++   return (error);
 + }
-+ 
++
 + static void
 + u9auth_m2t(char *ap, struct u9auth_ticket *f, char *key)
 + {
 + 	u_char *p;
-+ 
++
 + 	if(key)
 + 		decrypt9(key, ap, U9AUTH_TICKETLEN);
 + 	p = (u_char*)ap;
@@ -155,13 +155,13 @@ diff -N -c -r /usr/src/sys/9fs/9auth.c ./9fs/9auth.c
 + 	f->suid[U9FS_NAMELEN-1] = 0;
 + 	N2HSTRING(f->key, U9AUTH_DESKEYLEN);
 + };
-+ 
-+ static int 
++
++ static int
 + u9auth_a2m(struct u9auth_authenticator *f, char *ap, char *key)
 + {
 + 	int n;
 + 	u_char *p;
-+ 
++
 + 	p = (u_char*)ap;
 + 	H2NCHAR(f->num);
 + 	H2NSTRING(f->chal, U9FS_CHALLEN);
@@ -171,15 +171,15 @@ diff -N -c -r /usr/src/sys/9fs/9auth.c ./9fs/9auth.c
 + 		encrypt9(key, ap, n);
 + 	return n;
 + }
-+ 
++
 + void u9auth_genchal (char * chal)
 + {
 +   u_long * lp = (u_long *)chal;
-+ 
++
 +   *lp++ = random();
 +   *lp = random();
 + }
-+ 
++
 + int u9auth_gettickets (struct socket * so, struct u9fsreq * rep,
 + 			   char * user, char * ckey, char * ts, char * authc,
 + 		       struct proc *p)
@@ -190,7 +190,7 @@ diff -N -c -r /usr/src/sys/9fs/9auth.c ./9fs/9auth.c
 +   struct u9auth_authenticator auth;
 +   struct mbuf * m;
 +   int error, len;
-+   
++
 +   bzero(&tktq, sizeof(tktq));
 +   tktq.type = AuthTreq;
 +   bcopy(rep->r_authid, tktq.authid, U9FS_NAMELEN);
@@ -198,19 +198,19 @@ diff -N -c -r /usr/src/sys/9fs/9auth.c ./9fs/9auth.c
 +   bcopy(rep->r_chal, tktq.chal, U9FS_CHALLEN);
 +   strncpy(tktq.hostid, user, U9FS_NAMELEN);
 +   strncpy(tktq.uid, user, U9FS_NAMELEN);
-+ 
++
 +   m = u9auth_m_tr2m(&tktq);
 +   error = u9auth_send(so, m, p);
-+   if( error ) 
++   if( error )
 +     goto bad;
 +   error = u9auth_recv(so, &m, p);
 +   if( error )
 +     goto bad;
-+ 
++
 +   len = U9AUTH_TICKETLEN+1;
 +   if( m->m_len < len && (m = m_pullup(m, len)) == 0 )
 +     goto bad;
-+ 
++
 +   cp = mtod(m, char *);
 +   switch( cp[0] ) {
 +   case AuthOK:
@@ -219,10 +219,10 @@ diff -N -c -r /usr/src/sys/9fs/9auth.c ./9fs/9auth.c
 +     auth.num = AuthAc;
 +     bcopy(tc.chal, auth.chal, sizeof(auth.chal));
 +     auth.id = u9auth_count++;
-+ 
++
 +     m->m_len -= len;
 +     m->m_data += len;
-+ 
++
 +     len = U9AUTH_TICKETLEN;
 +     if( m->m_len < len && (m = m_pullup(m, len)) == 0 )
 +       goto bad;
@@ -235,13 +235,13 @@ diff -N -c -r /usr/src/sys/9fs/9auth.c ./9fs/9auth.c
 +     goto bad;
 +     break;
 +   }
-+ 
++
 +   u9auth_a2m(&auth, authc, tc.key);
 +   return 0;
 +  bad:
 +   return error;
 + }
-+ 
++
 diff -N -c -r /usr/src/sys/9fs/9auth.h ./9fs/9auth.h
 *** /usr/src/sys/9fs/9auth.h	Wed Dec 31 19:00:00 1969
 --- ./9fs/9auth.h	Thu Nov 11 15:00:29 1999
@@ -250,7 +250,7 @@ diff -N -c -r /usr/src/sys/9fs/9auth.h ./9fs/9auth.h
 --- 1,129 ----
 + #ifndef P9AUTH_H
 + #define P9AUTH_H
-+ 
++
 + #define U9AUTH_DOMLEN		48		/* length of an authentication domain name */
 + #define U9AUTH_DESKEYLEN	7		/* length of a des key for encrypt/decrypt */
 + #define U9AUTH_CHALLEN	8		/* length of a challenge */
@@ -262,7 +262,7 @@ diff -N -c -r /usr/src/sys/9fs/9auth.h ./9fs/9auth.h
 + #define U9AUTH_KEYDBOFF	8		/* length of random data at the start of key file */
 + #define U9AUTH_OKEYDBLEN	U9FSNAMELEN+U9AUTH_DESKEYLEN+4+2,	/* length of an entry in old key file */
 + #define U9AUTH_KEYDBLEN	OKEYDBLENSECRETLEN,	/* length of an entry in key file */
-+ 
++
 + /* encryption numberings (anti-replay) */
 + enum
 + {
@@ -276,15 +276,15 @@ diff -N -c -r /usr/src/sys/9fs/9auth.h ./9fs/9auth.h
 + 	AuthOKvar=9,	/* variable length reply follows */
 + 	AuthChap=10,	/* chap authentication for ppp */
 + 	AuthMSchap=11,	/* MS chap authentication for ppp */
-+ 
-+ 
++
++
 + 	AuthTs=64,	/* ticket encrypted with server's key */
 + 	AuthTc,		/* ticket encrypted with client's key */
 + 	AuthAs,		/* server generated authenticator */
 + 	AuthAc,		/* client generated authenticator */
 + 	AuthTp,		/* ticket encrypted with clien's key for password change */
 + };
-+ 
++
 + struct u9auth_ticketreq
 + {
 + 	char	type;
@@ -295,7 +295,7 @@ diff -N -c -r /usr/src/sys/9fs/9auth.h ./9fs/9auth.h
 + 	char	uid[U9FS_NAMELEN];		/* uid of requesting user on host */
 + };
 + #define	U9AUTH_TICKREQLEN	(3*U9FS_NAMELEN+U9AUTH_CHALLEN+U9AUTH_DOMLEN+1)
-+ 
++
 + struct u9auth_ticket
 + {
 + 	char	num;			/* replay protection */
@@ -305,7 +305,7 @@ diff -N -c -r /usr/src/sys/9fs/9auth.h ./9fs/9auth.h
 + 	char	key[U9AUTH_DESKEYLEN];		/* nonce DES key */
 + };
 + #define	U9AUTH_TICKETLEN	(U9AUTH_CHALLEN+2*U9FS_NAMELEN+U9AUTH_DESKEYLEN+1)
-+ 
++
 + struct u9auth_authenticator
 + {
 + 	char	num;			/* replay protection */
@@ -313,7 +313,7 @@ diff -N -c -r /usr/src/sys/9fs/9auth.h ./9fs/9auth.h
 + 	u_long	id;			/* authenticator id, ++'d with each auth */
 + };
 + #define	U9AUTH_AUTHENTLEN	(U9AUTH_CHALLEN+4+1)
-+ 
++
 + struct u9auth_passwordreq
 + {
 + 	char	num;
@@ -323,7 +323,7 @@ diff -N -c -r /usr/src/sys/9fs/9auth.h ./9fs/9auth.h
 + 	char	secret[U9AUTH_SECRETLEN];	/* new secret */
 + };
 + #define	U9AUTH_PASSREQLEN	(2*U9FS_NAMELEN+1+1+U9AUTH_SECRETLEN)
-+ 
++
 + struct u9auth_nvrsafe
 + {
 + 	char	machkey[U9AUTH_DESKEYLEN];
@@ -337,35 +337,35 @@ diff -N -c -r /usr/src/sys/9fs/9auth.h ./9fs/9auth.h
 + 	char	authdom[U9AUTH_DOMLEN];
 + 	u_char	authdomsum;
 + };
-+ 
++
 + struct u9auth_chalstate
 + {
 + 	int	afd;			/* /dev/authenticate */
 + 	int	asfd;			/* authdial() */
 + 	char	chal[U9AUTH_NETCHLEN];		/* challenge/response */
 + };
-+ 
++
 + struct u9auth_apopchalstate
 + {
 + 	int	afd;			/* /dev/authenticate */
 + 	int	asfd;			/* authdial() */
 + 	char	chal[U9AUTH_APOPCHLEN];	/* challenge/response */
 + };
-+ 
++
 + struct	u9auth_chapreply
 + {
 + 	u_char	id;
 + 	char	uid[U9FS_NAMELEN];
 + 	char	resp[U9AUTH_MD5LEN];
 + };
-+ 
++
 + struct	u9auth_mSchapreply
 + {
 + 	char	uid[U9FS_NAMELEN];
 + 	char	LMresp[24];		/* Lan Manager response */
 + 	char	NTresp[24];		/* NT response */
 + };
-+ 
++
 + #ifdef KERNEL
 + void u9auth_genchal __P((char *));
 + int  u9auth_gettickets __P((struct socket * so, struct u9fsreq * rep,
@@ -373,9 +373,9 @@ diff -N -c -r /usr/src/sys/9fs/9auth.h ./9fs/9auth.h
 + 			    struct proc * p));
 + int encrypt9 __P((void *key, void * vbuf, int n));
 + int decrypt9 __P((void *key, void * vbuf, int n));
-+ 
++
 + #endif
-+ 
++
 + #endif
 diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 *** /usr/src/sys/9fs/9crypt.c	Wed Dec 31 19:00:00 1969
@@ -393,19 +393,19 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + #include <sys/systm.h>
 + #include <sys/socket.h>
 + #include <sys/socketvar.h>
-+ 
++
 + typedef unsigned char uchar;
 + typedef unsigned long ulong;
 + #define NAMELEN 28      /* length of path element, including '\0' */
 + #include <9fs/9p.h>
 + #include <9fs/9auth.h>
-+ 
++
 + static	long	ip_low(char [8]);
 + static	long	ip_high(char [8]);
 + static	void	fp(long, long, char[8]);
 + static	void	key_setup(char[U9AUTH_DESKEYLEN], char[128]);
 + static	void	block_cipher(char[128], char[8], int);
-+ 
++
 + /*
 +  * destructively encrypt the buffer, which
 +  * must be at least 8 characters long.
@@ -415,7 +415,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + {
 + 	char ekey[128], *buf;
 + 	int i, r;
-+ 
++
 + 	if(n < 8)
 + 		return 0;
 + 	key_setup(key, ekey);
@@ -431,7 +431,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 		block_cipher(ekey, buf - 7 + r, 0);
 + 	return 1;
 + }
-+ 
++
 + /*
 +  * destructively decrypt the buffer, which
 +  * must be at least 8 characters long.
@@ -441,7 +441,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + {
 + 	char ekey[128], *buf;
 + 	int i, r;
-+ 
++
 + 	if(n < 8)
 + 		return 0;
 + 	key_setup(key, ekey);
@@ -458,11 +458,11 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 	}
 + 	return 1;
 + }
-+ 
++
 + /*
 +  *	Tables for Combined S and P Boxes
 +  */
-+ 
++
 + static long  s0p[] = {
 + 0x00410100,0x00010000,0x40400000,0x40410100,0x00400000,0x40010100,0x40010000,0x40400000,
 + 0x40010100,0x00410100,0x00410000,0x40000100,0x40400100,0x00400000,0x00000000,0x40010000,
@@ -473,7 +473,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 0x40410100,0x00010100,0x00410000,0x40400100,0x00400000,0x40000100,0x40010000,0x00000000,
 + 0x00010000,0x00400000,0x40400100,0x00410100,0x40000000,0x40410000,0x00000100,0x40010100,
 + };
-+ 
++
 + static long  s1p[] = {
 + 0x08021002,0x00000000,0x00021000,0x08020000,0x08000002,0x00001002,0x08001000,0x00021000,
 + 0x00001000,0x08020002,0x00000002,0x08001000,0x00020002,0x08021000,0x08020000,0x00000002,
@@ -484,7 +484,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 0x08021000,0x00001000,0x00000000,0x08000002,0x00000002,0x08021002,0x00021000,0x08020000,
 + 0x08020002,0x00020000,0x00001002,0x08001000,0x08001002,0x00000002,0x08020000,0x00021000,
 + };
-+ 
++
 + static long  s2p[] = {
 + 0x20800000,0x00808020,0x00000020,0x20800020,0x20008000,0x00800000,0x20800020,0x00008020,
 + 0x00800020,0x00008000,0x00808000,0x20000000,0x20808020,0x20000020,0x20000000,0x20808000,
@@ -495,7 +495,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 0x20008020,0x20800000,0x00800000,0x20808020,0x00008000,0x00800020,0x20800020,0x00008020,
 + 0x00800020,0x00000000,0x20808000,0x20000020,0x20800000,0x20008020,0x00000020,0x00808000,
 + };
-+ 
++
 + static long  s3p[] = {
 + 0x00080201,0x02000200,0x00000001,0x02080201,0x00000000,0x02080000,0x02000201,0x00080001,
 + 0x02080200,0x02000001,0x02000000,0x00000201,0x02000001,0x00080201,0x00080000,0x02000000,
@@ -506,7 +506,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 0x02000000,0x02080201,0x00080201,0x00080000,0x02080201,0x00000001,0x02000200,0x00080201,
 + 0x00080001,0x00080200,0x02080000,0x02000201,0x00000201,0x02000000,0x02000001,0x02080200,
 + };
-+ 
++
 + static long  s4p[] = {
 + 0x01000000,0x00002000,0x00000080,0x01002084,0x01002004,0x01000080,0x00002084,0x01002000,
 + 0x00002000,0x00000004,0x01000004,0x00002080,0x01000084,0x01002004,0x01002080,0x00000000,
@@ -517,7 +517,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 0x01000084,0x00000080,0x00000000,0x01002084,0x01002004,0x01002080,0x00000084,0x00002000,
 + 0x00002080,0x01002004,0x01000080,0x00000084,0x00000004,0x00002084,0x01002000,0x01000004,
 + };
-+ 
++
 + static long  s5p[] = {
 + 0x10000008,0x00040008,0x00000000,0x10040400,0x00040008,0x00000400,0x10000408,0x00040000,
 + 0x00000408,0x10040408,0x00040400,0x10000000,0x10000400,0x10000008,0x10040000,0x00040408,
@@ -528,7 +528,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 0x10040408,0x00040400,0x00040000,0x10000408,0x10000008,0x10040000,0x00040408,0x00000000,
 + 0x00000400,0x10000008,0x10000408,0x10040400,0x10040000,0x00000408,0x00000008,0x10040008,
 + };
-+ 
++
 + static long  s6p[] = {
 + 0x00000800,0x00000040,0x00200040,0x80200000,0x80200840,0x80000800,0x00000840,0x00000000,
 + 0x00200000,0x80200040,0x80000040,0x00200800,0x80000000,0x00200840,0x00200800,0x80000040,
@@ -539,7 +539,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 0x00000000,0x80200040,0x00200040,0x00000840,0x80000040,0x00000800,0x80200840,0x00200000,
 + 0x00200840,0x80000000,0x80000800,0x80200840,0x80200000,0x00200840,0x00200800,0x80000800,
 + };
-+ 
++
 + static long  s7p[] = {
 + 0x04100010,0x04104000,0x00004010,0x00000000,0x04004000,0x00100010,0x04100000,0x04104010,
 + 0x00000010,0x04000000,0x00104000,0x00004010,0x00104010,0x04004010,0x04000010,0x04100000,
@@ -550,7 +550,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 0x04104010,0x00100000,0x04100000,0x04000010,0x00104000,0x00004010,0x04004010,0x04100000,
 + 0x00000010,0x04104000,0x00104010,0x00000000,0x04000000,0x04100010,0x00004000,0x00104010,
 + };
-+ 
++
 + /*
 +  *	DES electronic codebook encryption of one block
 +  */
@@ -560,7 +560,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 	char *key;
 + 	long crypto, temp, right, left;
 + 	int i, key_offset;
-+ 
++
 + 	key = expanded_key;
 + 	left = ip_low(text);
 + 	right = ip_high(text);
@@ -591,7 +591,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 	 */
 + 	fp(right, left, text);
 + }
-+ 
++
 + /*
 +  *	Initial Permutation
 +  */
@@ -599,13 +599,13 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 	0x00000000, 0x00008000, 0x00000000, 0x00008000,
 + 	0x00000080, 0x00008080, 0x00000080, 0x00008080
 + };
-+ 
++
 + static long
 + ip_low(char block[8])
 + {
 + 	int i;
 + 	long l;
-+ 
++
 + 	l = 0;
 + 	for(i = 0; i < 8; i++){
 + 		l |= iptab[(block[i] >> 4) & 7] >> i;
@@ -613,13 +613,13 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 	}
 + 	return l;
 + }
-+ 
++
 + static long
 + ip_high(char block[8])
 + {
 + 	int i;
 + 	long l;
-+ 
++
 + 	l = 0;
 + 	for(i = 0; i < 8; i++){
 + 		l |= iptab[(block[i] >> 5) & 7] >> i;
@@ -627,7 +627,7 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 	}
 + 	return l;
 + }
-+ 
++
 + /*
 +  *	Final Permutation
 +  */
@@ -635,13 +635,13 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 0x00000000,0x80000000,0x00800000,0x80800000,0x00008000,0x80008000,0x00808000,0x80808000,
 + 0x00000080,0x80000080,0x00800080,0x80800080,0x00008080,0x80008080,0x00808080,0x80808080,
 + };
-+ 
++
 + static void
 + fp(long left, long right, char text[8])
 + {
 + 	unsigned long ta[2], t, v[2];
 + 	int i, j, sh;
-+ 
++
 + 	ta[0] = right;
 + 	ta[1] = left;
 + 	v[0] = v[1] = 0;
@@ -662,131 +662,131 @@ diff -N -c -r /usr/src/sys/9fs/9crypt.c ./9fs/9crypt.c
 + 			v[i] >>= 8;
 + 		}
 + }
-+ 
++
 + /*
 +  *	Key set-up
 +  */
 + static uchar keyexpand[][15][2] = {
-+ 	{   3,  2,   9,  8,  18,  8,  27, 32,  33,  2,  42, 16,  48,  8,  65, 16, 
++ 	{   3,  2,   9,  8,  18,  8,  27, 32,  33,  2,  42, 16,  48,  8,  65, 16,
 + 	   74,  2,  80,  2,  89,  4,  99, 16, 104,  4, 122, 32,   0,  0, },
-+ 	{   1,  4,   8,  1,  18,  4,  25, 32,  34, 32,  41,  8,  50,  8,  59, 32, 
++ 	{   1,  4,   8,  1,  18,  4,  25, 32,  34, 32,  41,  8,  50,  8,  59, 32,
 + 	   64, 16,  75,  4,  90,  1,  97, 16, 106,  2, 112,  2, 123,  1, },
-+ 	{   2,  1,  19,  8,  35,  1,  40,  1,  50,  4,  57, 32,  75,  2,  80, 32, 
++ 	{   2,  1,  19,  8,  35,  1,  40,  1,  50,  4,  57, 32,  75,  2,  80, 32,
 + 	   89,  1,  96, 16, 107,  4, 120,  8,   0,  0,   0,  0,   0,  0, },
-+ 	{   4, 32,  20,  2,  31,  4,  37, 32,  47,  1,  54,  1,  63,  2,  68,  1, 
++ 	{   4, 32,  20,  2,  31,  4,  37, 32,  47,  1,  54,  1,  63,  2,  68,  1,
 + 	   78,  4,  84,  8, 101, 16, 108,  4, 119, 16, 126,  8,   0,  0, },
-+ 	{   5,  4,  15,  4,  21, 32,  31,  1,  38,  1,  47,  2,  53,  2,  68,  8, 
++ 	{   5,  4,  15,  4,  21, 32,  31,  1,  38,  1,  47,  2,  53,  2,  68,  8,
 + 	   85, 16,  92,  4, 103, 16, 108, 32, 118, 32, 124,  2,   0,  0, },
-+ 	{  15,  2,  21,  2,  39,  8,  46, 16,  55, 32,  61,  1,  71, 16,  76, 32, 
++ 	{  15,  2,  21,  2,  39,  8,  46, 16,  55, 32,  61,  1,  71, 16,  76, 32,
 + 	   86, 32,  93,  4, 102,  2, 108, 16, 117,  8, 126,  1,   0,  0, },
-+ 	{  14, 16,  23, 32,  29,  1,  38,  8,  52,  2,  63,  4,  70,  2,  76, 16, 
++ 	{  14, 16,  23, 32,  29,  1,  38,  8,  52,  2,  63,  4,  70,  2,  76, 16,
 + 	   85,  8, 100,  1, 110,  4, 116,  8, 127,  8,   0,  0,   0,  0, },
-+ 	{   1,  8,   8, 32,  17,  1,  24, 16,  35,  4,  50,  1,  57, 16,  67,  8, 
++ 	{   1,  8,   8, 32,  17,  1,  24, 16,  35,  4,  50,  1,  57, 16,  67,  8,
 + 	   83,  1,  88,  1,  98,  4, 105, 32, 114, 32, 123,  2,   0,  0, },
-+ 	{   0,  1,  11, 16,  16,  4,  35,  2,  40, 32,  49,  1,  56, 16,  65,  2, 
++ 	{   0,  1,  11, 16,  16,  4,  35,  2,  40, 32,  49,  1,  56, 16,  65,  2,
 + 	   74, 16,  80,  8,  99,  8, 115,  1, 121,  4,   0,  0,   0,  0, },
-+ 	{   9, 16,  18,  2,  24,  2,  33,  4,  43, 16,  48,  4,  66, 32,  73,  8, 
++ 	{   9, 16,  18,  2,  24,  2,  33,  4,  43, 16,  48,  4,  66, 32,  73,  8,
 + 	   82,  8,  91, 32,  97,  2, 106, 16, 112,  8, 122,  1,   0,  0, },
-+ 	{  14, 32,  21,  4,  30,  2,  36, 16,  45,  8,  60,  1,  69,  2,  87,  8, 
++ 	{  14, 32,  21,  4,  30,  2,  36, 16,  45,  8,  60,  1,  69,  2,  87,  8,
 + 	   94, 16, 103, 32, 109,  1, 118,  8, 124, 32,   0,  0,   0,  0, },
-+ 	{   7,  4,  14,  2,  20, 16,  29,  8,  44,  1,  54,  4,  60,  8,  71,  8, 
++ 	{   7,  4,  14,  2,  20, 16,  29,  8,  44,  1,  54,  4,  60,  8,  71,  8,
 + 	   78, 16,  87, 32,  93,  1, 102,  8, 116,  2, 125,  4,   0,  0, },
-+ 	{   7,  2,  12,  1,  22,  4,  28,  8,  45, 16,  52,  4,  63, 16,  70,  8, 
++ 	{   7,  2,  12,  1,  22,  4,  28,  8,  45, 16,  52,  4,  63, 16,  70,  8,
 + 	   84,  2,  95,  4, 101, 32, 111,  1, 118,  1,   0,  0,   0,  0, },
-+ 	{   6, 16,  13, 16,  20,  4,  31, 16,  36, 32,  46, 32,  53,  4,  62,  2, 
++ 	{   6, 16,  13, 16,  20,  4,  31, 16,  36, 32,  46, 32,  53,  4,  62,  2,
 + 	   69, 32,  79,  1,  86,  1,  95,  2, 101,  2, 119,  8,   0,  0, },
-+ 	{   0, 32,  10,  8,  19, 32,  25,  2,  34, 16,  40,  8,  59,  8,  66,  2, 
++ 	{   0, 32,  10,  8,  19, 32,  25,  2,  34, 16,  40,  8,  59,  8,  66,  2,
 + 	   72,  2,  81,  4,  91, 16,  96,  4, 115,  2, 121,  8,   0,  0, },
-+ 	{   3, 16,  10,  4,  17, 32,  26, 32,  33,  8,  42,  8,  51, 32,  57,  2, 
++ 	{   3, 16,  10,  4,  17, 32,  26, 32,  33,  8,  42,  8,  51, 32,  57,  2,
 + 	   67,  4,  82,  1,  89, 16,  98,  2, 104,  2, 113,  4, 120,  1, },
-+ 	{   1, 16,  11,  8,  27,  1,  32,  1,  42,  4,  49, 32,  58, 32,  67,  2, 
++ 	{   1, 16,  11,  8,  27,  1,  32,  1,  42,  4,  49, 32,  58, 32,  67,  2,
 + 	   72, 32,  81,  1,  88, 16,  99,  4, 114,  1,   0,  0,   0,  0, },
-+ 	{   6, 32,  12,  2,  23,  4,  29, 32,  39,  1,  46,  1,  55,  2,  61,  2, 
++ 	{   6, 32,  12,  2,  23,  4,  29, 32,  39,  1,  46,  1,  55,  2,  61,  2,
 + 	   70,  4,  76,  8,  93, 16, 100,  4, 111, 16, 116, 32,   0,  0, },
-+ 	{   6,  2,  13, 32,  23,  1,  30,  1,  39,  2,  45,  2,  63,  8,  77, 16, 
++ 	{   6,  2,  13, 32,  23,  1,  30,  1,  39,  2,  45,  2,  63,  8,  77, 16,
 + 	   84,  4,  95, 16, 100, 32, 110, 32, 117,  4, 127,  4,   0,  0, },
-+ 	{   4,  1,  13,  2,  31,  8,  38, 16,  47, 32,  53,  1,  62,  8,  68, 32, 
++ 	{   4,  1,  13,  2,  31,  8,  38, 16,  47, 32,  53,  1,  62,  8,  68, 32,
 + 	   78, 32,  85,  4,  94,  2, 100, 16, 109,  8, 127,  2,   0,  0, },
-+ 	{   5, 16,  15, 32,  21,  1,  30,  8,  44,  2,  55,  4,  61, 32,  68, 16, 
++ 	{   5, 16,  15, 32,  21,  1,  30,  8,  44,  2,  55,  4,  61, 32,  68, 16,
 + 	   77,  8,  92,  1, 102,  4, 108,  8, 126, 16,   0,  0,   0,  0, },
-+ 	{   2,  8,   9,  1,  16, 16,  27,  4,  42,  1,  49, 16,  58,  2,  75,  1, 
++ 	{   2,  8,   9,  1,  16, 16,  27,  4,  42,  1,  49, 16,  58,  2,  75,  1,
 + 	   80,  1,  90,  4,  97, 32, 106, 32, 113,  8, 120, 32,   0,  0, },
-+ 	{   2,  4,   8,  4,  27,  2,  32, 32,  41,  1,  48, 16,  59,  4,  66, 16, 
++ 	{   2,  4,   8,  4,  27,  2,  32, 32,  41,  1,  48, 16,  59,  4,  66, 16,
 + 	   72,  8,  91,  8, 107,  1, 112,  1, 123, 16,   0,  0,   0,  0, },
-+ 	{   3,  8,  10,  2,  16,  2,  25,  4,  35, 16,  40,  4,  59,  2,  65,  8, 
++ 	{   3,  8,  10,  2,  16,  2,  25,  4,  35, 16,  40,  4,  59,  2,  65,  8,
 + 	   74,  8,  83, 32,  89,  2,  98, 16, 104,  8, 121, 16,   0,  0, },
-+ 	{   4,  2,  13,  4,  22,  2,  28, 16,  37,  8,  52,  1,  62,  4,  79,  8, 
++ 	{   4,  2,  13,  4,  22,  2,  28, 16,  37,  8,  52,  1,  62,  4,  79,  8,
 + 	   86, 16,  95, 32, 101,  1, 110,  8, 126, 32,   0,  0,   0,  0, },
-+ 	{   5, 32,  12, 16,  21,  8,  36,  1,  46,  4,  52,  8,  70, 16,  79, 32, 
++ 	{   5, 32,  12, 16,  21,  8,  36,  1,  46,  4,  52,  8,  70, 16,  79, 32,
 + 	   85,  1,  94,  8, 108,  2, 119,  4, 126,  2,   0,  0,   0,  0, },
-+ 	{   5,  2,  14,  4,  20,  8,  37, 16,  44,  4,  55, 16,  60, 32,  76,  2, 
++ 	{   5,  2,  14,  4,  20,  8,  37, 16,  44,  4,  55, 16,  60, 32,  76,  2,
 + 	   87,  4,  93, 32, 103,  1, 110,  1, 119,  2, 124,  1,   0,  0, },
-+ 	{   7, 32,  12,  4,  23, 16,  28, 32,  38, 32,  45,  4,  54,  2,  60, 16, 
++ 	{   7, 32,  12,  4,  23, 16,  28, 32,  38, 32,  45,  4,  54,  2,  60, 16,
 + 	   71,  1,  78,  1,  87,  2,  93,  2, 111,  8, 118, 16, 125, 16, },
-+ 	{   1,  1,  11, 32,  17,  2,  26, 16,  32,  8,  51,  8,  64,  2,  73,  4, 
++ 	{   1,  1,  11, 32,  17,  2,  26, 16,  32,  8,  51,  8,  64,  2,  73,  4,
 + 	   83, 16,  88,  4, 107,  2, 112, 32, 122,  8,   0,  0,   0,  0, },
-+ 	{   0,  4,   9, 32,  18, 32,  25,  8,  34,  8,  43, 32,  49,  2,  58, 16, 
++ 	{   0,  4,   9, 32,  18, 32,  25,  8,  34,  8,  43, 32,  49,  2,  58, 16,
 + 	   74,  1,  81, 16,  90,  2,  96,  2, 105,  4, 115, 16, 122,  4, },
-+ 	{   2,  2,  19,  1,  24,  1,  34,  4,  41, 32,  50, 32,  57,  8,  64, 32, 
++ 	{   2,  2,  19,  1,  24,  1,  34,  4,  41, 32,  50, 32,  57,  8,  64, 32,
 + 	   73,  1,  80, 16,  91,  4, 106,  1, 113, 16, 123,  8,   0,  0, },
-+ 	{   3,  4,  10, 16,  16,  8,  35,  8,  51,  1,  56,  1,  67, 16,  72,  4, 
++ 	{   3,  4,  10, 16,  16,  8,  35,  8,  51,  1,  56,  1,  67, 16,  72,  4,
 + 	   91,  2,  96, 32, 105,  1, 112, 16, 121,  2,   0,  0,   0,  0, },
-+ 	{   4, 16,  15,  1,  22,  1,  31,  2,  37,  2,  55,  8,  62, 16,  69, 16, 
++ 	{   4, 16,  15,  1,  22,  1,  31,  2,  37,  2,  55,  8,  62, 16,  69, 16,
 + 	   76,  4,  87, 16,  92, 32, 102, 32, 109,  4, 118,  2, 125, 32, },
-+ 	{   6,  4,  23,  8,  30, 16,  39, 32,  45,  1,  54,  8,  70, 32,  77,  4, 
++ 	{   6,  4,  23,  8,  30, 16,  39, 32,  45,  1,  54,  8,  70, 32,  77,  4,
 + 	   86,  2,  92, 16, 101,  8, 116,  1, 125,  2,   0,  0,   0,  0, },
-+ 	{   4,  4,  13,  1,  22,  8,  36,  2,  47,  4,  53, 32,  63,  1,  69,  8, 
++ 	{   4,  4,  13,  1,  22,  8,  36,  2,  47,  4,  53, 32,  63,  1,  69,  8,
 + 	   84,  1,  94,  4, 100,  8, 117, 16, 127, 32,   0,  0,   0,  0, },
-+ 	{   3, 32,   8, 16,  19,  4,  34,  1,  41, 16,  50,  2,  56,  2,  67,  1, 
++ 	{   3, 32,   8, 16,  19,  4,  34,  1,  41, 16,  50,  2,  56,  2,  67,  1,
 + 	   72,  1,  82,  4,  89, 32,  98, 32, 105,  8, 114,  8, 121,  1, },
-+ 	{   1, 32,  19,  2,  24, 32,  33,  1,  40, 16,  51,  4,  64,  8,  83,  8, 
++ 	{   1, 32,  19,  2,  24, 32,  33,  1,  40, 16,  51,  4,  64,  8,  83,  8,
 + 	   99,  1, 104,  1, 114,  4, 120,  4,   0,  0,   0,  0,   0,  0, },
-+ 	{   8,  2,  17,  4,  27, 16,  32,  4,  51,  2,  56, 32,  66,  8,  75, 32, 
++ 	{   8,  2,  17,  4,  27, 16,  32,  4,  51,  2,  56, 32,  66,  8,  75, 32,
 + 	   81,  2,  90, 16,  96,  8, 115,  8, 122,  2,   0,  0,   0,  0, },
-+ 	{   2, 16,  18,  1,  25, 16,  34,  2,  40,  2,  49,  4,  59, 16,  66,  4, 
++ 	{   2, 16,  18,  1,  25, 16,  34,  2,  40,  2,  49,  4,  59, 16,  66,  4,
 + 	   73, 32,  82, 32,  89,  8,  98,  8, 107, 32, 113,  2, 123,  4, },
-+ 	{   7,  1,  13,  8,  28,  1,  38,  4,  44,  8,  61, 16,  71, 32,  77,  1, 
++ 	{   7,  1,  13,  8,  28,  1,  38,  4,  44,  8,  61, 16,  71, 32,  77,  1,
 + 	   86,  8, 100,  2, 111,  4, 117, 32, 124, 16,   0,  0,   0,  0, },
-+ 	{  12,  8,  29, 16,  36,  4,  47, 16,  52, 32,  62, 32,  68,  2,  79,  4, 
++ 	{  12,  8,  29, 16,  36,  4,  47, 16,  52, 32,  62, 32,  68,  2,  79,  4,
 + 	   85, 32,  95,  1, 102,  1, 111,  2, 117,  2, 126,  4,   0,  0, },
-+ 	{   5,  1,  15, 16,  20, 32,  30, 32,  37,  4,  46,  2,  52, 16,  61,  8, 
++ 	{   5,  1,  15, 16,  20, 32,  30, 32,  37,  4,  46,  2,  52, 16,  61,  8,
 + 	   70,  1,  79,  2,  85,  2, 103,  8, 110, 16, 119, 32, 124,  4, },
-+ 	{   0, 16,   9,  2,  18, 16,  24,  8,  43,  8,  59,  1,  65,  4,  75, 16, 
++ 	{   0, 16,   9,  2,  18, 16,  24,  8,  43,  8,  59,  1,  65,  4,  75, 16,
 + 	   80,  4,  99,  2, 104, 32, 113,  1, 123, 32,   0,  0,   0,  0, },
-+ 	{  10, 32,  17,  8,  26,  8,  35, 32,  41,  2,  50, 16,  56,  8,  66,  1, 
++ 	{  10, 32,  17,  8,  26,  8,  35, 32,  41,  2,  50, 16,  56,  8,  66,  1,
 + 	   73, 16,  82,  2,  88,  2,  97,  4, 107, 16, 112,  4, 121, 32, },
-+ 	{   0,  2,  11,  1,  16,  1,  26,  4,  33, 32,  42, 32,  49,  8,  58,  8, 
++ 	{   0,  2,  11,  1,  16,  1,  26,  4,  33, 32,  42, 32,  49,  8,  58,  8,
 + 	   65,  1,  72, 16,  83,  4,  98,  1, 105, 16, 114,  2,   0,  0, },
-+ 	{   8,  8,  27,  8,  43,  1,  48,  1,  58,  4,  64,  4,  83,  2,  88, 32, 
++ 	{   8,  8,  27,  8,  43,  1,  48,  1,  58,  4,  64,  4,  83,  2,  88, 32,
 + 	   97,  1, 104, 16, 115,  4, 122, 16,   0,  0,   0,  0,   0,  0, },
-+ 	{   5,  8,  14,  1,  23,  2,  29,  2,  47,  8,  54, 16,  63, 32,  68,  4, 
++ 	{   5,  8,  14,  1,  23,  2,  29,  2,  47,  8,  54, 16,  63, 32,  68,  4,
 + 	   79, 16,  84, 32,  94, 32, 101,  4, 110,  2, 116, 16, 127,  1, },
-+ 	{   4,  8,  15,  8,  22, 16,  31, 32,  37,  1,  46,  8,  60,  2,  69,  4, 
++ 	{   4,  8,  15,  8,  22, 16,  31, 32,  37,  1,  46,  8,  60,  2,  69,  4,
 + 	   78,  2,  84, 16,  93,  8, 108,  1, 118,  4,   0,  0,   0,  0, },
-+ 	{   7, 16,  14,  8,  28,  2,  39,  4,  45, 32,  55,  1,  62,  1,  76,  1, 
++ 	{   7, 16,  14,  8,  28,  2,  39,  4,  45, 32,  55,  1,  62,  1,  76,  1,
 + 	   86,  4,  92,  8, 109, 16, 116,  4, 125,  1,   0,  0,   0,  0, },
-+ 	{   1,  2,  11,  4,  26,  1,  33, 16,  42,  2,  48,  2,  57,  4,  64,  1, 
++ 	{   1,  2,  11,  4,  26,  1,  33, 16,  42,  2,  48,  2,  57,  4,  64,  1,
 + 	   74,  4,  81, 32,  90, 32,  97,  8, 106,  8, 115, 32, 120, 16, },
-+ 	{   2, 32,  11,  2,  16, 32,  25,  1,  32, 16,  43,  4,  58,  1,  75,  8, 
++ 	{   2, 32,  11,  2,  16, 32,  25,  1,  32, 16,  43,  4,  58,  1,  75,  8,
 + 	   91,  1,  96,  1, 106,  4, 113, 32,   0,  0,   0,  0,   0,  0, },
-+ 	{   3,  1,   9,  4,  19, 16,  24,  4,  43,  2,  48, 32,  57,  1,  67, 32, 
++ 	{   3,  1,   9,  4,  19, 16,  24,  4,  43,  2,  48, 32,  57,  1,  67, 32,
 + 	   73,  2,  82, 16,  88,  8, 107,  8, 120,  2,   0,  0,   0,  0, },
-+ 	{   0,  8,  10,  1,  17, 16,  26,  2,  32,  2,  41,  4,  51, 16,  56,  4, 
++ 	{   0,  8,  10,  1,  17, 16,  26,  2,  32,  2,  41,  4,  51, 16,  56,  4,
 + 	   65, 32,  74, 32,  81,  8,  90,  8,  99, 32, 105,  2, 114, 16, },
-+ 	{   6,  1,  20,  1,  30,  4,  36,  8,  53, 16,  60,  4,  69,  1,  78,  8, 
++ 	{   6,  1,  20,  1,  30,  4,  36,  8,  53, 16,  60,  4,  69,  1,  78,  8,
 + 	   92,  2, 103,  4, 109, 32, 119,  1, 125,  8,   0,  0,   0,  0, },
-+ 	{   7,  8,  21, 16,  28,  4,  39, 16,  44, 32,  54, 32,  61,  4,  71,  4, 
++ 	{   7,  8,  21, 16,  28,  4,  39, 16,  44, 32,  54, 32,  61,  4,  71,  4,
 + 	   77, 32,  87,  1,  94,  1, 103,  2, 109,  2, 124,  8,   0,  0, },
-+ 	{   6,  8,  12, 32,  22, 32,  29,  4,  38,  2,  44, 16,  53,  8,  71,  2, 
++ 	{   6,  8,  12, 32,  22, 32,  29,  4,  38,  2,  44, 16,  53,  8,  71,  2,
 + 	   77,  2,  95,  8, 102, 16, 111, 32, 117,  1, 127, 16,   0,  0, }
 + };
-+ 
++
 + static void
 + key_setup(char key[U9AUTH_DESKEYLEN], char *ek)
 + {
 + 	int i, j, k, mask;
 + 	uchar (*x)[2];
-+ 
++
 + 	bzero(ek, 128);
 + 	x = keyexpand[0];
 + 	for(i = 0; i < 7; i++){
@@ -843,17 +843,17 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 +  *	@(#)nfs.h	8.4 (Berkeley) 5/1/95
 +  * $Id: nfs.h,v 1.44 1998/09/07 05:42:15 bde Exp $
 +  */
-+ 
++
 + #ifndef _9FS_H_
 + #define _9FS_H_
-+ 
++
 + #ifdef KERNEL
 + #include "opt_u9fs.h"
 + #endif
-+ 
++
 + #define U9FS_FABLKSIZE   512
 + #define U9FS_PORT        17008
-+ 
++
 + /*
 +  * The set of signals the interrupt an I/O in progress for U9FSMNT_INT mounts.
 +  * What should be in this set is open to debate, but I believe that since
@@ -864,7 +864,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 +  */
 + #define	U9FSINT_SIGMASK	(sigmask(SIGINT)|sigmask(SIGTERM)|sigmask(SIGKILL)| \
 + 			 sigmask(SIGHUP)|sigmask(SIGQUIT))
-+ 
++
 + /*
 +  * U9FS mount option flags
 +  */
@@ -873,7 +873,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 + #define	U9FSMNT_INT		0x00000040  /* allow interrupts on hard mount */
 + #define	U9FSMNT_KERB		0x00000400  /* Use Kerberos authentication */
 + #define	U9FSMNT_READAHEAD	0x00002000  /* set read ahead */
-+ 
++
 + #define U9FSSTA_HASWRITEVERF	0x00040000  /* Has write verifier for V3 */
 + #define U9FSSTA_GOTPATHCONF	0x00080000  /* Got the V3 pathconf info */
 + #define U9FSSTA_GOTFSINFO	0x00100000  /* Got the V3 fsinfo */
@@ -888,9 +888,9 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 + #define	U9FSSTA_HASAUTH		0x20000000  /* Has authenticator */
 + #define	U9FSSTA_WANTAUTH		0x40000000  /* Wants an authenticator */
 + #define	U9FSSTA_AUTHERR		0x80000000  /* Authentication error */
-+ 
++
 + #define	U9FSNOHASH(fhsum) (&u9fsnodehashtbl[(fhsum) % u9fsnodehash])
-+ 
++
 + /*
 +  * Arguments to mount 9FS
 +  */
@@ -907,12 +907,12 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 + 	int		rsize;		/* read size in bytes */
 + 	int		readdirsize;	/* readdir size in bytes */
 + 	char		*hostname;	/* server's name */
-+ 
++
 +         struct sockaddr * authaddr;
 +         int             authaddrlen;
 +         int             authsotype;
 +         int             authsoproto;
-+ 
++
 +         int             nusers;
 +         char            user[U9FS_NAMELEN];
 +         char            key[U9AUTH_DESKEYLEN];
@@ -921,9 +921,9 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 + 	  char p9_name[U9FS_NAMELEN];
 + 	} * users;
 + };
-+ 
++
 + #define U9FS_USER_HASHSIZE 512
-+ 
++
 + struct u9fsuser {
 +   LIST_ENTRY(u9fsuser) u_hash;
 +   uid_t                u_uid;
@@ -931,7 +931,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 +   char                 u_ckey[U9AUTH_DESKEYLEN];  /* user key */
 +   char                 u_skey[U9AUTH_DESKEYLEN];  /* session key */
 + };
-+ 
++
 + /*
 +  * The u9fsnode is the u9fs equivalent to ufs's inode. Any similarity
 +  * is purely coincidental.
@@ -957,8 +957,8 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 + 	time_t			n_ctime;	/* Prev create time. */
 +         struct u9fs_qid         n_qid;
 + 	u_short			n_fid;		/* U9FS FID */
-+         u_short                 n_rdfid;      
-+         u_short                 n_wrfid;      
++         u_short                 n_rdfid;
++         u_short                 n_wrfid;
 + 	struct vnode		*n_vnode;	/* associated vnode */
 + 	struct lockf		*n_lockf;	/* Locking record of file */
 + 	int			n_error;	/* Save write error value */
@@ -966,14 +966,14 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 + 	short			n_flag;		/* Flag for locking.. */
 +         int                     n_opens;        /* number of opens */
 + };
-+ 
++
 + #define n_atim		n_un1.nf_atim
 + #define n_mtim		n_un2.nf_mtim
 + #define n_sillyrename	n_un3.nf_silly
 + #define n_cookieverf	n_un1.nd_cookieverf
 + #define n_direofoffset	n_un2.nd_direof
 + #define n_cookies	n_un3.nd_cook
-+ 
++
 + /*
 +  * Flags for n_flag
 +  */
@@ -989,13 +989,13 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 + #define	NCHG		0x0400	/* Special file times changed */
 + #define NLOCKED		0x0800  /* node is locked */
 + #define NWANTED		0x0100  /* someone wants to lock */
-+ 
++
 + /*
 +  * Convert between u9fsnode pointers and vnode pointers
 +  */
 + #define VTOU9FS(vp)	((struct u9fsnode *)(vp)->v_data)
 + #define U9FSTOV(np)	((struct vnode *)(np)->n_vnode)
-+ 
++
 + /*
 +  * Mount structure.
 +  * One allocated on every U9FS mount.
@@ -1018,12 +1018,12 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 + 	int	nm_rsize;		/* Max size of read rpc */
 + 	int	nm_wsize;		/* Max size of write rpc */
 + 	int	nm_readdirsize;		/* Size of a readdir rpc */
-+   
++
 +   struct lock   nm_lock;                /* lock for tag/fid freelist */
 +   bitstr_t * nm_tags;
 +   bitstr_t * nm_fids;
 +   TAILQ_HEAD(u9fs_reqq, u9fsreq) nm_reqq;
-+ 
++
 +         uid_t   nm_authuid;             /* Uid for authenticator */
 + #if 0
 + 	struct vnode *nm_inprog;	/* Vnode in prog by nqu9fs_clientd() */
@@ -1045,19 +1045,19 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 + #endif
 + 	u_int64_t nm_maxfilesize;	/* maximum file size */
 + };
-+ 
++
 + #ifdef KERNEL
-+ 
++
 + #ifdef MALLOC_DECLARE
 + MALLOC_DECLARE(M_U9FSHASH);
 + MALLOC_DECLARE(M_U9FSBITS);
-+ 
++
 + extern        vop_t   **u9fs_vnodeop_p;
-+ 
++
 + /* u9fs_node.c */
 + void     u9fs_nhinit __P((void));
 + int u9fs_nget __P((struct mount *mntp, u9fsfh_t fh, struct u9fsnode **npp, struct proc * p));
-+ 
++
 + /* u9fs_subr.c */
 + void u9fs_id_init __P((bitstr_t ** bits));
 + u_short u9fs_id_new __P((bitstr_t * bits));
@@ -1068,19 +1068,19 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 + void  u9fs_hashuser __P((uid_t uid, char *name));
 + int u9fs_mbuftouio __P((struct mbuf *m, struct uio *uiop, int siz));
 + int u9fs_uiotombuf __P((struct uio *uiop, struct mbuf **mq, int siz));
-+ 
++
 + /* u9fs_vnopes.c */
 + int u9fs_readdirrpc __P((struct vnode *, struct uio *, struct ucred *));
 + int u9fs_readrpc __P((struct vnode *vp, struct uio *uiop, struct ucred *cred));
 + int u9fs_writerpc __P((struct vnode *vp, struct uio *uiop, struct ucred *cred));
-+ 
++
 + /* u9fs_bio.c */
 + int u9fs_bioread __P((struct vnode *, struct uio *, int, struct ucred *,int));
 + int u9fs_biowrite __P((struct vnode *, struct uio *, int ioflag, struct ucred *));
 + int u9fs_doio __P((struct buf *, struct ucred *, struct proc *));
 + int	u9fs_vinvalbuf __P((struct vnode *, int, struct ucred *, struct proc *, int));
-+ 
-+ 
++
++
 + /* u9fs_socket.c */
 + int u9fs_sigintr __P((struct u9fsmount *nmp, struct proc *p));
 + void     u9fs_disconnect __P((struct socket *));
@@ -1088,16 +1088,16 @@ diff -N -c -r /usr/src/sys/9fs/9fs.h ./9fs/9fs.h
 + int      u9fs_connect_9fs __P((struct u9fsmount *));
 + int      u9fs_connect_9auth __P((struct u9fsmount *, struct u9fs_args *, struct socket **));
 + int u9fs_request __P((struct u9fsreq * req, struct u9fsreq * rep, int relm));
-+ 
++
 + #endif
-+ 
++
 + /*
 +  * Convert mount ptr to u9fsmount ptr.
 +  */
 + #define VFSTOU9FS(mp)	((struct u9fsmount *)((mp)->mnt_data))
-+ 
++
 + #endif	/* KERNEL */
-+ 
++
 + #endif
 diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 *** /usr/src/sys/9fs/9fs_bio.c	Wed Dec 31 19:00:00 1969
@@ -1119,10 +1119,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + #include <sys/systm.h>
 + #include <sys/protosw.h>
 + #include <sys/syslog.h>
-+ 
++
 + #include <netinet/in.h>
 + #include <netinet/tcp.h>
-+ 
++
 + #include <vm/vm.h>
 + #include <vm/vm_extern.h>
 + #include <vm/vm_zone.h>
@@ -1131,19 +1131,19 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + #include <vm/vm_object.h>
 + #include <vm/vm_pager.h>
 + #include <vm/vnode_pager.h>
-+ 
++
 + #include <net/if.h>
 + #include <net/route.h>
 + #include <netinet/in.h>
-+ 
++
 + #include <9fs/bitstring.h>
 + #include <9fs/9p.h>
 + #include <9fs/9auth.h>
 + #include <9fs/9fs.h>
-+ 
++
 + static struct buf *u9fs_getcacheblk __P((struct vnode *vp, daddr_t bn, int size, struct proc *p));
 + static void u9fs_prot_buf __P((struct buf *bp, int off, int n));
-+ 
++
 + /*
 +  * Vnode op for read using bio
 +  */
@@ -1163,7 +1163,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 	struct u9fsmount *nmp = VFSTOU9FS(vp->v_mount);
 + 	daddr_t lbn;
 + 	int error = 0, n = 0, on = 0, bufsize, not_readin;
-+ 
++
 + 	if (uio->uio_resid == 0)
 + 		return (0);
 + 	if (uio->uio_offset < 0)
@@ -1190,7 +1190,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 		lbn = uio->uio_offset / biosize;
 + 		on = uio->uio_offset & (biosize - 1);
 + 		not_readin = 1;
-+ 
++
 + #if 0
 + 		/*
 + 		 * Start the read ahead(s), as required.
@@ -1217,7 +1217,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 		    }
 + 		}
 + #endif
-+ 
++
 + 		/*
 + 		 * If the block is in the cache and has the required data
 + 		 * in a valid region, just copy it out.
@@ -1226,7 +1226,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 		 */
 + again:
 + 		bufsize = biosize;
-+ 		if ((off_t)(lbn + 1) * biosize > np->n_size && 
++ 		if ((off_t)(lbn + 1) * biosize > np->n_size &&
 + 		    (off_t)(lbn + 1) * biosize - np->n_size < biosize) {
 + 			bufsize = np->n_size - (off_t)lbn * biosize;
 + 			bufsize = (bufsize + DEV_BSIZE - 1) & ~(DEV_BSIZE - 1);
@@ -1310,7 +1310,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 			    return (error);
 + 		    np->n_qid.vers = np->n_dir.dir_qid.vers;
 + 		}
-+ 
++
 + 		/*
 + 		 * Make sure we use a signed variant of min() since
 + 		 * the second term may be negative.
@@ -1321,7 +1321,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 		printf(" u9fs_bioread: type %x unexpected\n",vp->v_type);
 + 		break;
 + 	    };
-+ 
++
 + 	    if (n > 0) {
 + 		    error = uiomove(bp->b_data + on, (int)n, uio);
 + 	    }
@@ -1329,7 +1329,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 	} while (error == 0 && uio->uio_resid > 0 && n > 0);
 + 	return (error);
 + }
-+ 
++
 + /*
 +  * Vnode op for write using bio
 +  */
@@ -1349,7 +1349,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 +   daddr_t lbn;
 +   int bufsize;
 +   int n, on, error = 0;
-+ 
++
 +   if (ioflag & (IO_APPEND | IO_SYNC)) {
 +     if (ioflag & IO_APPEND) {
 +       error = VOP_GETATTR(vp, &vattr, cred, p);
@@ -1364,7 +1364,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 +     return (EFBIG);
 +   if (uio->uio_resid == 0)
 +     return (0);
-+ 
++
 + 	/*
 + 	 * I use nm_rsize, not nm_wsize so that all buffer cache blocks
 + 	 * will be the same size within a filesystem. nfs_writerpc will
@@ -1391,27 +1391,27 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 			crhold(cred);
 + 			bp->b_wcred = cred;
 + 		}
-+ 
++
 + 		error = uiomove((char *)bp->b_data + on, n, uio);
 + 		if (error) {
 + 			bp->b_flags |= B_ERROR;
 + 			brelse(bp);
 + 			return (error);
 + 		}
-+ 
++
 + 		/*
 + 		 * This will keep the buffer and mmaped regions more coherent.
 + 		 */
 + 		u9fs_prot_buf(bp, on, n);
 + 		bp->b_dirtyoff = on;
 + 		bp->b_dirtyend = on + n;
-+ 
++
 + 		if (bp->b_validend == 0 || bp->b_validend < bp->b_dirtyoff ||
 + 		    bp->b_validoff > bp->b_dirtyend) {
 + 		  /* XXX: destroys our read cache if not overlapping */
 + 		  /* two choice: none implemented
 + 		     1> keep the bigger(smaller) piece
-+ 		     2> read the missing segment		     
++ 		     2> read the missing segment
 + 		  */
 + 			bp->b_validoff = bp->b_dirtyoff;
 + 			bp->b_validend = bp->b_dirtyend;
@@ -1419,17 +1419,17 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 			bp->b_validoff = min(bp->b_validoff, bp->b_dirtyoff);
 + 			bp->b_validend = max(bp->b_validend, bp->b_dirtyend);
 + 		}
-+ 
++
 + 		error = bwrite(bp);
 + 		if( error ) {
 + 		  bp->b_flags |= B_ERROR;
 + 		  /* brelse(bp); */
-+ 		  return error;		  
++ 		  return error;
 + 		}
 + 	} while (uio->uio_resid > 0 && n > 0);
 + 	return 0;
 + }
-+ 
++
 + /*
 +  * Do an I/O operation to/from a cache block. This may be called
 +  * synchronously or from an u9fsiod.
@@ -1447,7 +1447,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 	int error = 0, diff, len;
 + 	struct uio uio;
 + 	struct iovec io;
-+ 
++
 + 	vp = bp->b_vp;
 + 	np = VTOU9FS(vp);
 + 	nmp = VFSTOU9FS(vp->v_mount);
@@ -1456,7 +1456,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 	uiop->uio_iovcnt = 1;
 + 	uiop->uio_segflg = UIO_SYSSPACE;
 + 	uiop->uio_procp = p;
-+ 
++
 + 	if (bp->b_flags & B_READ ) {
 + 	    io.iov_len = uiop->uio_resid = bp->b_bcount;
 + 	    io.iov_base = bp->b_data;
@@ -1504,7 +1504,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 	} else {
 + 	    if ((off_t)bp->b_blkno * DEV_BSIZE + bp->b_dirtyend > np->n_size)
 + 		bp->b_dirtyend = np->n_size - (off_t)bp->b_blkno * DEV_BSIZE;
-+ 
++
 + 	    if (bp->b_dirtyend > bp->b_dirtyoff) {
 + 		io.iov_len = uiop->uio_resid = bp->b_dirtyend
 + 		    - bp->b_dirtyoff;
@@ -1515,7 +1515,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 		bp->b_flags |= B_WRITEINPROG;
 + 		error = u9fs_writerpc(vp, uiop, cr);
 + 		bp->b_flags &= ~B_WRITEINPROG;
-+ 
++
 + 		if (error) {
 + 		  bp->b_flags |= B_ERROR;
 + 		  bp->b_error = np->n_error = error;
@@ -1532,7 +1532,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 	biodone(bp);
 + 	return error;
 + }
-+ 
++
 + /*
 +  * Get an u9fs cache block.
 +  * Allocate a new one if the block isn't currently in the cache
@@ -1550,10 +1550,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 	register struct buf *bp;
 + 	struct mount *mp;
 + 	struct u9fsmount *nmp;
-+ 
++
 + 	mp = vp->v_mount;
 + 	nmp = VFSTOU9FS(mp);
-+ 
++
 + 	if (nmp->nm_flag & U9FSMNT_INT) {
 + 		bp = getblk(vp, bn, size, PCATCH, 0);
 + 		while (bp == (struct buf *)0) {
@@ -1563,16 +1563,16 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 		}
 + 	} else
 + 		bp = getblk(vp, bn, size, 0, 0);
-+ 
++
 + 	if (vp->v_type == VREG) {
 + 		int biosize;
 + 		biosize = mp->mnt_stat.f_iosize;
 + 		bp->b_blkno = bn * (biosize / DEV_BSIZE);
 + 	}
-+ 
++
 + 	return (bp);
 + }
-+ 
++
 + static void
 + u9fs_prot_buf(bp, off, n)
 + 	struct buf *bp;
@@ -1580,17 +1580,17 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 	int n;
 + {
 + 	int pindex, boff, end;
-+ 
++
 + 	if ((bp->b_flags & B_VMIO) == 0)
 + 		return;
-+ 
++
 + 	end = round_page(off + n);
 + 	for (boff = trunc_page(off); boff < end; boff += PAGE_SIZE) {
 + 		pindex = boff >> PAGE_SHIFT;
 + 		vm_page_protect(bp->b_pages[pindex], VM_PROT_NONE);
 + 	}
 + }
-+ 
++
 + /*
 +  * Flush and invalidate all dirty buffers. If another process is already
 +  * doing the flush, just wait for completion.
@@ -1606,11 +1606,11 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 	register struct u9fsnode *np = VTOU9FS(vp);
 + 	struct u9fsmount *nmp = VFSTOU9FS(vp->v_mount);
 + 	int error = 0, slpflag, slptimeo;
-+ 
++
 + 	if (vp->v_flag & VXLOCK) {
 + 		return (0);
 + 	}
-+ 
++
 + 	if ((nmp->nm_flag & U9FSMNT_INT) == 0)
 + 		intrflg = 0;
 + 	if (intrflg) {
@@ -1630,7 +1630,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 		if (error && intrflg && u9fs_sigintr(nmp, p))
 + 			return (EINTR);
 + 	}
-+ 
++
 + 	/*
 + 	 * Now, flush as required.
 + 	 */
@@ -1654,7 +1654,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_bio.c ./9fs/9fs_bio.c
 + 	}
 + 	return (0);
 + }
-+ 
++
 diff -N -c -r /usr/src/sys/9fs/9fs_node.c ./9fs/9fs_node.c
 *** /usr/src/sys/9fs/9fs_node.c	Wed Dec 31 19:00:00 1969
 --- ./9fs/9fs_node.c	Thu Nov 25 15:36:49 1999
@@ -1675,28 +1675,28 @@ diff -N -c -r /usr/src/sys/9fs/9fs_node.c ./9fs/9fs_node.c
 + #include <sys/systm.h>
 + #include <sys/protosw.h>
 + #include <sys/syslog.h>
-+ 
++
 + #include <netinet/in.h>
 + #include <netinet/tcp.h>
-+ 
++
 + #include <vm/vm.h>
 + #include <vm/vm_extern.h>
 + #include <vm/vm_zone.h>
-+ 
++
 + #include <net/if.h>
 + #include <net/route.h>
 + #include <netinet/in.h>
-+ 
++
 + #include <9fs/bitstring.h>
 + #include <9fs/9p.h>
 + #include <9fs/9auth.h>
 + #include <9fs/9fs.h>
-+ 
++
 + vm_zone_t u9fsnode_zone;
 + static LIST_HEAD(u9fsnodehashhead, u9fsnode) *u9fsnodehashtbl;
 + static u_long u9fsnodehash;
 + MALLOC_DEFINE(M_U9FSHASH, "U9FS hash", "U9FS hash tables");
-+ 
++
 + /*
 +  * Initialize hash links for u9fsnodes
 +  * and build u9fsnode free list.
@@ -1707,7 +1707,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_node.c ./9fs/9fs_node.c
 +   u9fsnode_zone = zinit("U9FSNODE", sizeof(struct u9fsnode), 0, 0, 1);
 +   u9fsnodehashtbl = phashinit(desiredvnodes, M_U9FSHASH, &u9fsnodehash);
 + }
-+ 
++
 + /*
 +  * Look up a vnode/u9fsnode by file handle.
 +  * Callers must check for mount points!!
@@ -1715,7 +1715,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_node.c ./9fs/9fs_node.c
 +  * u9fsnode structure is returned.
 +  */
 + static int u9fs_node_hash_lock;
-+ 
++
 + int
 + u9fs_nget(mntp, fh, npp, p)
 +      struct mount *mntp;
@@ -1728,7 +1728,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_node.c ./9fs/9fs_node.c
 +   register struct vnode *vp;
 +   struct vnode *nvp;
 +   int error;
-+ 
++
 +   nhpp = U9FSNOHASH(fh);
 + loop:
 +   for (np = nhpp->lh_first; np != 0; np = np->n_hash.le_next) {
@@ -1752,14 +1752,14 @@ diff -N -c -r /usr/src/sys/9fs/9fs_node.c ./9fs/9fs_node.c
 +     goto loop;
 +   }
 +   u9fs_node_hash_lock = 1;
-+ 
++
 +   /*
 +    * allocate before getnewvnode since doing so afterward
 +    * might cause a bogus v_data pointer to get dereferenced
 +    * elsewhere if zalloc should block.
 +    */
 +   np = zalloc(u9fsnode_zone);
-+   
++
 +   error = getnewvnode(VT_U9FS, mntp, u9fs_vnodeop_p, &nvp);
 +   if (error) {
 +     if (u9fs_node_hash_lock < 0)
@@ -1781,16 +1781,16 @@ diff -N -c -r /usr/src/sys/9fs/9fs_node.c ./9fs/9fs_node.c
 +   np->n_qid.vers = 0; /* not in cache yet */
 +   np->n_fid = 0; /* should be set by the caller */
 +   *npp = np;
-+ 
++
 +   if (u9fs_node_hash_lock < 0)
 +     wakeup(&u9fs_node_hash_lock);
 +   u9fs_node_hash_lock = 0;
-+ 
++
 +   /*
 +    * Lock the new u9fsnode.
 +    */
 +   vn_lock(vp, LK_EXCLUSIVE | LK_RETRY, p);
-+   
++
 +   return (0);
 + }
 diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
@@ -1813,38 +1813,38 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 + #include <sys/systm.h>
 + #include <sys/protosw.h>
 + #include <sys/syslog.h>
-+ 
++
 + #include <netinet/in.h>
 + #include <netinet/tcp.h>
-+ 
++
 + #include <vm/vm.h>
 + #include <vm/vm_extern.h>
 + #include <vm/vm_zone.h>
-+ 
++
 + #include <net/if.h>
 + #include <net/route.h>
 + #include <netinet/in.h>
-+ 
++
 + #include <9fs/bitstring.h>
 + #include <9fs/9p.h>
 + #include <9fs/9auth.h>
 + #include <9fs/9fs.h>
-+ 
++
 + static int u9fs_reply __P((struct u9fsreq * req));
 + static int u9fs_send __P((struct socket * so, struct mbuf * mreq, struct u9fsreq * req));
 + static int u9fs_receive __P((struct socket * so, struct mbuf **mrep, struct u9fsreq * req));
-+ 
++
 + static int u9fs_sndlock __P((int *flagp, int *statep, struct u9fsreq *rep));
 + static void u9fs_sndunlock __P((int *flagp, int *statep));
 + static int u9fs_rcvlock __P((struct u9fsreq *req));
 + static void u9fs_rcvunlock __P((int *flagp, int *statep));
-+ 
++
 + int
 + u9fs_connect(struct socket ** sop, struct sockaddr * saddr, int sotype, int soproto, struct proc * p)
 + {
 +   register struct socket * so;
 +   int error, s;
-+   
++
 +   *sop = 0;
 +   error = socreate(saddr->sa_family, sop, sotype, soproto, p);
 +   if( error )
@@ -1853,7 +1853,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +   error = soconnect(so, saddr, p);
 +   if( error )
 +     return error;
-+ 
++
 +   /*
 +    * Wait for the connection to complete. Cribbed from the
 +    * connect system call but with the wait timing out so
@@ -1863,7 +1863,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +   while ((so->so_state & SS_ISCONNECTING) && so->so_error == 0)
 +     (void) tsleep((caddr_t)&so->so_timeo, PSOCK,
 + 		  "u9fscon", 2 * hz);
-+ 
++
 +   if (so->so_error) {
 +     error = so->so_error;
 +     so->so_error = 0;
@@ -1871,29 +1871,29 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +     return error;
 +   }
 +   splx(s);
-+ 
++
 +   return (0);
 + }
-+ 
++
 + int u9fs_connect_9auth(struct u9fsmount * nmp, struct u9fs_args * argp, struct socket ** sop)
 + {
 +   int error;
 +   struct proc * p = & proc0;
 +   struct sockaddr *nam;
-+ 
++
 +   error = getsockaddr(&nam, (caddr_t)argp->authaddr, argp->authaddrlen);
 +   if( error )
 +     return error;
-+   error = u9fs_connect(sop, nam, argp->authsotype, 
++   error = u9fs_connect(sop, nam, argp->authsotype,
 + 		       argp->authsoproto, p);
 +   if( error == 0 )
 +     return 0;
-+ 
++
 +   u9fs_disconnect(*sop);
 +   *sop = 0;
 +   return error;
 + }
-+ 
++
 + /*
 +  * Initialize sockets and congestion for a new U9FS connection.
 +  * We do not free the sockaddr if error.
@@ -1905,14 +1905,14 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +   register struct socket *so;
 +   int error, rcvreserve, sndreserve;
 +   struct proc *p = &proc0; /* only used for socreate and sobind */
-+ 
-+   error = u9fs_connect(&nmp->nm_so, nmp->nm_nam, nmp->nm_sotype, 
++
++   error = u9fs_connect(&nmp->nm_so, nmp->nm_nam, nmp->nm_sotype,
 + 		       nmp->nm_soproto, p);
 +   if (error)
 +     goto bad;
 +   so = nmp->nm_so;
 +   nmp->nm_soflags = so->so_proto->pr_flags;
-+ 
++
 +   if (nmp->nm_flag & (U9FSMNT_SOFT | U9FSMNT_INT)) {
 +     so->so_rcv.sb_timeo = (5 * hz);
 +     so->so_snd.sb_timeo = (5 * hz);
@@ -1920,7 +1920,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +     so->so_rcv.sb_timeo = 0;
 +     so->so_snd.sb_timeo = 0;
 +   }
-+ 
++
 +   /* XXX: i dont understand this, only one outstanding request? */
 +   if (nmp->nm_sotype == SOCK_SEQPACKET) {
 +     sndreserve = (nmp->nm_wsize) * 2;
@@ -1931,7 +1931,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +     if (so->so_proto->pr_flags & PR_CONNREQUIRED) {
 +       struct sockopt sopt;
 +       int val;
-+       
++
 +       bzero(&sopt, sizeof sopt);
 +       sopt.sopt_level = SOL_SOCKET;
 +       sopt.sopt_name = SO_KEEPALIVE;
@@ -1943,7 +1943,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +     if (so->so_proto->pr_protocol == IPPROTO_TCP) {
 +       struct sockopt sopt;
 +       int val;
-+       
++
 +       bzero(&sopt, sizeof sopt);
 +       sopt.sopt_level = IPPROTO_TCP;
 +       sopt.sopt_name = TCP_NODELAY;
@@ -1960,17 +1960,17 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +     goto bad;
 +   so->so_rcv.sb_flags |= SB_NOINTR;
 +   so->so_snd.sb_flags |= SB_NOINTR;
-+ 
++
 +   /* Initialize other non-zero congestion variables */
 +   nmp->nm_sent = 0;
 +   return (0);
-+ 
++
 + bad:
 +   u9fs_disconnect(nmp->nm_so);
 +   nmp->nm_so = 0;
 +   return (error);
 + }
-+ 
++
 + /*
 +  * U9FS disconnect. Clean up and unlink.
 +  */
@@ -1980,7 +1980,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +     soshutdown(so, 2);
 +     soclose(so);
 + }
-+ 
++
 + /*
 +  * Lock a socket against others.
 +  * Necessary for STREAM sockets to ensure you get an entire rpc request/reply
@@ -1995,7 +1995,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 + {
 + 	struct proc *p;
 + 	int slpflag = 0, slptimeo = 0;
-+ 
++
 + 	if (rep) {
 + 		p = rep->r_procp;
 + 		if (rep->r_nmp->nm_flag & U9FSMNT_INT)
@@ -2016,8 +2016,8 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 + 	*statep |= U9FSSTA_SNDLOCK;
 + 	return (0);
 + }
-+ 
-+ 
++
++
 + /*
 +  * Unlock the stream socket for others.
 +  */
@@ -2026,7 +2026,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 + 	register int *flagp;
 + 	register int *statep;
 + {
-+ 
++
 + 	if ((*statep & U9FSSTA_SNDLOCK) == 0)
 + 		panic("u9fs sndunlock");
 + 	*statep &= ~U9FSSTA_SNDLOCK;
@@ -2035,7 +2035,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 + 		wakeup((caddr_t)flagp);
 + 	}
 + }
-+ 
++
 + /*
 +  * Test for a termination condition pending on the process.
 +  * This is used for U9FSMNT_INT mounts.
@@ -2053,7 +2053,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 + 		return (EINTR);
 + 	return (0);
 + }
-+ 
++
 + /*
 +  * This is the u9fs send routine. For connection based socket types, it
 +  * must be called with an u9fs_sndlock() on the socket.
@@ -2074,24 +2074,24 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 + 	struct u9fsreq *req;
 + {
 +   int error, soflags, flags;
-+   
++
 +   soflags = so->so_proto->pr_flags;
 +   if (so->so_type == SOCK_SEQPACKET)
 +     flags = MSG_EOR;
 +   else
 +     flags = 0;
-+   
++
 +   error = so->so_proto->pr_usrreqs->pru_sosend(so, 0, 0, top, 0,
 + 					       flags, req->r_procp);
 +   if (error)
 +     log(LOG_INFO, "u9fs send error %d for server %s\n",error,
 + 	  req->r_nmp->nm_mountp->mnt_stat.f_mntfromname);
-+ 
++
 +   return (error);
 + }
-+ 
++
 + static int
-+ u9fs_receive(so, mrep, req)	
++ u9fs_receive(so, mrep, req)
 +      register struct socket * so;
 +      struct mbuf **mrep;
 +      struct u9fsreq * req;
@@ -2099,13 +2099,13 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +   struct uio auio;
 +   u_int32_t len;
 +   int error = 0, sotype, rcvflg;
-+   
++
 +   /*
 +    * Set up arguments for soreceive()
 +    */
 +   *mrep = (struct mbuf *)0;
 +   sotype = req->r_nmp->nm_sotype;
-+   
++
 +   /*
 +    * For reliable protocols, lock against other senders/receivers
 +    * in case a reconnect is necessary.
@@ -2125,15 +2125,15 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 + 				(so, 0, &auio, mrep,
 + 				(struct mbuf **)0, &rcvflg);
 + 		} while (error == EWOULDBLOCK);
-+ 		len -= auio.uio_resid;    
++ 		len -= auio.uio_resid;
 +   }
 +   if (error) {
 +     m_freem(*mrep);
 +     *mrep = (struct mbuf *)0;
 +   }
-+   return (error);  
++   return (error);
 + }
-+ 
++
 + static int
 + u9fs_rcvlock(req)
 + 	register struct u9fsreq *req;
@@ -2141,7 +2141,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 + 	register int *flagp = &req->r_nmp->nm_flag;
 + 	register int *statep = &req->r_nmp->nm_state;
 + 	int slpflag, slptimeo = 0;
-+ 
++
 + 	if (*flagp & U9FSMNT_INT)
 + 		slpflag = PCATCH;
 + 	else
@@ -2168,7 +2168,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 + 	*statep |= U9FSSTA_RCVLOCK;
 + 	return (0);
 + }
-+ 
++
 + /*
 +  * Unlock the stream socket for others.
 +  */
@@ -2177,7 +2177,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 + 	register int *flagp;
 + 	register int *statep;
 + {
-+ 
++
 + 	if ((*statep & U9FSSTA_RCVLOCK) == 0)
 + 		panic("u9fs rcvunlock");
 + 	*statep &= ~U9FSSTA_RCVLOCK;
@@ -2186,14 +2186,14 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 + 		wakeup((caddr_t)flagp);
 + 	}
 + }
-+ 
++
 + /*
 +  * Implement receipt of reply on a socket.
 +  * We must search through the list of received datagrams matching them
 +  * with outstanding requests using the xid, until ours is found.
 +  */
 + /* ARGSUSED */
-+ static 
++ static
 + int u9fs_reply(struct u9fsreq * req)
 + {
 +   int error;
@@ -2201,7 +2201,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +   register struct u9fsmount *nmp = req->r_nmp;
 +   u_short tag;
 +   struct u9fsreq * qp;
-+ 
++
 +   /*
 +    * Loop around until we get our own reply
 +    */
@@ -2229,10 +2229,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +     u9fs_rcvunlock(&nmp->nm_flag, &nmp->nm_state);
 +     if (error)
 +       return (error);
-+ 
++
 +     /* extract the tag */
 +     tag = u9p_m_tag(&mrep);
-+ 
++
 +     /*
 +      * Loop through the request list to match up the reply
 +      * Iff no match, just drop the datagram
@@ -2245,31 +2245,31 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +       m_freem(mrep);
 +       continue;
 +     }
-+ 
++
 +     if( u9p_m_m2s(&mrep, qp->r_rep) ) { /* freed by m2s */
 +       continue;
 +     }
-+ 
++
 +     qp->r_mrep = mrep;  /* should not be freed until the reply is read */
-+ 
++
 +     if( qp == req )
 +       return 0;
 +   }
 + }
-+ 
++
 + int u9fs_request(struct u9fsreq * req, struct u9fsreq * rep, int relm)
 + {
 +   struct mbuf * mreq;
 +   int error,s;
-+   struct u9fsmount * nmp;  
-+ 
++   struct u9fsmount * nmp;
++
 +   req->r_rep = rep;
 +   req->r_mrep = 0;
 +   nmp = req->r_nmp;
 +   req->r_tag = u9fs_id_new(nmp->nm_tags);
-+ 
++
 +   mreq = u9p_m_s2m(req);
-+ 
++
 +   /*
 +    * Chain request into list of outstanding requests. Be sure
 +    * to put it LAST so timer finds oldest requests first.
@@ -2277,31 +2277,31 @@ diff -N -c -r /usr/src/sys/9fs/9fs_socket.c ./9fs/9fs_socket.c
 +   s = splsoftclock();
 +   TAILQ_INSERT_TAIL(&nmp->nm_reqq, req, r_chain);
 +   splx(s);
-+ 
++
 +   error = u9fs_send(nmp->nm_so, mreq, req);
-+ 
++
 +   if( !error )
 +     error = u9fs_reply(req);
-+ 
++
 +   /*
 +    * RPC done, unlink the request.
 +    */
 +   s = splsoftclock();
 +   TAILQ_REMOVE(&nmp->nm_reqq, req, r_chain);
 +   splx(s);
-+ 
++
 +   u9fs_id_free(nmp->nm_tags, req->r_tag);
-+ 
++
 +   if( !error && relm ) {
 + 	m_freem(req->r_mrep);
 + 	req->r_mrep = 0;
-+   }      
++   }
 +   if( rep->r_type == Rerror )
 +       error = EACCES;
-+ 
++
 +   return error;
 + }
-+ 
++
 diff -N -c -r /usr/src/sys/9fs/9fs_subr.c ./9fs/9fs_subr.c
 *** /usr/src/sys/9fs/9fs_subr.c	Wed Dec 31 19:00:00 1969
 --- ./9fs/9fs_subr.c	Fri Nov 26 12:28:17 1999
@@ -2322,38 +2322,38 @@ diff -N -c -r /usr/src/sys/9fs/9fs_subr.c ./9fs/9fs_subr.c
 + #include <sys/systm.h>
 + #include <sys/protosw.h>
 + #include <sys/syslog.h>
-+ 
++
 + #include <netinet/in.h>
 + #include <netinet/tcp.h>
-+ 
++
 + #include <vm/vm.h>
 + #include <vm/vm_extern.h>
 + #include <vm/vm_zone.h>
-+ 
++
 + #include <net/if.h>
 + #include <net/route.h>
 + #include <netinet/in.h>
-+ 
++
 + #include <9fs/bitstring.h>
 + #include <9fs/9p.h>
 + #include <9fs/9auth.h>
 + #include <9fs/9fs.h>
-+ 
++
 + vm_zone_t u9fsuser_zone;
 + LIST_HEAD(u9fsuserhashhead, u9fsuser) * u9fsuidhashtbl, * u9fsunamehashtbl;
 + u_long u9fsuidhash;
 + u_long u9fsunamehash;
 + MALLOC_DEFINE(M_U9FSBITS, "U9FS bits", "U9FS tag/fid maps");
-+ 
++
 + static int   u9fs_hashname __P((char * name));
-+ 
++
 + void u9fs_uhinit()
 + {
 +   u9fsuser_zone = zinit("U9FSUSER", sizeof(struct u9fsuser), 0, 0, 1);
 +   u9fsuidhashtbl   = phashinit(U9FS_USER_HASHSIZE, M_U9FSHASH, &u9fsuidhash);
 +   u9fsunamehashtbl = phashinit(U9FS_USER_HASHSIZE, M_U9FSHASH, &u9fsunamehash);
 + }
-+ 
++
 + void
 + u9fs_id_init(bits)
 +      bitstr_t ** bits;
@@ -2361,21 +2361,21 @@ diff -N -c -r /usr/src/sys/9fs/9fs_subr.c ./9fs/9fs_subr.c
 +   bit_alloc(*bits, 0x10000, M_U9FSBITS, M_WAITOK);
 +   bit_nset(*bits, 1, 0xffff);  /* we dont use zero */
 + }
-+ 
++
 + u_short
 + u9fs_id_new(bits)
 +      bitstr_t * bits;
 + {
 +   int v;
-+ 
++
 +   bit_ffs(bits, 0x10000, &v);
 +   if( v < 0 )
 +     panic("no more u9fs bits!");
-+ 
++
 +   bit_clear(bits, v);
 +   return ((u_short)v);
 + }
-+ 
++
 + void
 + u9fs_id_free(bits, v)
 +      bitstr_t * bits;
@@ -2383,75 +2383,75 @@ diff -N -c -r /usr/src/sys/9fs/9fs_subr.c ./9fs/9fs_subr.c
 + {
 +   bit_set(bits, v);
 + }
-+ 
-+ 
++
++
 + static int u9fs_hashname(char * cp)
 + {
 +   int h = 0;
-+ 
++
 +   cp[U9FS_NAMELEN-1] = 0;
 +   do
 +     h += *cp;
 +   while ( *cp++ );
-+ 
++
 +   return h;
 + }
-+ 
++
 + void u9fs_hashuser(uid_t uid, char * name)
 + {
 +   int h;
 +   struct u9fsuser * u9p, *u9p2;
 +   struct u9fsuserhashhead * u9hp;
-+ 
++
 +   if( u9fs_name2uid(name) != 65534 ) /* already hashed by previous mount */
 +     return;
-+ 
++
 +   u9p = zalloc(u9fsuser_zone);
 +   bzero(u9p, sizeof(*u9p));
 +   u9p->u_uid = uid;
 +   strncpy(u9p->u_name, name, U9FS_NAMELEN);
 +   u9hp = & u9fsuidhashtbl[uid % u9fsuidhash];
 +   LIST_INSERT_HEAD(u9hp, u9p, u_hash);
-+   
++
 +   u9p2 = zalloc(u9fsuser_zone);
 +   bcopy(u9p, u9p2, sizeof(*u9p));
 +   h = u9fs_hashname(name);
 +   u9hp = & u9fsunamehashtbl[h%u9fsunamehash];
-+   LIST_INSERT_HEAD(u9hp, u9p2, u_hash);  
++   LIST_INSERT_HEAD(u9hp, u9p2, u_hash);
 + }
-+ 
++
 + /* name must be at least U9FS_NAMELEN long! */
 + struct u9fsuser * u9fs_finduser(uid_t uid)
 + {
 +   struct u9fsuser * u9p;
 +   struct u9fsuserhashhead * u9hp;
-+ 
++
 +   u9hp = & u9fsuidhashtbl[uid % u9fsuidhash];
 +   LIST_FOREACH(u9p, u9hp, u_hash)
 +     if( u9p->u_uid == uid )
 +       break;
-+ 
++
 +   return u9p;
 + }
-+ 
++
 + uid_t u9fs_name2uid(char *name)
 + {
 +   struct u9fsuser * u9p;
 +   struct u9fsuserhashhead * u9hp;
 +   int h;
-+ 
++
 +   h = u9fs_hashname(name);
 +   u9hp = & u9fsunamehashtbl[h%u9fsunamehash];
 +   LIST_FOREACH(u9p, u9hp, u_hash)
 +     if( strcmp(u9p->u_name, name) == 0 )
 +       break;
-+ 
++
 +   if( u9p )
 +     return u9p->u_uid;
 +   else
 +     return 65534; /* nobody */
 + }
-+ 
++
 + /*
 +  * copies a uio scatter/gather list to an mbuf chain.
 +  */
@@ -2464,7 +2464,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_subr.c ./9fs/9fs_subr.c
 +   register struct mbuf *m;
 +   struct mbuf * top, **mp;
 +   int mlen, len, error = 0;
-+ 
++
 +   mp = & top;
 +   while(siz) {
 +     MGET(m, M_WAIT, MT_DATA);
@@ -2485,14 +2485,14 @@ diff -N -c -r /usr/src/sys/9fs/9fs_subr.c ./9fs/9fs_subr.c
 +   }
 +   *mq = top;
 +   return 0;
-+ 
++
 +  release:
 +   if( top )
 +     m_freem(top);
-+ 
++
 +   return error;
 + }
-+ 
++
 + /*
 +  * copies mbuf chain to the uio scatter/gather list
 +  */
@@ -2505,7 +2505,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_subr.c ./9fs/9fs_subr.c
 +   register char *mbufcp, *uiocp;
 +   register int xfer, left, len;
 +   long uiosiz;
-+ 
++
 +   mbufcp = mtod(m, char *);
 +   len = m->m_len;
 +   while (siz > 0) {
@@ -2547,7 +2547,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_subr.c ./9fs/9fs_subr.c
 +   }
 +   return (0);
 + }
-+ 
++
 diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 *** /usr/src/sys/9fs/9fs_vfsops.c	Wed Dec 31 19:00:00 1969
 --- ./9fs/9fs_vfsops.c	Mon May 22 16:33:47 2000
@@ -2592,7 +2592,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +  *	@(#)u9fs_vfsops.c	8.12 (Berkeley) 5/20/95
 +  * $Id: u9fs_vfsops.c,v 1.79 1998/12/04 22:54:54 archie Exp $
 +  */
-+ 
++
 + #include <sys/param.h>
 + #include <sys/sockio.h>
 + #include <sys/proc.h>
@@ -2607,25 +2607,25 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 + #include <sys/systm.h>
 + #include <sys/protosw.h>
 + #include <sys/syslog.h>
-+ 
++
 + #include <netinet/in.h>
 + #include <netinet/tcp.h>
-+ 
++
 + #include <vm/vm.h>
 + #include <vm/vm_extern.h>
 + #include <vm/vm_zone.h>
-+ 
++
 + #include <net/if.h>
 + #include <net/route.h>
 + #include <netinet/in.h>
-+ 
++
 + #include <9fs/bitstring.h>
 + #include <9fs/9p.h>
 + #include <9fs/9auth.h>
 + #include <9fs/9fs.h>
-+ 
++
 + vm_zone_t u9fsmount_zone;
-+ 
++
 + static int	u9fs_mount __P(( struct mount *mp, char *path, caddr_t data,
 + 			struct nameidata *ndp, struct proc *p));
 + static int	u9fs_start __P(( struct mount *mp, int flags,
@@ -2646,13 +2646,13 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 + static int	u9fs_vget __P((struct mount *, ino_t, struct vnode **));
 + static int      u9fs_init __P((struct vfsconf *vfsp));
 + int             u9fs_uninit __P((struct vfsconf *vfsp));
-+ 
++
 + /* */
 + static int	mountu9fs __P((struct u9fs_args *,struct mount *,
 + 			struct sockaddr *,char *,char *,struct vnode **, struct proc *p));
 + static int	u9fs_iosize __P((struct u9fsmount *nmp));
 + static void	u9fs_decode_args __P((struct u9fsmount *nmp, struct u9fs_args *argp, struct proc *p));
-+ 
++
 + /*
 +  * u9fs vfs operations.
 +  */
@@ -2672,7 +2672,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 + 	0
 + };
 + VFS_SET(u9fs_vfsops, u9fs, VFCF_NETWORK);
-+ 
++
 + /*
 +  * u9fs statfs call
 +  */
@@ -2686,7 +2686,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +      stat not supported by 9fs */
 +   return 0;
 + }
-+ 
++
 + /*
 +  * Common code for mount and mountroot
 +  */
@@ -2707,7 +2707,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +   char * mntpoint;
 +   struct u9fsuser * u9p;
 +   struct socket * so;
-+ 
++
 +   if (mp->mnt_flag & MNT_UPDATE) {
 + #if 0
 +     nmp = VFSTONFS(mp);
@@ -2726,64 +2726,64 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +   }
 +   vfs_getnewfsid(mp);
 +   nmp->nm_mountp = mp;
-+ 
++
 +   nmp->nm_maxfilesize = (u_int64_t)0xffffffffffffffffLL;
-+ 
++
 +   nmp->nm_wsize = U9FS_MAXFDATA;
 +   nmp->nm_rsize = U9FS_MAXFDATA;
 +   nmp->nm_readdirsize = U9FS_MAXDDATA;
 +   bcopy(hst, mp->mnt_stat.f_mntfromname, MNAMELEN);
 +   bcopy(pth, mp->mnt_stat.f_mntonname, MNAMELEN);
 +   nmp->nm_nam = nam;
-+ 
++
 +   mntpoint = index(hst, '/');
 +   if( mntpoint )
 +     mntpoint++;
-+ 
++
 +   /* Set up the sockets and per-host congestion */
 +   nmp->nm_sotype = argp->sotype;
 +   nmp->nm_soproto = argp->proto;
-+ 
++
 +   u9fs_decode_args(nmp, argp, p);
-+ 
++
 +   lockinit(& nmp->nm_lock, PVFS, "u9fsmount", 0, 0);
 +   u9fs_id_init(&nmp->nm_tags);
 +   u9fs_id_init(&nmp->nm_fids);
 +   TAILQ_INIT(&nmp->nm_reqq);
-+ 
++
 +   if ((error = u9fs_connect_9fs(nmp)))
 +     goto bad;
-+   
++
 +   /* "Tnop 1", "Tsession 1 0", "Tattach 1 1 none main 0 0", */
 +   bzero(&req, sizeof(req));
 +   req.r_nmp = nmp;
 +   req.r_procp = p;
-+ 
++
 +   req.r_type = Tnop;
 +   error = u9fs_request(& req, & rep, 1);
 +   if( error )
 +     return error;
-+ 
++
 +   req.r_type = Tsession;
 +   /* bzero(req.r_chal, sizeof(req.r_chal)); */
 +   u9auth_genchal(req.r_chal);
 +   error = u9fs_request(& req, & rep, 1);
 +   if( error )
 +     return error;
-+ 
++
 +   if( argp->authaddr ) {
 +     /* get tickets from the auth server */
 +     error = u9fs_connect_9auth(nmp, argp, & so);
 +     if( error )
 +       goto bad;
 +     u9p = u9fs_finduser(u9fs_name2uid(argp->user));
-+     error = u9auth_gettickets(so, & rep, argp->user, u9p->u_ckey, 
++     error = u9auth_gettickets(so, & rep, argp->user, u9p->u_ckey,
 + 			      req.r_ticket, req.r_auth, p);
 +     u9fs_disconnect(so);
 +     if( error )
 +       goto bad;
 +   }
-+ 
++
 +   req.r_type = Tattach;
 +   req.r_fid = u9fs_id_new(nmp->nm_fids);
 +   strcpy(req.r_uname, argp->user);
@@ -2794,7 +2794,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +   nmp->nm_fh = rep.r_qid.path;
 +   nmp->nm_fid = req.r_fid;
 +   /* XXX: we should have checked our challenge to the server! */
-+ 
++
 +   /*
 +    * This is silly, but it has to be set so that vinifod() works.
 +    * We do not want to do an u9fs_statfs() here since we can get
@@ -2802,7 +2802,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +    * point.
 +    */
 +   mp->mnt_stat.f_iosize = u9fs_iosize(nmp);
-+ 
++
 +   /*
 +    * A reference count is needed on the u9fsnode representing the
 +    * remote root.  If this object is not persistent, then backward
@@ -2813,24 +2813,24 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +    */
 +   error = u9fs_nget(mp, nmp->nm_fh, &np, p);
 +   np->n_fid = nmp->nm_fid;
-+ 
++
 +   nmp->nm_authuid = p->p_ucred->cr_uid;
-+ 
++
 +   if (error)
 +     goto bad;
 +   *vpp = U9FSTOV(np);
-+   
++
 +   /*
 +    * Get file attributes for the mountpoint.  This has the side
 +    * effect of filling in (*vpp)->v_type with the correct value.
 +    */
 +   VOP_GETATTR(*vpp, &attrs, p->p_ucred, p);
-+   
++
 +   /*
 +    * Lose the lock but keep the ref.
 +    */
 +   VOP_UNLOCK(*vpp, 0, p);
-+ 
++
 +   return (0);
 + bad:
 +   u9fs_disconnect(nmp->nm_so);
@@ -2838,7 +2838,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +   FREE(nam, M_SONAME);
 +   return (error);
 + }
-+ 
++
 + /*
 +  * VFS Operations.
 +  *
@@ -2863,21 +2863,21 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +   struct vnode *vp;
 +   char pth[MNAMELEN], hst[MNAMELEN];
 +   size_t len;
-+ 
++
 +   if( path == NULL )
 +     return (EOPNOTSUPP);
-+ 
++
 +   error = copyin(data, (caddr_t)&args, sizeof (struct u9fs_args));
 +   if (error)
 +     return (error);
-+ 
++
 +   if (args.version != U9FS_ARGSVERSION)
 +     return (EPROGMISMATCH);
-+ 
++
 +   if (mp->mnt_flag & MNT_UPDATE) {
 + #if 0
 +     register struct u9fsmount *nmp = VFSTONFS(mp);
-+     
++
 +     if (nmp == NULL)
 +       return (EIO);
 +     /*
@@ -2892,7 +2892,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 + #endif
 +     return (0);
 +   }
-+ 
++
 +   error = copyinstr(path, pth, MNAMELEN-1, &len);
 +   if (error)
 +     return (error);
@@ -2906,9 +2906,9 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +   if (error)
 +     return (error);
 +   error = mountu9fs(&args, mp, nam, pth, hst, &vp, p);
-+   return (error);  
++   return (error);
 + }
-+ 
++
 + /*
 +  * unmount system call
 +  */
@@ -2922,14 +2922,14 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +   struct u9fsnode *np;
 +   struct vnode *vp;
 +   int error, flags = 0;
-+   
++
 +   if (mntflags & MNT_FORCE)
 +     flags |= FORCECLOSE;
 +   nmp = VFSTOU9FS(mp);
-+ 
++
 +   if( p->p_ucred->cr_uid != nmp->nm_authuid )
 +     return (EPERM);
-+ 
++
 +   /*
 +    * Goes something like this..
 +    * - Check for activity on the root vnode (other than ourselves).
@@ -2952,13 +2952,13 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +     vput(vp);
 +     return (EBUSY);
 +   }
-+ 
++
 +   error = vflush(mp, vp, flags);
 +   if (error) {
 +     vput(vp);
 +     return (error);
 +   }
-+ 
++
 +   /*
 +    * We are now committed to the unmount.
 +    */
@@ -2970,11 +2970,11 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +   vgone(vp);
 +   u9fs_disconnect(nmp->nm_so);
 +   FREE(nmp->nm_nam, M_SONAME);
-+ 
++
 +   zfree(u9fsmount_zone, nmp);
 +   return (0);
 + }
-+ 
++
 + /*
 +  * Return root of a filesystem
 +  */
@@ -2987,7 +2987,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +         struct u9fsmount *nmp;
 +         struct u9fsnode *np;
 +         int error;
-+ 
++
 +         nmp = VFSTOU9FS(mp);
 +         error = u9fs_nget(mp, nmp->nm_fh, &np, curproc); /* XXX */
 +         if (error)
@@ -2999,9 +2999,9 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +         *vpp = vp;
 +         return (0);
 + }
-+ 
++
 + extern int syncprt;
-+ 
++
 + /*
 +  * Flush out the buffer cache
 +  */
@@ -3016,7 +3016,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +   /* no cache yet */
 +   return 0;
 + }
-+ 
++
 + /*
 +  * U9FS flat namespace lookup.
 +  * Currently unsupported.
@@ -3028,10 +3028,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 + 	ino_t ino;
 + 	struct vnode **vpp;
 + {
-+ 
++
 + 	return (EOPNOTSUPP);
 + }
-+ 
++
 + /*
 +  * At this point, this should never happen
 +  */
@@ -3045,10 +3045,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 + 	int *exflagsp;
 + 	struct ucred **credanonp;
 + {
-+ 
++
 + 	return (EINVAL);
 + }
-+ 
++
 + /*
 +  * Vnode pointer to File handle, should never happen either
 +  */
@@ -3058,10 +3058,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 + 	struct vnode *vp;
 + 	struct fid *fhp;
 + {
-+ 
++
 + 	return (EINVAL);
 + }
-+ 
++
 + /*
 +  * Vfs start routine, a no-op.
 +  */
@@ -3072,10 +3072,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 + 	int flags;
 + 	struct proc *p;
 + {
-+ 
++
 + 	return (0);
 + }
-+ 
++
 + /*
 +  * Do operations associated with quotas, not supported
 +  */
@@ -3088,10 +3088,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 + 	caddr_t arg;
 + 	struct proc *p;
 + {
-+ 
++
 + 	return (EOPNOTSUPP);
 + }
-+ 
++
 + /*
 +  * Called once to initialize data structures...
 +  */
@@ -3104,20 +3104,20 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +   u9fs_uhinit();
 +   return 0;
 + }
-+ 
++
 + int
 + u9fs_uninit(vfsp)
 + 	struct vfsconf *vfsp;
 + {
 +   return 0;
 + }
-+ 
++
 + static int
 + u9fs_iosize(nmp)
 +      struct u9fsmount* nmp;
 + {
 +   int iosize;
-+   
++
 +   /*
 +    * Calculate the size used for io buffers.  Use the larger
 +    * of the two sizes to minimise u9fs requests but make sure
@@ -3128,7 +3128,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +   if (iosize < PAGE_SIZE) iosize = PAGE_SIZE;
 +   return iosize;
 + }
-+ 
++
 + static void
 + u9fs_decode_args(nmp, argp, p)
 +      struct u9fsmount *nmp;
@@ -3139,14 +3139,14 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +   int maxio;
 +   struct p9user * p9p, p9u;
 +   struct u9fsuser * u9p;
-+   
++
 +   s = splnet();
 +   /* Update flags atomically.  Don't change the lock bits. */
 +   nmp->nm_flag = argp->flags | nmp->nm_flag;
 +   splx(s);
-+ 
++
 +   maxio = U9FS_MAXFDATA;
-+ 
++
 +   if (argp->wsize > 0) {
 +     nmp->nm_wsize = argp->wsize;
 +     /* Round down to multiple of blocksize */
@@ -3158,7 +3158,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +     nmp->nm_wsize = maxio;
 +   if (nmp->nm_wsize > MAXBSIZE)
 +     nmp->nm_wsize = MAXBSIZE;
-+ 
++
 +   if (argp->rsize > 0) {
 +     nmp->nm_rsize = argp->rsize;
 +     /* Round down to multiple of blocksize */
@@ -3170,7 +3170,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +     nmp->nm_rsize = maxio;
 +   if (nmp->nm_rsize > MAXBSIZE)
 +     nmp->nm_rsize = MAXBSIZE;
-+ 
++
 +   if (argp->readdirsize > 0) {
 +     nmp->nm_readdirsize = argp->readdirsize;
 +   }
@@ -3178,7 +3178,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +     nmp->nm_readdirsize = maxio;
 +   if (nmp->nm_readdirsize > nmp->nm_rsize)
 +     nmp->nm_readdirsize = nmp->nm_rsize;
-+ 
++
 +   if( argp->nusers ) {
 +     p9p = argp->users;
 +     for(i = 0; i < argp->nusers; i++) {
@@ -3188,7 +3188,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vfsops.c ./9fs/9fs_vfsops.c
 +     }
 +     printf("%d p9users loaded\n", argp->nusers);
 +   }
-+ 
++
 +   if( (u9p = u9fs_finduser(u9fs_name2uid(argp->user))) ) {
 +     bcopy(argp->key, u9p->u_ckey, U9AUTH_DESKEYLEN);
 +   }
@@ -3237,14 +3237,14 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +  *	@(#)u9fs_vnops.c	8.16 (Berkeley) 5/27/95
 +  * $Id: u9fs_vnops.c,v 1.116.2.3 1999/02/13 08:03:47 dillon Exp $
 +  */
-+ 
-+ 
++
++
 + /*
 +  * vnode op calls for 9FS
 +  */
-+ 
++
 + #include "opt_inet.h"
-+ 
++
 + #include <sys/param.h>
 + #include <sys/kernel.h>
 + #include <sys/systm.h>
@@ -3262,7 +3262,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + #include <sys/lockf.h>
 + #include <sys/stat.h>
 + #include <sys/sysctl.h>
-+ 
++
 + #include <vm/vm.h>
 + #include <vm/vm_extern.h>
 + #include <vm/vm_zone.h>
@@ -3271,16 +3271,16 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + #include <vm/vm_object.h>
 + #include <vm/vm_pager.h>
 + #include <vm/vnode_pager.h>
-+ 
++
 + #include <net/if.h>
 + #include <netinet/in.h>
 + #include <netinet/in_var.h>
-+ 
++
 + #include <9fs/bitstring.h>
 + #include <9fs/9p.h>
 + #include <9fs/9auth.h>
 + #include <9fs/9fs.h>
-+ 
++
 + #define u9fs_poll vop_nopoll
 + static	int	u9fs_lookup __P((struct vop_lookup_args *));
 + static	int	u9fs_create __P((struct vop_create_args *));
@@ -3312,7 +3312,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + static int   u9fs_inactive __P((struct vop_inactive_args *));
 + static int   u9fs_reclaim __P((struct vop_reclaim_args *));
 + static int   u9fs_write __P((struct vop_write_args *));
-+ 
++
 + /*
 +  * Global vfs data structures for u9fs
 +  */
@@ -3357,15 +3357,15 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + static struct vnodeopv_desc u9fs_vnodeop_opv_desc =
 + 	{ &u9fs_vnodeop_p, u9fs_vnodeop_entries };
 + VNODEOP_SET(u9fs_vnodeop_opv_desc);
-+ 
++
 + extern vm_zone_t u9fsnode_zone;
-+ 
++
 + static int u9fs_trunc(struct vnode * vp, struct ucred * cred, struct proc * p);
 + static void u9fs_free_fid __P((u_short fid, struct u9fsmount * nmp, struct proc * p));
 + static void u9fs_updtcache __P((struct u9fsnode *, struct u9fsreq *));
-+ 
++
 + #define     DIRHDSIZ        (sizeof (struct dirent) - (MAXNAMLEN + 1))
-+ 
++
 + /* open returns a qid for cache consistent check */
 + static void
 + u9fs_updtcache(struct u9fsnode * np, struct u9fsreq * rep)
@@ -3373,7 +3373,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   if( rep->r_type != Rerror )
 +     np->n_dir.dir_qid = rep->r_qid;
 + }
-+ 
++
 + static int
 + u9fs_trunc(vp, cred, p)
 +      register struct vnode * vp;
@@ -3386,7 +3386,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   u_short newfid;
 +   struct u9fsreq req, rep;
 +   u_char mode;
-+ 
++
 +   /*
 +    * Disallow write attempts on filesystems mounted read-only;
 +    * unless the file is a socket, fifo, or a block or character
@@ -3423,15 +3423,15 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +     u9fs_free_fid(newfid, nmp, p);
 +     return error;
 +   }
-+ 
++
 +   if( !U9P_PERM_EXCL(np->n_dir.dir_mode))
 +     np->n_wrfid = newfid;
 +   else
 +     u9fs_free_fid(newfid, nmp, p);
-+ 
-+   return (0);  
++
++   return (0);
 + }
-+ 
++
 + /*
 +  * u9fs access vnode op.
 +  */
@@ -3453,11 +3453,11 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   struct u9fsreq req, rep;
 +   u_char mode;
 +   struct ucred * cred = ap->a_cred;
-+ 
++
 +   /* XXX: for the moment, only the authenticator has access */
 +   if( cred->cr_uid != nmp->nm_authuid )
 +     return (EPERM);
-+ 
++
 +   /*
 +    * Disallow write attempts on filesystems mounted read-only;
 +    * unless the file is a socket, fifo, or a block or character
@@ -3473,11 +3473,11 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +       break;
 +     }
 +   }
-+ 
++
 +   /* we cant open an exclusive open file here */
 +   if( U9P_PERM_EXCL(np->n_dir.dir_mode) )
 +     return 0;
-+ 
++
 +   /* check permission by actually opening it */
 +   /* translate mode */
 +   mode = 0;
@@ -3493,16 +3493,16 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +     fidp2 = &np->n_rdfid;
 +     mode = U9P_MODE_RDWR;
 +   }
-+ 
++
 +   if( a_mode & VEXEC ) {
 +     fidp = &np->n_rdfid;
 +     if( vp->v_type == VREG )
 +       mode = U9P_MODE_EX;
 +   }
-+ 
++
 +   if( fidp2 == 0 )
 +     fidp2 = fidp;
-+ 
++
 +   /* open fid mode */
 +   bzero(&req, sizeof(req));
 +   req.r_nmp = nmp;
@@ -3523,12 +3523,12 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +     u9fs_free_fid(newfid, nmp, p);
 +     return error;
 +   }
-+ 
++
 +   *fidp = *fidp2 = newfid;
-+ 
++
 +   return (0);
 + }
-+ 
++
 + /*
 +  * u9fs open vnode op
 +  * Check to see if the type is ok
@@ -3555,16 +3555,16 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   struct u9fsreq req, rep;
 +   u_char mode;
 +   struct ucred * cred = ap->a_cred;
-+ 
++
 +   /* assume access permissions have been checked via VOP_ACCESS */
 +   /* the file is actually opened except the rdwr case */
-+ 
++
 +   if( a_mode & (O_EXCL|O_SHLOCK|O_EXLOCK) ) {
 + #if 0  /* XXX: what can we do here? */
 +     return (EOPNOTSUPP);
 + #endif
 +   }
-+ 
++
 +   /* translate mode */
 +   mode = 0;
 +   if( a_mode & FREAD ) {
@@ -3581,11 +3581,11 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   }
 +   if( fidp2 == 0)
 +     fidp2 = fidp;
-+ 
++
 +   if( U9P_PERM_EXCL(np->n_dir.dir_mode) ) {
 +     if( *fidp || *fidp2 )
 +       return ENOLCK;
-+ 
++
 +     /* open fid mode */
 +     bzero(&req, sizeof(req));
 +     req.r_nmp = nmp;
@@ -3606,13 +3606,13 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +       return error;
 +     }
 +     u9fs_updtcache(np, &rep);
-+ 
++
 +     *fidp = *fidp2 = newfid;
 +   }
-+ 
++
 +   if( *fidp == 0 )
 +     panic("open");
-+ 
++
 +   if( *fidp2 == 0 ) {
 +     /* open fid mode */
 +     bzero(&req, sizeof(req));
@@ -3636,13 +3636,13 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +     u9fs_updtcache(np, &rep);
 +     *fidp2 = newfid;
 +   }
-+ 
++
 +   if( np->n_qid.vers != np->n_dir.dir_qid.vers ) /* content changed */
 +     u9fs_vinvalbuf(vp, 0, cred, p, 0);
-+ 
++
 +   return 0;
 + }
-+ 
++
 + /*
 +  * u9fs close vnode op
 +  * What an U9FS client should do upon close after writing is a debatable issue.
@@ -3683,31 +3683,31 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 		struct ucred *a_cred;
 + 		struct proc *a_p;
 + 	} */ *ap;
-+ { 
++ {
 +   int fflag = ap->a_fflag;
 +   struct vnode * vp = ap->a_vp;
 +   struct u9fsnode * np = VTOU9FS(vp);
 +   struct u9fsmount * nmp = VFSTOU9FS(vp->v_mount);
 +   struct proc * p = ap->a_p;
-+ 
++
 +   if( U9P_PERM_EXCL(np->n_dir.dir_mode) ) {
 +     if( (fflag & FREAD) ) {
 +       u9fs_free_fid(np->n_rdfid, nmp, p);
 +       np->n_rdfid = 0;
 +     }
-+ 
++
 +     if( (fflag & FWRITE) == FWRITE ) {
 +       u9fs_free_fid(np->n_wrfid, nmp, p);
 +       np->n_wrfid = 0;
 +     }
-+     
++
 +     if( (fflag & (FREAD|FWRITE)) == (FREAD|FWRITE) )
 +       np->n_wrfid = 0;
 +   }
-+ 
++
 +   return 0;
 + }
-+ 
++
 + /*
 +  * u9fs getattr call from vfs.
 +  */
@@ -3727,7 +3727,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   struct u9fsmount * nmp = VFSTOU9FS(vp->v_mount);
 +   struct u9fsdir * dir;
 +   struct vattr * vap = ap->a_vap;
-+   
++
 +   /*
 +    * Update local times for special files.
 +    */
@@ -3742,7 +3742,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + #endif
 +   if( np->n_fid == 0 )
 +     panic("u9fs_getattr");
-+ 
++
 +   /* stat fid */
 +   bzero(&req, sizeof(req));
 +   req.r_nmp = nmp;
@@ -3752,11 +3752,11 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   error = u9fs_request(& req, & rep, 1);
 +   if( error )
 +     return error;
-+ 
++
 +   /* fill in vattr */
 +   dir = & np->n_dir;
 +   u9p_m2d(rep.r_stat, dir);
-+ 
++
 +   bzero(vap, sizeof(*vap));
 +   /* the plan9 file system has no other types. */
 +   /* XXX: we have not delt with devices yet */
@@ -3764,7 +3764,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +     vap->va_type = VDIR;
 +   else
 +     vap->va_type = VREG;
-+ 
++
 +   vap->va_mode  = U9P_PERM_ALL(dir->dir_mode);
 +   vap->va_nlink = 1;
 +   vap->va_uid = u9fs_name2uid(dir->dir_uid);
@@ -3783,13 +3783,13 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   vap->va_flags = 0;
 +   vap->va_bytes = vap->va_size;
 +   vap->va_filerev = dir->dir_qid.vers;
-+ 
++
 +   vp->v_type = vap->va_type;
 +   vp->v_tag = VT_U9FS;
-+ 
++
 +   return (error);
 + }
-+ 
++
 + /*
 +  * u9fs setattr call.
 +  */
@@ -3812,10 +3812,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   struct u9fsuser * u9p;
 +   struct vattr attr;
 +   struct u9fsreq req, rep;
-+ 
++
 +   if( vp->v_mount->mnt_flag & MNT_RDONLY )
 +     return (EROFS);
-+ 
++
 +   if( vap->va_nlink != VNOVAL || vap->va_uid != VNOVAL ||
 +       vap->va_fsid != VNOVAL || vap->va_fileid != VNOVAL ||
 + #if 0
@@ -3825,21 +3825,21 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +       vap->va_gen != VNOVAL ||
 +       vap->va_flags != VNOVAL || vap->va_bytes != VNOVAL ) {
 + #if 0
-+     printf("%d %d %d %d %d %d %d %d %d %d %d\n", vap->va_nlink, vap->va_uid, vap->va_fsid, 
-+ 	       vap->va_fileid, vap->va_size, vap->va_blocksize, 
-+ 	       vap->va_atime.tv_sec, vap->va_ctime.tv_sec, vap->va_gen, 
++     printf("%d %d %d %d %d %d %d %d %d %d %d\n", vap->va_nlink, vap->va_uid, vap->va_fsid,
++ 	       vap->va_fileid, vap->va_size, vap->va_blocksize,
++ 	       vap->va_atime.tv_sec, vap->va_ctime.tv_sec, vap->va_gen,
 + 	       vap->va_flags, vap->va_bytes);
 +     printf("unsupported setattr\n");
-+     /* touch tries to change ctime first. 
++     /* touch tries to change ctime first.
 +      * if fails, it touches the first byte
 +     */
 + #endif
 +     return (EOPNOTSUPP);
 +   }
-+ 
++
 +   if( vap->va_size == 0 )
 +     u9fs_trunc(vp, ap->a_cred, ap->a_p);
-+ 
++
 +   bcopy(&np->n_dir, &dir, sizeof(dir));
 +   if( vap->va_mode  != (mode_t)VNOVAL ) {
 +     dir.dir_mode = U9P_PERM_NONPERM(dir.dir_mode)|U9P_PERM_ALL(vap->va_mode);
@@ -3852,7 +3852,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   if( vap->va_mtime.tv_sec != VNOVAL ) {
 +     dir.dir_mtime = vap->va_mtime.tv_sec;
 +   }
-+ 
++
 +   /* stat fid */
 +   bzero(&req, sizeof(req));
 +   req.r_nmp = nmp;
@@ -3864,10 +3864,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   if( error )
 +     return error;
 +   VOP_GETATTR(vp, &attr, ap->a_cred, ap->a_p);
-+ 
++
 +   return 0;
 + }
-+ 
++
 + /*
 +  * u9fs lookup call, one step at a time...
 +  * First look in cache
@@ -3896,7 +3896,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	struct u9fsreq req, rep;
 + 	u_short newfid;
 + 	struct vattr attrs;
-+ 
++
 + 	*vpp = NULLVP;
 + 	if ((flags & ISLASTCN) && (dvp->v_mount->mnt_flag & MNT_RDONLY) &&
 + 	    (cnp->cn_nameiop == DELETE || cnp->cn_nameiop == RENAME))
@@ -3911,12 +3911,12 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	if ((error = cache_lookup(dvp, vpp, cnp)) && error != ENOENT) {
 + 		struct vattr vattr;
 + 		int vpid;
-+ 
++
 + 		if (error = VOP_ACCESS(dvp, VEXEC, cnp->cn_cred, p)) {
 + 			*vpp = NULLVP;
 + 			return (error);
 + 		}
-+ 
++
 + 		newvp = *vpp;
 + 		vpid = newvp->v_id;
 + 		/*
@@ -3961,7 +3961,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	error = 0;
 + 	newvp = NULLVP;
 + 	len = cnp->cn_namelen;
-+ 
++
 + 	/* Tclwalk tag fid newfid name */
 + 	bzero(&req, sizeof(req));
 + 	req.r_procp = p;
@@ -3974,14 +3974,14 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	  u9fs_id_free(nmp->nm_fids, newfid);
 + 	  return error;
 + 	}
-+ 
++
 + 	fh = rep.r_qid.path;
 + 	if( fh == 0 ) {
 + 	  u9fs_id_free(nmp->nm_fids, newfid);
 + 	  error = ENOENT;
 + 	  goto lastcheck;
 + 	}
-+ 
++
 + 	/*
 + 	 * Handle RENAME case...
 + 	 */
@@ -3996,12 +3996,12 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 		error = u9fs_nget(dvp->v_mount, fh, &np, p);
 + 		if (error)
 + 		  goto fail;
-+ 
++
 + 		if ( np->n_fid )
 + 		  u9fs_free_fid(newfid, nmp, p);
 + 		else
 + 		  np->n_fid = newfid;
-+ 
++
 + 		newvp = U9FSTOV(np);
 + 		*vpp = newvp;
 + 		cnp->cn_flags |= SAVENAME;
@@ -4009,7 +4009,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 			VOP_UNLOCK(dvp, 0, p);
 + 		return (0);
 + 	}
-+ 
++
 + 	if (flags & ISDOTDOT) {
 + 		VOP_UNLOCK(dvp, 0, p);
 + 		error = u9fs_nget(dvp->v_mount, fh, &np, p);
@@ -4021,7 +4021,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 		  u9fs_free_fid(newfid, nmp, p);
 + 		else
 + 		  np->n_fid = req.r_newfid;
-+ 
++
 + 		newvp = U9FSTOV(np);
 + 		if (lockparent && (flags & ISLASTCN) &&
 + 		    (error = vn_lock(dvp, LK_EXCLUSIVE, p))) {
@@ -4036,19 +4036,19 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 		error = u9fs_nget(dvp->v_mount, fh, &np, p);
 + 		if (error)
 + 		  goto fail;
-+ 
++
 + 		if( np->n_fid )
 + 		  u9fs_free_fid(newfid, nmp, p);
 + 		else
 + 		  np->n_fid = req.r_newfid;
-+ 
++
 + 		if (!lockparent || !(flags & ISLASTCN))
 + 			VOP_UNLOCK(dvp, 0, p);
 + 		newvp = U9FSTOV(np);
-+ 
++
 + 		VOP_GETATTR(newvp, & attrs, p->p_ucred, p);
 + 	}
-+ 
++
 + 	if (cnp->cn_nameiop != LOOKUP && (flags & ISLASTCN))
 + 		cnp->cn_flags |= SAVENAME;
 + #if 0
@@ -4078,12 +4078,12 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 			cnp->cn_flags |= SAVENAME;
 + 	}
 + 	return (error);
-+ 
++
 +  fail:
 + 	u9fs_free_fid(newfid, nmp, p);
 + 	return (error);
 + }
-+ 
++
 + /*
 +  * u9fs read call.
 +  * Just call u9fs_bioread() to do the work.
@@ -4098,12 +4098,12 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	} */ *ap;
 + {
 +   register struct vnode *vp = ap->a_vp;
-+   
++
 +   if (vp->v_type != VREG)
 +     return (EPERM);
 +   return (u9fs_bioread(vp, ap->a_uio, ap->a_ioflag, ap->a_cred, 0));
 + }
-+ 
++
 + /*
 +  * u9fs readlink call
 +  */
@@ -4117,7 +4117,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + {
 +   return (EOPNOTSUPP);
 + }
-+ 
++
 + /*
 +  * u9fs mknod vop
 +  * just call u9fs_mknodrpc() to do the work.
@@ -4134,7 +4134,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + {
 +   return (EOPNOTSUPP);
 + }
-+ 
++
 + /*
 +  * u9fs file create call
 +  */
@@ -4159,7 +4159,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	u9fsfh_t fh;
 + 	struct proc * p;
 + 	int pfid;
-+ 
++
 + #if 0
 + 	/*
 + 	 * Oops, not for me..
@@ -4167,27 +4167,27 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	if (vap->va_type == VSOCK)
 + 		return (u9fs_mknodrpc(dvp, ap->a_vpp, cnp, vap));
 + #endif
-+ 
++
 + 	if (error = VOP_GETATTR(dvp, &vattr, cnp->cn_cred, cnp->cn_proc)) {
 + 		VOP_ABORTOP(dvp, cnp);
 + 		return (error);
 + 	}
-+ 
++
 + 	nmp = VFSTOU9FS(dvp->v_mount);
 + 	np = VTOU9FS(dvp);
 + 	p = cnp->cn_proc;
-+ 
++
 + 	bzero(&req, sizeof(req));
 + 	req.r_nmp = nmp;
 + 	req.r_procp = p;
-+ 
++
 + 	req.r_type = Tclone;
 + 	pfid = req.r_fid  = np->n_fid;
 + 	req.r_newfid = u9fs_id_new(nmp->nm_fids);
 + 	error = u9fs_request(&req, &rep, 1);
 + 	if( error )
 + 	  return error;
-+ 
++
 + 	req.r_type = Tcreate;
 + 	req.r_fid = req.r_newfid;
 + 	len = cnp->cn_namelen;
@@ -4201,13 +4201,13 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	  req.r_mode = U9P_MODE_RD;
 + 	} else
 + 	  req.r_mode = U9P_MODE_WR | U9P_MODE_TRUNC;
-+ 	if(vap->va_vaflags & VA_EXCLUSIVE) 
++ 	if(vap->va_vaflags & VA_EXCLUSIVE)
 + 	  req.r_mode = U9P_MODE_EX;
-+ 
++
 + 	error = u9fs_request(&req, &rep, 1);
 + 	if( error )
 + 	  return error;
-+ 
++
 + 	fh = rep.r_qid.path;
 + 	u9fs_nget(dvp->v_mount, fh, &np, p);
 + 	newvp = U9FSTOV(np);
@@ -4215,7 +4215,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	  np->n_rdfid = req.r_fid;
 + 	else
 + 	  np->n_wrfid = req.r_fid;
-+ 	
++
 + 	req.r_type = Tclwalk;
 + 	req.r_fid  = pfid;
 + 	req.r_newfid = u9fs_id_new(nmp->nm_fids);
@@ -4225,13 +4225,13 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	  return error;
 + 	np->n_fid = req.r_newfid;
 + 	VOP_GETATTR(newvp, & vattr, p->p_ucred, p);
-+ 
++
 + 	*ap->a_vpp = newvp;
 + 	zfree(namei_zone, cnp->cn_pnbuf);
-+ 
++
 + 	return 0;
 + }
-+ 
++
 + /*
 +  * u9fs file remove call
 +  * To try and make u9fs semantics closer to ufs semantics, a file that has
@@ -4259,7 +4259,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	struct u9fsmount *nmp;
 + 	struct proc * p;
 + 	int error;
-+ 
++
 + 	nmp = VFSTOU9FS(vp->v_mount);
 + 	np = VTOU9FS(vp);
 + 	p = cnp->cn_proc;
@@ -4274,7 +4274,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	zfree(namei_zone, cnp->cn_pnbuf);
 + 	return 0;
 + }
-+ 
++
 + /*
 +  * u9fs file rename call
 +  */
@@ -4300,24 +4300,24 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	struct u9fsreq req, rep;
 + 	struct u9fsdir dir;
 + 	struct u9fsnode * np;
-+ 
++
 + 	/* we cant do cross-directory renaming or move to an existing file */
 + 	if( fdvp != tdvp || tvp != 0 || fvp->v_mount->mnt_flag & MNT_RDONLY ){
 + 	  printf("rename to existing file not supported\n");
 + 	  error = EOPNOTSUPP;
 + 	  goto out;
 + 	}
-+ 
++
 + 	nmp = VFSTOU9FS(fvp->v_mount);
 + 	np = VTOU9FS(fvp);
-+ 
++
 + 	bcopy(&np->n_dir, &dir, sizeof(dir));
 + 	len = tcnp->cn_namelen;
 + 	if( len > U9FS_NAMELEN )
 + 	  len = U9FS_NAMELEN;
 + 	strncpy(dir.dir_name, tcnp->cn_nameptr, len);
 + 	dir.dir_name[U9FS_NAMELEN-1] = 0;
-+ 	
++
 + 	/* stat fid */
 + 	bzero(&req, sizeof(req));
 + 	req.r_nmp = nmp;
@@ -4326,7 +4326,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	req.r_fid = np->n_fid;
 + 	u9p_d2m(&dir, req.r_stat);
 + 	error = u9fs_request(& req, & rep, 1);
-+ 
++
 +  out:
 + 	if (tdvp == tvp)
 + 		vrele(tdvp);
@@ -4336,10 +4336,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 		vput(tvp);
 + 	vrele(fdvp);
 + 	vrele(fvp);
-+ 
++
 + 	return error;
 + }
-+ 
++
 + /*
 +  * u9fs hard link create call
 +  */
@@ -4353,7 +4353,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + {
 +   return (EOPNOTSUPP);
 + }
-+ 
++
 + /*
 +  * u9fs symbolic link create call
 +  */
@@ -4369,7 +4369,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + {
 +   return (EOPNOTSUPP);
 + }
-+ 
++
 + /*
 +  * u9fs make dir call
 +  */
@@ -4383,14 +4383,14 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	} */ *ap;
 + {
 +   struct vop_create_args cap;
-+ 
++
 +   cap.a_dvp = ap->a_dvp;
 +   cap.a_vpp = ap->a_vpp;
 +   cap.a_cnp = ap->a_cnp;
 +   cap.a_vap = ap->a_vap;
 +   return u9fs_create(&cap);
 + }
-+ 
++
 + /*
 +  * u9fs remove directory call
 +  */
@@ -4409,7 +4409,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	struct u9fsmount *nmp;
 + 	struct proc * p;
 + 	int error;
-+ 
++
 + 	nmp = VFSTOU9FS(vp->v_mount);
 + 	np = VTOU9FS(vp);
 + 	p = cnp->cn_proc;
@@ -4426,7 +4426,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	zfree(namei_zone, cnp->cn_pnbuf);
 + 	return 0;
 + }
-+ 
++
 + /*
 +  * u9fs readdir call
 +  */
@@ -4441,18 +4441,18 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   register struct vnode *vp = ap->a_vp;
 +   register struct uio *uio = ap->a_uio;
 +   int error;
-+   
++
 +   if (vp->v_type != VDIR)
 +     return (EPERM);
-+ 
++
 +   /*
 +    * Call u9fs_bioread() to do the real work.
 +    */
 +   error = u9fs_bioread(vp, uio, 0, ap->a_cred, 0);
-+   
++
 +   return (error);
 + }
-+ 
++
 + /*
 +  * Kludge City..
 +  * - make u9fs_bmap() essentially a no-op that does no translation
@@ -4474,7 +4474,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	} */ *ap;
 + {
 +   register struct vnode *vp = ap->a_vp;
-+   
++
 +   if (ap->a_vpp != NULL)
 +     *ap->a_vpp = vp;
 +   if (ap->a_bnp != NULL)
@@ -4484,10 +4484,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   if (ap->a_runb != NULL)
 +     *ap->a_runb = 0;
 +   return (0);
-+ 
++
 +   return 0;
 + }
-+ 
++
 + /*
 +  * Strategy routine.
 +  * For async requests when u9fsiod(s) are running, queue the request by
@@ -4502,21 +4502,21 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	struct ucred *cr;
 + 	struct proc *p;
 + 	int error = 0;
-+ 
++
 + 	if (bp->b_flags & B_PHYS)
 + 		panic("nfs physio");
 + 	if (bp->b_flags & B_ASYNC)
 + 	        panic("u9fs async");
-+ 
++
 + 	p = curproc;	/* XXX */
 + 	if (bp->b_flags & B_READ)
 + 		cr = bp->b_rcred;
 + 	else
 + 		cr = bp->b_wcred;
 + 	error = u9fs_doio(bp, cr, p);
-+ 	return (error);  
++ 	return (error);
 + }
-+ 
++
 + /*
 +  * Mmap a file
 +  *
@@ -4534,7 +4534,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + {
 + 	return (EINVAL);
 + }
-+ 
++
 + /*
 +  * fsync vnode op. Just call u9fs_flush() with commit == 1.
 +  */
@@ -4552,7 +4552,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   /* we have a blocking writeback cache */
 +   return 0;
 + }
-+ 
++
 + /*
 +  * U9FS advisory byte-level locks.
 +  * Currently unsupported.
@@ -4568,7 +4568,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	} */ *ap;
 + {
 + 	register struct u9fsnode *np = VTOU9FS(ap->a_vp);
-+ 
++
 + 	/*
 + 	 * The following kludge is to allow diskless support to work
 + 	 * until a real NFS lockd is implemented. Basically, just pretend
@@ -4576,7 +4576,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	 */
 + 	return (lf_advlock(ap, &(np->n_lockf), np->n_size));
 + }
-+ 
++
 + /*
 +  * Print out the contents of an u9fsnode.
 +  */
@@ -4589,7 +4589,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   panic("u9fs_print");
 +   return 0;
 + }
-+ 
++
 + /*
 +  * Just call u9fs_writebp() with the force argument set to 1.
 +  */
@@ -4602,7 +4602,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   panic("u9fs_bwrite");
 +   return 0;
 + }
-+ 
++
 + /*
 +  * Vnode op for VM getpages.
 +  */
@@ -4626,29 +4626,29 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	struct ucred *cred;
 + 	struct u9fsmount *nmp;
 + 	vm_page_t *pages;
-+ 
++
 + 	vp = ap->a_vp;
 + 	p = curproc;				/* XXX */
 + 	cred = curproc->p_ucred;		/* XXX */
 + 	nmp = VFSTOU9FS(vp->v_mount);
 + 	pages = ap->a_m;
 + 	count = ap->a_count;
-+ 
++
 + 	if (vp->v_object == NULL) {
 + 		printf("u9fs_getpages: called with non-merged cache vnode??\n");
 + 		return VM_PAGER_ERROR;
 + 	}
-+ 
++
 + 	/*
 + 	 * We use only the kva address for the buffer, but this is extremely
 + 	 * convienient and fast.
 + 	 */
 + 	bp = getpbuf();
-+ 
++
 + 	npages = btoc(count);
 + 	kva = (vm_offset_t) bp->b_data;
 + 	pmap_qenter(kva, pages, npages);
-+ 
++
 + 	iov.iov_base = (caddr_t) kva;
 + 	iov.iov_len = count;
 + 	uio.uio_iov = &iov;
@@ -4658,24 +4658,24 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	uio.uio_segflg = UIO_SYSSPACE;
 + 	uio.uio_rw = UIO_READ;
 + 	uio.uio_procp = p;
-+ 
++
 + 	error = u9fs_readrpc(vp, &uio, cred);
 + 	pmap_qremove(kva, npages);
-+ 
++
 + 	relpbuf(bp);
-+ 
++
 + 	if (error && (uio.uio_resid == count))
 + 		return VM_PAGER_ERROR;
-+ 
++
 + 	size = count - uio.uio_resid;
-+ 
++
 + 	for (i = 0, toff = 0; i < npages; i++, toff = nextoff) {
 + 		vm_page_t m;
 + 		nextoff = toff + PAGE_SIZE;
 + 		m = pages[i];
-+ 
++
 + 		m->flags &= ~PG_ZERO;
-+ 
++
 + 		if (nextoff <= size) {
 + 			m->valid = VM_PAGE_BITS_ALL;
 + 			m->dirty = 0;
@@ -4683,7 +4683,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 			int nvalid = ((size + DEV_BSIZE - 1) - toff) & ~(DEV_BSIZE - 1);
 + 			vm_page_set_validclean(m, 0, nvalid);
 + 		}
-+ 		
++
 + 		if (i != ap->a_reqpage) {
 + 			/*
 + 			 * Whether or not to leave the page activated is up in
@@ -4692,7 +4692,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 			 * It appears that emperical results show that
 + 			 * deactivating pages is best.
 + 			 */
-+ 
++
 + 			/*
 + 			 * Just in case someone was asking for this page we
 + 			 * now tell them that it is ok to use.
@@ -4710,7 +4710,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	}
 + 	return 0;
 + }
-+ 
++
 + /*
 +  * Vnode op for VM putpages.
 +  */
@@ -4728,7 +4728,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   panic("u9fs_putpages");
 +   return 0;
 + }
-+ 
++
 + static int
 + u9fs_inactive(ap)
 + 	struct vop_inactive_args /* {
@@ -4739,7 +4739,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   VOP_UNLOCK(ap->a_vp, 0, ap->a_p);
 +   return 0;
 + }
-+ 
++
 + /*
 +  * Reclaim an u9fsnode so that it can be used for other purposes.
 +  */
@@ -4753,7 +4753,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	register struct u9fsnode *np = VTOU9FS(vp);
 + 	register struct u9fsmount *nmp = VFSTOU9FS(vp->v_mount);
 + 	struct proc * p = curproc;
-+ 
++
 + 	/* some vnodes do not have fids due to previous access failure */
 + 	if( np->n_fid ) {
 + 	  /* clunk fids */
@@ -4763,15 +4763,15 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	  if( np->n_wrfid )
 + 	    u9fs_free_fid(np->n_wrfid, nmp, p);
 + 	}
-+ 
++
 + 	LIST_REMOVE(np, n_hash);
 + 	cache_purge(vp);
 + 	zfree(u9fsnode_zone, vp->v_data);
 + 	vp->v_data = (void *)0;
-+ 
++
 + 	return (0);
 + }
-+ 
++
 + /*
 +  * Vnode op for write using bio
 +  */
@@ -4786,10 +4786,10 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + {
 +   if (ap->a_vp->v_type != VREG)
 +     return (EIO);
-+ 
++
 +   return u9fs_biowrite(ap->a_vp, ap->a_uio, ap->a_ioflag, ap->a_cred);
 + }
-+ 
++
 + /*
 +  * Nfs abort op, called after namei() when a CREATE/DELETE isn't actually
 +  * done. Currently nothing to do.
@@ -4804,7 +4804,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + {
 + 	return (0);
 + }
-+ 
++
 + /*
 +  * u9fs write call
 +  */
@@ -4820,7 +4820,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   struct u9fsnode * np = VTOU9FS(vp);
 +   struct proc * p = uiop->uio_procp;
 +   struct mbuf * top;
-+ 
++
 +   tsiz = uiop->uio_resid;
 +   if (uiop->uio_offset + tsiz > nmp->nm_maxfilesize)
 +     return (EFBIG);
@@ -4846,19 +4846,19 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +       break;
 +     }
 +     tsiz -= len;
-+ 
++
 +     /* each write message increments version number by one.
 +        to avoid flushing our write cache, update the version */
 +     if( np->n_qid.vers )
 +       np->n_qid.vers++;
-+     else 
++     else
 +       np->n_qid.vers = np->n_dir.dir_qid.vers + 1;
 +   }
 +   if (error)
 +     uiop->uio_resid = tsiz;
 +   return (error);
 + }
-+ 
++
 + /*
 +  * Readdir rpc call.
 +  * Called from below the buffer cache by u9fs_doio().
@@ -4868,7 +4868,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	struct vnode *vp;
 + 	register struct uio *uiop;
 + 	struct ucred *cred;
-+ 
++
 + {
 + 	register int len, left;
 + 	register struct dirent *dp;
@@ -4878,7 +4878,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	struct u9fsreq req, rep;
 + 	int count;
 + 	struct u9fsdir u9dir;
-+ 
++
 + 	bigenough = uiop->uio_resid >= sizeof(struct dirent);
 + 	bzero(&req, sizeof(req));
 + 	req.r_nmp = nmp;
@@ -4890,7 +4890,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	  error = u9fs_request(&req, &rep, 0);
 + 	  if( error )
 + 	    return error;
-+ 
++
 + 	  count = rep.r_count;
 + 	  more_dirs = (count == req.r_count);
 + 	  len = 0;
@@ -4906,7 +4906,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	      printf("u9p_m_m2d failed!\n");
 + 	      return (EIO);
 + 	    }
-+ 	    
++
 + 	    dp->d_fileno = u9dir.dir_qid.path;
 + 	    if( U9P_PERM_CHDIR(u9dir.dir_mode) )
 + 	      dp->d_type = DT_DIR;
@@ -4931,7 +4931,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 + 	}
 + 	return 0;
 + }
-+ 
++
 + /*
 +  * u9fs read rpc call
 +  * Ditto above
@@ -4946,7 +4946,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   struct u9fsnode *np = VTOU9FS(vp);
 +   int error = 0, len, retlen, tsiz;
 +   struct u9fsreq req, rep;
-+ 
++
 +   nmp = VFSTOU9FS(vp->v_mount);
 +   tsiz = uiop->uio_resid;
 +   if (uiop->uio_offset + tsiz > nmp->nm_maxfilesize)
@@ -4967,7 +4967,7 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +       m_freem(req.r_mrep);
 +       return error;
 +     }
-+     
++
 +     m_freem(req.r_mrep);
 +     req.r_mrep = 0;
 +     tsiz -= retlen;
@@ -4976,14 +4976,14 @@ diff -N -c -r /usr/src/sys/9fs/9fs_vnops.c ./9fs/9fs_vnops.c
 +   }
 +   return (0);
 + }
-+ 
++
 + static void u9fs_free_fid(fid, nmp, p)
 +      u_short fid;
 +      struct u9fsmount * nmp;
 +      struct proc * p;
 + {
 +   struct u9fsreq req, rep;
-+ 
++
 +   /* clunk fid */
 +   bzero(&req, sizeof(req));
 +   req.r_nmp = nmp;
@@ -5008,15 +5008,15 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + #include <sys/malloc.h>
 + #include <sys/vnode.h>
 + #include <sys/mount.h>
-+ 
++
 + #include <9fs/bitstring.h>
 + #include <9fs/9p.h>
 + #include <9fs/9auth.h>
 + #include <9fs/9fs.h>
-+ 
++
 + int u9p_usetcp = 0;
 + struct u9fs_reqq u9fs_reqq;
-+ 
++
 + #define	N2HCHAR(x)		x = *p++
 + #define	N2HSHORT(x)	x = (p[0] | (p[1]<<8)); p += 2
 + #define	N2HLONG(x)		x = (p[0] | (p[1]<<8) |\
@@ -5026,7 +5026,7 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 				((u_int64_t)(p[4] | (p[5]<<8) |\
 + 					(p[6]<<16) | (p[7]<<24)) << 32); p += 8
 + #define	N2HSTRING(x,n)	bcopy(p, x, n); p += n
-+ 
++
 + #define	H2NCHAR(x)	*p++ = x
 + #define	H2NSHORT(x)	p[0]=x; p[1]=x>>8; p += 2
 + #define	H2NLONG(x)		p[0]=x; p[1]=x>>8; p[2]=x>>16; p[3]=x>>24; p += 4
@@ -5036,9 +5036,9 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 			p[6]=x>>48;	p[7]=x>>56;\
 + 			p += 8
 + #define	H2NSTRING(x,n)	bcopy(x, p, n); p += n
-+ 
++
 + static void u9p_print __P((u_char * m, int len, struct u9fsreq * f));
-+ 
++
 + static char * u9p_types[] = {
 +   "Tnop",
 +   "Rnop",
@@ -5082,11 +5082,11 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +   "Rtunnel",
 +   "Tmax"
 + };
-+ 
++
 + int u9p_m2s(char *ap, int n, struct u9fsreq *f)
 + {
 + 	u_char *p;
-+ 
++
 + 	p = (u_char*)ap;
 + 	N2HCHAR(f->r_type);
 + 	N2HSHORT(f->r_tag);
@@ -5094,19 +5094,19 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 	{
 + 	default:
 + 		return 0;
-+ 
++
 + 	case Tnop:
 + 	case Tosession:
 + 		break;
-+ 
++
 + 	case Tsession:
 + 		N2HSTRING(f->r_chal, sizeof(f->r_chal));
 + 		break;
-+ 
++
 + 	case Tflush:
 + 		N2HSHORT(f->r_oldtag);
 + 		break;
-+ 
++
 + 	case Tattach:
 + 		N2HSHORT(f->r_fid);
 + 		N2HSTRING(f->r_uname, sizeof(f->r_uname));
@@ -5114,48 +5114,48 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 		N2HSTRING(f->r_ticket, sizeof(f->r_ticket));
 + 		N2HSTRING(f->r_auth, sizeof(f->r_auth));
 + 		break;
-+ 
++
 + 	case Toattach:
 + 		N2HSHORT(f->r_fid);
 + 		N2HSTRING(f->r_uname, sizeof(f->r_uname));
 + 		N2HSTRING(f->r_aname, sizeof(f->r_aname));
 + 		N2HSTRING(f->r_ticket, U9FS_NAMELEN);
 + 		break;
-+ 
++
 + 	case Tauth:
 + 		N2HSHORT(f->r_fid);
 + 		N2HSTRING(f->r_uname, sizeof(f->r_uname));
 + 		N2HSTRING(f->r_ticket, 8+U9FS_NAMELEN);
 + 		break;
-+ 
++
 + 	case Tclone:
 + 		N2HSHORT(f->r_fid);
 + 		N2HSHORT(f->r_newfid);
 + 		break;
-+ 
++
 + 	case Twalk:
 + 		N2HSHORT(f->r_fid);
 + 		N2HSTRING(f->r_name, sizeof(f->r_name));
 + 		break;
-+ 
++
 + 	case Topen:
 + 		N2HSHORT(f->r_fid);
 + 		N2HCHAR(f->r_mode);
 + 		break;
-+ 
++
 + 	case Tcreate:
 + 		N2HSHORT(f->r_fid);
 + 		N2HSTRING(f->r_name, sizeof(f->r_name));
 + 		N2HLONG(f->r_perm);
 + 		N2HCHAR(f->r_mode);
 + 		break;
-+ 
++
 + 	case Tread:
 + 		N2HSHORT(f->r_fid);
 + 		N2HQUAD(f->r_offset);
 + 		N2HSHORT(f->r_count);
 + 		break;
-+ 
++
 + 	case Twrite:
 + 		N2HSHORT(f->r_fid);
 + 		N2HQUAD(f->r_offset);
@@ -5163,28 +5163,28 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 		p++;	/* pad(1) */
 + 		f->r_data = (char*)p; p += f->r_count;
 + 		break;
-+ 
++
 + 	case Ttunnel:
 + 		N2HSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Tclunk:
 + 		N2HSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Tremove:
 + 		N2HSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Tstat:
 + 		N2HSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Twstat:
 + 		N2HSHORT(f->r_fid);
 + 		N2HSTRING(f->r_stat, sizeof(f->r_stat));
 + 		break;
-+ 
++
 + 	case Tclwalk:
 + 		N2HSHORT(f->r_fid);
 + 		N2HSHORT(f->r_newfid);
@@ -5195,90 +5195,90 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 	case Rnop:
 + 	case Rosession:
 + 		break;
-+ 
++
 + 	case Rsession:
 + 		N2HSTRING(f->r_chal, sizeof(f->r_chal));
 + 		N2HSTRING(f->r_authid, sizeof(f->r_authid));
 + 		N2HSTRING(f->r_authdom, sizeof(f->r_authdom));
 + 		break;
-+ 
++
 + 	case Rerror:
 + 		N2HSTRING(f->r_ename, sizeof(f->r_ename));
 + 		break;
-+ 
++
 + 	case Rflush:
 + 		break;
-+ 
++
 + 	case Rattach:
 + 		N2HSHORT(f->r_fid);
 + 		N2HLONG(f->r_qid.path);
 + 		N2HLONG(f->r_qid.vers);
 + 		N2HSTRING(f->r_rauth, sizeof(f->r_rauth));
 + 		break;
-+ 
++
 + 	case Roattach:
 + 		N2HSHORT(f->r_fid);
 + 		N2HLONG(f->r_qid.path);
 + 		N2HLONG(f->r_qid.vers);
 + 		break;
-+ 
++
 + 	case Rauth:
 + 		N2HSHORT(f->r_fid);
 + 		N2HSTRING(f->r_ticket, 8+8+7+7);
 + 		break;
-+ 
++
 + 	case Rclone:
 + 		N2HSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Rwalk:
 + 	case Rclwalk:
 + 		N2HSHORT(f->r_fid);
 + 		N2HLONG(f->r_qid.path);
 + 		N2HLONG(f->r_qid.vers);
 + 		break;
-+ 
++
 + 	case Ropen:
 + 		N2HSHORT(f->r_fid);
 + 		N2HLONG(f->r_qid.path);
 + 		N2HLONG(f->r_qid.vers);
 + 		break;
-+ 
++
 + 	case Rcreate:
 + 		N2HSHORT(f->r_fid);
 + 		N2HLONG(f->r_qid.path);
 + 		N2HLONG(f->r_qid.vers);
 + 		break;
-+ 
++
 + 	case Rread:
 + 		N2HSHORT(f->r_fid);
 + 		N2HSHORT(f->r_count);
 + 		p++;	/* pad(1) */
 + 		f->r_data = (char*)p; p += f->r_count;
 + 		break;
-+ 
++
 + 	case Rwrite:
 + 		N2HSHORT(f->r_fid);
 + 		N2HSHORT(f->r_count);
 + 		break;
-+ 
++
 + 	case Rtunnel:
 + 		N2HSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Rclunk:
 + 		N2HSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Rremove:
 + 		N2HSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Rstat:
 + 		N2HSHORT(f->r_fid);
 + 		N2HSTRING(f->r_stat, sizeof(f->r_stat));
 + 		break;
-+ 
++
 + 	case Rwstat:
 + 		N2HSHORT(f->r_fid);
 + 		break;
@@ -5287,66 +5287,66 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 		return n;
 + 	return 0;
 + }
-+ 
++
 + void u9p_print(u_char * m, int len, struct u9fsreq * f)
 + {
 +   struct u9fsreq u9fsreq;
-+ 
++
 +   if( f == 0 )
 +     f = & u9fsreq;
-+ 
++
 +   if( len < 3 ) {
 +     printf("truncated-9p %d", len);
 +     return;
 +   }
-+ 
++
 +   if( u9p_m2s((char *)m, len, f) == 0 )
 +     return;
-+ 
++
 +   printf("%s tag %d ", u9p_types[f->r_type-Tnop], f->r_tag);
-+ 
++
 +   switch( f->r_type ) {
 + 	default:
 + 	  return;
-+ 
++
 + 	case Tnop:
 + 	case Tosession:
 + 	case Toattach:
 + 	case Tauth:
 + 		break;
-+ 
++
 + 	case Tsession:
 + 	case Rsession:
 + 	  printf("chal 0x%x 0x%x", *(u_int *)&f->r_chal[0], *(u_int *)&f->r_chal[4]);
 + 		break;
-+ 
++
 + 	case Tflush:
 + 	  printf("oldtag %d", f->r_oldtag);
 + 		break;
-+ 
++
 + 	case Tclone:
 + 	  printf("fid %d newfid %d", f->r_fid, f->r_newfid);
 + 		break;
-+ 
++
 + 	case Twalk:
 + 	  printf("fid %d name %s", f->r_fid, f->r_name);
 + 		break;
-+ 
++
 + 	case Topen:
 + 	  printf("fid %d %c", f->r_fid, f->r_mode);
 + 		break;
-+ 
++
 + 	case Tcreate:
 + 	  printf("fid %d name %s perm 0x%x mode %c", f->r_fid,
 + 		 f->r_name, f->r_perm, f->r_mode);
 + 		break;
-+ 
++
 + 	case Tread:
 + 	case Twrite:
 + 	  printf("fid %d offset 0x%llx count %d", f->r_fid,
 + 		 f->r_offset, f->r_count);
 + 		break;
-+ 
++
 + 	case Tattach:
 + 	case Ttunnel:
 + 	case Tclunk:
@@ -5361,7 +5361,7 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 	case Rwstat:
 + 	  printf("fid %d", f->r_fid);
 + 		break;
-+ 
++
 + 	case Tclwalk:
 + 	  printf("fid %d ", f->r_fid);
 + 	  printf("newfid  %d ", f->r_newfid);
@@ -5375,11 +5375,11 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 	case Roattach:
 + 	case Rauth:
 + 		break;
-+ 
++
 + 	case Rerror:
 + 	  printf("ename %s", f->r_ename);
 + 		break;
-+ 
++
 + 	case Rattach:
 + 	case Rwalk:
 + 	case Rclwalk:
@@ -5388,22 +5388,22 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 	  printf("fid %d ", f->r_fid);
 + 	  printf("qid 0x%x 0x%x", f->r_qid.path, f->r_qid.vers);
 + 		break;
-+ 
++
 + 	case Rread:
 + 	  printf("fid %d count %d ", f->r_fid, f->r_count);
 + 	  break;
-+ 
++
 + 	case Rwrite:
 + 	  printf("fid %d count %d", f->r_fid, f->r_count);
 + 		break;
 +   }
 + }
-+ 
++
 + int
 + u9p_s2m(struct u9fsreq *f, char *ap, int copydata)
 + {
 + 	u_char *p;
-+ 
++
 + 	p = (u_char*)ap;
 + 	H2NCHAR(f->r_type);
 + 	H2NSHORT(f->r_tag);
@@ -5411,19 +5411,19 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 	{
 + 	default:
 + 		return 0;
-+ 
++
 + 	case Tosession:
 + 	case Tnop:
 + 		break;
-+ 
++
 + 	case Tsession:
 + 		H2NSTRING(f->r_chal, sizeof(f->r_chal));
 + 		break;
-+ 
++
 + 	case Tflush:
 + 		H2NSHORT(f->r_oldtag);
 + 		break;
-+ 
++
 + 	case Tattach:
 + 		H2NSHORT(f->r_fid);
 + 		H2NSTRING(f->r_uname, sizeof(f->r_uname));
@@ -5431,48 +5431,48 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 		H2NSTRING(f->r_ticket, sizeof(f->r_ticket));
 + 		H2NSTRING(f->r_auth, sizeof(f->r_auth));
 + 		break;
-+ 
++
 + 	case Toattach:
 + 		H2NSHORT(f->r_fid);
 + 		H2NSTRING(f->r_uname, sizeof(f->r_uname));
 + 		H2NSTRING(f->r_aname, sizeof(f->r_aname));
 + 		H2NSTRING(f->r_ticket, U9FS_NAMELEN);
 + 		break;
-+ 
++
 + 	case Tauth:
 + 		H2NSHORT(f->r_fid);
 + 		H2NSTRING(f->r_uname, sizeof(f->r_uname));
 + 		H2NSTRING(f->r_ticket, 8+U9FS_NAMELEN);
 + 		break;
-+ 
++
 + 	case Tclone:
 + 		H2NSHORT(f->r_fid);
 + 		H2NSHORT(f->r_newfid);
 + 		break;
-+ 
++
 + 	case Twalk:
 + 		H2NSHORT(f->r_fid);
 + 		H2NSTRING(f->r_name, sizeof(f->r_name));
 + 		break;
-+ 
++
 + 	case Topen:
 + 		H2NSHORT(f->r_fid);
 + 		H2NCHAR(f->r_mode);
 + 		break;
-+ 
++
 + 	case Tcreate:
 + 		H2NSHORT(f->r_fid);
 + 		H2NSTRING(f->r_name, sizeof(f->r_name));
 + 		H2NLONG(f->r_perm);
 + 		H2NCHAR(f->r_mode);
 + 		break;
-+ 
++
 + 	case Tread:
 + 		H2NSHORT(f->r_fid);
 + 		H2NQUAD(f->r_offset);
 + 		H2NSHORT(f->r_count);
 + 		break;
-+ 
++
 + 	case Twrite:
 + 		H2NSHORT(f->r_fid);
 + 		H2NQUAD(f->r_offset);
@@ -5482,28 +5482,28 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 		  H2NSTRING(f->r_data, f->r_count);
 + 		}
 + 		break;
-+ 
++
 + 	case Ttunnel:
 + 		H2NSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Tclunk:
 + 		H2NSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Tremove:
 + 		H2NSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Tstat:
 + 		H2NSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Twstat:
 + 		H2NSHORT(f->r_fid);
 + 		H2NSTRING(f->r_stat, sizeof(f->r_stat));
 + 		break;
-+ 
++
 + 	case Tclwalk:
 + 		H2NSHORT(f->r_fid);
 + 		H2NSHORT(f->r_newfid);
@@ -5514,61 +5514,61 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 	case Rosession:
 + 	case Rnop:
 + 		break;
-+ 
++
 + 	case Rsession:
 + 		H2NSTRING(f->r_chal, sizeof(f->r_chal));
 + 		H2NSTRING(f->r_authid, sizeof(f->r_authid));
 + 		H2NSTRING(f->r_authdom, sizeof(f->r_authdom));
 + 		break;
-+ 
++
 + 	case Rerror:
 + 		H2NSTRING(f->r_ename, sizeof(f->r_ename));
 + 		break;
-+ 
++
 + 	case Rflush:
 + 		break;
-+ 
++
 + 	case Rattach:
 + 		H2NSHORT(f->r_fid);
 + 		H2NLONG(f->r_qid.path);
 + 		H2NLONG(f->r_qid.vers);
 + 		H2NSTRING(f->r_rauth, sizeof(f->r_rauth));
 + 		break;
-+ 
++
 + 	case Roattach:
 + 		H2NSHORT(f->r_fid);
 + 		H2NLONG(f->r_qid.path);
 + 		H2NLONG(f->r_qid.vers);
 + 		break;
-+ 
++
 + 	case Rauth:
 + 		H2NSHORT(f->r_fid);
 + 		H2NSTRING(f->r_ticket, 8+8+7+7);
 + 		break;
-+ 
++
 + 	case Rclone:
 + 		H2NSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Rwalk:
 + 	case Rclwalk:
 + 		H2NSHORT(f->r_fid);
 + 		H2NLONG(f->r_qid.path);
 + 		H2NLONG(f->r_qid.vers);
 + 		break;
-+ 
++
 + 	case Ropen:
 + 		H2NSHORT(f->r_fid);
 + 		H2NLONG(f->r_qid.path);
 + 		H2NLONG(f->r_qid.vers);
 + 		break;
-+ 
++
 + 	case Rcreate:
 + 		H2NSHORT(f->r_fid);
 + 		H2NLONG(f->r_qid.path);
 + 		H2NLONG(f->r_qid.vers);
 + 		break;
-+ 
++
 + 	case Rread:
 + 		H2NSHORT(f->r_fid);
 + 		H2NSHORT(f->r_count);
@@ -5577,42 +5577,42 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 		  H2NSTRING(f->r_data, f->r_count);
 + 		}
 + 		break;
-+ 
++
 + 	case Rwrite:
 + 		H2NSHORT(f->r_fid);
 + 		H2NSHORT(f->r_count);
 + 		break;
-+ 
++
 + 	case Rtunnel:
 + 		H2NSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Rclunk:
 + 		H2NSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Rremove:
 + 		H2NSHORT(f->r_fid);
 + 		break;
-+ 
++
 + 	case Rstat:
 + 		H2NSHORT(f->r_fid);
 + 		if( copydata )
 + 		  H2NSTRING(f->r_stat, sizeof(f->r_stat));
 + 		break;
-+ 
++
 + 	case Rwstat:
 + 		H2NSHORT(f->r_fid);
 + 		break;
 + 	}
 + 	return p - (u_char*)ap;
 + }
-+ 
++
 + int
 + u9p_m2d(char *ap, struct u9fsdir *f)
 + {
 + 	u_char *p;
-+ 
++
 + 	p = (u_char*)ap;
 + 	N2HSTRING(f->dir_name, sizeof(f->dir_name));
 + 	N2HSTRING(f->dir_uid, sizeof(f->dir_uid));
@@ -5627,12 +5627,12 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 	N2HSHORT(f->dir_dev);
 + 	return p - (u_char*)ap;
 + }
-+ 
++
 + int
 + u9p_d2m(struct u9fsdir *f, char *ap)
 + {
 + 	u_char *p;
-+ 
++
 + 	p = (u_char*)ap;
 + 	H2NSTRING(f->dir_name, sizeof(f->dir_name));
 + 	H2NSTRING(f->dir_uid, sizeof(f->dir_uid));
@@ -5647,104 +5647,104 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 + 	H2NSHORT(f->dir_dev);
 + 	return p - (u_char*)ap;
 + }
-+ 
++
 + /* parse 9P types */
 + int u9p_type(char * t)
 + {
 +   int i;
-+ 
++
 +   for(i = 0; i < sizeof(u9p_types)/sizeof(u9p_types[0]); i++) {
 +     if( strcmp(u9p_types[i], t) == 0 )
 +       return (i+Tnop);
 +   }
 +   return 0;
 + }
-+ 
++
 + /* m is freed if shorter than s */
 + #if 1
 + #define U9P_PULLUP(m,s)  if( (*(m))->m_len < (s) && ((*(m)) = m_pullup((*(m)),(s))) == 0 ) return 1; p = mtod((*(m)), u_char *)
 + #else
 + #define U9P_PULLUP(m,s)  if( (*(m))->m_len < (s) && ((*(m)) = m_pullup((*(m)),(s))) == 0 ) panic("PULLUP"); p = mtod((*(m)), u_char *)
 + #endif
-+ 
++
 + #define U9P_ADJ(m,s) (*(m))->m_len -= (s); (*(m))->m_data += (s)
-+ 
++
 + u_short u9p_m_tag(struct mbuf ** m)
 + {
 +   char * p;
 +   u_short t;
-+ 
++
 +   U9P_PULLUP(m,3);
 +   p = mtod(*m, char *);
 +   p++;
 +   N2HSHORT(t);
-+ 
++
 +   return t;
 + }
-+ 
-+ int 
++
++ int
 + u9p_m_m2s(struct mbuf **m, struct u9fsreq *f)
 + {
 +   u_char *p;
-+ 
++
 +   U9P_PULLUP(m,3);
 +   N2HCHAR(f->r_type);
 +   N2HSHORT(f->r_tag);
 +   U9P_ADJ(m, sizeof(f->r_type)+sizeof(f->r_tag));
-+ 
++
 +   switch(f->r_type) {
 +   default:
 +     goto drop;
-+ 
++
 +   case Tnop:
 +     break;
-+ 
++
 +   case Tsession:
 +     U9P_PULLUP(m,sizeof(f->r_chal));
 +     N2HSTRING(f->r_chal, sizeof(f->r_chal));
 +     U9P_ADJ(m, sizeof(f->r_chal));
 +     break;
-+ 
++
 +   case Tflush:
 +     U9P_PULLUP(m,sizeof(f->r_oldtag));
 +     N2HSHORT(f->r_oldtag);
 +     U9P_ADJ(m, f->r_oldtag);
 +     break;
-+ 
++
 +   case Tattach:
 +     U9P_PULLUP(m, sizeof(f->r_fid)+sizeof(f->r_uname)+sizeof(f->r_aname));
 +     N2HSHORT(f->r_fid);
 +     N2HSTRING(f->r_uname, sizeof(f->r_uname));
 +     N2HSTRING(f->r_aname, sizeof(f->r_aname));
 +     U9P_ADJ(m, sizeof(f->r_fid)+sizeof(f->r_uname)+sizeof(f->r_aname));
-+     
++
 +     U9P_PULLUP(m, sizeof(f->r_ticket)+sizeof(f->r_auth));
 +     N2HSTRING(f->r_ticket, sizeof(f->r_ticket));
 +     N2HSTRING(f->r_auth, sizeof(f->r_auth));
 +     U9P_ADJ(m, sizeof(f->r_ticket)+sizeof(f->r_auth));
 +     break;
-+ 
++
 +   case Tclone:
 +     U9P_PULLUP(m, sizeof(f->r_fid)+sizeof(f->r_newfid));
 +     N2HSHORT(f->r_fid);
 +     N2HSHORT(f->r_newfid);
 +     U9P_ADJ(m, sizeof(f->r_fid)+sizeof(f->r_newfid));
 +     break;
-+ 
++
 +   case Twalk:
 +     U9P_PULLUP(m, sizeof(f->r_fid)+sizeof(f->r_name));
 +     N2HSHORT(f->r_fid);
 +     N2HSTRING(f->r_name, sizeof(f->r_name));
 +     U9P_ADJ(m, sizeof(f->r_fid)+sizeof(f->r_name));
 +     break;
-+ 
++
 +   case Topen:
 +     U9P_PULLUP(m, sizeof(f->r_fid)+sizeof(f->r_mode));
 +     N2HSHORT(f->r_fid);
 +     N2HCHAR(f->r_mode);
 +     U9P_ADJ(m, sizeof(f->r_fid)+sizeof(f->r_mode));
 +     break;
-+ 
++
 +   case Tcreate:
 +     U9P_PULLUP(m, sizeof(f->r_fid)+sizeof(f->r_name)
 + 	       +sizeof(f->r_perm)+sizeof(f->r_mode));
@@ -5755,7 +5755,7 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +     U9P_ADJ(m, sizeof(f->r_fid)+sizeof(f->r_name)
 + 	    +sizeof(f->r_perm)+sizeof(f->r_mode));
 +     break;
-+ 
++
 +   case Tread:
 +     U9P_PULLUP(m, sizeof(f->r_fid)+sizeof(f->r_offset)+sizeof(f->r_count));
 +     N2HSHORT(f->r_fid);
@@ -5763,7 +5763,7 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +     N2HSHORT(f->r_count);
 +     U9P_ADJ(m, sizeof(f->r_fid)+sizeof(f->r_offset)+sizeof(f->r_count));
 +     break;
-+ 
++
 +   case Twrite:
 +     U9P_PULLUP(m, sizeof(f->r_fid)+sizeof(f->r_offset)+sizeof(f->r_count));
 +     N2HSHORT(f->r_fid);
@@ -5773,22 +5773,22 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +     f->r_data = (char*)p; p += f->r_count;
 +     U9P_ADJ(m, sizeof(f->r_fid)+sizeof(f->r_offset)+sizeof(f->r_count)+1);
 +     break;
-+ 
++
 +   case Tclunk:
 +   case Tremove:
-+   case Tstat: 
++   case Tstat:
 +    U9P_PULLUP(m, sizeof(f->r_fid));
 +     N2HSHORT(f->r_fid);
 +     U9P_ADJ(m, sizeof(f->r_fid));
 +     break;
-+ 
++
 +   case Twstat:
 +     U9P_PULLUP(m, sizeof(f->r_fid));
 +     N2HSHORT(f->r_fid);
 +     m_copydata(*m, sizeof(f->r_fid), sizeof(f->r_stat), f->r_stat);
 +     m_adj(*m, sizeof(f->r_fid)+sizeof(f->r_stat));
 +     break;
-+ 
++
 +   case Tclwalk:
 +      U9P_PULLUP(m, sizeof(f->r_fid)+sizeof(f->r_newfid)+sizeof(f->r_name));
 +      N2HSHORT(f->r_fid);
@@ -5800,7 +5800,7 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +  */
 +   case Rnop:
 +     break;
-+ 
++
 +   case Rsession:
 +     U9P_PULLUP(m, sizeof(f->r_fid)+sizeof(f->r_authid)+sizeof(f->r_authdom));
 +     N2HSTRING(f->r_chal, sizeof(f->r_chal));
@@ -5808,16 +5808,16 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +     N2HSTRING(f->r_authdom, sizeof(f->r_authdom));
 +     U9P_ADJ(m, sizeof(f->r_fid)+sizeof(f->r_authid)+sizeof(f->r_authdom));
 +     break;
-+ 
++
 +   case Rerror:
 +     U9P_PULLUP(m, sizeof(f->r_ename));
 +     N2HSTRING(f->r_ename, sizeof(f->r_ename));
 +     U9P_ADJ(m, sizeof(f->r_ename));
 +     break;
-+ 
++
 +   case Rflush:
 +     break;
-+ 
++
 +   case Rattach:
 +     U9P_PULLUP(m, sizeof(f->r_fid)+sizeof(f->r_qid.path)
 + 	       +sizeof(f->r_qid.vers)+sizeof(f->r_rauth));
@@ -5828,13 +5828,13 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +     U9P_ADJ(m, sizeof(f->r_fid)+sizeof(f->r_qid.path)
 + 	    +sizeof(f->r_qid.vers)+sizeof(f->r_rauth));
 +     break;
-+ 
++
 +   case Rclone:
 +     U9P_PULLUP(m, sizeof(f->r_fid));
 +     N2HSHORT(f->r_fid);
 +     U9P_ADJ(m, sizeof(f->r_fid));
 +     break;
-+ 
++
 +   case Rwalk:
 +   case Rclwalk:
 +   case Ropen:
@@ -5847,7 +5847,7 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +     U9P_ADJ(m, sizeof(f->r_fid)+sizeof(f->r_qid.path)
 +             +sizeof(f->r_qid.vers));
 +     break;
-+ 
++
 +   case Rread:
 +     U9P_PULLUP(m, sizeof(f->r_fid)+sizeof(f->r_count));
 +     N2HSHORT(f->r_fid);
@@ -5856,14 +5856,14 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +     f->r_data = (char*)p; p += f->r_count;
 +     U9P_ADJ(m, sizeof(f->r_fid)+sizeof(f->r_count)+1);
 +     break;
-+ 
++
 +   case Rwrite:
 +     U9P_PULLUP(m, sizeof(f->r_fid)+sizeof(f->r_count));
 +     N2HSHORT(f->r_fid);
 +     N2HSHORT(f->r_count);
 +     U9P_ADJ(m, sizeof(f->r_fid)+sizeof(f->r_count));
 +     break;
-+ 
++
 +   case Rclunk:
 +   case Rremove:
 +   case Rwstat:
@@ -5871,48 +5871,48 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +     N2HSHORT(f->r_fid);
 +     U9P_ADJ(m, sizeof(f->r_fid));
 +     break;
-+ 
++
 +   case Rstat:
 +     U9P_PULLUP(m, sizeof(f->r_fid));
 +     N2HSHORT(f->r_fid);
 +     m_copydata(*m, sizeof(f->r_fid), sizeof(f->r_stat), f->r_stat);
 +     m_adj(*m, sizeof(f->r_fid)+sizeof(f->r_stat));
 +     break;
-+     
++
 +   }
 +   return 0;
-+ 
++
 +  drop:
 +   m_freem(*m);
 +   return 1;
 + }
-+ 
-+ struct mbuf * 
++
++ struct mbuf *
 + u9p_m_s2m (struct u9fsreq *f)
 + {
 +   register struct mbuf * m;
 +   struct mbuf * m0;
 +   char * ap;
 +   int sz;
-+   
++
 +   /* we want one contiguous piece */
 +   if( f->r_type == Tattach || f->r_type == Rstat || f->r_type == Twstat )
 +     sz = 146; /* sizeof a Tattach */
 +   else
 +     sz = 87; /* sizeof a Tsession */
-+   
-+   MGETHDR(m, M_WAIT, MT_DATA);  
++
++   MGETHDR(m, M_WAIT, MT_DATA);
 +   if( sz > MHLEN )
 +     MCLGET(m, M_WAIT);
 +   m->m_len = 0;
-+   
++
 +   if ( M_TRAILINGSPACE(m) < sz )
 +     panic("u9p_m_s2m");
-+   
++
 +   ap = mtod(m, char *);
 +   m->m_len = u9p_s2m(f, ap, 0);
 +   m->m_pkthdr.len = m->m_len;
-+   
++
 +   /* append data mbufs  */
 +   switch ( f->r_type ) {
 +   default:
@@ -5924,21 +5924,21 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +     m->m_pkthdr.len += f->r_count;
 +     break;
 +   }
-+ 
++
 +   return m;
 + }
-+ 
-+ int 
++
++ int
 + u9p_m_m2d (struct mbuf **m, struct u9fsdir *f)
 + {
 +   u_char *p;
-+   
++
 +   U9P_PULLUP(m, sizeof(f->dir_name)+sizeof(f->dir_uid)+sizeof(f->dir_gid));
 +   N2HSTRING(f->dir_name, sizeof(f->dir_name));
 +   N2HSTRING(f->dir_uid, sizeof(f->dir_uid));
 +   N2HSTRING(f->dir_gid, sizeof(f->dir_gid));
 +   U9P_ADJ(m, sizeof(f->dir_name)+sizeof(f->dir_uid)+sizeof(f->dir_gid));
-+ 
++
 +   U9P_PULLUP(m, sizeof(f->dir_qid)+sizeof(f->dir_mode)
 + 	     +sizeof(f->dir_atime)+sizeof(f->dir_mtime)
 + 	     +sizeof(f->dir_length)+sizeof(f->dir_type)+sizeof(f->dir_dev));
@@ -5953,10 +5953,10 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +   U9P_ADJ(m, sizeof(f->dir_qid)+sizeof(f->dir_mode)
 + 	     +sizeof(f->dir_atime)+sizeof(f->dir_mtime)
 + 	     +sizeof(f->dir_length)+sizeof(f->dir_type)+sizeof(f->dir_dev));
-+ 
++
 +   return 0;
 + }
-+ 
++
 + struct mbuf * u9p_m_d2m (struct u9fsdir *f)
 + {
 +   char * ap;
@@ -5964,13 +5964,13 @@ diff -N -c -r /usr/src/sys/9fs/9p.c ./9fs/9p.c
 +   MGET(m, M_WAIT, MT_DATA);
 +   MCLGET(m, M_WAIT);
 +   m->m_len = 0;
-+ 
++
 +   if ( M_TRAILINGSPACE(m) < sizeof(struct u9fsdir) )
 +     panic("u9p_m_d2m");
-+ 
++
 +   ap = mtod(m, char *);
-+   m->m_len = u9p_d2m(f, ap);  
-+ 
++   m->m_len = u9p_d2m(f, ap);
++
 +   return m;
 + }
 diff -N -c -r /usr/src/sys/9fs/9p.h ./9fs/9p.h
@@ -5981,8 +5981,8 @@ diff -N -c -r /usr/src/sys/9fs/9p.h ./9fs/9p.h
 --- 1,183 ----
 + #ifndef _9FS_9P_H_
 + #define _9FS_9P_H_
-+ 
-+ 
++
++
 + #define U9FS_AUTHLEN 13
 + #define U9FS_NAMELEN    28
 + #define U9FS_TICKETLEN  72
@@ -5992,14 +5992,14 @@ diff -N -c -r /usr/src/sys/9fs/9p.h ./9fs/9p.h
 + #define U9FS_DIRLEN     116
 + #define U9FS_MAXFDATA  8192
 + #define U9FS_MAXDDATA  (((int)U9FS_MAXFDATA/U9FS_DIRLEN)*U9FS_DIRLEN)
-+ 
++
 + #define U9P_MODE_RD    0x0
 + #define U9P_MODE_WR    0x1
 + #define U9P_MODE_RDWR  0x2
 + #define U9P_MODE_EX    0x3
 + #define U9P_MODE_TRUNC 0x10
 + #define U9P_MODE_CLOSE 0x40
-+ 
++
 + #define U9P_PERM_CHDIR(m) (0x80000000&(m))
 + #define U9P_PERM_OWNER(m) ((m)&0x7)
 + #define U9P_PERM_GROUP(m) (((m)>>3)&0x7)
@@ -6008,22 +6008,22 @@ diff -N -c -r /usr/src/sys/9fs/9p.h ./9fs/9p.h
 + #define U9P_PERM_EXCL(m)    ((m)&0x20000000)
 + #define U9P_PERM_APPEND(m)  ((m)&0x40000000)
 + #define U9P_PERM_NONPERM(m) ((m)&0xfffffe00)
-+ 
++
 + /* this is too small */
 + typedef u_int32_t u9fsfh_t;
-+ 
++
 + struct u9fs_qid {
 + 	u9fsfh_t	path;
 + 	u_int32_t	vers;
 + };
-+ 
++
 + struct	u9fsreq {
 +   TAILQ_ENTRY(u9fsreq) r_chain;
 +   struct u9fsreq * r_rep;
 +   struct mbuf * r_mrep;
 +   struct proc	*r_procp;	/* Proc that did I/O system call */
 +   struct u9fsmount *r_nmp;
-+ 
++
 +   /* actual content of the 9P message */
 + 	char	r_type;
 + 	short	r_fid;
@@ -6047,7 +6047,7 @@ diff -N -c -r /usr/src/sys/9fs/9p.h ./9fs/9p.h
 + 			char	chal[U9FS_CHALLEN];		/* Tsession/Rsession */
 + 		} u3;
 + 		struct {
-+ 			u_int32_t	perm;		/* Tcreate */ 
++ 			u_int32_t	perm;		/* Tcreate */
 + 			short	newfid;		/* Tclone, Tclwalk */
 + 			char	name[U9FS_NAMELEN];	/* Twalk, Tclwalk, Tcreate */
 + 			char	mode;		/* Tcreate, Topen */
@@ -6060,7 +6060,7 @@ diff -N -c -r /usr/src/sys/9fs/9p.h ./9fs/9p.h
 + 			char	stat[U9FS_DIRLEN];	/* Twstat, Rstat */
 + 	} u;
 + };
-+ 
++
 + #define r_oldtag u.u1.oldtag
 + #define r_qid u.u1.qid
 + #define r_rauth u.u1.rauth
@@ -6080,7 +6080,7 @@ diff -N -c -r /usr/src/sys/9fs/9p.h ./9fs/9p.h
 + #define r_count  u.u5.count
 + #define r_data  u.u5.data
 + #define r_stat  u.stat
-+ 
++
 + struct u9fsdir {
 +   char	dir_name[U9FS_NAMELEN];
 +   char	dir_uid[U9FS_NAMELEN];
@@ -6099,11 +6099,11 @@ diff -N -c -r /usr/src/sys/9fs/9p.h ./9fs/9p.h
 +   u_short	dir_type;
 +   u_short	dir_dev;
 + };
-+ 
++
 + #define dir_length u.length
 + #define dir_llength u.l.llength
 + #define dir_hlength u.l.hlength
-+ 
++
 + enum
 + {
 + 	Tnop =		50,
@@ -6148,19 +6148,19 @@ diff -N -c -r /usr/src/sys/9fs/9p.h ./9fs/9p.h
 + 	Rtunnel,
 + 	Tmax
 + };
-+ 
++
 + int u9p_m2s __P((char *ap, int n, struct u9fsreq *f));
 + int u9p_s2m __P((struct u9fsreq *f, char *ap, int copydata));
 + int u9p_m2d __P((char *ap, struct u9fsdir *f));
 + int u9p_d2m __P((struct u9fsdir *f, char *ap));
 + int u9p_type __P((char * t));
-+ 
++
 + int u9p_m_m2s __P((struct mbuf **m, struct u9fsreq *f));
 + struct mbuf * u9p_m_s2m __P((struct u9fsreq *f));
 + int u9p_m_m2d __P((struct mbuf **m, struct u9fsdir *f));
 + struct mbuf * u9p_m_d2m __P((struct u9fsdir *f));
 + u_short u9p_m_tag __P((struct mbuf **m));
-+ 
++
 + #endif
 diff -N -c -r /usr/src/sys/9fs/bitstring.h ./9fs/bitstring.h
 *** /usr/src/sys/9fs/bitstring.h	Wed Dec 31 19:00:00 1969
@@ -6205,47 +6205,47 @@ diff -N -c -r /usr/src/sys/9fs/bitstring.h ./9fs/bitstring.h
 +  *
 +  *	@(#)bitstring.h	8.1 (Berkeley) 7/19/93
 +  */
-+ 
++
 + #ifndef _BITSTRING_H_
 + #define	_BITSTRING_H_
-+ 
++
 + typedef	unsigned char bitstr_t;
-+ 
++
 + /* internal macros */
 + 				/* byte of the bitstring bit is in */
 + #define	_bit_byte(bit) \
 + 	((bit) >> 3)
-+ 
++
 + 				/* mask for the bit within its byte */
 + #define	_bit_mask(bit) \
 + 	(1 << ((bit)&0x7))
-+ 
++
 + /* external macros */
 + 				/* bytes in a bitstring of nbits bits */
 + #define	bitstr_size(nbits) \
 + 	((((nbits) - 1) >> 3) + 1)
-+ 
++
 + 				/* allocate a bitstring */
 + #define	bit_alloc(space, nbits, type, flags) \
 + 	MALLOC((space), bitstr_t *, \
 +         (u_int)bitstr_size(nbits)*sizeof(bitstr_t), (type), (flags))
-+ 
++
 + 				/* allocate a bitstring on the stack */
 + #define	bit_decl(name, nbits) \
 + 	(name)[bitstr_size(nbits)]
-+ 
++
 + 				/* is bit N of bitstring name set? */
 + #define	bit_test(name, bit) \
 + 	((name)[_bit_byte(bit)] & _bit_mask(bit))
-+ 
++
 + 				/* set bit N of bitstring name */
 + #define	bit_set(name, bit) \
 + 	(name)[_bit_byte(bit)] |= _bit_mask(bit)
-+ 
++
 + 				/* clear bit N of bitstring name */
 + #define	bit_clear(name, bit) \
 + 	(name)[_bit_byte(bit)] &= ~_bit_mask(bit)
-+ 
++
 + 				/* clear bits start ... stop in bitstring */
 + #define	bit_nclear(name, start, stop) { \
 + 	register bitstr_t *_name = name; \
@@ -6262,7 +6262,7 @@ diff -N -c -r /usr/src/sys/9fs/bitstring.h ./9fs/bitstring.h
 + 		_name[_stopbyte] &= 0xff << ((_stop&0x7) + 1); \
 + 	} \
 + }
-+ 
++
 + 				/* set bits start ... stop in bitstring */
 + #define	bit_nset(name, start, stop) { \
 + 	register bitstr_t *_name = name; \
@@ -6279,7 +6279,7 @@ diff -N -c -r /usr/src/sys/9fs/bitstring.h ./9fs/bitstring.h
 + 		_name[_stopbyte] |= 0xff >> (7 - (_stop&0x7)); \
 + 	} \
 + }
-+ 
++
 + 				/* find first bit clear in name */
 + #define	bit_ffc(name, nbits, value) { \
 + 	register bitstr_t *_name = name; \
@@ -6294,7 +6294,7 @@ diff -N -c -r /usr/src/sys/9fs/bitstring.h ./9fs/bitstring.h
 + 		} \
 + 	*(value) = _value; \
 + }
-+ 
++
 + 				/* find first bit set in name */
 + #define	bit_ffs(name, nbits, value) { \
 + 	register bitstr_t *_name = name; \
@@ -6309,7 +6309,7 @@ diff -N -c -r /usr/src/sys/9fs/bitstring.h ./9fs/bitstring.h
 + 		} \
 + 	*(value) = _value; \
 + }
-+ 
++
 + #endif /* !_BITSTRING_H_ */
 diff -N -c -r /usr/src/sys/conf/files ./conf/files
 *** /usr/src/sys/conf/files	Fri Apr 30 15:32:40 1999
@@ -6361,9 +6361,9 @@ diff -N -c -r /usr/src/sys/conf/options ./conf/options
   NFS_MUIDHASHSIZ		opt_nfs.h
   NFS_NOSERVER		opt_nfs.h
   NFS_DEBUG		opt_nfs.h
-+ 
++
 + U9FS
-  
+
   # give bktr an opt_bktr.h file
   OVERRIDE_CARD		opt_bktr.h
 diff -N -c -r /usr/src/sys/i386/conf/IL ./i386/conf/IL
@@ -6375,24 +6375,24 @@ diff -N -c -r /usr/src/sys/i386/conf/IL ./i386/conf/IL
 + #
 + # GENERIC -- Generic machine with WD/AHx/NCR/BTx family disks
 + #
-+ # For more information read the handbook part System Administration -> 
-+ # Configuring the FreeBSD Kernel -> The Configuration File. 
++ # For more information read the handbook part System Administration ->
++ # Configuring the FreeBSD Kernel -> The Configuration File.
 + # The handbook is available in /usr/share/doc/handbook or online as
-+ # latest version from the FreeBSD World Wide Web server 
++ # latest version from the FreeBSD World Wide Web server
 + # <URL:http://www.FreeBSD.ORG/>
 + #
-+ # An exhaustive list of options and more detailed explanations of the 
-+ # device lines is present in the ./LINT configuration file. If you are 
++ # An exhaustive list of options and more detailed explanations of the
++ # device lines is present in the ./LINT configuration file. If you are
 + # in doubt as to the purpose or necessity of a line, check first in LINT.
 + #
 + #	$Id: GENERIC,v 1.143.2.2 1999/02/15 02:50:07 des Exp $
-+ 
++
 + machine		"i386"
 + cpu		"I586_CPU"
 + cpu		"I686_CPU"
 + ident		GENERIC
 + maxusers	128
-+ 
++
 + #options		DDB
 + options		IL			# plan9's IL
 + options		"U9FS"			# plan9's 9fs client
@@ -6415,9 +6415,9 @@ diff -N -c -r /usr/src/sys/i386/conf/IL ./i386/conf/IL
 + options		VISUAL_USERCONFIG	#visual boot -c editor
 + options		NMBCLUSTERS=4096
 + options		MAXFILES=10000
-+ 
++
 + config		kernel	root on wd0
-+ 
++
 + # To make an SMP kernel, the next two are needed
 + #options	SMP			# Symmetric MultiProcessor Kernel
 + #options	APIC_IO			# Symmetric (APIC) I/O
@@ -6426,74 +6426,74 @@ diff -N -c -r /usr/src/sys/i386/conf/IL ./i386/conf/IL
 + #options	NBUS=4			# number of busses
 + #options	NAPIC=1			# number of IO APICs
 + #options	NINTR=24		# number of INTs
-+ 
++
 + controller	isa0
 + controller	eisa0
 + controller	pci0
-+ 
++
 + controller	fdc0	at isa? port "IO_FD1" bio irq 6 drq 2
 + disk		fd0	at fdc0 drive 0
 + disk		fd1	at fdc0 drive 1
-+ 
++
 + options		"CMD640"	# work around CMD640 chip deficiency
 + controller	wdc0	at isa? port "IO_WD1" bio irq 14 flags 0xa0ff vector wdintr
 + disk		wd0	at wdc0 drive 0
 + disk		wd1	at wdc0 drive 1
-+ 
++
 + controller	wdc1	at isa? port "IO_WD2" bio irq 15 flags 0xa0ff vector wdintr
 + disk		wd2	at wdc1 drive 0
 + disk		wd3	at wdc1 drive 1
-+ 
++
 + options		ATAPI		#Enable ATAPI support for IDE bus
 + options		ATAPI_STATIC	#Don't do it as an LKM
 + #device		acd0		#IDE CD-ROM
 + #device		wfd0		#IDE Floppy (e.g. LS-120)
-+ 
++
 + # A single entry for any of these controllers (ncr, ahb, ahc) is
 + # sufficient for any number of installed devices.
 + #controller	ncr0
 + #controller	ahb0
 + #controller	ahc0
 + #controller	isp0
-+ 
++
 + # This controller offers a number of configuration options, too many to
 + # document here  - see the LINT file in this directory and look up the
 + # dpt0 entry there for much fuller documentation on this.
 + controller      dpt0
-+ 
++
 + #controller	adv0	at isa? port ? cam irq ?
 + #controller	adw0
 + #controller	bt0	at isa? port ? cam irq ?
 + #controller	aha0	at isa? port ? cam irq ?
 + #controller	aic0	at isa? port 0x340 bio irq 11
-+ 
++
 + controller	scbus0
-+ 
++
 + device		da0
-+ 
++
 + device		sa0
-+ 
++
 + device		pass0
-+ 
++
 + device		cd0	#Only need one of these, the code dynamically grows
-+ 
++
 + #device		wt0	at isa? port 0x300 bio irq 5 drq 1
 + #device		mcd0	at isa? port 0x300 bio irq 10
-+ 
++
 + #controller	matcd0	at isa? port 0x230 bio
-+ 
++
 + #device		scd0	at isa? port 0x230 bio
-+ 
++
 + # atkbdc0 controlls both the keyboard and the PS/2 mouse
 + controller	atkbdc0	at isa? port IO_KBD tty
 + device		atkbd0	at isa? tty irq 1
 + device		psm0	at isa? tty irq 12
-+ 
++
 + device		vga0	at isa? port ? conflicts
-+ 
++
 + # splash screen/screen saver
 + pseudo-device	splash
-+ 
++
 + # syscons is the default console driver, resembling an SCO console
 + device		sc0	at isa? tty
 + # Enable this and PCVT_FREEBSD for pcvt vt220 compatible console driver
@@ -6502,24 +6502,24 @@ diff -N -c -r /usr/src/sys/i386/conf/IL ./i386/conf/IL
 + #options		FAT_CURSOR		# start with block cursor
 + # If you have a ThinkPAD, uncomment this along with the rest of the PCVT lines
 + #options		PCVT_SCANSET=2		# IBM keyboards are non-std
-+ 
++
 + device		npx0	at isa? port IO_NPX irq 13
-+ 
++
 + #
 + # Laptop support (see LINT for more options)
 + #
 + device		apm0    at isa?	disable	flags 0x31 # Advanced Power Management
-+ 
++
 + # PCCARD (PCMCIA) support
 + #controller	card0
 + #device		pcic0	at card?
 + #device		pcic1	at card?
-+ 
++
 + device		sio0	at isa? port "IO_COM1" flags 0x10 tty irq 4
 + device		sio1	at isa? port "IO_COM2" tty irq 3
 + device		sio2	at isa? disable port "IO_COM3" tty irq 5
 + device		sio3	at isa? disable port "IO_COM4" tty irq 9
-+ 
++
 + # Parallel port
 + device		ppc0	at isa? port? net irq 7
 + controller	ppbus0
@@ -6527,7 +6527,7 @@ diff -N -c -r /usr/src/sys/i386/conf/IL ./i386/conf/IL
 + device		plip0	at ppbus?
 + device		ppi0	at ppbus?
 + #controller	vpo0	at ppbus?
-+ 
++
 + #
 + # The following Ethernet NICs are all PCI devices.
 + #
@@ -6543,12 +6543,12 @@ diff -N -c -r /usr/src/sys/i386/conf/IL ./i386/conf/IL
 + device vx0		# 3Com 3c590, 3c595 (``Vortex'')
 + device wb0		# Winbond W89C840F
 + device xl0		# 3Com 3c90x (``Boomerang'', ``Cyclone'')
-+ 
++
 + # Order is important here due to intrusive probes, do *not* alphabetize
 + # this list of network interfaces until the probes have been fixed.
 + # Right now it appears that the ie0 must be probed before ep0. See
 + # revision 1.20 of this file.
-+ 
++
 + #device ed0 at isa? port 0x280 net irq 10 iomem 0xd8000
 + #device ie0 at isa? port 0x300 net irq 10 iomem 0xd0000
 + #device ep0 at isa? port 0x300 net irq 10
@@ -6559,7 +6559,7 @@ diff -N -c -r /usr/src/sys/i386/conf/IL ./i386/conf/IL
 + #device ze0 at isa? port 0x300 net irq 10 iomem 0xd8000
 + #device zp0 at isa? port 0x300 net irq 10 iomem 0xd8000
 + #device cs0 at isa? port 0x300 net irq ?
-+ 
++
 + pseudo-device	loop
 + pseudo-device	ether
 + pseudo-device	sl	1
@@ -6567,24 +6567,24 @@ diff -N -c -r /usr/src/sys/i386/conf/IL ./i386/conf/IL
 + pseudo-device	tun	1
 + pseudo-device	pty	32
 + pseudo-device	gzip		# Exec gzipped a.out's
-+ 
++
 + # KTRACE enables the system-call tracing facility ktrace(2).
 + # This adds 4 KB bloat to your kernel, and slightly increases
 + # the costs of each syscall.
 + options		KTRACE		#kernel tracing
-+ 
++
 + # This provides support for System V shared memory and message queues.
 + #
 + options		SYSVSHM
 + options		SYSVMSG
-+ 
++
 + #  The `bpfilter' pseudo-device enables the Berkeley Packet Filter.  Be
 + #  aware of the legal and administrative consequences of enabling this
 + #  option.  The number of devices determines the maximum number of
 + #  simultaneous BPF clients programs runnable.
 + pseudo-device	bpfilter 4	#Berkeley packet filter
-+ 
-+ 
++
++
 + # USB support
 + #controller    uhci0
 + #controller    ohci0
@@ -6602,7 +6602,7 @@ diff -N -c -r /usr/src/sys/i386/conf/IL ./i386/conf/IL
 + #device        umodem0
 + #device        hid0
 + #device        ugen0
-+ 
++
 + #
 + #options       USB_DEBUG
 + #options       USBVERBOSE
@@ -6619,7 +6619,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + #include <sys/time.h>
 + #include <sys/systm.h>
 + #include <vm/vm_zone.h>
-+ 
++
 + #include <sys/malloc.h>
 + #include <machine/param.h>
 + #include <sys/mbuf.h>
@@ -6637,20 +6637,20 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + #include <netinet/ip_var.h>
 + #include <netinet/in_pcb.h>
 + #include <errno.h>
-+ 
++
 + #include <netinet/il.h>
 + #include <netinet/il_var.h>
-+ 
++
 + struct ilpcb * il_drop(struct ilpcb *ilpcb, int errno0);
 + static struct ilpcb * il_close(struct ilpcb *ilpcb);
-+ 
++
 + /* kernel protocol states needed */
 + static struct inpcbhead ilb;
 + static struct inpcbinfo ilbinfo;
-+ 
++
 + u_long il_sendspace = 1024*64;
 + u_long il_recvspace = 1024*64;
-+ 
++
 + /*
 +  * Target size of IL PCB hash tables. Must be a power of two.
 +  *
@@ -6660,7 +6660,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + #ifndef ILBHASHSIZE
 + #define ILBHASHSIZE	512
 + #endif
-+ 
++
 + enum				/* Connection state */
 + {
 + 	ILS_CLOSED,
@@ -6671,9 +6671,9 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	ILS_CLOSING,
 + 	ILS_OPENING,		/* only for file server */
 + };
-+ 
-+ char	*ilstates[] = 
-+ { 
++
++ char	*ilstates[] =
++ {
 + 	"Closed",
 + 	"Syncer",
 + 	"Syncee",
@@ -6682,7 +6682,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	"Closing",
 + 	"Opening",		/* only for file server */
 + };
-+ 
++
 + enum				/* Packet types */
 + {
 + 	ILT_SYNC,
@@ -6693,9 +6693,9 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	ILT_STATE,
 + 	ILT_CLOSE
 + };
-+ 
-+ char	*iltype[] = 
-+ {	
++
++ char	*iltype[] =
++ {
 + 	"sync",
 + 	"data",
 + 	"dataquery",
@@ -6704,7 +6704,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	"state",
 + 	"close",
 + };
-+ 
++
 + /*
 +  * This is the actual shape of what we allocate using the zone
 +  * allocator.  Doing it this way allows us to protect both structures
@@ -6724,26 +6724,26 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + };
 + #undef ALIGNMENT
 + #undef ALIGNM1
-+ 
++
 + static __inline struct mbuf * il_segq_top(struct ilpcb * ilpcb)
 + {
 +   return (ilpcb->segq);
 + }
-+ 
++
 + static __inline void il_segq_dequeue(struct ilpcb * ilpcb)
 + {
 +   struct mbuf * m = ilpcb->segq;
 +   ilpcb->segq = m->m_nextpkt;
 +   m->m_nextpkt = 0;
 + }
-+ 
++
 + static __inline void il_segq_insert(struct ilpcb * ilpcb, struct mbuf * m, u_long seq, struct ilhdr * il)
 + {
 +   u_long pseq;
 +   struct mbuf * mp, * mq;
-+ 
++
 +   m->m_pkthdr.header = il;
-+ 
++
 +   mp = 0;
 +   mq = ilpcb->segq;
 +   while ( mq ) {
@@ -6758,7 +6758,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +     mp = mq;
 +     mq = mq->m_nextpkt;
 +   }
-+ 
++
 +   if( mp == 0 ) {
 +     m->m_nextpkt = ilpcb->segq;
 +     ilpcb->segq = m;
@@ -6767,9 +6767,9 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   mp->m_nextpkt = m;
 +   m->m_nextpkt = mq;
 + }
-+ 
++
 + void il_init()
-+ {  
++ {
 +   LIST_INIT(&ilb);
 +   ilbinfo.listhead = &ilb;
 +   ilbinfo.hashbase = hashinit(ILBHASHSIZE, M_PCB, &ilbinfo.hashmask);
@@ -6778,7 +6778,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   ilbinfo.ipi_zone = zinit("ilpcb", sizeof(struct inp_ilpcb), maxsockets,
 + 			   ZONE_INTERRUPT, 0);
 + }
-+ 
++
 + /* fill in il header and cksum, ip src/dst addresses */
 + static int il_output(struct ilpcb * ilpcb, struct mbuf *m, int type, u_long seq, u_char spec)
 + {
@@ -6787,15 +6787,15 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   int illen;
 +   struct inpcb * inp;
 +   struct socket * so;
-+ 
++
 +   /* XXX: check total size is less than IP_MAXPACKET */
-+ 
++
 +   if( m == 0 ) {
 +     inp = ilpcb->inpcb;
 +     so = inp->inp_socket;
 +     m = m_copypacket(so->so_snd.sb_mb, M_DONTWAIT);
-+   } 
-+ 
++   }
++
 +   /*
 +    * Calculate data length and get a mbuf
 +    * for IL and IP headers.
@@ -6804,18 +6804,18 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   M_PREPEND(m, sizeof(struct ip) + sizeof(struct ilhdr), M_DONTWAIT);
 +   if( m == 0 )
 +     return ENOBUFS;
-+ 
++
 +   ip = mtod(m, struct ip *);
 +   il = (struct ilhdr *) (ip+1);
 +   bzero(ip, sizeof(*ip));
-+ 
++
 +   ip->ip_p = IPPROTO_IL;
 +   ip->ip_src = ilpcb->inpcb->inp_laddr;
 +   ip->ip_dst = ilpcb->inpcb->inp_faddr;
 +   ip->ip_len = m->m_pkthdr.len;
 +   ip->ip_ttl = ilpcb->inpcb->inp_ip_ttl;	/* XXX */
 +   ip->ip_tos = ilpcb->inpcb->inp_ip_tos;	/* XXX */
-+ 
++
 +   *(u_short *)il->illen = htons(illen + sizeof(struct ilhdr));
 +   il->iltype = type;
 +   il->ilspec = spec;
@@ -6825,40 +6825,40 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +     *(u_long *)il->ilid = htonl(seq);
 +   else
 +     *(u_long *)il->ilid = htonl(ilpcb->start);
-+ 
++
 +   if( type != ILT_ACK && type != ILT_STATE) {
 +     if( ilpcb->rxt_timer == 0 )
 +       ilpcb->rxt_timer = ilpcb->rxt_timer_cur;
 +     if( ilpcb->death_timer == 0 )
 +       ilpcb->death_timer = ilpcb->death_timer_cur;
 +   }
-+ 
++
 +   *(u_long *)il->ilack = htonl(ilpcb->recvd);
 +   il->ilsum[0] = il->ilsum[1] = 0;
-+ 
++
 +   /* IL checksum does not cover IP header */
 +   m->m_data += sizeof(struct ip);
 +   m->m_len  -= sizeof(struct ip);
 +   *(u_short *)il->ilsum = in_cksum(m, illen + sizeof(struct ilhdr));
 +   m->m_data -= sizeof(struct ip);
 +   m->m_len  += sizeof(struct ip);
-+ 
-+   return ip_output(m, ilpcb->inpcb->inp_options, &ilpcb->inpcb->inp_route, 
++
++   return ip_output(m, ilpcb->inpcb->inp_options, &ilpcb->inpcb->inp_route,
 + 		   ilpcb->inpcb->inp_socket->so_options & SO_DONTROUTE ,0);
 + }
-+ 
++
 + static int il_send_empty(struct ilpcb * ilpcb, int type, u_char spec)
 + {
 +   struct mbuf * m0;
-+ 
++
 +   MGETHDR(m0, M_DONTWAIT, MT_DATA);
 +   m0->m_len = 0;
 +   m0->m_pkthdr.len = 0;
 +   MH_ALIGN(m0, 0); /* leave space for the packet header */
-+ 
++
 +   return il_output(ilpcb, m0, type, ilpcb->next, spec);
 + }
-+ 
++
 + static int il_respond(struct ilpcb * ilpcb, struct ip * ip, struct ilhdr *il, int type, u_char spec)
 + {
 +   struct mbuf * m;
@@ -6867,14 +6867,14 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   struct ilhdr *il0;
 +   struct route * ro;
 +   struct route sro;
-+ 
++
 +   if( ilpcb ) {
 +     ro = & ilpcb->inpcb->inp_route;
 +   } else {
 +     ro = &sro;
 +     bzero(ro, sizeof *ro);
 +   }
-+ 	      
++
 +   MGETHDR(m, M_DONTWAIT, MT_DATA);
 +   m->m_len = 0;
 +   m->m_pkthdr.len = 0;
@@ -6883,11 +6883,11 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   M_PREPEND(m, sizeof(struct ip) + sizeof(struct ilhdr), M_DONTWAIT);
 +   if( m == 0 )
 +     return ENOBUFS;
-+ 
++
 +   ip0 = mtod(m, struct ip *);
 +   il0 = (struct ilhdr *) (ip0+1);
 +   bzero(ip0, sizeof(*ip0));
-+ 
++
 +   ip0->ip_p = IPPROTO_IL;
 +   ip0->ip_src = ip->ip_dst;
 +   ip0->ip_dst = ip->ip_src;
@@ -6901,17 +6901,17 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   *(u_long *)il0->ilid = 0;
 +   bcopy(il->ilid, il0->ilack, 4);
 +   il0->ilsum[0] = il0->ilsum[1] = 0;
-+ 
++
 +   /* IL checksum does not cover IP header */
 +   m->m_data += sizeof(struct ip);
 +   m->m_len  -= sizeof(struct ip);
 +   *(u_short *)il0->ilsum = in_cksum(m, illen + sizeof(struct ilhdr));
 +   m->m_data -= sizeof(struct ip);
 +   m->m_len  += sizeof(struct ip);
-+ 
++
 +   return ip_output(m, 0, ro, 0 ,0);
 + }
-+ 
++
 + static struct ilpcb *
 + il_newconn(struct ilpcb * ilpcb, struct in_addr ti_dst, u_short ti_dport,
 + 	   struct in_addr ti_src, u_short ti_sport)
@@ -6920,7 +6920,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   struct socket *so2, * so;
 +   struct inpcb * inp;
 +   struct sockaddr_in sin;
-+ 
++
 +   so = ilpcb->inpcb->inp_socket;
 +   so2 = sonewconn(so, 0);
 +   if (so2 == 0) {
@@ -6933,7 +6933,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +       return 0;
 +   }
 +   so = so2;
-+ 
++
 +   inp = (struct inpcb *)so->so_pcb;
 +   inp->inp_laddr = ti_dst;
 +   inp->inp_lport = ti_dport;
@@ -6944,11 +6944,11 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 				 */
 +     inp->inp_laddr.s_addr = INADDR_ANY;
 +     inp->inp_lport = 0;
-+ 
++
 +     soabort(so);
 +     return 0;
 +   }
-+ 
++
 +   bzero((char *)&sin, sizeof(sin));
 +   sin.sin_family = AF_INET;
 +   sin.sin_len = sizeof(sin);
@@ -6959,24 +6959,24 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +     soabort(so);
 +     return 0;
 +   }
-+ 
++
 +   ilpcb0 = intoilpcb(inp);
 +   ilpcb0->state = ILS_LISTENING;
-+ 
++
 +   return ilpcb0;
 + }
-+ 
++
 + /* ack processing */
 + static void il_proc_ack(struct ilpcb * ilpcb, struct socket * so, u_long ack)
 + {
 +   if( ack >= ilpcb->unacked ) {
 +     ilpcb->rxt_timer = 0;
 +     ilpcb->death_timer = 0;
-+ 
++
 +     /* the rxt timer is not prop. to RTT */
 +     /* reset it so that the first rxt is always 1 second */
 +     ilpcb->rxt_timer_cur = 2;
-+ 
++
 +     if( ack >= ilpcb->next )
 +       ack = ilpcb->next - 1;
 +     while (ilpcb->unacked <= ack ) {
@@ -6990,7 +6990,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +     sowwakeup(so);
 +   }
 + }
-+ 
++
 + static int il_proc_data(struct ilpcb * ilpcb, struct socket * so, struct mbuf * m, u_long seq, int spec)
 + {
 +   struct mbuf * m0;
@@ -6998,19 +6998,19 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   int hlen = sizeof(struct ip) + sizeof(struct ilhdr);
 +   struct ilhdr * il;
 +   int needack = 0;
-+ 
++
 +   ip = mtod(m, struct ip *);
 +   il = (struct ilhdr *)(ip+1);
 +   if( seq == ilpcb->recvd + 1 ) {
 +     needack = 1;
 +     while(1) {
 +       ilpcb->recvd = seq;
-+       
++
 +       m->m_len -= hlen;
 +       m->m_pkthdr.len -= hlen;
 +       m->m_data += hlen;
 +       sbappendrecord(&so->so_rcv, m);
-+ 
++
 +       if( (m0 = il_segq_top(ilpcb)) == 0 )
 + 	break;
 +       ip = mtod(m0, struct ip *);
@@ -7020,18 +7020,18 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	break;
 +       il_segq_dequeue(ilpcb);
 +       m = m0;
-+     };      
++     };
 +     sorwakeup(so);
 +   } else {
-+     if( seq > ilpcb->recvd ) 
++     if( seq > ilpcb->recvd )
 +       il_segq_insert(ilpcb, m, seq, il);
 +     else
 +       m_freem(m);
 +   }
-+ 
++
 +   return needack;
 + }
-+ 
++
 + /* assume we only have one connection */
 + void il_input(struct mbuf * m, int iphlen)
 + {
@@ -7044,7 +7044,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   u_short sport, dport;
 +   struct socket * so;
 +   u_char spec;
-+ 
++
 +   /*
 +    * Strip IP options, if any; should skip this,
 +    * make available to user, and use on returned packets,
@@ -7055,7 +7055,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +     ip_stripoptions(m, (struct mbuf *)0);
 +     iphlen = sizeof(struct ip);
 +   }
-+ 
++
 +   /*
 +    * Get IP and IL header together in first mbuf.
 +    */
@@ -7067,31 +7067,31 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +     ip = mtod(m, struct ip *);
 +   }
 +   il = (struct ilhdr *)((caddr_t)ip + iphlen);
-+ 
++
 +   len = ntohs(*(u_short *)il->illen);
 +   seq = ntohl(*(u_long *)il->ilid);
 +   ack = ntohl(*(u_long *)il->ilack);
 +   sport = *(u_short *)il->ilsrc;
-+   dport = *(u_short *)il->ildst;  
++   dport = *(u_short *)il->ildst;
 +   type = il->iltype;
 +   spec = il->ilspec;
-+ 
++
 +   inp = in_pcblookup_hash(&ilbinfo, ip->ip_src, sport, ip->ip_dst, dport, 1);
 +   if ( inp == 0 && type == ILT_SYNC )
 +     goto dropwithrest;
 +   if( inp == 0 )
 +     goto drop;
-+ 
++
 +   ilpcb = intoilpcb(inp);
 +   if( ilpcb == 0 )
 +     goto drop;
-+ 
++
 +   so = inp->inp_socket;
 +   if( type == ILT_QUERY ) { /* XXX: can we use the same mbuf to send? */
 +     il_send_empty(ilpcb, ILT_STATE, il->ilspec);
 +     goto drop;
-+   }  
-+ 
++   }
++
 +  again:
 +   /* FSM transition */
 +   switch( ilpcb->state ) {
@@ -7113,11 +7113,11 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +       break;
 +     }
 +     break;
-+ 
++
 +   case ILS_LISTENING:
 +     if( type == ILT_SYNC && ack == 0 && so->so_options & SO_ACCEPTCONN ) {
 +       ilpcb = il_newconn(ilpcb, ip->ip_dst, dport, ip->ip_src, sport);
-+ 
++
 +       ilpcb->next = ilpcb->start = random();
 +       ilpcb->unacked = ilpcb->next;
 +       ilpcb->rstart = ilpcb->recvd = seq;
@@ -7127,9 +7127,9 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +     } else
 +       il_respond(ilpcb, ip, il, ILT_CLOSE, 0);
 +     break;
-+ 
++
 +   case ILS_SYNCEE:
-+     if( ack == ilpcb->start ) {      
++     if( ack == ilpcb->start ) {
 +       ilpcb->rxt_timer = 0;
 +       ilpcb->unacked++;
 +       ilpcb->state = ILS_ESTABLISHED;
@@ -7140,12 +7140,12 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +     if( type == ILT_SYNC && seq == ilpcb->recvd && ack == 0 )
 +       il_send_empty(ilpcb, ILT_SYNC, 0);
 +     break;
-+ 
++
 +   case ILS_ESTABLISHED:
 +     il_proc_ack(ilpcb, so, ack);
 +     switch( type ) {
 +     case ILT_DATA:
-+       if( il_proc_data(ilpcb, so, m, seq, spec) ) 
++       if( il_proc_data(ilpcb, so, m, seq, spec) )
 + 	ilpcb->flags |= ILF_NEEDACK;
 +       goto done;
 +       break;
@@ -7173,11 +7173,11 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +       break;
 +     }
 +     break;
-+ 
++
 +   case	ILS_CLOSED:
 +     goto drop;
 +     break;
-+ 
++
 +   case ILS_CLOSING:
 +     if( type == ILT_CLOSE ) {
 +       if( ilpcb->recvd+1 == seq )
@@ -7188,17 +7188,17 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +     }
 +     break;
 +   }
-+ 
++
 +   m_freem(m);
 +  done:
 +   return;
-+ 
++
 +  dropwithrest:
 +   il_respond(ilpcb, ip, il, ILT_CLOSE, 0);
 +  drop:
 +   m_freem(m);
 + }
-+ 
++
 + static void il_sendseqinit(struct ilpcb * ilpcb)
 + {
 +   ilpcb->start = ilpcb->next = random();
@@ -7206,7 +7206,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   ilpcb->state = ILS_SYNCER;
 +   ilpcb->next++;
 + }
-+ 
++
 + static void il_rxt_timeout(struct ilpcb * ilpcb)
 + {
 +   switch ( ilpcb->state ) {
@@ -7224,28 +7224,28 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   }
 +   ilpcb->rxt_timer = ilpcb->rxt_timer_cur;
 + }
-+ 
++
 + void il_ctlinput(int cmd, struct sockaddr *sa, void *vip)
 + {}
-+ 
++
 + int  il_ctloutput(struct socket *so, struct sockopt *sopt)
 + { return 0; }
-+ 
++
 + void il_drain()
 + {}
-+ 
++
 + void il_slowtimo()
 + {
 +   struct ilpcb * ilpcb;
 +   struct inpcb * inp;
 +   int s;
-+ 
++
 +   s = splnet();
 +   for(inp = ilb.lh_first; inp; inp = inp->inp_list.le_next) {
 +     ilpcb = intoilpcb(inp);
 +     if(ilpcb->death_timer &&  --ilpcb->death_timer == 0 )
 +       il_drop(ilpcb, ETIMEDOUT);
-+     
++
 +     if(ilpcb->rxt_timer &&  --ilpcb->rxt_timer == 0 ) {
 +       ilpcb->rxt_timer_cur <<= 1;
 +       il_rxt_timeout(ilpcb);
@@ -7253,13 +7253,13 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   }
 +   splx(s);
 + }
-+ 
++
 + void il_fasttimo()
 + {
 +   struct ilpcb * ilpcb;
 +   struct inpcb * inp;
 +   int s;
-+ 
++
 +   s = splnet();
 +   for(inp = ilb.lh_first; inp; inp = inp->inp_list.le_next) {
 +     ilpcb = intoilpcb(inp);
@@ -7270,27 +7270,27 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   }
 +   splx(s);
 + }
-+ 
++
 + static struct ilpcb * il_newilpcb(struct inpcb * inp)
 + {
 +   struct inp_ilpcb *it;
 +   register struct ilpcb *ilpcb;
-+   
++
 +   it = (struct inp_ilpcb *)inp;
 +   ilpcb = &it->ilpcb;
 +   bzero((char *) ilpcb, sizeof(struct ilpcb));
-+   
++
 +   ilpcb->state = ILS_CLOSED;
 +   ilpcb->inpcb = inp;
 +   ilpcb->rxt_timer_cur = 2;
 +   ilpcb->death_timer_cur = 20;
-+   
++
 +   ilpcb->inpcb = inp;	/* XXX */
 +   inp->inp_ip_ttl = ip_defttl;
 +   inp->inp_ppcb = (caddr_t)ilpcb;
 +   return (ilpcb);		/* XXX */
 + }
-+ 
++
 + /*
 +  * Common subroutine to open a TCP connection to remote host specified
 +  * by struct sockaddr_in in mbuf *nam.  Call in_pcbbind to assign a local
@@ -7309,13 +7309,13 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	struct sockaddr_in *sin = (struct sockaddr_in *)nam;
 + 	struct sockaddr_in *ifaddr;
 + 	int error;
-+ 
++
 + 	if (inp->inp_lport == 0) {
 + 		error = in_pcbbind(inp, (struct sockaddr *)0, p);
 + 		if (error)
 + 			return error;
 + 	}
-+ 
++
 + 	/*
 + 	 * Cannot simply call in_pcbconnect, because there might be an
 + 	 * earlier incarnation of this same connection still in
@@ -7337,7 +7337,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	inp->inp_faddr = sin->sin_addr;
 + 	inp->inp_fport = sin->sin_port;
 + 	in_pcbrehash(inp);
-+ 
++
 + #if 0
 + 	ilpcb->t_template = tcp_template(tp);
 + 	if (ilpcb->t_template == 0) {
@@ -7345,68 +7345,68 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 		return ENOBUFS;
 + 	}
 + #endif
-+ 
++
 + 	soisconnecting(so);
 + 	il_sendseqinit(ilpcb);
-+ 
++
 + 	return 0;
 + }
-+ 
++
 + static int il_usr_send(struct socket *so, int flags, struct mbuf * m, struct sockaddr *addr, struct mbuf *control, struct proc *p)
 + {
 +   struct ilpcb * ilpcb;
 +   struct inpcb * inp = sotoinpcb(so);
 +   int error;
 +   struct mbuf * m0;
-+ 
++
 +   if (inp == 0) {
 +     m_freem(m);
 +     return EINVAL;
 +   }
 +   ilpcb = intoilpcb(inp);
-+ 
++
 +   if (sbspace(&so->so_snd) < -512) {
 +     m_freem(m);
 +     error = ENOBUFS;
 +     goto out;
 +   }
-+ 
++
 +   sbappendrecord(&so->so_snd, m);
 +   m0 = m_copypacket(m, M_DONTWAIT);
-+   error = il_output(ilpcb, m0, ILT_DATA, ilpcb->next++, 0); 
-+ 
++   error = il_output(ilpcb, m0, ILT_DATA, ilpcb->next++, 0);
++
 +  out:
 +   return error;
 + }
-+ 
++
 + static int il_usr_attach(struct socket *so, int proto, struct proc *p)
 + {
 +   int s = splnet();
 +   int error = 0;
 +   struct inpcb *inp = sotoinpcb(so);
 +   struct ilpcb *ilpcb = 0;
-+ 
++
 +   if (inp) {
 +     error = EISCONN;
 +     goto out;
 +   }
-+   
++
 +   if (so->so_snd.sb_hiwat == 0 || so->so_rcv.sb_hiwat == 0) {
 +     error = soreserve(so, il_sendspace, il_recvspace);
 +     if (error)
 +       goto out;
 +   }
-+ 
++
 +   error = in_pcballoc(so, &ilbinfo, p);
-+ 
++
 +   if (error)
 +     goto out;
-+ 
++
 +   inp = sotoinpcb(so);
 +   ilpcb = il_newilpcb(inp);
 +   if (ilpcb == 0) {
 +     int nofd = so->so_state & SS_NOFDREF;	/* XXX */
-+     
++
 +     so->so_state &= ~SS_NOFDREF;	/* don't free the socket yet */
 +     in_pcbdetach(inp);
 +     so->so_state |= nofd;
@@ -7415,13 +7415,13 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   }
 +   ilpcb->state = ILS_CLOSED;
 +   ilpcb->segq = 0;
-+   
++
 +  out:
 +   splx(s);
 +   return error;
-+ 
++
 + }
-+ 
++
 + static int il_usr_bind(struct socket *so, struct sockaddr *nam, struct proc *p)
 + {
 +   int s = splnet();
@@ -7429,13 +7429,13 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   struct inpcb *inp = sotoinpcb(so);
 +   struct ilpcb *ilpcb;
 +   struct sockaddr_in *sinp;
-+ 
++
 +   if (inp == 0) {
 +     splx(s);
 +     return EINVAL;
 +   }
 +   ilpcb = intoilpcb(inp);
-+ 
++
 + 	/*
 + 	 * Must check for multicast addresses and disallow binding
 + 	 * to them.
@@ -7447,10 +7447,10 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +     goto out;
 +   }
 +   error = in_pcbbind(inp, nam, p);
-+  out: splx(s); 
-+   return error; 
++  out: splx(s);
++   return error;
 + }
-+ 
++
 + /*
 +  * Initiate connection to peer.
 +  * Create a template for use in transmissions on this connection.
@@ -7466,13 +7466,13 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   struct inpcb *inp = sotoinpcb(so);
 +   struct ilpcb *ilpcb;
 +   struct sockaddr_in *sinp;
-+   
++
 +   if (inp == 0) {
 +     splx(s);
 +     return EINVAL;
 +   }
 +   ilpcb = intoilpcb(inp);
-+     
++
 +   /*
 +    * Must disallow TCP ``connections'' to multicast addresses.
 +    */
@@ -7482,16 +7482,16 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +     error = EAFNOSUPPORT;
 +     goto out;
 +   }
-+   
++
 +   if ((error = il_connect(ilpcb, nam, p)) != 0)
 +     goto out;
-+ 
++
 +   error = il_send_empty(ilpcb, ILT_SYNC, 0);
-+ 
-+  out: splx(s); 
-+   return error; 
++
++  out: splx(s);
++   return error;
 + }
-+ 
++
 + /*
 +  * Close a TCP control block:
 +  *	discard all space held by the tcp
@@ -7505,7 +7505,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	register struct mbuf *nq;
 + 	struct inpcb *inp = ilpcb->inpcb;
 + 	struct socket *so = inp->inp_socket;
-+ 
++
 + 	/* free the reassembly queue, if any */
 + 	for (q = ilpcb->segq; q; q = nq) {
 + 		nq = q->m_nextpkt;
@@ -7517,7 +7517,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	in_pcbdetach(inp);
 + 	return ((struct ilpcb *)0);
 + }
-+ 
++
 + /*
 +  * User issued close, and wish to trail through shutdown states:
 +  * if never received SYN, just forget it.  If got a SYN from peer,
@@ -7531,27 +7531,27 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + static struct ilpcb *
 + il_usrclosed(struct ilpcb *ilpcb)
 + {
-+ 
++
 + 	switch (ilpcb->state) {
 + 	case ILS_CLOSED:
 + 	case ILS_LISTENING:
 + 		ilpcb->state = ILS_CLOSED;
 + 		ilpcb = il_close(ilpcb);
 + 		break;
-+ 
++
 + 	case ILS_SYNCER:
 + 	case ILS_SYNCEE:
 + 	case ILS_ESTABLISHED:
 + 	  il_send_empty(ilpcb, ILT_CLOSE, 0);
 + 	  ilpcb->state = ILS_CLOSING;
 + 	  break;
-+ 
++
 + 	case ILS_CLOSING:
 + 		break;
 + 	}
 + 	return (ilpcb);
 + }
-+ 
++
 + /*
 +  * Drop a TCP connection, reporting
 +  * the specified error.  If connection is synchronized,
@@ -7563,9 +7563,9 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +      int errno0;
 + {
 +   struct socket *so = ilpcb->inpcb->inp_socket;
-+ 
++
 +   panic("il_drop");
-+   
++
 +   switch(ilpcb->state) {
 +   case ILS_SYNCEE:
 +   case ILS_ESTABLISHED:
@@ -7578,7 +7578,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   so->so_error = errno0;
 +   return (il_close(ilpcb));
 + }
-+ 
++
 + /*
 +  * Initiate (or continue) disconnect.
 +  * If embryonic state, just send reset (once).
@@ -7591,15 +7591,15 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + il_disconnect(struct ilpcb *ilpcb)
 + {
 +   struct socket *so = ilpcb->inpcb->inp_socket;
-+   
++
 +   soisdisconnecting(so);
 +   sbflush(&so->so_rcv);
 +   ilpcb = il_usrclosed(ilpcb);
-+   
++
 +   return (ilpcb);
 + }
-+ 
-+ 
++
++
 + /*
 +  * pru_detach() detaches the IL protocol from the socket.
 +  * If the protocol state is non-embryonic, then can't
@@ -7614,7 +7614,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	int error = 0;
 + 	struct inpcb *inp = sotoinpcb(so);
 + 	struct ilpcb *ilpcb;
-+ 
++
 + 	if (inp == 0) {
 + 		splx(s);
 + 		return EINVAL;	/* XXX */
@@ -7624,7 +7624,7 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	splx(s);
 + 	return error;
 + }
-+ 
++
 + /*
 +  * Mark the connection as being incapable of further output.
 +  */
@@ -7635,19 +7635,19 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	int error = 0;
 + 	struct inpcb *inp = sotoinpcb(so);
 + 	struct ilpcb *ilpcb;
-+ 
++
 +   if (inp == 0) {
 +     splx(s);
 +     return EINVAL;
 +   }
 +   ilpcb = intoilpcb(inp);
-+   
++
 +   socantsendmore(so);
 +   ilpcb = il_usrclosed(ilpcb);
-+   splx(s); 
++   splx(s);
 +   return error;
 + }
-+ 
++
 + /*
 +  * Initiate disconnect from peer.
 +  * If connection never passed embryonic stage, just drop;
@@ -7666,18 +7666,18 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   int error = 0;
 +   struct inpcb *inp = sotoinpcb(so);
 +   struct ilpcb * ilpcb;
-+ 
++
 +   if (inp == 0) {
 +     splx(s);
 +     return EINVAL;
 +   }
 +   ilpcb = intoilpcb(inp);
-+     
++
 +   il_disconnect(ilpcb);
-+   splx(s); 
++   splx(s);
 +   return error;
 + }
-+ 
++
 + /*
 +  * Abort the TCP.
 +  */
@@ -7688,19 +7688,19 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 + 	int error = 0;
 + 	struct inpcb *inp = sotoinpcb(so);
 + 	struct ilpcb * ilpcb;
-+ 
++
 +   if (inp == 0) {
 +     splx(s);
 +     return EINVAL;
 +   }
 +   ilpcb = intoilpcb(inp);
-+     
++
 +   ilpcb = il_drop(ilpcb, ECONNABORTED);
-+   splx(s); 
++   splx(s);
 +   return error;
-+ 
++
 + }
-+ 
++
 + /*
 +  * Prepare to accept connections.
 +  */
@@ -7711,22 +7711,22 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   int error = 0;
 +   struct inpcb *inp = sotoinpcb(so);
 +   struct ilpcb *ilpcb;
-+   
++
 +   if (inp == 0) {
 +     splx(s);
 +     return EINVAL;
 +   }
 +   ilpcb = intoilpcb(inp);
-+   
++
 +   if (inp->inp_lport == 0)
 +     error = in_pcbbind(inp, (struct sockaddr *)0, p);
 +   if (error == 0)
 +     ilpcb->state = ILS_LISTENING;
-+ 
-+   splx(s); 
++
++   splx(s);
 +   return error;
 + }
-+ 
++
 + /*
 +  * Accept a connection.  Essentially all the work is
 +  * done at higher levels; just return the address
@@ -7739,18 +7739,18 @@ diff -N -c -r /usr/src/sys/netinet/il.c ./netinet/il.c
 +   int error = 0;
 +   struct inpcb *inp = sotoinpcb(so);
 +   struct ilpcb * ilpcb;
-+   
++
 +   if (inp == 0) {
 +     splx(s);
 +     return EINVAL;
 +   }
 +   ilpcb = intoilpcb(inp);
-+   
++
 +   in_setpeeraddr(so, nam);
-+   splx(s); 
++   splx(s);
 +   return error;
 + }
-+ 
++
 + /* xxx - should be const */
 + struct pr_usrreqs il_usrreqs = {
 + 	il_usr_abort, il_usr_accept, il_usr_attach, il_usr_bind,
@@ -7765,10 +7765,10 @@ diff -N -c -r /usr/src/sys/netinet/il.h ./netinet/il.h
 ***************
 *** 0 ****
 --- 1,17 ----
-+ 
++
 + #ifndef NETINET_IL_H_
 + #define NETINET_IL_H_
-+ 
++
 + struct ilhdr
 + {
 + 	u_char	ilsum[2];	/* Checksum including header */
@@ -7780,7 +7780,7 @@ diff -N -c -r /usr/src/sys/netinet/il.h ./netinet/il.h
 + 	u_char	ilid[4];	/* Sequence id */
 + 	u_char	ilack[4];	/* Acked sequence */
 + };
-+ 
++
 + #endif
 diff -N -c -r /usr/src/sys/netinet/il_var.h ./netinet/il_var.h
 *** /usr/src/sys/netinet/il_var.h	Wed Dec 31 19:00:00 1969
@@ -7790,36 +7790,36 @@ diff -N -c -r /usr/src/sys/netinet/il_var.h ./netinet/il_var.h
 --- 1,46 ----
 + #ifndef NETINET_IL_VAR_H_
 + #define NETINET_IL_VAR_H_
-+ 
++
 + struct ilpcb			/* Control block */
 + {
 +   int	state;		/* Connection state */
 +   struct inpcb * inpcb;  /* back pointer to internet pcb */
 +   u_long unacked;
-+ 
++
 + #define ILF_NEEDACK 1
 +   u_long flags;
-+ 
++
 +   u_long rxt_max;
 +   int rxt_timer;  /* number of ticks to the next timeout */
 +   int rxt_timer_cur;  /* current rxt timer period */
-+ 
++
 +   int death_timer;
 +   int death_timer_cur;
-+   
++
 +   u_long	next;		/* Id of next to send */
 +   u_long	recvd;		/* Last packet received */
-+   
++
 +   u_long	start;		/* Local start id */
 +   u_long	rstart;		/* Remote start id */
 +   int	rxtot;		/* number of retransmits on this connection */
-+ 
++
 +   struct mbuf * segq;
 + };
-+ 
++
 + #define	intoilpcb(ip)	((struct ilpcb *)(ip)->inp_ppcb)
 + #define	sotoilpcb(so)	(intoilpcb(sotoinpcb(so)))
-+ 
++
 + #ifdef KERNEL
 + void il_init __P((void));
 + void il_input __P((struct mbuf * m, int iphlen));
@@ -7828,11 +7828,11 @@ diff -N -c -r /usr/src/sys/netinet/il_var.h ./netinet/il_var.h
 + void il_ctlinput __P((int cmd, struct sockaddr *sa, void *vip));
 + int  il_ctloutput __P((struct socket *so, struct sockopt *sopt));
 + void il_drain __P((void));
-+ 
++
 + extern struct pr_usrreqs il_usrreqs;
-+ 
++
 + #endif
-+ 
++
 + #endif
 diff -N -c -r /usr/src/sys/netinet/in_proto.c ./netinet/in_proto.c
 *** /usr/src/sys/netinet/in_proto.c	Sat Aug 22 23:07:14 1998
@@ -7840,11 +7840,11 @@ diff -N -c -r /usr/src/sys/netinet/in_proto.c ./netinet/in_proto.c
 ***************
 *** 36,41 ****
 --- 36,42 ----
-  
+
   #include "opt_ipdivert.h"
   #include "opt_ipx.h"
 + #include "opt_inet.h"
-  
+
   #include <sys/param.h>
   #include <sys/kernel.h>
 ***************
@@ -7852,15 +7852,15 @@ diff -N -c -r /usr/src/sys/netinet/in_proto.c ./netinet/in_proto.c
 --- 72,82 ----
   #include <netns/ns_if.h>
   #endif
-  
+
 + #ifdef IL
 + #include <netinet/il.h>
 + #include <netinet/il_var.h>
 + #endif
-+ 
++
   extern	struct domain inetdomain;
   static	struct pr_usrreqs nousrreqs;
-  
+
 ***************
 *** 161,166 ****
 --- 167,181 ----
@@ -7889,7 +7889,7 @@ diff -N -c -r /usr/src/sys/sys/vnode.h ./sys/vnode.h
   	VT_PORTAL, VT_NULL, VT_UMAP, VT_KERNFS, VT_PROCFS, VT_AFS, VT_ISOFS,
 ! 	VT_UNION, VT_MSDOSFS, VT_DEVFS, VT_TFS, VT_VFS, VT_CODA, VT_NTFS
   };
-  
+
   /*
 --- 62,68 ----
   enum vtagtype	{
@@ -7897,5 +7897,5 @@ diff -N -c -r /usr/src/sys/sys/vnode.h ./sys/vnode.h
   	VT_PORTAL, VT_NULL, VT_UMAP, VT_KERNFS, VT_PROCFS, VT_AFS, VT_ISOFS,
 ! 	VT_UNION, VT_MSDOSFS, VT_DEVFS, VT_TFS, VT_VFS, VT_CODA, VT_NTFS, VT_U9FS
   };
-  
+
   /*

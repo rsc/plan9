@@ -46,7 +46,7 @@ to single characters.
 .PP
 In either string a noninitial sequence
 .BI - x\f1,
-where 
+where
 .I x
 is any character (possibly quoted), stands for
 a range of characters:
@@ -65,7 +65,7 @@ The character sequence
 followed by 1 to 6 hexadecimal digits stands
 for the character whose
 21-bit value is given by those digits.
-A 
+A
 .L \e
 followed by any other character stands
 for that character.

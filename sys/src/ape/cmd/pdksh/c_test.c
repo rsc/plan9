@@ -124,9 +124,9 @@ c_test(wp)
 	te.pos.wp = wp + 1;
 	te.wp_end = wp + argc;
 
-	/* 
+	/*
 	 * Handle the special cases from POSIX.2, section 4.62.4.
-	 * Implementation of all the rules isn't necessary since 
+	 * Implementation of all the rules isn't necessary since
 	 * our parser does the right thing for the ommited steps.
 	 */
 	if (argc <= 5) {
@@ -238,7 +238,7 @@ test_eval(te, op, opnd1, opnd2, do_eval)
 			if (not)
 				res = !res;
 		}
-		return res; 
+		return res;
 	  case TO_FILRD: /* -r */
 		return test_eaccess(opnd1, R_OK) == 0;
 	  case TO_FILWR: /* -w */

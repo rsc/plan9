@@ -79,7 +79,7 @@ The output can be used later as input.
 Under flag
 .B -g
 the program draws a plot that can be inspected using the mouse and
-the keyboard. 
+the keyboard.
 A new window
 is used to plot the diagram if
 .B -w
@@ -107,7 +107,7 @@ see some interesting events otherwise merged due to the scale.
 Placing the mouse near a process line updates the
 status information shown, including time.
 .PP
-Arrow keys can be used 
+Arrow keys can be used
 to zoom in (up), out (down), and to move left (left) and right (right).
 A click on the left (or right) part of the top line with the mouse
 moves left (or right).
@@ -186,7 +186,7 @@ term% ptrace -d tr.out
 .EE
 .LP
 This output can be saved and later used as input for
-.IR 
+.IR
 .PP
 Convert the dump to a textual format and run
 .I ptrace

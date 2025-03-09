@@ -55,8 +55,8 @@ void
 kinit(void)
 {
 	int i;
-	
-	for(i = 0; keywds[i].name; i++) 
+
+	for(i = 0; keywds[i].name; i++)
 		enter(keywds[i].name, keywds[i].terminal);
 }
 
@@ -346,7 +346,7 @@ loop:
 			return numsym('.');
 
 		return '.';
- 
+
 	case '(':
 	case ')':
 	case '[':

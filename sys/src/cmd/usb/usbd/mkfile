@@ -36,4 +36,3 @@ $LIBU:
 
 devtab.c: usbdb ../lib/usb.h mkdev
 	./mkdev >$target
-

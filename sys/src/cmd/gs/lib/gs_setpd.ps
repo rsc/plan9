@@ -1,12 +1,12 @@
 %    Copyright (C) 1994, 2000 Aladdin Enterprises.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -179,7 +179,7 @@ level2dict begin
 /.requiredattrs mark
   /PageDeviceName //null
   /PageOffset [0 0] readonly
-% We populate InputAttributes with all of the known page sizes 
+% We populate InputAttributes with all of the known page sizes
 % followed by a dummy media type that handles pages of any size.
 % This will create some duplicates, but that only slightly slows
 % down the media selection (loop is in zmedia2.c).
@@ -204,7 +204,7 @@ level2dict begin
     % the 'match any' PageSize entry
     systemdict /NORANGEPAGESIZE known not {
       % Add one last entry which is the 4 element range array (non-standard)
-      counttomark 2 idiv 
+      counttomark 2 idiv
 	% PageSize with either dimension 0 will be detected in
 	% match_page_size, so we can allow it here
       mark /PageSize [0 dup 16#7ffff dup] .dicttomark
@@ -251,10 +251,10 @@ level2dict begin
 	% Merge policies from the device driver with defaults
 	2 index             % <<>> /key value <<>>
 	3 2 roll get        % <<>> value <<policies>>
-	exch {                
-	  2 index 2 index known { 
+	exch {
+	  2 index 2 index known {
 	    pop pop
-	  } { 
+	  } {
 	    2 index 3 1 roll put
 	  } ifelse
 	} forall

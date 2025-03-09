@@ -1,12 +1,12 @@
 '\"                Copyright (c) 1997 Lucent
 '\"                  All Rights Reserved
-'\"     
+'\"
 '\"#ident	"@(#)macros:strings.mm	3.1"
 '\"	UNIX Memorandum Macros, DWB 3.1, April 1990
 '\"	Company-specifics:  Lucent Bell Laboratories
 '''\"	'''\"tab  begins comments.
 '''\"	No comments should appear on the same line as the string definition.
-'''\"	
+'''\"
 '''\"	The following string is used by the macro MT.
 '''\"	]S defined as logo character
 .ds ]S \s36\(LH\s0
@@ -15,12 +15,12 @@
 '''\"
 '''\"   Strings for proprietary markings at bottom of page.
 '''\"	Free Strings:  ]Q ]R ]H ]L ]V ]W ]X ]k ]l
-'''\"	
+'''\"
 '''\"	Register ;V = user-specified year for copyright date
 .nr ;V \n(yr
 '''\"	LUCENT PROPRIETARY MARKINGS
 '''\"	The following strings are used by the macro PM:
-'''\"	
+'''\"
 '''\"	Marking Type:  PROPRIETARY
 '''\"	Invocation:  .PM 1  or  .PM P
 '''\"	Strings: ]M ]O

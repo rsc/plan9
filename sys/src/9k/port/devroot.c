@@ -251,4 +251,3 @@ Dev rootdevtab = {
 	devremove,
 	devwstat,
 };
-

@@ -17,7 +17,7 @@ The ICC profile I/O library archive is kept at
 http://web.access.net.au/argyll/color.html
 
 (Version 2.02 is has a few minor changes and fixups from V2.00.
-See icc.c for a more detailed change history.) 
+See icc.c for a more detailed change history.)
 
 Motivation
 
@@ -88,10 +88,10 @@ Changes from V1.30
 
  Added file I/O class to allow substitution of alternative ICC profile
  file access. Provide standard file class instance, and memory image
- instance of file I/O class as default and example. 
+ instance of file I/O class as default and example.
  Added an optional new_icc_a() object creator, that takes a memory
  allocator class instance. This allows an alternate memory heap to
- be used with the icc class. 
+ be used with the icc class.
  Renamed object free() methods to del() for more consistency with new().
 
  Added ColorSync 2.5 specific VideoCardGamma tag support (from Neil Okamoto)

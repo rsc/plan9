@@ -17,7 +17,7 @@ nextID(void)
 	unlock(&l);
 	return i;
 }
-	
+
 /*
  * Create and initialize a new Thread structure attached to a given proc.
  */
@@ -56,7 +56,7 @@ newthread(Proc *p, void (*f)(void *arg), void *arg, uint stacksize, char *name, 
 	return id;
 }
 
-/* 
+/*
  * Create a new thread and schedule it to run.
  * The thread grp is inherited from the currently running thread.
  */
@@ -149,4 +149,3 @@ _freethread(Thread *t)
 	free(t->stk);
 	free(t);
 }
-

@@ -7,4 +7,3 @@ segdetach(void *addr)
 {
 	return _SEGDETACH(addr);
 }
-

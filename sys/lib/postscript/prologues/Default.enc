@@ -340,4 +340,3 @@ userdict /@RealFindfont known not {
 	{{UTFstring kshow} bind}
 	{{UTFstring //kshow cvx exec} bind}
 ifelse def
-

@@ -769,7 +769,7 @@ enumcaps(Pcidev *p, int (*fmatch)(Pcidev*, int, int, int), int arg)
 
 	/* status register bit 4 has capabilities */
 	if((pcicfgr16(p, PciPSR) & 1<<4) == 0)
-		return -1;      
+		return -1;
 	switch(pcicfgr8(p, PciHDT) & 0x7F){
 	default:
 		return -1;

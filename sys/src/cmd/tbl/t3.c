@@ -2,7 +2,7 @@
 # include "t.h"
 
 struct optstr {
-	char	*optnam; 
+	char	*optnam;
 	int	*optadd;
 } options [] = {
 	"expand", &expflg,
@@ -47,7 +47,7 @@ getcomm(void)
 		return;
 	}
 	for (cp = line; (c = *cp) != ';'; cp++) {
-		if (!letter(c)) 
+		if (!letter(c))
 			continue;
 		found = 0;
 		for (lp = options; lp->optadd; lp++) {
@@ -62,9 +62,9 @@ getcomm(void)
 				if ( *cp == '(')
 					while ((ci = *++cp) != ')')
 						*t++ = ci;
-				else 
+				else
 					cp--;
-				*t++ = 0; 
+				*t++ = 0;
 				*t = 0;
 				if (lp->optadd == &tab) {
 					if (nb[0])

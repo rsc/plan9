@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -18,18 +18,18 @@
 
 /*
 	File 'sfnt.h'
-	
+
 	Contains 'sfnt' resource structure description
-	
+
 	Copyright 1991 Apple Computer, Inc.
-	
+
 */
 
 #ifndef sfntIncludes
 #define sfntIncludes
 
 #include "stdint_.h" /* make sure stdint types are available */
-                            
+
 typedef   uint8_t    uint8; /* 8-bit unsigned integer */
 typedef    int8_t     int8; /* 8-bit signed integer */
 typedef  uint16_t   uint16; /* 16-bit unsigned integer */
@@ -112,7 +112,7 @@ typedef struct {
 	uint16	macStyle;	/* macintosh style word */
 	uint16	lowestRecPPEM; 	/* lowest recommended pixels per Em */
 
-	/* 0: fully mixed directional glyphs, 1: only strongly L->R or T->B glyphs, 
+	/* 0: fully mixed directional glyphs, 1: only strongly L->R or T->B glyphs,
 	   -1: only strongly R->L or B->T glyphs, 2: like 1 but also contains neutrals,
 	   -2: like -1 but also contains neutrals */
 	int16		fontDirectionHint;
@@ -128,7 +128,7 @@ typedef struct {
 	int16		ascender;
 	int16		descender;
 	int16		lineGap;				/* linespacing = ascender - descender + linegap */
-	uint16	advanceMax;	
+	uint16	advanceMax;
 	int16		sideBearingMin;		/* left or top */
 	int16		otherSideBearingMin;	/* right or bottom */
 	int16		extentMax; 			/* Max of ( SB[i] + bounds[i] ), i loops through all glyphs */
@@ -253,7 +253,7 @@ typedef struct {
 		numberGlyphs;
 		int8[numberGlyphs];
 	}
-*/		
+*/
 } sfnt_PostScriptInfo;
 
 typedef enum outlinePacking {

@@ -1,12 +1,12 @@
 /* Copyright (C) 1991-2004 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -119,7 +119,7 @@ void gp_readline_finit(void *readline_data);
  * Returns number of bytes read, or 0 if EOF, or -ve if error.
  * If unbuffered is NOT possible, fetch 1 byte if interactive
  * is non-zero, or up to len bytes otherwise.
- * If unbuffered is possible, fetch at least 1 byte (unless error or EOF) 
+ * If unbuffered is possible, fetch at least 1 byte (unless error or EOF)
  * and any additional bytes that are available without blocking.
  */
 int gp_stdin_read(char *buf, int len, int interactive, FILE *f);
@@ -178,7 +178,7 @@ extern const char gp_fmode_wb[];
  * an appropriate system directory, usually as determined from
  * gp_gettmpdir(), followed by a path as returned from a system call.
  *
- * Implementations should make sure that 
+ * Implementations should make sure that
  *
  * Return value: Opened file object, or NULL on error.
  **/
@@ -201,12 +201,12 @@ typedef enum {
 
 /*
  * Combine a file name with a prefix.
- * Concatenates two paths and reduce parten references and current 
+ * Concatenates two paths and reduce parten references and current
  * directory references from the concatenation when possible.
  * The trailing zero byte is being added.
  * Various platforms may share this code.
  */
-gp_file_name_combine_result gp_file_name_combine(const char *prefix, uint plen, 
+gp_file_name_combine_result gp_file_name_combine(const char *prefix, uint plen,
 	    const char *fname, uint flen, bool no_sibling, char *buffer, uint *blen);
 
 /* -------------- Helpers for gp_file_name_combine_generic ------------- */
@@ -280,14 +280,14 @@ bool gp_file_name_is_empty_item_meanful(void);
 /* 'type' and 16 bit 'id' in an extended attribute of a file. The is   */
 /* primarily for accessing fonts on MacOS, which classically used this */
 /* format. Presumedly a 'nop' on systems that don't support Apple HFS. */
-int gp_read_macresource(byte *buf, const char *fname, 
+int gp_read_macresource(byte *buf, const char *fname,
                                      const uint type, const ushort id);
 
 
 /* ------ persistent cache interface ------ */
 
 /*
- * This is used for access to data cached between invocations of 
+ * This is used for access to data cached between invocations of
  * Ghostscript. It is generally used for saving reusable data that
  * is expensive to compute. Concurrent access by multiple instances
  * is safe. Because of this care should be taken to use a new data
@@ -299,7 +299,7 @@ int gp_read_macresource(byte *buf, const char *fname,
  * A query if successful uses the passed callback to allocate a buffer
  * and fills it with the retrieved data. The caller is thus responsible
  * for the buffer's memory management.
- * 
+ *
  * See zmisc.c for postscript test operators and an example implementation.
  */
 
@@ -385,8 +385,8 @@ void gp_enumerate_files_close(file_enum * pfen);
 
 /* ------ Font enumeration ------ */
 
-/* This is used to query the native os for a list of font names and 
- * corresponding paths. The general idea is to save the hassle of 
+/* This is used to query the native os for a list of font names and
+ * corresponding paths. The general idea is to save the hassle of
  * building a custom fontmap file
  */
 
@@ -399,7 +399,7 @@ void *gp_enumerate_fonts_init(gs_memory_t *mem);
    return C strings. The string 'name' is the font name, 'path'
    is the access path for the font resource. The returned strings
    are only safe to reference until until the next call.
-   Returns 0 when no more fonts are available, a positive value 
+   Returns 0 when no more fonts are available, a positive value
    on success, or negative value on error. */
 int gp_enumerate_fonts_next(void *enum_state, char **fontname, char **path);
 

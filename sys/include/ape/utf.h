@@ -4,7 +4,7 @@
 #pragma src "/sys/src/ape/lib/utf"
 
 #if defined(__cplusplus)
-extern "C" { 
+extern "C" {
 #endif
 
 typedef unsigned int Rune;	/* 32 bits */

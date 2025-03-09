@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 1994, 1996, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -38,7 +38,7 @@
 #define FIRST_COLUMN    180
 
 /* The value of X_DPI and Y_DPI is gained by experiment */
-#define X_DPI 154		/* pixels per inch */ 
+#define X_DPI 154		/* pixels per inch */
 #define Y_DPI 187		/* pixels per inch */
 
 /* The device descriptor */
@@ -68,7 +68,7 @@ int copies;
 /* Send the page to the printer. */
 private int
 cp50_print_page(gx_device_printer *pdev, FILE *prn_stream)
-{	
+{
 	int line_size = gdev_mem_bytes_per_scan_line((gx_device *)pdev);
 	byte *out = (byte *)gs_malloc(pdev->memory, line_size, 1, "cp50_print_page(out)");
     byte *r_plane = (byte *)gs_malloc(pdev->memory, X_PIXEL*Y_PIXEL, 1, "cp50_print_page(r_plane)");
@@ -86,7 +86,7 @@ cp50_print_page(gx_device_printer *pdev, FILE *prn_stream)
 /*fprintf(prn_stream, "%d,%d,%d,", pdev->width, pdev->height, line_size);*/
 
 	/* Check allocations */
-	if ( out == 0 || r_plane == 0 || g_plane == 0 || b_plane == 0 || 
+	if ( out == 0 || r_plane == 0 || g_plane == 0 || b_plane == 0 ||
          t_plane == 0)
 	{	if ( out )
 			gs_free(pdev->memory, (char *)out, line_size, 1,
@@ -94,14 +94,14 @@ cp50_print_page(gx_device_printer *pdev, FILE *prn_stream)
         if (r_plane)
             gs_free(pdev->memory, (char *)r_plane, X_PIXEL*Y_PIXEL, 1,
                 "cp50_print_page(r_plane)");
-        if (g_plane)  
-            gs_free(pdev->memory, (char *)g_plane, X_PIXEL*Y_PIXEL, 1, 
+        if (g_plane)
+            gs_free(pdev->memory, (char *)g_plane, X_PIXEL*Y_PIXEL, 1,
                 "cp50_print_page(g_plane)");
-        if (b_plane)  
-            gs_free(pdev->memory, (char *)b_plane, X_PIXEL*Y_PIXEL, 1, 
+        if (b_plane)
+            gs_free(pdev->memory, (char *)b_plane, X_PIXEL*Y_PIXEL, 1,
                 "cp50_print_page(b_plane)");
         if (t_plane)
-            gs_free(pdev->memory, (char *)t_plane, X_PIXEL*Y_PIXEL, 1, 
+            gs_free(pdev->memory, (char *)t_plane, X_PIXEL*Y_PIXEL, 1,
                 "cp50_print_page(t_plane)");
 		return -1;
 	}
@@ -155,12 +155,12 @@ cp50_print_page(gx_device_printer *pdev, FILE *prn_stream)
 
     for(i=0;i<X_PIXEL;i++)
       for(j=Y_PIXEL-1;j>=0;j--)
-        t_plane[(Y_PIXEL-1-j)+i*Y_PIXEL] = g_plane[i+j*X_PIXEL]; 
+        t_plane[(Y_PIXEL-1-j)+i*Y_PIXEL] = g_plane[i+j*X_PIXEL];
     fwrite(t_plane, sizeof(char), X_PIXEL*Y_PIXEL, prn_stream);
 
     for(i=0;i<X_PIXEL;i++)
       for(j=Y_PIXEL-1;j>=0;j--)
-        t_plane[(Y_PIXEL-1-j)+i*Y_PIXEL] = b_plane[i+j*X_PIXEL]; 
+        t_plane[(Y_PIXEL-1-j)+i*Y_PIXEL] = b_plane[i+j*X_PIXEL];
     fwrite(t_plane, sizeof(char), X_PIXEL*Y_PIXEL, prn_stream);
 
 
@@ -173,7 +173,7 @@ cp50_print_page(gx_device_printer *pdev, FILE *prn_stream)
 	return 0;
 }
 
-int private 
+int private
 cp50_output_page(gx_device *pdev, int num_copies, int flush)
 {   int code, outcode, closecode;
 
@@ -191,7 +191,7 @@ cp50_output_page(gx_device *pdev, int num_copies, int flush)
 
     if ( ppdev->buffer_space ) /* reinitialize clist for writing */
       code = (*gs_clist_device_procs.output_page)(pdev, num_copies, flush);
- 
+
     if ( outcode < 0 ) return outcode;
     if ( closecode < 0 ) return closecode;
     if ( code < 0 ) return code;
@@ -201,11 +201,11 @@ cp50_output_page(gx_device *pdev, int num_copies, int flush)
 
 /* 24-bit color mappers (taken from gdevmem2.c). */
 /* Note that Windows expects RGB values in the order B,G,R. */
- 
+
 /* Map a r-g-b color to a color index. */
 private gx_color_index
 cp50_rgb_color(gx_device *dev, const gx_color_value cv[])
-{   
+{
     gx_color_value red, green, blue;
 
     red = cv[0]; green = cv[1]; blue = cv[2];
@@ -213,7 +213,7 @@ cp50_rgb_color(gx_device *dev, const gx_color_value cv[])
            ((uint)gx_color_value_to_byte(green) << 8) +
            gx_color_value_to_byte(blue);
 }
- 
+
 /* Map a color index to a r-g-b color. */
 private int
 cp50_color_rgb(gx_device *dev, gx_color_index color,

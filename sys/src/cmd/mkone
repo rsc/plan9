@@ -60,4 +60,3 @@ safeinstallall:V:
 	cp $stem.man $MAN/$stem
 
 man:V:	$TARG.man
-

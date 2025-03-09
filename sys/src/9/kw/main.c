@@ -417,7 +417,7 @@ reboot(void *entry, void *code, ulong size)
 
 	iprint("starting reboot...");
 	writeconf();
-	
+
 	shutdown(0);
 
 	/*

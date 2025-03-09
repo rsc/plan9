@@ -79,7 +79,7 @@ enum {
 
 /* decode first four bits */
 int decode[16] = {
-	Lit7,	
+	Lit7,
 	Lit7,
 	Lit7,
 	Lit7,
@@ -88,15 +88,15 @@ int decode[16] = {
 	Lit7,
 	Lit7,
 	Lit8,
-	Lit8,	
 	Lit8,
-	Lit8,	
+	Lit8,
+	Lit8,
 	Off13,
 	Off13,
 	Off8,
 	Off6,
 };
-	
+
 
 static	void		*compinit(PPP*);
 static	Block*		comp(PPP*, ushort, Block*, int*);
@@ -199,7 +199,7 @@ comp(PPP *ppp, ushort proto, Block *b, int *protop)
 	s->b->wptr += 2;	/* leave room for mppc header */
 
 	comp2(s, b->rptr, n);
-		
+
 	/* flush sreg */
 	if(s->bits)
 		*s->b->wptr++ = s->sreg<<(8-s->bits);
@@ -210,7 +210,7 @@ comp(PPP *ppp, ushort proto, Block *b, int *protop)
 
 	if(n2 > n-2 && !s->encrypt) {
 		/* expened and not excrypting so send as a regular packet */
-//netlog("mppc: comp: expanded\n"); 
+//netlog("mppc: comp: expanded\n");
 		compreset(s);
 		freeb(s->b);
 		b->rptr += 2;
@@ -229,7 +229,7 @@ comp(PPP *ppp, ushort proto, Block *b, int *protop)
 	s->front = 0;
 
 	if(n2 > n) {
-//netlog("mppc: comp: expanded\n"); 
+//netlog("mppc: comp: expanded\n");
 		freeb(s->b);
 		/* make room for count */
 		compreset(s);
@@ -244,7 +244,7 @@ comp(PPP *ppp, ushort proto, Block *b, int *protop)
 	if(s->encrypt) {
 		count |= Pencrypt;
 		if((count&0xff) == 0xff) {
-//netlog("mppc: comp: changing key\n"); 
+//netlog("mppc: comp: changing key\n");
 			setkey(s->key, s->startkey);
 			setupRC4state(&s->rc4key, s->key, 16);
 			rc4(&s->rc4key, s->key, 16);
@@ -257,7 +257,7 @@ comp(PPP *ppp, ushort proto, Block *b, int *protop)
 
 	b->rptr[0] = count>>8;
 	b->rptr[1] = count;
-	
+
 	qunlock(s);
 
 	*protop = Pcdata;
@@ -526,7 +526,7 @@ uncomp(PPP *ppp, Block *b, int *protop, Block **r)
 
 #define NEXTBYTE	sreg = (sreg<<8) | *p++; n--; bits += 8
 int	maxoff;
-	
+
 static	Block*
 uncomp2(Uncstate *s, Block *b, ushort count)
 {
@@ -569,7 +569,7 @@ netlog("******* bad count - got %ux expected %ux\n", count&0xfff, ecount);
 		rc4(&s->rc4key, s->key, 16);
 		setupRC4state(&s->rc4key, s->key, 16);
 	}
-	
+
 	s->count = count;
 
 	n = BLEN(b);
@@ -680,7 +680,7 @@ netlog("ppp: mppc: bad length %d\n", ones);
 		hq = hp-off;
 		if(hq < hs) {
 			hq += sizeof(s->his);
-			if(hq-hs+len > s->size) 
+			if(hq-hs+len > s->size)
 				goto His;
 		}
 		if(hp+len > he) goto His;
@@ -699,11 +699,11 @@ Done:
 	memmove(b->wptr, hq, len);
 	b->wptr += len;
 netlog("ppp: mppc: len %d bits = %d n=%d\n", len, bits, n);
-	
+
 	s->indx += len;
 	if(s->indx > s->size)
 		s->size = s->indx;
-	
+
 	return b;
 Eof:
 netlog("*****unexpected end of data\n");
@@ -724,8 +724,8 @@ static	void
 uncfini(void *as)
 {
 	Uncstate *s;
-	
-	s = as;	
+
+	s = as;
 	free(s);
 }
 
@@ -796,7 +796,7 @@ struct UDPhdr
 	uchar	length[2];	/* packet length */
 	uchar	id[2];		/* Identification */
 	uchar	frag[2];	/* Fragment information */
-	uchar	Unused;	
+	uchar	Unused;
 	uchar	udpproto;	/* Protocol */
 	uchar	udpplen[2];	/* Header plus data length */
 	uchar	udpsrc[4];	/* Ip source */

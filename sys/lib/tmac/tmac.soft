@@ -262,7 +262,7 @@ KEY WORDS  \c
 .nr G1 \\n(G3
 .rn GN GT
 .nr G3 0
-.ev 
+.ev
 .nr FP 0
 .nr Q1 0
 .nr L4 \\n(LPu-\\n(LSu
@@ -292,7 +292,7 @@ KEY WORDS  \c
 .bp
 .ev
 ..
-.de CP \" cut text on page arg1 by arg2 
+.de CP \" cut text on page arg1 by arg2
 .nr C2 \\$2v
 .nr C1 \\$1
 .af C1 1
@@ -741,7 +741,7 @@ unpublished work
 .QP "\\*([F.\0"
 .if !"\\*([A"" \\*([A,
 .if !"\\*([T"" \\f2\\*([T\\f1\c
-.if !"\\*([T"" .if !"\\*([O"" ,\ 
+.if !"\\*([T"" .if !"\\*([O"" ,\
 .ie !"\\*([O"" \\*([O
 .el .if !"\\*([T"" \&.
 .if !"\\*([D"" \\*([D.

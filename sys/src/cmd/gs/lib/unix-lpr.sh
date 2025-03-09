@@ -2,13 +2,13 @@
 # $Id: unix-lpr.sh,v 1.5 2004/08/04 00:55:46 giles Exp $
 #
 # Unix lpr filter. The default setup sends output directly to a pipe,
-# which requires the Ghostscript process to fork, and thus may cause 
+# which requires the Ghostscript process to fork, and thus may cause
 # small systems to run out of memory/swap space. An alternative strategy,
 # based on a suggestion by Andy Fyfe (andy@cs.caltech.edu), uses a named
 # pipe for output, which avoids the fork and can thus save a lot of memory.
 #
-# Unfortunately this approach can cause problems when a print job is aborted, 
-# as the abort can cause one of the processes to die, leaving the process 
+# Unfortunately this approach can cause problems when a print job is aborted,
+# as the abort can cause one of the processes to die, leaving the process
 # at the other end of the pipe hanging forever.
 #
 # Because of this, the named pipe method has not been made the default,
@@ -90,7 +90,7 @@ fi
 lock=`dirname ${acctfile}`/lock
 cf=`sed -n '$p' ${lock}`
 job=`sed -n 's/^J//p' ${cf}`
- 
+
 echo "gsbanner: ${host}:${user}  Job: ${job}  Date: `date`"
 echo "gsif: ${host}:${user} ${fdevname} start - `date`"
 
@@ -143,7 +143,7 @@ echo "\
         } { pop } ifelse
       acctfile exch writestring
       acctfile (.00 ) writestring
-      acctfile (host) getenv 
+      acctfile (host) getenv
         { string cvs } { (NOHOST) } ifelse writestring
       acctfile (:) writestring
       acctfile (user) getenv
@@ -163,4 +163,3 @@ rm -f ${gspipe}
 # End the logfile entry
 #
 echo "gsif: end - `date`"
-

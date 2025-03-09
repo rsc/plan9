@@ -100,4 +100,3 @@ extern	int		nclient;
 extern	int		urldebug;
 extern	int		httpdebug;
 extern	char*	status[];
-

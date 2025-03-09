@@ -19,7 +19,7 @@
 #define BY2PG		4096			/* bytes per page */
 #define PGSHIFT		12			/* log(BY2PG) */
 #define STACKALIGN(sp)	((sp) & ~7)		/* bug: assure with alloc */
-#define SEGALIGN	(1024*1024)		/* alignment for segments */	
+#define SEGALIGN	(1024*1024)		/* alignment for segments */
 #define BY2PTE		8			/* bytes per pte entry */
 #define BY2PTEG		64			/* bytes per pte group */
 
@@ -118,7 +118,7 @@
 /*
  * Virtual MMU
  */
-#define PTEMAPMEM	(1024*1024)	
+#define PTEMAPMEM	(1024*1024)
 #define PTEPERTAB	(PTEMAPMEM/BY2PG)
 #define SEGMAPSIZE	1984
 #define SSEGMAPSIZE	16

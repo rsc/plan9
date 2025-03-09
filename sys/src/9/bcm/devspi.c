@@ -153,13 +153,13 @@ spiattach(char* spec)
 	return devattach(L'π', spec);
 }
 
-static Walkqid*	 
+static Walkqid*
 spiwalk(Chan* c, Chan *nc, char** name, int nname)
 {
 	return devwalk(c, nc, name, nname, spidir, nelem(spidir), devgen);
 }
 
-static int	 
+static int
 spistat(Chan* c, uchar* dp, int n)
 {
 	return devstat(c, dp, n, spidir, nelem(spidir), devgen);
@@ -192,7 +192,7 @@ spiopen(Chan* c, int omode)
 	return c;
 }
 
-static void	 
+static void
 spiclose(Chan *c)
 {
 	Spi *spi;
@@ -231,4 +231,3 @@ Dev spidevtab = {
 	devremove,
 	devwstat,
 };
-

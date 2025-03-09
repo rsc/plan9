@@ -23,7 +23,7 @@ sam -d $* >[2]/dev/null
 }
 
 fn awk2 {
-	awk 'NR%2==1 { a=$0; } 
+	awk 'NR%2==1 { a=$0; }
 		NR%2==0 { b=$0; printf("%-30s %s\n", a, b); }
 	' $*
 }

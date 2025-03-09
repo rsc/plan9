@@ -359,7 +359,7 @@ sdhostio(int write, uchar *buf, int len)
 
 static void
 sdhostinterrupt(Ureg*, void*)
-{	
+{
 	u32int *r;
 	int i;
 

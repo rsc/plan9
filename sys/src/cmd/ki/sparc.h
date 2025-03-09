@@ -204,7 +204,7 @@ Extern		Inst *ci;
 Extern		ulong *iprof;
 Extern		ulong loadlock;
 Extern		ulong anulled;
-extern		int datasize;		
+extern		int datasize;
 extern		int printcol;
 Extern		Map *symmap;
 

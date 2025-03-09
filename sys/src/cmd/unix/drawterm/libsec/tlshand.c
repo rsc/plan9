@@ -1779,7 +1779,7 @@ tlsSecSecretc(TlsSec *sec, uchar *sid, int nsid, uchar *srandom, uchar *cert, in
 
 	USED(sid);
 	USED(nsid);
-	
+
 	memmove(sec->srandom, srandom, RandomSize);
 
 	if(setVers(sec, vers) < 0)
@@ -1906,7 +1906,7 @@ serverMasterSecret(TlsSec *sec, uchar *epm, int nepm)
 		genrandom(pm->data, MasterSecretSize);
 	}
 	setMasterSecret(sec, pm);
-	memset(pm->data, 0, pm->len);	
+	memset(pm->data, 0, pm->len);
 	freebytes(pm);
 }
 

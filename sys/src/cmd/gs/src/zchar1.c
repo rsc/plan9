@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 2000, 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -67,7 +67,7 @@
 
 #undef  GS_CHAR_FILL
 #define GS_CHAR_FILL gs_fill	/* gs_fill or gs_eofill */
- 
+
 /* ============== PATCH END=================== */
 
 /* ---------------- Utilities ---------------- */
@@ -92,9 +92,9 @@ type1_exec_init(gs_type1_state *pcis, gs_text_enum_t *penum,
      * have to address someday!
      */
 
-    int alpha_bits = 1; 
+    int alpha_bits = 1;
     gs_log2_scale_point log2_subpixels;
-    
+
     if (color_is_pure(pgs->dev_color)) /* Keep consistency with alpha_buffer_bits() */
 	alpha_bits = (*dev_proc(pgs->device, get_alpha_bits)) (pgs->device, go_text);
     if (alpha_bits <= 1) {
@@ -103,7 +103,7 @@ type1_exec_init(gs_type1_state *pcis, gs_text_enum_t *penum,
     } else {
 	/* We'll render to target device through alpha buffer. */
 	/* Keep consistency with alpha_buffer_init() */
-	log2_subpixels.x = log2_subpixels.y = ilog2(alpha_bits); 
+	log2_subpixels.x = log2_subpixels.y = ilog2(alpha_bits);
     }
     return gs_type1_interp_init(pcis, (gs_imager_state *)pgs, pgs->path,
 				&penum->log2_scale, &log2_subpixels,
@@ -355,7 +355,7 @@ type1exec_bbox(i_ctx_t *i_ctx_p, gs_type1exec_state * pcxs,
 			        pcxs->sbw : NULL),
 			       pcxs->sbw + 2,
 			       &pcxs->char_bbox,
-			       cont, exec_cont, 
+			       cont, exec_cont,
 			       (pcxs->use_FontBBox_as_Metrics2 ? pcxs->sbw : NULL));
     }
 }
@@ -1038,7 +1038,7 @@ zcharstring_outline(gs_font_type1 *pfont1, int WMode, const ref *pgref,
     pdata = &pfont1->data;
     if (pgd->bits.size <= max(pdata->lenIV, 0))
 	return_error(e_invalidfont);
-#if 0 /* Ignore CDevProc for now. */   
+#if 0 /* Ignore CDevProc for now. */
     if (zchar_get_CDevProc((const gs_font_base *)pfont1, &pcdevproc))
 	return_error(e_rangecheck); /* can't call CDevProc from here */
 #endif
@@ -1118,8 +1118,8 @@ z1_glyph_info_generic(gs_font *font, gs_glyph glyph, const gs_matrix *pmat,
     int width_members = members & (GLYPH_INFO_WIDTH0 << wmode);
     int outline_widths = members & GLYPH_INFO_OUTLINE_WIDTHS;
     bool modified_widths = false;
-    int default_members = members & ~(width_members + outline_widths + 
-                                      GLYPH_INFO_VVECTOR0 + GLYPH_INFO_VVECTOR1 + 
+    int default_members = members & ~(width_members + outline_widths +
+                                      GLYPH_INFO_VVECTOR0 + GLYPH_INFO_VVECTOR1 +
 				      GLYPH_INFO_CDEVPROC);
     int done_members = 0;
     int code;
@@ -1194,13 +1194,13 @@ z1_glyph_info(gs_font *font, gs_glyph glyph, const gs_matrix *pmat,
 {
     int wmode = font->WMode;
 
-    return z1_glyph_info_generic(font, glyph, pmat, members, info, 
+    return z1_glyph_info_generic(font, glyph, pmat, members, info,
 				    &gs_type1_glyph_info, wmode);
 }
 
 /* Get a Type 1 or Type 9 character metrics and set the cache device. */
 int
-z1_set_cache(i_ctx_t *i_ctx_p, gs_font_base *pbfont, ref *cnref, 
+z1_set_cache(i_ctx_t *i_ctx_p, gs_font_base *pbfont, ref *cnref,
 	    gs_glyph glyph, op_proc_t cont, op_proc_t *exec_cont)
 {   /* This function is similar to zchar42_set_cache. */
     double sbw[4];

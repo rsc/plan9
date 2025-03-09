@@ -52,13 +52,13 @@ gpioattach(char* spec)
 	return devattach('G', spec);
 }
 
-static Walkqid*	 
+static Walkqid*
 gpiowalk(Chan* c, Chan *nc, char** name, int nname)
 {
 	return devwalk(c, nc, name, nname, gpiodir, nelem(gpiodir), devgen);
 }
 
-static int	 
+static int
 gpiostat(Chan* c, uchar* dp, int n)
 {
 	return devstat(c, dp, n, gpiodir, nelem(gpiodir), devgen);
@@ -70,12 +70,12 @@ gpioopen(Chan* c, int omode)
 	return devopen(c, omode, gpiodir, nelem(gpiodir), devgen);
 }
 
-static void	 
+static void
 gpioclose(Chan*)
 {
 }
 
-static long	 
+static long
 gpioread(Chan* c, void *buf, long n, vlong)
 {
 	char lbuf[20];
@@ -89,7 +89,7 @@ gpioread(Chan* c, void *buf, long n, vlong)
 	return readstr(0, buf, n, lbuf);
 }
 
-static long	 
+static long
 gpiowrite(Chan* c, void *buf, long n, vlong)
 {
 	Cmdbuf *cb;

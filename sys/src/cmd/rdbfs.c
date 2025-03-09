@@ -266,7 +266,7 @@ fsopen(Req *r)
 			return;
 		}
 		break;
-	}		
+	}
 	respond(r, nil);
 }
 
@@ -434,4 +434,3 @@ threadmain(int argc, char **argv)
 	threadpostmountsrv(&fs, srvname, "/proc", MBEFORE);
 	exits(0);
 }
-

@@ -1,4 +1,4 @@
-.TH OPEN 5 
+.TH OPEN 5
 .SH NAME
 open, create \- prepare a fid for I/O on an existing or new file
 .SH SYNOPSIS
@@ -92,10 +92,10 @@ All these permissions are checked at the time of the
 request; subsequent changes to the permissions of files do not affect
 the ability to read, write, or remove an open file.
 .PP
-The 
+The
 .B create
 request asks the file server to create a new file
-with the 
+with the
 .I name
 supplied, in the directory
 .RI ( dir )
@@ -244,4 +244,3 @@ will draw an error, but if it doesn't and the
 system call succeeds, the process issuing the
 .B create
 is guaranteed to be the one that created the file.
-

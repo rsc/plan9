@@ -50,7 +50,7 @@ Ghostscript</a>.
 <p>
 This document describes various maintenance procedures associated with AFPL
 Ghostscript.  It is only meant for developers actively working on AFPL
-Ghostscript; some parts of it are only relevant to developers who have 
+Ghostscript; some parts of it are only relevant to developers who have
 commit access to the source repository.
 
 <hr>
@@ -60,7 +60,7 @@ commit access to the source repository.
 <h3><a name="#Uploading_test_data"></a>Uploading test data</h3>
 
 <p>
-If a test file can't be attached to the report in the public 
+If a test file can't be attached to the report in the public
 bug tracking system, put it in <tt>casper:/home/support/<bug number>/</tt>.
 This is a good place to collect test files of all kinds.
 
@@ -77,7 +77,7 @@ for people working with this code base.
 <p>
 At any given time, there are usually two active branches: a stable
 branch and a development branch. The development branch is HEAD, which
-is the default when doing a checkout without a -r flag. The stable 
+is the default when doing a checkout without a -r flag. The stable
 branch is tagged after the previous major release. For example:
 GS_8_0x, GS_7_0x, GS_6_5.
 
@@ -121,8 +121,8 @@ History#.htm files.
 Log messages beginning with 'Fix' are treated specially. Such messages are
 put under the "Fixes problems" heading when the History files are
 generated. Additionally, if the first four characters are 'Fix:' this is removed
-(i.e., "Fix: The xyz" becomes "The xyz", but "Fixes xyz" is copied unchanged). 
-This feature is intended for explicit bugfixes and should be avoided for 
+(i.e., "Fix: The xyz" becomes "The xyz", but "Fixes xyz" is copied unchanged).
+This feature is intended for explicit bugfixes and should be avoided for
 enhancements or commits with long explanations.
 
 <p>
@@ -143,8 +143,8 @@ must add an entry to the "Incompatible changes" section of <tt>News.htm</tt>
 as this information can only be generated manually.
 This admonition applies to api changes that might
 affect other developers as well as user issues like switch behavior.
-Upon release, the accumulated incompatible changes will be moved to the 
-relevant History file, and the News collection in cvs will be wiped clean 
+Upon release, the accumulated incompatible changes will be moved to the
+relevant History file, and the News collection in cvs will be wiped clean
 for the next version.
 
 <p>

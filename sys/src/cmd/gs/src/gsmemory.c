@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -117,10 +117,10 @@ gs_resize_struct_array(gs_memory_t *mem, void *obj, uint num_elements,
 
 
 /* Allocate a structure using a "raw memory" allocator.
- * really just an alias for gs_alloc_struct_immovable 
- * with the clients false expectation that it is saving memory   
+ * really just an alias for gs_alloc_struct_immovable
+ * with the clients false expectation that it is saving memory
  */
- 
+
 void *
 gs_raw_alloc_struct_immovable(gs_memory_t * rmem,
 			      gs_memory_type_ptr_t pstype,

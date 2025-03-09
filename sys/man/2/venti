@@ -47,7 +47,7 @@ describes wrappers around the canonical
 routines that abort on error.
 .PP
 .IR Venti-packet (2)
-describes routines for 
+describes routines for
 manipulating zero-copy chains of
 data buffers.
 .PP

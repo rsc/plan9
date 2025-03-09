@@ -407,7 +407,7 @@ regaalloc1(Node *n, Node *nn)
 		diag(n, "regaalloc1");
 		return;
 	}
-/* not reached 
+/* not reached
 	nodreg(n, nn, REGARG);
 	reg[REGARG]++;
 	curarg = align(curarg, nn->type, Aarg1);
@@ -1400,8 +1400,8 @@ exreg(Type *t)
 
 schar	ewidth[NTYPE] =
 {
-	-1,		/*[TXXX]*/	
-	SZ_CHAR,	/*[TCHAR]*/	
+	-1,		/*[TXXX]*/
+	SZ_CHAR,	/*[TCHAR]*/
 	SZ_CHAR,	/*[TUCHAR]*/
 	SZ_SHORT,	/*[TSHORT]*/
 	SZ_SHORT,	/*[TUSHORT]*/
@@ -1425,10 +1425,10 @@ long	ncast[NTYPE] =
 {
 	0,				/*[TXXX]*/
 	BCHAR|BUCHAR,			/*[TCHAR]*/
-	BCHAR|BUCHAR,			/*[TUCHAR]*/	
+	BCHAR|BUCHAR,			/*[TUCHAR]*/
 	BSHORT|BUSHORT,			/*[TSHORT]*/
 	BSHORT|BUSHORT,			/*[TUSHORT]*/
-	BINT|BUINT|BLONG|BULONG|BIND,	/*[TINT]*/		
+	BINT|BUINT|BLONG|BULONG|BIND,	/*[TINT]*/
 	BINT|BUINT|BLONG|BULONG|BIND,	/*[TUINT]*/
 	BINT|BUINT|BLONG|BULONG|BIND,	/*[TLONG]*/
 	BINT|BUINT|BLONG|BULONG|BIND,	/*[TULONG]*/

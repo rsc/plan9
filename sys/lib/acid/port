@@ -46,7 +46,7 @@ defn params(param)
 		param = tail param;
 		if param then
 			print (",");
-	}	
+	}
 }
 
 stkprefix = "";
@@ -61,7 +61,7 @@ defn locals(l)
 		sym = head l;
 		print(stkprefix, "\t", sym[0], "=", itoa(sym[1], "%ux"), "\n");
 		l = tail l;
-	}	
+	}
 }
 
 defn _stkign(file)
@@ -260,7 +260,7 @@ defn src(addr)
 			print(line+1, "\t", text, "\n");
 		}
 		line = line+1;
-	}	
+	}
 }
 
 defn step()					// single step the process
@@ -566,7 +566,7 @@ defn spsrch(len)
 		if c > s && c < e then {
 			print("src(", a, ")\n");
 			pfl(a);
-		}			
+		}
 	}
 }
 

@@ -1,12 +1,12 @@
 /* Copyright (C) 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -176,7 +176,7 @@ pdf_put_image_values(cos_dict_t *pcd, gx_device_pdf *pdev,
 	int num_components = gs_color_space_num_components(pcs);
 	cos_array_t *pca;
 	int i;
-    
+
 	/* Masked images are only supported starting in PDF 1.3. */
 	if (pdev->CompatibilityLevel < 1.3)
 	    break; /* Will convert into an imagemask with a pattern color. */
@@ -387,7 +387,7 @@ pdf_begin_image_data(gx_device_pdf * pdev, pdf_image_writer * piw,
 		     const gs_pixel_image_t * pim, const cos_value_t *pcsvalue,
 		     int alt_writer_index)
 {
-    
+
     cos_stream_t *s = cos_stream_from_pipeline(piw->binary[alt_writer_index].strm);
     cos_dict_t *pcd = cos_stream_dict(s);
     int code = pdf_put_image_values(pcd, pdev, pim, piw->pin, pcsvalue);
@@ -408,7 +408,7 @@ pdf_complete_image_data(gx_device_pdf *pdev, pdf_image_writer *piw, int data_h,
 			int width, int bits_per_pixel)
 {
     if (data_h != piw->height) {
-	if (piw->binary[0].strm->procs.process == s_DCTE_template.process || 
+	if (piw->binary[0].strm->procs.process == s_DCTE_template.process ||
 	    piw->binary[0].strm->procs.process == s_PNGPE_template.process ) {
 	    /* 	Since DCTE and PNGPE can't safely close with incomplete data,
 		we add stub data to complete the stream.
@@ -421,10 +421,10 @@ pdf_complete_image_data(gx_device_pdf *pdev, pdf_image_writer *piw, int data_h,
 	    uint ignore;
 
 	    memset(buf, 128, lb);
-	    for (; lines_left; lines_left--) 
+	    for (; lines_left; lines_left--)
 		for (i = 0; i < piw->alt_writer_count; i++) {
 		    for (l = bytes_per_line; l > 0; l -= lb)
-			if ((status = sputs(piw->binary[i].strm, buf, min(l, lb), 
+			if ((status = sputs(piw->binary[i].strm, buf, min(l, lb),
 					    &ignore)) < 0)
 			    return_error(gs_error_ioerror);
 		}
@@ -588,9 +588,9 @@ pdf_choose_compression_cos(pdf_image_writer *piw, cos_stream_t *s[2], bool force
 	if (k0 && l0 > 0 && l1 > 0)
 	    k0--;
 	else if (much_bigger__DL(l0, l1))
-	    k0 = 0; 
+	    k0 = 0;
 	else if (much_bigger__DL(l1, l0) || force)
-	    k0 = 1; 
+	    k0 = 1;
 	else
 	   return;
     }

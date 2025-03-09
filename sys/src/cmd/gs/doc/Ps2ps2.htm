@@ -74,12 +74,12 @@ ps2ps2</tt></b> <em>[options] input.{ps|eps|pdf} output.ps</em>
 <h2><a name="Options"></a>Options</h2>
 
 <p>
-The <em>options</em> given on the command line may include any switches 
-that may be used with Ghostscript's PostScript and PDF interpreter (see 
+The <em>options</em> given on the command line may include any switches
+that may be used with Ghostscript's PostScript and PDF interpreter (see
 <a href="Use.htm#Switches">here</a> for a complete list).
 
 <p>
-Since <b><tt>ps2write</tt></b> makes use of some printer 
+Since <b><tt>ps2write</tt></b> makes use of some printer
 parameters while converting high level objects into Level 2 objects,
 we strongly recommend to set those values in accordance with the
 target printer or other output device.
@@ -113,10 +113,10 @@ running <b><tt>ps2ps2</tt></b>, and provide an equivalent way to set these
 parameters from within the PostScript input file.
 
 <p>
-The <b><tt>ps2write</tt></b> device handles the same set of distiller 
+The <b><tt>ps2write</tt></b> device handles the same set of distiller
 parameters as
-are handled by the <b><tt>pdfwrite</tt></b> device. See the 
-<a href="Ps2pdf.htm#Options">PostScript-to-PDF converter</a> 
+are handled by the <b><tt>pdfwrite</tt></b> device. See the
+<a href="Ps2pdf.htm#Options">PostScript-to-PDF converter</a>
 documentation for a complete description of how to use them to
 control the document conversion.
 
@@ -136,10 +136,10 @@ Must not be used with <tt><b>ps2ps2</tt></b>.
 
 <p>
 This set includes of the Acrobat Distiller 5 parameters
-defined in the DistillerParameters document included in the 
+defined in the DistillerParameters document included in the
 <a href="http://partners.adobe.com/public/developer/acrobat/sdk/index.html">Acrobat SDK</a>.
 
-Default values are same as the <tt><b>printer</tt></b> settings defined 
+Default values are same as the <tt><b>printer</tt></b> settings defined
 in <a href="Ps2pdf.htm#Options">PostScript-to-PDF converter</a>,
 with these exceptions:
 
@@ -175,39 +175,39 @@ Not implemented yet.
 <h2><a name="printer_control"></a>Controlling the printer behavior</h2>
 
 <p>
-A few options can be used to control the behavior of the printer or 
+A few options can be used to control the behavior of the printer or
 program that reads the result of ps2ps2.
 
 <dl>
-<dt><b><tt>-dRotatePages=</tt></b><em>boolean</em>. 
-<dd>The printer will rotate pages 
+<dt><b><tt>-dRotatePages=</tt></b><em>boolean</em>.
+<dd>The printer will rotate pages
 for a better fitting into the real page size. Default value : <em>false</em>.
 Must be <em>false</em> if <b><tt>-dSetPageSize=true</tt></b>.
 
-<dt><b><tt>-dFitPages=</tt></b><em>boolean</em>. 
+<dt><b><tt>-dFitPages=</tt></b><em>boolean</em>.
 <dd>The printer will scale pages down
 to fit into the real page size. The rendering quality may be poor due to the scaling,
-especially for fonts which Ghostscript had converted into bitmaps 
+especially for fonts which Ghostscript had converted into bitmaps
 (see the <em>ps2write</em> device parameter <b><tt>HaveTrueTypes</tt></b>;
 See <a href="#Options">Options</a> about the <b><tt>PageSize</tt></b> entry of the <b><tt>Policies</tt></b>
-dictionary while the conversion step). 
+dictionary while the conversion step).
 Default value : <em>false</em>.
 Must be <em>false</em> if <b><tt>-dSetPageSize=true</tt></b>.
 
-<dt><b><tt>-dSetPageSize=</tt></b><em>boolean</em>. 
-<dd>The printer will try to set page size from the job. 
+<dt><b><tt>-dSetPageSize=</tt></b><em>boolean</em>.
+<dd>The printer will try to set page size from the job.
 Only use with printers which can handle random <em>PageSize</em>.
 Must be <em>false</em> if <b><tt>-dRotatePages=true</tt></b> or <b><tt>-dFitPages=true</tt></b>.
 
 </dl>
 
 <p>
-These correspond to keys in the Postscript <em>userdict</em> 
-of the target printer's virtual memory to control its behavior while 
+These correspond to keys in the Postscript <em>userdict</em>
+of the target printer's virtual memory to control its behavior while
 executing a job generated with <tt><b>ps2ps2</tt></b>.
 
 <p>
-Currently Ghostscript does not provide a method for 
+Currently Ghostscript does not provide a method for
 incorporating these in a print job.
 Users should refer to the printer's documentation.
 
@@ -219,7 +219,7 @@ Users should refer to the printer's documentation.
 <p>
 Attempting to generate a device independent Postscript Level 2 is a bad idea.
 Postscript Level 2 data are device dependent by definition. Let Ghostscript know
-the features of the specific printer as described in 
+the features of the specific printer as described in
 <a href="#Options">Options</a> while generating a printer job.
 
 <p>

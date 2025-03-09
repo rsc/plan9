@@ -1,12 +1,12 @@
 /* Copyright (C) 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -61,7 +61,7 @@ private_st_line_params();
  * pointers are handled in this manner.
  */
 public_st_imager_state();
-private 
+private
 ENUM_PTRS_BEGIN(imager_state_enum_ptrs)
     ENUM_SUPER(gs_imager_state, st_line_params, line_params, st_imager_state_num_ptrs - st_line_params_num_ptrs);
     ENUM_PTR(0, gs_imager_state, client_data);
@@ -124,7 +124,7 @@ gs_imager_state_initialize(gs_imager_state * pis, gs_memory_t * mem)
     pis->set_transfer.gray->values[0] = frac_0;
     pis->set_transfer.red =
 	pis->set_transfer.green =
-	pis->set_transfer.blue = NULL; 
+	pis->set_transfer.blue = NULL;
     for (i = 0; i < GX_DEVICE_COLOR_MAX_COMPONENTS; i++)
 	pis->effective_transfer[i] = pis->set_transfer.gray;
     pis->cie_joint_caches = NULL;

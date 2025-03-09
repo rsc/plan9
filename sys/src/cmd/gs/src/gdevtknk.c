@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1996 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -15,7 +15,7 @@
 */
 
 /* $Id: gdevtknk.c,v 1.6 2002/08/22 07:12:28 henrys Exp $*/
-/*   
+/*
    This driver is written for Tektronix ink-jet 4696 and 4695 plotters.
 
    It may easily be adopted to the 4393 and 4394 models as well, simply by
@@ -38,10 +38,10 @@ private gx_device_procs tekink_procs =
 	tekink_map_rgb_color, tekink_map_color_rgb);
 
 
-/* 
+/*
    Device descriptor for the Tek 4696.
    The 4696 plotter uses roll media, thus the y size is arbitrary. The
-   value below is chosen to make the image area A*-format like, i.e. the 
+   value below is chosen to make the image area A*-format like, i.e. the
    aspect ratio is close to sqrt(2).
 */
 const gx_device_printer far_data gs_tek4696_device =
@@ -53,7 +53,7 @@ const gx_device_printer far_data gs_tek4696_device =
     tekink_print_page);
 
 /* Color mapping.
-   The tek inkjets use subtractive colors B=0 M=1 Y=2 C=3. These are 
+   The tek inkjets use subtractive colors B=0 M=1 Y=2 C=3. These are
    represented as 4 bits B=1 M=2 Y=4 C=8 in a byte. This gives:
       White   =  0
       Black   =  1
@@ -64,7 +64,7 @@ const gx_device_printer far_data gs_tek4696_device =
       Blue    = 10
       Green   = 12
    The remaining values are unused. (They give ugly results if sent to the
-   plotter.) Of course this could have been compressed into 3 bits, but 
+   plotter.) Of course this could have been compressed into 3 bits, but
    as the palette color memory device uses 8 bits anyway, this is easier,
    and perhaps faster.
 */
@@ -96,8 +96,8 @@ tekink_map_rgb_color(gx_device *dev, const gx_color_value cv[])
     gx_color_value r = cv[0];
     gx_color_value g = cv[1];
     gx_color_value b = cv[2];
-    
-    return(rgb_to_index[(((b>32767) << 2) + ((g>32767) << 1) + 
+
+    return(rgb_to_index[(((b>32767) << 2) + ((g>32767) << 1) +
 			(r>32767)) & 7]);
 }
 
@@ -127,12 +127,12 @@ tekink_print_page(gx_device_printer *pdev,FILE *prn_stream)
     register byte bdata,mdata,ydata,cdata;
     register byte mask,inbyte;
     register byte *indataend,*outdataend;
-    
+
     /* Allocate a temporary buffer for color separation.
        The buffer is partitioned into an input buffer and four
        output buffers for the color planes. The output buffers
        are allocated with an extra sentinel byte. */
-    
+
     line_size = gdev_mem_bytes_per_scan_line((gx_device *)pdev);
     color_line_size=(pdev->width+7)/8;
     indata1=(byte *)malloc(line_size+4*(color_line_size+1));
@@ -146,7 +146,7 @@ tekink_print_page(gx_device_printer *pdev,FILE *prn_stream)
 
     /* Does this device use roll paper? */
     roll_paper=!strcmp(pdev->dname,"tek4696");
-    
+
     out_line=0;
     blank_lines=0;
     scan_lines=pdev->height;
@@ -194,8 +194,8 @@ tekink_print_page(gx_device_printer *pdev,FILE *prn_stream)
 	for (color_plane=0;color_plane<4;color_plane++){
             outdata=indataend+(color_plane*(color_line_size+1));
             outdataend=outdata+color_line_size;
-            	
-            /* Remove trailing spaces and output the color line if it is 
+
+            /* Remove trailing spaces and output the color line if it is
                not blank */
             *outdata=0xff;
             while (!(*outdataend)) outdataend--;
@@ -218,11 +218,11 @@ tekink_print_page(gx_device_printer *pdev,FILE *prn_stream)
 		fwrite(outdata+1,1,num_bytes,prn_stream);
             }
 	} /* loop over color planes */
-        
+
 	/* If this line is blank, and if it is a roll paper model,
            count the line. Otherwise output the line */
 	if (line_blank&&roll_paper){
-            /* Only increment the blank line count, if non blank lines 
+            /* Only increment the blank line count, if non blank lines
                have been encountered previously, i.e. skip leading blank
                lines. */
             if (out_line) blank_lines++;
@@ -235,8 +235,8 @@ tekink_print_page(gx_device_printer *pdev,FILE *prn_stream)
             out_line++;
 	}
     } /* loop over scan lines */
-    
-    /* if the number of scan lines written is not a multiple of four, 
+
+    /* if the number of scan lines written is not a multiple of four,
        write the final micro line feed code */
     if (out_line%4){
 	fputs("\033A",prn_stream);
@@ -248,7 +248,7 @@ tekink_print_page(gx_device_printer *pdev,FILE *prn_stream)
     else{
     	fputs("\f",prn_stream);
     }
-    
+
     /* Deallocate temp buffer */
     free(indata1);
     return 0;

@@ -77,7 +77,7 @@ struct Flash
 	FlashAlg		*alg;
 	ushort		manid;		/* manufacturer id */
 	ushort		devid;		/* device id */
-	int			wbsize;		/* size of write buffer */ 
+	int			wbsize;		/* size of write buffer */
 	ulong		nr;			/* number of regions */
 	uchar		bootprotect;
 	ulong		offset;		/* beginning offset of this flash */
@@ -379,7 +379,7 @@ flashwalk(Chan *c, Chan *nc, char **name, int nname)
 	return devwalk(c, nc, name, nname, nil, 0, gen);
 }
 
-static int	 
+static int
 flashstat(Chan *c, uchar *db, int n)
 {
 	return devstat(c, db, n, nil, 0, gen);
@@ -394,7 +394,7 @@ flashopen(Chan* c, int omode)
 	return devopen(c, omode, nil, 0, gen);
 }
 
-static void	 
+static void
 flashclose(Chan*)
 {
 }
@@ -456,7 +456,7 @@ flashdataread(FPart *fp, void* a, long n, vlong off)
 	return n;
 }
 
-static long	 
+static long
 flashread(Chan* c, void* a, long n, vlong off)
 {
 	int t;
@@ -509,7 +509,7 @@ blockstart(Flash *flash, ulong addr)
 			return r->addr + x*r->size;
 		}
 	}
-			
+
 	return (ulong)-1;
 }
 
@@ -526,7 +526,7 @@ blockend(Flash *flash, ulong addr)
 			x /= r->size;
 			return r->addr + (x+1)*r->size;
 		}
-			
+
 	return (ulong)-1;
 }
 
@@ -670,7 +670,7 @@ flashdatawrite(FPart *fp, uchar *p, long n, long off)
 	return on;
 }
 
-static long	 
+static long
 flashwrite(Chan* c, void* a, long n, vlong off)
 {
 	int t;

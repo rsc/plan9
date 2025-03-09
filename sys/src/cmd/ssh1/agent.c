@@ -46,11 +46,11 @@ listkeys(Key **kp)
 	char *p, *f[20];
 	int nf;
 	mpint *mod, *ek;
-	
+
 	*kp = nil;
 	if((b = Bopen("/mnt/factotum/ctl", OREAD)) == nil)
 		return -1;
-	
+
 	k = nil;
 	nk = 0;
 	while((p = Brdline(b, '\n')) != nil){
@@ -81,7 +81,7 @@ listkeys(Key **kp)
 	}
 	Bterm(b);
 	*kp = k;
-	return nk;	
+	return nk;
 }
 
 
@@ -126,7 +126,7 @@ dorsa(mpint *mod, mpint *exp, mpint *chal, uchar chalbuf[32])
 	if(m == nil)
 		goto Die;
 	mpfree(m);
-	
+
 	p = mptoa(chal, 16, nil, 0);
 	if(p == nil){
 		debug(DBG_AUTH, "\tmptoa failed: %r\n");

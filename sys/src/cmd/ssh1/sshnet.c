@@ -285,7 +285,7 @@ closeclient(Client *c)
 		teardownclient(c);
 }
 
-	
+
 void
 sshreadproc(void *a)
 {
@@ -312,7 +312,7 @@ Tab tab[] =
 {
 	"/",		DMDIR|0555,
 	"cs",		0666,
-	"tcp",	DMDIR|0555,	
+	"tcp",	DMDIR|0555,
 	"clone",	0666,
 	nil,		DMDIR|0555,
 	"ctl",		0666,
@@ -491,7 +491,7 @@ ndbfindport(char *p)
 	free(port);
 
 	return n;
-}	
+}
 
 static void
 csread(Req *r)
@@ -996,7 +996,7 @@ takedown(Srv*)
 	threadexitsall("done");
 }
 
-Srv fs = 
+Srv fs =
 {
 .attach=		fssend,
 .destroyfid=	fsdestroyfid,
@@ -1107,4 +1107,3 @@ threadmain(int argc, char **argv)
 	threadpostmountsrv(&fs, service, mtpt, MREPL);
 	exits(0);
 }
-

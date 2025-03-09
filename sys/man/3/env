@@ -44,7 +44,7 @@ splits and then clears the environment.
 The special global environment
 .B #ec
 contains kernel configuration variables,
-such as those set in 
+such as those set in
 .IR plan9.ini (8).
 All processes see the same
 .BR #ec ;

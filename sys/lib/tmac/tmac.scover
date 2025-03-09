@@ -161,7 +161,7 @@ Author	Location	Extension	Charging Case- \s10\f3\\*(CA
 .if n .sp
 Pages Text   \\*(K1	Other   \\*(K2	Total   \\*(K3
 .if t .sp 8p
-.if n .sp 
+.if n .sp
 .if t .po .5i
 .if t No. Figures   \\*(K4	No. Tables   \\*(K5	No. Refs.   \\*(K6	\b'|||||\ \ '
 .if n No. Figures   \\*(K4	No. Tables   \\*(K5	No. Refs.   \\*(K6
@@ -215,7 +215,7 @@ Pages Text   \\*(K1	Other   \\*(K2	Total   \\*(K3
 .br
 .if !"\\$9"" \\$9
 ..
-.	\"S1 - tm style 
+.	\"S1 - tm style
 .de S1
 .br
 .if t .ta 4.25i

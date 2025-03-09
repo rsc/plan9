@@ -15,7 +15,7 @@
 .nr!1 0
 .nr!2 0
 .nr!3 0
-.nr!N 0  
+.nr!N 0
 .nr;F 0
 .nr!V 0
 .nr!Y 0
@@ -215,7 +215,7 @@
 .br
 .)R
 .nr;1 0\\$1
-.if!0\\$1 .nr ;1 \\n(Hu 
+.if!0\\$1 .nr ;1 \\n(Hu
 .if!\\n(;1 .)D "H:bad arg:\\$1"
 .if2-\\n(;1 .nr H2 0 1
 .if3-\\n(;1 .nr H3 0 1
@@ -227,8 +227,8 @@
 .if\\n(:C .nr :p 0 1 \}
 .SP .5
 .nr:u 0
-.if\\n(;1-1 .nr H\\n(;1 +1 
-.if!\\n(;1-1 \{.nr :u 1 
+.if\\n(;1-1 .nr H\\n(;1 +1
+.if!\\n(;1-1 \{.nr :u 1
 .SP 1 \}
 .if\\n(;1-1 .if (\\n(Ej+1-\\n(;1)&(\\n(;L\{\
 .bp
@@ -237,7 +237,7 @@
 .bp\}
 .if!\\n(;1-1 \{.if (\\n(Ej+\\n(:S)&(\\n(nl-\\n(:J) \{.if \\n(;C .nr ;C 2
 .bp\}
-.if!\\n(:u-1 .nr H1 +1 
+.if!\\n(:u-1 .nr H1 +1
 .if(\\n(:u=1)&(\\n(:S=1) .nr P 1 \}
 .nr:u 0
 .ds}0 \\n(H1.
@@ -250,13 +250,13 @@
 .if\\n(Ht \{.)I \\n(;1 \\n(H1 \\n(H2 \\n(H3 \\n(H4 \\n(H5 \\n(H6 \\n(H7
 .ds}0 \\*(}3.
 'br\}
-.as}0 \ \ 
-.if!0\\$1 .ds }0 
+.as}0 \ \
+.if!0\\$1 .ds }0
 .nr;0 0
 .if!\\n(;1-\\n(Hb .nr ;0 1
 .if!\\n(;1-\\n(Hs .nr ;0 2
 .ds}2
-.if!\\n(;0 .if \w\\$2 .ds }2 "  
+.if!\\n(;0 .if \w\\$2 .ds }2 "
 .nr;3 2v
 .HX \\n(;1 0\\$1 "\\$2\\$3"
 .if\\$1<3 .nr !5 0 1
@@ -325,13 +325,13 @@
 ..
 .de)L
 .if\\n(:g>5 .)D "LB:too many nested lists"
-.if\\n(:g .)A 
+.if\\n(:g .)A
 .if!\\n+(:g-1 .ds ]b \\n(.i
-.nr:b \\n(.iu+0\\$1u 
-.nr:c \\n(.iu+0\\$2u 
-.nr:d 0\\$3 
-.nr:e 0\\$4 
-.nr:f 0\\$6 
+.nr:b \\n(.iu+0\\$1u
+.nr:c \\n(.iu+0\\$2u
+.nr:d 0\\$3
+.nr:e 0\\$4
+.nr:f 0\\$6
 .if!\w\\$6 .nr :f 1
 .ds]g \\$5
 .if!\w\\$5 \{.ds ]g \&
@@ -356,8 +356,8 @@
 .if(\\n(:g<=\\n(Ls)&(\\n(.$>0) .SP .5
 .nr:J \\n(nl
 ..
-.deLI 
-.if!\\n(:g .)D "LI:no lists active" 
+.deLI
+.if!\\n(:g .)D "LI:no lists active"
 .if(\\n(:g<=\\n(Ls)&(\\n(:f>0) .SP .5
 .in\\n(:bu
 .if(\\n(:f)&(\\n(:D<1) .ne1v+.5p
@@ -565,7 +565,7 @@
 .deTS
 .if(\\n(:D=0)&(\\n(Ds>0) .SP
 .if\\$1H \{.br
-'ne5v     
+'ne5v
 .wh\\n(nlu+\\n(.tu-2v #f
 .di>t
 .nr;A 1 \}
@@ -597,8 +597,8 @@
 .di
 .)D "TE: used TS H but no TH" \}
 .rr;A ;B ;h ;D ;E
-.rmT#       
-.rr#a       
+.rmT#
+.rr#a
 .rma+ b+ c+ d+ e+ f+ g+ h+ i+ j+ k+ l+ n+ m+
 .rr32 33 34 35 36 37 38 40 79 80 81 82
 .rra| b| c| d| e| f| g| h| i| j| k| l| m|
@@ -677,16 +677,16 @@ ERROR:(\\n(.F)input line \\n(.c:\\$1
 .if\\n(;1*\\n(;0 .ds }0 \\$3\\$5
 .if\\n(;1-1*\\n(;0 .ds }0 \\$5
 .ds}0 \\$1\ \\*(}0
-.ie(\w\\$4)&(\\n(Of=0) .as }0 .\ \ 
-.el.if \\n(Of .as }0 " -\ 
+.ie(\w\\$4)&(\\n(Of=0) .as }0 .\ \
+.el.if \\n(Of .as }0 " -\
 .nr;0 \w\\*(}0
 .ll\\nWu
 .nr;1 \\n(.lu-\\n(;0u-\w\\$4u+1u
 .if(\\n(:B<2)&(\\n(;1>0) \{\
-.in0  
+.in0
 .ce\}
 .if!\\n(;1 \{\
-.if!\\n(.u .nr ;U 1  
+.if!\\n(.u .nr ;U 1
 .if\\n(:B=2 .ce 0
 .fi
 .in\\n(;0u
@@ -804,20 +804,20 @@ ERROR:(\\n(.F)input line \\n(.c:\\$1
 .deTC
 .LC 0
 .if\\n(:F .FE
-.if\\n(:y .DE 
-.if\\n(!N=1 .NE 
+.if\\n(:y .DE
+.if\\n(!N=1 .NE
 .)N
 .)w
 .if\\n(;R .RP 0 1
 .)R
 .rm)E )F DE DF DS FD FE FG FS H HU TB
 .if!\\nP-1 .if \\nN .if !\\nN-1 .rn }t }b
-.if!\\nP-1 .if \\nN .if !\\nN-1 .nr N 0 
+.if!\\nP-1 .if \\nN .if !\\nN-1 .nr N 0
 .rm}t }e }o
 .rs
 .if\\n(;C .nr ;C 2
 .bp
-.ie\\n(Oc .nr P 1 
+.ie\\n(Oc .nr P 1
 .el\{\
 .rm}f }p
 .nr;g 1 1
@@ -893,13 +893,13 @@ ERROR:(\\n(.F)input line \\n(.c:\\$1
 CONTENTS
 ..
 .deTL
-.nr:D 2 
-.nr;c 2 
-.nr;z 0 
-.nr:V 0 
-.nr:1 \\n(.i 
-.if\\nC=4 .ls 1 
-.if\\nC=5 .ls 1 
+.nr:D 2
+.nr;c 2
+.nr;z 0
+.nr:V 0
+.nr:1 \\n(.i
+.if\\nC=4 .ls 1
+.if\\nC=5 .ls 1
 .ds>1 \\$1
 .ds>2 \\$2
 'nr;y 1
@@ -908,15 +908,15 @@ CONTENTS
 ..
 .deAU
 .ec
-.nr:D 1 
-.nr;c 1 
+.nr:D 1
+.nr;c 1
 .if!\\n(;y 'nf
-.if\\n(;y .>9 
+.if\\n(;y .>9
 .rmTL
 .ll\\nWu
 .da>z
 'if\\nE 'ft 3
-.if(\\n(;z>0)&(\\n(Au>0) .sp 
+.if(\\n(;z>0)&(\\n(Au>0) .sp
 \\$1
 .if\\n(Au>0 \{.if \w\\$3 .ie \\$3HP HP\ \&\c
 .el\\$3\ \&\c
@@ -1015,7 +1015,7 @@ File Case \\*(>2
 .ll\\nWu
 .di
 .if\\nE .ft1
-.nr:9 \\n(dn 
+.nr:9 \\n(dn
 .nrdn 0
 .nr;y 0
 'nf
@@ -1040,8 +1040,8 @@ File Case \\*(>2
 .nrdn 0
 ..
 .deOK
-.nr:D 1 
-.nr;c 1  
+.nr:D 1
+.nr;c 1
 .de>7
 .ps-1
 .if\\n(.$-0 \\$1
@@ -1058,8 +1058,8 @@ File Case \\*(>2
 .rmOK
 ..
 .deTM
-.nr:D 1 
-.nr;c 1 
+.nr:D 1
+.nr;c 1
 .de>8
 .if\\nE .ft 3
 .if\\n(.$-0 \\$1
@@ -1073,18 +1073,18 @@ File Case \\*(>2
 .if\\n(.$-8 \\$9
 .if\\nE .ft1
 \\..
-.nr;x \\n(.$+1 
+.nr;x \\n(.$+1
 .rmTM
 ..
 .deAS
-.nr:D 3 
-.nr;c 3 
+.nr:D 3
+.nr;c 3
 .rmTL
-.nr:t 0\\$1 
-.if\\n(:t=1 .nr ;s \\n(:s 
+.nr:t 0\\$1
+.if\\n(:t=1 .nr ;s \\n(:s
 .nr:3 0
-.if\\n(.$-1 .nr :3 0\\$2n 
-.nr;N \\n(:1  
+.if\\n(.$-1 .nr :3 0\\$2n
+.nr;N \\n(:1
 'in\\n(:1u
 'fi
 .SA
@@ -1108,20 +1108,20 @@ File Case \\*(>2
 'nf
 'nh
 .nr;3 \\n(dn
-.nr;6 \\n(;3 
+.nr;6 \\n(;3
 .ll\\nWu
 'in\\n(:1u
-.if\\n(:t=1 .nr :s \\n(;s 
+.if\\n(:t=1 .nr :s \\n(;s
 .rmAE
 ..
 .deMT
 .if\\n(!N=1 .NE
-.nr:D 0 
-.nr;c 0  
+.nr:D 0
+.nr;c 0
 .if!\\n(;y 'nf
 .rmTL TM OK AS AE AF AU
 .ll\\nWu
-.rnTP >Y 
+.rnTP >Y
 .in\\n(:1u
 .rn>Y TP
 .rn)K >Y
@@ -1131,7 +1131,7 @@ File Case \\*(>2
 .if\\n(.$ .if \w\\$1u-\w'0'u .>6 "\\$1"
 .if\\n(.$ .nr ;y 0\\$1
 .if\\n(.$ .if !\\n(;y .>6 ""
-.if\\n(.$ .if \\n(;y-4 .>x 
+.if\\n(.$ .if \\n(;y-4 .>x
 .if\\n(.$ .if \\n(;y-3 .>5 "\\$2"
 .if\\n(.$ .if \\n(;y-2 .>6 "ADMINISTRATIVE MEMORANDUM"
 .if\\n(.$ .if \\n(;y-1 .>6 "INTERNAL MEMORANDUM"
@@ -1141,8 +1141,8 @@ File Case \\*(>2
 .ft1
 .ta.5i 1i 1.5i 2i 2.5i 3i 3.5i 4i 4.5i 5i 5.5i 6i
 .ns
-.if\\nC=4 .ls 2 
-.if\\nC=5 .ls 2 
+.if\\nC=4 .ls 2
+.if\\nC=5 .ls 2
 .>Y
 .]N \\nP+1
 .rm>Y MT
@@ -1175,10 +1175,10 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .sp2v
 .rm>x
 ..
-.de>6 
+.de>6
 .rm>5 >x )Y
-.di]t  
-.ta\\nWu-1.75i 
+.di]t
+.ta\\nWu-1.75i
 .br
 .rs
 .sp1
@@ -1187,7 +1187,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .sp\}
 .sp|1.25i
-.ie!(\\nA=3) \t\\*(]S 
+.ie!(\\nA=3) \t\\*(]S
 .el.if \w\\*(}Z \t\s16\f3\\*(}Z\fP\s0
 .vs12p
 .sp|1.9i
@@ -1232,22 +1232,22 @@ from:
 .rs
 .ie\\n(;3 \{\
 .ie\\n(:t=2 \{\
-.af!S \\gP 
+.af!S \\gP
 .afP i
-.]t  
+.]t
 .in+\\n(:3u
-.>3  
+.>3
 .sp3
-.)N  
+.)N
 .in-\\n(:3u
-.wh0 )k  
+.wh0 )k
 .bp
-.nrP 1  
-.afP \\g(!S 
-.]t  
-.wh0 )h  
+.nrP 1
+.afP \\g(!S
+.]t
+.wh0 )h
 .if\\n(:G \{\
-.nr:s +1  
+.nr:s +1
 .da>y
 .>d
 \!.			br
@@ -1257,29 +1257,29 @@ from:
 .nrdn 0
 'if!\\n(.pu-\\n(nlu-.5p-\\n(:ou 'nr :o \\n(.pu-\\n(nlu-.5p
 'if!\\n(:ou-\\n(:mu 'nr :o \\n(:mu
-'ch)f -\\n(:ou 
+'ch)f -\\n(:ou
 'br\}
 .tmWARNING:  Approved ITDS Document Cover Sheet not available with this package.
-.rmCS \}  
-.el.ie \\n(:t=1 .]t  
+.rmCS \}
+.el.ie \\n(:t=1 .]t
 .el\{\
-.]t  
+.]t
 .in+\\n(:3u
-.>3  
+.>3
 .sp3
 .in-\\n(:3u \} \}
-.el.]t  
+.el.]t
 .ns
 .ne10
 .ce
 .ul
 .if!\\n(.$ TECHNICAL MEMORANDUM
 .if\\n(.$ .if \w\\$1 \\$1
-.SP 3 
+.SP 3
 .ce0
 .ul0
 .if!\\n(:t=2 .)X
-.nr;M 1 
+.nr;M 1
 .rm)X >6
 ..
 .de>5
@@ -1353,7 +1353,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .if\\n(;3 .if !\\n(:t .in +\\n(:3u
 .if\\n(;3 .if !\\n(:t .>3
 .if\\n(;3 .if !\\n(:t .in -\\n(:3u
-.if\\n(;3 .if !\\n(:t .sp 
+.if\\n(;3 .if !\\n(:t .sp
 .ns
 .br
 .)Y
@@ -1376,7 +1376,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .el.if \\n(:D .ie !\\n(:t=2 .)D "check TL, AU, AS, AE, MT sequence"
 .el.)D "check TL, AU, AS, AE, NS, NE, MT sequence"
 .rm)X )Y >T >x >z >1 >2 >3 >4 >5 >6 >7 >8 >9 }z
-.rr;x ;y ;z :D :1 :2 :3 :9 ;0 ;1 ;2 ;3 
+.rr;x ;y ;z :D :1 :2 :3 :9 ;0 ;1 ;2 ;3
 .rmTL AU TM AF AS AE OK
 .rm)K
 ..
@@ -1401,7 +1401,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 \!.if \\n(:2=0 .if \\n(:H \\*(}H
 \!.if \\n(:2=0 \\*(}z
 \!.ce 0
-\!.sp 
+\!.sp
 \!.in 0
 \!.in +\\n(:3u
 .>3
@@ -1429,13 +1429,13 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .deCS
 .LC 0
 .if\\n(:F .FE
-.if\\n(:y .DE 
-.if\\n(!N=1 .NE 
+.if\\n(:y .DE
+.if\\n(!N=1 .NE
 .)N
-.)w 
+.)w
 .if\\n(;R .RP 0 1
 .if!\\nP-1 .if \\nN .if !\\nN-1 .rn }t }b
-.if!\\nP-1 .if \\nN .if !\\nN-1 .nr N 0 
+.if!\\nP-1 .if \\nN .if !\\nN-1 .nr N 0
 .rm}t }e }o
 .rm}b }f }p
 .br
@@ -1453,7 +1453,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .po\\nOu
 .ll\\nWu
 .lt\\nWu
-.)R 
+.)R
 .ta.5i 1i 1.5i 2i 2.5i 3i 3.5i 4i 4.5i 5i 5.5i 6i
 .nr;0 0
 .nr;1 0
@@ -1469,7 +1469,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .ne\\n(:Vu+3v+.5p
 .rmLT
 .ie\\n(;F \{\
-.sp2 
+.sp2
 .ie\\n(;F<3 \{\
 .ie\\n(.$ \\$1
 .elYours very truly, \}
@@ -1487,9 +1487,9 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .deSG
 .if\\n(:F .)D "SG:missing FE"
 .if\\n(:y .)D "SG:missing DE"
-.LC 0 
+.LC 0
 .)w
-.)R 
+.)R
 .in0
 .nf
 .ls1
@@ -1529,10 +1529,10 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .fi\}
 ..
 .deNS
-.if\\n(!N=1 .di 
-.if\\n(;M .br 
-.)R 
-.nr:D 1  
+.if\\n(!N=1 .di
+.if\\n(;M .br
+.)R
+.nr:D 1
 .ds}4 "Copy to
 .nr;0 0\\$1
 .if\w\\$1u-\w'\0\0'u .nr ;0 50
@@ -1551,15 +1551,15 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .if\\n(;0-12 .ds }4 "Complete memorandum to
 .if\\n(;0-13 .ds }4 "Copy (\\$1) to
 .if\\n(.$-1 .ds }4 \&\\$1
-'in\\n(;N  
-.if!\\n(!N .ds }5 \\*(}4  
-.if\\n(!N  .da }C  
-.if!\\n(!N  .di }C  
+'in\\n(;N
+.if!\\n(!N .ds }5 \\*(}4
+.if\\n(!N  .da }C
+.if!\\n(!N  .di }C
 .if\\n(!N .if !\\n(;F .sp
 \!.ds }4 \\*(}4
 \\*(}4
 .nf
-.nr!N 1  
+.nr!N 1
 ..
 .de)N
 .br
@@ -1598,8 +1598,8 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .if\\n(!N=1 .di
 .nr:D 0
 .nr!N 2
-.if\\n(;M .)N  
-.)R 
+.if\\n(;M .)N
+.)R
 ..
 .deAV
 .ne6v
@@ -1636,8 +1636,8 @@ APPROVED:
 .nrP +1
 .if\\n(:Z \{.nr P \\n%
 .rr:Z \}
-.if\\n(:u*\\n(:S .nr P 1 
-.if\\n(:u=1 \{.nr H1 +1 
+.if\\n(:u*\\n(:S .nr P 1
+.if\\n(:u=1 \{.nr H1 +1
 .nr:u 2 \}
 'sp\\n(!X
 .TP
@@ -1647,7 +1647,7 @@ APPROVED:
 .nr:I 2
 .nr:J \\n(nl
 'ns
-'if\\n(:q .)l 
+'if\\n(:q .)l
 'nr:q 0
 .mk;r
 .mk;m
@@ -1658,7 +1658,7 @@ APPROVED:
 'el'if \\n(Df>1 ')z \}
 .nr:I 3
 .nr!C \\n(.h
-.PX 
+.PX
 'ns
 .if!((\\n(!C=\\n(.h)&(\\n(!B=0)) .mk ;m
 .nr;T 0
@@ -1818,18 +1818,18 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 'ev
 ..
 .de)2
-.po\\nOu 
-.nr;C 1 
+.po\\nOu
+.nr;C 1
 'bp
 ..
 .de)1
 .rt\\n(;mu
-.po+\\n(;ou 
-.nr;C 2 
+.po+\\n(;ou
+.nr;C 2
 .nr:I 2
 .nr:J \\n(nl
 'ns
-'if\\n(:q .)l 
+'if\\n(:q .)l
 'nr:q 0
 'if\\n(;d=0&\\n(:z>0 \{\
 'ie\\n(Df>3 \{')z
@@ -1844,15 +1844,15 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .in\\n(;hu	\}
 .mk#T
 .nr:J \\n(nl
-.if\\n(;C&\\n(;a=1&\\n(!K=1 'wh \\n(!Eu+1v )a 
+.if\\n(;C&\\n(;a=1&\\n(!K=1 'wh \\n(!Eu+1v )a
 ..
-.de2C 
+.de2C
 .if\\n(;C=0 \{\
 .br
 .)R
 .nr;C 1
-.if!\\n(.$ .nr ;l \\n(.lu*8u/17u 
-.if!\\n(.$ .nr ;o \\n(.lu*9u/17u 
+.if!\\n(.$ .nr ;l \\n(.lu*8u/17u
+.if!\\n(.$ .nr ;o \\n(.lu*9u/17u
 .if\\n(.$ .nr ;l \\$1u*1.3n
 .if\\n(.$ .nr ;o \\nWu-\\n(;lu
 .ev1
@@ -1986,7 +1986,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .ch)b -(\\n(:mu-2v)
 ..
 .deFS
-'nr:s +1 
+'nr:s +1
 .if\\n(:F .)D "FS:missing FE"
 .if\\n(:F .FE
 .if\\n(:y .)D "FS:missing DE"
@@ -1998,7 +1998,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .ie(\\n(;C>0)&((\\n(;b=1):((\\n(;j=1)&(\\n(!F=1))) \{\
 .nr!F 1
 .>W  \}
-.el.if ((\\n(;C=0)&(\\n(;j=1)&(\\n(!F=2))  .>N   
+.el.if ((\\n(;C=0)&(\\n(;j=1)&(\\n(!F=2))  .>N
 'ev1
 'di>b
 .nr:D 1
@@ -2010,8 +2010,8 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 'ps-2
 'vs\\n(.sp+1p
 'sp\\n(Fsu*3p
-'if\\n(.$ 'ds }y \\$1\ 
-'if!\\n(.$ 'ds }y \\*(]y.\ 
+'if\\n(.$ 'ds }y \\$1\
+'if!\\n(.$ 'ds }y \\*(]y.\
 'if\\n(:k \\*(}y\&\c
 'if!\\n(:k 'nr ;v \w\0\0.\ 
 'if!\\n(:k 'nr ;u \w\\*(}y
@@ -2063,7 +2063,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .nrdn 0
 'if!\\n(.pu-\\n(nlu-.5p-\\n(:ou 'nr :o \\n(.pu-\\n(nlu-.5p
 'if!\\n(:ou-\\n(:mu 'nr :o \\n(:mu
-'ch)f -\\n(:ou 
+'ch)f -\\n(:ou
 'br\}\}
 ..
 .de)o
@@ -2103,11 +2103,11 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 'nr;Z 0
 .if!\\n(;C=1 \{\
 .rr!A
-.if\\n(dn=0 .rr !F \}  
+.if\\n(dn=0 .rr !F \}
 'rm>y
 'nr:q \\n(dnu
 'nrdn 0
-'nr:s 0 
+'nr:s 0
 .)R
 'ev
 ..
@@ -2154,10 +2154,10 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 'rm>w
 ..
 .deFD
-'nr:i 0 
-'nr:j 0 
-'nr:k 0 
-'nr:l 0 
+'nr:i 0
+'nr:j 0
+'nr:k 0
+'nr:l 0
 'nr;z 0
 'if\\n(.$ 'nr ;z \\$1
 'if\\n(;z-11 'nr ;z 0
@@ -2269,7 +2269,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 'nr;d 1
 \&\c
 'SP \\n(.tu+1v
-'nr;d 0	
+'nr;d 0
 ')z  \}
 ..
 .de)w
@@ -2302,14 +2302,14 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .)r
 .ti\\n(.iu
 .nf
-.if\\n(:t>1 .in -\\n(;iu  
+.if\\n(:t>1 .in -\\n(;iu
 .rs
 .nr;d 1
 .>0
 .)R
 .nr;d 0
 .ie\\n(:I>1 \{\
-.if\\n(nl>\\n(:J .nr :I 0 \}  
+.if\\n(nl>\\n(:J .nr :I 0 \}
 .el.nr :I 0
 .ls\\n(!L
 .in\\n(;iu
@@ -2323,7 +2323,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 (\\n(nl>(\\n(.p-\\n(;r-\\n(:o/2u+\\n(;r))) \{\
 .if\\n(;e \&\c
 .ne\\n(.tu+1v
-.if\\n(:I<2 .)r \}  
+.if\\n(:I<2 .)r \}
 ..
 .deDE
 .if!\\n(:y .)D "DE:no DS or DF active"
@@ -2331,7 +2331,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .if\\n(:B=3 \{.br
 .di
 .if\\n(dl>\\n(:Y .nr :Y \\n(dl
-.if\\n(:Y<\\n(.l .in (\\n(.lu-\\n(:Yu)/2u 
+.if\\n(:Y<\\n(.l .in (\\n(.lu-\\n(:Yu)/2u
 .nf
 .>X
 .fi
@@ -2369,8 +2369,8 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 ..
 .deRS
 .if\\n(;R=2 .)D "RS:missing RF"
-.nr;R 2 
-.nrRf +1 
+.nr;R 2
+.nrRf +1
 .if\\n(.$ .ds \\$1 \v'-.4m'\s-3[\\n(:R]\s0\v'.4m'
 .ie\\n(;C .ev 1
 .el.ev 2
@@ -2395,8 +2395,8 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .deRP
 .if\\n(;R=2 .)D "RP: missing RF"
 .if\\n(;R \{\
-.nr;R 0 
-.if!(0\\$1) .nr :R 0 1 
+.nr;R 0
+.if!(0\\$1) .nr :R 0 1
 .)R
 .ie(0\\$2=2):(0\\$2=3) \{\
 .if\\n(;e \&\c
@@ -2413,7 +2413,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 \\*(Rp
 .if\w\\*(Rp \{
 .am>C
-.)T 1 0 "" "\\*(Rp" \\nP 
+.)T 1 0 "" "\\*(Rp" \\nP
 \\..
 'br\}
 .nf
@@ -2429,14 +2429,14 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .nr;e 1
 .LC 0
 .if\\n(:F .FE
-.if\\n(:y .DE 
-.if\\n(!N=1 .NE 
+.if\\n(:y .DE
+.if\\n(!N=1 .NE
 .)N
-.nr;x 0 
+.nr;x 0
 .if\\n(;R .RP 0 1
 \&\c
 .if(\\n(;C>0)&(\\n(:z>0) 'bp
-.)w 
+.)w
 \&
 'nr:0 \\n(.pu-\\n(nlu-\\n(:ou
 'if\\n(:s 'if (\\n(:0<=0):((\\n(;C=2)&(\\n(!F=1)) 'nr ;x 1
@@ -2503,12 +2503,12 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .el.ie \\$1SJ \{\
 .ds}m \\$2
 .nr!M 1 \}
-.el.)D "LO argument not recognized" 
+.el.)D "LO argument not recognized"
 ..
 .deLT
 .nr:D 0
 .)W LT
-.rnTP >Y 
+.rnTP >Y
 .br
 .rn>Y TP
 .ie\\$1 .(1
@@ -2537,7 +2537,7 @@ PRIVATE\h'-\w'PRIVATE'u'\l'\w'PRIVATE'u'
 .sp
 .in(\\n(.lu/2u)
 \\*(}k \}
-.ie(\\n(!9:\\n(!6) .sp 2  
+.ie(\\n(!9:\\n(!6) .sp 2
 .el.sp 4
 .in0
 .if\w\\*(}6 \\*(}6
@@ -2689,29 +2689,29 @@ SUBJECT:  \\*(}m \}
 .	ps
 .	lt\}
 ..
-.nr:r .6i 
-.nr:m .8i 
-'nr:i 0 
-'nr:j 0 
-'nr:k 0 
-'nr:l 0 
-.nr:n 0 
-.nr:p 0 1 
-.nr:o 0 
-.nr:z 0 1 
-.nr:y 0 
+.nr:r .6i
+.nr:m .8i
+'nr:i 0
+'nr:j 0
+'nr:k 0
+'nr:l 0
+.nr:n 0
+.nr:p 0 1
+.nr:o 0
+.nr:z 0 1
+.nr:y 0
 .nr:x 0
 .af;w a
 .nr:w 0
 .nr:F 0
-.nr:R 0 1 
+.nr:R 0 1
 .ds]r \\n(:R
 .ds]y \\n(:p
 'wh0 )h
-.nr:o \n(:mu 
+.nr:o \n(:mu
 'wh-\n(:mu )f
 'ch)f 15i
-'wh-\n(:mu )n 
+'wh-\n(:mu )n
 'ch)f -\n(:mu
 'wh-\n(:ru )b
 .nr:M \n(:mu
@@ -2765,7 +2765,7 @@ SUBJECT:  \\*(}m \}
 .ls2
 .nrPt 1
 .nrPi 10 \}
-.if\nC=5 .ls 2 
+.if\nC=5 .ls 2
 .if\nC=2 .ds ]C ''DATE FILE COPY''
 .if\nC=1 .ds ]C ''OFFICIAL FILE COPY''
 .if(\nN=3):(\nN=5) \{.nr :S 1

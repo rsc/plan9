@@ -25,75 +25,75 @@
  */
 
 	/* round 1 */
-	DATA	md5tab<>+( 0*4)(SB)/4,$0xd76aa478	
-	DATA	md5tab<>+( 1*4)(SB)/4,$0xe8c7b756	
-	DATA	md5tab<>+( 2*4)(SB)/4,$0x242070db	
-	DATA	md5tab<>+( 3*4)(SB)/4,$0xc1bdceee	
-	DATA	md5tab<>+( 4*4)(SB)/4,$0xf57c0faf	
-	DATA	md5tab<>+( 5*4)(SB)/4,$0x4787c62a	
-	DATA	md5tab<>+( 6*4)(SB)/4,$0xa8304613	
-	DATA	md5tab<>+( 7*4)(SB)/4,$0xfd469501	
-	DATA	md5tab<>+( 8*4)(SB)/4,$0x698098d8	
-	DATA	md5tab<>+( 9*4)(SB)/4,$0x8b44f7af	
-	DATA	md5tab<>+(10*4)(SB)/4,$0xffff5bb1	
-	DATA	md5tab<>+(11*4)(SB)/4,$0x895cd7be	
-	DATA	md5tab<>+(12*4)(SB)/4,$0x6b901122	
-	DATA	md5tab<>+(13*4)(SB)/4,$0xfd987193	
-	DATA	md5tab<>+(14*4)(SB)/4,$0xa679438e	
+	DATA	md5tab<>+( 0*4)(SB)/4,$0xd76aa478
+	DATA	md5tab<>+( 1*4)(SB)/4,$0xe8c7b756
+	DATA	md5tab<>+( 2*4)(SB)/4,$0x242070db
+	DATA	md5tab<>+( 3*4)(SB)/4,$0xc1bdceee
+	DATA	md5tab<>+( 4*4)(SB)/4,$0xf57c0faf
+	DATA	md5tab<>+( 5*4)(SB)/4,$0x4787c62a
+	DATA	md5tab<>+( 6*4)(SB)/4,$0xa8304613
+	DATA	md5tab<>+( 7*4)(SB)/4,$0xfd469501
+	DATA	md5tab<>+( 8*4)(SB)/4,$0x698098d8
+	DATA	md5tab<>+( 9*4)(SB)/4,$0x8b44f7af
+	DATA	md5tab<>+(10*4)(SB)/4,$0xffff5bb1
+	DATA	md5tab<>+(11*4)(SB)/4,$0x895cd7be
+	DATA	md5tab<>+(12*4)(SB)/4,$0x6b901122
+	DATA	md5tab<>+(13*4)(SB)/4,$0xfd987193
+	DATA	md5tab<>+(14*4)(SB)/4,$0xa679438e
 	DATA	md5tab<>+(15*4)(SB)/4,$0x49b40821
 
 	/* round 2 */
-	DATA	md5tab<>+(16*4)(SB)/4,$0xf61e2562	
-	DATA	md5tab<>+(17*4)(SB)/4,$0xc040b340	
-	DATA	md5tab<>+(18*4)(SB)/4,$0x265e5a51	
-	DATA	md5tab<>+(19*4)(SB)/4,$0xe9b6c7aa	
-	DATA	md5tab<>+(20*4)(SB)/4,$0xd62f105d	
-	DATA	md5tab<>+(21*4)(SB)/4,$0x02441453	
-	DATA	md5tab<>+(22*4)(SB)/4,$0xd8a1e681	
-	DATA	md5tab<>+(23*4)(SB)/4,$0xe7d3fbc8	
-	DATA	md5tab<>+(24*4)(SB)/4,$0x21e1cde6	
-	DATA	md5tab<>+(25*4)(SB)/4,$0xc33707d6	
-	DATA	md5tab<>+(26*4)(SB)/4,$0xf4d50d87	
-	DATA	md5tab<>+(27*4)(SB)/4,$0x455a14ed	
-	DATA	md5tab<>+(28*4)(SB)/4,$0xa9e3e905	
-	DATA	md5tab<>+(29*4)(SB)/4,$0xfcefa3f8	
-	DATA	md5tab<>+(30*4)(SB)/4,$0x676f02d9	
+	DATA	md5tab<>+(16*4)(SB)/4,$0xf61e2562
+	DATA	md5tab<>+(17*4)(SB)/4,$0xc040b340
+	DATA	md5tab<>+(18*4)(SB)/4,$0x265e5a51
+	DATA	md5tab<>+(19*4)(SB)/4,$0xe9b6c7aa
+	DATA	md5tab<>+(20*4)(SB)/4,$0xd62f105d
+	DATA	md5tab<>+(21*4)(SB)/4,$0x02441453
+	DATA	md5tab<>+(22*4)(SB)/4,$0xd8a1e681
+	DATA	md5tab<>+(23*4)(SB)/4,$0xe7d3fbc8
+	DATA	md5tab<>+(24*4)(SB)/4,$0x21e1cde6
+	DATA	md5tab<>+(25*4)(SB)/4,$0xc33707d6
+	DATA	md5tab<>+(26*4)(SB)/4,$0xf4d50d87
+	DATA	md5tab<>+(27*4)(SB)/4,$0x455a14ed
+	DATA	md5tab<>+(28*4)(SB)/4,$0xa9e3e905
+	DATA	md5tab<>+(29*4)(SB)/4,$0xfcefa3f8
+	DATA	md5tab<>+(30*4)(SB)/4,$0x676f02d9
 	DATA	md5tab<>+(31*4)(SB)/4,$0x8d2a4c8a
 
 	/* round 3 */
-	DATA	md5tab<>+(32*4)(SB)/4,$0xfffa3942	
-	DATA	md5tab<>+(33*4)(SB)/4,$0x8771f681	
-	DATA	md5tab<>+(34*4)(SB)/4,$0x6d9d6122	
-	DATA	md5tab<>+(35*4)(SB)/4,$0xfde5380c	
-	DATA	md5tab<>+(36*4)(SB)/4,$0xa4beea44	
-	DATA	md5tab<>+(37*4)(SB)/4,$0x4bdecfa9	
-	DATA	md5tab<>+(38*4)(SB)/4,$0xf6bb4b60	
-	DATA	md5tab<>+(39*4)(SB)/4,$0xbebfbc70	
-	DATA	md5tab<>+(40*4)(SB)/4,$0x289b7ec6	
-	DATA	md5tab<>+(41*4)(SB)/4,$0xeaa127fa	
-	DATA	md5tab<>+(42*4)(SB)/4,$0xd4ef3085	
-	DATA	md5tab<>+(43*4)(SB)/4,$0x04881d05	
-	DATA	md5tab<>+(44*4)(SB)/4,$0xd9d4d039	
-	DATA	md5tab<>+(45*4)(SB)/4,$0xe6db99e5	
-	DATA	md5tab<>+(46*4)(SB)/4,$0x1fa27cf8	
-	DATA	md5tab<>+(47*4)(SB)/4,$0xc4ac5665	
+	DATA	md5tab<>+(32*4)(SB)/4,$0xfffa3942
+	DATA	md5tab<>+(33*4)(SB)/4,$0x8771f681
+	DATA	md5tab<>+(34*4)(SB)/4,$0x6d9d6122
+	DATA	md5tab<>+(35*4)(SB)/4,$0xfde5380c
+	DATA	md5tab<>+(36*4)(SB)/4,$0xa4beea44
+	DATA	md5tab<>+(37*4)(SB)/4,$0x4bdecfa9
+	DATA	md5tab<>+(38*4)(SB)/4,$0xf6bb4b60
+	DATA	md5tab<>+(39*4)(SB)/4,$0xbebfbc70
+	DATA	md5tab<>+(40*4)(SB)/4,$0x289b7ec6
+	DATA	md5tab<>+(41*4)(SB)/4,$0xeaa127fa
+	DATA	md5tab<>+(42*4)(SB)/4,$0xd4ef3085
+	DATA	md5tab<>+(43*4)(SB)/4,$0x04881d05
+	DATA	md5tab<>+(44*4)(SB)/4,$0xd9d4d039
+	DATA	md5tab<>+(45*4)(SB)/4,$0xe6db99e5
+	DATA	md5tab<>+(46*4)(SB)/4,$0x1fa27cf8
+	DATA	md5tab<>+(47*4)(SB)/4,$0xc4ac5665
 
 	/* round 4 */
-	DATA	md5tab<>+(48*4)(SB)/4,$0xf4292244	
-	DATA	md5tab<>+(49*4)(SB)/4,$0x432aff97	
-	DATA	md5tab<>+(50*4)(SB)/4,$0xab9423a7	
-	DATA	md5tab<>+(51*4)(SB)/4,$0xfc93a039	
-	DATA	md5tab<>+(52*4)(SB)/4,$0x655b59c3	
-	DATA	md5tab<>+(53*4)(SB)/4,$0x8f0ccc92	
-	DATA	md5tab<>+(54*4)(SB)/4,$0xffeff47d	
-	DATA	md5tab<>+(55*4)(SB)/4,$0x85845dd1	
-	DATA	md5tab<>+(56*4)(SB)/4,$0x6fa87e4f	
-	DATA	md5tab<>+(57*4)(SB)/4,$0xfe2ce6e0	
-	DATA	md5tab<>+(58*4)(SB)/4,$0xa3014314	
-	DATA	md5tab<>+(59*4)(SB)/4,$0x4e0811a1	
-	DATA	md5tab<>+(60*4)(SB)/4,$0xf7537e82	
-	DATA	md5tab<>+(61*4)(SB)/4,$0xbd3af235	
-	DATA	md5tab<>+(62*4)(SB)/4,$0x2ad7d2bb	
+	DATA	md5tab<>+(48*4)(SB)/4,$0xf4292244
+	DATA	md5tab<>+(49*4)(SB)/4,$0x432aff97
+	DATA	md5tab<>+(50*4)(SB)/4,$0xab9423a7
+	DATA	md5tab<>+(51*4)(SB)/4,$0xfc93a039
+	DATA	md5tab<>+(52*4)(SB)/4,$0x655b59c3
+	DATA	md5tab<>+(53*4)(SB)/4,$0x8f0ccc92
+	DATA	md5tab<>+(54*4)(SB)/4,$0xffeff47d
+	DATA	md5tab<>+(55*4)(SB)/4,$0x85845dd1
+	DATA	md5tab<>+(56*4)(SB)/4,$0x6fa87e4f
+	DATA	md5tab<>+(57*4)(SB)/4,$0xfe2ce6e0
+	DATA	md5tab<>+(58*4)(SB)/4,$0xa3014314
+	DATA	md5tab<>+(59*4)(SB)/4,$0x4e0811a1
+	DATA	md5tab<>+(60*4)(SB)/4,$0xf7537e82
+	DATA	md5tab<>+(61*4)(SB)/4,$0xbd3af235
+	DATA	md5tab<>+(62*4)(SB)/4,$0x2ad7d2bb
 	DATA	md5tab<>+(63*4)(SB)/4,$0xeb86d391
 
 #define S11 7

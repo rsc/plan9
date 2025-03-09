@@ -52,7 +52,7 @@ unlock(Lock *lk)
 		abort();
 }
 
-#else 
+#else
 
 /* old, non-pthread systems */
 

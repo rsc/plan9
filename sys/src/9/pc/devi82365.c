@@ -22,8 +22,8 @@ enum
 	 Fcardena=	 (1<<4),	/*  PC card enable */
 	Rigc= 		0x3,		/* interrupt and general control */
 	 Fiocard=	 (1<<5),	/*  I/O card (vs memory) */
-	 Fnotreset=	 (1<<6),	/*  reset if not set */	
-	 FSMIena=	 (1<<4),	/*  enable change interrupt on SMI */ 
+	 Fnotreset=	 (1<<6),	/*  reset if not set */
+	 FSMIena=	 (1<<4),	/*  enable change interrupt on SMI */
 	Rcsc= 		0x4,		/* card status change */
 	Rcscic= 	0x5,		/* card status change interrupt config */
 	 Fchangeena=	 (1<<3),	/*  card changed */
@@ -592,7 +592,7 @@ devi82365link(void)
 
 	if(_pcmspecial)
 		return;
-	
+
 	/* look for controllers if the ports aren't already taken */
 	if(ioalloc(0x3E0, 2, 0, "i82365.0") >= 0){
 		i82365probe(0x3E0, 0x3E1, 0);
@@ -937,7 +937,7 @@ pcmio(int slotno, ISAConf *isa)
 			ct = pp->def;
 		else
 			ct = pp->ctab;
-	
+
 		/* try for best match */
 		if(ct->nio == 0
 		|| ct->io[0].start != isa->port || ((1<<irq) & ct->irqs) == 0){

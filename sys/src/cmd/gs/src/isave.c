@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -171,7 +171,7 @@ struct alloc_change_s {
     short offset;		/* if >= 0, offset within struct */
 };
 
-private 
+private
 CLEAR_MARKS_PROC(change_clear_marks)
 {
     alloc_change_t *const ptr = (alloc_change_t *)vptr;
@@ -181,7 +181,7 @@ CLEAR_MARKS_PROC(change_clear_marks)
     else
 	r_clear_attrs(&ptr->contents, l_mark);
 }
-private 
+private
 ENUM_PTRS_WITH(change_enum_ptrs, alloc_change_t *ptr) return 0;
 ENUM_PTR(0, alloc_change_t, next);
 case 1:

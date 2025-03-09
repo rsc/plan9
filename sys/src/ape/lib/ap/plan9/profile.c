@@ -87,7 +87,7 @@ out:
 		/* Add kernel cycles on proc entry */
 		p->time = p->time + _tos->kcycles;
 		/* fall through */
-	case Proftime:	
+	case Proftime:
 	proftime:		/* Subtract cycle counter on proc entry */
 		_cycles((uvlong*)&t);
 		p->time = p->time - t;
@@ -117,7 +117,7 @@ _profout(void)
 	case Profuser:			/* Subtract kernel cycles on proc entry */
 		p->time = p->time - _tos->kcycles;
 		/* fall through */
-	case Proftime:	
+	case Proftime:
 	proftime:				/* Add cycle counter on proc entry */
 		_cycles((uvlong*)&t);
 		p->time = p->time + t;
@@ -321,4 +321,3 @@ void prof(void (*fn)(void*), void *arg, int entries, int what)
 }
 
 #pragma profile on
-

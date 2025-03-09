@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -36,7 +36,7 @@
  ****** NOTE: this module and gdevwddb should be refactored.
  * The drawing routines are almost identical.
  * The differences are that the mswinprn doesn't use an extra
- * palette (gdevwddb.c could probably be made to work with 
+ * palette (gdevwddb.c could probably be made to work with
  * one palette also), mswinprn doesn't call win_update() because
  * hwndimg doesn't exist, and the HDC is hdcmf not hdcbit.
  ******/
@@ -212,15 +212,15 @@ win_prn_open(gx_device * dev)
     wdev->procs.encode_color = wdev->procs.map_rgb_color;
     wdev->procs.decode_color = wdev->procs.map_color_rgb;
     if (dev->color_info.depth == 1) {
-	wdev->procs.get_color_mapping_procs = 
+	wdev->procs.get_color_mapping_procs =
 	    gx_default_DevGray_get_color_mapping_procs;
-	wdev->procs.get_color_comp_index = 
+	wdev->procs.get_color_comp_index =
 	    gx_default_DevGray_get_color_comp_index;
     }
     else {
-	wdev->procs.get_color_mapping_procs = 
+	wdev->procs.get_color_mapping_procs =
 	    gx_default_DevRGB_get_color_mapping_procs;
-	wdev->procs.get_color_comp_index = 
+	wdev->procs.get_color_comp_index =
 	    gx_default_DevRGB_get_color_comp_index;
     }
 
@@ -689,4 +689,3 @@ AbortProc(HDC hdcPrn, int code)
 	return (FALSE);		/* cancel job */
     return (TRUE);
 }
-

@@ -44,7 +44,7 @@ static char *encname[] = {
 
 };
 
-/* 
+/*
  * list head. used to hold the list, the lock, dim, and pixelfmt
  */
 struct {
@@ -298,7 +298,7 @@ vncsfmt(Fmt *fmt)
 }
 
 /*
- * We register exiting as an atexit handler in each proc, so that 
+ * We register exiting as an atexit handler in each proc, so that
  * client procs need merely exit when something goes wrong.
  */
 static void
@@ -349,7 +349,7 @@ vnchungup(Vnc *v)
 
 /*
  * Kill all clients except safe.
- * Used to start a non-shared client and at shutdown. 
+ * Used to start a non-shared client and at shutdown.
  */
 static void
 killclients(Vncs *safe)
@@ -614,7 +614,7 @@ vncname(char *fmt, ...)
  * Set the pixel format being sent.  Can only happen once.
  * (Maybe a client would send this again if the screen changed
  * underneath it?  If we want to support this we need a way to
- * make sure the current image is no longer in use, so we can free it. 
+ * make sure the current image is no longer in use, so we can free it.
  */
 static void
 setpixelfmt(Vncs *v)
@@ -1100,4 +1100,3 @@ clientwriteproc(Vncs *v)
 	vncunlock(v);
 	vnchungup(v);
 }
-

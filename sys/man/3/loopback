@@ -1,4 +1,4 @@
-.TH LOOPBACK 3 
+.TH LOOPBACK 3
 .SH NAME
 loopback \- network link simulation
 .SH SYNOPSIS

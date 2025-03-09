@@ -1,4 +1,4 @@
-@echo off 
+@echo off
 @rem $Id: pdf2ps.bat,v 1.7 2002/02/21 21:49:28 giles Exp $
 @rem Convert PDF to PostScript.
 

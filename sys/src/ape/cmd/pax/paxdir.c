@@ -1,6 +1,6 @@
 /*
 	opendir -- open a directory stream
-  
+
 	last edit:	16-Jun-1987	D A Gwyn
 */
 
@@ -12,13 +12,13 @@
 #ifdef BSD_SYSV
 /*
 	<sys/_dir.h> -- definitions for 4.2,4.3BSD directories
-  
+
 	last edit:	25-Apr-1987	D A Gwyn
-  
+
 	A directory consists of some number of blocks of DIRBLKSIZ bytes each,
 	where DIRBLKSIZ is chosen such that it can be transferred to disk in a
 	single atomic operation (e.g., 512 bytes on most machines).
-  
+
 	Each DIRBLKSIZ-byte block contains some number of directory entry
 	structures, which are of variable length.  Each directory entry has the
 	beginning of a (struct direct) at the front of it, containing its
@@ -26,7 +26,7 @@
 	of the name contained in the entry.  These are followed by the NUL-
 	terminated name padded to a (long) boundary with 0 bytes.  The maximum
 	length of a name in a directory is MAXNAMELEN.
-  
+
 	The macro DIRSIZ(dp) gives the amount of space required to represent a
 	directory entry.  Free space in a directory is represented by entries
 	that have dp->d_reclen > DIRSIZ(dp).  All DIRBLKSIZ bytes in a
@@ -37,7 +37,7 @@
 	dp->d_reclen.  If the first entry of a directory block is free, then
 	its dp->d_fileno is set to 0; entries other than the first in a
 	directory do not normally have 	dp->d_fileno set to 0.
-  
+
 	prerequisite:	<sys/types.h>
 */
 
@@ -75,7 +75,7 @@ struct direct {			/* data from read()/_getdirentries() */
 	directory entry.  This requires the amount of space in a (struct
 	direct) without the d_name field, plus enough space for the name with a
 	terminating NUL character, rounded up to a (long) boundary.
-  
+
 	(Note that Berkeley didn't properly compensate for struct padding,
 	but we nevertheless have to use the same size as the actual system.)
 */
@@ -202,7 +202,7 @@ typedef int     bool;		/* Boolean data type */
 DIR *opendir(char *dirname)
 
 #else
-    
+
 DIR *opendir(dirname)
 char           *dirname;	/* name of directory */
 
@@ -251,7 +251,7 @@ char           *dirname;	/* name of directory */
 int closedir(register DIR *dirp)
 
 #else
-    
+
 int closedir(dirp)
 register DIR	*dirp;		/* stream from opendir() */
 
@@ -273,7 +273,7 @@ register DIR	*dirp;		/* stream from opendir() */
 
 /*
 	readdir -- read next entry from a directory stream
-  
+
 	last edit:	25-Apr-1987	D A Gwyn
 */
 
@@ -282,7 +282,7 @@ register DIR	*dirp;		/* stream from opendir() */
 struct dirent  *readdir(register DIR *dirp)
 
 #else
-    
+
 struct dirent  *readdir(dirp)
 register DIR   *dirp;		/* stream from opendir() */
 
@@ -316,12 +316,12 @@ register DIR   *dirp;		/* stream from opendir() */
 
 /*
 	seekdir -- reposition a directory stream
-  
+
 	last edit:	24-May-1987	D A Gwyn
-  
+
 	An unsuccessful seekdir() will in general alter the current
 	directory position; beware.
-  
+
 	NOTE:	4.nBSD directory compaction makes seekdir() & telldir()
 		practically impossible to do right.  Avoid using them!
 */
@@ -331,7 +331,7 @@ register DIR   *dirp;		/* stream from opendir() */
 void seekdir(register DIR *dirp, register OFFSET loc)
 
 #else
-    
+
 void seekdir(dirp, loc)
 register DIR   *dirp;		/* stream from opendir() */
 register OFFSET  loc;		/* position from telldir() */
@@ -346,7 +346,7 @@ register OFFSET  loc;		/* position from telldir() */
     }
     /*
      * A (struct dirent)'s d_off is an invented quantity on 4.nBSD
-     * NFS-supporting systems, so it is not safe to lseek() to it. 
+     * NFS-supporting systems, so it is not safe to lseek() to it.
      */
 
     /* Monotonicity of d_off is heavily exploited in the following. */
@@ -356,7 +356,7 @@ register OFFSET  loc;		/* position from telldir() */
      * directories, it might be more efficient to read blocks until the first
      * d_off is too large, then back up one block, or even to use binary
      * search on the directory blocks.  I doubt that the extra code for that
-     * would be worthwhile. 
+     * would be worthwhile.
      */
 
     if (dirp->dd_loc >= dirp->dd_size	/* invalid index */
@@ -427,7 +427,7 @@ register OFFSET  loc;		/* position from telldir() */
  *
  * RETURNS
  *
- * 	Return offset of next entry 
+ * 	Return offset of next entry
  */
 
 
@@ -436,8 +436,8 @@ register OFFSET  loc;		/* position from telldir() */
 OFFSET telldir(DIR *dirp)
 
 #else
-    
-OFFSET telldir(dirp)			
+
+OFFSET telldir(dirp)
 DIR            *dirp;		/* stream from opendir() */
 
 #endif
@@ -468,7 +468,7 @@ DIR            *dirp;		/* stream from opendir() */
 static int NameLen(char *name)
 
 #else
-    
+
 static int NameLen(name)
 char            *name;		/* -> name embedded in struct direct */
 
@@ -513,7 +513,7 @@ static enum {
 static void sig_catch(int sig)
 
 #else
-    
+
 static void sig_catch(sig)
 int             sig;		/* must be SIGSYS */
 
@@ -533,13 +533,13 @@ int             sig;		/* must be SIGSYS */
  *
  * PARAMETERS
  *
- *	int             fildes	- directory file descriptor 
- *	char           *buf	- where to put the (struct dirent)s 
- *	unsigned	nbyte	- size of buf[] 
+ *	int             fildes	- directory file descriptor
+ *	char           *buf	- where to put the (struct dirent)s
+ *	unsigned	nbyte	- size of buf[]
  *
  * RETURNS
- * 
- *	Returns number of bytes read; 0 on EOF, -1 on error 
+ *
+ *	Returns number of bytes read; 0 on EOF, -1 on error
  */
 
 #ifdef __STDC__
@@ -547,8 +547,8 @@ int             sig;		/* must be SIGSYS */
 int getdents(int fildes, char *buf, unsigned nbyte)
 
 #else
-    
-int getdents(fildes, buf, nbyte)	
+
+int getdents(fildes, buf, nbyte)
 int             fildes;		/* directory file descriptor */
 char           *buf;		/* where to put the (struct dirent)s */
 unsigned        nbyte;		/* size of buf[] */
@@ -622,7 +622,7 @@ unsigned        nbyte;		/* size of buf[] */
 
     serrno = errno;		/* save entry errno */
 
-    for (bp = (struct dirent *) buf; bp == (struct dirent *) buf;) {	
+    for (bp = (struct dirent *) buf; bp == (struct dirent *) buf;) {
 
     	/* convert next directory block */
 	int             size;

@@ -48,7 +48,7 @@ if(! test -d /proc/$1) {
 
 pidlist=`{echo $"* | tr ' ' ,}
 
-echo 'leakdump({'$pidlist'})' | acid -lpool -lleak $1 $flagf | 
+echo 'leakdump({'$pidlist'})' | acid -lpool -lleak $1 $flagf |
 {
 	if(~ $#flaga 1 && ~ $#flagd 1)
 		grep 'block|free'
@@ -57,7 +57,7 @@ echo 'leakdump({'$pidlist'})' | acid -lpool -lleak $1 $flagf |
 		grep block
 	if not
 	if(~ $#flagd 1)
-		grep free 
+		grep free
 	if not
 		aux/acidleak $acidleakflags $flagf
 } |
@@ -92,4 +92,4 @@ echo 'leakdump({'$pidlist'})' | acid -lpool -lleak $1 $flagf |
 		'  | sort -nr +2
 	if not
 		cat
-}	
+}

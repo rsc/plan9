@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -41,7 +41,7 @@ bytes2int(const byte *p, int n)
 public_st_cmap_adobe1();
 /* Because lookup ranges can be elements of arrays, */
 /* their enum_ptrs procedure must never return 0 prematurely. */
-private 
+private
 ENUM_PTRS_WITH(cmap_lookup_range_enum_ptrs,
                gx_cmap_lookup_range_t *pclr) return 0;
 case 0:
@@ -132,7 +132,7 @@ gs_multidim_CID_offset(const byte *key_str,
     for (i = 0; i < key_size; i++)
         CID_offset = CID_offset * (key_hi[i] - key_lo[i] + 1) +
             key_str[i] - key_lo[i];
- 
+
     if_debug1('J', "[J]gmCo()         CID_offset = %d\n", CID_offset);
     return CID_offset;
 }
@@ -178,7 +178,7 @@ code_map_decode_next_multidim_regime(const gx_code_map_t * pcmap,
         dlprintf3(") @ 0x%lx ssize=%d, %d ranges to check\n",
                        str, ssize, pcmap->num_lookup);
     }
- 
+
     for (i = pcmap->num_lookup - 1; i >= 0; --i) {
 	/* main loop - scan the map passed via pcmap */
 	/* reverse scan order due to 'usecmap' */
@@ -249,7 +249,7 @@ code_map_decode_next_multidim_regime(const gx_code_map_t * pcmap,
                 if (gs_debug_c('j'))
                     print_msg_str_in_range(str + pre_size,
                         key, key + step - key_size, key_size) ;
- 
+
                 for (l = 0; l < key_size; l++) {
                     byte c = str[l + pre_size];
                     if (c < key[l] || c > key[step - key_size + l])
@@ -371,7 +371,7 @@ gs_cmap_adobe1_decode_next(const gs_cmap_t * pcmap_in,
     /*
      * This is undefined in def & undef maps,
      * use partially matched result with default notdef (CID = 0).
-     */ 
+     */
     if (save_index < pm_index) {
 
 	/* there was some partially matched */
@@ -390,12 +390,12 @@ gs_cmap_adobe1_decode_next(const gs_cmap_t * pcmap_in,
          * and take the leading bytes (with same length of the shortest
          * defined chr) as an unidentified character: CID = 0.
 	 * Also this procedure is specified in PS Ref. Manual v3,
-         * at the end of Fonts chapter. 
+         * at the end of Fonts chapter.
          */
 
 	const byte *str = pstr->data + save_index;
 	uint ssize = pstr->size - save_index;
-	int chr_size_shortest = 
+	int chr_size_shortest =
 		gs_cmap_get_shortest_chr(&pcmap->def, pfidx);
 
 	if (chr_size_shortest <= ssize) {

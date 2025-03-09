@@ -32,7 +32,7 @@ fossil/flfmt -b 4096 -y /tmp/fldisk
 fossil/conf -w /tmp/fldisk <<CONF-EOF
 fsys main config /tmp/fldisk
 fsys main open -AWPV
-fsys main 
+fsys main
 srv -p flcons.$pid
 srv fldisk.$pid
 uname bootes :bootes

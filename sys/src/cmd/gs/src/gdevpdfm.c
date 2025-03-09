@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -328,7 +328,7 @@ setup_pdfmark_stream_compression(gx_device_psdf *pdev0,
 	    return_error(gs_error_VMerror);
 	}
     }
-    st = s_alloc_state(mem, template->stype, 
+    st = s_alloc_state(mem, template->stype,
 			    "setup_pdfmark_stream_compression");
     if (st == 0)
 	return_error(gs_error_VMerror);
@@ -586,8 +586,8 @@ pdfmark_put_ao_pairs(gx_device_pdf * pdev, cos_dict_t *pcd,
 	    pdfmark_put_pair(pcd, Action);
 	else if (Action[1].size < 30) {
 	    /* Hack: we could substitute names in pdfmark_process,
-	       now should recognize whether it was done. 
-	       Not a perfect method though. 
+	       now should recognize whether it was done.
+	       Not a perfect method though.
 	       Go with it for a while. */
 	    char buf[30];
 	    int d0, d1;
@@ -1054,7 +1054,7 @@ start_XObject(gx_device_pdf * pdev, bool compress, cos_stream_t **ppcs)
     code = pdf_open_page(pdev, PDF_IN_STREAM);
     if (code < 0)
 	return code;
-    code = pdf_enter_substream(pdev, resourceXObject, gs_no_id, &pres, false, 
+    code = pdf_enter_substream(pdev, resourceXObject, gs_no_id, &pres, false,
 		pdev->CompressFonts /* Have no better switch*/);
     if (code < 0)
 	return code;
@@ -1111,9 +1111,9 @@ pdfmark_PS(gx_device_pdf * pdev, gs_param_string * pairs, uint count,
 	if (level1.data != 0) {
 	    pdf_resource_t *pres;
 
-	    code = pdf_enter_substream(pdev, 
-			resourceXObject, 
-			gs_no_id, &pres, true, 
+	    code = pdf_enter_substream(pdev,
+			resourceXObject,
+			gs_no_id, &pres, true,
 			pdev->CompressFonts /* Have no better switch*/);
 	    if (code < 0)
 		return code;
@@ -1205,11 +1205,11 @@ pdfmark_PAGE(gx_device_pdf * pdev, gs_param_string * pairs, uint count,
     return pdfmark_put_pairs(pdf_current_page_dict(pdev), pairs, count);
 }
 
-/* Add a page label for the current page. The last label on a page 
- * overrides all previous labels for this page. Unlabeled pages will get 
+/* Add a page label for the current page. The last label on a page
+ * overrides all previous labels for this page. Unlabeled pages will get
  * empty page labels. label == NULL flushes the last label */
-private int 
-pdfmark_add_pagelabel(gx_device_pdf * pdev, const gs_param_string *label) 
+private int
+pdfmark_add_pagelabel(gx_device_pdf * pdev, const gs_param_string *label)
 {
     cos_value_t value;
     cos_dict_t *dict = 0;
@@ -1218,7 +1218,7 @@ pdfmark_add_pagelabel(gx_device_pdf * pdev, const gs_param_string *label)
     /* create label dict (and page label array if not present yet) */
     if (label != 0) {
         if (!pdev->PageLabels) {
-            pdev->PageLabels = cos_array_alloc(pdev, 
+            pdev->PageLabels = cos_array_alloc(pdev,
                     "pdfmark_add_pagelabel(PageLabels)");
             if (pdev->PageLabels == 0)
                 return_error(gs_error_VMerror);
@@ -1236,7 +1236,7 @@ pdfmark_add_pagelabel(gx_device_pdf * pdev, const gs_param_string *label)
         if (dict == 0)
             return_error(gs_error_VMerror);
 
-        code = cos_dict_put_c_key(dict, "/P", cos_string_value(&value, 
+        code = cos_dict_put_c_key(dict, "/P", cos_string_value(&value,
             label->data, label->size));
         if (code < 0) {
             COS_FREE(dict, "pdfmark_add_pagelabel(dict)");
@@ -1249,28 +1249,28 @@ pdfmark_add_pagelabel(gx_device_pdf * pdev, const gs_param_string *label)
         /* handle current label */
         if (pdev->PageLabels_current_label) {
             if (code >= 0) {
-                code = cos_array_add_int(pdev->PageLabels, 
+                code = cos_array_add_int(pdev->PageLabels,
                         pdev->PageLabels_current_page);
-                if (code >= 0) 
+                if (code >= 0)
                     code = cos_array_add(pdev->PageLabels,
-                            COS_OBJECT_VALUE(&value, 
+                            COS_OBJECT_VALUE(&value,
                                 pdev->PageLabels_current_label));
             }
             pdev->PageLabels_current_label = 0;
         }
 
-        /* handle unlabled pages between current labeled page and 
+        /* handle unlabled pages between current labeled page and
          * next labeled page */
         if (pdev->PageLabels) {
             if (pdev->next_page - pdev->PageLabels_current_page > 1) {
-                cos_dict_t *tmp = cos_dict_alloc(pdev, 
+                cos_dict_t *tmp = cos_dict_alloc(pdev,
                         "pdfmark_add_pagelabel(tmp)");
                 if (tmp == 0)
                     return_error(gs_error_VMerror);
 
-                code = cos_array_add_int(pdev->PageLabels, 
+                code = cos_array_add_int(pdev->PageLabels,
                         pdev->PageLabels_current_page + 1);
-                if (code >= 0) 
+                if (code >= 0)
                     code = cos_array_add(pdev->PageLabels,
                             COS_OBJECT_VALUE(&value, tmp));
             }
@@ -1279,7 +1279,7 @@ pdfmark_add_pagelabel(gx_device_pdf * pdev, const gs_param_string *label)
 
     /* new current label */
     if (pdev->PageLabels_current_label)
-        COS_FREE(pdev->PageLabels_current_label, 
+        COS_FREE(pdev->PageLabels_current_label,
                 "pdfmark_add_pagelabel(current_label)");
     pdev->PageLabels_current_label = dict;
     pdev->PageLabels_current_page = pdev->next_page;
@@ -1288,8 +1288,8 @@ pdfmark_add_pagelabel(gx_device_pdf * pdev, const gs_param_string *label)
 }
 
 /* Close the pagelabel numtree.*/
-int 
-pdfmark_end_pagelabels(gx_device_pdf * pdev) 
+int
+pdfmark_end_pagelabels(gx_device_pdf * pdev)
 {
     return pdfmark_add_pagelabel(pdev, 0);
 }
@@ -1304,7 +1304,7 @@ pdfmark_PAGELABEL(gx_device_pdf * pdev, gs_param_string * pairs, uint count,
 
     if (pdev->CompatibilityLevel >= 1.3) {
         if (pdfmark_find_key("/Label", pairs, count, &key)) {
-            return pdfmark_add_pagelabel(pdev, &key); 
+            return pdfmark_add_pagelabel(pdev, &key);
         }
     }
     return 0;
@@ -1443,7 +1443,7 @@ pdfmark_BP(gx_device_pdf * pdev, gs_param_string * pairs, uint count,
     if (code < 0)
 	return code;
     {	byte *s = gs_alloc_string(pdev->memory, objname->size, "pdfmark_PS");
-	
+
 	if (s == NULL)
 	    return_error(gs_error_VMerror);
 	memcpy(s, objname->data, objname->size);
@@ -1468,7 +1468,7 @@ pdfmark_BP(gx_device_pdf * pdev, gs_param_string * pairs, uint count,
 					  bbox_str, bbox_str_len)) < 0 ||
 	(code = cos_dict_put_c_key_string(cos_stream_dict(pcs), "/Matrix",
 				      matrix_str, matrix_str_len)) < 0 ||
- 	(code = cos_dict_put_c_key_object(cos_stream_dict(pcs), "/Resources", 
+ 	(code = cos_dict_put_c_key_object(cos_stream_dict(pcs), "/Resources",
  					  COS_OBJECT(pdev->substream_Resources))) < 0
 	)
 	return code;
@@ -1565,7 +1565,7 @@ pdfmark_OBJ(gx_device_pdf * pdev, gs_param_string * pairs, uint count,
 	return code;
     }
     if (stream)
-	return setup_pdfmark_stream_compression((gx_device_psdf *)pdev, 
+	return setup_pdfmark_stream_compression((gx_device_psdf *)pdev,
 						     (cos_stream_t *)pco);
     return 0;
 }

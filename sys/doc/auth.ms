@@ -97,7 +97,7 @@ Once a user provided a password to connect to a local file store,
 the system required that the same password be used to access all the other file
 stores.
 That is, the system treated all network services as
-belonging to the same security domain. 
+belonging to the same security domain.
 .LP
 Second, the algorithms and protocols used in authentication,
 by nature tricky and difficult to get right, were compiled into the
@@ -151,7 +151,7 @@ designed a secure file store,
 called
 .CW secstore ,
 to protect our keys but make them easy to get when they are needed;
-designed a new kernel module to support transparent use of 
+designed a new kernel module to support transparent use of
 Transport Layer Security (TLS)
 [RFC2246];
 and began using encryption for all communications within the system.
@@ -519,7 +519,7 @@ processes (but no others)
 need to be restarted in order to take advantage of
 new or repaired protocols.
 .LP
-At the time of writing, 
+At the time of writing,
 .CW factotum
 contains authentication
 modules for the Plan 9 shared key protocol (p9sk1),
@@ -684,8 +684,8 @@ and protocol modules may expect other well-known attributes
 .CW !password
 attributes, for example).
 Additional attributes can be used as comments or for
-further discrimination without intervention by 
-.CW factotum ; 
+further discrimination without intervention by
+.CW factotum ;
 for example, the APOP and IMAP mail clients conventionally
 include a
 .CW server
@@ -851,7 +851,7 @@ creates a key with the given attributes, replacing any
 extant key with an identical set of public attributes.
 .CW Delkey
 deletes all keys that match the given set of attributes.
-Reading the 
+Reading the
 .CW ctl
 file returns a list of keys, one per line, displaying only public attributes.
 The following example illustrates these interactions.
@@ -876,7 +876,7 @@ key proto=apop server=x.y.com user=gre
 % echo 'delkey proto=apop' >ctl
 % cat ctl
 key dom=bell-labs.com proto=p9sk1 user=gre
-% 
+%
 .P2
 (A file with the
 .CW l
@@ -902,7 +902,7 @@ An RPC session begins with a
 .CW start
 transaction; the argument is a key query as described
 earlier.
-Once started, an RPC conversation usually consists of 
+Once started, an RPC conversation usually consists of
 a sequence of
 .CW read
 and
@@ -916,7 +916,7 @@ The
 .CW attr
 transaction returns a list of attributes for the current
 conversation; the list includes any attributes given in
-the 
+the
 .CW start
 query as well as any public attributes from keys being used.
 .LP
@@ -967,7 +967,7 @@ $F sub C -> P sub C#: ok APOP gre \f2response\fP
 .CW Factotum
 requires that
 .CW start
-requests include a 
+requests include a
 .CW proto
 attribute, and the APOP module requires an additional
 .CW role
@@ -1036,7 +1036,7 @@ the client's mailbox.
 Two more files provide hooks for a graphical
 .CW factotum
 control interface.
-The first, 
+The first,
 .CW confirm ,
 allows the user detailed control over the use of certain keys.
 If a key has a
@@ -1077,7 +1077,7 @@ $F sub C -> P sub C#: needkey proto=apop
 A typical client would then prompt the user for the desired
 key information, create a new key via the
 .CW ctl
-file, and then reissue the 
+file, and then reissue the
 .CW start
 request.
 If the
@@ -1131,7 +1131,7 @@ The authentication protocol, similar to that of Kerberos
 used a sequence of messages passed between client, file server, and authentication
 server to verify the identities of the user, calling machine, and serving machine.
 One major drawback to the design was that the authentication method was defined by 9P
-itself and could not be changed.  
+itself and could not be changed.
 Moreover, there was no mechanism to relegate
 authentication to an external (trusted) agent,
 so a process implementing 9P needed, besides support for file service,
@@ -1722,7 +1722,7 @@ Finally, there is a command (inside the authenticated,
 encrypted channel between client and
 .CW secstore )
 to change passwords by sending
-a new $H#; 
+a new $H#;
 for consistency, the client process must at the same time fetch and re-encrypt all files.
 .LP
 When
@@ -1787,7 +1787,7 @@ Native Plan 9 network services such as
 .CW cpu
 and
 .CW exportfs
-use these protocols for authentication and then invoke 
+use these protocols for authentication and then invoke
 .CW pushtls
 with the shared secret.
 .LP
@@ -1846,7 +1846,7 @@ for a passphrase whenever authentication is needed
 [Ylon96].
 The self-certifying file system SFS uses a similar agent
 [Kami00],
-not only for moderating the use of client authentication keys 
+not only for moderating the use of client authentication keys
 but also for verifying server public keys
 [Mazi99].
 .LP
@@ -1869,10 +1869,10 @@ reduces to $O(n)#.
 .LP
 Previous work on agents has concentrated on their use by clients
 authenticating to servers.
-Looking in the other direction, Sun Microsystem's 
+Looking in the other direction, Sun Microsystem's
 pluggable authentication module (PAM) is one
-of the earliest attempts to 
-provide a general authentication mechanism for Unix-like 
+of the earliest attempts to
+provide a general authentication mechanism for Unix-like
 operating systems
 [Sama96].
 Without a central authority like PAM, system policy is tied
@@ -1898,7 +1898,7 @@ achieves the same goals
 using the agent approach.
 .CW Factotum
 is the only process that needs to create
-capabilities, so all the network servers can run as 
+capabilities, so all the network servers can run as
 untrusted users (e.g.,
 Plan 9's
 .CW none

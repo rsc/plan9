@@ -77,7 +77,7 @@ char Enotconfigured[] = "device not configured";
 #define HOST_MEM_MODE_Y             		0x40000000
 #define HOST_MEM_MODE_U             		0x80000000
 #define HOST_MEM_MODE_V             		0xC0000000
-#define HOST_MEM_MODE_NORMAL     		HOST_YUV_APERTURE_UPPER 
+#define HOST_MEM_MODE_NORMAL     		HOST_YUV_APERTURE_UPPER
 
 static Chan *ovl_chan;		/* Channel of controlling process */
 static int ovl_width;		/* Width of input overlay buffer */
@@ -262,7 +262,7 @@ enum {
 	ClrCmpClr,
 	ClrCmpMask,
 	DpChainMask,
-	SrcOffPitch,	
+	SrcOffPitch,
 	LcdIndex,
 	LcdData,
 	ClockCntl,
@@ -665,7 +665,7 @@ resetengine(VGAscr *scr)
 static void
 init_overlayclock(VGAscr *scr)
 {
-	uchar *cc, save, pll_ref_div, pll_vclk_cntl, vclk_post_div, 
+	uchar *cc, save, pll_ref_div, pll_vclk_cntl, vclk_post_div,
 			vclk_fb_div, ecp_div;
 	int i;
 	ulong dotclock;
@@ -679,7 +679,7 @@ init_overlayclock(VGAscr *scr)
   	cc[1] = 6<<2; vclk_post_div = (cc[2]>>(i+i)) & 3;
   	cc[1] = (7+i)<<2; vclk_fb_div = cc[2];
 
-	dotclock = 2 * mach64refclock * vclk_fb_div / 
+	dotclock = 2 * mach64refclock * vclk_fb_div /
 			(pll_ref_div * (1 << vclk_post_div));
 	/* ecp_div: 0=dotclock, 1=dotclock/2, 2=dotclock/4 */
   	ecp_div = dotclock / mach64type->m64_ovlclock;
@@ -687,7 +687,7 @@ init_overlayclock(VGAscr *scr)
 
   	/* Force a scaler clock factor of 1 if refclock *
    	  * is unknown (VCLK_SRC not PLLVCLK)  */
-  	if ((pll_vclk_cntl & 0x03) != 0x03) 
+  	if ((pll_vclk_cntl & 0x03) != 0x03)
 		ecp_div = 0;
   	if ((pll_vclk_cntl & 0x30) != ecp_div<<4) {
     		cc[1] = (5<<2)|2;
@@ -768,22 +768,22 @@ initengine(VGAscr *scr)
 	table = *(ushort *)(bios + 0x48);
 	table = *(ushort *)(bios + table + 0x10);
 	switch (*(ushort *)(bios + table + 0x08)) {
-      	case 2700: 
-		mach64refclock = 270000; 
+      	case 2700:
+		mach64refclock = 270000;
 		break;
-      	case 2863: 
-      	case 2864: 
-		mach64refclock = 286363; 
+      	case 2863:
+      	case 2864:
+		mach64refclock = 286363;
 		break;
-      	case 2950: 
-		mach64refclock = 294989; 
+      	case 2950:
+		mach64refclock = 294989;
 		break;
-    	case 1432: 
+    	case 1432:
 	default:
-		mach64refclock = 143181; 
-		break ;	
+		mach64refclock = 143181;
+		break ;
 	}
-	
+
 	/* Figure out which revision this chip is */
 	switch ((scr->mmio[mmoffset[ConfigChipId]] >> 24) & 0xFF) {
 	case VTGTB1S1:
@@ -796,12 +796,12 @@ initengine(VGAscr *scr)
 	case GTIIIC1U1:
 	case GTIIIC1U2:
 	case GTIIIC2U1:
-	case GTIIIC2U2: 
-	case GTIIIC2U3: 
+	case GTIIIC2U2:
+	case GTIIIC2U3:
 	case LTPRO:
 			mach64revb = 1;
 			break;
-	default: 
+	default:
 			mach64revb = 0;
 			break;
 	}
@@ -990,54 +990,54 @@ ovl_configure(VGAscr *scr, Chan *c, char **field)
 	h = (int)strtol(field[2], nil, 0);
 	format = field[3];
 
-	if (c != ovl_chan) 
+	if (c != ovl_chan)
 		error(Einuse);
 	if (strcmp(format, "YUYV"))
 		error(Eunsupportedformat);
-	
+
 	ovl_width  = w;
 	ovl_height = h;
 	ovl_fib       = w * h * sizeof(ushort);
 
 	waitforidle(scr);
 	scr->mmio[mmoffset[BusCntl]] |= 0x08000000;	/* Enable regblock 1 */
-	scr->mmio[mmoffset[OverlayScaleCntl]] = 
+	scr->mmio[mmoffset[OverlayScaleCntl]] =
 		SCALE_ZERO_EXTEND|SCALE_RED_TEMP_6500K|
 		SCALE_HORZ_BLEND|SCALE_VERT_BLEND;
 	scr->mmio[mmoffset[!mach64revb? Buf0Pitch: ScalerBuf0Pitch]] = w;
-	scr->mmio[mmoffset[CaptureConfig]] = 
+	scr->mmio[mmoffset[CaptureConfig]] =
 		SCALER_FRAME_READ_MODE_FULL|
 		SCALER_BUF_MODE_SINGLE|
 		SCALER_BUF_NEXT_0;
 	scr->mmio[mmoffset[OverlayKeyCntl]] = !mach64revb?
-		OVERLAY_MIX_ALWAYS_V|(OVERLAY_EXCLUSIVE_NORMAL << 28): 
+		OVERLAY_MIX_ALWAYS_V|(OVERLAY_EXCLUSIVE_NORMAL << 28):
 		0x011;
 
 	if (mach64type->m64_pro) {
 		waitforfifo(scr, 6);
 
 		/* set the scaler co-efficient registers */
-		scr->mmio[mmoffset[ScalerColourCntl]] = 
+		scr->mmio[mmoffset[ScalerColourCntl]] =
 			(0x00) | (0x10 << 8) | (0x10 << 16);
-		scr->mmio[mmoffset[ScalerHCoef0]] = 
+		scr->mmio[mmoffset[ScalerHCoef0]] =
 			(0x00) | (0x20 << 8);
-		scr->mmio[mmoffset[ScalerHCoef1]] = 
+		scr->mmio[mmoffset[ScalerHCoef1]] =
 			(0x0D) | (0x20 << 8) | (0x06 << 16) | (0x0D << 24);
-		scr->mmio[mmoffset[ScalerHCoef2]] = 
+		scr->mmio[mmoffset[ScalerHCoef2]] =
 			(0x0D) | (0x1C << 8) | (0x0A << 16) | (0x0D << 24);
-		scr->mmio[mmoffset[ScalerHCoef3]] = 
+		scr->mmio[mmoffset[ScalerHCoef3]] =
 			(0x0C) | (0x1A << 8) | (0x0E << 16) | (0x0C << 24);
-		scr->mmio[mmoffset[ScalerHCoef4]] = 
+		scr->mmio[mmoffset[ScalerHCoef4]] =
 			(0x0C) | (0x14 << 8) | (0x14 << 16) | (0x0C << 24);
 	}
-	
+
 	waitforfifo(scr, 3);
 	scr->mmio[mmoffset[VideoFormat]] = SCALE_IN_YVYU422 |
 		(!mach64revb? 0xC: 0);
 
 	if (mach64overlay == 0)
 		mach64overlay = scr->storage + 64 * 64 * sizeof(uchar);
-	scr->mmio[mmoffset[!mach64revb? Buf0Offset: ScalerBuf0Offset]] = 
+	scr->mmio[mmoffset[!mach64revb? Buf0Offset: ScalerBuf0Offset]] =
 		mach64overlay;
 }
 
@@ -1056,7 +1056,7 @@ ovl_enable(VGAscr *scr, Chan *c, char **field)
 	     y < 0 || y + h > physgscreenr.max.y)
 		error(Ebadarg);
 
-	if (c != ovl_chan) 
+	if (c != ovl_chan)
 		error(Einuse);
 	if (scr->mmio[mmoffset[CrtcGenCntl]] & 1) {	/* double scan enable */
 		y *= 2;
@@ -1064,20 +1064,20 @@ ovl_enable(VGAscr *scr, Chan *c, char **field)
 	}
 
 	waitforfifo(scr, 2);
-	scr->mmio[mmoffset[OverlayYX]] = 
+	scr->mmio[mmoffset[OverlayYX]] =
 			((x & 0xFFFF) << 16) | (y & 0xFFFF);
-	scr->mmio[mmoffset[OverlayYXEnd]] = 
+	scr->mmio[mmoffset[OverlayYXEnd]] =
 			(((x + w) & 0xFFFF) << 16) | ((y + h) & 0xFFFF);
 
 	h_inc = (ovl_width << 12) / (w >> 1);  /* ??? */
 	v_inc = (ovl_height << 12) / h;
 	waitforfifo(scr, 2);
-	scr->mmio[mmoffset[OverlayScaleInc]] = 
+	scr->mmio[mmoffset[OverlayScaleInc]] =
 			((h_inc & 0xFFFF) << 16) | (v_inc & 0xFFFF);
-	scr->mmio[mmoffset[ScalerHeightWidth]] = 
+	scr->mmio[mmoffset[ScalerHeightWidth]] =
 			((ovl_width & 0xFFFF) << 16) | (ovl_height & 0xFFFF);
 	waitforidle(scr);
-	scr->mmio[mmoffset[OverlayScaleCntl]] |= 
+	scr->mmio[mmoffset[OverlayScaleCntl]] |=
 			(SCALE_ENABLE|OVERLAY_ENABLE);
 }
 
@@ -1095,11 +1095,11 @@ ovl_status(VGAscr *scr, Chan *, char **field)
 		   scr->dev->name, scr->storage, scr->paddr,
 		   mach64overlay);
 }
-	
+
 static void
 ovl_openctl(VGAscr *, Chan *c, char **)
 {
-	if (ovl_chan) 
+	if (ovl_chan)
 		error(Einuse);
 	ovl_chan = c;
 }
@@ -1149,7 +1149,7 @@ mach64xxovlctl(VGAscr *scr, Chan *c, void *a, int n)
 	Cmdbuf *cb;
 	Cmdtab *ct;
 
-	if(!mach64type->m64_vtgt) 
+	if(!mach64type->m64_vtgt)
 		error(Enodev);
 
 	if(!scr->overlayinit){
@@ -1177,7 +1177,7 @@ mach64xxovlwrite(VGAscr *scr, void *a, int len, vlong offs)
 	int _len;
 
 	if (ovl_chan == nil) return len;	/* Acts as a /dev/null */
-	
+
 	/* Calculate the destination address */
 	_len = len;
 	src   = (uchar *)a;
@@ -1187,7 +1187,7 @@ mach64xxovlwrite(VGAscr *scr, void *a, int len, vlong offs)
 
 		_offs = (ulong)(offs % ovl_fib);
 		nb     = (_offs + len > ovl_fib)? ovl_fib - _offs: len;
-		memmove((uchar *)scr->vaddr + mach64overlay + _offs, 
+		memmove((uchar *)scr->vaddr + mach64overlay + _offs,
 				  src, nb);
 		offs += nb;
 		src  += nb;
@@ -1219,4 +1219,3 @@ VGAcur vgamach64xxcur = {
 
 	1					/* doespanning */
 };
-

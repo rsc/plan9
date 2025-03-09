@@ -6,49 +6,49 @@ diff /sys/src/9k/vt4/archvt4.c ./archvt4.c
 < incref(Ref *r)
 < {
 < 	int x;
-< 
+<
 < 	lock(r);
 < 	x = ++r->ref;
 < 	unlock(r);
 < 	return x;
 < }
 < #endif /* incref */
-< 
+<
 < #ifndef decref
 < int
 < decref(Ref *r)
 < {
 < 	int x;
-< 
+<
 < 	lock(r);
 < 	x = --r->ref;
 < 	unlock(r);
 < 	if(x < 0)
 < 		panic("decref pc=%#p", getcallerpc(&r));
-< 
+<
 < 	return x;
 < }
 < #endif /* decref */
-< 
+<
 88a60,70
 > void
 > archvt4link(void)
 > {
 > }
-> 
+>
 > int
 > cmpswap(long *addr, long old, long new)
 > {
 > 	return cas32(addr, old, new);
 > }
-> 
+>
 254c236
 < reboot(void *entry, void *code, long size)
 ---
 > reboot(void *entry, void *code, ulong size)
 diff /sys/src/9k/vt4/clock.c ./clock.c
 126a127,132
-> 
+>
 > long
 > lcycles(void)
 > {
@@ -101,7 +101,7 @@ diff /sys/src/9k/vt4/devether.c ./devether.c
 > /* 9k compatibility */
 > #define devno dev
 > #define iq in
-> 
+>
 50,51c54,55
 < static long
 < etherstat(Chan* chan, uchar* dp, long n)
@@ -137,7 +137,7 @@ diff /sys/src/9k/vt4/etherif.h ./etherif.h
 < 	ETHERMINTU	= 60,		/* minimum transmit size */
 < 	ETHERMAXTU	= 1514,		/* maximum transmit size */
 < 	ETHERHDRSIZE	= 14,		/* size of an ethernet header */
-< 
+<
 < 	MaxEther	= 4,
 ---
 > 	MaxEther	= 2,
@@ -145,7 +145,7 @@ diff /sys/src/9k/vt4/etherif.h ./etherif.h
 < //	int	tbdf;			/* type+busno+devno+funcno */
 51,59d44
 < };
-< 
+<
 < typedef struct Etherpkt Etherpkt;
 < struct Etherpkt
 < {
@@ -167,7 +167,7 @@ diff /sys/src/9k/vt4/fns.h ./fns.h
 0a1,3
 > #define checkmmu(a, b)
 > #define countpagerefs(a, b)
-> 
+>
 7a11,12
 > int	adec(long*);
 > int	ainc(long*);
@@ -255,7 +255,7 @@ diff /sys/src/9k/vt4/main.c ./main.c
 > 	p->sched.sp = PTR2UINT(p->kstack+KSTACK-sizeof(up->s.args)-sizeof(uintptr));
 357a359,367
 > }
-> 
+>
 > /*
 >  *  set mach dependent process state for a new process
 >  */
@@ -341,7 +341,7 @@ diff /sys/src/9k/vt4/mkfile ./mkfile
 > 	/$objtype/lib/libc.a\
 22a71,72
 > 9:V: $p$CONF $p$CONF.elf
-> 
+>
 48,49c98,100
 < init.out:D:	init9.$O initcode.$O /$objtype/lib/libc.a
 < 	$LD -l -R4 -o init.out init9.$O initcode.$O -lc
@@ -358,7 +358,7 @@ diff /sys/src/9k/vt4/mkfile ./mkfile
 < 	 xd -1x reboot.out |
 < 		sed -e '1,2d' -e 's/^[0-9a-f]+ //' -e 's/ ([0-9a-f][0-9a-f])/0x\1,/g'
 < 	 echo '};'} > reboot.h
-< 
+<
 63,64c105,106
 < ethertemac.$O:	 ../port/ethermii.h ../port/netif.h etherif.h io.h
 < etherplbtemac.$O:	 ../port/ethermii.h ../port/netif.h etherif.h io.h
@@ -366,7 +366,7 @@ diff /sys/src/9k/vt4/mkfile ./mkfile
 > ethertemac.$O:	 ../port/netif.h etherif.h io.h
 > etherplbtemac.$O:	 ../port/netif.h etherif.h io.h
 74a117,142
-> 
+>
 > init.h:D:	../port/initcode.c init9.s
 > 	$CC ../port/initcode.c
 > 	$AS init9.s
@@ -375,10 +375,10 @@ diff /sys/src/9k/vt4/mkfile ./mkfile
 > 	 xd -1x <init.out |
 > 		sed -e 's/^[0-9a-f]+ //' -e 's/ ([0-9a-f][0-9a-f])/0x\1,/g'
 > 	 echo '};'} > init.h
-> 
+>
 > init.out:D:	init9.$O initcode.$O /$objtype/lib/libc.a
 > 	$LD -l -R4 -o init.out init9.$O initcode.$O -lc
-> 
+>
 > reboot.h:D:	rebootcode.s
 > 	$AS rebootcode.s
 > 	# -lc is only for memmove.  -T arg is PADDR(REBOOTADDR)
@@ -389,7 +389,7 @@ diff /sys/src/9k/vt4/mkfile ./mkfile
 > 	 echo '};'} > reboot.h
 > errstr.h:D:	../port/mkerrstr ../port/error.h
 > 	rc ../port/mkerrstr > errstr.h
-> 
+>
 > $CONF.clean:
 > 	rm -rf $p$CONF $p$CONF.elf $CONF.c boot$CONF.c ../boot/libboot.aq
 Only in .: mkfile.9k
@@ -404,7 +404,7 @@ diff /sys/src/9k/vt4/mmu.c ./mmu.c
 > putmmu(uintptr va, uintptr pa, Page* page)
 368a369,380
 > }
-> 
+>
 > /*
 >  * Return the number of bytes that can be accessed via KADDR(pa).
 >  * If pa is not a valid argument to KADDR, return 0.
@@ -422,7 +422,7 @@ diff /sys/src/9k/vt4/rebootcmd.c ./rebootcmd.c
 > 		nn = devtab[c->type]->read(c, p, n, c->offset);
 diff /sys/src/9k/vt4/syscall.c ./syscall.c
 6d5
-< 
+<
 8c7
 < #include "/sys/src/libc/9syscall/sys.h"
 ---
@@ -439,7 +439,7 @@ diff /sys/src/9k/vt4/syscall.c ./syscall.c
 > 	int i, scallnr;
 196a196,197
 > 	cycles(&up->kentry);
-> 
+>
 215c216
 < 	ar0 = zar0;
 ---
@@ -496,7 +496,7 @@ diff /sys/src/9k/vt4/syscall.c ./syscall.c
 ---
 > 	return USTKTOP-sizeof(Tos);
 338a336,340
-> /* 
+> /*
 >  *  Craft a return frame which will cause the child to pop out of
 >  *  the scheduler in user mode with the return register zero.  Set
 >  *  pc to point to a l.s return function.
@@ -524,7 +524,7 @@ diff /sys/src/9k/vt4/syscall.c ./syscall.c
 < 	/* Things from bottom of syscall which were never executed */
 < 	child->psstate = 0;
 < 	child->insyscall = 0;
-< 
+<
 ---
 > 	/* syscall returns 0 for child */
 358c356,358
@@ -543,12 +543,12 @@ diff /sys/src/9k/vt4/trap.c ./trap.c
 > callwithureg(void (*fn)(Ureg*))
 > {
 > 	Ureg ureg;
-> 
+>
 > 	ureg.pc = getcallerpc(&fn);
 > 	ureg.sp = PTR2UINT(&fn);
 > 	fn(&ureg);
 > }
-> 
+>
 > void
 413c427
 < 		iprint("cpu%d: registers for %s %d\n",
@@ -600,19 +600,19 @@ diff /sys/src/9k/vt4/vt4cpu ./vt4cpu
 < 	dcr
 < #	fakeqtm
 < 	qtm
-< 
+<
 < boot cpu
 < 	tcp
-< 
+<
 < rootdir
 < 	bootvt4cpu.out boot
 < 	/power/bin/ip/ipconfig ipconfig
 < 	/power/bin/auth/factotum factotum
 < 	nvram
-< 
+<
 < conf
 < 	int cpuserver = 1;
-< 
+<
 < dev +dev
 ---
 > dev
@@ -647,7 +647,7 @@ diff /sys/src/9k/vt4/vt4cpu ./vt4cpu
 > 	etherlltemac
 > 	loopbackmedium
 > 	netdevmedium
-> 
+>
 > ip
 62a38
 > 	ipmux
@@ -669,10 +669,10 @@ diff /sys/src/9k/vt4/vt4cpu ./vt4cpu
 70,77d48
 < misc +dev
 < 	cache
-< 
+<
 < sd +dev
 < 	sdaoe		sdscsi
-< 
+<
 < dir
 < 	ip
 78a50,51

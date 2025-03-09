@@ -47,7 +47,7 @@ echo start > /n/jtagfs/ctl
 
 #	set entry on exceptions
 #	changed so that turn it is turn on in debug state
-#	
+#
 
 #wait for entry in debug state (with timeout)
 

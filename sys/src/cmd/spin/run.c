@@ -49,7 +49,7 @@ rev_escape(SeqList *e)
 		{	r = eval_sub(e->this->frst);
 	}	}
 
-	return r;		
+	return r;
 }
 
 Element *

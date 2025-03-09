@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1991, 1993, 1994, 1997, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -58,7 +58,7 @@ zcurrenthalftone(i_ctx_t *i_ctx_p)
 	    push(13);
 	    {
 		os_ptr opc = op - 12;
-		gs_screen_halftone *pht = 
+		gs_screen_halftone *pht =
 		    &ht.params.colorscreen.screens.colored.red;
 
 		make_real(opc, pht->frequency);
@@ -155,7 +155,7 @@ zscreen_enum_init(i_ctx_t *i_ctx_p, const gx_ht_order * porder,
 		  int (*finish_proc)(i_ctx_t *), int space_index)
 {
     gs_screen_enum *penum;
-    gs_memory_t * mem = (gs_memory_t *)idmemory->spaces_indexed[space_index]; 
+    gs_memory_t * mem = (gs_memory_t *)idmemory->spaces_indexed[space_index];
     int code;
 
     check_estack(snumpush + 1);

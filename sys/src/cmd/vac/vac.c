@@ -118,10 +118,10 @@ threadmain(int argc, char **argv)
 	default:
 		usage();
 	}ARGEND
-	
+
 	if(argc == 0 && !stdinname)
 		usage();
-	
+
 	if(archivefile && (vacfile || diffvac)){
 		fprint(2, "cannot use -a with -f, -d\n");
 		usage();
@@ -248,7 +248,7 @@ threadmain(int argc, char **argv)
 	}
 	if(fdiff)
 		vacfiledecref(fdiff);
-	
+
 	/*
 	 * Record the maximum qid so that vacs can be merged
 	 * without introducing overlapping qids.  Older versions
@@ -295,7 +295,7 @@ recentarchive(VacFs *fs, char *path)
 	char buf[10];
 	int year, mmdd, nn, n, n1;
 	char *p;
-	
+
 	fp = vacfsgetroot(fs);
 	de = vdeopen(fp);
 	year = 0;
@@ -321,7 +321,7 @@ recentarchive(VacFs *fs, char *path)
 		return nil;
 	}
 	fp = f;
-	
+
 	de = vdeopen(fp);
 	mmdd = 0;
 	nn = 0;
@@ -405,7 +405,7 @@ plan9tovacdir(VacDir *vd, Dir *dir)
 
 /*
  * Archive the file named name, which has stat info d,
- * into the vac directory fp (p = parent).  
+ * into the vac directory fp (p = parent).
  *
  * If we're doing a vac -d against another archive, the
  * equivalent directory to fp in that archive is diffp.
@@ -434,7 +434,7 @@ vac(VacFile *fp, VacFile *diffp, char *name, Dir *d)
 
 	if(merge && vacmerge(fp, name) >= 0)
 		return;
-	
+
 	if(verbose)
 		fprint(2, "%s%s\n", name, (d->mode&DMDIR) ? "/" : "");
 
@@ -461,7 +461,7 @@ vac(VacFile *fp, VacFile *diffp, char *name, Dir *d)
 
 	if(vacfilesetdir(f, &vd) < 0)
 		warn("vacfilesetdir %s: %r", name);
-	
+
 	if(d->mode&DMDIR){
 		while((n = dirread(fd, &dk)) > 0){
 			for(i=0; i<n; i++){
@@ -485,7 +485,7 @@ vac(VacFile *fp, VacFile *diffp, char *name, Dir *d)
 			if(vacfilegetentries(fdiff, &e, nil) >= 0)
 			if(vacfilesetentries(f, &e, nil) >= 0){
 				bsize = e.dsize;
-			
+
 				/*
 				 * Or if -q is set, and the metadata looks the same,
 				 * don't even bother reading the file.
@@ -499,7 +499,7 @@ vac(VacFile *fp, VacFile *diffp, char *name, Dir *d)
 						vdcleanup(&vddiff);
 						goto Out;
 					}
-					
+
 					/*
 					 * Skip over presumably-unchanged prefix
 					 * of an append-only file.
@@ -565,7 +565,7 @@ vacstdin(VacFile *fp, char *name)
 		warn("vacfilecreate %s: %r", name);
 		return;
 	}
-	
+
 	off = 0;
 	while((n = read(0, buf, sizeof buf)) > 0){
 		if(vacfilewrite(f, buf, n, off) < 0){
@@ -594,7 +594,7 @@ vacmergefile(VacFile *fp, VacFile *mp, VacDir *d, char *vacfile,
 	VtEntry ed, em;
 	VacFile *mf;
 	VacFile *f;
-	
+
 	mf = vacfilewalk(mp, d->elem);
 	if(mf == nil){
 		warn("could not walk %s in %s", d->elem, vacfile);
@@ -605,7 +605,7 @@ vacmergefile(VacFile *fp, VacFile *mp, VacDir *d, char *vacfile,
 		vacfiledecref(mf);
 		return -1;
 	}
-	
+
 	if((f = vacfilecreate(fp, d->elem, d->mode)) == nil){
 		warn("vacfilecreate %s: %r", d->elem);
 		vacfiledecref(mf);
@@ -627,7 +627,7 @@ vacmergefile(VacFile *fp, VacFile *mp, VacDir *d, char *vacfile,
 		vacfiledecref(f);
 		return -1;
 	}
-	
+
 	vacfiledecref(mf);
 	vacfiledecref(f);
 	return 0;

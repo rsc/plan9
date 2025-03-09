@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -52,10 +52,10 @@ z1_glyph_info(gs_font *font, gs_glyph glyph, const gs_matrix *pmat,
 	      int members, gs_glyph_info_t *info);
 
 int z1_glyph_info_generic(gs_font *font, gs_glyph glyph, const gs_matrix *pmat,
-	      int members, gs_glyph_info_t *info, font_proc_glyph_info((*proc)), 
+	      int members, gs_glyph_info_t *info, font_proc_glyph_info((*proc)),
 	      int wmode);
 
-int z1_set_cache(i_ctx_t *i_ctx_p, gs_font_base *pbfont, ref *cnref, 
+int z1_set_cache(i_ctx_t *i_ctx_p, gs_font_base *pbfont, ref *cnref,
 	    gs_glyph glyph, op_proc_t cont, op_proc_t *exec_cont);
 
 #endif /* ichar1_INCLUDED */

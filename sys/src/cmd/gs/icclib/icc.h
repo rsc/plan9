@@ -1,6 +1,6 @@
 #ifndef ICC_H
 #define ICC_H
-/* 
+/*
  * International Color Consortium Format Library (icclib)
  *
  * Author:  Graeme W. Gill
@@ -74,7 +74,7 @@
 #define ORD32  unsigned long	/* 32 bit unsigned */
 #endif
 
-#include "icc9809.h"	/* Standard ICC definitions, version ICC.1:1998-09 with mods noted. */ 
+#include "icc9809.h"	/* Standard ICC definitions, version ICC.1:1998-09 with mods noted. */
 
 /* Note that the prefix icm is used for the native Machine */
 /* equivalents of the file structures defined in icc34.h */
@@ -223,7 +223,7 @@ typedef struct {
 																						\
 	/* Public: */																		\
 	void           (*dump)(struct _icmBase *p, FILE *op, int verb);						\
-	int            (*allocate)(struct _icmBase *p);									
+	int            (*allocate)(struct _icmBase *p);
 
 /* Base tag element data object */
 struct _icmBase {
@@ -239,7 +239,7 @@ struct _icmUInt8Array {
 
 	/* Public: */
 	unsigned long	size;		/* Allocated and used size of the array */
-    unsigned int   *data;		/* Pointer to array of data */ 
+    unsigned int   *data;		/* Pointer to array of data */
 }; typedef struct _icmUInt8Array icmUInt8Array;
 
 /* uInt16 Array */
@@ -251,7 +251,7 @@ struct _icmUInt16Array {
 
 	/* Public: */
 	unsigned long	size;		/* Allocated and used size of the array */
-    unsigned int	*data;		/* Pointer to array of data */ 
+    unsigned int	*data;		/* Pointer to array of data */
 }; typedef struct _icmUInt16Array icmUInt16Array;
 
 /* uInt32 Array */
@@ -263,7 +263,7 @@ struct _icmUInt32Array {
 
 	/* Public: */
 	unsigned long	size;		/* Allocated and used size of the array */
-    unsigned int	*data;		/* Pointer to array of data */ 
+    unsigned int	*data;		/* Pointer to array of data */
 }; typedef struct _icmUInt32Array icmUInt32Array;
 
 /* UInt64 Array */
@@ -275,7 +275,7 @@ struct _icmUInt64Array {
 
 	/* Public: */
 	unsigned long	size;		/* Allocated and used size of the array */
-    icmUint64		*data;		/* Pointer to array of hight data */ 
+    icmUint64		*data;		/* Pointer to array of hight data */
 }; typedef struct _icmUInt64Array icmUInt64Array;
 
 /* u16Fixed16 Array */
@@ -287,7 +287,7 @@ struct _icmU16Fixed16Array {
 
 	/* Public: */
 	unsigned long	size;		/* Allocated and used size of the array */
-    double			*data;		/* Pointer to array of hight data */ 
+    double			*data;		/* Pointer to array of hight data */
 }; typedef struct _icmU16Fixed16Array icmU16Fixed16Array;
 
 /* s15Fixed16 Array */
@@ -299,7 +299,7 @@ struct _icmS15Fixed16Array {
 
 	/* Public: */
 	unsigned long	size;		/* Allocated and used size of the array */
-    double			*data;		/* Pointer to array of hight data */ 
+    double			*data;		/* Pointer to array of hight data */
 }; typedef struct _icmS15Fixed16Array icmS15Fixed16Array;
 
 /* XYZ Array */
@@ -311,7 +311,7 @@ struct _icmXYZArray {
 
 	/* Public: */
 	unsigned long	size;		/* Allocated and used size of the array */
-    icmXYZNumber	*data;		/* Pointer to array of data */ 
+    icmXYZNumber	*data;		/* Pointer to array of data */
 }; typedef struct _icmXYZArray icmXYZArray;
 
 /* Curve */
@@ -464,7 +464,7 @@ struct _icmPlatformEntry {
 	/* Public: */
 	icPlatformSignature platform;
 	unsigned long       numCombinations;    /* num of settings and allocated array size */
-	icmSettingComb      *data; 
+	icmSettingComb      *data;
 }; typedef struct _icmPlatformEntry icmPlatformEntry;
 
 /* The Device Settings holds all platform settings */
@@ -540,7 +540,7 @@ struct _icmLut {
 												/* (NULL = default) */
 		void (*outfunc)(void *cbntx, double *out, double *in));
 								/* Output transfer function, outspace'->outspace (NULL = deflt) */
-		
+
 }; typedef struct _icmLut icmLut;
 
 /* Measurement Data */
@@ -992,7 +992,7 @@ struct _icc {
 	                                 /* Return appropriate lookup object */
 	                                 /* NULL on error, check errc+err for reason */
 
-	
+
     icmHeader       *header;			/* The header */
 	char             err[512];			/* Error message */
 	int              errc;				/* Error code */
@@ -1121,4 +1121,3 @@ extern ICCLIB_API double icmCIE94sq(double *in1, double *in2);
 #endif
 
 #endif /* ICC_H */
-

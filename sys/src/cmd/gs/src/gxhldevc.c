@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 Artifex Software Inc, artofcode llc.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -36,7 +36,7 @@ void gx_hld_saved_color_init(gx_hl_saved_color * psc)
 {
     gx_device_color temp_devc;
 
-    memset(psc, 0, sizeof(*psc));	/* clear the entire structure */   
+    memset(psc, 0, sizeof(*psc));	/* clear the entire structure */
     psc->color_space_id = psc->pattern_id = gs_no_id;
     color_set_null(&temp_devc);
     temp_devc.type->save_dc(&temp_devc, &(psc->saved_dev_color));
@@ -95,7 +95,7 @@ gx_hld_save_color(const gs_imager_state * pis, const gx_device_color * pdevc,
 	    psc->ccolor.paint.values[i] = pdevc->ccolor.paint.values[i];
 
 	/* Save the pattern id - if present */
-	if ((pdevc->type == gx_dc_type_pattern 
+	if ((pdevc->type == gx_dc_type_pattern
 	   || pdevc->type == gx_dc_type_pattern2) && pdevc->ccolor_valid)
             psc->pattern_id = pdevc->ccolor.pattern->pattern_id;
 	else
@@ -163,7 +163,7 @@ gx_hld_get_color_space_and_ccolor(const gs_imager_state * pis,
 
 	*ppcs = pcs;
 	*ppcc = &(pdevc->ccolor);
-	if (pdevc->type == gx_dc_type_pattern 
+	if (pdevc->type == gx_dc_type_pattern
 	   || pdevc->type == &gx_dc_pure_masked
 	   || pdevc->type == gx_dc_type_pattern2)
             return pattern_color_sapce;
@@ -211,11 +211,10 @@ gx_hld_get_color_component(const gs_imager_state * pis,
 
 	if (ncomp < 0)
 	    return invalid_color_info;
-	if (comp_num < 0 || comp_num >= ncomp) 
+	if (comp_num < 0 || comp_num >= ncomp)
 	    return invalid_component_requested;
 	*output = pdevc->ccolor.paint.values[comp_num];
         return valid_result;
     }
     return invalid_color_info;
 }
-

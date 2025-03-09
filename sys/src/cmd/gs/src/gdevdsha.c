@@ -1,8 +1,8 @@
 /* Copyright (C) 2004 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
@@ -23,7 +23,7 @@
 #include "gxcindex.h"
 #include "vdtrace.h"
 
-int 
+int
 gx_default_fill_linear_color_scanline(gx_device *dev, const gs_fill_attributes *fa,
 	int i0, int j, int w,
 	const frac31 *c0, const int32_t *c0f, const int32_t *cg_num, int32_t cg_den)
@@ -73,7 +73,7 @@ gx_default_fill_linear_color_scanline(gx_device *dev, const gs_fill_attributes *
 	    si = max(bi, fixed2int(fa->clip->p.x));	    /* Must be compatible to the clipping logic. */
 	    ei = min(i, fixed2int_ceiling(fa->clip->q.x));  /* Must be compatible to the clipping logic. */
 	    if (si < ei) {
-		
+
 		if (fa->swap_axes) {
 		    vd_rect(int2fixed(j), int2fixed(si), int2fixed(j + 1), int2fixed(ei), 1, (ulong)ci0);
 		    code = dev_proc(dev, fill_rectangle)(dev, j, si, 1, ei - si, ci0);
@@ -101,4 +101,3 @@ gx_default_fill_linear_color_scanline(gx_device *dev, const gs_fill_attributes *
     }
     return 0;
 }
-

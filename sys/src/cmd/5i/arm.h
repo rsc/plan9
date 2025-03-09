@@ -58,7 +58,7 @@ struct Tlb
 	ulong	tlbent[Nmaxtlb];	/* Virtual address tags */
 	int	hit;			/* Number of successful tag matches */
 	int	miss;			/* Number of failed tag matches */
-};		
+};
 
 struct Icache
 {
@@ -111,7 +111,7 @@ enum
 
 enum
 {
-	CCcmp, 
+	CCcmp,
 	CCtst,
 	CCteq,
 };
@@ -217,7 +217,7 @@ EXTERN	Biobuf*		bioout;
 EXTERN	Biobuf*		bin;
 EXTERN	ulong*		iprof;
 EXTERN	int		datasize;
-EXTERN	Map*		symmap;	
+EXTERN	Map*		symmap;
 
 /* Plan9 Kernel constants */
 enum

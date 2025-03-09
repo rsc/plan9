@@ -27,7 +27,7 @@ dumpbuf(char d, uchar *buf, int bufsz)
 		return;
 	for(i = 0; i < bufsz; i++){
 		fprint(2, "%#2.2x ", buf[i]);
-		if(i != 0 && (i + 1) % 8 == 0)	
+		if(i != 0 && (i + 1) % 8 == 0)
 			fprint(2, "\n");
 	}
 	if(i %16 != 0)

@@ -168,4 +168,3 @@ fastticks(uvlong *v)
 		*v = 1;
 	return 0;
 }
-

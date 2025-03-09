@@ -1,7 +1,7 @@
 #!/bin/rc
 rfork e
 
-fn xchmod { 
+fn xchmod {
 	chmod $* >[2]/dev/null
 }
 

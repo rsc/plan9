@@ -4,7 +4,7 @@ col \- column alignment
 .SH SYNOPSIS
 .B col
 [
-.B -bfx 
+.B -bfx
 ]
 .SH DESCRIPTION
 .I Col
@@ -17,15 +17,15 @@ for .2C in
 .IR ms (6)
 or
 .IR man (6)
-and for 
+and for
 .IR tbl (1).
 .I Col
 is a pure filter.
 It normally emits only full line feeds;
-option 
+option
 .B -f
 (fine) allows half line feeds too.
-Option 
+Option
 .B -b
 removes backspaces, printing just one of each pile of overstruck
 characters.
@@ -42,7 +42,7 @@ tbl file | nroff -ms | col | p
 Format some tables for printing on typewriters;
 use
 .I col
-to remove reverse line feeds, and 
+to remove reverse line feeds, and
 paginate the output.
 .SH SEE ALSO
 .IR pr (1)

@@ -23,4 +23,3 @@ _threadinitstack(Thread *t, void (*f)(void*), void *arg)
 	t->sched[JMPBUFPC] = (uvlong)launcheramd64+JMPBUFDPC;
 	t->sched[JMPBUFSP] = (uvlong)tos - 2*8;		/* old PC and new PC */
 }
-

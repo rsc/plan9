@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996, 1997, 1998, 1999, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -71,12 +71,12 @@ const uint build_function_type_table_count =
 oper_(interp_op_defs)		/* Interpreter operators */
 #include "gconf.h"
 #undef oper_
- 
+
 const op_def *const op_defs_all[] = {
 #define oper_(defs) defs,
     oper_(interp_op_defs)	/* Interpreter operators */
 #include "gconf.h"
-#undef oper_ 
+#undef oper_
     0
 };
 const uint op_def_count = (countof(op_defs_all) - 1) * OP_DEFS_MAX_SIZE;

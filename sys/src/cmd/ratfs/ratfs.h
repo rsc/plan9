@@ -115,4 +115,3 @@ void	printtree(Node*);
 void	reload(void);
 char*	subslash(char*);
 char*	walk(char*, Fid*);
-

@@ -1,12 +1,12 @@
 /* Copyright (C) 1994, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -67,7 +67,7 @@ const gs_color_space_type gs_color_space_type_Separation = {
 
 /* GC procedures */
 
-private 
+private
 ENUM_PTRS_WITH(cs_Separation_enum_ptrs, gs_color_space *pcs)
 {
     return ENUM_USING(*pcs->params.separation.alt_space.type->stype,
@@ -100,7 +100,7 @@ gx_concrete_space_Separation(const gs_color_space * pcs,
 			     const gs_imager_state * pis)
 {
 #ifdef DEBUG
-    /* 
+    /*
      * Verify that the color space and imager state info match.
      */
     if (pcs->id != pis->color_component_map.cspace_id)
@@ -155,7 +155,7 @@ gx_set_overprint_Separation(const gs_color_space * pcs, gs_state * pgs)
     gs_devicen_color_map *  pcmap = &pgs->color_component_map;
 
     if (pcmap->use_alt_cspace)
-        return gx_spot_colors_set_overprint( 
+        return gx_spot_colors_set_overprint(
                    (const gs_color_space *)&pcs->params.separation.alt_space,
                    pgs );
     else {
@@ -241,7 +241,7 @@ gs_cspace_build_Separation(
     code = gs_cspace_alloc(&pcspace, &gs_color_space_type_Separation, pmem);
     if (code < 0)
 	return code;
- 
+
     code = gs_build_Separation(pcspace, palt_cspace, pmem);
     if (code < 0) {
 	gs_free_object(pmem, pcspace, "gs_cspace_build_Separation");
@@ -353,7 +353,7 @@ gx_concretize_Separation(const gs_client_color *pc, const gs_color_space *pcs,
     gs_client_color cc;
     const gs_color_space *pacs =
 	(const gs_color_space *)&pcs->params.separation.alt_space;
-    
+
     if (pcs->params.separation.sep_type == SEP_OTHER &&
         pcs->params.separation.use_alt_cspace) {
         gs_device_n_map *map = pcs->params.separation.map;
@@ -385,7 +385,7 @@ gx_remap_concrete_Separation(const frac * pconc,  const gs_color_space * pcs,
 			     gs_color_select_t select)
 {
 #ifdef DEBUG
-    /* 
+    /*
      * Verify that the color space and imager state info match.
      */
     if (pcs->id != pis->color_component_map.cspace_id)
@@ -501,7 +501,7 @@ typedef ulong gs_separation;	/* BOGUS */
 
 /* ---------------- Serialization. -------------------------------- */
 
-private int 
+private int
 gx_serialize_Separation(const gs_color_space * pcs, stream * s)
 {
     const gs_separation_params * p = &pcs->params.separation;

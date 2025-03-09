@@ -618,7 +618,7 @@ textsym(Symbol *s, int index)
 	return 1;
 }
 
-/*	
+/*
  *	Get ith file name
  */
 int
@@ -844,7 +844,7 @@ file2pc(char *file, long line)
 	if(name == 0) {			/* encode the file name */
 		werrstr("file %s not found", file);
 		return ~0;
-	} 
+	}
 		/* find this history stack */
 	for(i = 0, fp = files; i < nfiles; i++, fp++)
 		if (hline(fp, name, &line))
@@ -969,7 +969,7 @@ hline(File *fp, short *name, long *line)
 			else if(depth++ == 1)		/* push	*/
 				offset -= hp->line;
 		} else if(--depth == 1)		/* pop */
-			offset += hp->line;	
+			offset += hp->line;
 	}
 	*line = ln+offset;
 	return 1;
@@ -1231,7 +1231,7 @@ pc2sp(uvlong pc)
 			currsp += 4*u;
 		else if (u < 129)
 			currsp -= 4*(u-64);
-		else 
+		else
 			currpc += mach->pcquant*(u-129);
 		currpc += mach->pcquant;
 	}
@@ -1267,7 +1267,7 @@ pc2line(uvlong pc)
 			currline += u;
 		else if(u < 129)
 			currline -= (u-64);
-		else 
+		else
 			currpc += mach->pcquant*(u-129);
 		currpc += mach->pcquant;
 	}
@@ -1322,7 +1322,7 @@ line2addr(long line, uvlong basepc, uvlong endpc)
 			currline += u;
 		else if(u < 129)
 			currline -= (u-64);
-		else 
+		else
 			currpc += mach->pcquant*(u-129);
 		currpc += mach->pcquant;
 	}

@@ -29,7 +29,7 @@ This document describes the organization of the architecture-dependent
 code and headers on Plan 9.
 The first section briefly discusses the layout of
 the headers and the source code for the kernels, compilers, loaders, and the
-system library, 
+system library,
 .CW libc .
 The second section provides a detailed
 discussion of the structure of
@@ -79,7 +79,7 @@ where
 is the name of the architecture (e.g.,
 .CW mips ).
 Two header files are required:
-.CW u.h 
+.CW u.h
 and
 .CW ureg.h .
 The first defines fundamental data types,
@@ -335,7 +335,7 @@ allows applications to choose
 an appropriate level of service.  Even though an application
 does not directly reference the architecture-specific data structures,
 it must load the
-architecture-dependent tables and code 
+architecture-dependent tables and code
 for all architectures it supports.  The size of this data
 can be substantial and many applications do not require
 the full range of architecture-dependent functionality.
@@ -406,7 +406,7 @@ structure are stored in
 files named
 .CW \fIm\fPdb.c .
 Files
-.CW machdata.c 
+.CW machdata.c
 and
 .CW setmach.c
 contain debugger support functions shared
@@ -496,7 +496,7 @@ Add the following symbolic codes to the
 statement near the beginning of the file:
 .RS
 .IP \(bu
-The processor type code, e.g., 
+The processor type code, e.g.,
 .CW MSPARC .
 .IP \(bu
 The type of the executable.  There are usually
@@ -531,7 +531,7 @@ but a few require further explanation.
 .RS
 .IP "\f(CWkbase\fP\ -\ "
 This field
-contains the address of the kernel 
+contains the address of the kernel
 .CW ublock .
 The debuggers
 assume the first entry of the kernel
@@ -542,7 +542,7 @@ structure for a kernel thread.
 .IP "\f(CWktmask\fP\ -\ "
 This field
 is a bit mask used to calculate the kernel text address from
-the kernel 
+the kernel
 .CW ublock
 address.
 The first page of the
@@ -556,7 +556,7 @@ contains the byte offset in the
 .CW Proc
 data structure to the saved kernel
 stack pointer for a suspended kernel thread.  This
-is the offset to the 
+is the offset to the
 .CW sched.sp
 field of a
 .CW Proc
@@ -616,18 +616,18 @@ one for a bootable
 image.  Each table entry contains:
 .RS
 .IP \(bu
-Magic Number\ \-\ 
+Magic Number\ \-\
 The big-endian magic number assigned to the architecture in
 .CW /sys/include/a.out.h .
 .IP \(bu
-Name\ \-\ 
+Name\ \-\
 A string describing the executable.
 .IP \(bu
-Executable type code\ \-\ 
+Executable type code\ \-\
 The executable code assigned in
 .CW /sys/include/mach.h .
 .IP \(bu
-\f(CWMach\fP pointer\ \-\ 
+\f(CWMach\fP pointer\ \-\
 The address of the initialized
 .CW Mach
 data structure constructed in Step 2.
@@ -638,7 +638,7 @@ table definitions immediately preceding the
 .CW ExecTable
 initialization.
 .IP \(bu
-Header size\ \-\ 
+Header size\ \-\
 The number of bytes in the executable file header.
 The size of a normal executable header is always
 .CW sizeof(Exec) .
@@ -647,7 +647,7 @@ determined by the size of the structure
 for the architecture defined in
 .CW /sys/include/bootexec.h .
 .IP \(bu
-Byte-swapping function\ \-\ 
+Byte-swapping function\ \-\
 The address of
 .CW beswal
 or
@@ -655,7 +655,7 @@ or
 for big-endian and little-endian
 architectures, respectively.
 .IP \(bu
-Decoder function\ -\ 
+Decoder function\ -\
 The address of a function to decode the header.
 Function
 .CW adotout

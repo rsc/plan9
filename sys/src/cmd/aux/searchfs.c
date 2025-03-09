@@ -191,7 +191,7 @@ main(int argc, char **argv)
 	case 0:
 		fsrun(&fs, p[0]);
 		exits(nil);
-	case -1:	
+	case -1:
 		fatal("fork failed");
 	}
 
@@ -467,7 +467,7 @@ void
 quickmk(Quick *q, char *spat, int ignorecase)
 {
 	char *pat, *up;
-	uchar *j;	
+	uchar *j;
 	int ep, ea, cp, ca, i, c, n;
 
 	/*
@@ -510,7 +510,7 @@ quickmk(Quick *q, char *spat, int ignorecase)
 		j[(uchar)pat[i]] = n - i;
 		j[(uchar)up[i]] = n - i;
 	}
-	
+
 	/*
 	 * find the minimum safe amount to skip
 	 * if we match the last char but not the whole pat

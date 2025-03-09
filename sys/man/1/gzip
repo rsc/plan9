@@ -106,7 +106,7 @@ with
 becoming
 .BR .tbz .
 .I Bunzip2
-recognizes the extension 
+recognizes the extension
 .B .tbz2
 as a synonym for
 .BR .tbz .
@@ -238,7 +238,7 @@ can only extract files which are uncompressed or compressed
 with the
 .B deflate
 compression scheme.  Recent zip files fall into this category.
-Very recent zip files may have tables of contents that 
+Very recent zip files may have tables of contents that
 .I unzip
 cannot read.  Such files are still readable by invoking
 .I unzip

@@ -264,13 +264,13 @@
 .	nr m3 \\$3/10
 .	if !\\n(m2=\\n(m3 .nr ud \\n(ud+1 \}
 .ie \\$1<4 \{\
-.	as m! \\l'2.25i'	
+.	as m! \\l'2.25i'
 .	as m( 	\\$2 \}
 .el .ie \\$1<7 \{\
-.	as n! \\l'2.25i'	
+.	as n! \\l'2.25i'
 .	as n(	\\$2 \}
 .el \{\
-.	as o! \\l'2.25i'	
+.	as o! \\l'2.25i'
 .	as o(	\\$2 \}
 ..
 .de TO	\"begin list of im to people
@@ -289,7 +289,7 @@
 ..
 .de SA				\" macro for abstract info SA = mm(AS)
 .br
-.ie \\n(.$ \{\ 
+.ie \\n(.$ \{\
 .ds a( \\$1
 .if '\\$1'no' .ds a(\}
 .el .ds a( ABSTRACT
@@ -382,9 +382,9 @@
 .	if \\nn=2 .ds N3 \\*(NN
 .	if \\nn=3 .ds N4 \\*(NN
 .	if \\nn=4 .ds N5 \\*(NN
-.	ie \\nn<4 .as x! \\l'2.25i'	
-.	el ie \\nn<7 .as y! \\l'2.25i'	
-.	el .as z! \\l'2.25i'	
+.	ie \\nn<4 .as x! \\l'2.25i'
+.	el ie \\nn<7 .as y! \\l'2.25i'
+.	el .as z! \\l'2.25i'
 .	nr n \\n+n \}
 .if !'\\$6'' \{\
 .	ie !\\n(a!=0 \{\
@@ -757,7 +757,7 @@ Title:
 .wh 0 HD
 .sp 0.1i
 .ta 0.15i 4.55i
-	\s36\(FA\s0	\\*(t( 
+	\s36\(FA\s0	\\*(t(
 .ft
 .ps 10
 .HX

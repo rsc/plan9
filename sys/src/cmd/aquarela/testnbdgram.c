@@ -49,7 +49,7 @@ deliver(void *, NbDgram *s)
 		print("not a supported mailslot\n");
 		goto done;
 	}
-	
+
 	if (!smbbuffergetb(b, &opcode)) {
 		print("not enough data for opcode\n");
 		goto done;
@@ -59,7 +59,7 @@ deliver(void *, NbDgram *s)
 		print("not a supported mailslot opcode %d\n", opcode);
 		goto done;
 	}
-	
+
 	if (!smbbuffergetb(b, &updatecount)
 		|| !smbbuffergetl(b, &periodicity)
 		|| !smbbuffergetstrn(b, 16, &servername)

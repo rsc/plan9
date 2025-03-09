@@ -130,7 +130,7 @@ The
 .I time
 and
 .I gen
-fields are both decimal numbers, providing an ordering 
+fields are both decimal numbers, providing an ordering
 for log entries so that incremental tools need not process
 the whole log each time they are run.
 The
@@ -179,7 +179,7 @@ to consider only file and metadata changes, ignoring file additions and deletion
 By default, the log events have
 .I time
 set to the current system time
-and use incrementing 
+and use incrementing
 .I gen
 numbers starting at 0.
 The
@@ -223,7 +223,7 @@ When it detects such conflicts, by default it prints an error describing
 the conflict and takes no action.
 If the
 .B -c
-flag is given, 
+flag is given,
 .I applylog
 still takes no action for files beginning with the given names,
 but does so silently and will not
@@ -231,7 +231,7 @@ report the conflicts in the future.
 (The conflict is resolved in favor of the client.)
 The
 .B -s
-is similar but causes 
+is similar but causes
 .I applylog
 to overwrite the local changes.
 (The conflict is resolved in favor of the server.)
@@ -258,7 +258,7 @@ invoke
 with the
 .B -c
 or
-.B -s 
+.B -s
 flags.
 .SH EXAMPLE
 One might
@@ -309,7 +309,7 @@ describes this in full.
 .SH SEE ALSO
 .IR replica (1)
 .SH BUGS
-These tools assume that 
+These tools assume that
 .I mtime
 combined with
 .I length

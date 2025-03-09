@@ -13,7 +13,7 @@ rwd, conswdir \- maintain remote working directory
 .I Rwd
 and
 .I conswdir
-conspire to keep 
+conspire to keep
 .IR rio (4)
 and
 .IR acme (4)
@@ -46,7 +46,7 @@ suffixed by
 .BI @ remotesys \fR,
 to
 .BR /dev/label ;
-and when run inside a 
+and when run inside a
 .I win
 (see
 .IR acme (1))

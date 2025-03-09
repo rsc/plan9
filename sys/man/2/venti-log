@@ -1,7 +1,7 @@
 .TH VENTI-LOG 2
 .SH NAME
 VtLog,
-VtLogChunk, 
+VtLogChunk,
 vtlog,
 vtlogclose,
 vtlogdump,
@@ -56,7 +56,7 @@ The logs are named by UTF strings.
 returns a reference to the log with the given
 .I name .
 If a log with that name does not exist and
-.I size 
+.I size
 is non-zero,
 .I vtlogopen
 creates a new log capable of holding at

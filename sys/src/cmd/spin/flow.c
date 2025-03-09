@@ -78,7 +78,7 @@ Rjumpslocal(Element *q, Element *stop)
 		for (h = f->sub; h; h = h->nxt)
 		{	if (!Rjumpslocal(h->this->frst, h->this->last))
 				return 0;
-	
+
 	}	}
 	return 1;
 }
@@ -879,7 +879,7 @@ dump_lex(Lextok *t, char *s)
 	}
 	if (t->rgt)
 	{	dump_lex(t->rgt, "\nR");
-	}	
+	}
 	depth--;
 }
 void

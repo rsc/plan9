@@ -1,12 +1,12 @@
 /* Copyright (C) 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -173,7 +173,7 @@ cmd_write_band(gx_device_clist_writer * cldev, int band_min, int band_max,
 	if (code_b < 0)
 	    return_error(code_b);
 	if (code_c < 0)
-	    return_error(code_c); 
+	    return_error(code_c);
     }
     return code_b | code_c;
 }
@@ -289,7 +289,7 @@ cmd_put_range_op(gx_device_clist_writer * cldev, int band_min, int band_max,
 {
     if_debug4('L', "[L]band range(%d,%d): size=%u, left=%u",
 	      band_min, band_max, size, 0);
-    if (cldev->ccl != 0 && 
+    if (cldev->ccl != 0 &&
 	(cldev->ccl != &cldev->band_range_list ||
 	 band_min != cldev->band_range_min ||
 	 band_max != cldev->band_range_max)
@@ -461,7 +461,7 @@ cmd_put_color(gx_device_clist_writer * cldev, gx_clist_state * pcls,
 	bool use_delta = (color == (*pcolor + delta - delta_offset));
 	int bytes_dropped = 0;
 	gx_color_index data = color;
-	
+
 	/*
 	 * If we use the full value mode, we do not send low order bytes
 	 * which are zero. Determine how many low order bytes are zero.
@@ -472,10 +472,10 @@ cmd_put_color(gx_device_clist_writer * cldev, gx_clist_state * pcls,
 	else  {
 	    while ((data & 0xff) == 0) {
 	        bytes_dropped++;
-		data >>= 8; 
+		data >>= 8;
 	    }
 	}
-	
+
 	/* Now send one of the two command forms */
 	if (use_delta && delta_bytes < num_bytes - bytes_dropped) {
 	    code = set_cmd_put_op(dp, cldev, pcls,

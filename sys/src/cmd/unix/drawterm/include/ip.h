@@ -1,4 +1,4 @@
-enum 
+enum
 {
 	IPaddrlen=	16,
 	IPv4addrlen=	4,

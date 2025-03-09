@@ -22,7 +22,7 @@ rmtmpfiles(void)
 	}
 }
 
-void	
+void
 done(int status)
 {
 	rmtmpfiles();
@@ -72,7 +72,7 @@ mkpathname(char *pathname, char *path, char *name)
 	sprint(pathname, "%s/%s", path, name);
 	return 0;
 }
-	
+
 static char *
 mktmpfile(int input, Dir **sb)
 {
@@ -208,7 +208,7 @@ main(int argc, char *argv[])
 				break;
 
 			case 'm':
-				mflag = 1;	
+				mflag = 1;
 				break;
 
 			case 'h':

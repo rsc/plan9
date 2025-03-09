@@ -1,7 +1,7 @@
 *PPD-Adobe: "4.1"
 *% Adobe Systems PostScript(R) Printer Description File
 *% Copyright 1995 Yves Arrouye for AFPL Ghostscript with Level 2 PS.
-*% All Rights Reserved. 
+*% All Rights Reserved.
 *% This file may be distributed as part of GNU Ghostscript and/or AFPL
 *% Ghostscript, under the same terms and conditions as Ghostscript.
 *% End of Copyright statement
@@ -49,7 +49,7 @@
 *FileSystem: True
 *Throughput: "1"
 
-*Password: "()" 
+*Password: "()"
 
 *% ============Paper Size Information ==============
 
@@ -133,7 +133,7 @@ save
 *Transfer Normalized: "{mark
 1.0 1.000 0.955 0.915 0.847 0.765 0.683 0.602 0.500 0.311 0.030 0.0
 counttomark dup 3 add -1 roll exch
-2 sub mul dup floor cvi dup 3 1 roll sub exch dup 
+2 sub mul dup floor cvi dup 3 1 roll sub exch dup
 3 add index exch 2 add index dup 4 1 roll sub mul add
 counttomark 1 add 1 roll cleartomark
 } bind"
@@ -268,8 +268,8 @@ counttomark 1 add 1 roll cleartomark
 *?MediaType: "
  save
  currentpagedevice /MediaType get
- dup null eq {pop (Unknown)} if = flush 
- restore " 
+ dup null eq {pop (Unknown)} if = flush
+ restore "
 *End
 
 *CloseUI: *MediaType
@@ -294,8 +294,8 @@ counttomark 1 add 1 roll cleartomark
 *?OutputMode: "
  save
  currentpagedevice /PrintQuality get
- dup null eq {pop (Unknown)} if = flush 
- restore " 
+ dup null eq {pop (Unknown)} if = flush
+ restore "
 *End
 
 *CloseUI: *OutputMode
@@ -306,7 +306,7 @@ counttomark 1 add 1 roll cleartomark
 *OrderDependency: 20 AnySetup *ColorModel
 *DefaultColorModel: DeviceCMYK
 *ColorModel DeviceGray/Gray: "
- 1 dict dup /ProcessColorModel /DeviceGray 
+ 1 dict dup /ProcessColorModel /DeviceGray
  put setpagedevice"
 *End
 
@@ -316,13 +316,13 @@ counttomark 1 add 1 roll cleartomark
 *End
 
 *ColorModel DeviceCMYK/CMYK: "
- 1 dict dup /ProcessColorModel /DeviceCMYK 
+ 1 dict dup /ProcessColorModel /DeviceCMYK
  put setpagedevice"
 *End
 
 *?ColorModel: "
  save
- currentpagedevice /ProcessColorModel get = flush 
+ currentpagedevice /ProcessColorModel get = flush
  restore "
 *End
 
@@ -334,7 +334,7 @@ counttomark 1 add 1 roll cleartomark
 *OrderDependency: 30 AnySetup *ThickMedia
 *Default ThickMedia: Thin
 *ThickMedia Thin/No: "
- 1 dict dup /MediaWeight 80 
+ 1 dict dup /MediaWeight 80
  put setpagedevice"
 *End
 
@@ -346,7 +346,7 @@ counttomark 1 add 1 roll cleartomark
 *?ThickMedia: "
  save
  currentpagedevice /MediaWeight get 105 gt { (Thick) } { (Thin) } ifelse
- = flush 
+ = flush
  restore "
 *End
 
@@ -384,12 +384,12 @@ counttomark 1 add 1 roll cleartomark
 *OrderDependency: 50 AnySetup *MonochromePrint
 *DefaultMonochromePrint: False
 *MonochromePrint True/Yes: "
- 1 dict dup /MonochromePrint true 
+ 1 dict dup /MonochromePrint true
  put setpagedevice"
 *End
 
 *MonochromePrint False/No: "
- 1 dict dup /MonochromePrint false 
+ 1 dict dup /MonochromePrint false
  put setpagedevice"
 *End
 
@@ -401,4 +401,3 @@ counttomark 1 add 1 roll cleartomark
 *End
 
 *CloseUI: *MonochromePrint
-

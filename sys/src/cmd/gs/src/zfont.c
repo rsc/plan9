@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -49,7 +49,7 @@ zfont_mark_glyph_name(const gs_memory_t *mem, gs_glyph glyph, void *ignore_data)
 }
 
 /* Get a global glyph code.  */
-private int 
+private int
 zfont_global_glyph_code(const gs_memory_t *mem, gs_const_string *gstr, gs_glyph *pglyph)
 {
     ref v;
@@ -592,13 +592,13 @@ typedef struct gs_unicode_decoder_s {
 } gs_unicode_decoder;
 
 /* GC procedures */
-private 
+private
 CLEAR_MARKS_PROC(unicode_decoder_clear_marks)
 {   gs_unicode_decoder *const pptr = vptr;
 
     r_clear_attrs(&pptr->data, l_mark);
 }
-private 
+private
 ENUM_PTRS_WITH(unicode_decoder_enum_ptrs, gs_unicode_decoder *pptr) return 0;
 case 0:
 ENUM_RETURN_REF(&pptr->data);
@@ -609,7 +609,7 @@ r_clear_attrs(&pptr->data, l_mark);
 RELOC_PTRS_END
 
 gs_private_st_complex_only(st_unicode_decoder, gs_unicode_decoder,\
-    "unicode_decoder", unicode_decoder_clear_marks, unicode_decoder_enum_ptrs, 
+    "unicode_decoder", unicode_decoder_clear_marks, unicode_decoder_enum_ptrs,
     unicode_decoder_reloc_ptrs, 0);
 
 /* Get the Unicode value for a glyph. */
@@ -617,14 +617,14 @@ const ref *
 zfont_get_to_unicode_map(gs_font_dir *dir)
 {
     const gs_unicode_decoder *pud = (gs_unicode_decoder *)dir->glyph_to_unicode_table;
-    
+
     return (pud == NULL ? NULL : &pud->data);
 }
 
 private int
 setup_unicode_decoder(i_ctx_t *i_ctx_p, ref *Decoding)
 {
-    gs_unicode_decoder *pud = gs_alloc_struct(imemory, gs_unicode_decoder, 
+    gs_unicode_decoder *pud = gs_alloc_struct(imemory, gs_unicode_decoder,
                              &st_unicode_decoder, "setup_unicode_decoder");
     if (pud == NULL)
 	return_error(e_VMerror);

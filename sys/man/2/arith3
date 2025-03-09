@@ -130,7 +130,7 @@ Divide coordinates by a scalar.
 Test two points for exact equality.
 .TP
 .B closept3
-Is the distance between two points smaller than 
+Is the distance between two points smaller than
 .IR eps ?
 .TP
 .B dot3
@@ -150,11 +150,11 @@ A unit vector parallel to
 .IR p .
 .TP
 .B midpt3
-The midpoint of line segment 
+The midpoint of line segment
 .IR pq .
 .TP
 .B lerp3
-Linear interpolation between 
+Linear interpolation between
 .I p
 and
 .IR q .
@@ -162,25 +162,25 @@ and
 .B reflect3
 The reflection of point
 .I p
-in the segment joining 
+in the segment joining
 .I p0
 and
 .IR p1 .
 .TP
 .B nearseg3
-The closest point to 
+The closest point to
 .I testp
 on segment
 .IR "p0 p1" .
 .TP
 .B pldist3
-The distance from 
+The distance from
 .I p
 to segment
 .IR "p0 p1" .
 .TP
 .B vdiv3
-Vector divide \(em the length of the component of 
+Vector divide \(em the length of the component of
 .I a
 parallel to
 .IR b ,
@@ -188,11 +188,11 @@ in units of the length of
 .IR b .
 .TP
 .B vrem3
-Vector remainder \(em the component of 
+Vector remainder \(em the component of
 .I a
 perpendicular to
 .IR b .
-Ignoring roundoff, we have 
+Ignoring roundoff, we have
 .BR "eqpt3(add3(mul3(b, vdiv3(a, b)), vrem3(a, b)), a)" .
 .PD
 .PP

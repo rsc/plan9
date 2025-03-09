@@ -7,14 +7,14 @@ The VGA database,
 .BR /lib/vgadb ,
 consists of two parts,
 the first describing how to identify and program a VGA controller
-and the second describing the timing parameters for known 
+and the second describing the timing parameters for known
 monitors to be loaded into a VGA controller to give a particular
 resolution and refresh rate.
 Conventionally, at system boot, the program
 .B aux/vga
 (see
 .IR vga (8))
-uses the monitor type in 
+uses the monitor type in
 .BR /env/monitor ,
 the display resolution in
 .BR /env/vgasize ,
@@ -65,7 +65,7 @@ and not contain any characters at or after
 For example,
 .B 0xC0000-0xC0200="MACH64LP"
 identifies a Mach 64 controller with the
-string 
+string
 .B MACH64LP
 occurring anywhere in the first 512 bytes of BIOS memory.
 .TP
@@ -353,11 +353,11 @@ for details.
 .SH EXAMPLES
 Basic
 .B ctlr
-entry for a laptop with a Chips and Technology 65550 
+entry for a laptop with a Chips and Technology 65550
 controller:
 .EX
 ctlr                        # NEC Versa 6030X/6200MX
-    0xC0090="CHIPS 65550 PCI & VL Accelerated VGA BIOS"	
+    0xC0090="CHIPS 65550 PCI & VL Accelerated VGA BIOS"
     link=vga
     ctlr=hiqvideo linear=1
     hwgc=hiqvideohwgc
@@ -456,7 +456,7 @@ a new VGA controller card are interconnected in the same way as an
 existing entry, adding a new entry requires adding new internal
 types to
 .IR vga (8).
-Fortunately, the unit of variety 
+Fortunately, the unit of variety
 has, for the most part, shifted from
 individual components to entire
 video chipsets.

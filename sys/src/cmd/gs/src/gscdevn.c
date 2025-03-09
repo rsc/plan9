@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -73,7 +73,7 @@ const gs_color_space_type gs_color_space_type_DeviceN = {
 
 /* GC procedures */
 
-private 
+private
 ENUM_PTRS_WITH(cs_DeviceN_enum_ptrs, gs_color_space *pcs)
 {
     return ENUM_USING(*pcs->params.device_n.alt_space.type->stype,
@@ -308,7 +308,7 @@ gx_concrete_space_DeviceN(const gs_color_space * pcs,
 			  const gs_imager_state * pis)
 {
 #ifdef DEBUG
-    /* 
+    /*
      * Verify that the color space and imager state info match.
      */
     if (pcs->id != pis->color_component_map.cspace_id)
@@ -342,7 +342,7 @@ gx_concretize_DeviceN(const gs_client_color * pc, const gs_color_space * pcs,
     gs_device_n_map *map = pcs->params.device_n.map;
 
 #ifdef DEBUG
-    /* 
+    /*
      * Verify that the color space and imager state info match.
      */
     if (pcs->id != pis->color_component_map.cspace_id)
@@ -394,7 +394,7 @@ gx_remap_concrete_DeviceN(const frac * pconc, const gs_color_space * pcs,
 			  gs_color_select_t select)
 {
 #ifdef DEBUG
-    /* 
+    /*
      * Verify that the color space and imager state info match.
      */
     if (pcs->id != pis->color_component_map.cspace_id)
@@ -489,7 +489,7 @@ check_DeviceN_component_names(const gs_color_space * pcs, gs_state * pgs)
 	    }
 	    else
 		non_match = true;
-        }	
+        }
     }
     pcolor_component_map->use_alt_cspace = non_match;
     return 0;
@@ -525,7 +525,7 @@ gx_set_overprint_DeviceN(const gs_color_space * pcs, gs_state * pgs)
     gs_devicen_color_map *  pcmap = &pgs->color_component_map;
 
     if (pcmap->use_alt_cspace)
-        return gx_spot_colors_set_overprint( 
+        return gx_spot_colors_set_overprint(
                    (const gs_color_space *)&pcs->params.device_n.alt_space,
                    pgs );
     else {
@@ -560,7 +560,7 @@ gx_adjust_cspace_DeviceN(const gs_color_space * pcs, int delta)
 
 /* ---------------- Serialization. -------------------------------- */
 
-int 
+int
 gx_serialize_device_n_map(const gs_color_space * pcs, gs_device_n_map * m, stream * s)
 {
     const gs_function_t *pfn;
@@ -571,7 +571,7 @@ gx_serialize_device_n_map(const gs_color_space * pcs, gs_device_n_map * m, strea
     return gs_function_serialize(pfn, s);
 }
 
-private int 
+private int
 gx_serialize_DeviceN(const gs_color_space * pcs, stream * s)
 {
     const gs_device_n_params * p = &pcs->params.device_n;

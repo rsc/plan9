@@ -187,7 +187,7 @@ void
 vncwrbytes(Vnc *v, void *a, int n)
 {
 	if(Bwrite(&v->out, a, n) < 0){
-		if(verbose > 1) 
+		if(verbose > 1)
 			fprint(2, "hungup while writing bytes\n");
 		vnchungup(v);
 	}
@@ -273,7 +273,7 @@ hexdump(void *a, int n)
 	p = a;
 	ep = p+n;
 
-	for(; p<ep; p++) 
+	for(; p<ep; p++)
 		print("%.2ux ", *p);
 	print("\n");
 }

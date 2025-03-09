@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000-2004 artofcode LLC. All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -179,9 +179,9 @@ const gx_device_pswrite gs_epswrite_device = {
 /* Vector device implementation */
 private int
     psw_beginpage(gx_device_vector * vdev),
-    psw_can_handle_hl_color(gx_device_vector * vdev, const gs_imager_state * pis, 
+    psw_can_handle_hl_color(gx_device_vector * vdev, const gs_imager_state * pis,
                   const gx_drawing_color * pdc),
-    psw_setcolors(gx_device_vector * vdev, const gs_imager_state * pis, 
+    psw_setcolors(gx_device_vector * vdev, const gs_imager_state * pis,
                   const gx_drawing_color * pdc),
     psw_dorect(gx_device_vector * vdev, fixed x0, fixed y0, fixed x1,
 	       fixed y1, gx_path_type_t type),
@@ -318,7 +318,7 @@ private const char *const psw_2_procset[] = {
     "/IC{3 1 roll 10 dict begin 1{/ImageType/Interpolate/Decode/DataSource",
     "/ImageMatrix/BitsPerComponent/Height/Width}{exch def}forall",
     "currentdict end image}!",
-    /* A hack for compatibility with interpreters, which don't consume 
+    /* A hack for compatibility with interpreters, which don't consume
        ASCII85Decode EOD when reader stops immediately before it : */
     "/~{@ read {pop} if}!",
     0
@@ -447,7 +447,7 @@ private int
 psw_image_cleanup(gx_device_pswrite * pdev)
 {
     int code = 0;
-    
+
     if (pdev->image_stream != 0) {
 	code = psdf_end_binary(pdev->image_writer);
 	memset(pdev->image_writer, 0, sizeof(*pdev->image_writer));
@@ -488,7 +488,7 @@ psw_put_image_bits(gx_device_pswrite *pdev, const char *op,
 		   int width, int height, int depth)
 {
     int code;
-    
+
     pprints1(pdev->strm, "%s\n", op);
     code = psw_put_bits(pdev->image_stream, data, data_x * depth, raster,
 		 width * depth, height);
@@ -651,13 +651,13 @@ psw_check_erasepage(gx_device_pswrite *pdev)
   END
 
 /* Check if we write each page into separate file. */
-private bool 
+private bool
 psw_is_separate_pages(gx_device_vector *const vdev)
 {
     const char *fmt;
     gs_parsed_file_name_t parsed;
     int code = gx_parse_output_file_name(&parsed, &fmt, vdev->fname, strlen(vdev->fname));
-    
+
     return (code >= 0 && fmt != 0);
 }
 
@@ -680,7 +680,7 @@ psw_beginpage(gx_device_vector * vdev)
 	     return code;
     }
 
-    code = psw_write_page_header(s, (gx_device *)vdev, &pdev->pswrite_common, true, 
+    code = psw_write_page_header(s, (gx_device *)vdev, &pdev->pswrite_common, true,
                           (psw_is_separate_pages(vdev) ? 1 : vdev->PageCount + 1),
                           image_cache_size);
     if (code < 0)
@@ -692,14 +692,14 @@ psw_beginpage(gx_device_vector * vdev)
 
 
 private int
-psw_can_handle_hl_color(gx_device_vector * vdev, const gs_imager_state * pis1, 
+psw_can_handle_hl_color(gx_device_vector * vdev, const gs_imager_state * pis1,
               const gx_drawing_color * pdc)
 {
     return false; /* High level color is not implemented yet. */
 }
 
 private int
-psw_setcolors(gx_device_vector * vdev, const gs_imager_state * pis1, 
+psw_setcolors(gx_device_vector * vdev, const gs_imager_state * pis1,
               const gx_drawing_color * pdc)
 {
     const gs_imager_state * pis = NULL; /* High level color is not implemented yet. */
@@ -1001,7 +1001,7 @@ psw_output_page(gx_device * dev, int num_copies, int flush)
     if (psw_is_separate_pages(vdev)) {
 	code = psw_close_printer(dev);
 
-	if (code < 0) 
+	if (code < 0)
 	    return code;
     }
     return 0;
@@ -1128,7 +1128,7 @@ psw_fill_rectangle(gx_device * dev, int x, int y, int w, int h,
  * Open the printer's output file if necessary.
  */
 
-private int 
+private int
 psw_open_printer(gx_device * dev)
 {
     gx_device_vector *const vdev = (gx_device_vector *)dev;
@@ -1155,7 +1155,7 @@ psw_open_printer(gx_device * dev)
  * Close the printer's output file.
  */
 
-private int 
+private int
 psw_close_printer(gx_device * dev)
 {
     int code;
@@ -1172,7 +1172,7 @@ psw_close_printer(gx_device * dev)
             return code;
     } else {
 	/* If there is an incomplete page, complete it now. */
-	if (vdev->in_page) { 
+	if (vdev->in_page) {
 	    /*
 	     * Flush the stream after writing page trailer.
 	     */
@@ -1186,7 +1186,7 @@ psw_close_printer(gx_device * dev)
 	    dev->PageCount++;
 	}
     }
-    code = psw_end_file(f, dev, &pdev->pswrite_common, &bbox, 
+    code = psw_end_file(f, dev, &pdev->pswrite_common, &bbox,
                  (psw_is_separate_pages(vdev) ? 1 : vdev->PageCount));
     if(code < 0)
         return code;

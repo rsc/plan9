@@ -307,7 +307,7 @@ Exec*
 newexec(Plumbmsg *m)
 {
 	Exec *exec;
-	
+
 	exec = emalloc(sizeof(Exec));
 	exec->msg = m;
 	exec->p0 = -1;
@@ -329,7 +329,7 @@ rewrite(Plumbmsg *m, Exec *e)
 				else
 					prev->next = a->next;
 				free(a->name);
-				free(a->value);	
+				free(a->value);
 				free(a);
 				break;
 			}

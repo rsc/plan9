@@ -549,6 +549,6 @@ bootkern(void *f)
 
 	jump(e);
 
-Error:		
+Error:
 	return "i/o error";
 }

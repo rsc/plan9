@@ -39,11 +39,11 @@ percentage battery life remaining.
 .B "c context
 number of process context switches per second.
 .TP
-.B 
+.B
 .B "e ether
 total number of packets sent and received per second.
 .TP
-.B 
+.B
 .B "E etherin,out
 number of packets sent and received per second, displayed as separate graphs.
 .TP
@@ -63,12 +63,12 @@ multiprocessor.
 The load is computed as a running average of
 the number of processes ready to run, multiplied by 1000.
 .TP
-.B "m mem 
+.B "m mem
 total pages of active memory.
 The graph displays the fraction
 of the machine's total memory in use.
 .TP
-.B 
+.B
 .B "n etherin,out,err
 number of packets sent and received per second, and total number of errors, displayed as separate graphs.
 .TP
@@ -93,14 +93,14 @@ a midrange value represents a strong signal.
 .PD
 .PP
 The graphs are plotted with time on the horizontal axis.
-The vertical axes range from 0 to 1000*sleepsecs, 
+The vertical axes range from 0 to 1000*sleepsecs,
 multiplied by the number of processors on the machine
 when appropriate.
 The only exceptions are
 memory,
 and swap space,
-which display fractions of the total available, 
-system load, which displays a number between 0 and 1000, 
+which display fractions of the total available,
+system load, which displays a number between 0 and 1000,
 idle and intr, which display percentages and the Ethernet error count,
 which goes from 0 to 10..
 If the value of the parameter is too large for the visible range, its value is shown

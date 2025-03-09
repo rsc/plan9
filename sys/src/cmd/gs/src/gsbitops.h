@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 1995, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -152,7 +152,7 @@
 #define sample_load_next_any(value, sptr, sbit, sbpv)\
   sample_load_any(value, sptr, sbit, sbpv);\
   sample_next(sptr, sbit, sbpv)
-  
+
 /* Declare variables for storing. */
 #define sample_store_declare(dptr, dbit, dbbyte)\
   byte *dptr;\

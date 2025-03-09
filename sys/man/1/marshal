@@ -63,7 +63,7 @@ The options are:
 .BI -a file
 directs
 .I marshal
-to append 
+to append
 .I file
 as a mime attachment.
 Unless explicitly specified by the

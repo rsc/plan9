@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -25,7 +25,7 @@
 #ifdef __WIN32__
 /*
  * MS Windows has popen and pclose in stdio.h, but under different names.
- * Unfortunately MSVC5 and 6 have a broken implementation of _popen, 
+ * Unfortunately MSVC5 and 6 have a broken implementation of _popen,
  * so we use own.  Our implementation only supports mode "wb".
  */
 extern FILE *mswin_popen(const char *cmd, const char *mode);

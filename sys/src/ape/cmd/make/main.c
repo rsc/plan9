@@ -154,7 +154,7 @@ for(i=1; i<argc; ++i)
 			oldflag = NO;
 			*mkflagp++ = 'N';
 			break;
-	
+
 		case 'p':
 			prtrflag = YES;
 			break;
@@ -409,7 +409,7 @@ for(p = firstname; p; p = p->nxtnameblock)
 				if(dp->depname != 0)
 					printf(" %s ", dp->depname->namep);
 			}
-	
+
 		if(sp = lp->shp)
 			{
 			printf("\n commands:\n");

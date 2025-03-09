@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -150,8 +150,8 @@ acquire_code_map(gx_code_map_t *pcmap, const ref *pref, gs_cmap_adobe1_t *root,
     memset(pclr, 0, sizeof(*pclr) * num_lookup);
     pcmap->lookup = pclr;
     pcmap->num_lookup = num_lookup;
-    
-   
+
+
     for (i = 0; i < r_size(pref); i++) {
         uint j;
         array_get(mem, pref, i, &elem);
@@ -379,7 +379,7 @@ ztype0_get_cmap(const gs_cmap_t **ppcmap, const ref *pfdepvector,
  * For details, see lib/gs_cmap.ps and the Adobe documentation.
  */
 private int
-zfcmap_glyph_name(const gs_memory_t *mem, 
+zfcmap_glyph_name(const gs_memory_t *mem,
 		  gs_glyph glyph, gs_const_string *pstr, void *proc_data)
 {
     ref nref, nsref;

@@ -1,12 +1,12 @@
 /* Copyright (C) 2001 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -77,7 +77,7 @@ struct _icmLuBase;
  *    the stream via save/restore.
  *
  *    The color space objects themselves (the top-level profile structure
- *    pointed to by picc and the lookup object pointed to by plu) are 
+ *    pointed to by picc and the lookup object pointed to by plu) are
  *    allocated in non-garbage collected ("foreign") memory, so we do not
  *    have to indicate access via this structure, nor do we have to be
  *    concerned about relocation of these structures.
@@ -151,7 +151,7 @@ struct gs_cie_icc_s {
 /* typedef struct gs_cie_icc_s gs_cie_icc; */   /* in gscspace.h */
 
 
-/* 
+/*
  * Build an ICCBased color space.
  *
  * As with all of the CIE base color space constructurs, this will build

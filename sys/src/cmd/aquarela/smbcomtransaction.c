@@ -132,6 +132,3 @@ done:
 	free(errmsg);
 	return pr;
 }
-
-
-

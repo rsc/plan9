@@ -42,4 +42,3 @@ main(int , char *[])
 	print("\n};");
 	exits(nil);
 }
-

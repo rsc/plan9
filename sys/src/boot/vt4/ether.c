@@ -71,7 +71,7 @@ etherinit(void)		/* called from probe() */
 			if(ctlr->size)
 				print(" size 0x%luX", ctlr->size);
 			print(": %E\n", ctlr->ea);
-		
+
 			if(ctlr->nrb == 0)
 				ctlr->nrb = Nrb;
 			ctlr->rb = ialloc(sizeof(RingBuf)*ctlr->nrb, 0);
@@ -83,7 +83,7 @@ etherinit(void)		/* called from probe() */
 			ctlr->ri = 0;
 			for(i = 0; i < ctlr->nrb; i++)
 				ctlr->rb[i].owner = Interface;
-		
+
 			ctlr->th = 0;
 			ctlr->ti = 0;
 			for(i = 0; i < ctlr->ntb; i++)

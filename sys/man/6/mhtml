@@ -21,7 +21,7 @@ mhtml \- macros for formatting HTML
 This package of
 .IR htmlroff (1)
 macro definitions provides convenient macros for formatting HTML.
-It is usually used along with 
+It is usually used along with
 .IR troff (1)
 macro packages such as
 .IR man (6)
@@ -30,13 +30,13 @@ and
 .I Mhtml
 replaces some macros defined in the other packages,
 so it should be listed after them on the
-.I htmlroff 
+.I htmlroff
 command line.
 .PP
 The following macros are defined:
 .TP
 .B .HTML \fItitle
-Print an HTML header marking the output as 
+Print an HTML header marking the output as
 HTML 4.01 loose transitional encoded in UTF.
 If given, the
 .I title

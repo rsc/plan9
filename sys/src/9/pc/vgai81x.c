@@ -80,7 +80,7 @@ i81xenable(VGAscr* scr)
 	int size;
 	Mach *mach0;
 	ulong *pgtbl, *rp, cursor, *pte, fbuf, fbend;
-	
+
 	if(scr->mmio)
 		return;
 	p = i81xpcimatch();

@@ -13,7 +13,7 @@ never been ported.  To port Upas to another system:
 	  Plan 9 and each Unix.  This includes file management, signal
 	  handling, process control and error handling.
 	- change the important directory trees in common/mail.c to reflect
-	  where you want things like 
+	  where you want things like
 	- get the ARGBEGIN/ARGEND/ARGF macros from Plan 9's libc.h
 	- get the include files correct in common/sys.h
 	- rewrite smtp/mxdial to use the conventions of that system

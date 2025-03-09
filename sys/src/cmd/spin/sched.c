@@ -944,7 +944,7 @@ oneparam(RunList *r, Lextok *t, Lextok *a, ProcList *p)
 	t->ntyp = NAME;
 	addsymbol(r, t->sym);
 	(void) setval(t, k);
-	
+
 	X_lst = oX;
 }
 

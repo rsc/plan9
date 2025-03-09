@@ -780,7 +780,7 @@ fsopen(Fs *fs, Request *r, Fid *f)
 {
 	int mode;
 	char errbuf[ERRMAX];
-	
+
 	if(f->attached == 0){
 		fsreply(fs, r, Enofid);
 		return;
@@ -972,7 +972,7 @@ uint
 shash(char *str, int len)
 {
 	uint	hash;
-	char	*val; 
+	char	*val;
 
 	hash = 0;
 	for(val = str; *val; val++)
@@ -1520,4 +1520,3 @@ closetar(Dfile *df, Symbol *dp)
 		closefile(&df->file[i]);
 	}
 }
-

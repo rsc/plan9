@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -30,11 +30,11 @@
 
 private const bool skip_instructions = 0; /* Debug purpose only. */
 
-typedef struct { 
+typedef struct {
     Fixed a, b, c, d, tx, ty;
 } FixMatrix;
 
-struct ttfSubGlyphUsage_s { 
+struct ttfSubGlyphUsage_s {
     FixMatrix m;
     int index;
     int flags;
@@ -105,7 +105,7 @@ private ttfPtrElem *ttfFont__get_table_ptr(ttfFont *f, char *id)
 TT_Error  TT_Set_Instance_CharSizes(TT_Instance  instance,
                                        TT_F26Dot6   charWidth,
                                        TT_F26Dot6   charHeight)
-{ 
+{
     PInstance  ins = instance.z;
 
     if ( !ins )
@@ -182,7 +182,7 @@ void ttfInterpreter__release(ttfInterpreter **ptti)
 
 /*-------------------------------------------------------------------*/
 
-void ttfFont__init(ttfFont *this, ttfMemory *mem, 
+void ttfFont__init(ttfFont *this, ttfMemory *mem,
 		    void (*DebugRepaint)(ttfFont *),
 		    int (*DebugPrint)(ttfFont *, const char *s, ...))
 {
@@ -207,12 +207,12 @@ void ttfFont__finit(ttfFont *this)
     this->face = NULL;
 }
 
-#define MAX_SUBGLYPH_NESTING 3 /* Arbitrary. We need this because we don't want 
-                                  a ttfOutliner__BuildGlyphOutline recursion 
+#define MAX_SUBGLYPH_NESTING 3 /* Arbitrary. We need this because we don't want
+                                  a ttfOutliner__BuildGlyphOutline recursion
 				  while a glyph is loaded in ttfReader. */
 
-FontError ttfFont__Open(ttfInterpreter *tti, ttfFont *this, ttfReader *r, 
-				    unsigned int nTTC, float w, float h, 
+FontError ttfFont__Open(ttfInterpreter *tti, ttfFont *this, ttfReader *r,
+				    unsigned int nTTC, float w, float h,
 				    bool design_grid)
 {   char sVersion[4], sVersion0[4] = {0, 1, 0, 0};
     unsigned int nNumTables, i;
@@ -286,8 +286,8 @@ FontError ttfFont__Open(ttfInterpreter *tti, ttfFont *this, ttfReader *r,
     if (tti->usage_size < this->nMaxComponents * MAX_SUBGLYPH_NESTING) {
 	tti->ttf_memory->free(tti->ttf_memory, tti->usage, "ttfFont__Open");
 	tti->usage_size = 0;
-	tti->usage = mem->alloc_bytes(mem, 
-		sizeof(ttfSubGlyphUsage) * this->nMaxComponents * MAX_SUBGLYPH_NESTING, 
+	tti->usage = mem->alloc_bytes(mem,
+		sizeof(ttfSubGlyphUsage) * this->nMaxComponents * MAX_SUBGLYPH_NESTING,
 		"ttfFont__Open");
 	if (tti->usage == NULL)
 	    return fMemoryError;
@@ -443,10 +443,10 @@ private void  org_to_cur( Int  n, PGlyph_Zone  zone )
 
 /*-------------------------------------------------------------------*/
 
-void ttfOutliner__init(ttfOutliner *this, ttfFont *f, ttfReader *r, ttfExport *exp, 
-			bool bOutline, bool bFirst, bool bVertical) 
+void ttfOutliner__init(ttfOutliner *this, ttfFont *f, ttfReader *r, ttfExport *exp,
+			bool bOutline, bool bFirst, bool bVertical)
 {
-    this->r = r; 
+    this->r = r;
     this->bOutline = bOutline;
     this->bFirst = bFirst;
     this->pFont = f;
@@ -460,8 +460,8 @@ private void MoveGlyphOutline(TGlyph_Zone *pts, int nOffset, ttfGlyphOutline *ou
     short count = out->pointCount;
     F26Dot6Point p;
 
-    if (m->a == 65536 && m->b == 0 && 
-	m->c == 0 && m->d == 65536 && 
+    if (m->a == 65536 && m->b == 0 &&
+	m->c == 0 && m->d == 65536 &&
 	m->tx == 0 && m->ty == 0)
 	return;
     for (; count != 0; --count) {
@@ -471,7 +471,7 @@ private void MoveGlyphOutline(TGlyph_Zone *pts, int nOffset, ttfGlyphOutline *ou
     }
 }
 
-private FontError ttfOutliner__BuildGlyphOutlineAux(ttfOutliner *this, int glyphIndex, 
+private FontError ttfOutliner__BuildGlyphOutlineAux(ttfOutliner *this, int glyphIndex,
 	    FixMatrix *m_orig, ttfGlyphOutline* gOutline)
 {   ttfFont *pFont = this->pFont;
     ttfReader *r = this->r;
@@ -569,7 +569,7 @@ private FontError ttfOutliner__BuildGlyphOutlineAux(ttfOutliner *this, int glyph
 	if (tti->usage_top + pFont->nMaxComponents > tti->usage_size)
 	    return fBadFontData;
 	gOutline->contourCount = gOutline->pointCount = 0;
-	do { 
+	do {
 	    FixMatrix m;
 	    ttfSubGlyphUsage *e;
 
@@ -603,7 +603,7 @@ private FontError ttfOutliner__BuildGlyphOutlineAux(ttfOutliner *this, int glyph
 		m.b = (Fixed)ttfReader__Short(r)<<2;
 		m.c = (Fixed)ttfReader__Short(r)<<2;
 		m.d = (Fixed)ttfReader__Short(r)<<2;
-            } else 
+            } else
 		m.a = m.d = 65536;
 	    e = &usage[nUsage];
 	    e->m = m;
@@ -665,7 +665,7 @@ private FontError ttfOutliner__BuildGlyphOutlineAux(ttfOutliner *this, int glyph
 	    gOutline->contourCount += out.contourCount;
 	    gOutline->pointCount += out.pointCount;
 	    if(e->flags & USE_MY_METRICS) {
-		gOutline->advance.x = out.advance.x; 
+		gOutline->advance.x = out.advance.x;
 		gOutline->sideBearing = out.sideBearing;
             }
         }
@@ -787,7 +787,7 @@ private FontError ttfOutliner__BuildGlyphOutlineAux(ttfOutliner *this, int glyph
 		else if(!(flag & NEXT_Y_IS_ZERO))
 		    coord += ttfReader__Short(r);
 		*y++ = Scale_Y( &exec->metrics, coord );
-            
+
 		/*  Filter off the extra bits */
 		*onCurve++ = flag & ONCURVE;
 	    }
@@ -848,7 +848,7 @@ ex:;
     return error;
 }
 
-private FontError ttfOutliner__BuildGlyphOutline(ttfOutliner *this, int glyphIndex, 
+private FontError ttfOutliner__BuildGlyphOutline(ttfOutliner *this, int glyphIndex,
 	    float orig_x, float orig_y, ttfGlyphOutline* gOutline)
 {
     FixMatrix m_orig = {1 << 16, 0, 0, 1 << 16, 0, 0};
@@ -959,7 +959,7 @@ void ttfOutliner__DrawGlyphOutline(ttfOutliner *this)
 			    p0 = p1;
                         }
                     }
-                } else { 
+                } else {
 		    F26Dot6 prevX, prevY, nextX, nextY;
 
 		    px = x[pt];
@@ -994,7 +994,7 @@ void ttfOutliner__DrawGlyphOutline(ttfOutliner *this)
 			dx1 = p1.x - p0.x, dy1 = p1.y - p0.y;
 			dx2 = p2.x - p0.x, dy2 = p2.y - p0.y;
 			dx3 = p3.x - p0.x, dy3 = p3.y - p0.y;
-			if (fabs(dx1 * dy3 - dy1 * dx3) > prec * fabs(dx1 * dx3 - dy1 * dy3) || 
+			if (fabs(dx1 * dy3 - dy1 * dx3) > prec * fabs(dx1 * dx3 - dy1 * dy3) ||
 			    fabs(dx2 * dy3 - dy2 * dx3) > prec * fabs(dx2 * dx3 - dy2 * dy3))
 			    exp->CurveTo(exp, &p1, &p2, &p3);
 			else

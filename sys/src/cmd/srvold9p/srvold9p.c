@@ -1052,7 +1052,7 @@ rwstat(Fcall *t, Fcall *, char *mdata9p1)
 			return err;
 		if(convM2D9p1(r9.stat, &cd) != DIRREC)
 			return "bad in conversion in wstat";
-	
+
 		/* fill in default values */
 		if(d.name[0] != '\0'){
 			if(strlen(d.name) >= NAMEREC)

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1998, 1999, 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -106,10 +106,10 @@ win_close(gx_device * dev)
 {
     /* Free resources */
     if (wdev->nColors > 0) {
-	gs_free(dev->memory, 
+	gs_free(dev->memory,
 		wdev->mapped_color_flags, 4096, 1, "win_set_bits_per_pixel");
 	DeleteObject(wdev->himgpalette);
-	gs_free(dev->memory, 
+	gs_free(dev->memory,
 		(char *)(wdev->limgpalette), 1, sizeof(LOGPALETTE) +
 		(1 << (wdev->color_info.depth)) * sizeof(PALETTEENTRY),
 		"win_close");
@@ -476,7 +476,7 @@ win_set_bits_per_pixel(gx_device_win * wdev, int bpp)
 	}
 	memset(wdev->mapped_color_flags, 0, 4096);
     } else {
-	gs_free(wdev->memory, 
+	gs_free(wdev->memory,
 		wdev->mapped_color_flags, 4096, 1, "win_set_bits_per_pixel");
 	wdev->mapped_color_flags = 0;
     }
@@ -485,15 +485,15 @@ win_set_bits_per_pixel(gx_device_win * wdev, int bpp)
     wdev->procs.encode_color = wdev->procs.map_rgb_color;
     wdev->procs.decode_color = wdev->procs.map_color_rgb;
     if (bpp == 1) {
-	wdev->procs.get_color_mapping_procs = 
+	wdev->procs.get_color_mapping_procs =
 	    gx_default_DevGray_get_color_mapping_procs;
-	wdev->procs.get_color_comp_index = 
+	wdev->procs.get_color_comp_index =
 	    gx_default_DevGray_get_color_comp_index;
     }
     else {
-	wdev->procs.get_color_mapping_procs = 
+	wdev->procs.get_color_mapping_procs =
 	    gx_default_DevRGB_get_color_mapping_procs;
-	wdev->procs.get_color_comp_index = 
+	wdev->procs.get_color_comp_index =
 	    gx_default_DevRGB_get_color_comp_index;
     }
 

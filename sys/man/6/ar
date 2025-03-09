@@ -67,7 +67,7 @@ instead, each field should be read or written independently.
 .PP
 Each file begins on an even (0 mod 2) boundary;
 a newline is inserted between files if necessary.
-Nevertheless 
+Nevertheless
 .B size
 reflects the
 actual size of the file exclusive of padding.
@@ -84,8 +84,8 @@ externally defined text and data symbols in the archive.
 There is no provision for empty areas in an archive
 file.
 .SH "SEE ALSO"
-.IR ar (1), 
-.IR 8l (1), 
+.IR ar (1),
+.IR 8l (1),
 .IR nm (1),
 .IR stat (2)
 .SH BUGS

@@ -151,9 +151,9 @@ lm78rdreg(int reg)
 	return val;
 }
 
-/*  start the chip monitoring but don't change any smi 
- *  interrupts and/or alarms that the BIOS may have set up. 
- *  this isn't locked because it's thought to be idempotent 
+/*  start the chip monitoring but don't change any smi
+ *  interrupts and/or alarms that the BIOS may have set up.
+ *  this isn't locked because it's thought to be idempotent
  */
 static void
 lm78enable(void)
@@ -213,7 +213,7 @@ lm78reset(void)
 				/* already enabled */
 				lm78.port = pcs & ~3;
 				lm78.ifc = Parallel;
-				return;	
+				return;
 			}
 
 			/*  enable the chip, use default address 0x50 */
@@ -343,4 +343,3 @@ Dev lm78devtab = {
 	devremove,
 	devwstat,
 };
-

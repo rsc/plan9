@@ -78,7 +78,7 @@ Optab	optab[] =
  /* sd		*/	AMOV,		C_ZREG,		C_LEXT,		12,0,	8,	OSTORE,		3,	0,
  /* fsw 	*/	AMOVF,		C_FREG,		C_LEXT,		12,0,	8,	OSTORE_FP,	2,	0,
  /* fsd 	*/	AMOVD,		C_FREG,		C_LEXT,		12,0,	8,	OSTORE_FP,	3,	0,
-			
+
  /* sb		*/	AMOVB,		C_ZREG,		C_LOREG,	15,0,	12,	OSTORE,		0,	0,
  /* sb		*/	AMOVBU,		C_ZREG,		C_LOREG,	15,0,	12,	OSTORE,		0,	0,
  /* sh		*/	AMOVH,		C_ZREG,		C_LOREG,	15,0,	12,	OSTORE,		1,	0,

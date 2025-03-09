@@ -2,11 +2,11 @@
 
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -95,7 +95,7 @@
  * there simply because it is being used as a terminator for the file name.
  * It could easily be eliminated by adding a zero as the name terminator.
  * The only disadvantage is that the file is no longer totally printable ascii.
- */ 
+ */
 
 #include "errno_.h"
 #include "string_.h"
@@ -205,7 +205,7 @@ iodev_diskn_fopen(gx_io_device * iodev, const char *fname, const char *access,
 {
     char realname[gp_file_name_sizeof];
     diskn_state * pstate = (diskn_state *)iodev->state;
-    
+
     /* Exit if we do not have a root location */
     if (!pstate->root)
         return_error(gs_error_undefinedfilename);
@@ -228,7 +228,7 @@ diskn_delete(gx_io_device * iodev, const char *fname)
 {
     char realname[gp_file_name_sizeof];
     diskn_state * pstate = (diskn_state *)iodev->state;
-    
+
     /* Exit if we do not have a root location */
     if (!pstate->root)
         return_error(gs_error_undefinedfilename);
@@ -247,7 +247,7 @@ diskn_rename(gx_io_device * iodev, const char *from, const char *to)
     char toreal[gp_file_name_sizeof];
     int code = 0;
     diskn_state * pstate = (diskn_state *)iodev->state;
-    
+
     /* Exit if we do not have a root location */
     if (!pstate->root)
         return_error(gs_error_undefinedfilename);
@@ -273,7 +273,7 @@ diskn_status(gx_io_device * iodev, const char *fname, struct stat *pstat)
 {
     char realname[gp_file_name_sizeof];
     diskn_state * pstate = (diskn_state *)iodev->state;
-    
+
     /* Exit if we do not have a root location */
     if (!pstate->root)
         return_error(gs_error_undefinedfilename);
@@ -364,7 +364,7 @@ diskn_put_params(gx_io_device *iodev, gs_param_list *plist)
     gs_param_string rootstr;
     int code;
     diskn_state * pstate = (diskn_state *)iodev->state;
-  
+
     switch (code = param_read_string(plist, "Root", &rootstr)) {
 	case 0:
 	    break;
@@ -477,7 +477,7 @@ MapFileRead(FILE * mapfile, char * namebuf, int * value)
     /* Get the file number */
     if (fscanf(mapfile, "%d\t", value) != 1)
     	return 0;
-    
+
     /* Get the file name */
     do {
 	namebuf[count++] = c = fgetc(mapfile);
@@ -506,7 +506,7 @@ MapFileWrite(FILE * mapfile, const char * namebuf, int value)
 }
 
 /*
- * Remove the specified file 
+ * Remove the specified file
  *
  * rootpath - Path to base disk location.
  * filename - File name string
@@ -614,7 +614,7 @@ map_file_enum_init(gs_memory_t * mem, const char * root_name, const char * searc
         strcpy(mapfileenum->pattern, search_pattern);
     }
 
-    mapfileenum->root = (char *)gs_alloc_bytes(mem, strlen(root_name) + 1, 
+    mapfileenum->root = (char *)gs_alloc_bytes(mem, strlen(root_name) + 1,
     						"diskn:enum_init(root)");
     if (mapfileenum->root == NULL) {
 	map_file_enum_close((file_enum *) mapfileenum);
@@ -673,7 +673,7 @@ map_file_enum_next(void * enum_mem, char* target)
     return false;
 }
 
-/* 
+/*
  * map_file_enum_close
  *
  * cleans up after an enumeration, this may only be called
@@ -784,7 +784,7 @@ map_file_name_del(const char * root_name, const char * Fname)
 private void
 map_file_name_add(const char * root_name, const char * Fname)
 {
-    /* 
+    /*
      * add entry to map file
      * entry number is one greater than biggest number
      */
@@ -794,7 +794,7 @@ map_file_name_add(const char * root_name, const char * Fname)
     int file_version;
     FILE*   newMap;
     FILE*   oldMap;
-    
+
     oldMap = MapFileOpen(root_name, MAP_FILE_NAME, "r");
     if (oldMap != NULL && (!MapFileReadVersion(oldMap, &file_version)
 	|| file_version != MAP_FILE_VERSION)) {
@@ -803,7 +803,7 @@ map_file_name_add(const char * root_name, const char * Fname)
     }
     if (oldMap == NULL) {
         oldMap = MapFileOpen(root_name, MAP_FILE_NAME, "w");
-	if (!oldMap) 
+	if (!oldMap)
 	    return;
         MapFileWriteVersion(oldMap, MAP_FILE_VERSION);
         MapFileWrite(oldMap, Fname, InitialNumber);
@@ -841,7 +841,7 @@ map_file_name_add(const char * root_name, const char * Fname)
  */
 private void
 map_file_name_ren(const char* root_name, const char * oldname, const char * newname)
-{   
+{
     /*  search for target entry */
 
     int d = MapToFile(root_name, oldname);
@@ -851,7 +851,7 @@ map_file_name_ren(const char* root_name, const char * oldname, const char * newn
         char    name[BUFFER_LENGTH];
         FILE*   newMap;
         FILE*   oldMap;
-        
+
 	/* Open current map file and a working file */
 
         MapFileUnlink(root_name, TEMP_FILE_NAME );

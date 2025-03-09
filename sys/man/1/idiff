@@ -11,9 +11,9 @@ idiff \- interactive diff
 .SH DESCRIPTION
 .I Idiff
 interactively
-merges 
+merges
 .I file1
-and 
+and
 .I file2
 onto standard output.
 Wherever
@@ -30,7 +30,7 @@ and prompts the user to select a chunk.
 Valid responses are:
 .TP
 .B <
-Use the chunk from 
+Use the chunk from
 .IR file1 .
 .TP
 .B >

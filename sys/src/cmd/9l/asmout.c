@@ -138,7 +138,7 @@ loadu32(int r, vlong d)
 		return LOP_IRR(OP_ORIS, r, REGZERO, v);
 	return AOP_IRR(OP_ADDIS, r, REGZERO, v);
 }
-	
+
 int
 asmout(Prog *p, Optab *o, int aflag)
 {
@@ -770,7 +770,7 @@ asmout(Prog *p, Optab *o, int aflag)
 		if(r == NREG)
 			r = p->to.reg;
 		/*
-		 * Let user (gs) shoot himself in the foot. 
+		 * Let user (gs) shoot himself in the foot.
 		 * qc has already complained.
 		 *
 		if(v < 0 || v > 31)

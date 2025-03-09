@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -262,7 +262,7 @@ gx_overprint_generic_fill_rectangle(
      *
      *  - Data should be returned in the depth of the process color
      *    model. Though this depth could be specified explicitly, there
-     *    is little reason to do so. 
+     *    is little reason to do so.
      *
      *  - Though overprint is much more easily implemented with planar
      *    data, there is no planar version of the copy_color method to
@@ -320,7 +320,7 @@ gx_overprint_generic_fill_rectangle(
             gx_color_index  comps;
             int             j;
             gx_color_value  dest_cvals[GX_DEVICE_COLOR_MAX_COMPONENTS];
-        
+
             if ((code = dev_proc(tdev, decode_color)(tdev, *cp, dest_cvals)) < 0)
                 break;
             for (j = 0, comps = drawn_comps; comps != 0; ++j, comps >>= 1) {
@@ -616,4 +616,3 @@ gx_overprint_sep_fill_rectangle_2(
 
     return code;
 }
-

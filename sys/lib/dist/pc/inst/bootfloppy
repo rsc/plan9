@@ -40,7 +40,7 @@ disk/format -b /386/pbs \
 x=$status
 
 if(~ $x ''){
-	echo 
+	echo
 	echo 'Done!'
 	echo
 }

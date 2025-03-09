@@ -1,12 +1,12 @@
 #    Copyright (C) 1997, 2003 Aladdin Enterprises.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -286,7 +286,7 @@ zip: $(SETUP_XE) $(UNINSTALL_XE)
 ZIP_RSP = $(PSOBJ)setupgs.rsp
 # Note that we use ECHOGS_XE rather than echo for the .txt files
 # to avoid ANSI/OEM character mapping.
-# Use a special icon WinZip SE can't handle 48 pixel 32-bit icons 
+# Use a special icon WinZip SE can't handle 48 pixel 32-bit icons
 # as used by Windows XP.
 archive: zip $(PSOBJ)gswin16.ico $(ECHOGS_XE)
 	$(ECHOGS_XE) -w $(ZIP_RSP) -q "-win32 -setup"

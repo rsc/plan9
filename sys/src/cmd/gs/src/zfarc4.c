@@ -1,12 +1,12 @@
 /* Copyright (C) 2001 Artifex Software, Inc.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -50,7 +50,7 @@ z_arcfour_d(i_ctx_t * i_ctx_p)
     s_arcfour_set_key(&state, sop->value.const_bytes, r_size(sop));
 
     /* we pass npop=0, since we've no arguments left to consume */
-    /* we pass 0 instead of the usual rspace(sop) will allocate storage for 
+    /* we pass 0 instead of the usual rspace(sop) will allocate storage for
        filter state from the same memory pool as the stream it's coding. this
        causes no trouble because we maintain no pointers */
     return filter_read(i_ctx_p, 0, &s_arcfour_template,
@@ -74,7 +74,7 @@ z_arcfour_e(i_ctx_t * i_ctx_p)
     s_arcfour_set_key(&state, sop->value.const_bytes, r_size(sop));
 
     /* we pass npop=0, since we've no arguments left to consume */
-    /* we pass 0 instead of the usual rspace(sop) will allocate storage for 
+    /* we pass 0 instead of the usual rspace(sop) will allocate storage for
        filter state from the same memory pool as the stream it's coding. this
        causes no trouble because we maintain no pointers */
     return filter_write(i_ctx_p, 0, &s_arcfour_template,

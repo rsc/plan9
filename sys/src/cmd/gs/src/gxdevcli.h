@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -187,8 +187,8 @@ typedef struct gx_device_anti_alias_info_s {
     int graphics_bits;		/* ditto */
 } gx_device_anti_alias_info;
 
-typedef int32_t frac31; /* A fraction value in [-1,1]. 
-    Represents a color (in [0,1]) 
+typedef int32_t frac31; /* A fraction value in [-1,1].
+    Represents a color (in [0,1])
     or a color difference (in [-1,1]) in shadings. */
 
 /* Define an edge of a linear color trapezoid.  Requirement: end.y >= start.y. */
@@ -219,7 +219,7 @@ typedef struct gs_linear_color_edge_s {
  *    A separable and linear encoding has the separability and
  *    linearity properties.
  *
- *    Encodings with this property are completely characterized 
+ *    Encodings with this property are completely characterized
  *    by the comp_shift array. Hence, there is no need to provide
  *    an encode_color procedure for such devices, though the device
  *    creator may choose to do so for performance reasons (e.g.: when
@@ -319,7 +319,7 @@ typedef struct gx_device_color_info_s {
     gx_color_polarity_t polarity;
 
     /*
-     * The number of bits of gx_color_index actually used. 
+     * The number of bits of gx_color_index actually used.
      * This must be <= arch_sizeof_color_index, which is usually 64.
      */
     byte depth;
@@ -328,7 +328,7 @@ typedef struct gx_device_color_info_s {
      * Index of the gray color component, if any. The max_gray and
      * dither_gray values apply to this component only; all other
      * components use the max_color and dither_color values.
-     * 
+     *
      * Note:  This field refers to a 'gray' colorant because of the
      * past use of the max_gray/color and dither_grays/colors fields.
      * Prior to 8.00, the 'gray' values were used for monochrome
@@ -347,7 +347,7 @@ typedef struct gx_device_color_info_s {
      * 1 (the green colorant), set max_gray to 63 and dither_grays to
      * 64, and set max_color to 31 and dither_colors to 32.
      *
-     * This will be GX_CINFO_COMP_NO_INDEX if there is no 'gray' 
+     * This will be GX_CINFO_COMP_NO_INDEX if there is no 'gray'
      * component.
      */
     byte gray_index;
@@ -569,7 +569,7 @@ typedef struct gx_device_color_info_s {
 #define dci_std_color_max_gray(nc, color_bits)            \
     ( (nc) == 3                                           \
         ? 0                                               \
-        : (1 << dci_std_gray_bits(nc, color_bits)) - 1 ) 
+        : (1 << dci_std_gray_bits(nc, color_bits)) - 1 )
 
 #define dci_std_color_max_color(nc, color_bits)               \
     ( (nc) == 1                                               \
@@ -639,7 +639,7 @@ dev_page_proc_end_page(gx_default_end_page);
 /*
  * Define the generic device structure.  The device procedures can
  * have two different configurations:
- * 
+ *
  *      - Statically initialized devices predating release 2.8.1
  *      set the static_procs pointer to point to a separate procedure record,
  *      and do not initialize procs.
@@ -1220,9 +1220,9 @@ typedef enum {
   Fill rectangle with a high level color.
   Return rangecheck, if the device can't handle the high level color.
 
-  The graphics library calls this function with degenerate (widths=0) 
-  rectangles, to know whether the device can handle a rectangle with 
-  the high level color. The device should skip such rectangles returning 
+  The graphics library calls this function with degenerate (widths=0)
+  rectangles, to know whether the device can handle a rectangle with
+  the high level color. The device should skip such rectangles returning
   a proper code.
 
   Currently this function is used with gs_rectfill and gs_fillpage only.
@@ -1238,7 +1238,7 @@ typedef enum {
 
 /*
   Include a color space into the output.
-  This function is used to include DefaultGray, DefaultRGB, 
+  This function is used to include DefaultGray, DefaultRGB,
   DefaultCMYK into PDF, PS, EPS output.
   Low level devices should ignore this call.
 */
@@ -1271,7 +1271,7 @@ typedef struct gs_fill_attributes_s {
   dev_t_proc_fill_linear_color_scanline(proc, gx_device)
 
 /* Fill a linear color trapezoid. */
-/* The server assumes a strongly linear color, 
+/* The server assumes a strongly linear color,
    i.e. it can ignore any of c0, c1, c2, c3. */
 /* [p0 : p1] - left edge, from bottom to top.
    [p2 : p3] - right edge, from bottom to top.
@@ -1280,9 +1280,9 @@ typedef struct gs_fill_attributes_s {
    In this case the color doesn't depend on X (on Y if fa->swap_axes).
    In this case the base coordinates for the color gradient
    may be unequal to p0, p1, p2, p3, and must be provided/taken
-   in/from fa->ystart, fa->yend. 
+   in/from fa->ystart, fa->yend.
    The rerurn value 0 is not allowed in this case. */
-/* Return values : 
+/* Return values :
   1 - success;
   0 - Too big. The area isn't filled. The client must decompose the area.
   <0 - error.
@@ -1298,7 +1298,7 @@ typedef struct gs_fill_attributes_s {
   dev_t_proc_fill_linear_color_trapezoid(proc, gx_device)
 
 /* Fill a linear color triangle. */
-/* Return values : 
+/* Return values :
   1 - success;
   0 - Too big. The area isn't filled. The client must decompose the area.
   <0 - error.

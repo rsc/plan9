@@ -1,12 +1,12 @@
 % (C) 2002 Artifex, Inc.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -120,7 +120,7 @@ def
 end
 .setglobal
 
-% 
+%
 % Build a dictionary of utility procedures and constants for use in
 % impelementing the image operators. This dictionary is in global VM but
 % is maintained (during initialization) in userdict. It should be pushed
@@ -458,7 +458,7 @@ def
 %
 %   <width>  <height>  <bits/component>  <matrix>  <dsrc_0> ...
 %   <multi>  <ncomp>  <has_alpha>
-%   .colorimage 
+%   .colorimage
 %   -
 %
 % Convert the image/colorimage operator from their traditional form to
@@ -513,10 +513,10 @@ def
 .bind def
 
 
-% 
+%
 %   <width>  <height>  <bits/component>  <matrix>  <dsrc_0> ...
 %   <multi>  <ncomp>
-%   colorimage 
+%   colorimage
 %   -
 %
 % Build the colorimage pseudo-operator only if setcolorscreen is visible.
@@ -525,7 +525,7 @@ systemdict /setcolorscreen .knownget
   {
     type /operatortype eq
       {
-        /colorimage 
+        /colorimage
           {
              //false
                //.colorimage
@@ -542,7 +542,7 @@ if
 
 %
 %   width  height  bits_per_component  matrix  data_src   image   -
-%   
+%
 %   <dict>   image   -
 %
 % Some special handling is required for ImageType 2 (Display PostScript
@@ -552,7 +552,7 @@ if
 /image
   {
     dup type /dicttype eq languagelevel 2 ge and
-      { 
+      {
         dup /ImageType get dup 2 eq
           {
             % verify the ImageType 2 is supported
@@ -571,7 +571,7 @@ if
                 % should be used.
                 %
                 % The mechanism to determine depth for the DevicePixel
-                % color space when BitsPerPixel is not available is 
+                % color space when BitsPerPixel is not available is
                 % somewhat of a hack.
                 %
                 gsave
@@ -616,7 +616,7 @@ if
           }
         ifelse
       }
-      { 
+      {
         //false 1 //false
           //.colorimage
         stopped

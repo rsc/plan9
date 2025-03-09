@@ -226,7 +226,7 @@ print(char *fmt, ...)
 }
 
 /*
- * Want to interlock iprints to avoid interlaced output on 
+ * Want to interlock iprints to avoid interlaced output on
  * multiprocessor, but don't want to deadlock if one processor
  * dies during print and another has something important to say.
  * Make a good faith effort.
@@ -236,7 +236,7 @@ static int
 iprintcanlock(Lock *l)
 {
 	int i;
-	
+
 	for(i=0; i<1000; i++){
 		if(canlock(l))
 			return 1;
@@ -529,7 +529,7 @@ kbdputc(Queue*, int ch)
 
 	if(kbd.ir == nil)
 		return 0;		/* in case we're not inited yet */
-	
+
 	ilock(&kbd.lockputc);		/* just a mutex */
 	r = ch;
 	n = runetochar(buf, &r);
@@ -822,7 +822,7 @@ consread(Chan *c, void *buf, long n, vlong off)
 	case Qkmesg:
 		/*
 		 * This is unlocked to avoid tying up a process
-		 * that's writing to the buffer.  kmesg.n never 
+		 * that's writing to the buffer.  kmesg.n never
 		 * gets smaller, so worst case the reader will
 		 * see a slurred buffer.
 		 */
@@ -834,7 +834,7 @@ consread(Chan *c, void *buf, long n, vlong off)
 			memmove(buf, kmesg.buf+off, n);
 		}
 		return n;
-		
+
 	case Qkprint:
 		return qread(kprintoq, buf, n);
 
@@ -1013,7 +1013,7 @@ conswrite(Chan *c, void *va, long n, vlong off)
 				kbd.raw = 1;
 				/* clumsy hack - wake up reader */
 				ch = 0;
-				qwrite(kbdq, &ch, 1);			
+				qwrite(kbdq, &ch, 1);
 			} else if(strncmp(a, "rawoff", 6) == 0){
 				kbd.raw = 0;
 			} else if(strncmp(a, "ctlpon", 6) == 0){

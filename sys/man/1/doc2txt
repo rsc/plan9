@@ -30,7 +30,7 @@ doc2txt, doc2ps, wdoc2txt, xls2txt, olefs, mswordstrings, msexceltables
 ]
 .I file.doc
 .br
-.B aux/mswordstrings 
+.B aux/mswordstrings
 .IB mtpt /WordDocument
 .br
 .B aux/msexceltables
@@ -51,7 +51,7 @@ doc2txt, doc2ps, wdoc2txt, xls2txt, olefs, mswordstrings, msexceltables
 .I Doc2txt
 is an
 .IR rc (1)
-script that uses 
+script that uses
 .I olefs
 and
 .I mswordstrings
@@ -106,10 +106,10 @@ Limit processing to just those columns named;
 by default all columns are output.
 .TP
 .B -n
-Disables field padding to column width. 
+Disables field padding to column width.
 .TP
 .B -q
-Disable quoting of textural fields (see 
+Disable quoting of textural fields (see
 .IR quote (2).)
 .TP
 .B -t
@@ -153,8 +153,8 @@ the others
 ``Microsoft Word 97 Binary File Format'',
 at Microsoft's developer (MSDN) home page.
 .br
-``LAOLA Binary Structures'', 
-.B http://user.cs.tu-berlin.de/~schwartz/pmh 
+``LAOLA Binary Structures'',
+.B http://user.cs.tu-berlin.de/~schwartz/pmh
 .br
 ``OpenOffice.Org's Excel Documentation'',
 .br

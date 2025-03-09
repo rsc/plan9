@@ -53,7 +53,7 @@ enum {
 	SH0_INNER	= 3<<12,
 	ORGN0_WB	= 1<<10,
 	IRGN0_WB	= 1<<8,
- 
+
 	LAttrDRAM	= LKrw | LAF | LShareInner | LMem,
 	LAttrPhys	= LPXN | LAF | LShareOuter | LUncached,
 	LAttrIO		= LKrw | LAF | LXN | LPXN | LShareOuter | LDevice,
@@ -117,7 +117,7 @@ mmuinit(void *a)
 	 */
 	l1[L1X(PHYSDRAM)] = PHYSDRAM|LAttrDRAM|LBlock;
 	/*
-	 * map i/o registers 
+	 * map i/o registers
 	 */
 	va = VIRTIO;
 	for(pa = soc.physio; pa < soc.physio+IOSIZE; pa += 2*MiB){
@@ -137,7 +137,7 @@ mmuinit(void *a)
 	va = VIRTIO + 0x600000;
 	pa = soc.physio - 0x2000000 + 0x400000;
 	l1[L1X(va)] = pa|LAttrIO|LBlock;
-	
+
 	/*
 	 * double map exception vectors near top of virtual memory
 	 * not ready for malloc, so alias first L1 page (which has only one entry)
@@ -528,7 +528,7 @@ lpapageinit(void)
 	npage = conf.himem.npage;
 	if(npage == 0)
 		return;
-	
+
 	pages = xalloc(npage*sizeof(Page));
 	if(pages == 0)
 		panic("lpapageinit");

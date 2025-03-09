@@ -19,5 +19,3 @@ case go
 	fstype=$rd
 	export fstype
 }
-
-

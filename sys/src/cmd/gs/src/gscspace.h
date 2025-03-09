@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -71,7 +71,7 @@
  * The proper solution to this problem would be to reference alternative and
  * underlying color spaces via a pointer. The cost and risk of that approach
  * is, however, larger than is warranted just by the addition of ICCBased
- * color spaces. Another alternative is to allow just base color spaces to 
+ * color spaces. Another alternative is to allow just base color spaces to
  * include an alternative color space via a pointer. That would require two
  * separate mechanisms for dealing with alternative color spaces, which
  * seems messy and may well cause problems in the future.

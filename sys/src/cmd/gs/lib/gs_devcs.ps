@@ -1,12 +1,12 @@
 %    Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -72,7 +72,7 @@ systemdict /..page_default_spaces 3 dict put
 % <color_space> <color_space_name> cs_substitute_generic <color_space1> <color_space2>
 /cs_substitute_generic
 { .getuseciecolor
-    { NOSUBSTDEVICECOLORS 
+    { NOSUBSTDEVICECOLORS
         { //..includecolorspace exec dup }
         { /ColorSpace findresource }
       ifelse
@@ -94,7 +94,7 @@ bind def
     /ColorSpace findresource
   } {
     //cs_substitute_generic exec
-  } ifelse   
+  } ifelse
 } bind def
 
 colorspacedict
@@ -214,7 +214,7 @@ colorspacedict
       { pop 4 1 roll //rgb_2_gray exec add 1 exch sub //bound_0_1 exec }
     bind
 
-    /cs_get_currentrgb 
+    /cs_get_currentrgb
       {
         pop
         4 1 roll 3
@@ -245,4 +245,3 @@ currentdict /cs_substitute_generic .undef
 
 end     % .cspace_util
 .setglobal
-

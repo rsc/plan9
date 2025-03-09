@@ -1,12 +1,12 @@
 /* Copyright (C) 2000 Artifex Software Inc.   All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -308,7 +308,7 @@ dsc_page_orientation(gs_param_list *plist, const CDSC *pData)
 private int
 dsc_orientation(gs_param_list *plist, const CDSC *pData)
 {
-    return dsc_put_int(plist, "Orientation", 
+    return dsc_put_int(plist, "Orientation",
 			   convert_orient(pData->page_orientation));
 }
 
@@ -355,7 +355,7 @@ typedef struct cmd_list_s {
 				   key/value pairs. */
 } cmdlist_t;
 
-private const cmdlist_t DSCcmdlist[] = { 
+private const cmdlist_t DSCcmdlist[] = {
     { CDSC_PSADOBE,	    "Header",		dsc_adobe_header },
     { CDSC_CREATOR,	    "Creator",		dsc_creator },
     { CDSC_CREATIONDATE,    "CreationDate",	dsc_creation_date },
@@ -430,7 +430,7 @@ zparse_dsc_comments(i_ctx_t *i_ctx_p)
      */
     while (*pBadList && strncmp(*pBadList, dsc_buffer, strlen(*pBadList)))
         pBadList++;
-    if (*pBadList) {		    /* If found in list, then skip comment */	
+    if (*pBadList) {		    /* If found in list, then skip comment */
         comment_code = 0;	    /* Force NOP */
     }
     else {

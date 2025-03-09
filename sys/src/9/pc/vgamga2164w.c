@@ -208,9 +208,9 @@ tvp3026enable(VGAscr* scr)
 	 */
 	*(tvp3026+CaddrW) = 0x00;
 	for(i = 0; i < 6; i++)
-		*(tvp3026+Cdata) = Pwhite; 
+		*(tvp3026+Cdata) = Pwhite;
 	for(i = 0; i < 6; i++)
-		*(tvp3026+Cdata) = Pblack; 
+		*(tvp3026+Cdata) = Pblack;
 
 	/*
 	 * Load, locate and enable the

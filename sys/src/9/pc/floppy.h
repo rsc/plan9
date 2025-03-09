@@ -64,7 +64,7 @@ struct FType
 	int	heads;		/* number of heads */
 	int	steps;		/* steps per cylinder */
 	int	tracks;		/* tracks/disk */
-	int	gpl;		/* intersector gap length for read/write */	
+	int	gpl;		/* intersector gap length for read/write */
 	int	fgpl;		/* intersector gap length for format */
 	int	rate;		/* rate code */
 
@@ -175,7 +175,7 @@ floppyeject(FDrive *dp)
 	floppyoff(dp);
 }
 
-int 
+int
 floppyexec(char *a, long b, int c)
 {
 	USED(a, b, c);

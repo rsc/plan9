@@ -1,15 +1,15 @@
 .TH SMTPD 6
-.SH NAME 
+.SH NAME
 smtpd \- SMTP listener configuration
 .SH DESCRIPTION
 The
 SMTP
-daemon 
+daemon
 of
 .IR mail (1)
 implements the slave side of the SMTP protocol
 to accept incoming mail on TCP port 25.
-In general, 
+In general,
 .IR smtpd 's
 default parameters
 are sufficient for internal systems
@@ -114,7 +114,7 @@ For safety, the sender addresses
 .BR ! ,
 .BR *! ,
 .B !*
-and 
+and
 .B *!*
 are ignored.
 .SS /mail/lib/smtpd.conf
@@ -198,7 +198,7 @@ When the
 .B norelay
 option is enabled or the
 .B -f
-command line option given, 
+command line option given,
 relaying is allowed only if the source IP address is in
 .B ournets
 or the destination domain is specified in
@@ -213,7 +213,7 @@ for a list of banned addresses.
 Messages received from these addresses are
 rejected with a 5\fIxx\fP-series SMTP error code.
 There is no option
-to turn blocking on or off; if 
+to turn blocking on or off; if
 .B /mail/ratify
 is mounted,
 .I smtpd
@@ -260,7 +260,7 @@ system is being used as a spam relay.
 .BR deny " \fIaddress\fP [, ... \fIaddress\fP]"
 The
 .B deny
-command rejects a message when the 
+command rejects a message when the
 sender address matches one of its parameters.
 The rejection message asks the sender to
 contact
@@ -299,7 +299,7 @@ software that works well with
 the capabilities described here
 and
 .IR mail (1)
-defines additional 
+defines additional
 .I smtpd
 command line arguments applicable
 to exposed systems.

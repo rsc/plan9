@@ -17,4 +17,3 @@ UPDATE=\
 
 </sys/src/cmd/mkone
 CFLAGS=$CFLAGS -I../common
-

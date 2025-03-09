@@ -86,4 +86,3 @@ readline(Ibuf *b, char *buf, int len)
 	*p = 0;
 	return p-buf;
 }
-

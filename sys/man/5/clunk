@@ -1,4 +1,4 @@
-.TH CLUNK 5 
+.TH CLUNK 5
 .SH NAME
 clunk \- forget about a fid
 .SH SYNOPSIS
@@ -16,7 +16,7 @@ The
 .B clunk
 request informs the file server
 that the current file represented by
-.I fid 
+.I fid
 is no longer needed by the client.
 The actual file is not removed on the server unless the fid had been opened with
 .BR ORCLOSE .

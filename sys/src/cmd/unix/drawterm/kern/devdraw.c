@@ -871,7 +871,7 @@ drawpoint(Point *p, uchar *a)
 
 
 Point
-drawchar(Memimage *dst, Memimage *rdst, Point p, 
+drawchar(Memimage *dst, Memimage *rdst, Point p,
 	Memimage *src, Point *sp, DImage *font, int index, int op)
 {
 	FChar *fc;
@@ -886,7 +886,7 @@ drawchar(Memimage *dst, Memimage *rdst, Point p,
 	r.max.y = r.min.y+(fc->maxy-fc->miny);
 	sp1.x = sp->x+fc->left;
 	sp1.y = sp->y+fc->miny;
-	
+
 	/*
 	 * If we're drawing greyscale fonts onto a VGA screen,
 	 * it's very costly to read the screen memory to do the
@@ -2145,4 +2145,3 @@ drawidletime(void)
 	return 0;
 /*	return TK2SEC(MACHP(0)->ticks - sdraw.blanktime)/60; */
 }
-

@@ -297,4 +297,3 @@ audio_interface(Dev *, Desc *dd)
 		}
 	}
 }
-

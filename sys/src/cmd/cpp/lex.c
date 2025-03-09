@@ -537,7 +537,7 @@ fillbuf(Source *s)
 	while((char *)s->inl+s->ins/8 > (char *)s->inb+s->ins) {
 		int l = s->inl - s->inb;
 		int p = s->inp - s->inb;
-		if(l < 0) 
+		if(l < 0)
 			error(FATAL, "negative end of input!?");
 		if(p < 0)
 			error(FATAL, "negative input pointer!?");
@@ -601,7 +601,7 @@ setsource(char *name, int fd, char *str)
 		len = 0;
 	}
 
-	s->ins = INS;	
+	s->ins = INS;
 	s->inl = s->inp+len;
 	s->inl[0] = s->inl[1] = EOB;
 	return s;

@@ -17,7 +17,7 @@ Acid is an unusual source-level symbolic debugger for Plan 9. It is implemented
 as a language interpreter with specialized primitives that provide
 debugger support.  Programs written in the language manipulate
 one or more target processes; variables in the language represent the
-symbols, state, and resources of those processes. 
+symbols, state, and resources of those processes.
 This structure allows complex
 interaction between the debugger and the target program and
 provides a convenient method of parameterizing differences between
@@ -88,7 +88,7 @@ Furthermore, Acid avoids the limitations other debuggers impose when
 debugging parallel programs.  Instead of embedding a fixed
 process model in the debugger, Acid allows the
 programmer to adapt the debugger to handle an
-arbitrary process partitioning or program structure. 
+arbitrary process partitioning or program structure.
 The ability to
 interact dynamically with an executing process provides clear advantages
 over debuggers constrained to probe a static image.
@@ -282,7 +282,7 @@ acid: i = 0; loop 1,5 do print(i=i+1)
 acid:
 .P2
 The traditional
-.CW if-then-else 
+.CW if-then-else
 statement implements conditional execution.
 .NH
 Addressing
@@ -346,7 +346,7 @@ For example:
 .P1
 acid: x=10
 acid: x				 // print x in hex
-0x0000000a 
+0x0000000a
 acid: x = fmt(x, 'D')		 // make x type decimal
 acid: print(x, fmt(x, 'X'), x\eX) // print x in decimal & hex
 10 0x0000000a 0x0000000a
@@ -355,7 +355,7 @@ acid: x				 // print x in decimal
 acid: x\eo			 // print x in octal
 000000000012
 .P2
-The 
+The
 .CW ++
 and
 .CW --
@@ -383,7 +383,7 @@ then prints the address and the assembly language representation of each.
 Notice that the stride of the increment operator varies with the size of
 the instruction: the
 .CW MOVL
-at 
+at
 .CW 0x0000223a
 is a two byte instruction while all others are four bytes long.
 .PP
@@ -400,7 +400,7 @@ Since the registers are accessed via Acid variables they may
 be used in arbitrary expressions.
 .P1
 acid: PC                            // addr of saved PC
-0xc0000f60 
+0xc0000f60
 acid: *PC
 0x0000623c                          // contents of PC
 acid: *PC\ea
@@ -454,14 +454,14 @@ several processes simultaneously.
 .PP
 The interpreter has builtin functions named after each of the control
 messages. The functions take a process id as argument.
-Any time a control message causes the program to execute instructions 
+Any time a control message causes the program to execute instructions
 the interpreter performs two actions when the control operation has completed.
 The Acid variables pointing at the register set are fixed up to point
 at the saved registers, and then
 the user defined function
 .CW stopped
 is executed.
-The 
+The
 .CW stopped
 function may print the current address,
 line of source or instruction and return to interactive mode. Alternatively
@@ -597,7 +597,7 @@ defn step()				// single step
 	local lst, lpl, addr, bput;
 
 	bput = 0;			// sitting on bkpoint
-	if match(*PC, bplist) >= 0 then {	
+	if match(*PC, bplist) >= 0 then {
 		bput = fmt(*PC, bpfmt);	// save current addr
 		*bput = @bput;		// replace it
 	}
@@ -733,7 +733,7 @@ When the executed statement is a function call or a return
 from a function, the new value of the
 .CW PC
 is outside the bounds calculated by
-.CW fnbound 
+.CW fnbound
 and the test of the
 .CW while
 loop is evaluated.
@@ -796,7 +796,7 @@ designed specifically for systems programming, which supports both
 shared variable and message passing paradigms.
 Alef borrows the C expression syntax but implements
 a substantially different type system.
-The language provides a rich set of 
+The language provides a rich set of
 exception handling, process management, and synchronization
 primitives, which rely on a runtime system.
 Alef program bugs are often deadlocks, synchronization failures,
@@ -820,7 +820,7 @@ unfulfilled event.
 Commands in the Alef support library decode
 the runtime data structures and program state to report the cause
 of the blockage in terms of the high-level operations available to
-the Alef programmer.  
+the Alef programmer.
 Here, the Acid language acts
 as a communications medium between Alef implementer and Alef user.
 .NH
@@ -866,7 +866,7 @@ emit descriptions of complex data types
 (e.g., aggregates and abstract data types)
 to an auxiliary file.
 The vehicle for expressing this information is Acid source code.
-When an Acid debugging session is 
+When an Acid debugging session is
 subsequently started, that file is loaded with the other Acid libraries.
 .PP
 For each complex object in the program the compiler generates
@@ -977,7 +977,7 @@ type systems.
 Further, the assumption that the compiler can select the proper
 Acid format code for each basic type in the language is somewhat
 naive.  For example, when a member of a complex type is a pointer,
-it is assigned a hexadecimal type code; integer members are always 
+it is assigned a hexadecimal type code; integer members are always
 assigned a decimal type code.
 This heuristic proves inaccurate when an integer field is a
 bit mask or set of bit flags which are more appropriately displayed
@@ -1018,7 +1018,7 @@ now
 the
 time
 27680 : breakpoint	_exits+0x4	MOVW	$0x8,R1
-acid: 
+acid:
 .P2
 The
 .CW go
@@ -1069,25 +1069,25 @@ the allocated blocks.
 .P1 1m
 acid: leak()
 Lost a total of 524288 bytes from:
-    malloc() malloc.c:32 called from dofile+0xe8 sort.c:217 
-    dofile() sort.c:190 called from main+0xac sort.c:161 
-    main() sort.c:128 called from _main+0x20 main9.s:10 
+    malloc() malloc.c:32 called from dofile+0xe8 sort.c:217
+    dofile() sort.c:190 called from main+0xac sort.c:161
+    main() sort.c:128 called from _main+0x20 main9.s:10
 Lost a total of 64 bytes from:
-    malloc() malloc.c:32 called from newline+0xfc sort.c:280 
-    newline() sort.c:248 called from dofile+0x110 sort.c:222 
-    dofile() sort.c:190 called from main+0xac sort.c:161 
-    main() sort.c:128 called from _main+0x20 main9.s:10 
+    malloc() malloc.c:32 called from newline+0xfc sort.c:280
+    newline() sort.c:248 called from dofile+0x110 sort.c:222
+    dofile() sort.c:190 called from main+0xac sort.c:161
+    main() sort.c:128 called from _main+0x20 main9.s:10
 Lost a total of 64 bytes from:
-    malloc() malloc.c:32 called from realloc+0x14 malloc.c:129 
-    realloc() malloc.c:123 called from bldkey+0x358 sort.c:1388 
-    buildkey() sort.c:1345 called from newline+0x150 sort.c:285 
-    newline() sort.c:248 called from dofile+0x110 sort.c:222 
-    dofile() sort.c:190 called from main+0xac sort.c:161 
+    malloc() malloc.c:32 called from realloc+0x14 malloc.c:129
+    realloc() malloc.c:123 called from bldkey+0x358 sort.c:1388
+    buildkey() sort.c:1345 called from newline+0x150 sort.c:285
+    newline() sort.c:248 called from dofile+0x110 sort.c:222
+    dofile() sort.c:190 called from main+0xac sort.c:161
     main() sort.c:128 called from _main+0x20 main9.s:10
 acid: refs()
 data...bss...stack...
 acid: leak()
-acid: 
+acid:
 .P2
 The presence of a block in the allocation list does not imply
 it is there because of a leak; for instance, it may have been
@@ -1128,8 +1128,8 @@ window system from being tested.
 .NH
 Code Coverage
 .PP
-Another common component of software test uses 
-.I coverage 
+Another common component of software test uses
+.I coverage
 analysis.
 The purpose of the test is to determine which paths through the code have
 not been executed while running the test suite.
@@ -1138,7 +1138,7 @@ performed by a combination of compiler support and a reporting tool run
 on the output generated by statements compiled into the program.
 The compiler emits code that
 logs the progress of the program as it executes basic blocks and writes the
-results to a file. The file is then processed by the reporting tool 
+results to a file. The file is then processed by the reporting tool
 to determine which basic blocks have not been executed.
 .PP
 Acid can perform the same function in a language independent manner without
@@ -1179,7 +1179,7 @@ breakpoints at the entry to each basic block. The start of each basic
 block is found using the Acid builtin function
 .CW follow .
 If the list generated by
-.CW follow 
+.CW follow
 contains more than one
 element, then the addresses mark the start of basic blocks. A breakpoint
 is placed at each address to detect entry into the block. If the result
@@ -1195,7 +1195,7 @@ Each time a breakpoint is encountered
 Acid deletes the address from the breakpoint list, removes the breakpoint
 from memory and then restarts the program.
 At any instant the breakpoint list contains the addresses of basic blocks
-which have not been executed. 
+which have not been executed.
 The
 .CW analyse
 function reports the lines of source code bounded by basic blocks

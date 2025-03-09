@@ -73,7 +73,7 @@ a community that uses it exclusively.
 Although Acme discourages the traditional style of interaction
 based on typescript windows\(emteletypes\(emits
 users find Acme's other services render
-typescripts obsolete. 
+typescripts obsolete.
 .AE
 .SH
 History and motivation
@@ -825,7 +825,7 @@ a directory,
 .CW /acme/edit ,
 contains a set of tools for repetitive editing and a template
 or `guide' file that gives examples
-of its use.  
+of its use.
 Acme's editing guide,
 .CW /acme/edit/guide ,
 looks like this:
@@ -947,7 +947,7 @@ support for multiple processes,
 the right mouse button's features,
 the default actions and context-dependent properties
 of execution and searching,
-and a host of little touches such as moving the mouse cursor that make the system 
+and a host of little touches such as moving the mouse cursor that make the system
 more pleasant.
 At the moment, though, Oberon does have one distinct advantage: it incorporates
 graphical programs well into its model, an issue Acme has not yet faced.
@@ -990,7 +990,7 @@ Until recently, EMACS did not support the mouse especially well,
 and even with the latest version providing features such as `extents'
 that can be programmed to behave much like Acme commands,
 many users don't bother to upgrade.
-Moreover, in the versions that provide extents, 
+Moreover, in the versions that provide extents,
 most EMACS packages don't take advantage of them.
 .PP
 The most important distinction is just that
@@ -1114,7 +1114,7 @@ Xfid.ctl(Xfid *x)
         cxfidfree <-= x;   /* return to free list */
     }
 }
-.P2 
+.P2
 Thus X
 will wake up with the address of a function to call (here
 .CW Xfid.write )
@@ -1232,9 +1232,9 @@ revised in this volume.
 .br
 [Alle92]
 .I
-Allegro Common Lisp user Guide, Vol 2, 
+Allegro Common Lisp user Guide, Vol 2,
 .R
-Chapter 14, "The Emacs-Lisp Interface". 
+Chapter 14, "The Emacs-Lisp Interface".
 March 1992.
 .br
 [AT&T92] Plan 9 Programmer's manual, Murray Hill, New Jersey, 1992.

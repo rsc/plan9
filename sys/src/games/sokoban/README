@@ -8,7 +8,7 @@ If
  - all squares between the ball and the destination square
    (where glenda will move) are empty, and
  - the square next to the destination square where glenda will
-   push the ball is empty too, 
+   push the ball is empty too,
 then glenda will move to the destination square, pushing the
 ball while moving.
 

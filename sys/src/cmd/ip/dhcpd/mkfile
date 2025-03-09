@@ -34,4 +34,3 @@ $O.dhcpleases: $IOFILES
 
 $O.testping: testping.$O ping.$O
 	$LD -o $target $prereq
-

@@ -64,7 +64,7 @@ for(i in $tasks) {
 
 	if(~ $$i notdone ready) {
 		okay=yes
-		for(j in `{prereq $i}) 
+		for(j in `{prereq $i})
 			if(! ~ $$j done)
 				okay=no
 		switch($okay){

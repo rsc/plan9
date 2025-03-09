@@ -167,5 +167,3 @@ int ingest(Drive*);
 int markplay(Window*, ulong);
 int setplaytime(Window*, char*);
 void advancetrack(Drive*, Window*);
-
-

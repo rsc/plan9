@@ -113,7 +113,7 @@ struct	Reg
 	long	regu;
 	long	loop;		/* could be shorter */
 
-	
+
 	Reg*	log5;
 	long	active;
 
@@ -341,10 +341,10 @@ long	FtoB(int);
 int	BtoR(long);
 int	BtoF(long);
 
-void	predicate(void); 
-int	isbranch(Prog *); 
-int	predicable(Prog *p); 
-int	modifiescpsr(Prog *p); 
+void	predicate(void);
+int	isbranch(Prog *);
+int	predicable(Prog *p);
+int	modifiescpsr(Prog *p);
 
 #pragma	varargck	type	"A"	int
 #pragma	varargck	type	"A"	uint

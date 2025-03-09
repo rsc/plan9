@@ -35,7 +35,7 @@ struct Optab {
 	int	func7;
 	int	op[8];
 };
-		
+
 typedef struct Opclass	Opclass;
 struct Opclass {
 	char	*fmt;

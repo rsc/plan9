@@ -21,8 +21,8 @@ if ( ! test -e /srv/boot && ! test -e /srv/kfs ) {
 }
 
 if (test -e /srv/$fscons) {
-	if ( ! test -w /srv/$fscons ) { 
-		echo 'error: no write access to /srv/'^$fscons^', make sure you are the host owner' 
+	if ( ! test -w /srv/$fscons ) {
+		echo 'error: no write access to /srv/'^$fscons^', make sure you are the host owner'
 		exit 'no write access to /srv/fscons'
 	}
 
@@ -35,7 +35,7 @@ if (test -e /srv/$fscons) {
 	}
 	c=/n/boot/dist/replica
 	clientroot=/n/boot
-} 
+}
 if not {
 	fn clientmount { 9fs kfs }
 	c=/n/kfs/dist/replica

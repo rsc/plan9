@@ -20,4 +20,3 @@ memfillcolor(Memimage *i, ulong val)
 {
 	_memfillcolor(i, val);
 }
-

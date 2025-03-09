@@ -12,7 +12,7 @@ This device presents a low-level interface to
 the APM 1.2 bios calls.
 It is enabled by adding the line
 .RB `` apm0= ''
-to 
+to
 .IR plan9.ini .
 (The value after the equals sign is ignored; the presence of
 the line at all enables the driver.)
@@ -52,7 +52,7 @@ and the read registers are those returned by the call.
 .\" mode.
 .PP
 This device is intended to enable more user-friendly
-interfaces such as 
+interfaces such as
 .IR apm (8).
 .SH SOURCE
 .B /sys/src/9/pc/apm.c

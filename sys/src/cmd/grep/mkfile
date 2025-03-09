@@ -14,4 +14,3 @@ YFILES=grep.y\
 
 BIN=/$objtype/bin
 </sys/src/cmd/mkone
-

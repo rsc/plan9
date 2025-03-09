@@ -285,7 +285,7 @@ parseheaders(Message *m, int justmime, Mailbox *mb, int addfrom)
 	// cobble together Unix-style from line
 	// for local mailbox messages, we end up recreating the
 	// original header.
-	// for pop3 messages, the best we can do is 
+	// for pop3 messages, the best we can do is
 	// use the From: information and the RFC822 date.
 	//
 	if(m->unixdate == nil || strcmp(s_to_c(m->unixdate), "???") == 0
@@ -313,7 +313,7 @@ parseheaders(Message *m, int justmime, Mailbox *mb, int addfrom)
 			}
 		}
 
-		// fall back on the rfc822 date	
+		// fall back on the rfc822 date
 		if(m->unixdate==nil && m->date822)
 			m->unixdate = date822tounix(s_to_c(m->date822));
 	}
@@ -750,7 +750,7 @@ ctype(Message *m, Header *h, char *p)
 	p = skipwhite(p);
 
 	p = getstring(p, m->type, 1);
-	
+
 	while(*p){
 		if(isattribute(&p, "boundary")){
 			s = s_new();
@@ -770,7 +770,7 @@ ctype(Message *m, Header *h, char *p)
 		} else if(isattribute(&p, "charset")){
 			p = getstring(p, s_reset(m->charset), 0);
 		}
-		
+
 		p = skiptosemi(p);
 	}
 }
@@ -1125,7 +1125,7 @@ hex2int(int x)
 	return -1;
 }
 
-// underscores are translated in 2047 headers (uscores=1) 
+// underscores are translated in 2047 headers (uscores=1)
 // but not in the body (uscores=0)
 static char*
 decquotedline(char *out, char *in, char *e, int uscores)
@@ -1517,4 +1517,3 @@ date822tounix(char *s)
 		*q = '\0';
 	return s_copy(p);
 }
-

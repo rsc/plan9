@@ -47,7 +47,7 @@ is used on a file tree that shares data with an existing archive, the consumptio
 storage will be approximately equal to an incremental backup.
 This reduction in storage consumption occurs transparently to the user.
 .PP
-As an optimization, the 
+As an optimization, the
 .B -d
 and
 .B -q
@@ -64,7 +64,7 @@ is the hexadecimal representation of the SHA1 fingerprint of the root of the arc
 vac:64daefaecc4df4b5cb48a368b361ef56012a4f46
 .EE
 .PP
-The options to 
+The options to
 .I vac
 are:
 .TF "-d\fI oldvacfile"
@@ -92,7 +92,7 @@ Do not include the file or directory specified by
 This option may be repeated multiple times.
 .TP
 .BI -f " vacfile
-The results of 
+The results of
 .I vac
 are placed in
 .IR vacfile ,
@@ -108,7 +108,7 @@ The network address of the Venti server.
 The default is taken from the environment variable
 .BR venti .
 If this variable does not exist, then the default is the
-metaname 
+metaname
 .BR $venti ,
 which can be configured via
 .IR ndb (6).

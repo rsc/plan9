@@ -99,7 +99,7 @@ if(chatty9p)
 if(chatty9p)
 	if(r->error)
 		fprint(2, "<-%d- %F: %s\n", s->infd, &r->ifcall, r->error);
-	else	
+	else
 		fprint(2, "<-%d- %F\n", s->infd, &r->ifcall);
 
 	return r;
@@ -374,7 +374,7 @@ sopen(Srv *srv, Req *r)
 	default:
 		assert(0);
 	case OREAD:
-		p = AREAD;	
+		p = AREAD;
 		break;
 	case OWRITE:
 		p = AWRITE;
@@ -383,7 +383,7 @@ sopen(Srv *srv, Req *r)
 		p = AREAD|AWRITE;
 		break;
 	case OEXEC:
-		p = AEXEC;	
+		p = AEXEC;
 		break;
 	}
 	if(r->ifcall.mode&OTRUNC)
@@ -578,7 +578,7 @@ rremove(Req *r, char *error, char *errbuf)
 		return;
 	if(r->fid->file){
 		if(removefile(r->fid->file) < 0){
-			snprint(errbuf, ERRMAX, "remove %s: %r", 
+			snprint(errbuf, ERRMAX, "remove %s: %r",
 				r->fid->file->name);
 			r->error = errbuf;
 		}
@@ -605,8 +605,8 @@ sstat(Srv *srv, Req *r)
 		if(r->d.muid)
 			r->d.muid = estrdup9p(r->d.muid);
 	}
-	if(srv->stat)	
-		srv->stat(r);	
+	if(srv->stat)
+		srv->stat(r);
 	else if(r->fid->file)
 		respond(r, nil);
 	else
@@ -705,7 +705,7 @@ srv(Srv *srv)
 	while(r = getreq(srv)){
 		if(r->error){
 			respond(r, r->error);
-			continue;	
+			continue;
 		}
 		switch(r->ifcall.type){
 		default:
@@ -822,7 +822,7 @@ void
 responderror(Req *r)
 {
 	char errbuf[ERRMAX];
-	
+
 	rerrstr(errbuf, sizeof errbuf);
 	respond(r, errbuf);
 }
@@ -852,4 +852,3 @@ postfd(char *name, int pfd)
 		fprint(2, "postfd successful\n");
 	return 0;
 }
-

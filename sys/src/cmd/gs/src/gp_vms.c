@@ -1,12 +1,12 @@
 /* Copyright (C) 1989-2003 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -259,7 +259,7 @@ gp_open_scratch_file(const char *prefix, char fname[gp_file_name_sizeof],
     strcat(fname, "XXXXXX");
    mktemp(fname);
     f = fopen(fname, mode);
-   
+
     if (f == NULL)
 	eprintf1("**** Could not open temporary file %s\n", fname);
    return f;
@@ -345,7 +345,7 @@ gp_enumerate_files_init(const char *pat, uint patlen, gs_memory_t * mem)
 		break;
 	    case '.':
 	    case ']':
-		dot_in_filename = *pat == '.'; 
+		dot_in_filename = *pat == '.';
 	    default:
 		*c++ = *pat;
 		break;
@@ -429,7 +429,7 @@ gp_strerror(int errnum)
 /* -------------- Helpers for gp_file_name_combine_generic ------------- */
 
 uint gp_file_name_root(const char *fname, uint len)
-{   
+{
     /*
      *    The root for device:[root.][directory.subdirectory]filename.extension;version
      *	    is device:[root.][
@@ -451,7 +451,7 @@ uint gp_file_name_root(const char *fname, uint len)
     if (fname[i] == ':')
 	i++;
     if (i == len || fname[i] != '[')
-	return i; 
+	return i;
     /* Search for ']' */
     i++;
     for (j = i; j < len; j++)
@@ -468,12 +468,12 @@ uint gp_file_name_root(const char *fname, uint len)
 }
 
 uint gs_file_name_check_separator(const char *fname, int len, const char *item)
-{   
+{
     if (len > 0) {
-	/* 
+	/*
 	 * Ghostscript specifics : an extended syntax like Mac OS.
 	 * We intentionally don't consider ':' and '[' as separators
-	 * in forward search, see gp_file_name_combine. 
+	 * in forward search, see gp_file_name_combine.
 	 */
 	if (fname[0] == ']')
 	    return 1; /* It is a file separator. */
@@ -526,21 +526,21 @@ bool gp_file_name_is_empty_item_meanful(void)
 }
 
 gp_file_name_combine_result
-gp_file_name_combine(const char *prefix, uint plen, const char *fname, uint flen, 
+gp_file_name_combine(const char *prefix, uint plen, const char *fname, uint flen,
 		    bool no_sibling, char *buffer, uint *blen)
 {
     /*
      * Reduce it to the general case.
      *
-     * Implementation restriction : fname must not contain a part of 
+     * Implementation restriction : fname must not contain a part of
      * "device:[root.]["
      */
     uint rlen, flen1 = flen, plen1 = plen;
     const char *fname1 = fname;
-  
+
    if ( plen > 0 && prefix[plen-1] == '\0' )
      plen--;
-   
+
     if (plen == 0 && flen == 0) {
 	/* Not sure that we need this case. */
 	if (*blen == 0)
@@ -561,7 +561,7 @@ gp_file_name_combine(const char *prefix, uint plen, const char *fname, uint flen
 	*blen = flen1;
 	return gp_combine_success;
     }
-   
+
    if ( prefix[plen - 1] == ']' && fname[ 0 ] == '-' )
      {
 	memcpy(buffer, prefix, plen - 1 );
@@ -591,7 +591,7 @@ gp_file_name_combine(const char *prefix, uint plen, const char *fname, uint flen
      {
 	char* tmp_prefix;
 	int tmp_plen;
-	
+
 	if ( prefix[0] == '/' )
 	  {
 	     tmp_prefix = prefix + 1;
@@ -629,28 +629,27 @@ gp_file_name_combine(const char *prefix, uint plen, const char *fname, uint flen
     }
     if (prefix[plen - 1] == ']')
         plen1 = plen - 1;
-    return gp_file_name_combine_generic(prefix, plen1, 
+    return gp_file_name_combine_generic(prefix, plen1,
 	    fname1, flen1, no_sibling, buffer, blen);
 }
 
 /* ------ Font enumeration ------ */
- 
+
  /* This is used to query the native os for a list of font names and
   * corresponding paths. The general idea is to save the hassle of
   * building a custom fontmap file.
   */
- 
+
 void *gp_enumerate_fonts_init(gs_memory_t *mem)
 {
     return NULL;
 }
-         
+
 int gp_enumerate_fonts_next(void *enum_state, char **fontname, char **path)
 {
     return 0;
 }
-                         
+
 void gp_enumerate_fonts_free(void *enum_state)
 {
 }
-

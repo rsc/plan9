@@ -54,7 +54,7 @@ dispatchHello(VtSession *z, Packet **pkt)
 
 	p = *pkt;
 
-	version = nil;	
+	version = nil;
 	uid = nil;
 	crypto = nil;
 	codec = nil;
@@ -179,7 +179,7 @@ vtExport(VtSession *z)
 		return 1;
 	}
 
-	
+
 	p = nil;
 	clean = 0;
 	vtAttach();
@@ -262,4 +262,3 @@ Exit:
 	exits(0);
 	return 0;	/* never gets here */
 }
-

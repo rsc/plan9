@@ -20,4 +20,3 @@ tas(long *x)
 		return 1;
 	}
 }
-

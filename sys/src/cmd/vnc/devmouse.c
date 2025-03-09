@@ -205,7 +205,7 @@ mouseread(Chan *c, void *va, long n, vlong off)
 				mouse.ri = 0;
 		} else {
 			lock(&cursor);
-	
+
 			m = mouse.Mousestate;
 			unlock(&cursor);
 		}

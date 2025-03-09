@@ -3,7 +3,7 @@
 htmlroff \- HTML formatting and typesetting
 .SH DESCRIPTION
 .IR Htmlroff (1)
-accepts 
+accepts
 .I troff
 input with a few extensions and changes.
 This manual describes the changes to the input language,
@@ -82,14 +82,14 @@ but is intended for inline HTML constructs such as
 or
 .B <i>
 (those that can be contained
-within 
+within
 .BR <p> ).
 Unlike
 .BR .html ,
 .B .ihtml
 treats the open HTML tags as a set rather than a stack:
 each must be explicitly closed.
-Although it treats the tags as a set, 
+Although it treats the tags as a set,
 .B .ihtml
 treats nesting properly in the output,
 closing and reopening tags as necessary.
@@ -139,7 +139,7 @@ and
 .SS Font changes
 .PP
 .I Htmlroff
-interprets the usual 
+interprets the usual
 .BR \ef ,
 .BR .ft ,
 .BR \es ,
@@ -173,8 +173,8 @@ Input files can redefine
 like any other request or macro.
 .SS Paragraphs
 .I Htmlroff
-implements line height, text adjustment, and margins by 
-wrapping all output text in 
+implements line height, text adjustment, and margins by
+wrapping all output text in
 .B <p style="...">
 tags.
 This behavior can be disabled by setting the
@@ -191,14 +191,14 @@ interprets the
 .BR \eu ,
 .BR \ed ,
 and
-.BR \ev 
+.BR \ev
 requests to move vertically during output.
 It emits output vertically offset up the page inside
 .B <sup>
-tags and output vertically offset down the page 
+tags and output vertically offset down the page
 inside
 .B <sub>
-tags.  
+tags.
 This heuristic handles simple equations formatted by
 .IR eqn (1).
 .SS Conditional input
@@ -217,7 +217,7 @@ and
 requests.
 The
 .B t
-condition continues to evaluate true, to accomodate 
+condition continues to evaluate true, to accomodate
 input files trying to distinguish between
 .I troff
 and
@@ -242,7 +242,7 @@ For example,
 .LP
 redefines the
 .B xx
-macro in 
+macro in
 .I troff
 but not in
 .IR htmlroff .
@@ -256,7 +256,7 @@ in some cases.  To work around them, use
 on a line by itself, as in the last example.
 .SS Diversions
 .PP
-Diversions in 
+Diversions in
 .I htmlroff
 use the alignment in effect at the time of the
 diversion
@@ -268,13 +268,13 @@ In particular,
 Line here.
 \&.di
 \&.nf
-\&.ce 
+\&.ce
 \&.xx
 .EE
 .LP
-produces a centered line in 
+produces a centered line in
 .I troff
-but not in 
+but not in
 .IR htmlroff .
 The solution is to center inside the diversion, as in
 .IP
@@ -300,12 +300,12 @@ adds a new request
 .I cmd
 that redirects
 .IR htmlroff 's
-input into a pipe to 
+input into a pipe to
 .IR cmd .
 The redirection stops on encountering the line
 .IR stop ,
 optionally followed by white space and extra text.
-This is a dangerous and clumsy request, as 
+This is a dangerous and clumsy request, as
 .I htmlroff
 stops interpreting its input during the redirection, so
 .I stop
@@ -316,7 +316,7 @@ Although clumsy,
 allows input files to invoke
 .I troff
 to handle complicated input.
-For example, 
+For example,
 .B tmac.html
 redefines the
 .B PS
@@ -349,7 +349,7 @@ register holds the final path element
 .SS Unimplemented
 Tabs are set every eight spaces and cannot be changed.
 .PP
-Some requests, such as 
+Some requests, such as
 .BR .tl ,
 are unimplemented for lack of a good implementation.
 Workarounds can be defined as necessary in input files.

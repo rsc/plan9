@@ -946,7 +946,7 @@ edit (left, lenl, right, lenr, outfile)
 	    tmp = fdopen (tfd, "w+");
 	    if (tmp == NULL)
 	      perror_fatal ("temporary file name");
- 
+
 	    tmpmade = 1;
 
 	    if (cmd1 == 'l' || cmd1 == 'b')

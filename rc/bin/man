@@ -34,7 +34,7 @@ fn roff {
 	{echo -n $FONTS; cat $2 </dev/null} |
 		switch($#preproc) {
 		case 0
-			troff $Nflag $Lflag -$MAN 
+			troff $Nflag $Lflag -$MAN
 		case 1
 			$preproc | troff $Nflag $Lflag -$MAN
 		case 2

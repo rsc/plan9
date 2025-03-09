@@ -26,7 +26,7 @@ looks up words from the named
 .I files
 (standard input default)
 in a spelling list and places
-possible misspellings\(emwords 
+possible misspellings\(emwords
 not sanctioned there\(emon the standard output.
 .PP
 .I Spell
@@ -48,7 +48,7 @@ Print on standard error, marked with
 every stem as it is looked up in the spelling list,
 along with its affix classes.
 .PP
-As a matter of policy, 
+As a matter of policy,
 .I spell
 does not admit multiple spellings of the same word.
 Variants that follow general rules are preferred
@@ -57,7 +57,7 @@ more common.
 Thus, in American usage, `modelled', `sizeable', and `judgment' are
 rejected in favor of `modeled', `sizable', and `judgement'.
 Agglutinated variants are shunned: `crewmember' and `backyard'
-cede to `crew member' and  `back yard' (noun) or `back-yard' 
+cede to `crew member' and  `back yard' (noun) or `back-yard'
 (adjective).
 .SH FILES
 .TF \fL/sys/lib/brspell

@@ -73,7 +73,7 @@ is assumed, with collating sequence
 .SH SOURCE
 .B /sys/src/cmd/look.c
 .SH "SEE ALSO"
-.IR sort (1), 
+.IR sort (1),
 .IR grep (1)
 .SH DIAGNOSTICS
 The exit status is

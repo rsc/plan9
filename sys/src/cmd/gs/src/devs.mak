@@ -1,12 +1,12 @@
 #    Copyright (C) 1989, 2000-2004 artofcode LLC. All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -575,7 +575,7 @@ $(DD)ljetplus.dev : $(DEVS_MAK) $(HPMONO) $(GLD)page.dev
 	$(SETPDEV2) $(DD)ljetplus $(HPMONO)
 
 ### Selecting ljet2p provides TIFF (mode 2) compression on LaserJet III,
-### IIIp, IIId, IIIsi, IId, and IIp. 
+### IIIp, IIId, IIIsi, IId, and IIp.
 
 $(DD)ljet2p.dev : $(DEVS_MAK) $(HPMONO) $(GLD)page.dev
 	$(SETPDEV2) $(DD)ljet2p $(HPMONO)
@@ -794,7 +794,7 @@ pdfwrite_=$(pdfwrite1_) $(pdfwrite2_) $(pdfwrite3_) $(pdfwrite4_)\
  $(pdfwrite10_) $(pdfwrite11_)
 
 # Since ps2write actually is a clone of pdfwrite,
-# we don't define a full module for it, 
+# we don't define a full module for it,
 # but generate both devices within pdfwrite.dev .
 
 # Note that for ps2pdf operation, we need to parse DSC comments to set
@@ -1599,4 +1599,3 @@ tiffsep_=$(tiffgray_) $(GLOBJ)gdevdevn.$(OBJ) $(GLOBJ)gsequivc.$(OBJ)
 $(DD)tiffsep.dev : $(DEVS_MAK) $(tiffgray_) $(DD)tiffs.dev
 	$(SETPDEV2) $(DD)tiffsep $(tiffsep_)
 	$(ADDMOD) $(DD)tiffsep -include $(DD)tiffs
-

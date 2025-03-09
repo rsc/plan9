@@ -26,9 +26,9 @@ fn clone{
 	mkdir -p $local/.git/fs
 	mkdir -p $local/.git/objects/pack/
 	mkdir -p $local/.git/refs/heads/
-	
+
 	cd $local
-	
+
 	>>.git/config {
 		echo '[remote "origin"]'
 		echo '	url='$remote

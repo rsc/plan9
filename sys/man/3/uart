@@ -1,4 +1,4 @@
-.TH UART 3 
+.TH UART 3
 .SH NAME
 uart, eia \- serial communication control
 .SH SYNOPSIS

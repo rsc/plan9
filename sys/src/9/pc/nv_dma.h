@@ -78,7 +78,7 @@
 #define LINE_LINES(i)                                               0x00008400\
                                                                     +(i)*8
 #define LINE_LINES_POINT0_X                                         15:0
-#define LINE_LINES_POINT0_Y                                         31:16 
+#define LINE_LINES_POINT0_Y                                         31:16
 #define LINE_LINES_POINT1_X                                         47:32
 #define LINE_LINES_POINT1_Y                                         63:48
 
@@ -149,7 +149,7 @@
 #define STRETCH_BLIT_FORMAT_YUYV                                    0x00000005
 #define STRETCH_BLIT_FORMAT_UYVY                                    0x00000006
 #define STRETCH_BLIT_CLIP_POINT                                     0x0000E308
-#define STRETCH_BLIT_CLIP_POINT_X                                   15:0 
+#define STRETCH_BLIT_CLIP_POINT_X                                   15:0
 #define STRETCH_BLIT_CLIP_POINT_Y                                   31:16
 #define STRETCH_BLIT_CLIP_SIZE                                      0x0000E30C
 #define STRETCH_BLIT_CLIP_SIZE_WIDTH                                15:0

@@ -45,7 +45,7 @@ qlock(QLock *q)
 	/*
 	 * Can't assert this because of RWLock
 	assert(q->hold != up);
-	 */		
+	 */
 
 	queue((Proc**)&q->first, (Proc**)&q->last);
 	unlock(&q->lk);
@@ -71,7 +71,7 @@ qunlock(QLock *q)
 	Proc *p;
 
 	lock(&q->lk);
-	/* 
+	/*
 	 * Can't assert this because of RWlock
 	assert(q->hold == CT);
 	 */
@@ -91,4 +91,3 @@ holdqlock(QLock *q)
 {
 	return q->hold == up;
 }
-

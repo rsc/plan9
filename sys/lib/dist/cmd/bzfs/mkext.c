@@ -4,14 +4,14 @@
  * prefixed with "bzfilesystem\n" and suffixed with
  * a kilobyte of zeros.
  *
- * changes to the file system are only kept in 
+ * changes to the file system are only kept in
  * memory, not written back to the disk.
  *
  * this is intended for use on a floppy boot disk.
  * we assume the file is in the dos file system and
  * contiguous on the disk: finding it amounts to
- * looking at the beginning of each sector for 
- * "bzfilesystem\n".  then we pipe it through 
+ * looking at the beginning of each sector for
+ * "bzfilesystem\n".  then we pipe it through
  * bunzip2 and store the files in a file tree in memory.
  * things are slightly complicated by the fact that
  * devfloppy requires reads to be on a 512-byte
@@ -50,7 +50,7 @@ usage(void)
 }
 
 /*
- * floppy disks can only be read on 512-byte 
+ * floppy disks can only be read on 512-byte
  * boundaries and in 512 byte multiples.
  * feed one over a pipe to allow arbitrary reading.
  */
@@ -78,7 +78,7 @@ blockread(int in, char *first, int nfirst)
 	}
 
 	write(out, first, nfirst);
-	
+
 	while((n=read(in, blk, sizeof blk)) > 0){
 		if(write(out, blk, n) != n)
 			break;
@@ -222,7 +222,7 @@ ffcreate(char *name, ulong mode, char *uid, char *gid, ulong mtime, int length)
 	nd.mtime = mtime;
 	if(length)
 		nd.length = length;
-	if(dirfwstat(fd, &nd) < 0)	
+	if(dirfwstat(fd, &nd) < 0)
 		error("fwstat %s: %r", buf);
 
 	return fd;

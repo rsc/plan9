@@ -1,12 +1,12 @@
 /* Copyright (C) 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -193,8 +193,8 @@ pdf_pattern(gx_device_pdf *pdev, const gx_drawing_color *pdc,
 }
 
 /* Store pattern 1 parameters to cos dictionary. */
-int 
-pdf_store_pattern1_params(gx_device_pdf *pdev, pdf_resource_t *pres, 
+int
+pdf_store_pattern1_params(gx_device_pdf *pdev, pdf_resource_t *pres,
 			gs_pattern1_instance_t *pinst)
 {
     gs_pattern1_template_t *t = &pinst->template;
@@ -209,9 +209,9 @@ pdf_store_pattern1_params(gx_device_pdf *pdev, pdf_resource_t *pres,
     if (pcd == NULL || pcd_Resources == NULL)
 	return_error(gs_error_VMerror);
     pdev->substream_Resources = pcd_Resources;
-    sprintf(buf, "[%g %g %g %g]", t->BBox.p.x, t->BBox.p.y, 
+    sprintf(buf, "[%g %g %g %g]", t->BBox.p.x, t->BBox.p.y,
 				  t->BBox.q.x, t->BBox.q.y);
-    /* The graphics library assumes a shifted origin to provide 
+    /* The graphics library assumes a shifted origin to provide
        positive bitmap pixel indices. Compensate it now. */
     smat.tx += pinst->step_matrix.tx;
     smat.ty += pinst->step_matrix.ty;
@@ -323,7 +323,7 @@ pdf_put_uncolored_pattern(gx_device_pdf *pdev, const gx_drawing_color *pdc,
 	    *ppres = pdf_find_resource_by_gs_id(pdev, resourcePattern, pdc->mask.id);
 	    *ppres = pdf_substitute_pattern(*ppres);
 	    if (!pdev->AR4_save_bug && pdev->CompatibilityLevel <= 1.3) {
-		/* We reconnized AR4 behavior as reserving "q Q" stack elements 
+		/* We reconnized AR4 behavior as reserving "q Q" stack elements
 		 * on demand. It looks as processing a pattern stream
 		 * with PaintType 1 AR4 replaces the topmost stack element
 		 * instead allocating a new one, if it was not previousely allocated.
@@ -388,7 +388,7 @@ pdf_put_colored_pattern(gx_device_pdf *pdev, const gx_drawing_color *pdc,
 		    for (j = 0; j < width; ++j) {
 			if (mp[j >> 3] & (0x80 >> (j & 7))) {
 			    gx_color_index ci = 0;
-			
+
 			    for (k = 0; k < depth_bytes; ++k)
 				ci = (ci << 8) + *bp++;
 			    if (first)
@@ -405,7 +405,7 @@ pdf_put_colored_pattern(gx_device_pdf *pdev, const gx_drawing_color *pdc,
 
 		    dcolor = *pdc;
 		    dcolor.colors.pure = color;
-		    return pdf_put_uncolored_pattern(pdev, &dcolor, pcs, ppscc, 
+		    return pdf_put_uncolored_pattern(pdev, &dcolor, pcs, ppscc,
 				have_pattern_streams, ppres);
 		}
 	    not_pure:

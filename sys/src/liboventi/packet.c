@@ -37,7 +37,7 @@ Packet *
 packetAlloc(void)
 {
 	Packet *p;
-	
+
 	lock(&freeList.lk);
 	p = freeList.packet;
 	if(p != nil)
@@ -84,7 +84,7 @@ if(0)fprint(2, "packetFree %p\n", p);
 
 Packet *
 packetDup(Packet *p, int offset, int n)
-{	
+{
 	Frag *f, *ff;
 	Packet *pp;
 
@@ -103,7 +103,7 @@ packetDup(Packet *p, int offset, int n)
 	/* skip offset */
 	for(f=p->first; offset >= FRAGSIZE(f); f=f->next)
 		offset -= FRAGSIZE(f);
-	
+
 	/* first frag */
 	ff = fragDup(pp, f);
 	ff->rp += offset;
@@ -119,7 +119,7 @@ packetDup(Packet *p, int offset, int n)
 		n -= FRAGSIZE(ff);
 		pp->asize += FRAGASIZE(ff);
 	}
-	
+
 	/* fix up last frag: note n <= 0 */
 	ff->wp += n;
 	ff->next = nil;
@@ -207,7 +207,7 @@ packetTrim(Packet *p, int offset, int n)
 		p->asize = 0;
 		return 1;
 	}
-	
+
 	/* free before offset */
 	for(f=p->first; offset >= FRAGSIZE(f); f=ff) {
 		p->asize -= FRAGASIZE(f);
@@ -252,7 +252,7 @@ packetHeader(Packet *p, int n)
 	}
 
 	p->size += n;
-	
+
 	/* try and fix in current frag */
 	f = p->first;
 	if(f != nil) {
@@ -286,7 +286,7 @@ packetTrailer(Packet *p, int n)
 	}
 
 	p->size += n;
-	
+
 	/* try and fix in current frag */
 	if(p->first != nil) {
 		f = p->last;
@@ -340,7 +340,7 @@ packetPrefix(Packet *p, uchar *buf, int n)
 		nn = n;
 		if(nn > MaxFragSize)
 			nn = MaxFragSize;
-		f = fragAlloc(p, nn, PEnd, p->first);	
+		f = fragAlloc(p, nn, PEnd, p->first);
 		p->asize += FRAGASIZE(f);
 		if(p->first == nil)
 			p->last = f;
@@ -377,7 +377,7 @@ packetAppend(Packet *p, uchar *buf, int n)
 			n -= nn;
 		}
 	}
-	
+
 	while(n > 0) {
 		nn = n;
 		if(nn > MaxFragSize)
@@ -438,7 +438,7 @@ packetPeek(Packet *p, uchar *buf, int offset, int n)
 		vtSetError(EPacketSize);
 		return 0;
 	}
-	
+
 	/* skip up to offset */
 	for(f=p->first; offset >= FRAGSIZE(f); f=f->next)
 		offset -= FRAGSIZE(f);
@@ -484,7 +484,7 @@ packetFragments(Packet *p, IOchunk *io, int nio, int offset)
 	NOTFREE(p);
 	if(p->size == 0 || nio <= 0)
 		return 0;
-	
+
 	if(offset < 0 || offset > p->size) {
 		vtSetError(EPacketOffset);
 		return -1;
@@ -497,7 +497,7 @@ packetFragments(Packet *p, IOchunk *io, int nio, int offset)
 	eio = io + nio;
 	for(; f != nil && io < eio; f=f->next) {
 		io->addr = f->rp + offset;
-		io->len = f->wp - (f->rp + offset);	
+		io->len = f->wp - (f->rp + offset);
 		offset = 0;
 		size += io->len;
 		io++;
@@ -528,7 +528,7 @@ packetStats(void)
 	nbm = 0;
 	for(m=freeList.bigMem; m; m=m->next)
 		nbm++;
-	
+
 	fprint(2, "packet: %d/%d frag: %d/%d small mem: %d/%d big mem: %d/%d\n",
 		np, freeList.npacket,
 		nf, freeList.nfrag,
@@ -546,7 +546,7 @@ packetSize(Packet *p)
 	if(0) {
 		Frag *f;
 		int size = 0;
-	
+
 		for(f=p->first; f; f=f->next)
 			size += FRAGSIZE(f);
 		if(size != p->size)
@@ -563,7 +563,7 @@ packetAllocatedSize(Packet *p)
 	if(0) {
 		Frag *f;
 		int asize = 0;
-	
+
 		for(f=p->first; f; f=f->next)
 			asize += FRAGASIZE(f);
 		if(asize != p->asize)
@@ -644,7 +644,7 @@ packetCmp(Packet *pkt0, Packet *pkt1)
 		}
 	}
 }
-	
+
 
 static Frag *
 fragAlloc(Packet *p, int n, int pos, Frag *next)
@@ -661,7 +661,7 @@ fragAlloc(Packet *p, int n, int pos, Frag *next)
 			goto Found;
 		}
 	}
-	lock(&freeList.lk);	
+	lock(&freeList.lk);
 	f = freeList.frag;
 	if(f != nil)
 		freeList.frag = f->next;
@@ -695,7 +695,7 @@ fragDup(Packet *p, Frag *f)
 	Frag *ff;
 	Mem *m;
 
-	m = f->mem;	
+	m = f->mem;
 
 	/*
 	 * m->rp && m->wp can be out of date when ref == 1
@@ -728,7 +728,7 @@ fragFree(Frag *f)
 	lock(&freeList.lk);
 	f->next = freeList.frag;
 	freeList.frag = f;
-	unlock(&freeList.lk);	
+	unlock(&freeList.lk);
 }
 
 static Mem *
@@ -766,7 +766,7 @@ memAlloc(int n, int pos)
 		m->bp = vtMemBrk(nn);
 		m->ep = m->bp + nn;
 	}
-	assert(m->ref == 0);	
+	assert(m->ref == 0);
 	m->ref = 1;
 
 	switch(pos) {
@@ -781,7 +781,7 @@ memAlloc(int n, int pos)
 		break;
 	case PEnd:
 		m->rp = m->ep - n;
-		break; 
+		break;
 	}
 	/* check we did not blow it */
 	if(m->rp < m->bp)

@@ -32,7 +32,7 @@ struct Fid
 };
 
 struct Paq
-{	
+{
 	int ref;
 	Paq *up;
 	PaqDir *dir;
@@ -228,7 +228,7 @@ main(int argc, char *argv[])
 		usage();
 
 	init(argv[0], verify);
-	
+
 	if(!stdio){
 		if(pipe(pfd) < 0)
 			sysfatal("pipe: %r");
@@ -713,7 +713,7 @@ blockLoad(ulong addr, int type)
 	b->age = cacheage;
 	b->addr = addr;
 	b->ref = 1;
-	
+
 	return b;
 }
 
@@ -880,7 +880,7 @@ init(char *file, int verify)
 		sysfatal("could not open file: %s: %r", file);
 	if(verify)
 		ds = sha1(0, 0, 0, 0);
-	
+
 	readHeader(&hdr, file, ds);
 	blocksize = hdr.blocksize;
 
@@ -990,7 +990,7 @@ void
 readHeader(PaqHeader *hdr, char *name, DigestState *ds)
 {
 	uchar buf[HeaderSize];
-	
+
 	if(Bread(bin, buf, HeaderSize) < HeaderSize)
 		sysfatal("could not read header: %s: %r", name);
 	if(ds)
@@ -1113,7 +1113,7 @@ gets(uchar *p)
 int
 checkDirSize(uchar *p, uchar *ep)
 {
-	int n;	
+	int n;
 	int i;
 
 	if(ep-p < 2)
@@ -1213,4 +1213,3 @@ usage(void)
 	fprint(2, "usage: %s [-disv] [-c cachesize] [-m mountpoint] [-M mesgsize] paqfile\n", argv0);
 	exits("usage");
 }
-

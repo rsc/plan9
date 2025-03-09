@@ -62,7 +62,7 @@ define cw % "\&" font CW %
 .SH
 Introduction
 .PP
-\*(Tr and \*(NR are text processors 
+\*(Tr and \*(NR are text processors
 that format text for typesetter- and
 typewriter-like terminals, respectively.
 They accept lines of text interspersed with lines of
@@ -101,7 +101,7 @@ Conditional input is provided to enable
 the user to embed input expressly destined for either program.
 \*(Nr can prepare output directly for a variety of terminal types and
 is capable of utilizing the full resolution of each terminal.
-\*(Nr is the same program as \*(TR; in fact, on Plan 9 
+\*(Nr is the same program as \*(TR; in fact, on Plan 9
 \*(NR is a shell script that calls \*(TR with the
 .CW -N
 argument.
@@ -344,7 +344,7 @@ These include the equation preprocessor
 the table-construction preprocessor
 .I tbl ,
 and
-.I pic 
+.I pic
 and
 .I grap
 for various forms of graphics.
@@ -361,14 +361,14 @@ to set the parameter to @N@, increment it by @N@, or decrement it by @N@,
 respectively.
 Plain @N@ means that the value is used to set the parameter.
 .BI "Initial Values
-separated by 
+separated by
 .CW ;
 are for
 \*(TR
 and
 \*(NR
 respectively.
-In the 
+In the
 .BI Notes
 column,
 .TS
@@ -1111,7 +1111,7 @@ The requests
 .CW ll ,
 .CW in ,
 and
-.CW lt 
+.CW lt
 restore the previous parameter value in the absence
 of an argument.
 .PP
@@ -1126,7 +1126,7 @@ The \*(TR character set is defined by a description file specific to each output
 There are normally several regular fonts and one or more special fonts.
 Characters are input as themselves,
 as @cw "\e(" xx@, as @cw "\eC'" name cw "'"@,
-or as 
+or as
 .CW \eN'@n@' .
 The form
 .CW \eC'@name@'
@@ -1589,7 +1589,7 @@ In
 .CW \ex'\f2...\fP'
 and other functions having a pair of delimiters around
 their parameter,
-the delimiter choice (here 
+the delimiter choice (here
 .CW ' )
 is arbitrary,
 except that it can not look like the continuation of a number expression for @N@.
@@ -2115,7 +2115,7 @@ but is often a subset of
 They may be input by
 \&\f(CW\e(fi\fR, \&\f(CW\e(fl\fR, \&\f(CW\e(ff\fR, \&\f(CW\e(Fi\fR, and \&\f(CW\e(Fl\fR respectively.
 .lg
-The ligature mode is normally on in \*(TR, and automatically invokes 
+The ligature mode is normally on in \*(TR, and automatically invokes
 ligatures during input.
 .h1
 .bt "\&\f(CW&lg\fI N\fR" "on; off" "on" "-" "Ligature mode
@@ -2201,8 +2201,8 @@ copies
 .I anything
 to the output, as a device control function of the form
 .CW x
-.CW X 
-.I anything 
+.CW X
+.I anything
 (§22).
 Escape sequences in
 .I anything
@@ -2438,7 +2438,7 @@ For example the macro
 \&..
 .ps +1
 .P2
-.nr DV \nx 
+.nr DV \nx
 will draw a box around some text whose beginning vertical place was
 saved in number register \fIa\fR
 (e.g., using \&\f(CW.mk\ a\fR)
@@ -2806,7 +2806,7 @@ The number register
 contains the number of input lines read from the current file,
 again perhaps as modified by
 .CW lf .
-.CW 
+.CW
 .bt "\&\f(CW.pm\fI t\fR" "-" "all" "-" "Print macros.
 The names and sizes of all of the defined macros and strings are printed
 on the standard error;
@@ -2888,7 +2888,7 @@ end of the line they occur on.
 The device control and graphics commands are intended as open-ended
 families, to be expanded as needed.
 The graphics functions coincide directly with the
-.CW \eD 
+.CW \eD
 sequences:
 .IP
 .nf
@@ -3016,7 +3016,7 @@ command-line option may be used to change the default directory.
 .......
 .sc "Device description file.
 General parameters of the device are stored, one per line, in
-the file 
+the file
 .CW /sys/lib/troff/font/dev@name@/DESC ,
 as a sequence of names and values.
 \*(Tr recognizes these parameters, and ignores any
@@ -3038,7 +3038,7 @@ to be initially mounted.
 The list of sizes is a set of integers representing
 some or all of the legal sizes the device can produce,
 terminated by a zero.
-The 
+The
 .CW res
 parameter gives the resolution of the machine in units per inch;
 .CW hor
@@ -3117,7 +3117,7 @@ Comments are permitted,
 as are other unrecognized parameters.
 .PP
 Each line following
-.CW charset 
+.CW charset
 describes one character: its name, its width in units as described above,
 ascender/descender information, and a decimal, octal or hexadecimal value
 by which the output device knows it
@@ -3138,7 +3138,7 @@ is 2 if it has an ascender (is tall, like
 is 3 if both,
 and is 0 if neither.
 The value is returned
-in the 
+in the
 .CW ct
 register, as computed by the
 .CW \ew
@@ -3165,7 +3165,7 @@ em	100	0	208
 This says, for example, that the width of the letter
 .CW a
 is 44 units at point size 10,
-the value of 
+the value of
 .CW unitwidth .
 Point sizes are scaled linearly and rounded, so the width of
 .CW a

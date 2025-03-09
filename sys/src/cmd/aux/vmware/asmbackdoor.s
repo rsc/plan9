@@ -23,6 +23,3 @@ done:
 	MOVL	AX, 28(BP)
 
 	RET
-
-
-	

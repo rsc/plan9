@@ -19,7 +19,7 @@ while(! ~ $#* 0){
 	cname=$2
 	file=$3
 	shift
-	shift 
+	shift
 	shift
 	allname=($allname $name)
 	allcname=($allcname $cname)

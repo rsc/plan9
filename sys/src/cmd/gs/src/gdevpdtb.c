@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -164,7 +164,7 @@ pdf_end_fontfile(gx_device_pdf *pdev, pdf_data_writer_t *pdw)
  */
 int
 pdf_base_font_alloc(gx_device_pdf *pdev, pdf_base_font_t **ppbfont,
-		    gs_font_base *font, const gs_matrix *orig_matrix, 
+		    gs_font_base *font, const gs_matrix *orig_matrix,
 		    bool is_standard, bool orig_name)
 {
     gs_memory_t *mem = pdev->pdf_memory;
@@ -185,7 +185,7 @@ pdf_base_font_alloc(gx_device_pdf *pdev, pdf_base_font_t **ppbfont,
 	goto fail;
     memset(pbfont, 0, sizeof(*pbfont));
     {
-	/* 
+	/*
 	 * Adobe Technical Note # 5012 "The Type 42 Font Format Specification" says :
 	 *
 	 * There is a known bug in the TrueType rasterizer included in versions of the
@@ -194,7 +194,7 @@ pdf_base_font_alloc(gx_device_pdf *pdev, pdf_base_font_t **ppbfont,
 	 * definefont or makefont operators, are ignored. Translation of user space is
 	 * not affected by this bug.
 	 *
-	 * Besides that, we found that Adobe Acrobat Reader 4 and 5 ignore 
+	 * Besides that, we found that Adobe Acrobat Reader 4 and 5 ignore
 	 * FontMatrix.ty .
 	 */
 	copied->FontMatrix.tx = copied->FontMatrix.ty = 0;
@@ -481,7 +481,7 @@ pdf_write_embedded_font(gx_device_pdf *pdev, pdf_base_font_t *pbfont,
 
     if (pbfont->written)
 	return 0;		/* already written */
-    code = pdf_begin_data_stream(pdev, &writer, DATA_STREAM_BINARY | 
+    code = pdf_begin_data_stream(pdev, &writer, DATA_STREAM_BINARY |
 			    /* Don't set DATA_STREAM_ENCRYPT since we write to a temporary file.
 			       See comment in pdf_begin_encrypt. */
 				 (pdev->CompressFonts ?
@@ -493,7 +493,7 @@ pdf_write_embedded_font(gx_device_pdf *pdev, pdf_base_font_t *pbfont,
 	/*
 	 * Due to a bug in Acrobat Reader 3, we need to generate
 	 * unique font names, except base 14 fonts being not embedded.
-	 * To recognize base 14 fonts here we used the knowledge 
+	 * To recognize base 14 fonts here we used the knowledge
 	 * that pbfont->is_standard is true for base 14 fonts only.
 	 * Note that subsetted fonts already have an unique name
 	 * due to subset prefix.
@@ -535,17 +535,17 @@ pdf_write_embedded_font(gx_device_pdf *pdev, pdf_base_font_t *pbfont,
 	    if (lengths[0] > 0) {
 		if (code < 0)
 		    return code;
-		code = cos_dict_put_c_key_int((cos_dict_t *)writer.pres->object, 
+		code = cos_dict_put_c_key_int((cos_dict_t *)writer.pres->object,
 			    "/Length1", lengths[0]);
 	    }
 	    if (lengths[1] > 0) {
 		if (code < 0)
 		    return code;
-		code = cos_dict_put_c_key_int((cos_dict_t *)writer.pres->object, 
+		code = cos_dict_put_c_key_int((cos_dict_t *)writer.pres->object,
 			    "/Length2", lengths[1]);
 		if (code < 0)
 		    return code;
-		code = cos_dict_put_c_key_int((cos_dict_t *)writer.pres->object, 
+		code = cos_dict_put_c_key_int((cos_dict_t *)writer.pres->object,
 			    "/Length3", lengths[2]);
 	    }
 	} else {
@@ -576,7 +576,7 @@ pdf_write_embedded_font(gx_device_pdf *pdev, pdf_base_font_t *pbfont,
 	     WRITE_TRUETYPE_NO_TRIMMED_TABLE : 0) |
 	    /* Generate a cmap only for incrementally downloaded fonts
 	       and for subsetted fonts. */
-	    (pfont->data.numGlyphs != pfont->data.trueNumGlyphs || 
+	    (pfont->data.numGlyphs != pfont->data.trueNumGlyphs ||
 	     pbfont->do_subset == DO_SUBSET_YES ?
 	     WRITE_TRUETYPE_CMAP : 0);
 	stream poss;
@@ -674,8 +674,8 @@ pdf_write_CIDSet(gx_device_pdf *pdev, pdf_base_font_t *pbfont,
     int code;
 
     code = pdf_begin_data_stream(pdev, &writer,
-		      DATA_STREAM_BINARY | 
-		      (pdev->CompressFonts ? DATA_STREAM_COMPRESS : 0), 
+		      DATA_STREAM_BINARY |
+		      (pdev->CompressFonts ? DATA_STREAM_COMPRESS : 0),
 		      gs_no_id);
     if (code < 0)
 	return code;

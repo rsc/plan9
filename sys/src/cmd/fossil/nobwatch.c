@@ -36,4 +36,3 @@ bwatchUnlock(Block *b)
 {
 	USED(b);
 }
-

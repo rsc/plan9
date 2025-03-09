@@ -344,4 +344,3 @@ image_class_(gs_image_class_2_fracs)
 image_class_(gs_image_class_3_mono)
 image_class_(gs_image_class_4_color)
 #endif
-

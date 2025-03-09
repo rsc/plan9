@@ -19,4 +19,3 @@ fn fat {
 
 fat 54 || fat 82
 exit $status
-

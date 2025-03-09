@@ -45,7 +45,7 @@ cyber938xlinear(VGAscr* scr, int, int)
 
 	if(scr->vaddr)
 		return;
-	
+
 	vgalinearpciid(scr, 0x1023, 0);
 	p = scr->pci;
 

@@ -11,4 +11,3 @@ _MALLOCZ(int n, int clr)
 		memset(v, 0, n);
 	return v;
 }
-

@@ -3,7 +3,7 @@
 #	for delivery.  we assume the mail server handles incoming messages.
 #
 #	by default the return address points to this system; set $site
-#	to the name of the mail server that receives your mail in 
+#	to the name of the mail server that receives your mail in
 #	/rc/bin/termrc and /rc/bin/cpurc.
 #
 #	replace YOURDOMAIN.DOM with the name of your domain.

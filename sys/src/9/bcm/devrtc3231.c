@@ -25,7 +25,7 @@ enum {
 	Pm=		1<<5,
 
 	I2Caddr=	0x68,
-	
+
 };
 
 typedef struct Rtc	Rtc;
@@ -87,13 +87,13 @@ rtcattach(char* spec)
 	return devattach('r', spec);
 }
 
-static Walkqid*	 
+static Walkqid*
 rtcwalk(Chan* c, Chan *nc, char** name, int nname)
 {
 	return devwalk(c, nc, name, nname, rtcdir, nelem(rtcdir), devgen);
 }
 
-static int	 
+static int
 rtcstat(Chan* c, uchar* dp, int n)
 {
 	return devstat(c, dp, n, rtcdir, nelem(rtcdir), devgen);
@@ -116,7 +116,7 @@ rtcopen(Chan* c, int omode)
 	return devopen(c, omode, rtcdir, nelem(rtcdir), devgen);
 }
 
-static void	 
+static void
 rtcclose(Chan*)
 {
 }
@@ -127,7 +127,7 @@ bcd(int n)
 	return (n & 0xF) + (10 * (n >> 4));
 }
 
-long	 
+long
 rtctime(void)
 {
 	uchar clk[Nbcd];
@@ -163,7 +163,7 @@ rtctime(void)
 }
 
 
-static long	 
+static long
 rtcread(Chan* c, void* buf, long n, vlong off)
 {
 	ulong t;
@@ -184,7 +184,7 @@ rtcread(Chan* c, void* buf, long n, vlong off)
 
 #define PUTBCD(n,o) bcdclock[1+o] = (n % 10) | (((n / 10) % 10)<<4)
 
-static long	 
+static long
 rtcwrite(Chan* c, void* buf, long n, vlong off)
 {
 	Rtc rtc;
@@ -210,7 +210,7 @@ rtcwrite(Chan* c, void* buf, long n, vlong off)
 			cp++;
 		}
 		secs = strtoul(cp, 0, 0);
-	
+
 		/*
 		 *  convert to bcd
 		 */

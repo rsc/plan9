@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -36,14 +36,14 @@ private int ref_stack_push_block(ref_stack_t *pstack, uint keep, uint add);
 
 /* GC descriptors and procedures */
 private_st_ref_stack_params();
-private 
+private
 CLEAR_MARKS_PROC(ref_stack_clear_marks)
 {
     ref_stack_t *const sptr = vptr;
 
     r_clear_attrs(&sptr->current, l_mark);
 }
-private 
+private
 ENUM_PTRS_WITH(ref_stack_enum_ptrs, ref_stack_t *sptr) return 0;
 case 0: ENUM_RETURN_REF(&sptr->current);
 case 1: return ENUM_OBJ(sptr->params);

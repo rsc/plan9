@@ -170,7 +170,7 @@ sgi_print_page(gx_device_printer *pdev, FILE *pstream)
 	       optr=startcol;
 	       ibufend=curcol-1;
 	       while(iptr<ibufend) {
-		 sptr = iptr;						
+		 sptr = iptr;
 		 iptr += 2;
 		 while((iptr<ibufend)&&((iptr[-2]!=iptr[-1])||(iptr[-1]!=iptr[0])))
 		   iptr++;

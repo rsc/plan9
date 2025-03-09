@@ -155,7 +155,7 @@ latin1(Rune *k, int n)
 		else
 			return -5;
 	}
-	
+
 	for(l=latintab; l->ld!=0; l++)
 		if(k[0] == l->ld[0]){
 			if(n == 1)

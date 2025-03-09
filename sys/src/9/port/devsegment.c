@@ -43,7 +43,7 @@ struct Globalseg
 	char	*data;
 	long	off;
 	int	dlen;
-	int	cmd;	
+	int	cmd;
 	char	err[64];
 };
 
@@ -301,7 +301,7 @@ segmentcreate(Chan *c, char *name, int omode, ulong perm)
 	g->ref = 1;
 	kstrdup(&g->name, name);
 	kstrdup(&g->uid, up->user);
-	g->perm = 0660; 
+	g->perm = 0660;
 	globalseg[xfree] = g;
 	unlock(&globalseglock);
 	poperror();
@@ -576,4 +576,3 @@ Dev segmentdevtab = {
 	segmentremove,
 	segmentwstat,
 };
-

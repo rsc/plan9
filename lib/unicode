@@ -126,11 +126,11 @@
 00007d	right curly bracket
 00007e	tilde
 00007f	delete
-000080	
-000081	
+000080
+000081
 000082	break permitted here
 000083	no break here
-000084	
+000084
 000085	next line (nel)
 000086	start of selected area
 000087	end of selected area
@@ -151,7 +151,7 @@
 000096	start of guarded area
 000097	end of guarded area
 000098	start of string
-000099	
+000099
 00009a	single character introducer
 00009b	control sequence introducer
 00009c	string terminator

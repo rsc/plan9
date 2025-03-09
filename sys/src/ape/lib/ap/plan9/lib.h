@@ -29,7 +29,7 @@ typedef struct Fdinfo{
 	unsigned long	flags;
 	unsigned long	oflags;
 	uid_t	uid;
-	gid_t	gid;	
+	gid_t	gid;
 	char		*name;
 	/*
 	 * the following is used if flags&FD_BUFFERED

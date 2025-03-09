@@ -1,12 +1,12 @@
 /* Copyright (C) 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -26,7 +26,7 @@ mktemp(char *fname)
     struct stat fst;
     int len = strlen(fname);
     char *end = fname + len - 6;
-    
+
     if (len < 6 || strcmp(end, "XXXXXX"))
 	return (char *)0;	/* invalid  */
     strcpy(end, "AA.AAA");

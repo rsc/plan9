@@ -7,13 +7,13 @@
  * DESCRIPTION
  *
  *	This file contains function delcarations in both ANSI style
- *	(function prototypes) and traditional style. 
+ *	(function prototypes) and traditional style.
  *
  * AUTHOR
  *
  *     Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
@@ -23,7 +23,7 @@
  * duplicated in all such forms and that any documentation,
  * advertising materials, and other materials related to such
  * distribution and use acknowledge that the software was developed
- * by Mark H. Colburn and sponsored by The USENIX Association. 
+ * by Mark H. Colburn and sponsored by The USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED

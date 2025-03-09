@@ -63,4 +63,3 @@ readcertchain(char *filename)
 	}
 	return decodepemchain(chfile, "CERTIFICATE");
 }
-

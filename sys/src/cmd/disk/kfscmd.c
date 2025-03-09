@@ -52,5 +52,5 @@ main(int argc, char *argv[])
 			write(1, buf, n);
 		}
 	}
-	exits(errs ? "errors" : 0);		
+	exits(errs ? "errors" : 0);
 }

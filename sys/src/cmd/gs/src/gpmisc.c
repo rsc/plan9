@@ -1,12 +1,12 @@
 /* Copyright (C) 2000-2003 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -119,22 +119,22 @@ search_separator(const char **ip, const char *ipe, const char *item, int directi
 
 /*
  * Combine a file name with a prefix.
- * Concatenates two paths and reduce parent references and current 
+ * Concatenates two paths and reduce parent references and current
  * directory references from the concatenation when possible.
  * The trailing zero byte is being added.
  *
- * Examples : 
+ * Examples :
  *	"/gs/lib" + "../Resource/CMap/H" --> "/gs/Resource/CMap/H"
  *	"C:/gs/lib" + "../Resource/CMap/H" --> "C:/gs/Resource/CMap/H"
- *	"hard disk:gs:lib" + "::Resource:CMap:H" --> 
+ *	"hard disk:gs:lib" + "::Resource:CMap:H" -->
  *		"hard disk:gs:Resource:CMap:H"
- *	"DUA1:[GHOSTSCRIPT.LIB" + "-.RESOURCE.CMAP]H" --> 
+ *	"DUA1:[GHOSTSCRIPT.LIB" + "-.RESOURCE.CMAP]H" -->
  *		"DUA1:[GHOSTSCRIPT.RESOURCE.CMAP]H"
- *      "\\server\share/a/b///c/../d.e/./" + "../x.e/././/../../y.z/v.v" --> 
+ *      "\\server\share/a/b///c/../d.e/./" + "../x.e/././/../../y.z/v.v" -->
  *		"\\server\share/a/y.z/v.v"
  */
 gp_file_name_combine_result
-gp_file_name_combine_generic(const char *prefix, uint plen, const char *fname, uint flen, 
+gp_file_name_combine_generic(const char *prefix, uint plen, const char *fname, uint flen,
 		    bool no_sibling, char *buffer, uint *blen)
 {
     /*
@@ -211,7 +211,7 @@ gp_file_name_combine_generic(const char *prefix, uint plen, const char *fname, u
 		    /* Falls through. */
 		case 0:
 		    /* We have no infix, start with parent. */
-		    if ((no_sibling && ipe == fname + flen && flen != 0) || 
+		    if ((no_sibling && ipe == fname + flen && flen != 0) ||
 			    !gp_file_name_is_partent_allowed())
 			return gp_combine_cant_handle;
 		    /* Falls through. */
@@ -240,7 +240,7 @@ gp_file_name_combine_generic(const char *prefix, uint plen, const char *fname, u
 		const char *p = ip;
 
 		DISCARD(search_separator(&p, ipe, ip, 1));
-		if (p - ip != bie - bp || memcmp(ip, bp, p - ip))    
+		if (p - ip != bie - bp || memcmp(ip, bp, p - ip))
 		    return gp_combine_cant_handle;
 	    }
 	    slen = 0;
@@ -279,9 +279,9 @@ gp_file_name_combine_generic(const char *prefix, uint plen, const char *fname, u
 		if (slen == 0) {
 		    /* Insert a separator. */
 		    const char *sep;
-    
+
 		    slen = search_separator(&ip, ipe, fname, 1);
-		    sep = (slen != 0 ? gp_file_name_directory_separator() 
+		    sep = (slen != 0 ? gp_file_name_directory_separator()
 		                    : gp_file_name_separator());
 		    slen = strlen(sep);
 		    if (bp == buffer + rlen + infix_len)
@@ -299,14 +299,14 @@ gp_file_name_combine_generic(const char *prefix, uint plen, const char *fname, u
  * Reduces parent references and current directory references when possible.
  * The trailing zero byte is being added.
  *
- * Examples : 
+ * Examples :
  *	"/gs/lib/../Resource/CMap/H" --> "/gs/Resource/CMap/H"
  *	"C:/gs/lib/../Resource/CMap/H" --> "C:/gs/Resource/CMap/H"
- *	"hard disk:gs:lib::Resource:CMap:H" --> 
+ *	"hard disk:gs:lib::Resource:CMap:H" -->
  *		"hard disk:gs:Resource:CMap:H"
- *	"DUA1:[GHOSTSCRIPT.LIB.-.RESOURCE.CMAP]H" --> 
+ *	"DUA1:[GHOSTSCRIPT.LIB.-.RESOURCE.CMAP]H" -->
  *		"DUA1:[GHOSTSCRIPT.RESOURCE.CMAP]H"
- *      "\\server\share/a/b///c/../d.e/./../x.e/././/../../y.z/v.v" --> 
+ *      "\\server\share/a/b///c/../d.e/./../x.e/././/../../y.z/v.v" -->
  *		"\\server\share/a/y.z/v.v"
  *
  */
@@ -316,24 +316,24 @@ gp_file_name_reduce(const char *fname, uint flen, char *buffer, uint *blen)
     return gp_file_name_combine(fname, flen, fname + flen, 0, false, buffer, blen);
 }
 
-/* 
- * Answers whether a file name is absolute (starts from a root). 
+/*
+ * Answers whether a file name is absolute (starts from a root).
  */
-bool 
+bool
 gp_file_name_is_absolute(const char *fname, uint flen)
 {
     return (gp_file_name_root(fname, flen) > 0);
 }
 
-/* 
+/*
  * Returns length of all starting parent references.
  */
-private uint 
-gp_file_name_prefix(const char *fname, uint flen, 
+private uint
+gp_file_name_prefix(const char *fname, uint flen,
 		bool (*test)(const char *fname, uint flen))
 {
     uint plen = gp_file_name_root(fname, flen), slen;
-    const char *ip, *ipe; 
+    const char *ip, *ipe;
     const char *item = fname; /* plen == flen could cause an indeterminizm. */
 
     if (plen > 0)
@@ -350,20 +350,20 @@ gp_file_name_prefix(const char *fname, uint flen,
     return item - fname;
 }
 
-/* 
+/*
  * Returns length of all starting parent references.
  */
-uint 
+uint
 gp_file_name_parents(const char *fname, uint flen)
 {
-    return gp_file_name_prefix(fname, flen, gp_file_name_is_parent); 
+    return gp_file_name_prefix(fname, flen, gp_file_name_is_parent);
 }
 
-/* 
+/*
  * Returns length of all starting cwd references.
  */
-uint 
+uint
 gp_file_name_cwds(const char *fname, uint flen)
 {
-    return gp_file_name_prefix(fname, flen, gp_file_name_is_current); 
+    return gp_file_name_prefix(fname, flen, gp_file_name_is_current);
 }

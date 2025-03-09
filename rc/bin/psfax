@@ -34,7 +34,7 @@ ext=`{echo $tel | sed 's/.*\) [^ ]* [^ ]* ([^ ]*).*/\1/'}
 fn sigint{
 	#rm -f $tmp.* $tmpin.* $script $header $header.*
 	exit interrupt
-	
+
 }
 
 # gs insists on reading its standard input, so we read quit.ps to cut it off.

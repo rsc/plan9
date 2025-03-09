@@ -2,7 +2,7 @@
 .SH NAME
 ktrace \- interpret kernel stack dumps
 .SH SYNOPSIS
-.B ktrace 
+.B ktrace
 [
 .B -i
 ]
@@ -14,8 +14,8 @@ ktrace \- interpret kernel stack dumps
 ]
 .SH DESCRIPTION
 .I Ktrace
-translates a hexadecimal kernel stack dump 
-into a sequence of 
+translates a hexadecimal kernel stack dump
+into a sequence of
 .IR acid (1)
 commands to show the points in the call trace.
 The
@@ -30,7 +30,7 @@ For MIPS kernels, the contents of the
 .I link
 register must also be supplied.
 .PP
-A stack trace consists of a 
+A stack trace consists of a
 .I ktrace
 command followed by a series of lines containing
 fields of the form
@@ -46,7 +46,7 @@ The trace can be edited to provide the correct kernel path
 and then pasted into a shell window.
 If the
 .B -i
-option is present, 
+option is present,
 .I ktrace
 instead prompts for the contents of the memory locations in which it is interested;
 this is useful when the stack trace is on a screen rather than
@@ -57,6 +57,6 @@ in a machine readable form.
 .IR acid (1),
 .IR rdbfs (4)
 .SH BUGS
-When examining a kernel trace resulting from 
+When examining a kernel trace resulting from
 an interrupt on top of other interrupts,
 only the topmost call trace is printed.

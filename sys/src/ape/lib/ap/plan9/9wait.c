@@ -90,4 +90,3 @@ _WAIT(void)
 	memmove(w->msg, fld[4], l);
 	return w;
 }
-

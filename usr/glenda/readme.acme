@@ -14,7 +14,7 @@ text. You can edit anything at will.
 For example, in the left column is a directory window.
 If you look at the window's tag line, you will see that it contains
 
-	/usr/glenda/ Del Snarf Get | Look 
+	/usr/glenda/ Del Snarf Get | Look
 
 (This might be truncated if the column is narrow.)
 That is just text.
@@ -99,4 +99,3 @@ buffer. That's it!
 
 For more information, read /sys/doc/acme/acme.ps (you can just
 button-3 click on that string to view the file).
-

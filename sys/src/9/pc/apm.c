@@ -1,10 +1,10 @@
 /*
  * Interface to Advanced Power Management 1.2 BIOS
  *
- * This is, in many ways, a giant hack, and when things settle down 
+ * This is, in many ways, a giant hack, and when things settle down
  * a bit and standardize, hopefully we can write a driver that deals
  * more directly with the hardware and thus might be a bit cleaner.
- * 
+ *
  * ACPI might be the answer, but at the moment this is simpler
  * and more widespread.
  */
@@ -38,7 +38,7 @@ getreg(ulong *reg, ISAConf *isa, char *name)
 /*
  * Segment descriptors look like this.
  *
- * d1: [base 31:24] [gran] [is32bit] [0] [unused] [limit 19:16] 
+ * d1: [base 31:24] [gran] [is32bit] [0] [unused] [limit 19:16]
 		[present] [privlev] [type 3:0] [base 23:16]
  * d0: [base 15:00] [limit 15:00]
  *
@@ -136,7 +136,7 @@ apmlink(void)
 
 	/*
 	 * We are required by the BIOS to set up three consecutive segments,
-	 * one for the APM 32-bit code, one for the APM 16-bit code, and 
+	 * one for the APM 32-bit code, one for the APM 16-bit code, and
 	 * one for the APM data.  The BIOS handler uses the code segment it
 	 * get called with to determine the other two segment selector.
 	 */
@@ -150,4 +150,3 @@ print("apm0: configured cbase %.8lux off %.8lux\n", ax<<4, ebx);
 
 	return;
 }
-

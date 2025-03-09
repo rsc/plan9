@@ -514,7 +514,7 @@ dp83820rballoc(Desc* desc)
 		bp->next = nil;
 		ainc(&bp->ref);	/* prevent bp from being freed */
 		iunlock(&dp83820rblock);
-	
+
 		desc->bufptr = PCIWADDR(bp->rp);
 		desc->bp = bp;
 	}

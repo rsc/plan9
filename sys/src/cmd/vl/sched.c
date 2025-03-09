@@ -609,7 +609,7 @@ depend(Sch *sa, Sch *sb)
 			return 1;
 	}
 
-	return 0; 
+	return 0;
 }
 
 int

@@ -173,4 +173,3 @@ emallocz(ulong size, int zero)
 	setmalloctag(x, getcallerpc(&size));
 	return x;
 }
-

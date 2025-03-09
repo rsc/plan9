@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -342,14 +342,14 @@ int pdf_font_simple_alloc(gx_device_pdf *pdev, pdf_font_resource_t **ppfres,
 			  gs_id rid, pdf_font_descriptor_t *pfd);
 int pdf_font_cidfont_alloc(gx_device_pdf *pdev, pdf_font_resource_t **ppfres,
 			   gs_id rid, pdf_font_descriptor_t *pfd);
-int pdf_obtain_cidfont_widths_arrays(gx_device_pdf *pdev, pdf_font_resource_t *pdfont, 
+int pdf_obtain_cidfont_widths_arrays(gx_device_pdf *pdev, pdf_font_resource_t *pdfont,
 		    int wmode, double **w, double **w0, double **v);
 int font_resource_encoded_alloc(gx_device_pdf *pdev, pdf_font_resource_t **ppfres,
 			    gs_id rid, font_type ftype,
 			    pdf_font_write_contents_proc_t write_contents);
 
 /* Resize font resource arrays. */
-int pdf_resize_resource_arrays(gx_device_pdf *pdev, pdf_font_resource_t *pfres, 
+int pdf_resize_resource_arrays(gx_device_pdf *pdev, pdf_font_resource_t *pfres,
 	int chars_count);
 
 /*

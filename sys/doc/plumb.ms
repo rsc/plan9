@@ -475,7 +475,7 @@ first, that the regular expressions in
 .CW matches
 rules should be used to identify the relevant data;
 and second, approximately where the relevant data lies.
-The plumber 
+The plumber
 will then use the first
 .CW matches
 pattern to identify the longest leftmost match that touches the cursor, which will extract the string
@@ -1426,4 +1426,3 @@ San Francisco, CA, 1994.
 Niklaus Wirth and Jurg Gutknecht,
 .I "Project Oberon: The Design of an Operating System and Compilers" ,
 Addison-Wesley, Reading, 1992.
-

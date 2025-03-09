@@ -50,7 +50,7 @@ isum(void)
 				else
 					Bprint(bioout, "%-8ud      %s\n",
 					i->count, i->name);
-	
+
 				switch(i->type) {
 				default:
 					fatal(0, "isum bad stype %d\n", i->type);
@@ -88,14 +88,14 @@ isum(void)
 
 	total += anulled;
 	Bprint(bioout, "\n%-8ud      Memory cycles\n", loads+stores+total);
-	
+
 	Bprint(bioout, "%-8ud %3d%% Instruction cycles\n",
 				total, Percent(total, loads+stores+total));
 	Bprint(bioout, "%-8lud %3ld%% Annulled branch cycles\n",
 				anulled, Percent(anulled, total));
 
 	Bprint(bioout, "%-8ud %3d%% Data cycles\n\n",
-				loads+stores, Percent(loads+stores, loads+stores+total));	
+				loads+stores, Percent(loads+stores, loads+stores+total));
 
 	Bprint(bioout, "%-8ud %3d%% Stores\n", stores, Percent(stores, total));
 
@@ -123,7 +123,7 @@ isum(void)
 	Bprint(bioout, "   %-8ud %3d%% Delay slots\n",
 					useddelay, Percent(useddelay, branch));
 
-	Bprint(bioout, "   %-8ud %3d%% Unused delay slots\n", 
+	Bprint(bioout, "   %-8ud %3d%% Unused delay slots\n",
 					nopcount, Percent(nopcount, branch));
 
 	Bprint(bioout, "%-8ud %3d%% Program total delay slots\n",

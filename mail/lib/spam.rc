@@ -15,4 +15,3 @@ cd /mail/box/$user
 upas/addhash -o _prof.mbox _prof.mbox 1 $TMP.tok -1
 upas/addhash -o _prof.spam _prof.spam 1 $TMP.tok 1
 rm -f $TMP.*
-

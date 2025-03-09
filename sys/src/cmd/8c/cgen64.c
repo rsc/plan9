@@ -1367,7 +1367,7 @@ biggen(Node *l, Node *r, Node *t, int true, uchar code[][VLEN], uchar *a)
 							}
 						}
 						break;
-					
+
 					default:
 						diag(l, "bad V_lop");
 						return;
@@ -2497,7 +2497,7 @@ twoop:
 			reglcgen(&nod1, l, Z);
 			l = &nod1;
 		}
-		
+
 		if(nn != Z) {
 			d = regpair(nn, n);
 			instpair(d, Z);

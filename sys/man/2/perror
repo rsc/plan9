@@ -53,7 +53,7 @@ can be used safely in multi-threaded programs.
 .PP
 .I Sysfatal
 prints to standard error the name of the running program,
-a colon and a space, 
+a colon and a space,
 the message described by the
 .IR print (2)
 format string

@@ -339,7 +339,7 @@ con /srv/fscons
 .I length
 .SH DESCRIPTION
 These are configuration and maintenance commands
-executed at the console of a 
+executed at the console of a
 .IR fossil (4)
 file server.
 The commands are split into three groups above:
@@ -356,7 +356,7 @@ command
 reads
 .IR file ,
 treating each line as a command to be executed.
-Blank lines and lines beginning with a 
+Blank lines and lines beginning with a
 .L #
 character are ignored.
 Errors during execution are printed but do not stop the script.
@@ -404,7 +404,7 @@ starts a new listener at
 .IR address ;
 the
 .B -d
-flag causes 
+flag causes
 .I listen
 to remove the listener
 at the given address.
@@ -455,8 +455,8 @@ behaves like listen but uses
 rather than a network address.
 With the
 .B -p
-flag, 
-.I srv 
+flag,
+.I srv
 edits a list of console services rather than 9P services.
 With no arguments,
 .I srv
@@ -467,7 +467,7 @@ starts a new service at
 .IR /srv/name ;
 the
 .B -d
-flag causes 
+flag causes
 .I srv
 to remove the named service.
 See the
@@ -754,7 +754,7 @@ primarily to avoid wear on flash memories
 open the file system read-only
 .TP
 .BI -c " ncache
-allocate an in-memory cache of 
+allocate an in-memory cache of
 .I ncache
 (by default, 1000)
 blocks
@@ -794,7 +794,7 @@ starting at
 and continuing for
 .I count
 bytes or until the end of the block.
-If 
+If
 .I data
 (also hexadecimal)
 is given, the contents in that range are
@@ -809,7 +809,7 @@ Editing blocks is discouraged.
 zeros an entry from a disk block.
 Before doing so, it prints a
 .I block
-command that can be used 
+command that can be used
 to restore the entry.
 .PP
 .I Clri
@@ -828,7 +828,7 @@ commands.
 .PP
 .I Clrp
 zeros a pointer in a disk block.
-Before doing so, it prints a 
+Before doing so, it prints a
 .I block
 command that can be used to restore the entry.
 .PP
@@ -846,7 +846,7 @@ The
 .BR pdir ,
 and
 .B pfile
-options cause 
+options cause
 .I check
 to print the name of each block, directory, or file encountered.
 .PP
@@ -908,13 +908,13 @@ are uids
 .RI ( not
 unames;
 see the discussion above, in the description
-of the 
+of the
 .I uname
 command).
 .I Perm
 is the low 9 bits of the permission mode of the file,
 in octal.
-The 
+The
 .BR a ,
 .BR d ,
 and
@@ -950,7 +950,7 @@ The command
 ``\fLepoch\fI n''\fR
 is used to propose changing the low epoch to
 .IR n .
-In response, 
+In response,
 .I fossil
 scans
 .B /archive
@@ -1010,13 +1010,13 @@ removes
 .PP
 .I Snap
 takes a temporary snapshot of the current file system,
-recording it in 
+recording it in
 .BI /snapshot/ yyyy / mmdd / hhmm \fR,
-as described in 
+as described in
 .IR fossil (4).
 The
 .B -a
-flag causes 
+flag causes
 .I snap
 to take an archival snapshot, recording it in
 .BI /archive/ yyyy / mmdd \fR,
@@ -1025,7 +1025,7 @@ also described in
 By default the snapshot is taken of
 .BR /active ,
 the root of the active file system.
-The 
+The
 .B -s
 flag specifies a different source path.
 The

@@ -161,7 +161,7 @@ nsinit(int fd, char **rspp)
 	rp = getenv("rootspec");
 	if(rp == nil)
 		rp = "";
-	
+
 	afd = fauth(fd, rp);
 	if(afd >= 0){
 		ai = auth_proxy(afd, auth_getkey, "proto=p9any role=client");

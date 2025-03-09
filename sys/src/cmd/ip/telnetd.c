@@ -294,7 +294,7 @@ doauth(char *user)
 	if(noworldonly)
 		return -1;
 	return challuser(user);
-		
+
 }
 
 /*
@@ -327,7 +327,7 @@ fromchild(char *bp, int len)
 /*
  *  Read from the network up to a '\n' or some other break.
  *
- *  If in binary mode, buffer characters but don't 
+ *  If in binary mode, buffer characters but don't
  *
  *  The following characters are special:
  *	'\r\n's and '\r's get turned into '\n's.

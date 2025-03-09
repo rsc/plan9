@@ -1,12 +1,12 @@
 /* Copyright (C) 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -47,7 +47,7 @@ int font_gdir_get_outline(const gs_memory_t *mem, const ref *, long, gs_glyph_da
  * Access a given byte offset and length in an array of strings.
  * This is used for sfnts and for CIDMap.  The int argument is 2 for sfnts
  * (because of the strange behavior of odd-length strings), 1 for CIDMap.
- * Return code : 0 - success, <0 - error, 
+ * Return code : 0 - success, <0 - error,
  *               >0 - number of accessible bytes (client must cycle).
  */
 int string_array_access_proc(const gs_memory_t *mem, const ref *, int, ulong, uint, const byte **);

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -32,7 +32,7 @@ private void stream_compact(stream *, bool);
 public_st_stream();
 public_st_stream_state();	/* default */
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(stream_enum_ptrs, stream *st) return 0;
 case 0:
 if (st->foreign)
@@ -108,7 +108,7 @@ s_init(stream *s, gs_memory_t * mem)
     s->error_string[0] = 0;
     s->prev = s->next = 0;	/* clean for GC */
     s->file_name.data = 0;	/* ibid. */
-    s->file_name.size = 0;	
+    s->file_name.size = 0;
     s->close_strm = false;	/* default */
     s->close_at_eod = true;	/* default */
 }
@@ -1052,9 +1052,9 @@ s_string_read_seek(register stream * s, long pos)
     s->srptr = s->cbuf + pos - 1;
     /* We might be seeking after a reusable string reached EOF. */
     s->srlimit = s->cbuf + s->bsize - 1;
-    /* 
+    /*
      * When the file reaches EOF,
-     * stream_compact sets s->position to its end. 
+     * stream_compact sets s->position to its end.
      * Reset it now to allow stell to work properly
      * after calls to this function.
      * Note that if the riched EOF and this fuction

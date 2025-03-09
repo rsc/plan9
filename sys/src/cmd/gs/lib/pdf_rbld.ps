@@ -1,12 +1,12 @@
 %    Copyright (C) 2002 artofcode LLC.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -38,7 +38,7 @@
 	% We reserve 0 to indicate an free xref entry
   1 add			% increment generation number
 	% To save space, generations numbers are stored in a lstring unless we
-	% find a generation number greater than 255.  If so then transfer to 
+	% find a generation number greater than 255.  If so then transfer to
 	% an larray.
   dup 255 gt {
     Generations ltype /stringtype eq {	% Convert Generations to an larray.
@@ -119,7 +119,7 @@
 
 % Allocate space for post_eof_count to be bound into procedures below.
 /post_eof_count 0 def
- 
+
 % We want the location of the trailer dictionary at the start of file.
 % First we will find the xref.  Then we will skip over the xref entries
 % to the trailer.
@@ -164,7 +164,7 @@
   (trailer) { search not { exit } if pop } loop
   % determine where the trailer is in the file
   %   trailer loc = end loc - remaing string length
-  length sub 
+  length sub
 } bind def
 
 % We want to find the trailer dictionary.  There is a trailer dictionary
@@ -211,7 +211,7 @@
 % contain some garbage.  This routine checks how much.  We then ignore this
 % stuff when we are scanning for objects.
 /determine_post_eof_count		% - determine_post_eof_count <count>
-{ % Position to read block of data from the end of the file. 
+{ % Position to read block of data from the end of the file.
   PDFfile 0 setfileposition
   PDFfile bytesavailable	% size of file
   dup 4096 .min			% block size to read

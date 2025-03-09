@@ -50,4 +50,3 @@ changes :
 	    -e "s'^.ds dT.*'.ds dT $(TMACDIR)'" \
 	mcolor.5 >Xmcolor.5; \
 	mv Xmcolor.5 mcolor.5
-

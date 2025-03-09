@@ -483,8 +483,8 @@ setpmk(uchar pmk[PMKlen])
 
 int
 getptk(AuthGetkey *getkey,
-	uchar smac[Eaddrlen], uchar amac[Eaddrlen], 
-	uchar snonce[Noncelen],  uchar anonce[Noncelen], 
+	uchar smac[Eaddrlen], uchar amac[Eaddrlen],
+	uchar snonce[Noncelen],  uchar anonce[Noncelen],
 	uchar ptk[PTKlen])
 {
 	uchar buf[2*Eaddrlen + 2*Noncelen], *p;
@@ -782,8 +782,8 @@ Reset:
 		w = p + (w - rec), rec = p;
 		if(readn(fd, w+Tlshdrsz, n) != n)
 			break;
-		n += Tlshdrsz;	
-		
+		n += Tlshdrsz;
+
 		/* batch records that need to be send together */
 		if(!css){
 			/* Client Certificate */
@@ -929,7 +929,7 @@ eapreq(Eapconn *conn, int code, int id, uchar *data, int datalen)
 		if(datalen < 1)
 			break;
 
-		/* OpCode */	
+		/* OpCode */
 		switch(data[0]){
 		case 1:	/* Challenge */
 			if(datalen > 4) {
@@ -1381,7 +1381,7 @@ Connect:
 					fprint(2, "getptk: %r\n");
 				continue;
 			}
-			/* allow installation of new keys */	
+			/* allow installation of new keys */
 			newptk = 1;
 
 			/* ack key exchange with mic */
@@ -1489,7 +1489,7 @@ Connect:
 				sleep(100);
 
 				tsc = 0LL;
-				/* install pairwise transmit key (PTK) */ 
+				/* install pairwise transmit key (PTK) */
 				if(fprint(cfd, "txkey %E %s:%.*H@%llux", conn.amac,
 					peercipher->name, peercipher->keylen, ptk+32, tsc) < 0)
 					sysfatal("write txkey: %r");
@@ -1515,7 +1515,7 @@ Connect:
 			/* install group key (GTK) */
 			if(gtklen >= groupcipher->keylen && gtkkid != -1)
 				if(fprint(cfd, "rxkey%d %E %s:%.*H@%llux",
-					gtkkid, conn.amac, 
+					gtkkid, conn.amac,
 					groupcipher->name, groupcipher->keylen, gtk, rsc) < 0)
 					sysfatal("write rxkey%d: %r", gtkkid);
 		}

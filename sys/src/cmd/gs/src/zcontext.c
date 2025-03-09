@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -106,7 +106,7 @@ visible_context(gs_context_t *pctx)
 }
 
 /* GC descriptor */
-private 
+private
 CLEAR_MARKS_PROC(context_clear_marks)
 {
     gs_context_t *const pctx = vptr;
@@ -114,7 +114,7 @@ CLEAR_MARKS_PROC(context_clear_marks)
     (*st_context_state.clear_marks)
         (cmem, &pctx->state, sizeof(pctx->state), &st_context_state);
 }
-private 
+private
 ENUM_PTRS_WITH(context_enum_ptrs, gs_context_t *pctx)
 ENUM_PREFIX(st_context_state, 2);
 case 0: return ENUM_OBJ(pctx->scheduler);

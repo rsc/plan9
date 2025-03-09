@@ -131,7 +131,7 @@ threadmain(int argc, char *argv[])
 	fmtinstall('H', encodefmt);
 	fmtinstall('V', vtscorefmt);
 	fmtinstall('F', vtfcallfmt);
-	
+
 	defmnt = nil;
 	defsrv = nil;
 	ARGBEGIN{
@@ -595,7 +595,7 @@ rstat(Fid *f)
 	VacDir dir;
 	static uchar statbuf[1024];
 	VacFile *parent;
-	
+
 	if(!f->busy)
 		return vtstrdup(Enotexist);
 	parent = vacfilegetparent(f->file);
@@ -640,8 +640,8 @@ vacstat(VacFile *parent, VacDir *vd, uchar *p, int np)
 		dir.qid.type |= QTDIR;
 		dir.mode |= DMDIR;
 	}
-	
-	
+
+
 	dir.atime = vd->atime;
 	dir.mtime = vd->mtime;
 	dir.length = vd->size;

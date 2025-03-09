@@ -1,12 +1,12 @@
 /* Copyright (C) 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -51,20 +51,20 @@ cid_system_info_param(gs_cid_system_info_t *pcidsi, const ref *prcidsi)
 }
 
 /* Convert a CID into TT char code or to TT glyph index. */
-private bool 
-TT_char_code_from_CID_no_subst(const gs_memory_t *mem, 
+private bool
+TT_char_code_from_CID_no_subst(const gs_memory_t *mem,
 			       const ref *Decoding, const ref *TT_cmap, uint nCID, uint *c)
 {   ref *DecodingArray, char_code, ih, glyph_index;
 
     make_int(&ih, nCID / 256);
-    if (dict_find(Decoding, &ih, &DecodingArray) <= 0 || 
+    if (dict_find(Decoding, &ih, &DecodingArray) <= 0 ||
 	    !r_has_type(DecodingArray, t_array) ||
-	    array_get(mem, DecodingArray, nCID % 256, &char_code) < 0 || 
+	    array_get(mem, DecodingArray, nCID % 256, &char_code) < 0 ||
 	    !r_has_type(&char_code, t_integer)) {
-	/* fixme : Generally, a single char_code can be insufficient. 
+	/* fixme : Generally, a single char_code can be insufficient.
 	   It could be an array. Fix lib/gs_ciddc.ps as well.  */
         return false;
-    } 
+    }
     if (TT_cmap == NULL) {
 	*c = char_code.value.intval;
 	return true;
@@ -79,8 +79,8 @@ TT_char_code_from_CID_no_subst(const gs_memory_t *mem,
 /* Convert a CID into a TT char code or into a TT glyph index, using SubstNWP. */
 /* Returns 1 if a glyph presents, 0 if not, <0 if error. */
 int
-cid_to_TT_charcode(const gs_memory_t *mem, 
-		   const ref *Decoding, const ref *TT_cmap, const ref *SubstNWP, 
+cid_to_TT_charcode(const gs_memory_t *mem,
+		   const ref *Decoding, const ref *TT_cmap, const ref *SubstNWP,
                    uint nCID, uint *c, ref *src_type, ref *dst_type)
 {
     int SubstNWP_length = r_size(SubstNWP), i, code;
@@ -93,7 +93,7 @@ cid_to_TT_charcode(const gs_memory_t *mem,
     for (i = 0; i < SubstNWP_length; i += 5) {
         ref rb, re, rs;
         int nb, ne, ns;
-        
+
 	if ((code = array_get(mem, SubstNWP, i + 1, &rb)) < 0)
 	    return code;
         if ((code = array_get(mem, SubstNWP, i + 2, &re)) < 0)
@@ -125,7 +125,7 @@ cid_to_TT_charcode(const gs_memory_t *mem,
 }
 
 /* Set a CIDMap element. */
-private int 
+private int
 set_CIDMap_element(const gs_memory_t *mem, ref *CIDMap, uint cid, uint glyph_index)
 {   /* Assuming the CIDMap is already type-checked. */
     /* Assuming GDBytes == 2. */
@@ -154,8 +154,8 @@ set_CIDMap_element(const gs_memory_t *mem, ref *CIDMap, uint cid, uint glyph_ind
 
 /* Create a CIDMap from a True Type cmap array, Decoding and SubstNWP. */
 int
-cid_fill_CIDMap(const gs_memory_t *mem, 
-		const ref *Decoding, const ref *TT_cmap, const ref *SubstNWP, int GDBytes, 
+cid_fill_CIDMap(const gs_memory_t *mem,
+		const ref *Decoding, const ref *TT_cmap, const ref *SubstNWP, int GDBytes,
                 ref *CIDMap)
 {   int dict_enum;
     ref el[2];
@@ -179,7 +179,7 @@ cid_fill_CIDMap(const gs_memory_t *mem,
     dict_enum = dict_first(Decoding);
     for (;;) {
         int index, count, i;
-	
+
 	if ((dict_enum = dict_next(Decoding, dict_enum, el)) == -1)
 	    break;
 	if (!r_has_type(&el[0], t_integer))
@@ -191,7 +191,7 @@ cid_fill_CIDMap(const gs_memory_t *mem,
 	for (i = 0; i < count; i++) {
 	    uint cid = index * 256 + i, glyph_index;
 	    ref src_type, dst_type;
-	    int code = cid_to_TT_charcode(mem, Decoding, TT_cmap, SubstNWP, 
+	    int code = cid_to_TT_charcode(mem, Decoding, TT_cmap, SubstNWP,
                                 cid, &glyph_index, &src_type, &dst_type);
 
 	    if (code < 0)

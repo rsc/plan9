@@ -22,4 +22,3 @@
 	closepath fill
     grestore
 } def
-

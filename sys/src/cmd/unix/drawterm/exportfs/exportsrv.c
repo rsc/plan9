@@ -200,7 +200,7 @@ Xwalk(Fsrpc *t)
 			wf->ref++;
 			goto Accept;
 		}
-	
+
 		wf = file(f->f, t->work.wname[i]);
 		if(wf == 0){
 			errstr(err, sizeof err);
@@ -311,7 +311,7 @@ Xcreate(Fsrpc *t)
 		t->busy = 0;
 		return;
 	}
-	
+
 
 	path = makepath(f->f, t->work.name);
 	f->fid = create(path, t->work.mode, t->work.perm);
@@ -438,7 +438,7 @@ slave(Fsrpc *f)
 				if(pid != p->pid)
 					fatal("rendezvous sync fail");
 				return;
-			}	
+			}
 		}
 
 		if(++nproc > MAXPROC)
@@ -481,7 +481,7 @@ blockingslave(void *x)
 DEBUG(DFD, "blockingslave %d rendez\n", pid);
 	m = (Proc*)rendezvous((void*)(uintptr)pid, 0);
 DEBUG(DFD, "blockingslave %d rendez got %p\n", pid, m);
-	
+
 	for(;;) {
 		p = rendezvous((void*)(uintptr)pid, (void*)(uintptr)pid);
 		if((uintptr)p == ~(uintptr)0)			/* Interrupted */
@@ -544,7 +544,7 @@ slaveopen(Fsrpc *p)
 		close(f->fid);
 		f->fid = -1;
 	}
-	
+
 	path = makepath(f->f, "");
 	DEBUG(DFD, "\topen: %s %d\n", path, work->mode);
 

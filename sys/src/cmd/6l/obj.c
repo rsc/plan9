@@ -300,7 +300,7 @@ main(int argc, char *argv[])
 			if(i >= D_Y0+8)
 				regrex[i] = Rxr | Rxx | Rxb;
 		}
-		if(i >= D_CR+8 && i <= D_CR+15) 
+		if(i >= D_CR+8 && i <= D_CR+15)
 			regrex[i] = Rxr;
 	}
 

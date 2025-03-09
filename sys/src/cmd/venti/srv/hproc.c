@@ -35,7 +35,7 @@ text(int pid)
 		debug.textfd = -1;
 	}
 	memset(&debug.fhdr, 0, sizeof debug.fhdr);
-	
+
 	snprint(buf, sizeof buf, "#p/%d/text", pid);
 	fd = open(buf, OREAD);
 	if(fd < 0)
@@ -58,7 +58,7 @@ static void
 unmap(Map *m)
 {
 	int i;
-	
+
 	for(i=0; i<m->nsegs; i++)
 		if(m->seg[i].inuse)
 			close(m->seg[i].fd);
@@ -71,7 +71,7 @@ map(int pid)
 	int mem;
 	char buf[100];
 	Map *m;
-	
+
 	snprint(buf, sizeof buf, "#p/%d/mem", pid);
 	mem = open(buf, OREAD);
 	if(mem < 0)
@@ -82,7 +82,7 @@ map(int pid)
 		close(mem);
 		return nil;
 	}
-	
+
 	if(debug.map)
 		unmap(debug.map);
 	debug.map = m;
@@ -94,7 +94,7 @@ static void
 dprint(char *fmt, ...)
 {
 	va_list arg;
-	
+
 	va_start(arg, fmt);
 	fmtvprint(debug.fmt, fmt, arg);
 	va_end(arg);
@@ -105,7 +105,7 @@ openfiles(void)
 {
 	char buf[4096];
 	int fd, n;
-	
+
 	snprint(buf, sizeof buf, "#p/%d/fd", getpid());
 	if((fd = open(buf, OREAD)) < 0){
 		dprint("open %s: %r\n", buf);
@@ -268,7 +268,7 @@ static void
 stacktrace(Map *m)
 {
 	uintptr pc, sp;
-	
+
 	if(geta(m, debug.pcoff, (uvlong *)&pc) < 0){
 		dprint("geta pc: %r");
 		return;
@@ -409,7 +409,7 @@ debugstr(uintptr s)
 {
 	static char buf[4096];
 	char *p, *e;
-	
+
 	p = buf;
 	e = buf+sizeof buf - 1;
 	while(p < e){
@@ -431,7 +431,7 @@ threadfmt(uintptr t)
 	int s;
 
 	fmtbufinit(&fmt, buf, sizeof buf);
-	
+
 	fmtprint(&fmt, "t=(Thread)%#p ", t);
 	switch(s = FIELD(Thread, t, state)){
 	case Running:
@@ -447,9 +447,9 @@ threadfmt(uintptr t)
 		fmtprint(&fmt, " bad state %d ", s);
 		break;
 	}
-	
+
 	fmtprint(&fmt, "%s", threadstkline(t));
-	
+
 	if(FIELD(Thread, t, moribund) == 1)
 		fmtprint(&fmt, " Moribund");
 	if(s = FIELD(Thread, t, cmdname)){
@@ -472,7 +472,7 @@ threadapply(uintptr p, void (*fn)(uintptr))
 {
 	int oldpid, pid;
 	uintptr tq, t;
-	
+
 	oldpid = debug.pid;
 	pid = FIELD(Proc, p, pid);
 	if(map(pid) == nil)
@@ -510,7 +510,7 @@ static void
 procapply(void (*fn)(uintptr))
 {
 	uintptr proc, pq;
-	
+
 	pq = resolvev("_threadpq");
 	if(pq == 0){
 		dprint("no thread run queue\n");

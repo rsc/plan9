@@ -264,9 +264,9 @@ _dtoa(double darg, int mode, int ndigits, int *decpt, int *sign, char **rve)
 	s = s0 = (char *)result;
 
 	if (ilim >= 0 && ilim <= Quick_max && try_quick) {
-	
+
 		/* Try to get by with floating-point arithmetic. */
-	
+
 		i = 0;
 		d2.d = d.d;
 		k0 = k;

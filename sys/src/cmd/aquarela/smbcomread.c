@@ -41,7 +41,7 @@ smbcomreadandx(SmbSession *s, SmbHeader *h, uchar *pdata, SmbBuffer *b)
 		smbseterror(s, ERRDOS, ERRbadfid);
 		return SmbProcessResultError;
 	}
-	
+
 	if (!f->ioallowed) {
 		smbseterror(s, ERRDOS, ERRbadaccess);
 		return SmbProcessResultError;
@@ -65,7 +65,7 @@ smbcomreadandx(SmbSession *s, SmbHeader *h, uchar *pdata, SmbBuffer *b)
 	smbbufferwritelimit(s->response, smbbufferwriteoffset(s->response) + 65535);
 	smbbufferoffsetputs(s->response, datafixup + 2, smbbufferwriteoffset(s->response));
 	seek(f->fd, offset, 0);
-	toread = smbbufferwritespace(s->response);	
+	toread = smbbufferwritespace(s->response);
 	if (toread > maxcount)
 		toread = maxcount;
 	nb = readn(f->fd, smbbufferwritepointer(s->response), toread);

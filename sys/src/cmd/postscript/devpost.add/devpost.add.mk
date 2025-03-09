@@ -46,4 +46,3 @@ changes :
 	    -e "s'^FONTDIR=.*'FONTDIR=$(FONTDIR)'" \
 	$(MAKEFILE) >XXX.mk; \
 	mv XXX.mk $(MAKEFILE)
-

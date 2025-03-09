@@ -331,7 +331,7 @@ else	{
 				while( (kc=getc(fin))=='\t' || kc==' ' || kc=='\n')
 					if(kc == '\n')
 						++yylineno;
-	
+
 				if(kc != EOF)
 					break;
 			case EOF:
@@ -357,7 +357,7 @@ endloop:
 
 	if((c = text[0]) == '\t')
 		return retsh(text) ;
-	
+
 	if(isalpha(c) || isdigit(c) || c==' ' || c=='.'|| c=='_')
 		for(p=text+1; *p!='\0'; )
 			if(*p == ':')

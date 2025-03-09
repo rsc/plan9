@@ -47,7 +47,7 @@ if(test $p9offset -gt 4128705) {	# 65536 * 63
 	echo 'Would you like to install a master boot record' >[1=2]
 	echo 'that will be able to access partitions more than 2GB into the disk?' >[1=2]
 	echo >[1=2]
-	prompt 'Install a new mbr' y n 
+	prompt 'Install a new mbr' y n
 	switch($rd) {
 	case n
 		echo >[1=2]
@@ -59,7 +59,7 @@ if(test $p9offset -gt 4128705) {	# 65536 * 63
 	}
 }
 
-p9part=`{disk/fdisk $disk/data >[2]/dev/null </dev/null | 
+p9part=`{disk/fdisk $disk/data >[2]/dev/null </dev/null |
 		grep PLAN9 | sed 1q | sed 's/ *(p.) .*/\1/'}
 if(~ $#p9part 1) {
 	{ echo 'A '^$p9part; echo w } | disk/fdisk $disk/data >[2]/dev/null >/dev/null

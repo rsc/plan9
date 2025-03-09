@@ -89,7 +89,7 @@ enum
 #define VtMaxFileSize ((1ULL<<48)-1)
 
 
-/* 
+/*
  * Strings in packets.
  */
 int vtputstring(Packet*, char*);
@@ -97,7 +97,7 @@ int vtgetstring(Packet*, char**);
 
 /*
  * Block types.
- * 
+ *
  * The initial Venti protocol had a much
  * less regular list of block types.
  * VtToDiskType converts from new to old.
@@ -239,7 +239,7 @@ enum
 	VtCryptoMax
 };
 
-/* 
+/*
  * Codecs
  */
 enum

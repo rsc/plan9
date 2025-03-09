@@ -66,7 +66,7 @@ structure representing the service.
 .PP
 .I Vtgetreq
 waits for and returns
-the next 
+the next
 .BR read ,
 .BR write ,
 .BR sync ,
@@ -100,7 +100,7 @@ and
 .IB r ->rx.data \fR.
 .SH EXAMPLE
 .B /sys/src/cmd/venti
-contains two simple Venti servers 
+contains two simple Venti servers
 .B ro.c
 and
 .B devnull.c

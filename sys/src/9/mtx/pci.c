@@ -99,7 +99,7 @@ tbdffmt(Fmt* fmt)
 
 	if((p = malloc(READSTR)) == nil)
 		return fmtstrcpy(fmt, "(tbdfconv)");
-		
+
 	switch(fmt->r){
 	case 'T':
 		tbdf = va_arg(fmt->args, int);
@@ -178,7 +178,7 @@ pcibusmap(Pcidev *root, ulong *pmema, ulong *pioa, int wrreg)
 	ioa = *pioa;
 	mema = *pmema;
 
-	DBG("pcibusmap wr=%d %T mem=%luX io=%luX\n", 
+	DBG("pcibusmap wr=%d %T mem=%luX io=%luX\n",
 		wrreg, root->tbdf, mema, ioa);
 
 	ntb = 0;
@@ -199,23 +199,23 @@ pcibusmap(Pcidev *root, ulong *pmema, ulong *pioa, int wrreg)
 				sioa = ioa;
 				smema = mema;
 				pcibusmap(p->bridge, &smema, &sioa, 0);
-	
+
 				hole = pcimask(smema-mema);
 				if(hole < (1<<20))
 					hole = 1<<20;
 				p->mema.size = hole;
-	
+
 				hole = pcimask(sioa-ioa);
 				if(hole < (1<<12))
 					hole = 1<<12;
-	
+
 				p->ioa.size = hole;
-	
+
 				itb->dev = p;
 				itb->bar = -1;
 				itb->siz = p->ioa.size;
 				itb++;
-	
+
 				mtb->dev = p;
 				mtb->bar = -1;
 				mtb->siz = p->mema.size;
@@ -530,7 +530,7 @@ pcicfginit(void)
 			pcimaxdno = 31;
 		}
 	}
-	
+
 	if(pcicfgmode < 0)
 		goto out;
 
@@ -554,7 +554,7 @@ pcicfginit(void)
 
 			/*
 			  * If we have found a PCI-to-Cardbus bridge, make sure
-			  * it has no valid mappings anymore.  
+			  * it has no valid mappings anymore.
 			  */
 			pci = pciroot;
 			while (pci) {
@@ -858,7 +858,7 @@ pcilhinv(Pcidev* p)
 		if(p->bridge != nil)
 			pcilhinv(p->bridge);
 		p = p->link;
-	}	
+	}
 }
 
 void

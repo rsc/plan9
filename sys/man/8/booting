@@ -35,7 +35,7 @@ There are many ways to do this.  A Plan 9 boot floppy prepared by
 will load
 .B 9load
 when the PC is reset or powered on.
-Other methods are described in 
+Other methods are described in
 .IR 9boot (8).
 .I 9boot
 or
@@ -50,7 +50,7 @@ stored in the
 .B 9fat
 configuration partition or on a DOS file system
 .RI ( 9load ).
-See 
+See
 .IR 9boot (8)
 for details.
 .PP

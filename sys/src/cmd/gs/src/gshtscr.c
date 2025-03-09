@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -34,7 +34,7 @@ static const bool FORCE_STRIP_HALFTONES = false;
 private_st_gs_screen_enum();
 
 /* GC procedures */
-private 
+private
 ENUM_PTRS_WITH(screen_enum_enum_ptrs, gs_screen_enum *eptr)
 {
     if (index < 1 + st_ht_order_max_ptrs) {
@@ -572,7 +572,7 @@ gs_screen_currentpoint(gs_screen_enum * penum, gs_point * ppt)
     spot_center.y = floor(spot_center.y) + 0.5;
 
     /* compute the spot function arguments for the shifted spot : */
-    if ((code = gs_distance_transform(penum->x - spot_center.x + 0.501, 
+    if ((code = gs_distance_transform(penum->x - spot_center.x + 0.501,
                                       penum->y - spot_center.y + 0.498,
                                       &penum->mat, &pt)) < 0)
         return code;

@@ -1,12 +1,12 @@
 %    Copyright (C) 1994, 2000 Aladdin Enterprises.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -30,7 +30,7 @@ pdfdict begin
 /.writepdfmarks {	% - .writepdfmarks <bool>
   currentdevice //.writepdfmarkdict .getdeviceparams
   mark eq { false } { pop pop true } ifelse
-  systemdict /DOPDFMARKS known or 
+  systemdict /DOPDFMARKS known or
 } bind def
 
 % For simplicity, we use a single interpretation dictionary for all
@@ -133,7 +133,7 @@ currentdict /runpdfstring .undef
     { oforce_array normrect mark /CropBox 3 -1 roll /PAGES pdfmark
     }
    if
-   /FirstPage where 
+   /FirstPage where
     { pop FirstPage dup pdfpagecount gt
       { (\nRequested FirstPage is greater than the number of pages in the file: ) print
         pdfpagecount = flush
@@ -479,7 +479,7 @@ pdfdict begin
 	  } if
 	} .internalstopped
 	{ true } if			% If we stop then we need to rebuild
-	{ 
+	{
 	  (   **** Warning:  File has an invalid xref entry:  )
 	  pdfformaterror
 	  pdfstring cvs pdfformaterror
@@ -518,7 +518,7 @@ pdfdict begin
    currentglobal true .setglobal globaldict begin
    /TTFWarnList 0 dict def /UndefProcList 0 dict def
    end .setglobal
-   PDFfile dup 0 setfileposition pdfstring readstring 
+   PDFfile dup 0 setfileposition pdfstring readstring
    not {/pdfopen cvx /syntaxerror signalerror} if
    (%PDF-) search not {/pdfopen cvx /syntaxerror signalerror} if
    length /PDFoffset exch def pop
@@ -707,7 +707,7 @@ pdfdict begin
       stderrprint
       (                 The following fonts were not embedded:\n)
       stderrprint
-      [ TTFWarnList { pop .namestring (\t\t\t) exch concatstrings (\n) concatstrings } forall ] 
+      [ TTFWarnList { pop .namestring (\t\t\t) exch concatstrings (\n) concatstrings } forall ]
       { lt } .sort { stderrprint } forall
    } if
    UndefProcList length 0 gt {
@@ -715,7 +715,7 @@ pdfdict begin
       UndefProcList {
          exch .namestring stderrprint ( ) stderrprint
 	 =string cvs stderrprint ( times, ) stderrprint
-      } forall 
+      } forall
       (\n) stderrprint
    } if
 } bind def
@@ -745,7 +745,7 @@ pdfdict begin
     { 2 index /Count knownoget { 0 lt { neg } if } if
       /Count exch 3 index
     }
-   ifelse { linkdest } stopped 
+   ifelse { linkdest } stopped
     {
       cleartomark	% ignore this link
       (   **** Warning: Outline has invalid link that was discarded.\n)
@@ -921,7 +921,7 @@ pdfdict begin
              } if
            } if
          } if
-         dup type /integertype ne 
+         dup type /integertype ne
            { pop }
            { /Page exch 4 -2 roll }
          ifelse
@@ -986,8 +986,8 @@ end readonly def
 % **** implemented in one of those three procedures.
 /pdfshowpage		% <pagedict> pdfshowpage -
  { dup /Page exch store
-   pdfshowpage_init 
-   pdfshowpage_setpage 
+   pdfshowpage_init
+   pdfshowpage_setpage
    pdfshowpage_finish
  } bind def
 
@@ -1167,7 +1167,7 @@ end readonly def
       } ifelse
     } stopped {
       % todo: discard
-      .poppdf14devicefilter 
+      .poppdf14devicefilter
       /DefaultQstate qstate store	% device has changed -- reset DefaultQstate
       stop
     } if .poppdf14devicefilter
@@ -1190,7 +1190,7 @@ end readonly def
   end			% scratch dict
   % Some PDF files don't have matching q/Q (gsave/grestore) so we need
   % to clean up any left over dicts from the dictstack
-  countdictstack PDFdictstackcount sub dup 0 ne { 
+  countdictstack PDFdictstackcount sub dup 0 ne {
     (   **** Warning: File has imbalanced q/Q operators \(too many q's\)\n)
     pdfformaterror
     { end } repeat

@@ -83,7 +83,7 @@
 #define DUP2_BROKEN 1
 
 /* Define as the return value of signal handlers (0 or ).  */
-#define RETSIGVAL 
+#define RETSIGVAL
 
 /* Define if you have posix signal routines (sigaction(), et. al.) */
 /* #undef POSIX_SIGNALS */
@@ -120,7 +120,7 @@
 #undef void
 
 /* Define to nothing if compiler doesn't like the volatile keyword */
-#define volatile 
+#define volatile
 
 /* Define if C compiler groks function prototypes */
 #define HAVE_PROTOTYPES

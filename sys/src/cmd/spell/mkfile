@@ -10,7 +10,7 @@ BIN=/$objtype/bin/aux
 </sys/src/cmd/mkone
 cpuobjtype=`{sed -n 's/^O=//p' /$cputype/mkfile}
 
-all:V:	lib 
+all:V:	lib
 
 lib:	amspell brspell
 	for (i in $prereq) cp $i /sys/lib/$i

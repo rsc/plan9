@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -216,8 +216,8 @@ pdf_font_descriptor_alloc(gx_device_pdf *pdev, pdf_font_descriptor_t **ppfd,
 {
     pdf_font_descriptor_t *pfd;
     pdf_base_font_t *pbfont;
-    int code = pdf_base_font_alloc(pdev, &pbfont, font, 
-		(font->orig_FontMatrix.xx == 0 && font->orig_FontMatrix.xy == 0 
+    int code = pdf_base_font_alloc(pdev, &pbfont, font,
+		(font->orig_FontMatrix.xx == 0 && font->orig_FontMatrix.xy == 0
 		    ? &font->FontMatrix : &font->orig_FontMatrix), false, !embed);
 
     if (code < 0)
@@ -393,7 +393,7 @@ pdf_compute_font_descriptor(pdf_font_descriptor_t *pfd)
      */
     notdef = GS_NO_GLYPH;
     for (index = 0;
-	 (code = bfont->procs.enumerate_glyph((gs_font *)bfont, &index, 
+	 (code = bfont->procs.enumerate_glyph((gs_font *)bfont, &index,
 		(is_cid ? GLYPH_SPACE_INDEX : GLYPH_SPACE_NAME), &glyph)) >= 0 &&
 	     index != 0;
 	 ) {
@@ -472,7 +472,7 @@ pdf_compute_font_descriptor(pdf_font_descriptor_t *pfd)
 	    case 'g': case 'p': case 'q': case 'y': /* descender */
 		small_descent = min(small_descent, y0);
 	    default:		/* no ascender or descender */
-		x_height = max(x_height, y1);		
+		x_height = max(x_height, y1);
 	    }
 	}
     }
@@ -488,7 +488,7 @@ pdf_compute_font_descriptor(pdf_font_descriptor_t *pfd)
 	 */
 	if (have_colon && have_period) {
 	    /* Calculate the dominant angle. */
-	    int angle = 
+	    int angle =
 		(int)(atan2((bbox_colon.q.y - bbox_colon.p.y) -
 			      (bbox_period.q.y - bbox_period.p.y),
 			    (bbox_colon.q.x - bbox_colon.p.x) -
@@ -557,8 +557,8 @@ pdf_finish_FontDescriptor(gx_device_pdf *pdev, pdf_font_descriptor_t *pfd)
     if (!pfd->common.object->written &&
 	(code = pdf_compute_font_descriptor(pfd)) >= 0 &&
 	(!pfd->embed ||
-	 (code = pdf_write_embedded_font(pdev, pfd->base_font, 
-				&pfd->common.values.FontBBox, 
+	 (code = pdf_write_embedded_font(pdev, pfd->base_font,
+				&pfd->common.values.FontBBox,
 				pfd->common.rid, &pcd)) >= 0)
 	) {
         pdf_set_FontFile_object(pfd->base_font, pcd);

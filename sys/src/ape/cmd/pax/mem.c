@@ -14,17 +14,17 @@
  *     Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice is duplicated in all such 
- * forms and that any documentation, advertising materials, and other 
- * materials related to such distribution and use acknowledge that the 
- * software was developed * by Mark H. Colburn and sponsored by The 
- * USENIX Association. 
+ * provided that the above copyright notice is duplicated in all such
+ * forms and that any documentation, advertising materials, and other
+ * materials related to such distribution and use acknowledge that the
+ * software was developed * by Mark H. Colburn and sponsored by The
+ * USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -33,10 +33,10 @@
  * $Log:	mem.c,v $
  * Revision 1.2  89/02/12  10:04:53  mark
  * 1.2 release fixes
- * 
+ *
  * Revision 1.1  88/12/23  18:02:17  mark
  * Initial revision
- * 
+ *
  */
 
 #ifndef lint
@@ -55,7 +55,7 @@ static char *copyright = "Copyright (c) 1989 Mark H. Colburn.\nAll rights reserv
  * DESCRIPTION
  *
  *	Mem_get attempts to allocate a block of memory using the malloc
- *	function call.  In the event that the memory is not available, 
+ *	function call.  In the event that the memory is not available,
  *	mem_get will display an "Out of memory" message for the user
  *	the first time it encounters the an out of memory situation.
  *	Subsequent calls to mem_get may fail, but no message will be
@@ -73,7 +73,7 @@ static char *copyright = "Copyright (c) 1989 Mark H. Colburn.\nAll rights reserv
  *
  * ERRORS
  *
- *	ENOMEM	No memory is available 
+ *	ENOMEM	No memory is available
  */
 
 #ifdef __STDC__
@@ -108,13 +108,13 @@ uint            len;		/* amount of memory to get */
  *
  * PARAMETERS
  *
- *	char *str 	- string to make a copy of 
+ *	char *str 	- string to make a copy of
  *
  * RETURNS
  *
  *	Normally returns a pointer to a new string at least as large
- *	as strlen(str) + 1, which contains a copy of the the data 
- *	passed in str, plus a null terminator.  Returns (char *)NULL 
+ *	as strlen(str) + 1, which contains a copy of the the data
+ *	passed in str, plus a null terminator.  Returns (char *)NULL
  *	if enough memory to make a copy of str is not available.
  */
 

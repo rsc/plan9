@@ -139,7 +139,7 @@ option
 .I convkeys
 uses the key stored in NVRAM
 to decrypt the file, and encrypts it using the new key.
-By default, 
+By default,
 .I convkeys
 prompts twice for the new password.
 The

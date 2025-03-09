@@ -37,7 +37,7 @@ on the third.
 If no
 .I file
 is given,
-.I cat 
+.I cat
 reads from the standard input.
 Output is buffered in blocks matching the input.
 .PP

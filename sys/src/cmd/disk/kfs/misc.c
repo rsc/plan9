@@ -33,7 +33,7 @@ belong(char *s)
 	uchar *x;
 
 	x = (uchar *)s;
-	return (x[0] << 24) + (x[1] << 16) + (x[2] << 8) + x[3]; 
+	return (x[0] << 24) + (x[1] << 16) + (x[2] << 8) + x[3];
 }
 
 void
@@ -83,4 +83,3 @@ print(char *fmt, ...)
 	va_end(arg);
 	return n;
 }
-

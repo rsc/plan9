@@ -18,7 +18,7 @@ webcookies \- HTTP cookie manager
 .SH DESCRIPTION
 .I Webcookies
 manages a set of HTTP cookies, which are
-used to associate HTTP requests with persistent state 
+used to associate HTTP requests with persistent state
 (such as user profiles) on many web servers.
 .PP
 .I Webcookies
@@ -26,13 +26,13 @@ reads
 .I cookiefile
 (default
 .BR $home/lib/webcookies )
-and mounts itself at 
+and mounts itself at
 .I mtpt
 (default
 .BR /mnt/webcookies ).
 If
 .I service
-is specified, 
+is specified,
 .I cookiefs
 will post a service file descriptor
 in
@@ -137,7 +137,7 @@ the client must write a full URL to it.
 After writing the URL, reading from the file will yield any
 HTTP
 .B Cookie:
-headers that should be included in the 
+headers that should be included in the
 request for this particular URL.
 Once the request has been made, any
 .B Set-Cookie:

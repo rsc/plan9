@@ -87,7 +87,7 @@ The grammar is:
 .PP
 The values for
 .I protocol
-and 
+and
 .I field
 can
 be obtained using the
@@ -112,7 +112,7 @@ ether's subprotos:
   0x86dd ip6
 .EE
 .PP
-The format of 
+The format of
 .I value
 depends on context.  In general,
 ethernet addresses are entered as a string of hex

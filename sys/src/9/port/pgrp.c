@@ -238,7 +238,7 @@ closefgrp(Fgrp *f)
  * of some kind of deadly embrace with mntclose
  * trying to talk to itself.  To break free, hand the
  * unclosed channels to the close queue.  Once they
- * are finished, the blocked cclose that we've 
+ * are finished, the blocked cclose that we've
  * interrupted will finish by itself.
  */
 void

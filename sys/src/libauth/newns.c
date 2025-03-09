@@ -251,7 +251,7 @@ unquote(char *s)
 {
 	char *r, *w;
 	int inquote;
-	
+
 	inquote = 0;
 	for(r=w=s; *r; r++){
 		if(*r != '\''){
@@ -296,7 +296,7 @@ nextdollar(char *arg)
 {
 	char *p;
 	int inquote;
-	
+
 	inquote = 0;
 	for(p=arg; *p; p++){
 		if(*p == '\'')

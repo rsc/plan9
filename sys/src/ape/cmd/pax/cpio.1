@@ -48,12 +48,12 @@ unless the user has appropriate privileges, which causes
 to retains the owner and group of the files of the previous
 .B "cpio -o" .
 .PP
-The 
+The
 .B "cpio -p"
 (pass) utility reads the standard input to obtain a list of path names
 of files that are conditionally created and copied into the
 destination
-.I directory 
+.I directory
 based upon the options described below.
 .PP
 If an error is detected, the cause is reported and the
@@ -62,7 +62,7 @@ utility will continue to copy other files.
 .B cpio
 will skip over any unrecognized files which it encounters in the archive.
 .PP
-The following restrictions apply to the 
+The following restrictions apply to the
 .B cpio
 utility:
 .IP 1 .25i
@@ -77,7 +77,7 @@ The following options are available:
 .B \-B
 Input/output is to be blocked 5120 bytes to the record.
 Can only be used with
-.B "cpio -o" 
+.B "cpio -o"
 or
 .B "cpio -i"
 for data that is directed to or from character special files.
@@ -103,8 +103,8 @@ Note that this option should always be used to write portable files.
 .TP .5i
 .B \-d
 Creates directories as needed.
-Can only be used with 
-.B "cpio -i" 
+Can only be used with
+.B "cpio -i"
 or
 .B "cpio -p" .
 .TP .5i
@@ -116,14 +116,14 @@ Can only be used with
 .TP .5i
 .B \-l
 Whenever possible, link files rather than copying them.
-Can only be used with 
+Can only be used with
 .B "cpio -p" .
 .TP .5i
 .B \-m
 Retain previous modification times.
 This option is ineffective on directories that are being copied.
 Can only be used with
-.B "cpio -i" 
+.B "cpio -i"
 or
 .B "cpio -p" .
 .TP .5i
@@ -159,7 +159,7 @@ or
 Verbose: cause the names of the affected files to be printed.
 Can only be used with
 .B "cpio -i" .
-Provides a detailed listing when used with the 
+Provides a detailed listing when used with the
 .B \-t
 option.
 .SS Operands
@@ -190,7 +190,7 @@ It is important to use the
 .B "-depth"
 option of the
 .B find
-utility to generate pathnames for 
+utility to generate pathnames for
 .B cpio .
 This eliminates problems
 .B cpio
@@ -200,7 +200,7 @@ The following command:
 .RS
 ls | cpio -o > ../newfile
 .RE
-copies out the files listed by the 
+copies out the files listed by the
 .B ls
 utility and redirects them to the file
 .B newfile .
@@ -234,23 +234,23 @@ while retaining the modification time.
 .TP 1i
 /dev/tty
 used to prompt the user for information when the
-.B \-i 
-or 
+.B \-i
+or
 .B \-r
 options are specified.
 .SH "SEE ALSO"
 find(1), pax(1), tar(1), cpio(5), tar(5)
 .SH COPYRIGHT
-Copyright (c) 1989 Mark H. Colburn.  
+Copyright (c) 1989 Mark H. Colburn.
 .br
 All rights reserved.
 .PP
 Redistribution and use in source and binary forms are permitted
-provided that the above copyright notice is duplicated in all such 
-forms and that any documentation, advertising materials, and other 
-materials related to such distribution and use acknowledge that the 
-software was developed by Mark H. Colburn and sponsored by The 
-USENIX Association. 
+provided that the above copyright notice is duplicated in all such
+forms and that any documentation, advertising materials, and other
+materials related to such distribution and use acknowledge that the
+software was developed by Mark H. Colburn and sponsored by The
+USENIX Association.
 .PP
 THE SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
 IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED

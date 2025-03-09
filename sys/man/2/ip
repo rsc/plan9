@@ -350,7 +350,7 @@ struct Ipv6rp
 	int	reachtime;
 	int	rxmitra;
 	int	ttl;
-	int	routerlt;	
+	int	routerlt;
 };
 .EE
 .PP

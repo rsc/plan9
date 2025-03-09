@@ -1,4 +1,4 @@
-.TH COMM 1 
+.TH COMM 1
 .CT 1 files
 .SH NAME
 comm \- select or reject lines common to two sorted files
@@ -42,6 +42,6 @@ Print lines common to two sorted files.
 .B /sys/src/cmd/comm.c
 .SH "SEE ALSO"
 .IR sort (1),
-.IR cmp (1), 
-.IR diff (1), 
+.IR cmp (1),
+.IR diff (1),
 .IR uniq (1)

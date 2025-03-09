@@ -134,7 +134,7 @@ greg(int f, ulong off)
 	int n;
 	ulong l;
 	uchar wd[BY2WD];
-	
+
 	seek(f, off, 0);
 	n = read(f, wd, BY2WD);
 	if(n != BY2WD)
@@ -226,7 +226,7 @@ procinit(int pid)
 		s->table = malloc(((s->end-s->base)/BY2PG)*sizeof(uchar*));
 	}
 	seginit(m, s, 0, vastart, vaend);
-	
+
 	p = strstr(sfile, "Bss");
 	if(p == 0)
 		fatal(0, "no bss");
@@ -255,7 +255,7 @@ procinit(int pid)
 	vastart = reg.r[1] & ~(BY2PG-1);
 	seginit(m, s, (vastart-s->base)/BY2PG, vastart, STACKTOP);
 	close(m);
-	Bprint(bioout, "qi\n"); 
+	Bprint(bioout, "qi\n");
 }
 
 void
@@ -303,7 +303,7 @@ initstk(int argc, char *argv[])
 	putmem_w(tos + 4*4 + 2*sizeof(ulong) + 3*sizeof(uvlong), getpid());
 
 	/* Build exec stack */
-	size = strlen(file)+1+BY2WD+BY2WD+(BY2WD*2);	
+	size = strlen(file)+1+BY2WD+BY2WD+(BY2WD*2);
 	for(i = 0; i < argc; i++)
 		size += strlen(argv[i])+BY2WD+1;
 
@@ -320,7 +320,7 @@ initstk(int argc, char *argv[])
 	ap = sp+((argc+1)*BY2WD)+BY2WD;
 	putmem_w(sp, ap);
 	sp += BY2WD;
-	
+
 	/* Build argv[0] string into stack */
 	for(p = file; *p; p++)
 		putmem_b(ap++, *p);

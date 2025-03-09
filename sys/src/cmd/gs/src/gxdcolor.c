@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -446,7 +446,7 @@ gx_dc_pure_equal(const gx_device_color * pdevc1, const gx_device_color * pdevc2)
  *
  *  psdc        pointer ot saved version of last serialized color (for
  *              this band); this is ignored
- *  
+ *
  *  dev         pointer to the current device, used to retrieve process
  *              color model information
  *

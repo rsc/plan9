@@ -56,11 +56,11 @@ The options are
 .TP
 .B -p
 use pulse dialing
-.TP 
+.TP
 .B -v
 verbose: write to the log file all communications with
 the dialer.
-.TP 
+.TP
 .B -i
 specify a
 .I source-id
@@ -70,7 +70,7 @@ Some control of outgoing calls can be encoded
 in the address.
 Normally, addresses are of the form
 .IB telco ! number\f1,
-where 
+where
 .I number
 is a decimal telephone number.
 However, commas in the telephone number can be used to insert

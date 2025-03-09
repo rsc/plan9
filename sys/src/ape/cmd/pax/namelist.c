@@ -14,17 +14,17 @@
  *
  *	Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice is duplicated in all such 
- * forms and that any documentation, advertising materials, and other 
- * materials related to such distribution and use acknowledge that the 
- * software was developed by Mark H. Colburn and sponsored by The 
- * USENIX Association. 
+ * provided that the above copyright notice is duplicated in all such
+ * forms and that any documentation, advertising materials, and other
+ * materials related to such distribution and use acknowledge that the
+ * software was developed by Mark H. Colburn and sponsored by The
+ * USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -33,22 +33,22 @@
  * $Log:	namelist.c,v $
  * Revision 1.6  89/02/13  09:14:48  mark
  * Fixed problem with directory errors
- * 
+ *
  * Revision 1.5  89/02/12  12:14:00  mark
  * Fixed misspellings
- * 
+ *
  * Revision 1.4  89/02/12  11:25:19  mark
  * Modifications to compile and link cleanly under USG
- * 
+ *
  * Revision 1.3  89/02/12  10:40:23  mark
  * Fixed casting problems
- * 
+ *
  * Revision 1.2  89/02/12  10:04:57  mark
  * 1.2 release fixes
- * 
+ *
  * Revision 1.1  88/12/23  18:02:17  mark
  * Initial revision
- * 
+ *
  */
 
 #ifndef lint
@@ -65,7 +65,7 @@ static char *copyright = "Copyright (c) 1989 Mark H. Colburn.\nAll rights reserv
 /* Type Definitions */
 
 /*
- * Structure for keeping track of filenames and lists thereof. 
+ * Structure for keeping track of filenames and lists thereof.
  */
 struct nm_list {
     struct nm_list *next;
@@ -109,12 +109,12 @@ static struct nm_list *namelast;	/* Points to last name in list */
 static struct nm_list *namelist;	/* Points to first name in list */
 
 
-/* addname -  add a name to the namelist. 
+/* addname -  add a name to the namelist.
  *
  * DESCRIPTION
  *
  *	Addname adds the name given to the name list.  Memory for the
- *	namelist structure is dynamically allocated.  If the space for 
+ *	namelist structure is dynamically allocated.  If the space for
  *	the structure cannot be allocated, then the program will exit
  *	the an out of memory error message and a non-zero return code
  *	will be returned to the caller.
@@ -129,7 +129,7 @@ static struct nm_list *namelist;	/* Points to first name in list */
 void add_name(char *name)
 
 #else
-    
+
 void add_name(name)
 char           *name;		/* pointer to name */
 
@@ -162,7 +162,7 @@ char           *name;		/* pointer to name */
 }
 
 
-/* name_match - match a name from an archive with a name from the namelist 
+/* name_match - match a name from an archive with a name from the namelist
  *
  * DESCRIPTION
  *
@@ -187,7 +187,7 @@ char           *name;		/* pointer to name */
 int name_match(char *p)
 
 #else
-    
+
 int name_match(p)
 char           *p;
 
@@ -226,7 +226,7 @@ char           *p;
 }
 
 
-/* names_notfound - print names of files in namelist that were not found 
+/* names_notfound - print names of files in namelist that were not found
  *
  * DESCRIPTION
  *
@@ -241,7 +241,7 @@ char           *p;
 void names_notfound(void)
 
 #else
-    
+
 void names_notfound()
 
 #endif
@@ -260,7 +260,7 @@ void names_notfound()
 }
 
 
-/* name_init - set up to gather file names 
+/* name_init - set up to gather file names
  *
  * DESCRIPTION
  *
@@ -280,7 +280,7 @@ void names_notfound()
 void name_init(int argc, char **argv)
 
 #else
-    
+
 void name_init(argc, argv)
 int             argc;
 char          **argv;
@@ -293,7 +293,7 @@ char          **argv;
 }
 
 
-/* name_next - get the next name from argv or the name file. 
+/* name_next - get the next name from argv or the name file.
  *
  * DESCRIPTION
  *
@@ -304,7 +304,7 @@ char          **argv;
  *	using a directory stack.  See the pushdir/popdir function for
  *	more details.
  *
- * 	The names come from argv, after options or from the standard input.  
+ * 	The names come from argv, after options or from the standard input.
  *
  * PARAMETERS
  *
@@ -313,8 +313,8 @@ char          **argv;
  *
  * RETURNS
  *
- *	Returns -1 if there are no names left, (e.g. EOF), otherwise returns 
- *	0 
+ *	Returns -1 if there are no names left, (e.g. EOF), otherwise returns
+ *	0
  */
 
 #ifdef __STDC__
@@ -322,7 +322,7 @@ char          **argv;
 int name_next(char *name, Stat *statbuf)
 
 #else
-    
+
 int name_next(name, statbuf)
 char           *name;
 Stat           *statbuf;
@@ -352,7 +352,7 @@ Stat           *statbuf;
 		        strcmp(d->d_name, "..") == 0) {
 			    continue;
 		    }
-		    if (strlen(d->d_name) + 
+		    if (strlen(d->d_name) +
 			strlen(curr_dir->dirname) >= PATH_MAX) {
 			warn("name too long", d->d_name);
 			continue;
@@ -388,11 +388,11 @@ Stat           *statbuf;
 		curr_dir->where = telldir(dirp);
 		pushdir(curr_dir);
 		closedir(dirp);
-	    } 
+	    }
 	    in_subdir++;
 
 	    /* Build new prototype name */
-	    if ((curr_dir = (struct dirinfo *) mem_get(sizeof(struct dirinfo))) 
+	    if ((curr_dir = (struct dirinfo *) mem_get(sizeof(struct dirinfo)))
 			  == (struct dirinfo *)NULL) {
 		exit(2);
 	    }
@@ -404,7 +404,7 @@ Stat           *statbuf;
 	    curr_dir->dirname[len++] = '/';	/* Now add exactly one back */
 	    curr_dir->dirname[len] = '\0';/* Make sure null-terminated */
             curr_dir->where = 0;
-           
+
             errno = 0;
             do {
                 if ((dirp = opendir(curr_dir->dirname)) == (DIR *)NULL) {
@@ -425,7 +425,7 @@ Stat           *statbuf;
 }
 
 
-/* name_gather - gather names in a list for scanning. 
+/* name_gather - gather names in a list for scanning.
  *
  * DESCRIPTION
  *
@@ -442,14 +442,14 @@ Stat           *statbuf;
 void name_gather(void)
 
 #else
-    
+
 void name_gather()
 
 #endif
 {
-     while (optind < n_argc) { 
-	 add_name(n_argv[optind++]); 
-     } 
+     while (optind < n_argc) {
+	 add_name(n_argv[optind++]);
+     }
 }
 
 
@@ -471,7 +471,7 @@ void name_gather()
 static void pushdir(struct dirinfo *info)
 
 #else
-    
+
 static void pushdir(info)
 struct dirinfo	*info;
 
@@ -483,7 +483,7 @@ struct dirinfo	*info;
     } else {
 	info->next = stack_head;
 	stack_head = info;
-    } 
+    }
 }
 
 
@@ -506,7 +506,7 @@ struct dirinfo	*info;
 static struct dirinfo *popdir(void)
 
 #else
-    
+
 static struct dirinfo *popdir()
 
 #endif

@@ -4,7 +4,7 @@ void
 swit1(C1 *q, int nc, long def, Node *n)
 {
 	Node tn;
-	
+
 	regalloc(&tn, &regnode, Z);
 	swit2(q, nc, def, n, &tn);
 	regfree(&tn);
@@ -226,7 +226,7 @@ loop:
 		if(vs < 0) {
 			gopcode(OAS, &nod1, Z, &nod1);
 			gopcode(OSUB, &nod1, nodconst(0), nn);
-		} else 
+		} else
 			gopcode(OAS, &nod1, Z, nn);
 		regfree(&nod1);
 		return 1;

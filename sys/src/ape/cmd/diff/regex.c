@@ -5470,7 +5470,7 @@ re_match_2_internal (bufp, string1, size1, string2, size2, pos, regs, stop)
 	      UPDATE_SYNTAX_TABLE (charpos);
 #endif
 	      s2 = SYNTAX (c2);
-	
+
 	      /* Case 2: S2 is not Sword. */
 	      if (s2 != Sword)
 		goto fail;

@@ -15,7 +15,7 @@ enum{
 	  *	random mix and match!!.
 	  */
 	FeroceonId	= 0x20a023d3,
-	
+
 	/* Looks like a pxa/feroceon frankenstein */
 	ArmadaId	= 0x304113d3,
 
@@ -57,7 +57,7 @@ enum {
 	WpTanDBKptSz		= 1,
 	Ch1ResvdSz,
 	RWDataSz			= 32,
-	
+
 
 	/* chain 2, here registers are directed through addr */
 	DataSz			= 32,
@@ -79,7 +79,7 @@ enum {
 	DataMskReg		= 0x03,
 	CtlValReg			= 0x04,
 	CtlMskReg		= 0x05,
-	
+
 	/* sizes in bits */
 	DebugCtlRegSz		= 6,
 	DebStsRegSz		= 10,		/* in feroceon 5, no Moe */
@@ -93,7 +93,7 @@ enum {
 	DataMskRegSz		= 32,
 	CtlValRegSz		= 9,
 	CtlMskRegSz		= 8,
-	
+
 	/*	DebugCtlReg (write) */
 	DBGACK			= 1,		/* I am dealing with debug mode */
 	DBGRQ			= 1<<1,	/* Enter debug mode */
@@ -126,7 +126,7 @@ enum {
 	 *	CtlValReg CtlMskReg
 	 *	Bit 1 in Msk makes condition ignored.
 	 */
-	
+
 	/* Data version of CtlValReg bits 6, 7, 8 are shared */
 	DnRWWPCtl		= 1,		/*  0 access is read 1 write */
 	DmasWPCtlMsk	= 3<<1,	/*  this two bits represent size of access */

@@ -158,7 +158,7 @@ snarf(Vga* vga, Ctlr* ctlr)
 		vga->r[1] = 4;
 		vga->m[1] = 511;
 		vga->n[1] = 127;
-		vga->f[1] = 300000000;	
+		vga->f[1] = 300000000;
 
 		vga->apz = 128*1024*1024;
 		vga->vmz = savage4mem[vga->crt[0x36]>>5] * 1024 * 1024;
@@ -243,7 +243,7 @@ init(Vga* vga, Ctlr* ctlr)
 		width = vga->virtx*(vga->mode->z/8);
 	else
 		width = vga->virtx*(8/vga->mode->z);
-	
+
 	switch(id){
 
 	case 0x8810:				/* Microsoft Virtual PC 2004 */
@@ -272,7 +272,7 @@ init(Vga* vga, Ctlr* ctlr)
 			 */
 			vga->crt[0x67] |= 0x10;
 		}
-	
+
 		/*
 		 * VLB address latch delay.
 		 */
@@ -294,7 +294,7 @@ init(Vga* vga, Ctlr* ctlr)
 		break;
 	case 0x8A10:				/* ViRGE/GX2 */
 		vga->crt[0x90] = 0;
-	
+
 		vga->crt[0x31] |= 0x08;
 
 		vga->crt[0x13] = (width>>3) & 0xFF;
@@ -328,7 +328,7 @@ init(Vga* vga, Ctlr* ctlr)
 
 		if(id == 0x883D){		/* ViRGE/VX */
 			/*
-			 * Put the VRAM in 1-cycle EDO mode.  
+			 * Put the VRAM in 1-cycle EDO mode.
 			 * If it is not put in this mode, hardware acceleration
 			 * will leave little turds on the screen when hwfill is used.
 			 */

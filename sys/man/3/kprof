@@ -1,4 +1,4 @@
-.TH KPROF 3 
+.TH KPROF 3
 .SH NAME
 kprof \- kernel profiling
 .SH SYNOPSIS

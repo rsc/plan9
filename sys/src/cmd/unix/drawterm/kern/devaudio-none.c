@@ -46,4 +46,3 @@ audiodevgetvol(int what, int *left, int *right)
 {
 	error("no audio support");
 }
-

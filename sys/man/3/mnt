@@ -1,4 +1,4 @@
-.TH MNT 3 
+.TH MNT 3
 .SH NAME
 mnt \- attach to 9P servers
 .SH SYNOPSIS

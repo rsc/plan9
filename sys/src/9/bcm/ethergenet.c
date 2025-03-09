@@ -139,7 +139,7 @@ enum
 	UmacMac1	= 0x810/4,
 	UmacMaxFrameLen	= 0x814/4,
 
-	UmacEeeCtrl	= 0x864/4,	
+	UmacEeeCtrl	= 0x864/4,
 		UmacEeeEn	= 1<<3,
 
 	UmacEeeLpiTimer	= 0x868/4,
@@ -585,7 +585,7 @@ initrings(Ctlr *ctlr)
 		initring(&ctlr->rx[i], ctlr->rd, (i-1)*32, 32);
 	initring(ctlr->rx, ctlr->rd, (i-1)*32, nelem(ctlr->rd) - (i-1)*32);
 
-	for(i = 0; i < nelem(ctlr->rx); i++){		 
+	for(i = 0; i < nelem(ctlr->rx); i++){
 		REG(ctlr->rx[i].regs[DmaDoneThresh]) = 1;
 		REG(ctlr->rx[i].regs[RdmaXonXoffThresh]) = (5 << 16) | ((ctlr->rx[i].m+1) >> 4);
 
@@ -877,8 +877,8 @@ attach(Ether *edev)
 	if(ctlr->mii->curphy == nil)
 		error("no phy");
 
-	MIIDBG("#l%d: phy%d id %.8ux oui %x\n", 
-		edev->ctlrno, ctlr->mii->curphy->phyno, 
+	MIIDBG("#l%d: phy%d id %.8ux oui %x\n",
+		edev->ctlrno, ctlr->mii->curphy->phyno,
 		ctlr->mii->curphy->id, ctlr->mii->curphy->oui);
 
 	miireset(ctlr->mii);

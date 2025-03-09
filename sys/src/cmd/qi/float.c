@@ -496,7 +496,7 @@ fcmp(ulong ir)
 
 /*
  * the farith functions probably don't produce the right results
- * in the presence of NaNs, Infs, etc., esp. wrt exception handling, 
+ * in the presence of NaNs, Infs, etc., esp. wrt exception handling,
  */
 void
 fariths(ulong ir)

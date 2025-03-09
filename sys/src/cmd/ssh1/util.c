@@ -180,7 +180,7 @@ trim(char *s)
 			last = i;
 		}
 	}
-	return t;	
+	return t;
 }
 
 static void

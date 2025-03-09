@@ -6,7 +6,7 @@ void
 swit1(C1 *q, int nc, long def, Node *n)
 {
 	Node tn;
-	
+
 	regalloc(&tn, &regnode, Z);
 	swit2(q, nc, def, n, &tn);
 	regfree(&tn);

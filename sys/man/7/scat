@@ -33,14 +33,14 @@ An item is in one of the following formats:
 .B ngc1234
 Number 1234 in the New General Catalogue of
 Nonstellar Objects, NGC2000.0.
-The output identifies the type 
+The output identifies the type
 .RB( Gx =galaxy,
 .BR Pl =planetary
-nebula, 
+nebula,
 .BR OC =open
-cluster, 
+cluster,
 .BR Gb =globular
-cluster, 
+cluster,
 .BR Nb =bright
 nebula,
 .BR C+N =cluster
@@ -86,7 +86,7 @@ per square degree, and popular names.
 .B planetarynebula
 The set of NGC objects of the specified type.
 The type may be a compact NGC code or a full name, as above, with no blank.
-.TP 
+.TP
 \fL"α umi"\fP
 Names are provided in double quotes.
 Known names are the Greek
@@ -326,7 +326,7 @@ Show a pretty galaxy.
 .SH SEE ALSO
 .IR astro (7)
 .br
-.B /lib/sky/constelnames\ \ 
+.B /lib/sky/constelnames\ \
 the three-letter abbreviations of the constellation names.
 .PP
 The data was provided by the Astronomical Data Center at the NASA Goddard

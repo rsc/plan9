@@ -296,4 +296,3 @@ userdict /@RealFindfont known not {
 	} if
 	NewFontDirectory exch get
 } bind def
-

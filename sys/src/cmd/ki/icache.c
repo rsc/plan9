@@ -15,4 +15,3 @@ updateicache(ulong addr)
 {
 	USED(addr);
 }
-

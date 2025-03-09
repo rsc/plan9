@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2001 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -60,7 +60,7 @@
  * real world.
 
 %!
-	newpath 
+	newpath
 	0 0 moveto 144 72 lineto 72 144 lineto
 	closepath fill stroke 0 0 moveto 144 144 lineto stroke
 
@@ -104,14 +104,14 @@ typedef struct {
 
 } ByteList;
 
-/* 
+/*
  * Type for representing a summary of the previous lines
  *
  */
 
 typedef struct {
   short  previousSize;
-  Byte   previousData[1500]; /* Size bigger than any possible line */ 
+  Byte   previousData[1500]; /* Size bigger than any possible line */
   short  nbBlankLines;
   short  nbLinesSent;
   short  pageWidth;
@@ -229,7 +229,7 @@ private const PaperFormat tableOfFormats[] = {
 /* Compute the maximum length of a compressed line */
 private short MaxLineLength(short resolution){
 return (((156 * resolution / 150 ) * 5 )/4) + 8;
-} 
+}
 
 
 /* Margins are left, bottom, right, top. */
@@ -285,7 +285,7 @@ const gx_device_printer far_data gs_hl7x0_device =
 
 /* Open the printer, adjusting the margins if necessary. */
 
-private int 
+private int
 hl7x0_open(gx_device *pdev)
 {	/* Change the margins if necessary. */
 	static const float m_a4[4] = { HL7X0_MARGINS_A4 };
@@ -299,7 +299,7 @@ hl7x0_open(gx_device *pdev)
 
 
 /* The orders sent are those provided in the Brother DOS example */
-private int 
+private int
 hl7x0_close(gx_device *pdev)
 {
     gx_device_printer *const ppdev = (gx_device_printer *)pdev;
@@ -323,7 +323,7 @@ hl720_print_page(gx_device_printer *pdev, FILE *prn_stream)
   ,'@','P','J','L',' ','E','N','T','E','R',' '
   ,'L','A','N','G','U','A','G','E'
   ,' ','=',' ','H','B','P',0x0A                 /* set GDI Printer mode */
-  ,'@','L', 0x0	       
+  ,'@','L', 0x0
    };
 	ByteList initCommand;
     	int x_dpi = pdev->x_pixels_per_inch;
@@ -333,9 +333,9 @@ hl720_print_page(gx_device_printer *pdev, FILE *prn_stream)
 		     sizeof(prefix) - 1); /* Leave one byte free since*/
 	/* we need to add the following order at the end */
 	addByte(&initCommand, (Byte) ((((600/x_dpi) >> 1) \
-						  | (((600/x_dpi) >> 1) << 2)))); 
+						  | (((600/x_dpi) >> 1) << 2))));
 	/* Put the value of the used resolution into the init string */
-	
+
 	return hl7x0_print_page(pdev, prn_stream, HL720, 300,
 	       &initCommand);
 }
@@ -347,7 +347,7 @@ hl730_print_page(gx_device_printer *pdev, FILE *prn_stream)
 
 /* Send the page to the printer.  For speed, compress each scan line, */
 /* since computer-to-printer communication time is often a bottleneck. */
-private int 
+private int
 hl7x0_print_page(gx_device_printer *pdev, FILE *printStream, int ptype,
   int dots_per_inch, ByteList *initCommand)
 {
@@ -361,8 +361,8 @@ hl7x0_print_page(gx_device_printer *pdev, FILE *printStream, int ptype,
   /*  int y_dpi = pdev->y_pixels_per_inch; */
   int num_rows = dev_print_scan_lines(pdev);
   int result;
-  int sizeOfBuffer   = MaxLineLength(x_dpi) + 30; 
-  Byte * storage      = (Byte *) gs_malloc(pdev->memory, 
+  int sizeOfBuffer   = MaxLineLength(x_dpi) + 30;
+  Byte * storage      = (Byte *) gs_malloc(pdev->memory,
 					   sizeOfBuffer + line_size,
 					   1,
 					   "hl7x0_print_page");
@@ -373,13 +373,13 @@ hl7x0_print_page(gx_device_printer *pdev, FILE *printStream, int ptype,
 	initSummary(&pageSummary,
 		    line_size,
 		    num_rows,
-		    x_dpi); 
+		    x_dpi);
 	if ( storage == 0 )	/* can't allocate working area */
 		return_error(gs_error_VMerror);
 	initByteList(&commandsBuffer, storage, sizeOfBuffer,0 );
 	/* PLUS A MOI */
 	if ( pdev->PageCount == 0 )
-	  {		
+	  {
 	    /* Put out init string before first page. */
 	    dumpToPrinter(initCommand, printStream);		/* send init to printer */
 
@@ -391,7 +391,7 @@ hl7x0_print_page(gx_device_printer *pdev, FILE *printStream, int ptype,
 			    &commandsBuffer,
 			    &pageSummary);
 	  dumpToPrinter(&commandsBuffer,printStream);
-	  
+
 	} while (result == DumpContinue);
 
 
@@ -401,7 +401,7 @@ hl7x0_print_page(gx_device_printer *pdev, FILE *printStream, int ptype,
 		     sizeof(FormFeed),  /* Size in bytes */
 		     sizeof(FormFeed)); /* First free byte */
 	dumpToPrinter(&formFeedCommand, printStream);
-		
+
 	/* free temporary storage */
 	gs_free(pdev->memory, (char *)storage, storage_size_words, 1, "hl7X0_print_page");
 
@@ -409,7 +409,7 @@ hl7x0_print_page(gx_device_printer *pdev, FILE *printStream, int ptype,
 }
 
 /*
- * Useful auxiliary declarations 
+ * Useful auxiliary declarations
  *
  */
 
@@ -429,7 +429,7 @@ private short stripTrailingBlanks(Byte * line, short length){
  * Changed the horizontalOffset function 1/17/00 Ross Martin.
  * ross@ross.interwrx.com or martin@walnut.eas.asu.edu
  *
- * The equation used to muliply pixWidth by resolution/600 
+ * The equation used to muliply pixWidth by resolution/600
  * also.  This didn't work right at resolution 300; it caused
  * landscape pages produced by a2ps to be half off the
  * page, when they were not at 600dpi or on other
@@ -440,15 +440,15 @@ private short stripTrailingBlanks(Byte * line, short length){
 private short horizontalOffset(short pixWidth,
 			      short pixOffset,
 			      short resolution){
-return (((LETTER_WIDTH * resolution/600 - pixWidth) + pixOffset * 2) + 7) / 8; 
+return (((LETTER_WIDTH * resolution/600 - pixWidth) + pixOffset * 2) + 7) / 8;
 
-} 
+}
 
 
 
 /*
  * First values in a Summary
- */ 
+ */
 private void initSummary(Summary * s,short pw, short ph, short resolution){
   s->previousSize = -1 ;
   s->nbBlankLines = 1;
@@ -478,17 +478,17 @@ private int dumpPage(gx_device_printer * pSource,
 		      ){
 
   /* Declarations */
-  Byte * pSaveCommandStart; 
+  Byte * pSaveCommandStart;
   short  lineNB;
   short usefulLength;
   short tmpLength;
   /* Initializations */
   /* Make room for size of commands buffer */
-  pSaveCommandStart = currentPosition(pCommandList);  
+  pSaveCommandStart = currentPosition(pCommandList);
   addNBytes(pCommandList,0,HL7X0_LENGTH);
   /* pSource += pSummary->nbLinesSent * pSummary->pageWidth;*/
   /* Process all possible Lines */
-  for (lineNB = pSummary->nbLinesSent /*ERROR? + nbBlankLines */ ; 
+  for (lineNB = pSummary->nbLinesSent /*ERROR? + nbBlankLines */ ;
        lineNB < pSummary->pageHeight ; lineNB ++ ) {
     /* Fetch the line and put it into the buffer */
     gdev_prn_copy_scan_lines(pSource,
@@ -529,7 +529,7 @@ private int dumpPage(gx_device_printer * pSource,
       }
 
       if (pSummary->previousSize > usefulLength){
-	tmpLength = pSummary->previousSize; 
+	tmpLength = pSummary->previousSize;
       }
       else {
 	tmpLength = usefulLength;
@@ -540,7 +540,7 @@ private int dumpPage(gx_device_printer * pSource,
 	Byte *save = currentPosition(pCommandList);
 	addByte(pCommandList,0); /* One byte for the number of commands */
 
-	makeCommandsForSequence(pLineTmp, 
+	makeCommandsForSequence(pLineTmp,
 				tmpLength,
 				pCommandList,
 				pSummary->horizontalOffset,
@@ -557,18 +557,18 @@ private int dumpPage(gx_device_printer * pSource,
       }
       /* The present line will soon be considered as "previous" */
       pSummary->previousSize = tmpLength;
-      /* Update the data representing the line will soon be the "previous line" */ 
+      /* Update the data representing the line will soon be the "previous line" */
       memcpy(pSummary->previousData,pLineTmp,tmpLength);
 
     }
-    else { /* the current line is blank */ 
+    else { /* the current line is blank */
       pSummary->nbBlankLines++;
     }
 
   /* And one more line */
-    pSummary->nbLinesSent ++;          
+    pSummary->nbLinesSent ++;
   }
-    
+
   if (pCommandList->current > HL7X0_LENGTH){
     short size = pCommandList->current - HL7X0_LENGTH;
     *(pSaveCommandStart++)  = '@';
@@ -587,12 +587,12 @@ private int dumpPage(gx_device_printer * pSource,
     return DumpContinue;
   }
 }
-		 
+
 
 /*
- *  makeFullLine : 
+ *  makeFullLine :
  *  process an arbitrary line for which a former line is available
- *  The line will be split in sequences that are different from the 
+ *  The line will be split in sequences that are different from the
  * corresponding ones of the previous line. These sequences will be processed
  * by makeCommandsOfSequence.
  */
@@ -625,18 +625,18 @@ private void makeFullLine( Byte      * pCurrentLine,
   /*******************/
   /* Initializations */
   /*******************/
-  
+
   pNumberOfCommands = currentPosition(commandsList); /* Keep a pointer to the number of commands */
   addByte(commandsList,0); /* At the moment there are 0 commands */
-  
+
   pPreviousTmp = pPreviousLine;
-  pCurrentTmp = pCurrentLine;  
+  pCurrentTmp = pCurrentLine;
 
   /* Build vector of differences with a Xor */
 
   for (loopCounter = lineWidth ;  0 < loopCounter ; loopCounter -- )
     *pPreviousTmp++ ^= *pCurrentTmp++;
- 
+
   /* Find sequences that are different from the corresponding (i.e. vertically aligned)
    * one of the previous line. Make commands for them.
    */
@@ -685,12 +685,12 @@ private void makeFullLine( Byte      * pCurrentLine,
       --remainingWidth;
     }
 #endif
-    
+
     pPreviousTmp = pStartOfSequence + 1; /* The sequence contains at least this byte */
-    --remainingWidth; 
-    
+    --remainingWidth;
+
     /* Find the end of the sequence of "new" bytes */
-    
+
 #ifdef USE_POSSIBLY_FLAWED_COMPRESSION
     while (remainingWidth != 0 && *pPreviousTmp != 0) {
       ++pPreviousTmp; /* Enlarge the sequence Of new bytes */
@@ -708,7 +708,7 @@ private void makeFullLine( Byte      * pCurrentLine,
 			     pNumberOfCommands,
 			     remainingWidth);
     if (*pNumberOfCommands == 0xfe   /* If the number of commands has reached the maximum value */
-	||                           /* or */ 
+	||                           /* or */
 	remainingWidth == 0 )        /* There is nothing left to process */
     {
       return;
@@ -718,27 +718,27 @@ private void makeFullLine( Byte      * pCurrentLine,
     horizontalOffset = 1;
     --remainingWidth;
   } /* End of While */
-  
-  
+
+
 
 
 } /* End of makeFullLine */
 
 
 
-/* 
- *  Declarations of functions that are defined further in the file 
+/*
+ *  Declarations of functions that are defined further in the file
  */
 private void makeSequenceWithoutRepeat(
 				  Byte     * pSequence,
 				  short      lengthOfSequence,
-				  ByteList * pCommandList, 
+				  ByteList * pCommandList,
 				  short      offset             );
 
 private void makeSequenceWithRepeat(
 				  Byte     * pSequence,
 				  short      lengthOfSequence,
-				  ByteList * pCommandList, 
+				  ByteList * pCommandList,
 				  short      offset             );
 
 
@@ -760,14 +760,14 @@ private void makeCommandsForSequence(Byte     * pSource,
 
   pStartOfSequence = pSource;
   pEndOfSequence = pStartOfSequence + 1;
-  /* 
-   * Process the whole "new" Sequence that is divided into 
+  /*
+   * Process the whole "new" Sequence that is divided into
    * repetitive and non-repetitive sequences.
-   */ 
+   */
   while (true) {
-    
-    /* If we have already stored too many commands, make one last command with 
-     * everything that is left in the line and return. 
+
+    /* If we have already stored too many commands, make one last command with
+     * everything that is left in the line and return.
      */
     if (*pNumberOfCommands == 0xfd) {
       makeSequenceWithoutRepeat(pStartOfSequence,
@@ -777,10 +777,10 @@ private void makeCommandsForSequence(Byte     * pSource,
       ++*pNumberOfCommands;
       return;
     }
-    
+
     /* Start with a sub-sequence without byte-repetition */
     while (true) {
-      /* If we have completed the last subsequence */  
+      /* If we have completed the last subsequence */
       if (remainingLength == 0) {
 	makeSequenceWithoutRepeat(pStartOfSequence,
 		     pEndOfSequence - pStartOfSequence,
@@ -805,7 +805,7 @@ private void makeCommandsForSequence(Byte     * pSource,
       ++*pNumberOfCommands;
       offset = 0;
       pStartOfSequence = pEndOfSequence - 1;
-      
+
       /* If we have too many commands */
       if (*pNumberOfCommands == 0xfd) {
 	makeSequenceWithoutRepeat(pStartOfSequence,
@@ -816,9 +816,9 @@ private void makeCommandsForSequence(Byte     * pSource,
 	return;
       }
     } /* End If */
-    
-    /* 
-     * Process a subsequence that repeats the same byte 
+
+    /*
+     * Process a subsequence that repeats the same byte
      */
     while (true) {
       /* If there is nothing left to process */
@@ -828,7 +828,7 @@ private void makeCommandsForSequence(Byte     * pSource,
 			       pCommandList,
 			       offset);
 	++*pNumberOfCommands;
-	return;		     
+	return;
       }
       /* If we find a different byte */
       if (*pEndOfSequence != *pStartOfSequence){
@@ -845,10 +845,10 @@ private void makeCommandsForSequence(Byte     * pSource,
       offset = 0;   /* The relative offset between two subsequences is 0 */
       pStartOfSequence = pEndOfSequence ++ ; /* we loop again from the end of this subsequence */
       --remainingLength;
-     
+
   } /* End of While */
-  
-} /* End makeCommandsForSequence */ 
+
+} /* End makeCommandsForSequence */
 
 
 
@@ -863,15 +863,15 @@ private void makeCommandsForSequence(Byte     * pSource,
 private void makeSequenceWithoutRepeat(
 				  Byte     * pSequence,
 				  short      lengthOfSequence,
-				  ByteList * pCommandList, 
+				  ByteList * pCommandList,
 				  short      offset             ){
   /*
-   *   Constant definitions 
+   *   Constant definitions
    */
   static const short MAX_OFFSET         = 15;
   static const short POSITION_OF_OFFSET = 3;
   static const short MAX_LENGTH         =  7;
-  
+
   Byte tmpFirstByte = 0;
   Byte * pSaveFirstByte;
   short reducedLength = lengthOfSequence - 1; /* Length is alway higher than 1
@@ -898,7 +898,7 @@ private void makeSequenceWithoutRepeat(
   else
     tmpFirstByte |= reducedLength ;
   /* Add a copy of the source sequence */
-  
+
   addArray(pCommandList, pSequence, lengthOfSequence);
 
   /* Store the computed value of the first byte */
@@ -916,16 +916,16 @@ private void makeSequenceWithoutRepeat(
 private void makeSequenceWithRepeat(
 				  Byte     * pSequence,
 				  short      lengthOfSequence,
-				  ByteList * pCommandList, 
+				  ByteList * pCommandList,
 				  short      offset             ){
   /*
-   *   Constant definitions 
+   *   Constant definitions
    */
   static const short MAX_OFFSET         = 3;
   static const short POSITION_OF_OFFSET = 5;
   static const short MAX_LENGTH         =  31;
-  
-  Byte tmpFirstByte = 0x80; 
+
+  Byte tmpFirstByte = 0x80;
   Byte * pSaveFirstByte;
   short reducedLength = lengthOfSequence - 2; /* Length is always higher than 2
 						 Therefore a reduced value is stored
@@ -951,7 +951,7 @@ private void makeSequenceWithRepeat(
   else
     tmpFirstByte |= reducedLength ;
   /* Add a copy the byte that is repeated throughout the sequence */
-  
+
   addByte(pCommandList, *pSequence );
 
   /* Store the computed value of the first byte */
@@ -994,12 +994,12 @@ private void addArray(ByteList *list, Byte *source, short nb){
     memcpy(list->data + list->current, source , (size_t) nb);
     list->current += nb;
   }
-  else 
+  else
     errprintf("Could not add byte array to command\n");
 }
 
 
-/* 
+/*
  * Add N bytes to a list of Bytes
  */
 
@@ -1013,7 +1013,7 @@ private void addNBytes(ByteList * list, Byte value, short nb){
       }
     list->current += nb;
   }
-  else 
+  else
     errprintf("Could not add %d bytes to command\n",nb);
 }
 
@@ -1034,7 +1034,7 @@ private Byte * currentPosition(ByteList * list) {
 private void addCodedNumber(ByteList * list, short number){
  short q = number / 0xff;
  short r = number % 0xff;
- 
+
  addNBytes(list, 0xff, q);
  addByte(list,r);
 
@@ -1049,7 +1049,7 @@ private int isThereEnoughRoom(ByteList * list, short biggest){
   return ((list->maxSize-list->current) >= biggest);
 }
 /*
- * Tell how much room is left 
+ * Tell how much room is left
  */
 private short roomLeft(ByteList * list){
   return list->maxSize - list->current;

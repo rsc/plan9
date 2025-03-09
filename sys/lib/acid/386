@@ -48,7 +48,7 @@ defn spr()				// print special processor registers
 	print("SP\t", *SP, " ECODE ", *ECODE, " EFLAG ", *EFLAGS, "\n");
 	print("CS\t", *CS, " DS\t ", *DS, " SS\t", *SS, "\n");
 	print("GS\t", *GS, " FS\t ", *FS, " ES\t", *ES, "\n");
-	
+
 	cause = *TRAP;
 	print("TRAP\t", cause, " ", reason(cause), "\n");
 }

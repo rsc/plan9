@@ -29,7 +29,7 @@ enum {
 	MGA200			= 0x0521,
 
 	FCOL			= 0x1c24,
-	FXRIGHT			= 0x1cac,	
+	FXRIGHT			= 0x1cac,
 	FXLEFT			= 0x1ca8,
 	YDST			= 0x1c90,
 	YLEN			= 0x1c5c,
@@ -81,7 +81,7 @@ static Pcidev *
 mgapcimatch(void)
 {
 	Pcidev *p;
-	
+
 	p = pcimatch(nil, MATROX, MGA4xx);
 	if(p == nil)
 		p = pcimatch(nil, MATROX, MGA550);
@@ -136,7 +136,7 @@ mga4xxenable(VGAscr* scr)
 	scr->mmio = vmap(pci->mem[1].bar&~0x0F, 16*1024);
 	if(scr->mmio == nil)
 		return;
-	
+
 	addvgaseg("mga4xxmmio", pci->mem[1].bar&~0x0F, pci->mem[1].size);
 
 	/* need to map frame buffer here too, so vga can find memory size */
@@ -180,7 +180,7 @@ enum{
 	Cylsb		= 0x0E,		/* Cursor Y LSB */
 	Cymsb		= 0x0F,		/* Cursor Y MSB */
 
-	Icuradrl		= 0x04,		/* Cursor Base Address Low */	
+	Icuradrl		= 0x04,		/* Cursor Base Address Low */
 	Icuradrh		= 0x05,		/* Cursor Base Address High */
 	Icctl			= 0x06,		/* Indirect Cursor Control */
 };
@@ -189,12 +189,12 @@ static void
 dac4xxdisable(VGAscr *scr)
 {
 	uchar *dac4xx;
-	
+
 	if(scr->mmio == 0)
 		return;
 
 	dac4xx = (uchar*)scr->mmio+0x3C00;
-	
+
 	*(dac4xx+Index) = Icctl;
 	*(dac4xx+Data) = 0x00;
 }
@@ -210,7 +210,7 @@ dac4xxload(VGAscr *scr, Cursor *curs)
 		return;
 
 	dac4xx = (uchar*)scr->mmio+0x3C00;
-	
+
 	dac4xxdisable(scr);
 
 	p = (uchar*)scr->storage;
@@ -268,7 +268,7 @@ dac4xxenable(VGAscr *scr)
 {
 	uchar *dac4xx;
 	ulong storage;
-	
+
 	if(scr->mmio == 0)
 		return;
 	dac4xx = (uchar*)scr->mmio+0x3C00;
@@ -280,7 +280,7 @@ dac4xxenable(VGAscr *scr)
 	*(dac4xx+Index) = Icuradrl;
 	*(dac4xx+Data) = 0xff & (storage >> 10);
 	*(dac4xx+Index) = Icuradrh;
-	*(dac4xx+Data) = 0xff & (storage >> 18);		
+	*(dac4xx+Data) = 0xff & (storage >> 18);
 
 	scr->storage = (ulong)scr->vaddr + storage;
 
@@ -326,13 +326,13 @@ mga4xxblank(VGAscr *scr, int blank)
 	char *cp;
 	uchar *mga;
 	uchar seq1, crtcext1;
-	
+
 	/* blank = 0 -> turn screen on */
 	/* blank = 1 -> turn screen off */
 
 	if(scr->mmio == 0)
 		return;
-	mga = (uchar*)scr->mmio;	
+	mga = (uchar*)scr->mmio;
 
 	if(blank == 0){
 		seq1 = 0x00;
@@ -417,7 +417,7 @@ mga4xxscroll(VGAscr *scr, Rectangle dr, Rectangle sr)
  	int width, height;
 	ulong start, end, sgn;
 	Point sp, dp;
- 
+
 	if(scr->mmio == 0)
 		return 0;
 	mga = (uchar*)scr->mmio;

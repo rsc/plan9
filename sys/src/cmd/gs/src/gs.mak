@@ -1,12 +1,12 @@
 #    Copyright (C) 1989, 1996-2004 artofcode LLC.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -84,7 +84,7 @@
 #		    pdf - a PDF 1.2 interpreter.
 #	    psl3 includes everything in psl2, and psl2 includes everything
 #	      in psl1.  For backward compatibility, level1 is a synonym for
-#	      psl1, and level2 is a synonym for psl2.  
+#	      psl1, and level2 is a synonym for psl2.
 #	    The following feature may be added to any of the standard
 #	      configurations:
 #		    ccfonts - precompile fonts into C, and link them
@@ -142,9 +142,9 @@
 #	    both, provides both implementations with different procedure
 #	    names for the fd-based implementation (see sfxfd.c for
 #	    more information).
-#	STDIO_IMPLEMENTATION - normally 'c' which uses callouts and 
-#	    ziodevsc.c, but ghostscript library must use '' for file 
-#	    based stdio in ziodevs.c. 
+#	STDIO_IMPLEMENTATION - normally 'c' which uses callouts and
+#	    ziodevsc.c, but ghostscript library must use '' for file
+#	    based stdio in ziodevs.c.
 #           Callouts use procedure based streams and return back to
 #           to gs_main_interpret() in imain.c whenever stdio is needed.
 #	EXTEND_NAMES - a value N between 0 and 6, indicating that the name
@@ -418,7 +418,7 @@ $(ld_tr) : \
 
 $(gconfig_h) : $(ld_tr)
 	$(NO_OP)
-	
+
 # The line above is an empty command; don't delete.
 
 # save our set of makefile variables that are defined in every build (paths, etc.)

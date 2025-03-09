@@ -167,7 +167,7 @@ END{
 			printf "\t&%scur,\n", vgacur[i];
 	  	printf "\tnil,\n};\n\n";
 	}
-	
+
 	if(nip){
 		printf "#include \"../ip/ip.h\"\n";
 		for(i = 0; i < nip; i++)

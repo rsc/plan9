@@ -264,7 +264,7 @@ it cannot resize the caches.
 .PP
 .I Loadchar
 loads a character image into the character cache.
-Then it tells the graphics server to copy the character 
+Then it tells the graphics server to copy the character
 into position
 .I h
 in the character cache.

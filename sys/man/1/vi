@@ -89,7 +89,7 @@ for a detailed description.
 Data formats and addressing are compatible with
 .I db
 except
-for disassembly: 
+for disassembly:
 .I vi
 offers only MIPS
 .RB ( db

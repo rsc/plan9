@@ -25,4 +25,3 @@ become(char **cmd, char *who)
 	}
 	return 0;
 }
-

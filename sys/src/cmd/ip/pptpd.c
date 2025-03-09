@@ -8,7 +8,7 @@
 typedef struct Call	Call;
 typedef struct Event Event;
 
-#define	SDB	if(debug) fprint(2, 
+#define	SDB	if(debug) fprint(2,
 #define EDB	);
 
 enum {
@@ -315,14 +315,14 @@ serve(void)
 			case Alinkinfo:
 				n2 = slinkinfo(p, n);
 				break;
-			}	
+			}
 			if(n2 == 0)
 				break;
 			if(n2 != len)
 				myfatal("op=%d: bad length: got %d expected %d", op, len, n2);
 			n -= n2;
 			p += n2;
-			
+
 		}
 
 		/* move down partial message */
@@ -397,7 +397,7 @@ sstop(uchar *p, int n)
 	if(n < 16)
 		return 0;
 	reason = p[12];
-	
+
 	SDB "%I: stop %d\n", srv.remote, reason EDB
 
 	memset(buf, 0, sizeof(buf));
@@ -422,7 +422,7 @@ secho(uchar *p, int n)
 	if(n < 16)
 		return 0;
 	id = GLONG(p+12);
-	
+
 	SDB "%I: echo %d\n", srv.remote, id EDB
 
 	memset(buf, 0, sizeof(buf));
@@ -454,7 +454,7 @@ scallout(uchar *p, int n)
 
 	if(!srv.start)
 		myfatal("%I: did not recieve start message", srv.remote);
-	
+
 	id = GSHORT(p+12);
 	serial = GSHORT(p+14);
 	minbps = GLONG(p+16);
@@ -488,7 +488,7 @@ scallout(uchar *p, int n)
 	PSHORT(buf+24, c->recvwindow);	/* window size */
 	PSHORT(buf+26, 0);		/* delay */
 	PLONG(buf+28, 0);		/* channel id */
-	
+
 	if(write(1, buf, sizeof(buf)) < sizeof(buf))
 		myfatal("write failed: %r");
 
@@ -525,9 +525,9 @@ scallclear(uchar *p, int n)
 	if(n < 16)
 		return 0;
 	id = GSHORT(p+12);
-	
+
 	SDB "%I: callclear id=%d\n", srv.remote, id EDB
-	
+
 	if(c = calllookup(id)) {
 		callclose(c);
 		callfree(c);
@@ -576,10 +576,10 @@ swaninfo(uchar *p, int n)
 
 	if(n < 40)
 		return 0;
-	
+
 	id = GSHORT(p+12);
 	SDB "%I: waninfo id = %d\n", srv.remote, id EDB
-	
+
 	c = calllookup(id);
 	if(c != 0) {
 		c->err.crc = GLONG(p+16);
@@ -592,7 +592,7 @@ swaninfo(uchar *p, int n)
 		callfree(c);
 	}
 
-	
+
 	return 40;
 }
 
@@ -617,7 +617,7 @@ slinkinfo(uchar *p, int n)
 
 		callfree(c);
 	}
-	
+
 	return 24;
 }
 
@@ -731,21 +731,21 @@ callclose(Call *c)
 
 void
 callfree(Call *c)
-{	
+{
 	int ref;
-	
+
 	qlock(&srv.lk);
 	ref = --c->ref;
 	qunlock(&srv.lk);
 	if(ref > 0)
 		return;
-	
+
 	/* already unhooked from hash list - see callclose */
 	assert(c->closed == 1);
 	assert(ref == 0);
 	assert(c->next == 0);
 
-SDB "call free\n" EDB	
+SDB "call free\n" EDB
 	free(c);
 }
 
@@ -1023,7 +1023,7 @@ pppread(void *a)
 		n = read(c->pppfd, p, sizeof(buf)-24);
 		if(n <= 0)
 			break;
-		
+
 		qlock(&c->lk);
 
 		/* add gre header */
@@ -1037,7 +1037,7 @@ SDB "window full seq = %d ack = %ux window = %ux\n", c->seq, c->ack, c->sendwind
 			ewait(&c->eack);
 			qlock(&c->lk);
 		}
-		
+
 		if(c->tick-tick >= Sendtimeout) {
 			c->stat.sendtimeout++;
 SDB "send timeout = %d ack = %ux window = %ux\n", c->seq, c->ack, c->sendwindow EDB
@@ -1066,7 +1066,7 @@ SDB "%I: %.3f: gre %d: send s=%ux a=%ux len=%d\n", srv.remote, realtime(),
 	}
 
 	SDB "pppread exit: %d\n", c->id);
-	
+
 	callfree(c);
 	exits(0);
 }
@@ -1199,7 +1199,7 @@ ipaddralloc(Call *c)
 
 void
 esignal(Event *e)
-{	
+{
 	qlock(e);
 	if(e->wait == 0) {
 		e->ready = 1;
@@ -1220,7 +1220,7 @@ ewait(Event *e)
 	assert(e->wait == 0);
 	if(e->ready) {
 		e->ready = 0;
-	} else {	
+	} else {
 		e->wait = 1;
 		qunlock(e);
 		rendezvous(e, (void*)2);
@@ -1338,4 +1338,3 @@ proc(char **argv, int fd0, int fd1, int fd2)
 	myfatal("proc: exec failed: %r");
 	return 0;
 }
-

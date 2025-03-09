@@ -64,11 +64,11 @@ output
 .B /sys/lib/lex/ncform
 template
 .SH "SEE ALSO"
-.IR yacc (1), 
+.IR yacc (1),
 .IR sed (1)
 .br
 M. E. Lesk and E. Schmidt,
-`LEX\(emLexical Analyzer Generator', 
+`LEX\(emLexical Analyzer Generator',
 .I
 Unix Research System Programmer's Manual,
 Tenth Edition, Volume 2.

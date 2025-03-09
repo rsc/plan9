@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 1994 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -91,7 +91,7 @@ private dev_proc_print_page(escp2_print_page);
 const gx_device_printer far_data gs_st800_device =
   prn_device(prn_std_procs, "st800",
 	DEFAULT_WIDTH_10THS,
-	DEFAULT_HEIGHT_10THS,			
+	DEFAULT_HEIGHT_10THS,
 	X_DPI, Y_DPI,
 	STYLUS_L_MARGIN, STYLUS_B_MARGIN, STYLUS_R_MARGIN, STYLUS_T_MARGIN,
 	1, escp2_print_page);
@@ -100,7 +100,7 @@ const gx_device_printer far_data gs_st800_device =
 const gx_device_printer far_data gs_ap3250_device =
   prn_device(prn_std_procs, "ap3250",
 	DEFAULT_WIDTH_10THS,
-	DEFAULT_HEIGHT_10THS,			
+	DEFAULT_HEIGHT_10THS,
 	X_DPI, Y_DPI,
 	AP3250_L_MARGIN, AP3250_B_MARGIN, AP3250_R_MARGIN, AP3250_T_MARGIN,
 	1, escp2_print_page);
@@ -110,7 +110,7 @@ const gx_device_printer far_data gs_ap3250_device =
 /* Send the page to the printer. */
 private int
 escp2_print_page(gx_device_printer *pdev, FILE *prn_stream)
-{	
+{
 	int line_size = gdev_prn_raster((gx_device_printer *)pdev);
 	int band_size = 24;	/* 1, 8, or 24 */
 	int in_size = line_size * band_size;
@@ -145,9 +145,9 @@ escp2_print_page(gx_device_printer *pdev, FILE *prn_stream)
 	*/
 
 	if ( buf1 == 0 || buf2 == 0 )
-	{	if ( buf1 ) 
+	{	if ( buf1 )
 		  gs_free(pdev->memory, (char *)buf1, in_size, 1, "escp2_print_page(buf1)");
-		if ( buf2 ) 
+		if ( buf2 )
 		  gs_free(pdev->memory, (char *)buf2, in_size, 1, "escp2_print_page(buf2)");
 		return_error(gs_error_VMerror);
 	}
@@ -191,7 +191,7 @@ escp2_print_page(gx_device_printer *pdev, FILE *prn_stream)
 
         if( auto_feed ) {
            top = (int)(dev_t_margin(pdev) * pdev->y_pixels_per_inch);
-           bottom = (int)(pdev->height - 
+           bottom = (int)(pdev->height -
 			dev_b_margin(pdev) * pdev->y_pixels_per_inch);
         } else {
            top = 0;
@@ -211,7 +211,7 @@ escp2_print_page(gx_device_printer *pdev, FILE *prn_stream)
 	*/
 
 	for ( lnum = top, skip = 0 ; lnum < bottom ; )
-	{	
+	{
 		byte *in_data;
 		byte *inp;
 		byte *in_end;
@@ -227,7 +227,7 @@ escp2_print_page(gx_device_printer *pdev, FILE *prn_stream)
 		while ( in_data[0] == 0 &&
 		        !memcmp((char *)in_data, (char *)in_data + 1, line_size - 1) &&
 		        lnum < bottom )
-	    	{	
+	    	{
 			lnum++;
 			skip++;
 			gdev_prn_get_bits(pdev, lnum, in, &in_data);

@@ -892,7 +892,7 @@ seprintep(char *s, char*, Ep*)
 {
 	return s;
 }
-	
+
 static int
 portenable(Hci *hp, int port, int on)
 {

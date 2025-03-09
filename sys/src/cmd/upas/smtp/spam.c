@@ -26,7 +26,7 @@ static Keyword options[] = {
 	"norelay",		NORELAY,
 	"verifysenderdom",	DNSVERIFY,
 	"saveblockedmsg",	SAVEBLOCK,
-	"defaultdomain",	DOMNAME,	
+	"defaultdomain",	DOMNAME,
 	"ournets",		OURNETS,
 	"ourdomains",		OURDOMS,
 	0,			NONE,
@@ -435,7 +435,7 @@ cidrcheck(char *cp)
 		if((v4peerip&m) == a)
 			return 1;
 		cp += strlen(cp)+1;
-	}		
+	}
 	return 0;
 }
 

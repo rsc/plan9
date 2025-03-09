@@ -157,7 +157,7 @@ and the packet
 .PP
 The block type enumeration defined in
 .B <venti.h>
-(presented in 
+(presented in
 .IR venti (6))
 differs from the one used on disk and in the network
 protocol.
@@ -208,7 +208,7 @@ most programs will not need to call them directly.
 converts a
 .B VtRoot
 structure describing a Venti file tree
-into the 300-byte 
+into the 300-byte
 .RB ( VtRootSize )
 buffer pointed to by
 .IR buf .

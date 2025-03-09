@@ -48,7 +48,7 @@ workproc(void *a)
 	}
 	sendul(rc, 0);
 	threadexits(nil);
-	
+
 }
 
 int

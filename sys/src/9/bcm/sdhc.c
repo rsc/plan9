@@ -97,7 +97,7 @@ enum {
 	Clkgendiv		= 0<<5,		/* SD clock divided */
 	Clkgenprog		= 1<<5,		/* SD clock programmable */
 	Clken			= 1<<2,		/* SD clock enable */
-	Clkstable		= 1<<1,	
+	Clkstable		= 1<<1,
 	Clkintlen		= 1<<0,		/* enable internal EMMC clocks */
 
 	/* Cmdtm */
@@ -549,7 +549,7 @@ emmcio(int write, uchar *buf, int len)
 
 static void
 mmcinterrupt(Ureg*, void*)
-{	
+{
 	u32int *r;
 	int i;
 

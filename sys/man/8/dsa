@@ -136,7 +136,7 @@ removes the private attributes, and prints the resulting public key.
 Comment attributes are preserved.
 .PP
 .I Dsa2ssh
-reads a Plan 9 DSA public or private key and prints the public portion 
+reads a Plan 9 DSA public or private key and prints the public portion
 in the format used by SSH:
 .L ssh-dss
 and a long base-64 encoded number.

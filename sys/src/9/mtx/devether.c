@@ -254,7 +254,7 @@ etherwrite(Chan* chan, void* buf, long n, vlong)
 
 		if(ether->ctl!=nil)
 			return ether->ctl(ether,buf,n);
-			
+
 		error(Ebadctl);
 	}
 
@@ -373,7 +373,7 @@ etherreset(void)
 					continue;
 				if(parseether(ether->ea, &ether->opt[i][3]) == -1)
 					memset(ether->ea, 0, Eaddrlen);
-			}	
+			}
 			if(cards[n].reset(ether))
 				break;
 

@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -156,7 +156,7 @@ gs_type2_interpret(gs_type1_state * pcis, const gs_glyph_data_t *pgd,
 			    pcis->scale.x.log2_unit, pcis->scale.x.log2_unit,
 			    pcis->scale.x.log2_unit - pcis->log2_subpixels.x,
 			    pcis->scale.y.log2_unit - pcis->log2_subpixels.y,
-			    pcis->origin.x, pcis->origin.y, 
+			    pcis->origin.x, pcis->origin.y,
 			    gs_currentaligntopixels(pfont->dir));
 	    if (code < 0)
 	    	return code;
@@ -360,7 +360,7 @@ gs_type2_interpret(gs_type1_state * pcis, const gs_glyph_data_t *pgd,
 		/* See vmoveto above re closing the subpath. */
 		check_first_operator(!((csp - cstack) & 1));
 		if (csp > cstack + 1) {
-		  /* Some Type 2 charstrings omit the vstemhm operator before rmoveto, 
+		  /* Some Type 2 charstrings omit the vstemhm operator before rmoveto,
 		     even though this is only allowed before hintmask and cntrmask.
 		     Thanks to Felix Pahl.
 		   */
@@ -417,7 +417,7 @@ gs_type2_interpret(gs_type1_state * pcis, const gs_glyph_data_t *pgd,
 		    deltas = base + n - 1;
 		    for (j = 0; j < n; j++, base++, deltas += k - 1)
 			for (i = 1; i < k; i++)
-			    *base += (fixed)(deltas[i] * 
+			    *base += (fixed)(deltas[i] *
 				pfont->data.WeightVector.values[i]);
 		}
 		cnext;
@@ -642,7 +642,7 @@ gs_type2_interpret(gs_type1_state * pcis, const gs_glyph_data_t *pgd,
 			{
 			    double prod = fixed2float(csp[-1]) * *csp;
 
-			    csp[-1] = 
+			    csp[-1] =
 				(prod > max_fixed ? max_fixed :
 				 prod < min_fixed ? min_fixed : (fixed)prod);
 			}
@@ -741,12 +741,12 @@ flex:			{
 				 * because the flex operators don't clear
 				 * the stack (!).
 				 */
-				code = t1_hinter__rcurveto(h, 
+				code = t1_hinter__rcurveto(h,
 					csp[-12], csp[-11], csp[-10],
 					csp[-9], csp[-8], csp[-7]);
 				if (code < 0)
 				    return code;
-				code = t1_hinter__rcurveto(h, 
+				code = t1_hinter__rcurveto(h,
 					csp[-6], csp[-5], csp[-4],
 					csp[-3], csp[-2], csp[-1]);
 			    }

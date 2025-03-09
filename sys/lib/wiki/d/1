@@ -9,7 +9,7 @@ Arsc
 # To get at the real Plan 9 wiki, execute:
 #
 # Local srv net!plan9.bell-labs.com!wiki wiki /mnt/wiki
-# 
+#
 # and then restart the wiki reader:
 #
 # Wiki /mnt/wiki

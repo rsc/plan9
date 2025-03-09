@@ -80,7 +80,7 @@ putbits(Chain *ch, void *p, int nbits)
 
 	for(i = 0; i < nby; i++)
 		put8bits(ch, vp++, 8);
-	
+
 	if(nbi != 0)
 		put8bits(ch, vp, nbi);
 }
@@ -98,7 +98,7 @@ getbits(void *p, Chain *ch, int nbits)
 	vp = p;
 	for(i = 0; i < nby; i++)
 		*vp++ = get8bits(ch, 8);
-	
+
 	if(nbi != 0)
 		*vp = get8bits(ch, nbi);
 }
@@ -135,7 +135,7 @@ printchain(Chain *ch)
 		if(ch2->e - ch2->b < ng)
 			ng = ch2->e - ch2->b;
 		getbits(&c, ch2, ng);
-		if(i != 0 && i%15 == 0)	
+		if(i != 0 && i%15 == 0)
 			fprint(2, "\n");
 		if(ng < 8){
 			msk = MSK(ng);
@@ -143,7 +143,7 @@ printchain(Chain *ch)
 		}
 		else
 			fprint(2, "%#2.2x ", c);
-		
+
 	}
 	if(i%16 != 0)
 		fprint(2, "\n");
@@ -216,4 +216,3 @@ msbhgetl(u32int *v)
 	rv = lehgetl(&rev);
 	return rv;
 }
-

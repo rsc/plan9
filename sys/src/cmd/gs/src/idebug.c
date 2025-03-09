@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -237,7 +237,7 @@ print_ref_data(const gs_memory_t *mem, const ref *p)
 
 /* Dump a region of memory containing refs. */
 void
-debug_dump_refs(const gs_memory_t *mem, const ref * from, 
+debug_dump_refs(const gs_memory_t *mem, const ref * from,
 		uint size, const char *msg)
 {
     const ref *p = from;
@@ -255,7 +255,7 @@ debug_dump_refs(const gs_memory_t *mem, const ref * from,
 
 /* Dump a stack. */
 void
-debug_dump_stack(const gs_memory_t *mem, 
+debug_dump_stack(const gs_memory_t *mem,
 		 const ref_stack_t * pstack, const char *msg)
 {
     uint i;

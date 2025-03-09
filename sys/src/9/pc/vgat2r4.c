@@ -75,7 +75,7 @@ t2r4enable(VGAscr* scr)
 	else
 		return;
 	scr->pci = p;
-	
+
 	mmio = vmap(p->mem[4].bar & ~0x0F, p->mem[4].size);
 	if(mmio == nil)
 		return;
@@ -499,7 +499,7 @@ t2r4drawinit(VGAscr *scr)
 	d[CmdClp] = 0;	/* 2 = inside rectangle */
 	d[Mask] = ~0;
 	d[DeKey] = 0;
-	d[Clptl] = 0; 
+	d[Clptl] = 0;
 	d[Clpbr] = 0xFFF0FFF0;
 	d[Alpha] = 0;
 	d[ACtl] = 0;
@@ -528,4 +528,3 @@ VGAcur vgat2r4cur = {
 	t2r4curload,
 	t2r4curmove,
 };
-

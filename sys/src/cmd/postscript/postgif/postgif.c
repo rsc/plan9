@@ -732,7 +732,7 @@ done()
     fprintf(stdout, "%s", TRAILER);
     fprintf(stdout, "done\n");
     fprintf(stdout, "%s 0 0 %d %d\n", BOUNDINGBOX, bburx, bbury);
-    fprintf(stdout, "%s %d\n", PAGES, printed); 
+    fprintf(stdout, "%s %d\n", PAGES, printed);
 }
 
 main(agc, agv)
@@ -752,4 +752,3 @@ main(agc, agv)
 
     exit(0);
 }
-

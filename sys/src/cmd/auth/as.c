@@ -115,7 +115,7 @@ initcap(void)
 }
 
 /*
- *  create a change uid capability 
+ *  create a change uid capability
  */
 char*
 mkcap(char *from, char *to)

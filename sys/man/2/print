@@ -140,7 +140,7 @@ Each of these functions
 converts, formats, and prints its
 trailing arguments
 under control of a
-.IR format 
+.IR format
 string.
 The
 format
@@ -292,7 +292,7 @@ is the maximum number of significant digits for
 and
 .B G
 conversions.
-The 
+The
 .B f
 verb produces output of the form
 .RB [ - ] digits [ .digits\fR].

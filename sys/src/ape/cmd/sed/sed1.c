@@ -695,7 +695,7 @@ arout(void)
 uchar *
 lformat(int c, uchar *p)
 {
-	int trans = 
+	int trans =
 		c=='\b'? 'b':
 		c=='\t'? 't':
 		c=='\n'? 'n':
@@ -716,4 +716,3 @@ lformat(int c, uchar *p)
 		*p++ = c;
 	return p;
 }
-

@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -2349,7 +2349,7 @@ static int nInstrCount=0;
   {
     if (CUR.countIDefs >= CUR.numIDefs || args[0] > 255)
 	CUR.error = TT_Err_Storage_Overflow;
-    else 
+    else
       {
 	PDefRecord  pTDR;
 
@@ -2568,7 +2568,7 @@ static int nInstrCount=0;
       CUR.error = TT_Err_Invalid_Reference;
       return;
 #else
-      /* A workaround for the Ghostscript Bug 687604. 
+      /* A workaround for the Ghostscript Bug 687604.
          Ported from FreeType 2 : !FT_LOAD_PEDANTIC by default. */
       index=args[0];
       args[0] = 0;
@@ -4751,7 +4751,7 @@ static int nInstrCount=0;
     TDefRecord*  def;
     PCallRecord  call;
 
-#   if 0     /* The condition below appears always false 
+#   if 0     /* The condition below appears always false
 		due to limited range of data type
 		- skip it to quiet a compiler warning. */
     if (CUR.opcode > sizeof(CUR.IDefPtr) / sizeof(CUR.IDefPtr[0])) {
@@ -4761,7 +4761,7 @@ static int nInstrCount=0;
 #   endif
     i = CUR.IDefPtr[(Byte)CUR.opcode];
 
-    if (i >= CUR.numIDefs) 
+    if (i >= CUR.numIDefs)
       {
 	CUR.error = TT_Err_Invalid_Opcode;
 	return;
@@ -5204,14 +5204,14 @@ static int nInstrCount=0;
       Instruct_Dispatch[CUR.opcode].p( EXEC_ARGS &CUR.stack[CUR.args] );
 
 #     ifdef DEBUG
-      if (save_ox != NULL) { 
+      if (save_ox != NULL) {
 	F26Dot6 *pp[4], *qq[4];
         const char *ss[] = {"org.x", "org.y", "cur.x", "cur.y"};
         int l = 0, i, j;
 
-        pp[0] = save_ox, 
-        pp[1] = save_oy, 
-        pp[2] = save_cx, 
+        pp[0] = save_ox,
+        pp[1] = save_oy,
+        pp[2] = save_cx,
         pp[3] = save_cy;
         qq[0] = CUR.pts.org_x;
         qq[1] = CUR.pts.org_y;
@@ -5228,7 +5228,7 @@ static int nInstrCount=0;
                   { l=0;
                     DBG_PRINT("\n");
                   }
-              }	       
+              }
             }
         nInstrCount++;
         bFirst=FALSE;

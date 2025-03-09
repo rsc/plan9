@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1995, 1996, 1997, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -363,7 +363,7 @@ win_dib_repaint(gx_device_win * dev, HDC hdc, int dx, int dy, int wx, int wy,
     UINT which_colors;
 
     memset(&bmi.h, 0, sizeof(bmi.h));
-    
+
     bmi.h.biSize = sizeof(bmi.h);
     bmi.h.biWidth = wdev->mdev.width;
     bmi.h.biHeight = wy;
@@ -373,7 +373,7 @@ win_dib_repaint(gx_device_win * dev, HDC hdc, int dx, int dy, int wx, int wy,
     bmi.h.biSizeImage = 0;	/* default */
     bmi.h.biXPelsPerMeter = 0;	/* default */
     bmi.h.biYPelsPerMeter = 0;	/* default */
-    
+
     if (dev->BitsPerPixel <= 8) {
 	bmi.h.biClrUsed = wdev->nColors;
 	bmi.h.biClrImportant = wdev->nColors;
@@ -493,14 +493,14 @@ win_dib_make_dib(gx_device_win * dev, int orgx, int orgy, int wx, int wy)
 	bmi_colors[0] = 0x7c00;
 	bmi_colors[1] = 0x03e0;
 	bmi_colors[2] = 0x001f;
-    } 
+    }
     else if (dev->BitsPerPixel == 16) { /* 5-6-5 RGB mode */
 	DWORD* bmi_colors = (DWORD*)(pColors);
         pbmih->biCompression = BI_BITFIELDS;
 	bmi_colors[0] = 0xf800;
 	bmi_colors[1] = 0x07e0;
 	bmi_colors[2] = 0x001f;
-    } 
+    }
     else {
     for (i = 0; i < palcount; i++) {
 	win_map_color_rgb((gx_device *) wdev, (gx_color_index) i, prgb);
@@ -709,14 +709,14 @@ gsdll_get_bitmap_row(unsigned char *device, LPBITMAPINFOHEADER pbmih,
 	    bmi_colors[0] = 0x7c00;
 	    bmi_colors[1] = 0x03e0;
 	    bmi_colors[2] = 0x001f;
-	} 
+	}
 	else if (dev->BitsPerPixel == 16) { /* 5-6-5 RGB mode */
 	    DWORD* bmi_colors = (DWORD*)(prgbquad);
 	    pbmih->biCompression = BI_BITFIELDS;
 	    bmi_colors[0] = 0xf800;
 	    bmi_colors[1] = 0x07e0;
 	    bmi_colors[2] = 0x001f;
-	} 
+	}
 	else {
 	for (i = 0; i < palcount; i++) {
 	    win_map_color_rgb((gx_device *) wdev, (gx_color_index) i, prgb);

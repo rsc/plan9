@@ -107,7 +107,7 @@ getstr(char *prompt, char *buf, int size, char *def, int timeout)
 		if (timeout > 0) {
 			for(timeout *= 1000; timeout > 0; timeout -= 100) {
 				if (qlen(kbdq) > 0)	/* if input queued */
-					break; 
+					break;
 				tsleep(&up->sleep, return0, 0, 100);
 			}
 			if (timeout <= 0) {		/* use default */
@@ -315,10 +315,10 @@ again:
 			break;
 		default:
 			continue;
-			
+
 		}
 		mi = &mitem[i];
-	
+
 		p = str;
 		p += snprint(p, len, "menuitem=%s\n", mi->mb->name);
 		for(i = 0; i < nmblock; i++){
@@ -491,10 +491,10 @@ dotini(char *inibuf)
 	 * Change runs of spaces into single spaces.
 	 * Strip out trailing spaces, blank lines.
 	 *
-	 * We do this before we make the copy so that if we 
+	 * We do this before we make the copy so that if we
 	 * need to change the copy, it is already fairly clean.
 	 * The main need is in the case when plan9.ini has been
-	 * padded with lots of trailing spaces, as is the case 
+	 * padded with lots of trailing spaces, as is the case
 	 * for those created during a distribution install.
 	 */
 	p = cp;
@@ -527,7 +527,7 @@ dotini(char *inibuf)
 			incomment = 1;
 		blankline = 0;
 		if(!incomment)
-			*p++ = *q;	
+			*p++ = *q;
 	}
 	if(p > cp && p[-1] != '\n')
 		*p++ = '\n';

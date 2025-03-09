@@ -1,12 +1,12 @@
 %    Copyright (C) 1994 Aladdin Enterprises.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -15,7 +15,7 @@
 
 % $Id: Fontmap.ATB,v 1.4 2002/02/21 21:49:28 giles Exp $
 % Fontmap.ATB - an alternative Fontmap for Ghostscript,
-% suitable for use with the 65 Adobe Type Manager fonts 
+% suitable for use with the 65 Adobe Type Manager fonts
 % supplied with Adobe Type Basics.
 
 % Before you use ATM fonts with Ghostscript, please read carefully
@@ -137,7 +137,7 @@
 /Hershey-Gothic-German-Bold	(hrgr_rb.gsf)	4291030 ;
 /Hershey-Gothic-German-Oblique	(hrgr_ro.gsf)	4291010 ;
 
-/Hershey-Gothic-Italian		(hrit_r.gsf)	4292000 ; 
+/Hershey-Gothic-Italian		(hrit_r.gsf)	4292000 ;
 /Hershey-Gothic-Italian-Bold	(hrit_rb.gsf)	4292030 ;
 /Hershey-Gothic-Italian-Oblique	(hrit_ro.gsf)	4292010 ;
 

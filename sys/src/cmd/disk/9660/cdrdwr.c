@@ -126,7 +126,7 @@ opencd(char *file, Cdinfo info)
 	}
 
 	/* lowercase because of isostring */
-	if(strstr(cd->iso.systemid, "iso9660") == nil 
+	if(strstr(cd->iso.systemid, "iso9660") == nil
 	&& strstr(cd->iso.systemid, "utf8") == nil) {
 		werrstr("unknown systemid %s", cd->iso.systemid);
 		free(cd);
@@ -134,7 +134,7 @@ opencd(char *file, Cdinfo info)
 		close(xfd);
 		return nil;
 	}
-	
+
 	if(strstr(cd->iso.systemid, "plan 9"))
 		cd->flags |= CDplan9;
 	if(strstr(cd->iso.systemid, "iso9660"))
@@ -312,7 +312,7 @@ parsedesc(Voldesc *v, Cvoldesc *cv, char *(*string)(uchar*, int))
 	v->biblio = string(cv->biblio, sizeof cv->biblio);
 	v->notice = string(cv->notice, sizeof cv->notice);
 }
-	
+
 static int
 readisodesc(Cdimg *cd, Voldesc *v)
 {
@@ -666,4 +666,3 @@ Clinelen(Cdimg *cd)
 {
 	return Blinelen(&cd->brd);
 }
-

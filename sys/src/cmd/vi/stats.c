@@ -45,7 +45,7 @@ isum(void)
 		for(i = tables[j]; i->func; i++) {
 			if(i->name && i->count) {
 				/* Dont count floating point twice */
-				if(strcmp(i->name, "cop1") == 0)	
+				if(strcmp(i->name, "cop1") == 0)
 					i->count = 0;
 				else
 					total += i->count;
@@ -100,16 +100,16 @@ isum(void)
 					realarith += i->count;
 					break;
 				}
-		
+
 			}
 		}
 	}
 
-	Bprint(bioout, "\n%-8ud      Memory cycles\n", loads+stores+total);	
+	Bprint(bioout, "\n%-8ud      Memory cycles\n", loads+stores+total);
 	Bprint(bioout, "%-8ud %3d%% Instruction cycles\n",
 			total, Percent(total, loads+stores+total));
 	Bprint(bioout, "%-8ud %3d%% Data cycles\n\n",
-			loads+stores, Percent(loads+stores, loads+stores+total));	
+			loads+stores, Percent(loads+stores, loads+stores+total));
 
 	Bprint(bioout, "%-8ud %3d%% Stores\n", stores, Percent(stores, total));
 	Bprint(bioout, "%-8ud %3d%% Loads\n", loads, Percent(loads, total));
@@ -121,7 +121,7 @@ isum(void)
 	Bprint(bioout, "   %-8ud %3d%% Delay slots\n",
 			ldsused, Percent(ldsused, ltotal));
 
-	Bprint(bioout, "   %-8ud %3d%% Unused delay slots\n", 
+	Bprint(bioout, "   %-8ud %3d%% Unused delay slots\n",
 			ldsunused, Percent(ldsunused, ltotal));
 
 	Bprint(bioout, "%-8ud %3d%% Arithmetic\n",
@@ -145,7 +145,7 @@ isum(void)
 	Bprint(bioout, "   %-8ud %3d%% Delay slots\n",
 			useddelay, Percent(useddelay, branch));
 
-	Bprint(bioout, "   %-8ud %3d%% Unused delay slots\n", 
+	Bprint(bioout, "   %-8ud %3d%% Unused delay slots\n",
 			branch-useddelay, Percent(branch-useddelay, branch));
 
 	Bprint(bioout, "%-8ud %3d%% Program total delay slots\n",

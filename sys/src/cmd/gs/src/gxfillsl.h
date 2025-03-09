@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 artofcode LLC. All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -21,7 +21,7 @@
  * Since we need several statically defined variants of this agorithm,
  * we store it in .h file and include it several times into gxfill.c .
  * Configuration macros (template arguments) are :
- * 
+ *
  *  FILL_DIRECT - See LOOP_FILL_RECTANGLE_DIRECT.
  *  TEMPLATE_spot_into_scanlines - the name of the procedure to generate.
 */
@@ -80,7 +80,7 @@ TEMPLATE_spot_into_scanlines (line_list *ll, fixed band_mask)
 		y = min(y, yll->start.y);
 	    for (alp = ll->x_list; alp != 0; alp = alp->next) {
 		fixed yy = max(alp->fi.y3, alp->fi.y0);
-		
+
 		yy = max(yy, alp->end.y); /* Non-monotonic curves may have an inner extreme. */
 		y = min(y, yy);
 	    }
@@ -221,4 +221,3 @@ TEMPLATE_spot_into_scanlines (line_list *ll, fixed band_mask)
     range_list_free(&rlist);
     return code;
 }
-

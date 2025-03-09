@@ -1,12 +1,12 @@
 /* Copyright (C) 1994, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -76,7 +76,7 @@ tfax_get_params(gx_device * dev, gs_param_list * plist)
     gx_device_tfax *const tfdev = (gx_device_tfax *)dev;
     int code = gdev_fax_get_params(dev, plist);
     int ecode = code;
-    
+
     if ((code = param_write_long(plist, "MaxStripSize", &tfdev->MaxStripSize)) < 0)
         ecode = code;
     if ((code = param_write_int(plist, "FillOrder", &tfdev->FillOrder)) < 0)
@@ -110,7 +110,7 @@ tfax_put_params(gx_device * dev, gs_param_list * plist)
 	    break;
     }
 
-    /* Following TIFF spec, FillOrder is integer */ 
+    /* Following TIFF spec, FillOrder is integer */
     switch (code = param_read_int(plist, (param_name = "FillOrder"), &fill_order)) {
         case 0:
 	    if (fill_order == 1 || fill_order == 2)

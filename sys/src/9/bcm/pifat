@@ -56,5 +56,3 @@ bootdir
 	/arm/bin/ls
 	/arm/bin/cat
 	/arm/bin/usb/usbd
-
-

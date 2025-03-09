@@ -1,12 +1,12 @@
 #    Copyright (C) 1991-2004 artofcode LLC.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -16,7 +16,7 @@
 # $Id: msvc32.mak,v 1.75 2005/08/31 05:59:58 ray Exp $
 # makefile for 32-bit Microsoft Visual C++, Windows NT or Windows 95 platform.
 #
-# All configurable options are surrounded by !ifndef/!endif to allow 
+# All configurable options are surrounded by !ifndef/!endif to allow
 # preconfiguration from within another makefile.
 #
 # Optimization /O2 seems OK with MSVC++ 4.1, but not with 5.0.
@@ -114,7 +114,7 @@ GS_INIT=gs_init.ps
 #    tracing and self-validation code fragments into compilation.
 #    Particularly it enables the -Z and -T switches in Ghostscript.
 # 2. It compiles code fragments for C stack overflow checks.
-# Code produced with this option is somewhat larger and runs 
+# Code produced with this option is somewhat larger and runs
 # somewhat slower.
 
 !ifndef DEBUG
@@ -641,7 +641,7 @@ DEVICE_DEVS14=$(DD)jpeg.dev $(DD)jpeggray.dev $(DD)jpegcmyk.dev
 DEVICE_DEVS15=$(DD)pdfwrite.dev $(DD)pswrite.dev $(DD)ps2write.dev $(DD)epswrite.dev $(DD)pxlmono.dev $(DD)pxlcolor.dev
 DEVICE_DEVS16=$(DD)bbox.dev
 # Overflow for DEVS3,4,5,6,9
-DEVICE_DEVS17=$(DD)ljet3.dev $(DD)ljet3d.dev $(DD)ljet4.dev $(DD)ljet4d.dev 
+DEVICE_DEVS17=$(DD)ljet3.dev $(DD)ljet3d.dev $(DD)ljet4.dev $(DD)ljet4d.dev
 DEVICE_DEVS18=$(DD)pj.dev $(DD)pjxl.dev $(DD)pjxl300.dev $(DD)jetp3852.dev $(DD)r4081.dev
 DEVICE_DEVS19=$(DD)lbp8.dev $(DD)m8510.dev $(DD)necp6.dev $(DD)bjc600.dev $(DD)bjc800.dev
 DEVICE_DEVS20=$(DD)pnm.dev $(DD)pnmraw.dev $(DD)ppm.dev $(DD)ppmraw.dev

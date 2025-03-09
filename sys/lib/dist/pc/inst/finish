@@ -2,7 +2,7 @@
 
 # desc: finish the installation and reboot
 # prereq: bootsetup
-# mustdo: 
+# mustdo:
 
 switch($1) {
 case checkdone

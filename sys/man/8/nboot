@@ -11,7 +11,7 @@ configuration file, gather some basic system information like
 the amount of usable system memory, do some basic system
 initialization and load the kernel from the boot media into memory.
 
-After reading the configuration, the loader will automatically 
+After reading the configuration, the loader will automatically
 attempt to boot the kernel that was specified by the
 .B bootfile=
 parameter. If there is no such parameter, a key
@@ -52,18 +52,18 @@ method.
 .SH FAT BOOTING
 When booting Plan 9 from a harddisk or USB pen drive, a
 FAT16/32 partition
-.IR (9fat) 
-is used to store the kernel and 
+.IR (9fat)
+is used to store the kernel and
 .IR plan9.ini (8)
 configuration. Due to size limitations, instead of loading
 the kernel directly, the bootsector
 .IR (pbs)
 of the FAT partition loads
-a 2nd stage bootloader 
+a 2nd stage bootloader
 .IR (9bootfat)
 from the root directory of the filesystem.
 .SH CD-ROM BOOTING
-Booting from CD-ROM requires only the 
+Booting from CD-ROM requires only the
 .IR 9bootiso
 bootloader to be included in the ISO-9660 image under
 .BR /386/9bootiso ,
@@ -112,13 +112,13 @@ or
 in the boot media and executes them.
 For local disk media, these files are located in the directory
 .B /efi/boot
-of the 
+of the
 .B FAT
 formatted boot partition.
-For 
+For
 .B CD-ROM
 media, the boot partition is provided
-as a embedded 
+as a embedded
 .B FAT
 filesystem image
 .I efiboot.fat
@@ -134,7 +134,7 @@ files are used as the
 .B BSP
 program instead of
 .IR 9bootpxe .
-Once started, the boot media 
+Once started, the boot media
 .RB ( PXE ,
 .BR ISO ,
 .BR FAT )
@@ -143,13 +143,13 @@ is discovered and
 configuration is read from it in the same way as
 with the BIOS-based
 .I 9boot*
-loaders.  If the EFI loader was executed from a 
+loaders.  If the EFI loader was executed from a
 .B FAT
 partition, it will first search for
 .IR plan9.ini (8)
 in the same
-.B FAT 
-filesystem that it was loaded from, and if not found, will search for 
+.B FAT
+filesystem that it was loaded from, and if not found, will search for
 .IR plan9.ini (8)
 in any other partition in an implementation-defined order.  The kernel
 is always loaded from the same partition that

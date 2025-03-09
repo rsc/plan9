@@ -18,4 +18,3 @@ UPDATE=\
 
 </sys/src/cmd/mkmany
 CFLAGS=$CFLAGS -I../common
-

@@ -1,4 +1,4 @@
-.TH READ 5 
+.TH READ 5
 .SH NAME
 read, write \- transfer data from and to a file
 .SH SYNOPSIS
@@ -35,10 +35,10 @@ request
 asks for
 .I count
 bytes of data
-from the file identified by 
+from the file identified by
 .IR fid ,
 which must be opened for reading,
-starting 
+starting
 .I offset
 bytes after the beginning of the file.
 The bytes are returned with the
@@ -98,7 +98,7 @@ the data will be placed at the end of the file regardless of
 .IR offset .
 Directories may not be written.
 .PP
-The 
+The
 .B write
 reply records the number of bytes actually written.
 It is usually an error

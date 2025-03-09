@@ -210,7 +210,7 @@ This is used to make a server be a backup only.
 Sleep roughly 1 to 2 seconds before answering requests for dynamic addresses.
 .TP
 .B x
-The IP stack to use is mounted at 
+The IP stack to use is mounted at
 .IR netmtpt .
 The default is
 .BR /net .
@@ -239,7 +239,7 @@ Use the Ethernet mounted at
 .BI /net/ etherdev\f1.
 .TP
 .B x
-The IP stack to use is mounted at 
+The IP stack to use is mounted at
 .IR netmtpt .
 The default is
 .BR /net .
@@ -267,7 +267,7 @@ The options are:
 Print debugging to standard output.
 .TP
 .B x
-The IP stack to use is mounted at 
+The IP stack to use is mounted at
 .IR netmtpt .
 The default is
 .BR /net .

@@ -737,7 +737,7 @@ audioinit(void)
 	if(isaconfig("audio", 0, &sbconf) == 0)
 		return;
 	if(sbconf.type == nil ||
-		(cistrcmp(sbconf.type, "sb16") != 0 && 
+		(cistrcmp(sbconf.type, "sb16") != 0 &&
 		 cistrcmp(sbconf.type, "ess1688") != 0))
 		return;
 	switch(sbconf.port){

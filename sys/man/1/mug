@@ -14,7 +14,7 @@ from
 .I file
 (or standard input if there is no
 .IR file )
-and 
+and
 displays a working version of the icon
 a gray ramp,
 and a larger image (the `crop box'),

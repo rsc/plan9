@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 1995, 1996, 1997, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -166,7 +166,7 @@ struct gx_color_tile_s {
     gx_strip_bitmap tmask;	/* data = 0 if no mask */
     /* (i.e., the mask is all 1's) */
     bool is_simple;		/* true if xstep/ystep = tile size */
-    bool is_dummy;		/* if true, the device manages the pattern, 
+    bool is_dummy;		/* if true, the device manages the pattern,
                                    and the content of the tile is empty. */
     /* The following is neither key nor value. */
     uint index;			/* the index of the tile within */

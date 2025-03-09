@@ -1,10 +1,10 @@
 /*
  * CHAP, MSCHAP
- * 
+ *
  * The client does not authenticate the server, hence no CAI
  *
  * Client protocol:
- *	write Chapchal 
+ *	write Chapchal
  *	read response Chapreply or MSchaprely structure
  *
  * Server protocol:
@@ -271,7 +271,7 @@ dochal(State *s)
 	s->asfd = _authdial(nil, dom);
 	if(s->asfd < 0)
 		goto err;
-	
+
 	memset(&s->tr, 0, sizeof(s->tr));
 	s->tr.type = s->astype;
 	safecpy(s->tr.authdom, dom, sizeof s->tr.authdom);
@@ -449,4 +449,3 @@ dochap(char *pass, int id, char chal[ChapChallen], uchar resp[ChapResplen])
 	memmove(buf+1+n, chal, ChapChallen);
 	md5((uchar*)buf, 1+n+ChapChallen, resp, nil);
 }
-

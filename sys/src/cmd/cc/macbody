@@ -272,7 +272,7 @@ macdef(void)
 			continue;
 		}
 		if(ischr){
-			if(c == '\\'){ 
+			if(c == '\\'){
 				base = allocn(base, len, 1);
 				base[len++] = c;
 				c = getc();
@@ -389,7 +389,7 @@ macexpand(Sym *s, char *b)
 			print("#expand %s %s\n", s->name, ob);
 		return;
 	}
-	
+
 	nargs = (char)(*s->macro & ~VARMAC) - 1;
 	dots = *s->macro & VARMAC;
 
@@ -764,7 +764,7 @@ praglib:
 		goto bad;
 
 	/*
-	 * put pragma-line in as a funny history 
+	 * put pragma-line in as a funny history
 	 */
 	c = strlen(symb) + 1;
 	while(c & 3)

@@ -1,7 +1,7 @@
 .TH SOELIM 1
 .\" .so in the NAME line confuses the ptx machinery; sorry
 .SH NAME
-soelim \- preprocess so inclusion commands in troff input 
+soelim \- preprocess so inclusion commands in troff input
 .SH SYNOPSIS
 .B soelim
 [

@@ -22,4 +22,3 @@ print("--YYY\n");' |
 	sed -n '/--XXX/,/--YYY/p' |
 	sed 's/acid: //g' |
 	grep -v '^--'
-

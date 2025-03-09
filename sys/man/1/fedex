@@ -2,10 +2,10 @@
 .SH NAME
 fedex, ups, usps \- track shipments
 .SH SYNOPSIS
-.B fedex 
+.B fedex
 .I tracking-number
 .br
-.B ups 
+.B ups
 .I tracking-number
 .br
 .B usps

@@ -200,7 +200,7 @@ dollar(char *cp)
 	case 'C':
 		stktrace(*cp);
 		break;
-		
+
 	case 'b':
 		dobplist();
 		break;

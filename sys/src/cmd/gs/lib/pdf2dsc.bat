@@ -1,4 +1,4 @@
-@echo off 
+@echo off
 @rem $Id: pdf2dsc.bat,v 1.4 2002/02/21 21:49:28 giles Exp $
 @rem Convert PDF to DSC
 
@@ -14,5 +14,3 @@ goto end
 echo "Usage: pdf2dsc input.pdf output.dsc"
 
 :end
-
-

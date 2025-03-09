@@ -68,7 +68,7 @@ Control the construction of union directories, as in
 .I mount
 and
 .IR bind (1).
-Only valid when 
+Only valid when
 .I file
 is a directory.
 .TP
@@ -144,7 +144,7 @@ mounts it on
 as guided by the other
 .IR options .
 .PP
-The 
+The
 .B -B
 option runs
 .I import
@@ -185,7 +185,7 @@ has access to a private file server containing public web pages
 that need to be served by the less-trusted server
 .BR webvax .
 .B Webvax
-runs the following listener 
+runs the following listener
 (see
 .IR listen (8))
 on TCP port 999:
@@ -209,7 +209,7 @@ to
 .BR webvax .
 When
 .B webvax
-gets the call, 
+gets the call,
 .B import
 mounts the served tree onto its own
 .B /usr/web

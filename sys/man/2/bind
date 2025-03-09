@@ -97,7 +97,7 @@ or both must not be directories.
 .I Flag
 can be one of:
 .TF MBEFORE
-.TP 
+.TP
 .B MREPL
 Replace the
 .I old

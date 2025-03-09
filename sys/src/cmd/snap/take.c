@@ -174,7 +174,7 @@ stackptr(Proc *proc, int fd)
 		fprint(2, "couldn't find stack pointer register?\n");
 		return 0;
 	}
-	
+
 	if((dreg = proc->d[Pregs]) == nil)
 		return 0;
 
@@ -261,7 +261,7 @@ snap(long pid, int usetext)
 	stackoff = 0;
 	stacki = 0;
 	for(i=0; i<nf; i++) {
-		if(q = strchr(f[i], ' ')) 
+		if(q = strchr(f[i], ' '))
 			*q = 0;
 		name = f[i];
 		off = strtoull(name+10, &q, 16);

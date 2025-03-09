@@ -43,7 +43,7 @@ watch(int fd)
 	int n;
 	uchar *buf;
 	Fcall f;
-	
+
 	buf = malloc(messagesize);
 	if(buf == nil)
 		sysfatal("out of memory");
@@ -306,7 +306,7 @@ shell9p(int fd)
 		print("\t-> %F\n", &t);
 	}
 }
-		
+
 void
 main(int argc, char **argv)
 {

@@ -354,7 +354,7 @@ format(char *mnemonic, Instr *i, char *f)
 			if (i->rs == 30) {
 				i->curr += symoff(i->curr, i->end-i->curr, i->immediate+mach->sb, CANY);
 				bprint(i, "(SB)");
-			} else 
+			} else
 				bprint(i, "%lx(r%d)", i->immediate, i->rs);
 			break;
 
@@ -472,31 +472,31 @@ cop0(Instr *i)
 
 	if (i->rs >= 0x10) {
 		switch (i->cofun) {
-	
+
 		case 1:
 			m = "tlbr";
 			break;
-	
+
 		case 2:
 			m = "tlbwi";
 			break;
-	
+
 		case 6:
 			m = "tlbwr";
 			break;
-	
+
 		case 8:
 			m = "tlbp";
 			break;
-	
+
 		case 16:
 			m = "rfe";
 			break;
-	
+
 		case 24:
 			m = "eret";
 			break;
-	
+
 		case 32:
 			m = "wait";
 			break;

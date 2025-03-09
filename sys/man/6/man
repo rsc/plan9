@@ -107,7 +107,7 @@ Change to default type size.
 .SH FILES
 .B /sys/lib/tmac/tmac.an
 .SH SEE ALSO
-.IR troff (1), 
+.IR troff (1),
 .IR man (1)
 .SH REQUESTS
 .ta \w'.TH n c x 'u +\w'Cause 'u +\w'Argument\ 'u
@@ -208,7 +208,7 @@ is small.
 \&\fL.TF\fR \fIs\fR	yes		Prevailing indent is wide as
 string
 .I s
-in font 
+in font
 .BR L ;
 paragraph distance is 0.
 .ti0

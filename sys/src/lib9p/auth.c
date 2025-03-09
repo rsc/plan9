@@ -23,7 +23,7 @@ auth9p(Req *r)
 {
 	char *spec;
 	Afid *afid;
-	
+
 	afid = emalloc9p(sizeof(Afid));
 	afid->afd = open("/mnt/factotum/rpc", ORDWR);
 	if(afid->afd < 0)
@@ -70,7 +70,7 @@ static int
 _authread(Afid *afid, void *data, int count)
 {
 	AuthInfo *ai;
-	
+
 	switch(auth_rpc(afid->rpc, "read", nil, 0)){
 	case ARdone:
 		ai = auth_getinfo(afid->rpc);
@@ -90,7 +90,7 @@ _authread(Afid *afid, void *data, int count)
 		count = afid->rpc->narg;
 		memmove(data, afid->rpc->arg, count);
 		return count;
-	
+
 	case ARphase:
 	default:
 		werrstr("authrpc botch");
@@ -104,7 +104,7 @@ authread(Req *r)
 	int n;
 	Afid *afid;
 	Fid *fid;
-	
+
 	fid = r->fid;
 	afid = fid->aux;
 	if(afid == nil || r->fid->qid.type != QTAUTH){
@@ -125,7 +125,7 @@ authwrite(Req *r)
 {
 	Afid *afid;
 	Fid *fid;
-	
+
 	fid = r->fid;
 	afid = fid->aux;
 	if(afid == nil || r->fid->qid.type != QTAUTH){
@@ -144,7 +144,7 @@ void
 authdestroy(Fid *fid)
 {
 	Afid *afid;
-	
+
 	if((fid->qid.type & QTAUTH) && (afid = fid->aux) != nil){
 		if(afid->rpc)
 			auth_freerpc(afid->rpc);
@@ -161,7 +161,7 @@ authattach(Req *r)
 {
 	Afid *afid;
 	char buf[ERRMAX];
-	
+
 	if(r->afid == nil){
 		respond(r, "not authenticated");
 		return -1;
@@ -179,20 +179,19 @@ authattach(Req *r)
 			return -1;
 		}
 	}
-	
+
 	if(strcmp(afid->uname, r->ifcall.uname) != 0){
-		snprint(buf, sizeof buf, "auth uname mismatch: %s vs %s", 
+		snprint(buf, sizeof buf, "auth uname mismatch: %s vs %s",
 			afid->uname, r->ifcall.uname);
 		respond(r, buf);
 		return -1;
 	}
 
 	if(strcmp(afid->aname, r->ifcall.aname) != 0){
-		snprint(buf, sizeof buf, "auth aname mismatch: %s vs %s", 
+		snprint(buf, sizeof buf, "auth aname mismatch: %s vs %s",
 			afid->aname, r->ifcall.aname);
 		respond(r, buf);
 		return -1;
 	}
 	return 0;
 }
-

@@ -300,7 +300,7 @@ a
 .B ^
 is inserted between the two.
 If an unquoted word immediately follows a
-.BR $ 
+.BR $
 and contains a character other than an alphanumeric, underscore,
 or
 .BR * ,
@@ -369,7 +369,7 @@ or
 .I Fd1
 is a previously opened file descriptor and
 .I fd0
-becomes a new copy (in the sense of 
+becomes a new copy (in the sense of
 .IR dup (2))
 of it.
 A file descriptor may be closed by writing
@@ -488,7 +488,7 @@ is executed.
 The
 .I command
 is executed once for each
-.IR argument 
+.IR argument
 with that argument assigned to
 .IR name .
 If the argument list is omitted,

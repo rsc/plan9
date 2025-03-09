@@ -1,12 +1,12 @@
 /* Copyright (C) 1999, 2000, Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -30,7 +30,7 @@
 //
 
 IDD_MAIN DIALOG 32, 32, 300, 200
-STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP /* | WS_VISIBLE */ | WS_CAPTION | WS_SYSMENU 
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP /* | WS_VISIBLE */ | WS_CAPTION | WS_SYSMENU
 CAPTION "AFPL Ghostscript Setup"
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -68,7 +68,7 @@ CAPTION "AFPL Ghostscript setup log"
 FONT 8, "MS Sans Serif"
 BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,261,148,50,14
-    EDITTEXT        IDC_TEXTWIN_MLE,7,7,304,136,ES_MULTILINE | ES_WANTRETURN | 
+    EDITTEXT        IDC_TEXTWIN_MLE,7,7,304,136,ES_MULTILINE | ES_WANTRETURN |
                     WS_VSCROLL | WS_HSCROLL
     PUSHBUTTON      "Copy to Clipboard",IDC_TEXTWIN_COPY,7,148,84,14
 END
@@ -80,7 +80,7 @@ FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,216,7,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,216,24,50,14
-    LISTBOX         IDC_FILES,7,7,197,70,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+    LISTBOX         IDC_FILES,7,7,197,70,LBS_SORT | LBS_NOINTEGRALHEIGHT |
                     WS_VSCROLL | WS_TABSTOP
     LTEXT           "Folder",IDC_FOLDER,7,82,259,12
     LTEXT           "Destination Folder",IDC_STATIC,7,105,259,12
@@ -104,7 +104,7 @@ IDR_MAIN                ICON    DISCARDABLE     "gswin.ico"
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO DISCARDABLE 
+GUIDELINES DESIGNINFO DISCARDABLE
 BEGIN
     IDD_MAIN, DIALOG
     BEGIN
@@ -137,7 +137,7 @@ END
 // String Table
 //
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE DISCARDABLE
 BEGIN
     IDS_APPNAME             "AFPL Ghostscript Setup"
     IDS_TARGET_DIR          "gs"
@@ -145,6 +145,3 @@ BEGIN
 END
 
 /////////////////////////////////////////////////////////////////////////////
-
-
-

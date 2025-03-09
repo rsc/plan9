@@ -1,12 +1,12 @@
 /* Copyright (C) 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -70,7 +70,7 @@ glyph_data_substring_permanent(gs_glyph_data_t *pgd, uint offset, uint size)
     pgd->bits.data += offset;
     pgd->bits.size = size;
     return 0;
-}			       
+}
 
 /* Manage the glyph data using the font's allocator. */
 private void
@@ -89,12 +89,12 @@ glyph_data_substring_by_font(gs_glyph_data_t *pgd, uint offset, uint size)
 	return glyph_data_substring_permanent(pgd, offset, size);
     if (offset > 0)
 	memmove(data, data + offset, size);
-    pgd->bits.data = 
+    pgd->bits.data =
 	gs_resize_string(font->memory, data, pgd->bits.size, size,
 			 "glyph_data_substring"); /* shortening, can't fail */
     pgd->bits.size = size;
     return 0;
-}			       
+}
 
 private const gs_glyph_data_procs_t no_free_procs = {
     glyph_data_free_permanent, glyph_data_substring_permanent

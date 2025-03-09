@@ -24,10 +24,10 @@ mounts itself at
 .I mtpt
 (default
 .BR /mnt/web ),
-and, if 
+and, if
 .I service
 is specified, will post a service file descriptor
-in 
+in
 .BR /srv/\fIservice .
 .PP
 .I Webfs
@@ -47,7 +47,7 @@ The
 .B ctl
 file is used to maintain parameters global to the instance of
 .IR webfs .
-Reading the 
+Reading the
 .B ctl
 file yields the current values of the parameters.
 Writing strings of the form
@@ -67,7 +67,7 @@ prints 9P message traces on standard error,
 and values above
 .B 1
 present more debugging, at the whim of the library.
-The default for this and the following debug flags is 
+The default for this and the following debug flags is
 .BR 0 .
 .TP
 .B fsdebug
@@ -124,7 +124,7 @@ numbered directories corresponding to connections, which
 may be used to fetch a single URL.
 To allocate a connection, open the
 .B clone
-file and read a number 
+file and read a number
 .I n
 from it.
 After opening, the

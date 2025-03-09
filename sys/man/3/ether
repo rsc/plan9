@@ -1,4 +1,4 @@
-.TH ETHER 3 
+.TH ETHER 3
 .SH NAME
 ether \- Ethernet device
 .SH SYNOPSIS
@@ -59,7 +59,7 @@ the packet header as the source address.
 A connection is assigned to a packet type by opening its
 .B ctl
 file and
-writing 
+writing
 .B connect
 .I n
 where
@@ -113,16 +113,16 @@ card and general statistics, independent of the interface;
 .B ifstats
 contains device-specific data and statistics about the card.
 .PP
-An interface normally receives only those packets whose 
+An interface normally receives only those packets whose
 destination address is that of the interface or is the
 broadcast address,
 .BR ff:ff:ff:ff:ff:ff .
 The interface can be made to receive all packets on the
-network by writing the string 
+network by writing the string
 .B promiscuous
 to the
 .B ctl
-file. 
+file.
 The interface remains promiscuous until the control file is
 closed.
 The extra packets are passed up connections only of types \-1

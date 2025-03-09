@@ -368,7 +368,7 @@ setio(Node *np)
 		return 0;
 	return 1;
 }
-			
+
 /* simple - word ( [ < | > | >> ] word )* */
 Node*
 simple(void)

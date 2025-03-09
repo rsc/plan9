@@ -12,13 +12,13 @@ number of sleeps
 
 number of core switches
 awk 'BEGIN{nsw = 0; last = -3;}
-	$2 == 195 {if($3 != last) nsw++; last=$3} 
+	$2 == 195 {if($3 != last) nsw++; last=$3}
 	END{print nsw}' <T.txt
 217
 
 number of acpi domain switches
 awk 'BEGIN{nsw = 0; last = -3;}
-	$2 == 195 {if($3%8 != last%8) nsw++; last=$3} 
+	$2 == 195 {if($3%8 != last%8) nsw++; last=$3}
 	END{print nsw}' <T.txt
 188
 
@@ -47,7 +47,7 @@ awk 'BEGIN{nsw = 0; last = -3;}
 	$5 == "Ready" {print $0 - stime, ln, NR} ' <T.txt | sort -nr
 
 This gives:
-381601037 15175 19811	
+381601037 15175 19811
 140216350 10518 15064
 58225471 6569 9619
 ...

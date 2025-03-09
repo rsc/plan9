@@ -102,4 +102,4 @@ test.fat:D:	bootia32.efi bootx64.efi
 
 
 clean:V:
-	rm -f *.[68] *.out $TARG test.* 
+	rm -f *.[68] *.out $TARG test.*

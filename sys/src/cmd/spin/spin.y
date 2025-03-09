@@ -126,7 +126,7 @@ r_par	: ')'		{ par_cnt--; }
 
 
 proc	: inst		/* optional instantiator */
-	  proctype NAME	{ 
+	  proctype NAME	{
 			  setptype(ZN, $3, PROCTYPE, ZN);
 			  setpname($3);
 			  context = $3->sym;
@@ -740,7 +740,7 @@ Stmnt	: varref ASGN full_expr	{ $$ = nn($1, ASGN, $1, $3);	/* assignment */
 				  IArgs--;
 				}
 	  Stmnt			{ $$ = $9; }
-	| RETURN full_expr	{ $$ = return_statement($2); }	
+	| RETURN full_expr	{ $$ = return_statement($2); }
 	;
 
 options : option		{ $$->sl = seqlist($1->sq, 0); }

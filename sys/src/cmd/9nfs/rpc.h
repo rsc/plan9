@@ -73,7 +73,7 @@ enum
 	IPPROTO_UDP	= 17	/* protocol number for UDP/IP */
 };
 
-#define	ROUNDUP(n)	((n) + ((-(n))&3))	
+#define	ROUNDUP(n)	((n) + ((-(n))&3))
 
 #define	PLONG(x)	(dataptr[3] = ((ulong)(x)), dataptr[2] = ((ulong)(x))>>8, dataptr[1] = ((ulong)(x))>>16, dataptr[0] = ((ulong)(x))>>24, dataptr += 4)
 #define	PPTR(x, n)	(memmove(dataptr, (x), n), dataptr += ROUNDUP(n))

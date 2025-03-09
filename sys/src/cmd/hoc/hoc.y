@@ -13,7 +13,7 @@
 %token	<sym>	FUNCTION PROCEDURE RETURN FUNC PROC READ
 %type	<formals>	formals
 %type	<inst>	expr stmt asgn prlist stmtlist
-%type	<inst>	cond while for if begin end 
+%type	<inst>	cond while for if begin end
 %type	<sym>	procname
 %type	<narg>	arglist
 %right	'=' ADDEQ SUBEQ MULEQ DIVEQ MODEQ
@@ -29,7 +29,7 @@ list:	  /* nothing */
 	| list '\n'
 	| list defn '\n'
 	| list asgn '\n'  { code2(xpop, STOP); return 1; }
-	| list stmt '\n'  { code(STOP); return 1; } 
+	| list stmt '\n'  { code(STOP); return 1; }
 	| list expr '\n'  { code2(printtop, STOP); return 1; }
 	| list error '\n' { yyerrok; }
 	;

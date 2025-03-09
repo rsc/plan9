@@ -133,7 +133,7 @@ main(int argc, char *argv[])
 	default:
 		usage();
 	}ARGEND
-	
+
 	if(nprocs < 2)
 		nprocs = 2;
 	for(p = 0; p < nprocs/2; p++){

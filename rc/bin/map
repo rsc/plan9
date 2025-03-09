@@ -17,7 +17,7 @@ for (i) {
 	case no
 		switch ($i) {
 		case -f
-			FEATURE=yes 
+			FEATURE=yes
 			F=($F)
 		case *
 			A=($A $i)

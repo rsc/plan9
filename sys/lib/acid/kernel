@@ -77,7 +77,7 @@ defn chans() {
 
 defn nchans() {
 	local c, n;
-	
+
 	n = 0;
 	c = (Chan)chanalloc.list;
 	while c != 0 do {
@@ -90,7 +90,7 @@ defn nchans() {
 
 defn activechanlist() {
 	local l, n;
-	
+
 	l = {};
 	c = (Chan)chanalloc.list;
 	while c != 0 do {
@@ -103,7 +103,7 @@ defn activechanlist() {
 
 defn difflist(a, b) {
 	local l, x;
-	
+
 	l = {};
 	while a != {} do {
 		x = head a;
@@ -117,7 +117,7 @@ defn difflist(a, b) {
 _active_chan_list = {};
 defn newchans() {
 	local l, new;
-	
+
 	l = activechanlist();
 	if _active_chan_list != {} then
 		newerchans(_active_chan_list);
@@ -126,7 +126,7 @@ defn newchans() {
 
 defn newerchans(oldlist){
 	local new;
-	
+
 	new = difflist(activechanlist(), oldlist);
 	while new != {} do {
 		chan(head new);
@@ -137,7 +137,7 @@ defn newerchans(oldlist){
 // look for channels that refer to themselves
 defn badchans() {
 	local bad, c, i, len, mtpt, p;
-	
+
 	c = (Chan)chanalloc.list;
 	while c != 0 do {
 		if c.ref != 0 then {
@@ -370,7 +370,7 @@ defn kinit() {
 if (map()[2]) != {} then {	// map has more than two elements -> active proc
 	kdir = "unknown";
 	KZERO = kzero();
-	
+
 	if objtype == "386" then {
 		map({"*data", KZERO, 0xffffffff, KZERO});
 		kdir="pc";

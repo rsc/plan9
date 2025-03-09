@@ -1,4 +1,4 @@
-.TH DUP 3 
+.TH DUP 3
 .SH NAME
 dup \- dups of open files
 .SH SYNOPSIS

@@ -47,7 +47,7 @@ will look for
 dump files of the form
 \fL/n/\fIfs\fLdump/\fIyyyy\fL/\fIhhmm\fL/\fIpath\fR.
 .PP
-By default, 
+By default,
 .I yesterday
 prints the names of the dump files corresponding to the named files.
 The first set of options changes this behavior.
@@ -69,12 +69,12 @@ Copy the dump files over the named files only when
 they differ.
 .TP
 .B -d
-Run 
+Run
 .B diff
 to compare the dump files with the named files.
 .TP
 .B -D
-Run 
+Run
 .B diff
 .B -n
 to compare the dump files with the named files.

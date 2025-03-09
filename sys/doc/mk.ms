@@ -53,7 +53,7 @@ perform many maintenance tasks including
 database maintenance,
 hardware design, and document production.
 .PP
-This document begins by discussing 
+This document begins by discussing
 the syntax of the control file,
 the pattern matching capabilities, and
 the special rules for maintaining archives.
@@ -159,7 +159,7 @@ for that architecture defines architecture-specific variables:
 and
 .CW LD
 are the names of the compiler and loader,
-.CW O 
+.CW O
 is the code character of the architecture.
 The rules compile the source file into an object
 file and invoke the loader to produce
@@ -203,7 +203,7 @@ modified by the
 .I attribute
 .CW V ,
 builds both programs.
-The attribute identifies 
+The attribute identifies
 .CW all
 as a dummy target that is
 not related to a file of the same name;
@@ -459,7 +459,7 @@ for a complete list.
 The
 .CW V
 attribute identifies a
-.I virtual 
+.I virtual
 target;
 that is, a target that is not a file.
 For example,
@@ -472,7 +472,7 @@ The target is virtual because it does not refer to a file named
 .CW clean .
 Without the attribute, the recipe would not be
 executed if a file named
-.CW clean 
+.CW clean
 existed.
 The
 .CW Q
@@ -497,7 +497,7 @@ executes recipes without interpretation.
 After
 stripping the first white space character from each line
 it passes the entire recipe to
-.CW rc 
+.CW rc
 on standard input.
 Since
 .CW mk
@@ -557,7 +557,7 @@ produces the message
 .CW none .
 A variable assignment in a recipe
 does not affect the value of the variable in the
-.CW mkfile 
+.CW mkfile
 for two reasons.
 First,
 .CW mk
@@ -565,7 +565,7 @@ does not import values from
 the environment when a recipe completes;
 one recipe cannot pass a value through
 the environment to another recipe.
-Second, no recipe is executed until 
+Second, no recipe is executed until
 .CW mk
 has completed its evaluation, so even if a variable
 were changed,
@@ -576,7 +576,7 @@ Metarules
 A
 .I metarule
 is a rule based on a pattern.
-The pattern selects a class of target(s) and 
+The pattern selects a class of target(s) and
 identifies related prerequisites.
 .CW Mk
 metarules may select targets and prerequisites
@@ -619,7 +619,7 @@ depends on
 .CW foo.c ,
 .CW bar.v
 depends on
-.CW bar.c , 
+.CW bar.c ,
 and so on.
 The string matched by an intrinsic pattern in the target
 is supplied to the recipe in the variable
@@ -720,7 +720,7 @@ An archive member is referenced using the form
 .CW \fIlib\fP(\fIfile\fP)
 where
 .I lib
-is the name of the archive and 
+is the name of the archive and
 .I file
 is the name of the member.  Two rules define the
 dependency between an object file and its membership
@@ -761,12 +761,12 @@ $LIB:	${OBJS:%=$LIB(%)}
 The namelist prerequisite of the
 .CW $LIB
 target generates archive member names for each object file name;
-for example, 
+for example,
 .CW etoa.$O
 becomes
 .CW lib.a(etoa.$O) .
 This formulation always updates all members.
-This is acceptable for a small archive, but may 
+This is acceptable for a small archive, but may
 be slow for a big one.
 The rule
 .P1
@@ -919,7 +919,7 @@ contains two rules that could build
 .CW Mk
 selects the last rule because its target,
 .CW f2.$O ,
-is explicitly specified, while the 
+is explicitly specified, while the
 .CW %.$O
 rule is a metarule.  In effect,
 the explicit rule for
@@ -953,7 +953,7 @@ as a prerequisite of the compile metarule;
 an object file produced from a C source file
 depends on
 .CW hdr.h
-as well as the source file.  Notice that the recipe of 
+as well as the source file.  Notice that the recipe of
 the compile rule uses
 .CW $stem.c
 instead of
@@ -1103,7 +1103,7 @@ using portable code in directory
 .CW ../port
 and architecture-specific code in the current directory.
 As long as the
-names of the C source files in 
+names of the C source files in
 .CW ../port
 do not conflict with the names of files in the current directory,
 .CW mk
@@ -1149,7 +1149,7 @@ produces the error message
 .P2
 when \fIfile\fP.s is an assembler
 source file.
-This occurs because 
+This occurs because
 .CW \fIfile\fP.s
 satisfies the assemble rule and
 .CW hdr.h
@@ -1287,7 +1287,7 @@ The command
 .P1
 cmp -s foo.ref foo
 .P2
-is executed and if 
+is executed and if
 .CW foo.ref
 differs from
 .CW foo ,

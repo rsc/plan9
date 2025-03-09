@@ -105,4 +105,3 @@ done:
 	smbbufferfree(&outdata);
 	return rv;
 }
-

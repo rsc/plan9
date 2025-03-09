@@ -232,4 +232,3 @@ _dnr:
 	STI
 	HLT
 	JMP	_dnr				/* do not resuscitate */
-

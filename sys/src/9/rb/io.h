@@ -272,7 +272,7 @@ struct Pcidev
 	} mem[6];
 
 	struct {
-		ulong	bar;	
+		ulong	bar;
 		int	size;
 	} rom;
 	uchar	intl;			/* interrupt line */

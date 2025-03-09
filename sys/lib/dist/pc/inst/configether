@@ -10,7 +10,7 @@ case go
 	echo '	manual - specify IP address, network mask, gateway IP address'
 	echo '	dhcp - use DHCP to automatically configure'
 	echo
-	
+
 	prompt 'Configuration method' manual dhcp
 	ethermethod=$rd
 	gwaddr=xxx
@@ -37,7 +37,7 @@ case go
 		prompt 'gateway address'; gwaddr=$rd
 		export ipaddr ipmask gwaddr
 	}
-	
+
 	export ethermethod gwaddr ipaddr ipmask dhcphost
 	exec startether go
 

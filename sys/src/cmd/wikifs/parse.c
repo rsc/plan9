@@ -72,7 +72,7 @@ wcondense(Wpage *wtxt)
 		w->text = erealloc(w->text, strlen(w->text)+1+strlen(w->next->text)+1);
 		strcat(w->text, " ");
 		strcat(w->text, w->next->text);
-		
+
 		ow = w->next;
 		w->next = ow->next;
 		ow->next = nil;
@@ -141,7 +141,7 @@ wlink(Wpage *wtxt)
 		}
 		assert(w->next == nw);
 	}
-	return wtxt;	
+	return wtxt;
 }
 
 static int
@@ -186,7 +186,7 @@ findmanref(char *p, char **beginp, char **endp)
 
 /*
  * Parse Wplains, looking for man page references.
- * This should be done by using a plumb(6)-style 
+ * This should be done by using a plumb(6)-style
  * control file rather than hard-coding things here.
  */
 static Wpage*
@@ -211,7 +211,7 @@ wman(Wpage *wtxt)
 		}
 		assert(w->next == nw);
 	}
-	return wtxt;	
+	return wtxt;
 }
 
 static int isheading(char *p) {
@@ -287,14 +287,14 @@ Brdpage(char *(*rdline)(void*,int), void *b)
 	}
 	if(w == nil)
 		werrstr("empty page");
-	
+
 	*pw = nil;
 	w = wcondense(w);
 	w = wlink(w);
 	w = wman(w);
 	setmalloctag(w, getcallerpc(&rdline));
 
-	return w;		
+	return w;
 }
 
 void

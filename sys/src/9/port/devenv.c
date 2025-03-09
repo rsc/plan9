@@ -387,7 +387,7 @@ ksetenv(char *ename, char *eval, int conf)
 {
 	Chan *c;
 	char buf[2*KNAMELEN];
-	
+
 	snprint(buf, sizeof(buf), "#e%s/%s", conf?"c":"", ename);
 	c = namec(buf, Acreate, OWRITE, 0600);
 	devtab[c->type]->write(c, eval, strlen(eval), 0);
@@ -412,7 +412,7 @@ getconfenv(void)
 		runlock(eg);
 		nexterror();
 	}
-	
+
 	/* determine size */
 	n = 0;
 	for(i=0; i<eg->nent; i++){
@@ -433,7 +433,7 @@ getconfenv(void)
 		q += strlen(q) + 1;
 	}
 	*q = 0;
-	
+
 	poperror();
 	runlock(eg);
 	return p;

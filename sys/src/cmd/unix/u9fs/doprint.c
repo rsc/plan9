@@ -164,7 +164,7 @@ loop:
 	case 0:
 		*local.out = 0;
 		return local.out;
-	
+
 	default:
 		printcol++;
 		goto common;
@@ -607,4 +607,3 @@ flags(va_list *va, Fconv *fp)
  * using the more complex code.
  *
  */
-

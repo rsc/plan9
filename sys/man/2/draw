@@ -810,7 +810,7 @@ is non-zero.
 .IR addpt (2)
 .PP
 T. Porter, T. Duff.
-``Compositing Digital Images'', 
+``Compositing Digital Images'',
 .I "Computer Graphics
 (Proc. SIGGRAPH), 18:3, pp. 253-259, 1984.
 .SH DIAGNOSTICS

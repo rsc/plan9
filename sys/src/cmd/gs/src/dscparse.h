@@ -1,12 +1,12 @@
 /* Copyright (C) 2000-2003, Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -33,7 +33,7 @@ typedef unsigned int GSWORD;	/* must be at least 16 bits */
 /* DSC_OFFSET is an unsigned integer which holds the offset
  * from the start of a file to a particular DSC comment,
  * or the length of a file.
- * Normally it is "unsigned long" which is commonly 32 bits. 
+ * Normally it is "unsigned long" which is commonly 32 bits.
  * Change it if you need to handle larger files.
  */
 #ifndef DSC_OFFSET
@@ -65,7 +65,7 @@ typedef unsigned int GSWORD;	/* must be at least 16 bits */
 #define CDSC_STRING_CHUNK 4096
 
 /* page array is allocated in chunks of this many pages */
-#define CDSC_PAGE_CHUNK 128	
+#define CDSC_PAGE_CHUNK 128
 
 /* buffer length for storing lines passed to dsc_scan_data() */
 /* must be at least 2 * DSC_LINE_LENGTH */
@@ -169,7 +169,7 @@ typedef enum CDSC_RETURN_CODE_e {
 
 /* Trailer section */
   CDSC_TRAILER		= 800,	/* %%Trailer */
-/* also %%Pages, %%BoundingBox, %%Orientation, %%PageOrder, %%DocumentMedia */ 
+/* also %%Pages, %%BoundingBox, %%Orientation, %%PageOrder, %%DocumentMedia */
 /* %%Page is recognised as an error */
 /* also %%DocumentNeededFonts, %%DocumentSuppliedFonts */
 
@@ -178,7 +178,7 @@ typedef enum CDSC_RETURN_CODE_e {
 } CDSC_RETURN_CODE;
 
 
-/* stored in dsc->preview */ 
+/* stored in dsc->preview */
 typedef enum CDSC_PREVIEW_TYPE_e {
     CDSC_NOPREVIEW = 0,
     CDSC_EPSI = 1,
@@ -187,7 +187,7 @@ typedef enum CDSC_PREVIEW_TYPE_e {
     CDSC_PICT = 4
 } CDSC_PREVIEW_TYPE;
 
-/* stored in dsc->page_order */ 
+/* stored in dsc->page_order */
 typedef enum CDSC_PAGE_ORDER_e {
     CDSC_ORDER_UNKNOWN = 0,
     CDSC_ASCEND = 1,
@@ -195,7 +195,7 @@ typedef enum CDSC_PAGE_ORDER_e {
     CDSC_SPECIAL = 3
 } CDSC_PAGE_ORDER;
 
-/* stored in dsc->page_orientation and dsc->page[pagenum-1].orientation */ 
+/* stored in dsc->page_orientation and dsc->page[pagenum-1].orientation */
 typedef enum CDSC_ORIENTATION_ENUM_e {
     CDSC_ORIENT_UNKNOWN = 0,
     CDSC_PORTRAIT = 1,
@@ -445,7 +445,7 @@ char dummy[1024];
     int skip_bytes;		/* #bytes to ignore from BeginData: */
 				/* or DOSEPS preview section */
     int skip_lines;		/* #lines to ignore from BeginData: */
-    GSBOOL skip_pjl;		/* TRUE if skip PJL until first PS comment */ 
+    GSBOOL skip_pjl;		/* TRUE if skip PJL until first PS comment */
     int begin_font_count;	/* recursion level of %%BeginFont */
     int begin_feature_count;	/* recursion level of %%BeginFeature */
     int begin_resource_count;	/* recursion level of %%BeginResource */
@@ -483,7 +483,7 @@ char dummy[1024];
     void (*debug_print_fn)(void *caller_data, const char *str);
 
     /* function for reporting errors in DSC comments */
-    int (*dsc_error_fn)(void *caller_data, CDSC *dsc, 
+    int (*dsc_error_fn)(void *caller_data, CDSC *dsc,
 	unsigned int explanation, const char *line, unsigned int line_len);
 
     /* public data */
@@ -537,12 +537,12 @@ int dsc_scan_data(CDSC *dsc, const char *data, int len);
 int dsc_fixup(CDSC *dsc);
 
 /* Install error query function */
-void dsc_set_error_function(CDSC *dsc, 
-    int (*dsc_error_fn)(void *caller_data, CDSC *dsc, 
+void dsc_set_error_function(CDSC *dsc,
+    int (*dsc_error_fn)(void *caller_data, CDSC *dsc,
 	unsigned int explanation, const char *line, unsigned int line_len));
 
 /* Install print function for debug messages */
-void dsc_set_debug_function(CDSC *dsc, 
+void dsc_set_debug_function(CDSC *dsc,
 	void (*debug_fn)(void *caller_data, const char *str));
 
 /* Print a message to debug output, if provided */
@@ -554,12 +554,12 @@ const char * dsc_find_platefile(CDSC *dsc, int page);
 /* Compare two strings, case insensitive */
 int dsc_stricmp(const char *s, const char *t);
 
-/* should be internal only functions, but made available to 
+/* should be internal only functions, but made available to
  * GSview for handling PDF
  */
 int dsc_add_page(CDSC *dsc, int ordinal, char *label);
 int dsc_add_media(CDSC *dsc, CDSCMEDIA *media);
-int dsc_set_page_bbox(CDSC *dsc, unsigned int page_number, 
+int dsc_set_page_bbox(CDSC *dsc, unsigned int page_number,
     int llx, int lly, int urx, int ury);
 
 /* in dscutil.c */

@@ -23,4 +23,3 @@ $(LIB): $(OFILES)
 
 %.$O: %.c
 	$(CC) $(CFLAGS) $*.c
-

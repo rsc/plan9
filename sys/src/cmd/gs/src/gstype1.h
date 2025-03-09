@@ -1,12 +1,12 @@
 /* Copyright (C) 1990, 1995, 1996, 1997, 1999, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -38,7 +38,7 @@ struct gs_type1_data_s;
 #endif
 int gs_type1_interp_init(gs_type1_state * pcis, gs_imager_state * pis,
 			 gx_path * ppath, const gs_log2_scale_point * pscale,
-			 const gs_log2_scale_point * psubpixels, bool no_grid_fitting, 
+			 const gs_log2_scale_point * psubpixels, bool no_grid_fitting,
 			 int paint_type, gs_font_type1 * pfont);
 void gs_type1_set_callback_data(gs_type1_state *pcis, void *callback_data);
 void gs_type1_set_lsb(gs_type1_state * pcis, const gs_point * psbpt);

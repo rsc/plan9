@@ -53,7 +53,7 @@ header || goodpage {
 	goodpage = 0;
 }
 
-/^%%Trailer[ 	]*$/ { 
+/^%%Trailer[ 	]*$/ {
 	goodpage = 1;
 }
 

@@ -130,7 +130,7 @@ paint(Hash *head, int nhead, Hash *tail, int ntail, Object ***res, int *nres, in
 		dprint(1, "init: keep %H\n", o->hash);
 		qput(&objq, o, Keep);
 		unref(o);
-	}		
+	}
 	for(i = 0; i < ntail; i++){
 		if((o = readobject(tail[i])) == nil){
 			werrstr("read tail %H: %r", tail[i]);
@@ -279,7 +279,7 @@ parent(Eval *ev)
 		werrstr("no parent for %H", o->hash);
 		return -1;
 	}
-		
+
 	push(ev, p);
 	return 0;
 }
@@ -450,7 +450,7 @@ evalpostfix(Eval *ev)
 		default:
 			goto done;
 			break;
-		}	
+		}
 	}
 done:
 	return 0;

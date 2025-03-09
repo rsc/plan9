@@ -178,4 +178,3 @@ insertdb(Db *db, char *name, Dir *d)
 		sysfatal("appending to db: %r");
 	_insertdb(db, &e);
 }
-

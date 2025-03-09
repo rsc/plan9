@@ -1,12 +1,12 @@
 %    Copyright (C) 2000 artofcode LLC.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -88,9 +88,9 @@ currentdict end def
 /TranslateCSI   % <record> TranslateCSI <CSI>
 { RESMPDEBUG { (fntem TranslateCSI beg ) = } if
   begin
-  << /Registry (Adobe) 
-     /Ordering CSI aload pop 
-     /Supplement exch 
+  << /Registry (Adobe)
+     /Ordering CSI aload pop
+     /Supplement exch
   >>
   end
   RESMPDEBUG { (fntem TranslateCSI end ) = } if
@@ -103,17 +103,17 @@ currentdict end def
   /CIDCount 1 def % ChooseDecoding will set a reasonable value.
 } bind def
 
-% GFlyph substitution table for narrow, wide, proportional glyphs - 
+% GFlyph substitution table for narrow, wide, proportional glyphs -
 % used with TrueTypes.
 
 currentpacking false setpacking
-/SubstNWP << 
+/SubstNWP <<
 
   % Array format : orig_type, beg_CID, end_CID, subst_beg_CID, subst_type
   % type = (n==narrow, w==wide, p==proportional).
 
   /Japan1
-  { p 1 94 231 n    
+  { p 1 94 231 n
 
     p 17 26 780 w
     p 34 59 790 w
@@ -154,7 +154,7 @@ currentpacking false setpacking
 
   /GB1
   { p 2 94 814 n
-  
+
     p 2 94 262 w
 
     p 1 1 7716 n
@@ -294,7 +294,7 @@ currentdict end def
         dup length dict begin
         /.notdef 0 def
         0 1 currentdict length 1 sub
-        { dup 2 index exch get 
+        { dup 2 index exch get
           dup /.notdef ne {
             exch def
           } {
@@ -355,7 +355,7 @@ currentdict end def
 {
   % If the font is maintained by FAPI, or if it is TT-emulated CID font,
   % it already has /Decoding. But its value isn't guaranteeed to
-  % be an Unicode decoding. Since we can't determine whether 
+  % be an Unicode decoding. Since we can't determine whether
   % it is an Unicode decoding, we unconditionally load an appropriate Unicode decoding
   % and attach it with /GlyphNames2Unicode entry.
   %

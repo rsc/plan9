@@ -57,7 +57,7 @@ tvp3020disable(VGAscr*)
 	uchar r;
 
 	/*
-	 * Disable 
+	 * Disable
 	 *	cursor;
 	 *	cursor control enable for Bt485 DAC (!);
 	 *	the hardware cursor external operation mode.

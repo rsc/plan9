@@ -1,5 +1,5 @@
 .TH REWRITE 6
-.SH NAME 
+.SH NAME
 rewrite \- mail rewrite rules
 .SH SYNOPSIS
 .B /mail/lib/rewrite
@@ -7,7 +7,7 @@ rewrite \- mail rewrite rules
 .IR Mail (1)
 uses rewrite rules to convert mail destinations into
 commands used to dispose of the mail.
-Each line of the file 
+Each line of the file
 .F /mail/lib/rewrite
 is a rule.
 Blank lines and lines beginning with

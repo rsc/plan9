@@ -2,11 +2,11 @@
 
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -44,7 +44,7 @@ typedef struct GSDLL_S {
 
 /* Load the Ghostscript DLL.
  * Return 0 on success.
- * Return non-zero on error and store error message 
+ * Return non-zero on error and store error message
  * to last_error of length len
  */
 int load_dll(GSDLL *gsdll, char *last_error, int len);

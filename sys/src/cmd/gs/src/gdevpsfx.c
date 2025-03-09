@@ -1,12 +1,12 @@
 /* Copyright (C) 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -439,7 +439,7 @@ psf_convert_type1_to_type2(stream *s, const gs_glyph_data_t *pgd,
 	hints_changed = false;\
     }\
   END
-    /* 
+    /*
      * In order to combine Type 1 operators, we usually delay writing
      * out operators (but not their operands).  We must keep track of
      * the stack depth so we don't exceed it when combining operators.
@@ -526,7 +526,7 @@ psf_convert_type1_to_type2(stream *s, const gs_glyph_data_t *pgd,
 	hintmask_size =
 	    (hstem_hints.count + vstem_hints.count + 7) / 8;
 	memset(active_hints, 0, hintmask_size);
-    } else 
+    } else
 	hintmask_size = 0;
 
     /* Do a second pass to write the result. */
@@ -587,8 +587,8 @@ psf_convert_type1_to_type2(stream *s, const gs_glyph_data_t *pgd,
 	    continue;
 	case CE_OFFSET + ce1_setcurrentpoint:
 	    if (first) {
-		/*  A workaround for fonts which use ce1_setcurrentpoint 
-		    in an illegal way for shifting a path. 
+		/*  A workaround for fonts which use ce1_setcurrentpoint
+		    in an illegal way for shifting a path.
 		    See t1_hinter__setcurrentpoint for more information. */
 		mx0 = csp[-1], my0 = *csp;
 	    }

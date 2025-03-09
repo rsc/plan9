@@ -29,6 +29,6 @@ pbkdf2_x(p, plen, s, slen, rounds, d, dlen, x, xlen)
 				block[k] ^= tmp[k];
 		}
 		n = dlen > xlen ? xlen : dlen;
-		memmove(d, block, n); 
+		memmove(d, block, n);
 	}
 }

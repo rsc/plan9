@@ -393,7 +393,7 @@ Packed array elements occupy either 2 bytes or 8 bytes.  The average
 element size is probably about 5 bytes.  Names occupy 12 bytes plus the
 space for the string.
 <p>
-The garbage collector doesn't reclaim portions of arrays obtained with 
+The garbage collector doesn't reclaim portions of arrays obtained with
 <tt>getinterval</tt>, rather it collects entire arrays.
 <hr>
 
@@ -409,10 +409,10 @@ and compositing facilities of PDF 1.4.  These are defined only if the
 <b><tt>transpar</tt></b> option was selected when Ghostscript was built.  We
 do not attempt to explain the underlying graphics model here: for details,
 see <a
-href="http://partners.adobe.com/asn/developer/technotes.html#acrobat-pdf" 
+href="http://partners.adobe.com/asn/developer/technotes.html#acrobat-pdf"
 class="offsite">Adobe
 Technical Note</a> #5407, "<a
-href="http://partners.adobe.com/asn/developer/acrosdk/DOCS/PDF_Transparency.pdf" 
+href="http://partners.adobe.com/asn/developer/acrosdk/DOCS/PDF_Transparency.pdf"
 class="offsite">Transparency
 in PDF</a>". Note, however, that
 Ghostscript's model generalizes that of PDF 1.4 in that Ghostscript
@@ -515,7 +515,7 @@ onto the group that now becomes current.
 <dl>
 <dt><b><tt>&lt;paramdict&gt; &lt;llx&gt; &lt;lly&gt; &lt;urx&gt; &lt;ury&gt;
 .begintransparencymaskgroup -</tt></b>
-<dd>Begins a new transparency mask, which is represented as a group.  
+<dd>Begins a new transparency mask, which is represented as a group.
 The <b><tt>ll/ur</tt></b> coordinates
 are the bounding box of the mask in the current user coordinate system.
 <b><tt>paramdict</tt></b> has the following keys:
@@ -1086,7 +1086,7 @@ error.  May also cause an <b><tt>ioerror</tt></b> if the last operation on
 the file was not a reading operation.  This operator is now deprecated:
 use <b><tt>.peekstring</tt></b> in new code.
 </dl>
- 
+
 <p>
 Ghostscript also supports the following <b><tt>IODevice</tt></b> in
 addition to a subset of those defined in the Adobe documentation:
@@ -1234,7 +1234,7 @@ otherwise.
 <dl>
 <dt><b><tt>&lt;array&gt; &lt;procedure&gt; .runandhide ... &lt;array&gt;</tt></b>
 <dd>Runs the <i><tt>&lt;procedure&gt;</tt></i> after removing the
-<i><tt>&lt;array&gt;</tt></i> from the stack. As long as <i><tt>&lt;array&gt;</tt></i> 
+<i><tt>&lt;array&gt;</tt></i> from the stack. As long as <i><tt>&lt;array&gt;</tt></i>
 is not contained in any readable dictionaries or elsewhere on stacks, it
 will not be accessible to <i><tt>&lt;procedure&gt;</tt></i>.
 <p>
@@ -1276,7 +1276,7 @@ using <b><tt>stopped</tt></b> in order to report errors but continue processing.
 
 <dl>
 <dt><b><tt>- .setsafe -</tt></b>
-<dd>If Ghostscript is started with <b><tt>-dNOSAFER</tt></b> or 
+<dd>If Ghostscript is started with <b><tt>-dNOSAFER</tt></b> or
 <b><tt>-dDELAYSAFER</tt></b>, this operator can be used to enter <b>SAFER</b>
 mode (see <a href="Use.htm#Safer"><b>-dSAFER</b></a>)
 <p>
@@ -1284,7 +1284,7 @@ Since <b>SAFER</b> mode is implemented with userparameters and device parameters
 it is possible to use <b><tt>save</tt></b> and <b><tt>restore</tt></b> before
 and after <b><tt>.setsafe</tt></b> to return to <b>NOSAFER</b> mode, but care
 should be taken to ensure that the <i><tt>save</tt></i> object is not
-accessible to any procedures or file run in <b>SAFER</b> mode (see 
+accessible to any procedures or file run in <b>SAFER</b> mode (see
 <a href="#Runandhide"><b>.runandhide</b></a> above).
 <p>
 <b>Note: This uses setpagedevice to change .LockSafetyParams, so the page
@@ -1300,7 +1300,7 @@ adding the paths on LIBPATH and FONTPATH and the paths given by the
 system params /GenericResourceDir and /FontResourceDir to the current
 PermitFileReading list of paths.
 <p>
-If Ghostscript is started with <b><tt>-dNOSAFER</tt></b> or 
+If Ghostscript is started with <b><tt>-dNOSAFER</tt></b> or
 <b><tt>-dDELAYSAFER</tt></b>, this operator can be used to enter <b>SAFER</b>
 mode with the current set of <b><tt>PermitFile...</tt></b> user parameters
 in effect. Since <b><tt>.setsafe</tt></b> sets the <b><tt>PermitFile...</tt></b>
@@ -1478,11 +1478,11 @@ Signals an <b><tt>invalidaccess</tt></b> error if the device is a
 prototype or if <a href="Language.htm#LockSafetyParams">.LockSafetyParams</a>
 is true for the current device.
 <p>
-Some device properties may need to be set with <tt>putdeviceprops</tt> before 
+Some device properties may need to be set with <tt>putdeviceprops</tt> before
 <b><tt>setdevice</tt></b> is called. For example, the pdfwrite device will try
-to open its output file, causing an <tt>undefinedfilename</tt> error if 
+to open its output file, causing an <tt>undefinedfilename</tt> error if
 <tt>OutputFile</tt> hasn't been set to a valid filename. Another method in such
-cases is to use the level 2 operator instead: 
+cases is to use the level 2 operator instead:
 
   <tt>&lt;&lt;&nbsp;/OutputDevice /pdfwrite /OutputFile (MyPDF.pdf)&nbsp;&gt;&gt;    <b>setpagedevice</b></tt>.
 
@@ -2038,11 +2038,11 @@ may be overridden by the command line argument
 <dt><b><tt>GridFitTT &lt;integer&gt;</tt></b>
 <dd>Control the use of True Type grid fitting.
 Ghostscript implements a reduced True Type bytecode interpreter,
-which can interpret the subset of True Type glyph instructions  
+which can interpret the subset of True Type glyph instructions
 not covered by Apple's patents. This allows proper rasterization
 of the Dynalab fonts.
 <p>
-The reduced interpreter can't properly grid fit 
+The reduced interpreter can't properly grid fit
 fonts with patented instructions. Therefore Ghostscript implements
 another grid fitting method for True Type fonts, based on a spot topology analysis.
 <p>
@@ -2053,7 +2053,7 @@ A value of 0 disables grid fitting for all True Type fonts. This is a backward c
 </li>
 
 <li>
-A value of 1 enables the grid fitting for glyphs that don't involve 
+A value of 1 enables the grid fitting for glyphs that don't involve
 patented instructions, using the reduced True Type bytecode interpreter.
 When a patented instruction is encountered, a warning is printed to stderr,
 and the glyph is rendered ignoring the entire grid fitting program.
@@ -2077,7 +2077,7 @@ This parameter defaults to 2, but this
 may be overridden on the command line with
 <b><tt>-dGridFitTT=n</tt></b>.
 <p>
-The reduced bytecode interpreter is based in part of the work of the 
+The reduced bytecode interpreter is based in part of the work of the
 <a href="http://freetype.org/">FreeType</a> Team.
 The topological grid fitting is a new original Ghostscript method.
 </dl>
@@ -2123,7 +2123,7 @@ errors just as for the string case.
 <p>
 <b><tt>Decoding</tt></b> is a Ghostscript-specific resource category. It contains
 various resources for emulating PostScript fonts with other font technologies.
-Instances of the <tt>Decoding</tt> category are tables which map PostScript glyph 
+Instances of the <tt>Decoding</tt> category are tables which map PostScript glyph
 names to character codes used with TrueType, Intellifont, Microtype and other font formats.
 
 <p>
@@ -2156,7 +2156,7 @@ information.
 The file format for <b><tt>Decoding</tt></b> resource files is
 generic PostScript.
 Users may want to define custom <b><tt>Decoding</tt></b> resources.
-The <b><tt>ParseDecoding</tt></b> procset defined in 
+The <b><tt>ParseDecoding</tt></b> procset defined in
 <a href="../lib/gs_ciddc.ps">lib/gs_ciddc.ps</a> allows representation
 of the table in a comfortable form.
 
@@ -2166,7 +2166,7 @@ of the table in a comfortable form.
 <p>
 <b><tt>CIDDecoding</tt></b> resources are similar to <b><tt>Decoding</tt></b>
 resources, except they map Charaacter Identifiers (CIDs) rather than glyph names.
-Another difference is that the native Ghostscript font renderer already uses 
+Another difference is that the native Ghostscript font renderer already uses
 <b><tt>CIDDecoding</tt></b> resources while emulate CID fonts with TrueType.
 
 <p>
@@ -2186,18 +2186,18 @@ resources  are provided. See the table <b><tt>.CMapChooser</tt></b> in
 <a href="../lib/gs_ciddc.ps">lib/gs_ciddc.ps</a>
 for the names of automatically gerenated resources and associated <b><tt>CMap</tt></b>s.
 They allow to mapping CNS1, GB1, Japan1, Japan2 and Korea1 CID sets to TrueType
-character sets known as Unicode (exactly UTF-16), Big5, 
+character sets known as Unicode (exactly UTF-16), Big5,
 GB1213, ShiftJIS, Johab and Wansung.
 
 <p>
 The file format for <b><tt>CIDDecoding</tt></b> resource file is
 generic PostScript.
 Users may want to define custom resources to <b><tt>CIDDecoding</tt></b>
-resource category. 
+resource category.
 
 <h3><a name="GlyphNames2Unicode"></a>GlyphNames2Unicode</h3>
 <p>
-<b><tt>GlyphNames2Unicode</tt></b> is an undocumented dictionary which Adobe 
+<b><tt>GlyphNames2Unicode</tt></b> is an undocumented dictionary which Adobe
 PostScript printer driver uses to communicate with Adobe Distiller.
 In this dictionary the keys are glyph names, the values are Unicode UTF-16 codes for them.
 The dictionaly is stored in the <b><tt>FontInfo</tt></b> dictionary under

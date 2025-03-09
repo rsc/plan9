@@ -8,4 +8,3 @@ iprint(char*,...)
 {
 	return -1;
 }
-

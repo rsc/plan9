@@ -2,7 +2,7 @@
  *
  * $Revision: 1.2 $
  *
- * warn.c - miscellaneous user warning routines 
+ * warn.c - miscellaneous user warning routines
  *
  * DESCRIPTION
  *
@@ -13,17 +13,17 @@
  *
  *     Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice is duplicated in all such 
- * forms and that any documentation, advertising materials, and other 
- * materials related to such distribution and use acknowledge that the 
- * software was developed * by Mark H. Colburn and sponsored by The 
- * USENIX Association. 
+ * provided that the above copyright notice is duplicated in all such
+ * forms and that any documentation, advertising materials, and other
+ * materials related to such distribution and use acknowledge that the
+ * software was developed * by Mark H. Colburn and sponsored by The
+ * USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -32,10 +32,10 @@
  * $Log:	warn.c,v $
  * Revision 1.2  89/02/12  10:06:15  mark
  * 1.2 release fixes
- * 
+ *
  * Revision 1.1  88/12/23  18:02:40  mark
  * Initial revision
- * 
+ *
  */
 
 #ifndef lint
@@ -73,8 +73,8 @@ static void prsize();
  * PARAMETERS
  *
  *	char 	*msg	- A message string to be printed for the user.
- *	OFFSET 	adjust	- An adjustment which is added to the current 
- *			  archive position to tell the user exactly where 
+ *	OFFSET 	adjust	- An adjustment which is added to the current
+ *			  archive position to tell the user exactly where
  *			  the error occurred.
  */
 
@@ -82,7 +82,7 @@ static void prsize();
 
 void warnarch(char *msg, OFFSET adjust)
 
-#else 
+#else
 
 void warnarch(msg, adjust)
 char           *msg;
@@ -109,7 +109,7 @@ OFFSET          adjust;
  *	message for the present value of errno.  The error message
  *	strings are taken from sys_errlist[] where appropriate.  If an
  *	appropriate message is not available in sys_errlist, then a
- *	pointer to the string "Unknown error (errno <errvalue>)" is 
+ *	pointer to the string "Unknown error (errno <errvalue>)" is
  *	returned instead.
  */
 
@@ -149,8 +149,8 @@ char *strerror()
  *
  * PARAMETERS
  *
- *	FILE  *stream	- Stream which is to be used for output 
- *	OFFSET size	- Current archive position to be printed on the output 
+ *	FILE  *stream	- Stream which is to be used for output
+ *	OFFSET size	- Current archive position to be printed on the output
  *			  stream in the form: "%dm+%dk+%d".
  *
  */
@@ -191,8 +191,8 @@ OFFSET          size;		/* current archive position to be printed */
  *
  * PARAMETERS
  *
- *	char 	*why	- description of reason for termination 
- *		
+ *	char 	*why	- description of reason for termination
+ *
  * RETURNS
  *
  *	Returns an exit code of 1 to the parent process.

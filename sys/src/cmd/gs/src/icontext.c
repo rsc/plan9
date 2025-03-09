@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -39,7 +39,7 @@ extern_st(st_exec_stack);
 extern_st(st_op_stack);
 
 /* GC descriptors */
-private 
+private
 CLEAR_MARKS_PROC(context_state_clear_marks)
 {
     gs_context_state_t *const pcst = vptr;
@@ -49,7 +49,7 @@ CLEAR_MARKS_PROC(context_state_clear_marks)
     r_clear_attrs(&pcst->stdio[2], l_mark);
     r_clear_attrs(&pcst->userparams, l_mark);
 }
-private 
+private
 ENUM_PTRS_WITH(context_state_enum_ptrs, gs_context_state_t *pcst) {
     index -= 5;
     if (index < st_gs_dual_memory_num_ptrs)

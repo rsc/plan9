@@ -40,10 +40,10 @@ This package implements Plan 9's IL and 9fs client for FreeBSD 3.2.
   1. connect via IL:
 
 	  if( (s = socket(AF_INET, SOCK_SEQPACKET, IPPROTO_IL)) < 0 ) {
-	    perror("socket");    
+	    perror("socket");
 	    exit(1);
 	  }
-	
+
 	  bzero(&sin, sizeof(sin));
 	  sin.sin_family = AF_INET;
 	  sin.sin_addr.s_addr = dest_addr;
@@ -56,33 +56,33 @@ This package implements Plan 9's IL and 9fs client for FreeBSD 3.2.
   2. listen via IL:
 
 	  if( (s = socket(AF_INET, SOCK_SEQPACKET, IPPROTO_IL)) < 0 ) {
-	    perror("socket");    
+	    perror("socket");
 	    exit(1);
 	  }
-	
+
 	  bzero(&sin, sizeof(sin));
 	  sin.sin_family = AF_INET;
 	  sin.sin_addr.s_addr = INADDR_ANY;
 	  sin.sin_port = htons(port_number);
-	
+
 	  if( bind(s, (struct sockaddr *)&sin, sizeof(sin)) < 0 ) {
 	    perror("bind");
 	    exit(1);
 	  }
-	
+
 	  if( listen(s, 5) < 0 ) {
 	    perror("listen");
 	    exit(1);
 	  }
-	
+
 	  len = sizeof(sin);
 	  if ( (c = accept(s, (struct sockaddr *)& sin, &len)) < 0 ) {
 	    perror("accept");
 	    exit(1);
 	  }
-  
 
-> Using 9fs 
+
+> Using 9fs
 
   1. limitations:
 
@@ -108,7 +108,7 @@ This package implements Plan 9's IL and 9fs client for FreeBSD 3.2.
      first (sysctl -w vfs.usermount=1). Then follow the steps below.
 
      To mount by root:
-	
+
 	mount_9fs -u 9user@9auth_server 9fileserver:path node
 
      This mounts "path" on 9fileserver on local "node" on behalf of
@@ -129,6 +129,3 @@ This package implements Plan 9's IL and 9fs client for FreeBSD 3.2.
 
   You are welcome to contact dong@research.bell-labs.com for bug
   reports and fixes.
-
-
-

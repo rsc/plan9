@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -321,7 +321,7 @@ gx_dc_wts_fill_rectangle_1(const gx_device_color *pdevc,
     tile_data = malloc(tile_size);
 
     wts_draw(ws, shade, tile_data, tile_raster, x, y, w, h);
- 
+
     /* See gx_dc_ht_binary_fill_rectangle() for explanation. */
     if (dev->color_info.depth > 1)
 	lop &= ~lop_T_transparent;
@@ -455,10 +455,10 @@ gx_dc_wts_fill_rectangle_4(const gx_device_color *pdevc,
     }
 
     ctile_data = malloc(ctile_size);
-    wts_repack_tile_4(ctile_data, ctile_raster, 
+    wts_repack_tile_4(ctile_data, ctile_raster,
     		  (const unsigned char **)tile_data, tile_raster,
 		      pdevc->colors.wts.plane_vector, invert, w, h);
- 
+
     /* See gx_dc_ht_binary_fill_rectangle() for explanation. */
     if (dev->color_info.depth > 1)
 	lop &= ~lop_T_transparent;

@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -51,7 +51,7 @@ int
  */
 int
     gs_cie_render1_init_from(const gs_memory_t  *mem,
-	    		     gs_cie_render *pcrd, 
+	    		     gs_cie_render *pcrd,
 			     void *client_data,
 			     const gs_cie_render * pfrom_crd,
 			     const gs_vector3 * WhitePoint,
@@ -70,8 +70,8 @@ int
  * Initialize a CRD without the option of copying cached values.
  */
 int
-    gs_cie_render1_initialize(const gs_memory_t *mem, 
-			      gs_cie_render *pcrd, 
+    gs_cie_render1_initialize(const gs_memory_t *mem,
+			      gs_cie_render *pcrd,
 			      void *client_data,
 			      const gs_vector3 * WhitePoint,
 			      const gs_vector3 * BlackPoint,

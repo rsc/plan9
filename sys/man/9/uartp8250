@@ -34,7 +34,7 @@ PhysUart		p8250physuart;
 void	i8250interrupt(Ureg*, void*);
 .SH DESCRIPTION
 P8250 provides a portable interface for 8250-style uarts.
-All necessary functions are provided except for 
+All necessary functions are provided except for
 .BR get ,
 .BR set ,
 and

@@ -26,7 +26,7 @@ enum{
 	NVctl=		0x1ff8,
 	NVsec,
 	NVmin,
-	NVhour,	
+	NVhour,
 	NVday,		/* (1 = Sun) */
 	NVmday,		/* (1-31) */
 	NVmon,		/* (1-12) */
@@ -91,7 +91,7 @@ rtcwalk(Chan *c, Chan *nc, char **name, int nname)
 	return devwalk(c, nc, name, nname, rtcdir, nelem(rtcdir), devgen);
 }
 
-static int	 
+static int
 rtcstat(Chan *c, uchar *dp, int n)
 {
 	return devstat(c, dp, n, rtcdir, nelem(rtcdir), devgen);
@@ -113,12 +113,12 @@ rtcopen(Chan *c, int omode)
 	return devopen(c, omode, rtcdir, nelem(rtcdir), devgen);
 }
 
-static void	 
+static void
 rtcclose(Chan*)
 {
 }
 
-static long	 
+static long
 rtcread(Chan *c, void *buf, long n, vlong off)
 {
 	char *p;
@@ -153,7 +153,7 @@ rtcread(Chan *c, void *buf, long n, vlong off)
 	return -1;		/* never reached */
 }
 
-static long	 
+static long
 rtcwrite(Chan *c, void *buf, long n, vlong off)
 {
 	Rtc rtc;
@@ -273,7 +273,7 @@ putbcd(int val)
 	return (val % 10) | (((val/10) % 10) << 4);
 }
 
-long	 
+long
 rtctime(void)
 {
 	int ctl;

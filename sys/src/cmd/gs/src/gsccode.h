@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 2000, 2002 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -35,11 +35,11 @@ typedef ulong gs_char;
  * Define a character glyph code, a.k.a. character name.  The space of
  * glyph codes is divided into five sections:
  *
- *	- Codes >= GS_MIN_GLYPH_INDEX represent (non-negative) 
+ *	- Codes >= GS_MIN_GLYPH_INDEX represent (non-negative)
  *	  integers biased by GS_MIN_CID_GLYPH.  They represent glyph indices
  *	  of a specific font.
  *
- *	- Codes within [GS_MIN_CID_GLYPH, GS_MIN_GLYPH_INDEX) represent (non-negative) 
+ *	- Codes within [GS_MIN_CID_GLYPH, GS_MIN_GLYPH_INDEX) represent (non-negative)
  *	  integers biased by GS_MIN_CID_GLYPH.  They represent PostScript CIDs
  *        of a specific Ordering.
  *
@@ -134,7 +134,7 @@ typedef enum gs_glyph_space_s {
  * currently used only for CMaps: it is *not* the same as the glyph_name
  * procedure in fonts.
  */
-typedef int (*gs_glyph_name_proc_t)(const gs_memory_t *mem, 
+typedef int (*gs_glyph_name_proc_t)(const gs_memory_t *mem,
 				    gs_glyph glyph, gs_const_string *pstr,
 				    void *proc_data);
 

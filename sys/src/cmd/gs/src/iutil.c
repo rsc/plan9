@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -289,14 +289,14 @@ obj_cvp(const ref * op, byte * str, uint len, uint * prlen,
 	    goto rs;
 	}
 	case t_operator:
-	case t_oparray:  
+	case t_oparray:
 	    code = obj_cvp(op, (byte *)buf + 2, sizeof(buf) - 4, &size, 0, 0, mem);
-	    if (code < 0) 
+	    if (code < 0)
 		return code;
 	    buf[0] = buf[1] = buf[size + 2] = buf[size + 3] = '-';
 	    size += 4;
 	    goto nl;
-	case t_name:	 
+	case t_name:
 	    if (r_has_attr(op, a_executable)) {
 		code = obj_string_data(mem, op, &data, &size);
 		if (code < 0)
@@ -316,7 +316,7 @@ obj_cvp(const ref * op, byte * str, uint len, uint * prlen,
 	case t_null:
 	    data = (const byte *)"null";
 	    goto rs;
-	case t_string:  
+	case t_string:
 	    if (!r_has_attr(op, a_read))
 		goto other;
 	    size = r_size(op);
@@ -390,7 +390,7 @@ obj_cvp(const ref * op, byte * str, uint len, uint * prlen,
 	    }
 	    return 0;
 	case t_astruct:
-	case t_struct:    
+	case t_struct:
 	    if (r_is_foreign(op)) {
 		/* gs_object_type may not work. */
 		data = (const byte *)"-foreign-struct-";
@@ -428,7 +428,7 @@ other:
 	    }
 	    goto rs;
 	}
-    }	
+    }
     /* full_print = 0 */
     switch (r_btype(op)) {
     case t_boolean:

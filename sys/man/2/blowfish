@@ -11,7 +11,7 @@ setupBFstate, bfCBCencrypt, bfCBCdecrypt, bfECBencrypt, bfECBdecrypt  - blowfish
 .B #include <libsec.h>
 .PP
 .B
-void setupBFstate(BFstate *s, uchar key[], int keybytes, 
+void setupBFstate(BFstate *s, uchar key[], int keybytes,
 .B
 			 uchar *ivec)
 .PP

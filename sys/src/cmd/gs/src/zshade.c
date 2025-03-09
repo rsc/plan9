@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -196,7 +196,7 @@ build_shading(i_ctx_t *i_ctx_p, build_shading_proc_t proc)
     }
     if (dict_find_string(op, "BBox", &pvalue) <= 0)
 	params.have_BBox = false;
-    else if ((code = dict_floats_param(imemory, op, "BBox", 
+    else if ((code = dict_floats_param(imemory, op, "BBox",
 				       4, box, NULL)) == 4) {
 	params.BBox.p.x = box[0];
 	params.BBox.p.y = box[1];
@@ -302,7 +302,7 @@ build_shading_1(i_ctx_t *i_ctx_p, const ref * op, const gs_shading_params_t * pc
     *(gs_shading_params_t *)&params = *pcommon;
     gs_make_identity(&params.Matrix);
     params.Function = 0;
-    if ((code = dict_floats_param(imemory, op, "Domain", 
+    if ((code = dict_floats_param(imemory, op, "Domain",
 				  4, params.Domain,
 				  default_Domain)) < 0 ||
 	(dict_find_string(op, "Matrix", &pmatrix) > 0 &&
@@ -329,7 +329,7 @@ build_directional_shading(i_ctx_t *i_ctx_p, const ref * op, float *Coords, int n
 			  float Domain[2], gs_function_t ** pFunction,
 			  bool Extend[2], gs_memory_t *mem)
 {
-    int code = dict_floats_param(imemory, op, "Coords", 
+    int code = dict_floats_param(imemory, op, "Coords",
 				 num_Coords, Coords, NULL);
     static const float default_Domain[2] = {0, 1};
     ref *pExtend;
@@ -352,9 +352,9 @@ build_directional_shading(i_ctx_t *i_ctx_p, const ref * op, float *Coords, int n
 	    return_error(e_typecheck);
 	else if (r_size(pExtend) != 2)
 	    return_error(e_rangecheck);
-	else if ((array_get(imemory, pExtend, 0L, &E0), 
+	else if ((array_get(imemory, pExtend, 0L, &E0),
 		  !r_has_type(&E0, t_boolean)) ||
-		 (array_get(imemory, pExtend, 1L, &E1), 
+		 (array_get(imemory, pExtend, 1L, &E1),
 		  !r_has_type(&E1, t_boolean))
 	    )
 	    return_error(e_typecheck);

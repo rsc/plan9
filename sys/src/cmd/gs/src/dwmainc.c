@@ -1,12 +1,12 @@
 /* Copyright (C) 1996-2004 Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -110,7 +110,7 @@ static void winthread(void *arg)
 		break;
 	    case DISPLAY_CLOSE:
 		{
-		    IMAGE *img = (IMAGE *)msg.lParam; 
+		    IMAGE *img = (IMAGE *)msg.lParam;
 		    HANDLE hmutex = img->hmutex;
 		    image_close(img);
 		    CloseHandle(hmutex);
@@ -183,7 +183,7 @@ int display_close(void *handle, void *device)
     return 0;
 }
 
-int display_presize(void *handle, void *device, int width, int height, 
+int display_presize(void *handle, void *device, int width, int height,
 	int raster, unsigned int format)
 {
     IMAGE *img;
@@ -198,8 +198,8 @@ int display_presize(void *handle, void *device, int width, int height,
     }
     return 0;
 }
-   
-int display_size(void *handle, void *device, int width, int height, 
+
+int display_size(void *handle, void *device, int width, int height,
 	int raster, unsigned int format, unsigned char *pimage)
 {
     IMAGE *img;
@@ -216,7 +216,7 @@ int display_size(void *handle, void *device, int width, int height,
     }
     return 0;
 }
-   
+
 int display_sync(void *handle, void *device)
 {
     IMAGE *img;
@@ -235,7 +235,7 @@ int display_page(void *handle, void *device, int copies, int flush)
 {
     IMAGE *img;
 #ifdef DISPLAY_DEBUG
-    fprintf(stdout, "display_page(0x%x, 0x%x, copies=%d, flush=%d)\n", 
+    fprintf(stdout, "display_page(0x%x, 0x%x, copies=%d, flush=%d)\n",
 	handle, device, copies, flush);
 #endif
     img = image_find(handle, device);
@@ -244,7 +244,7 @@ int display_page(void *handle, void *device, int copies, int flush)
     return 0;
 }
 
-int display_update(void *handle, void *device, 
+int display_update(void *handle, void *device,
     int x, int y, int w, int h)
 {
     IMAGE *img;
@@ -265,7 +265,7 @@ void *display_memalloc(void *handle, void *device, unsigned long size)
 {
     void *mem;
 #ifdef DISPLAY_DEBUG
-    fprintf(stdout, "display_memalloc(0x%x 0x%x %d)\n", 
+    fprintf(stdout, "display_memalloc(0x%x 0x%x %d)\n",
 	handle, device, size);
 #endif
     mem = malloc(size);
@@ -278,7 +278,7 @@ void *display_memalloc(void *handle, void *device, unsigned long size)
 int display_memfree(void *handle, void *device, void *mem)
 {
 #ifdef DISPLAY_DEBUG
-    fprintf(stdout, "display_memfree(0x%x, 0x%x, 0x%x)\n", 
+    fprintf(stdout, "display_memfree(0x%x, 0x%x, 0x%x)\n",
 	handle, device, mem);
 #endif
     free(mem);
@@ -286,14 +286,14 @@ int display_memfree(void *handle, void *device, void *mem)
 }
 #endif
 
-int display_separation(void *handle, void *device, 
+int display_separation(void *handle, void *device,
    int comp_num, const char *name,
    unsigned short c, unsigned short m,
    unsigned short y, unsigned short k)
 {
     IMAGE *img;
 #ifdef DISPLAY_DEBUG
-    fprintf(stdout, "display_separation(0x%x, 0x%x, %d '%s' %d,%d,%d,%d)\n", 
+    fprintf(stdout, "display_separation(0x%x, 0x%x, %d '%s' %d,%d,%d,%d)\n",
 	handle, device, comp_num, name, (int)c, (int)m, (int)y, (int)k);
 #endif
     img = image_find(handle, device);
@@ -303,7 +303,7 @@ int display_separation(void *handle, void *device,
 }
 
 
-display_callback display = { 
+display_callback display = {
     sizeof(display_callback),
     DISPLAY_VERSION_MAJOR,
     DISPLAY_VERSION_MINOR,
@@ -384,27 +384,27 @@ int main(int argc, char *argv[])
     gsdll.set_stdio(instance, gsdll_stdin, gsdll_stdout, gsdll_stderr);
     gsdll.set_display_callback(instance, &display);
 
-    {   int format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | 
+    {   int format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_1 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
 	HDC hdc = GetDC(NULL);	/* get hdc for desktop */
 	int depth = GetDeviceCaps(hdc, PLANES) * GetDeviceCaps(hdc, BITSPIXEL);
 	sprintf(ddpi, "-dDisplayResolution=%d", GetDeviceCaps(hdc, LOGPIXELSY));
         ReleaseDC(NULL, hdc);
 	if (depth == 32)
- 	    format = DISPLAY_COLORS_RGB | DISPLAY_UNUSED_LAST | 
+ 	    format = DISPLAY_COLORS_RGB | DISPLAY_UNUSED_LAST |
 		DISPLAY_DEPTH_8 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
 	else if (depth == 16)
- 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | 
+ 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_16 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST |
 		DISPLAY_NATIVE_555;
 	else if (depth > 8)
- 	    format = DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE | 
+ 	    format = DISPLAY_COLORS_RGB | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_8 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
 	else if (depth >= 8)
- 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | 
+ 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_8 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
 	else if (depth >= 4)
- 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE | 
+ 	    format = DISPLAY_COLORS_NATIVE | DISPLAY_ALPHA_NONE |
 		DISPLAY_DEPTH_4 | DISPLAY_LITTLEENDIAN | DISPLAY_BOTTOMFIRST;
         sprintf(dformat, "-dDisplayFormat=%d", format);
     }
@@ -442,7 +442,7 @@ int main(int argc, char *argv[])
     free(nargv);
 
     /* close other thread */
-    quitnow = TRUE; 
+    quitnow = TRUE;
     PostThreadMessage(thread_id, WM_QUIT, 0, (LPARAM)0);
     Sleep(0);
 
@@ -462,4 +462,3 @@ int main(int argc, char *argv[])
 
     return exit_status;
 }
-

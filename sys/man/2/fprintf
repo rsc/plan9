@@ -47,12 +47,12 @@ in consecutive bytes starting at
 it is the user's responsibility to ensure that
 enough storage is available.
 .I Snprintf
-is like 
+is like
 .I sprintf
-but writes at most 
+but writes at most
 .I n
 bytes (including the null character)
-into 
+into
 .IR s .
 .IR Vfprintf ,
 .IR vprintf ,
@@ -71,7 +71,7 @@ Each function returns the number of characters
 transmitted (not including the
 .B \e0
 in the case of
-.IR sprintf 
+.IR sprintf
 and friends),
 or
 a negative value if an output error was encountered.
@@ -80,7 +80,7 @@ These functions
 convert, format, and print their
 trailing arguments
 under control of a
-.IR format 
+.IR format
 string.
 The
 .I format
@@ -379,7 +379,7 @@ The result of converting a zero value with a precision
 of zero is no characters.
 .TP
 .BR f
-The 
+The
 .B double
 argument is converted to decimal notation
 in the style

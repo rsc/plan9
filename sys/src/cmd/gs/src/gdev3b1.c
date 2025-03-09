@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1994, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -283,7 +283,7 @@ att3b1_fill_rectangle(gx_device *dev, int x, int y, int w, int h,
 int
 att3b1_copy_mono(gx_device *dev, const uchar *data,
 		 int data_x, int raster, gx_bitmap_id id,
-		 int x, int y, int width, int height, 
+		 int x, int y, int width, int height,
 		 gx_color_index colour0, gx_color_index colour1)
 {
     const ushort *src_p, *src_q;
@@ -597,7 +597,7 @@ att3b1_do_output_page(gx_device *dev, int num_copies, int flush)
 	    yorigin += 1;
 	    break;
 
-	    
+
 	case '\025':	/* control-U */
 	    yorigin -= screen_height/2;
 	    break;
@@ -620,11 +620,11 @@ att3b1_do_output_page(gx_device *dev, int num_copies, int flush)
 	    xorigin = def_xorigin;
 	    yorigin = def_yorigin;
 	    break;
-	
+
 	case 'c':	/* centre horizontally */
 	    xorigin = (att3b1dev->width - screen_width) / 2;
 	    break;
-	
+
 	case 'C':	/* centre vertically */
 	    yorigin = (att3b1dev->height - screen_height) / 2;
 	    break;
@@ -640,11 +640,11 @@ att3b1_do_output_page(gx_device *dev, int num_copies, int flush)
 		*p = ~ *p;
 	    inverted = !inverted;
 	    break;
-	
+
 	case '?':
 	    do_help(dev);
 	    break;
-	
+
 	case -1:
 	    error = gs_error_ioerror;
 	    /* fall through, for cleanup */

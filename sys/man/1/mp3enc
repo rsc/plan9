@@ -124,7 +124,7 @@ is an MP3 file
 .BI -f
 same as
 .LR "-q 7" .
-Such a deal. 
+Such a deal.
 .TP
 .BI -o
 mark as non-original (i.e. do not set the original bit)

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -270,7 +270,7 @@ gs_state_alloc(gs_memory_t * mem)
     pgs->level = 0;
     pgs->dfilter_stack = 0;
     pgs->transparency_group_stack = 0;
-    if (gs_initgraphics(pgs) >= 0) 
+    if (gs_initgraphics(pgs) >= 0)
 	return pgs;
     /* Something went very wrong. */
 fail:

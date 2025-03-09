@@ -1,6 +1,6 @@
 /*
  * Network listening authentication.
- * This and all the other network-related 
+ * This and all the other network-related
  * code is due to Richard Miller.
  */
 #include	"all.h"

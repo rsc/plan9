@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -129,7 +129,7 @@ jpegcmyk_map_color_rgb(gx_device * dev, gx_color_index color,
 	not_k = color & 0xff,
 	r = not_k - ~(color >> 24),
 	g = not_k - ~((color >> 16) & 0xff),
-	b = not_k - ~((color >> 8) & 0xff); 
+	b = not_k - ~((color >> 8) & 0xff);
 
     prgb[0] = (r < 0 ? 0 : gx_color_value_from_byte(r));
     prgb[1] = (g < 0 ? 0 : gx_color_value_from_byte(g));
@@ -145,7 +145,7 @@ jpegcmyk_map_cmyk_color(gx_device * dev, const gx_color_value cv[])
         ((uint)gx_color_value_to_byte(cv[2]) << 8) +
         ((uint)gx_color_value_to_byte(cv[1]) << 16) +
         ((uint)gx_color_value_to_byte(cv[0]) << 24));
-    
+
     return (color == gx_no_color_index ? color ^ 1 : color);
 }
 

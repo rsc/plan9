@@ -191,7 +191,7 @@ snarfclose(Fid *fid)
 }
 
 typedef struct Bit Bit;
-struct Bit 
+struct Bit
 {
 	char *name;
 	uint bit;
@@ -617,7 +617,7 @@ void
 nohwaccel(void)
 {
 	int fd;
-	
+
 	if((fd = open("#v/vgactl", OWRITE)) < 0)
 		return;
 	fprint(fd, "hwaccel off");

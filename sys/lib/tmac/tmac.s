@@ -420,7 +420,7 @@
 .if n \{\
 .	sp 2
 .	A1
-.	sp 
+.	sp
 .	ns
 .	I1
 .	if \\n(NA-1 .sp 2
@@ -539,7 +539,7 @@ ABSTRACT
 .ls 1
 .pn 2
 .WB
-.ls 
+.ls
 .sp 3v
 \\*(DY
 .sp |9i
@@ -1207,9 +1207,9 @@ Bell Laboratories
 .ps \\n(PS-2
 .vs \\n(.s+2p
 .ev
-.if !\\n(KG .nr FP 0 
+.if !\\n(KG .nr FP 0
 .if \\n(GA>1 .if \\n(KG=0 .nr GA 0 \" next UNIX must be flagged.
-.nr KG 0 
+.nr KG 0
 .if \\n(FP \{\
 .	FS
 .	FG

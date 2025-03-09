@@ -29,7 +29,7 @@ static Dirtab rootdir[Nrootfiles] = {
 	"boot",	{Qboot, 0, QTDIR},	0,		DMDIR|0555,
 };
 static uchar *rootdata[Nrootfiles];
-static Dirlist rootlist = 
+static Dirlist rootlist =
 {
 	0,
 	rootdir,
@@ -221,7 +221,7 @@ rootread(Chan *c, void *buf, long n, vlong off)
 	if(offset+n > d->length)
 		n = d->length - offset;
 #ifdef asdf
-print("[%d] kaddr %.8ulx base %.8ulx offset %ld (%.8ulx), n %d %.8ulx %.8ulx %.8ulx\n", 
+print("[%d] kaddr %.8ulx base %.8ulx offset %ld (%.8ulx), n %d %.8ulx %.8ulx %.8ulx\n",
 		t, buf, data, offset, offset, n,
 		((ulong*)(data+offset))[0],
 		((ulong*)(data+offset))[1],
@@ -258,4 +258,3 @@ Dev rootdevtab = {
 	devremove,
 	devwstat,
 };
-

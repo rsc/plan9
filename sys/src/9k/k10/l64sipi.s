@@ -132,7 +132,7 @@ TEXT _protected<>(SB), 1, $-4
 	ADDL	AX, BX				/* sipi[apicno] */
 
 	MOVL	0(BX), SI			/* sipi[apicno].pml4 */
-	
+
 	MOVL	SI, AX
 	MOVL	AX, CR3				/* load the mmu */
 

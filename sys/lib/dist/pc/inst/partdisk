@@ -11,7 +11,7 @@ case go
 		echo 'The installation process cannot continue.'
 		exit giveup
 	}
-	
+
 	echo 'The following disk devices were found.'
 	echo
 	for(i in $disks) {
@@ -20,7 +20,7 @@ case go
 		echo e | disk/fdisk -r /dev/$i/data >[2]/dev/null | grep -v '^   mbr'
 		echo
 	}
-	
+
 	okay=no
 	defdisk=$disks(1)
 

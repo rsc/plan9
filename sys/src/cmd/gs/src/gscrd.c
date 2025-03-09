@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -36,7 +36,7 @@ extern_gs_lib_device_list();
 
 /* Allocator structure type */
 public_st_cie_render1();
-private 
+private
 ENUM_PTRS_WITH(cie_render1_enum_ptrs, gs_cie_render *pcrd) return 0;
 case 0: return ENUM_OBJ(pcrd->client_data);
 case 1: return ENUM_OBJ(pcrd->RenderTable.lookup.table);
@@ -280,7 +280,7 @@ gs_cie_render1_build(gs_cie_render ** ppcrd, gs_memory_t * mem,
  */
 int
 gs_cie_render1_init_from(const gs_memory_t *mem,
-			 gs_cie_render * pcrd, 
+			 gs_cie_render * pcrd,
 			 void *client_data,
 			 const gs_cie_render * pfrom_crd,
 			 const gs_vector3 * WhitePoint,

@@ -29,7 +29,7 @@ void	Ssllv(ulong);
 void	Ssrlv(ulong);
 void	Ssrav(ulong);
 
-Inst ispec[] = 
+Inst ispec[] =
 {
 	{ Ssll,		"sll",	Iarith },
 	{ undef,		"" },

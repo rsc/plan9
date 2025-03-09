@@ -20,7 +20,7 @@ on standard input.
 .PP
 If the
 .B -m
-flag is given, 
+flag is given,
 .I file
 outputs an
 appropriate MIME

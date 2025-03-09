@@ -50,7 +50,7 @@ The
 .B -v
 option enables verbose debugging printout.
 .PP
-The 
+The
 .B -D
 option causes
 .IR diff (1)

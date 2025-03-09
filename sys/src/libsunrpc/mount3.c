@@ -710,7 +710,7 @@ static SunProc proc1[] = {
 	(P)nfsMount3RExportPack, (P)nfsMount3RExportUnpack, (S)nfsMount3RExportSize, (F)nfsMount3RExportPrint, sizeof(NfsMount3RExport),
 };
 
-SunProg nfsMount3Prog = 
+SunProg nfsMount3Prog =
 {
 	NfsMount3Program,
 	NfsMount3Version,

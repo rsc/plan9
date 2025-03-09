@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 artofcode LLC. All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -21,7 +21,7 @@
 #  define vdtrace_INCLUDED
 
 /*  Painting contract :
-    
+
     First use vd_get_dc.
     Then paint with vd_* functionns.
     When completed, use vd_release_dc.
@@ -94,10 +94,10 @@ void vd_setflag(char f, char v);
 #endif
 
 #if VD_TRACE && defined(DEBUG)
-#    define vd_allowed(f)       (vd_flags[(f) & 127]) 
+#    define vd_allowed(f)       (vd_flags[(f) & 127])
 #    define vd_get_dc(f)        while (vd_trace0 && vd_allowed(f)) { vd_trace0->get_dc(vd_trace0, &vd_trace1); break; }
 #    define vd_release_dc       BEGIN if (vd_trace1) vd_trace1->release_dc(vd_trace1, &vd_trace1); END
-#    define vd_enabled          (vd_trace1 != 0) 
+#    define vd_enabled          (vd_trace1 != 0)
 #    define vd_get_size_unscaled_x      (vd_trace1 ? vd_trace1->get_size_x(vd_trace1) : 100)
 #    define vd_get_size_unscaled_y      (vd_trace1 ? vd_trace1->get_size_y(vd_trace1) : 100)
 #    define vd_get_size_scaled_x        (vd_trace1 ? vd_trace1->get_size_x(vd_trace1) / vd_trace1->scale_x : 100)
@@ -137,9 +137,9 @@ void vd_setflag(char f, char v);
 	    because in release build it compiles to the empty operator.
 	    We intentionally defined an operator here for a compatible syntax check.  */
 #    define vd_restore	vd_trace1 = vd_trace_save
-#    define vd_disable	vd_trace1 = NULL  
+#    define vd_disable	vd_trace1 = NULL
 #else
-#    define vd_allowed(f)   false 
+#    define vd_allowed(f)   false
 #    define vd_get_dc(f)    DO_NOTHING
 #    define vd_release_dc   DO_NOTHING
 #    define vd_enabled			0

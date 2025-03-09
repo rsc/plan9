@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -45,7 +45,7 @@ typedef struct gs_main_instance_s gs_main_instance;
 
 /* ================ Exported procedures from imain.c ================ */
 
-/* get minst from memory is a hack to allow parts of the system 
+/* get minst from memory is a hack to allow parts of the system
  * to reach minst, slightly better than a global
  */
 gs_main_instance* get_minst_from_memory(const gs_memory_t *mem);
@@ -54,10 +54,10 @@ gs_main_instance* get_minst_from_memory(const gs_memory_t *mem);
 
 /*
  * NB: multiple instances are not supported yet
- * 
+ *
  * // add usage documentation
  */
-gs_main_instance *gs_main_alloc_instance(gs_memory_t *); 
+gs_main_instance *gs_main_alloc_instance(gs_memory_t *);
 
 /* ---------------- Initialization ---------------- */
 

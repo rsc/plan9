@@ -1,5 +1,5 @@
 /*
- * The `cd' shell.  
+ * The `cd' shell.
  * Just has cd and lc.
  */
 

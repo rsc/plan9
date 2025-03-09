@@ -1044,4 +1044,3 @@ bScaleKeyPressed(event_pollblock *pEvent, void *pvReference)
 	vForceRedraw(pDiag);
 	return TRUE;
 } /* end of bScaleKeyPressed */
-

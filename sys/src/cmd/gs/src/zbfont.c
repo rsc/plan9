@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -77,7 +77,7 @@ zfont_encode_char(gs_font *pfont, gs_char chr, gs_glyph_space_t gspace)
 	ref nsref, tname;
 
 	name_string_ref(pfont->memory, &cname, &nsref);
-	if (r_size(&nsref) == 7 && 
+	if (r_size(&nsref) == 7 &&
 	    !memcmp(nsref.value.const_bytes, ".notdef", r_size(&nsref))) {
 	    /* A special support for high level devices.
 	       They need a glyph name but the font doesn't provide one
@@ -85,14 +85,14 @@ zfont_encode_char(gs_font *pfont, gs_char chr, gs_glyph_space_t gspace)
 	       Such fonts don't conform to PLRM section 5.3.7,
 	       but we've got real examples that we want to handle (Bug 686982).
 	       Construct a name here.
-	       Low level devices don't pass here, because regular PS interpretation 
+	       Low level devices don't pass here, because regular PS interpretation
 	       doesn't need such names.
 	    */
 	    char buf[20];
 	    int code;
 
 	    if (gspace == GLYPH_SPACE_NOGEN)
-		return gs_no_glyph;    
+		return gs_no_glyph;
 	    sprintf(buf, "j%ld", chr); /* 'j' is arbutrary. */
 	    code = name_ref(pfont->memory, (const byte *)buf, strlen(buf), &tname, 1);
 	    if (code < 0) {
@@ -128,7 +128,7 @@ zfont_glyph_name(gs_font *font, gs_glyph index, gs_const_string *pstr)
     return 0;
 }
 
-private gs_char 
+private gs_char
 gs_font_map_glyph_by_dict(const gs_memory_t *mem, const ref *map, gs_glyph glyph)
 {
     ref *v, n;
@@ -166,21 +166,21 @@ gs_font_map_glyph_by_dict(const gs_memory_t *mem, const ref *map, gs_glyph glyph
 }
 
 /* Get Unicode UTF-16 code for a glyph. */
-gs_char 
+gs_char
 gs_font_map_glyph_to_unicode(gs_font *font, gs_glyph glyph)
 {
     font_data *pdata = pfont_data(font);
     const ref *UnicodeDecoding;
 
     if (r_type(&pdata->GlyphNames2Unicode) == t_dictionary) {
-	gs_char c = gs_font_map_glyph_by_dict(font->memory, 
+	gs_char c = gs_font_map_glyph_by_dict(font->memory,
 					      &pdata->GlyphNames2Unicode, glyph);
 
 	if (c != GS_NO_CHAR)
 	    return c;
-	/* 
-	 * Fall through, because test.ps for SF bug #529103 requres 
-	 * to examine both tables. Due to that the Unicode Decoding resource 
+	/*
+	 * Fall through, because test.ps for SF bug #529103 requres
+	 * to examine both tables. Due to that the Unicode Decoding resource
 	 * can't be a default value for FontInfo.GlyphNames2Unicode .
 	 */
     }
@@ -210,7 +210,7 @@ build_proc_name_refs(const gs_memory_t *mem, build_proc_refs * pbuild,
     if (!bcstr)
 	make_null(&pbuild->BuildChar);
     else {
-	if ((code = name_ref(mem, (const byte *)bcstr, 
+	if ((code = name_ref(mem, (const byte *)bcstr,
 			     strlen(bcstr), &pbuild->BuildChar, 0)) < 0)
 	    return code;
 	r_set_attrs(&pbuild->BuildChar, a_executable);
@@ -218,7 +218,7 @@ build_proc_name_refs(const gs_memory_t *mem, build_proc_refs * pbuild,
     if (!bgstr)
 	make_null(&pbuild->BuildGlyph);
     else {
-	if ((code = name_ref(mem, (const byte *)bgstr, 
+	if ((code = name_ref(mem, (const byte *)bgstr,
 			     strlen(bgstr), &pbuild->BuildGlyph, 0)) < 0)
 	    return code;
 	r_set_attrs(&pbuild->BuildGlyph, a_executable);
@@ -336,8 +336,8 @@ build_gs_primitive_font(i_ctx_t *i_ctx_p, os_ptr op, gs_font_base ** ppfont,
 	uid_set_invalid(&pfont->UID);
     if (uid_is_valid(&pfont->UID)) {
 	const gs_font *pfont0 = (const gs_font *)pfont;
-	
-	code = gs_font_find_similar(ifont_dir, &pfont0, 
+
+	code = gs_font_find_similar(ifont_dir, &pfont0,
 		       font_with_same_UID_and_another_metrics);
 	if (code < 0)
 	    return code; /* Must not happen. */

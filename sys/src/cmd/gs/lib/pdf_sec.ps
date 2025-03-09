@@ -1,4 +1,4 @@
-%   Copyright (C) 1996-1998 Geoffrey Keating. 
+%   Copyright (C) 1996-1998 Geoffrey Keating.
 %	Copyright (C) 2001 Artifex Software, Inc.
 % This file may be freely distributed with or without modifications,
 % so long as modified versions are marked as such and copyright notices are
@@ -109,7 +109,7 @@ def
     ()
     (   **** ID key in the trailer is required for encrypted files.\n) pdfformaterror
   } ifelse
-  3 { concatstrings } repeat 
+  3 { concatstrings } repeat
   % We will finish step 5 after possibly including step 6.
 
   % The following only executed for /R equal to 3 or more
@@ -324,12 +324,12 @@ def
               { pop //true
               }
               { dup /false eq
-                  { pop //false 
+                  { pop //false
                   }
                   { dup /null eq
                       { pop //null
                       }
-                      { (   **** Unknown operator: ) 
+                      { (   **** Unknown operator: )
 	                exch =string cvs concatstrings (\n) concatstrings
 			pdfformaterror
                       }
@@ -373,7 +373,7 @@ def
    /loop cvx 2 packedarray cvx
     { stopped /PDFsource } aload pop
    PDFsource
-    { store { stop } if } aload pop .packtomark cvx 
+    { store { stop } if } aload pop .packtomark cvx
    /PDFsource 3 -1 roll store exec
  } bind def
 
@@ -441,7 +441,7 @@ def
 /pdf_decrypt_stream
  { 3 index /StreamKey known	% Check if the file is encrypted
    {
-      exch 
+      exch
 	% Stack: readdata? dict parms filternames file/string
       3 index /Length oget
       dup 0 eq {

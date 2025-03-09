@@ -42,7 +42,7 @@ read, write, copy \- simple Venti clients
 ]
 .SH DESCRIPTION
 Venti is a SHA1-addressed block storage server.
-See 
+See
 .IR venti (6)
 for a full introduction.
 .PP
@@ -50,7 +50,7 @@ for a full introduction.
 reads a block with the given
 .I score
 and numeric
-.I type 
+.I type
 from the server
 .I host
 and prints the block to standard output.
@@ -74,7 +74,7 @@ command to standard error
 to indicate the type of the block.
 .PP
 .I Write
-writes at most 56 kilobytes of data from standard input 
+writes at most 56 kilobytes of data from standard input
 to the server
 .I host
 and prints the resulting score to standard output.
@@ -93,7 +93,7 @@ zero truncates the block before writing it to the server.
 .I Copy
 expects
 .I score
-to be the score of a 
+to be the score of a
 .B VtRoot
 block.
 It copies the entire tree of blocks reachable from
@@ -129,11 +129,11 @@ exits after printing the first error.
 If the
 .B -i
 option is given, read errors are ignored.
-This is dangerous behavior because it breaks the 
+This is dangerous behavior because it breaks the
 assumption made by `fast' mode.
 If the
 .B -r
-option is given, 
+option is given,
 .I copy
 replaces pointers to unreadable blocks with
 pointers to the zero block.

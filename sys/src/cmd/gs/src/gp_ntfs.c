@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -152,16 +152,16 @@ gp_enumerate_files_next(file_enum * pfen, char *ptr, uint maxlen)
 {
     int code = 0;
     uint len;
-    for(;;) 
-      { if (pfen->first_time) 
+    for(;;)
+      { if (pfen->first_time)
           { pfen->find_handle = FindFirstFile(pfen->pattern, &(pfen->find_data));
 	    if (pfen->find_handle == INVALID_HANDLE_VALUE)
 	      { code = -1;
                 break;
               }
 	    pfen->first_time = 0;
-          } 
-        else 
+          }
+        else
           { if (!FindNextFile(pfen->find_handle, &(pfen->find_data)))
 	      { code = -1;
                 break;
@@ -171,8 +171,8 @@ gp_enumerate_files_next(file_enum * pfen, char *ptr, uint maxlen)
           && strcmp("..", pfen->find_data.cFileName)
 	  && (pfen->find_data.dwFileAttributes != FILE_ATTRIBUTE_DIRECTORY))
             break;
-      } 
-   
+      }
+
     if (code != 0) {		/* All done, clean up. */
 	gp_enumerate_files_close(pfen);
 	return ~(uint) 0;
@@ -211,7 +211,7 @@ gp_enumerate_files_close(file_enum * pfen)
 
 uint gp_file_name_root(const char *fname, uint len)
 {   int i = 0;
-    
+
     if (len == 0)
 	return 0;
     if (len > 1 && fname[0] == '\\' && fname[1] == '\\') {
@@ -278,10 +278,9 @@ bool gp_file_name_is_empty_item_meanful(void)
 }
 
 gp_file_name_combine_result
-gp_file_name_combine(const char *prefix, uint plen, const char *fname, uint flen, 
+gp_file_name_combine(const char *prefix, uint plen, const char *fname, uint flen,
 		    bool no_sibling, char *buffer, uint *blen)
 {
-    return gp_file_name_combine_generic(prefix, plen, 
+    return gp_file_name_combine_generic(prefix, plen,
 	    fname, flen, no_sibling, buffer, blen);
 }
-

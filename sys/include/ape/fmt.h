@@ -62,7 +62,7 @@ enum{
 };
 
 #ifdef	__cplusplus
-extern "C" { 
+extern "C" {
 #endif
 
 extern	int	print(char*, ...);

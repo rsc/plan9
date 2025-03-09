@@ -1,12 +1,12 @@
 /* Copyright (C) 1999-2003, Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -28,13 +28,13 @@
 //   gs#.##\*          (files listed in filelist.txt)
 //   fonts\*           (fonts listed in fontlist.txt)
 // This is the same as the zip file created by Aladdin Enterprises,
-// with the addition of setupgs.exe, uninstgs.exe, filelist.txt and 
+// with the addition of setupgs.exe, uninstgs.exe, filelist.txt and
 // fontlist.txt.
 //
 // The first line of the files filelist.txt and fontlist.txt
-// contains the uninstall name to be used.  
-// The second line contains name of the main directory where 
-// uninstall log files are to be placed.  
+// contains the uninstall name to be used.
+// The second line contains name of the main directory where
+// uninstall log files are to be placed.
 // Subsequent lines contain files to be copied (but not directories).
 // For example, filelist.txt might contain:
 //   AFPL Ghostscript 6.50
@@ -53,13 +53,13 @@
 // The setup program will create the following uninstall log files
 //   c:\gs\gs#.##\uninstal.txt
 //   c:\gs\fonts\uninstal.txt
-// The uninstall program (accessed through control panel) will not 
+// The uninstall program (accessed through control panel) will not
 // remove directories nor will it remove itself.
 //
-// If the install directory is the same as the current file 
-// location, no files will be copied, but the existence of each file 
+// If the install directory is the same as the current file
+// location, no files will be copied, but the existence of each file
 // will be checked.  This allows the archive to be unzipped, then
-// configured in its current location.  Running the uninstall will not 
+// configured in its current location.  Running the uninstall will not
 // remove uninstgs.exe, setupgs.exe, filelist.txt or fontlist.txt.
 
 
@@ -138,7 +138,7 @@ HINSTANCE g_hInstance;
 
 // If a directory is listed on the command line, g_bBatch will
 // be TRUE and a silent install will occur.
-BOOL g_bBatch = FALSE;	
+BOOL g_bBatch = FALSE;
 
 BOOL g_bQuit = FALSE;	// TRUE = Get out of message loop.
 BOOL g_bError = FALSE;	// TRUE = Install was not successful
@@ -176,16 +176,16 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 {
 	MSG msg;
 	g_hInstance = hInstance;
-	
+
 	if (!init()) {
-		MessageBox(HWND_DESKTOP, "Initialisation failed", 
+		MessageBox(HWND_DESKTOP, "Initialisation failed",
 			g_szAppName, MB_OK);
 		return 1;
 	}
-	
+
 	if (!g_bBatch) {
 		while (GetMessage(&msg, (HWND)NULL, 0, 0)) {
-			if (!IsDialogMessage(g_hWndText, &msg) && 
+			if (!IsDialogMessage(g_hWndText, &msg) &&
 				!IsDialogMessage(g_hMain, &msg)) {
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
@@ -193,7 +193,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 		}
 		DestroyWindow(g_hMain);
 	}
-	
+
 	return (g_bError ? 1 : 0);
 }
 
@@ -211,7 +211,7 @@ char twbuf[TWLENGTH];
 int twend;
 
 // Modeless Dialog Box
-DLGRETURN CALLBACK 
+DLGRETURN CALLBACK
 TextWinDlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch(message) {
@@ -279,7 +279,7 @@ gs_addmess_count(const char *str, int count)
 	char *p;
 	int i, lfcount;
 	MSG msg;
-	
+
 	// we need to add \r after each \n, so count the \n's
 	lfcount = 0;
 	s = str;
@@ -288,7 +288,7 @@ gs_addmess_count(const char *str, int count)
 			lfcount++;
 		s++;
 	}
-	
+
 	if (count + lfcount >= TWSCROLL)
 		return;		// too large
 	if (count + lfcount + twend >= TWLENGTH-1) {
@@ -305,15 +305,15 @@ gs_addmess_count(const char *str, int count)
 	}
 	twend += (count + lfcount);
 	*(twbuf+twend) = '\0';
-	
-	
+
+
 	// Update the dialog box
 	if (g_bBatch)
 		return;
-	
+
 	gs_addmess_update();
 	while (PeekMessage(&msg, (HWND)NULL, 0, 0, PM_REMOVE)) {
-		if (!IsDialogMessage(g_hWndText, &msg) && 
+		if (!IsDialogMessage(g_hWndText, &msg) &&
 			!IsDialogMessage(g_hMain, &msg)) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
@@ -325,7 +325,7 @@ void
 gs_addmess(const char *str)
 {
 	gs_addmess_count(str, lstrlen(str));
-	
+
 }
 
 
@@ -333,10 +333,10 @@ void
 gs_addmess_update(void)
 {
 	HWND hwndmess = g_hWndText;
-	
+
 	if (g_bBatch)
 		return;
-	
+
 	if (IsWindow(hwndmess)) {
 		HWND hwndtext = GetDlgItem(hwndmess, IDC_TEXTWIN_MLE);
 		DWORD linecount;
@@ -352,21 +352,21 @@ gs_addmess_update(void)
 
 
 //////////////////////////////////////////////////////////////////////
-// Browse dialog box 
+// Browse dialog box
 //////////////////////////////////////////////////////////////////////
 
 // nasty GLOBALS
 char szFolderName[MAXSTR];
 char szDirName[MAXSTR];
 
-DLGRETURN CALLBACK 
+DLGRETURN CALLBACK
 DirDlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	WORD notify_message;
-	
+
 	switch(message) {
 	case WM_INITDIALOG:
-		DlgDirList(hwnd, szDirName, IDC_FILES, IDC_FOLDER, 
+		DlgDirList(hwnd, szDirName, IDC_FILES, IDC_FOLDER,
 			DDL_DRIVES | DDL_DIRECTORY);
 		SetDlgItemText(hwnd, IDC_TARGET, szFolderName);
 		return FALSE;
@@ -377,7 +377,7 @@ DirDlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 			if (notify_message == LBN_DBLCLK) {
 				CHAR szPath[MAXSTR];
 				DlgDirSelectEx(hwnd, szPath, sizeof(szPath), IDC_FILES);
-				DlgDirList(hwnd, szPath, IDC_FILES, IDC_FOLDER, 
+				DlgDirList(hwnd, szPath, IDC_FILES, IDC_FOLDER,
 					DDL_DRIVES | DDL_DIRECTORY);
 			}
 			return FALSE;
@@ -413,22 +413,22 @@ init()
 	DWORD dwVersion = GetVersion();
 	// get source directory
 	GetCurrentDirectory(sizeof(g_szSourceDir), g_szSourceDir);
-	
+
 	// load strings
 	LoadString(g_hInstance, IDS_APPNAME, g_szAppName, sizeof(g_szAppName));
-	LoadString(g_hInstance, IDS_TARGET_GROUP, 
+	LoadString(g_hInstance, IDS_TARGET_GROUP,
 		g_szTargetGroup, sizeof(g_szTargetGroup));
-	
+
 	if (LOBYTE(LOWORD(dwVersion)) < 4) {
-        MessageBox(HWND_DESKTOP, 
+        MessageBox(HWND_DESKTOP,
 			"This install program needs Windows 4.0 or later",
 			g_szAppName, MB_OK);
 		return FALSE;
 	}
 	if ( (HIWORD(dwVersion) & 0x8000) == 0)
 		is_winnt = TRUE;
-	
-	
+
+
 	cinst.SetMessageFunction(message_box);
 
 #define MAXCMDTOKENS 128
@@ -439,14 +439,14 @@ init()
 	char command[256];
 	char *args;
 	char *d, *e;
-     
+
 	p = GetCommandLine();
 
 	argc = 0;
 	args = (char *)malloc(lstrlen(p)+1);
 	if (args == (char *)NULL)
 		return 1;
-       
+
 	// Parse command line handling quotes.
 	d = args;
 	while (*p) {
@@ -464,7 +464,7 @@ init()
 				while ((*p) && (*p != '\042'))
 					*d++ =*p++;
 			}
-			else 
+			else
 				*d++ = *p;
 			if (*p)
 				p++;
@@ -500,23 +500,23 @@ init()
 		if (!install_all()) {
 			// display log showing error
 			g_bBatch = FALSE;
-			g_hWndText = CreateDialogParam(g_hInstance, 
-				MAKEINTRESOURCE(IDD_TEXTWIN), 
-				(HWND)HWND_DESKTOP, TextWinDlgProc, 
+			g_hWndText = CreateDialogParam(g_hInstance,
+				MAKEINTRESOURCE(IDD_TEXTWIN),
+				(HWND)HWND_DESKTOP, TextWinDlgProc,
 				(LPARAM)NULL);
 			gs_addmess_update();
 		}
 		return TRUE;
 	}
-	
+
 	// Interactive setup
 	if (!GetProgramFiles(g_szTargetDir))
 	    strcpy(g_szTargetDir, "C:\\Program Files");
 	strcat(g_szTargetDir, "\\");
-	LoadString(g_hInstance, IDS_TARGET_DIR, 
-	    g_szTargetDir+strlen(g_szTargetDir), 
+	LoadString(g_hInstance, IDS_TARGET_DIR,
+	    g_szTargetDir+strlen(g_szTargetDir),
 	    sizeof(g_szTargetDir)-strlen(g_szTargetDir));
-	
+
 	// main dialog box
 	g_hMain = CreateDialogParam(g_hInstance, MAKEINTRESOURCE(IDD_MAIN), (HWND)NULL, MainDlgProc, (LPARAM)NULL);
 	// centre dialog on screen
@@ -528,7 +528,7 @@ init()
 		(height - (rect.bottom - rect.top))/2,
 		(rect.right - rect.left),
 		(rect.bottom - rect.top), FALSE);
-	
+
 	// initialize targets
 	cinst.SetMessageFunction(message_box);
 	if (!cinst.Init(g_szSourceDir, "filelist.txt"))
@@ -539,13 +539,13 @@ init()
 	SetDlgItemText(g_hMain, IDC_PRODUCT_NAME, cinst.GetUninstallName());
 	SendDlgItemMessage(g_hMain, IDC_INSTALL_FONTS, BM_SETCHECK, BST_CHECKED, 0);
 	ShowWindow(g_hMain, SW_SHOWNORMAL);
-	
+
 	return (g_hMain != (HWND)NULL); /* success */
 }
 
 
 // Main Modeless Dialog Box
-DLGRETURN CALLBACK 
+DLGRETURN CALLBACK
 MainDlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch(message) {
@@ -559,7 +559,7 @@ MainDlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 			char buf[MAXSTR];
 			sprintf(buf, "%s\\%s\\doc\\Readme.htm", g_szSourceDir,
 				cinst.GetMainDir());
-			ShellExecute(hwnd, NULL, buf, NULL, g_szSourceDir, 
+			ShellExecute(hwnd, NULL, buf, NULL, g_szSourceDir,
 				SW_SHOWNORMAL);
 			}
 			return TRUE;
@@ -578,7 +578,7 @@ MainDlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 				strcpy(szDirName, "c:\\");
 				strcpy(szFolderName, dir);
 			}
-			if (DialogBox(g_hInstance, MAKEINTRESOURCE(IDD_DIRDLG), 
+			if (DialogBox(g_hInstance, MAKEINTRESOURCE(IDD_DIRDLG),
 				hwnd, DirDlgProc)) {
 				strcpy(dir, szDirName);
 				if (strlen(dir) && (dir[strlen(dir)-1] != '\\'))
@@ -599,17 +599,17 @@ MainDlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 				programs, sizeof(programs));
 			strcpy(szDirName, programs);
 			strcpy(szFolderName, dir);
-			if (DialogBox(g_hInstance, MAKEINTRESOURCE(IDD_DIRDLG), 
+			if (DialogBox(g_hInstance, MAKEINTRESOURCE(IDD_DIRDLG),
 				hwnd, DirDlgProc)) {
 				strcpy(dir, szFolderName);
 				p = szDirName;
-				if (strnicmp(szDirName, programs, 
+				if (strnicmp(szDirName, programs,
 					strlen(programs)) == 0) {
 					p += strlen(programs);
 					if (*p == '\\')
 						p++;
 					strcpy(dir, p);
-					if (strlen(dir) && 
+					if (strlen(dir) &&
 						(dir[strlen(dir)-1] != '\\'))
 						strcat(dir, "\\");
 					strcat(dir, szFolderName);
@@ -622,23 +622,23 @@ MainDlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 			PostQuitMessage(0);
 			return TRUE;
 		case IDC_INSTALL:
-			GetDlgItemText(hwnd, IDC_TARGET_DIR, 
+			GetDlgItemText(hwnd, IDC_TARGET_DIR,
 				g_szTargetDir, sizeof(g_szTargetDir));
-			GetDlgItemText(hwnd, IDC_TARGET_GROUP, 
+			GetDlgItemText(hwnd, IDC_TARGET_GROUP,
 				g_szTargetGroup, sizeof(g_szTargetGroup));
-			g_bInstallFonts = (SendDlgItemMessage(g_hMain, 
-				IDC_INSTALL_FONTS, BM_GETCHECK, 0, 0) 
+			g_bInstallFonts = (SendDlgItemMessage(g_hMain,
+				IDC_INSTALL_FONTS, BM_GETCHECK, 0, 0)
 				== BST_CHECKED);
-			g_bCJKFonts = (SendDlgItemMessage(g_hMain, 
-				IDC_CJK_FONTS, BM_GETCHECK, 0, 0) 
+			g_bCJKFonts = (SendDlgItemMessage(g_hMain,
+				IDC_CJK_FONTS, BM_GETCHECK, 0, 0)
 				== BST_CHECKED);
-			g_bAllUsers = (SendDlgItemMessage(hwnd, 
+			g_bAllUsers = (SendDlgItemMessage(hwnd,
 				IDC_ALLUSERS, BM_GETCHECK, 0, 0
 				) == BST_CHECKED);
-			
+
 			// install log dialog box
-			g_hWndText = CreateDialogParam(g_hInstance, 
-				MAKEINTRESOURCE(IDD_TEXTWIN), 
+			g_hWndText = CreateDialogParam(g_hInstance,
+				MAKEINTRESOURCE(IDD_TEXTWIN),
 				(HWND)hwnd, TextWinDlgProc, (LPARAM)NULL);
 			EnableWindow(GetDlgItem(hwnd, IDC_INSTALL), FALSE);
 			if (install_all())
@@ -668,21 +668,21 @@ install_all()
 	gs_addmess(g_szTargetGroup);
 	gs_addmess("\n");
 	gs_addmess(g_bAllUsers ? "  All users\n" : "  Current user\n");
-	
+
 	if (stricmp(g_szSourceDir, g_szTargetDir) == 0) {
 		// Don't copy files
 		if (!g_bBatch)
-			if (::MessageBox(g_hWndText, "Install location is the same as the current file location.  No files will be copied.", g_szAppName, MB_OKCANCEL) 
+			if (::MessageBox(g_hWndText, "Install location is the same as the current file location.  No files will be copied.", g_szAppName, MB_OKCANCEL)
 				!= IDOK) {
 				return FALSE;
 			}
 		g_bNoCopy = TRUE;
 	}
-	
-	
+
+
 	if (g_bQuit)
 		return FALSE;
-	
+
 	if (!install_prog()) {
 		cinst.CleanUp();
 		g_bError = TRUE;
@@ -693,9 +693,9 @@ install_all()
 		g_bError = TRUE;
 		return FALSE;
 	}
-	
+
 	gs_addmess("Install successful\n");
-	
+
 	// show start menu folder
 	if (!g_bBatch) {
 		char szFolder[MAXSTR];
@@ -703,10 +703,10 @@ install_all()
 		cinst.GetPrograms(g_bAllUsers, szFolder, sizeof(szFolder));
 		strcat(szFolder, "\\");
 		strcat(szFolder, g_szTargetGroup);
-		ShellExecute(HWND_DESKTOP, "open", szFolder, 
+		ShellExecute(HWND_DESKTOP, "open", szFolder,
 			NULL, NULL, SW_SHOWNORMAL);
 	}
-	
+
 #ifdef DEBUG
 	return FALSE;
 #endif
@@ -727,17 +727,17 @@ install_prog()
 	char szDotVersion[MAXSTR];
 	char szPlatformSuffix[MAXSTR];
 	const char *pSuffix = "";
-	
+
 	if (g_bQuit)
 		return FALSE;
-	
+
 	cinst.SetMessageFunction(gs_addmess);
 	cinst.SetTargetDir(g_szTargetDir);
 	cinst.SetTargetGroup(g_szTargetGroup);
 	cinst.SetAllUsers(g_bAllUsers);
 	if (!cinst.Init(g_szSourceDir, "filelist.txt"))
 		return FALSE;
-	
+
 	// Get GS version number
 	gs_addmess("Installing Program...\n");
 	int nGSversion = 0;
@@ -750,16 +750,16 @@ install_prog()
 		nGSversion = (p[0]-'0')*100 + (p[2]-'0')*10;
         strncpy(szDotVersion, p, sizeof(szDotVersion));
 	strncpy(regkey2, szDotVersion, sizeof(regkey2));
-	
+
 	// copy files
 	if (!cinst.InstallFiles(g_bNoCopy, &g_bQuit)) {
 		gs_addmess("Program install failed\n");
 		return FALSE;
 	}
-	
+
 	if (g_bQuit)
 		return FALSE;
-	
+
 	// write registry entries
 	gs_addmess("Updating Registry\n");
 	if (!cinst.UpdateRegistryBegin()) {
@@ -802,7 +802,7 @@ install_prog()
 	}
 	if (g_bQuit)
 		return FALSE;
-	
+
 	// Add Start Menu items
 	gs_addmess("Adding Start Menu items\n");
 
@@ -841,7 +841,7 @@ install_prog()
 	strcat(szProgram, "\\");
 	strcat(szProgram, cinst.GetMainDir());
 	strcat(szProgram, "\\doc\\Readme.htm");
-	sprintf(szDescription, "Ghostscript Readme %s%s", 
+	sprintf(szDescription, "Ghostscript Readme %s%s",
 		szDotVersion, pSuffix);
 	if (!cinst.StartMenuAdd(szDescription, szProgram, NULL)) {
 		gs_addmess("Failed to add Start Menu item\n");
@@ -888,7 +888,7 @@ install_prog()
 			return FALSE;
 		}
 	}
-	
+
 	// consolidate logs into one uninstall file
 	if (cinst.MakeLog()) {
 		// add uninstall entry for "Add/Remove Programs"
@@ -907,7 +907,7 @@ install_prog()
 			return TRUE;
 		return FALSE;
 	}
-	
+
 	gs_addmess("Program install successful\n");
 	return TRUE;
 }
@@ -922,16 +922,16 @@ install_fonts()
 	cinst.SetAllUsers(g_bAllUsers);
 	if (!cinst.Init(g_szSourceDir, "fontlist.txt"))
 		return FALSE;
-	
+
 	// copy files
 	if (!cinst.InstallFiles(g_bNoCopy, &g_bQuit)) {
 		gs_addmess("Font install failed\n");
 		return FALSE;
 	}
-	
+
 	if (g_bQuit)
 		return FALSE;
-	
+
 	if (g_bNoCopy) {
 		// Don't write uninstall log or entry
 		// since we didn't copy any files.
@@ -957,7 +957,7 @@ install_fonts()
 			return FALSE;
 		}
 	}
-	
+
 	gs_addmess("Font install successful\n");
 	return TRUE;
 }
@@ -1065,7 +1065,7 @@ dofile(const char *filename)
 		fputs(filename, fList);
 		fputs("\n", fList);
     }
-	
+
     return 0;
 }
 
@@ -1075,9 +1075,9 @@ dofile(const char *filename)
  * If recurse=1, recurse into subdirectories, calling dodir() for
  * each directory.
  */
-int 
+int
 dirwalk(char *path, int recurse, PFN_dodir dodir, PFN_dodir dofile)
-{    
+{
 	WIN32_FIND_DATA find_data;
 	HANDLE find_handle;
 	char pattern[MAXSTR];	/* orig pattern + modified pattern */
@@ -1085,8 +1085,8 @@ dirwalk(char *path, int recurse, PFN_dodir dodir, PFN_dodir dofile)
 	char name[MAXSTR];
 	BOOL bMore = TRUE;
 	char *p;
-	
-	
+
+
 	if (path) {
 		strcpy(pattern, path);
 		if (strlen(pattern) != 0)  {
@@ -1094,7 +1094,7 @@ dirwalk(char *path, int recurse, PFN_dodir dodir, PFN_dodir dofile)
 			if (*p == '\\')
 				*p = '\0';		// truncate trailing backslash
 		}
-		
+
 		strcpy(base, pattern);
 		if (strchr(base, '*') != NULL) {
 			// wildcard already included
@@ -1102,7 +1102,7 @@ dirwalk(char *path, int recurse, PFN_dodir dodir, PFN_dodir dofile)
 			if ( (p = strrchr(base, '\\')) != NULL )
 				*(++p) = '\0';
 		}
-		else if (isalpha(pattern[0]) && 
+		else if (isalpha(pattern[0]) &&
 			pattern[1]==':' && pattern[2]=='\0')  {
 			strcat(pattern, "\\*");		// search entire disk
 			strcat(base, "\\");
@@ -1114,7 +1114,7 @@ dirwalk(char *path, int recurse, PFN_dodir dodir, PFN_dodir dofile)
 			if (find_handle != INVALID_HANDLE_VALUE) {
 				FindClose(find_handle);
 				if (find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
-					strcat(pattern, "\\*");		// yes, search files 
+					strcat(pattern, "\\*");		// yes, search files
 					strcat(base, "\\");
 				}
 				else {
@@ -1130,16 +1130,16 @@ dirwalk(char *path, int recurse, PFN_dodir dodir, PFN_dodir dofile)
 		base[0] = '\0';
 		strcpy(pattern, "*");
 	}
-	
+
 	find_handle = FindFirstFile(pattern,  &find_data);
 	if (find_handle == INVALID_HANDLE_VALUE)
 		return 1;
-	
+
 	while (bMore) {
 		strcpy(name, base);
 		strcat(name, find_data.cFileName);
 		if (find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
-			if ( strcmp(find_data.cFileName, ".") && 
+			if ( strcmp(find_data.cFileName, ".") &&
 				strcmp(find_data.cFileName, "..") ) {
 				dodir(name);
 				if (recurse)
@@ -1152,7 +1152,7 @@ dirwalk(char *path, int recurse, PFN_dodir dodir, PFN_dodir dofile)
 		bMore = FindNextFile(find_handle, &find_data);
 	}
 	FindClose(find_handle);
-	
+
 	return 0;
 }
 
@@ -1167,7 +1167,7 @@ BOOL make_filelist(int argc, char *argv[])
     char *list = NULL;
     int i;
     g_bBatch = TRUE;	// Don't run message loop
-	
+
     for (i=1; i<argc; i++) {
 		if (strcmp(argv[i], "-title") == 0) {
 			i++;
@@ -1224,7 +1224,7 @@ BOOL make_filelist(int argc, char *argv[])
 		        dirwalk(argv[i], TRUE, &dodir, &dofile);
 		}
     }
-	
+
     if (fList != (FILE *)NULL) {
         fclose(fList);
 	fList = NULL;
@@ -1244,8 +1244,8 @@ BOOL make_filelist(int argc, char *argv[])
 #define SHGFP_TYPE_CURRENT 0
 #endif
 
-BOOL 
-GetProgramFiles(LPTSTR path) 
+BOOL
+GetProgramFiles(LPTSTR path)
 {
     PFN_SHGetSpecialFolderPath PSHGetSpecialFolderPath = NULL;
     PFN_SHGetFolderPath PSHGetFolderPath = NULL;
@@ -1259,8 +1259,8 @@ GetProgramFiles(LPTSTR path)
 	PSHGetFolderPath = (PFN_SHGetFolderPath)
 	    GetProcAddress(hModuleShfolder, "SHGetFolderPathA");
 	if (PSHGetFolderPath) {
-	    fOk = (PSHGetFolderPath(HWND_DESKTOP, 
-		CSIDL_PROGRAM_FILES | CSIDL_FLAG_CREATE, 
+	    fOk = (PSHGetFolderPath(HWND_DESKTOP,
+		CSIDL_PROGRAM_FILES | CSIDL_FLAG_CREATE,
 		NULL, SHGFP_TYPE_CURRENT, path) == S_OK);
 	}
     }
@@ -1269,8 +1269,8 @@ GetProgramFiles(LPTSTR path)
 	PSHGetFolderPath = (PFN_SHGetFolderPath)
 	    GetProcAddress(hModuleShell32, "SHGetFolderPathA");
 	if (PSHGetFolderPath) {
-	    fOk = (PSHGetFolderPath(HWND_DESKTOP, 
-		CSIDL_PROGRAM_FILES | CSIDL_FLAG_CREATE, 
+	    fOk = (PSHGetFolderPath(HWND_DESKTOP,
+		CSIDL_PROGRAM_FILES | CSIDL_FLAG_CREATE,
 		NULL, SHGFP_TYPE_CURRENT, path) == S_OK);
 	}
     }
@@ -1290,13 +1290,13 @@ GetProgramFiles(LPTSTR path)
 	HKEY hkey;
 	DWORD cbData;
 	DWORD keytype;
-	rc = RegOpenKeyEx(HKEY_LOCAL_MACHINE, 
+	rc = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
 	    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion", 0, KEY_READ, &hkey);
 	if (rc == ERROR_SUCCESS) {
 	    cbData = MAX_PATH;
 	    keytype =  REG_SZ;
 	    if (rc == ERROR_SUCCESS)
-		rc = RegQueryValueEx(hkey, "ProgramFilesDir", 0, &keytype, 
+		rc = RegQueryValueEx(hkey, "ProgramFilesDir", 0, &keytype,
 		    (LPBYTE)path, &cbData);
 	    RegCloseKey(hkey);
 	}

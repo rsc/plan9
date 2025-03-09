@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1996, 1997, 1998, 1999, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -54,17 +54,17 @@
 
 /* ------ Exported data ------ */
 
-/** using backpointers retrieve minst from any memory pointer 
- * 
+/** using backpointers retrieve minst from any memory pointer
+ *
  */
-gs_main_instance* 
+gs_main_instance*
 get_minst_from_memory(const gs_memory_t *mem)
 {
 #ifdef PSI_INCLUDED
     extern gs_main_instance *ps_impl_get_minst( const gs_memory_t *mem );
     return ps_impl_get_minst(mem);
 #else
-    return (gs_main_instance*)mem->gs_lib_ctx->top_of_system;  
+    return (gs_main_instance*)mem->gs_lib_ctx->top_of_system;
 #endif
 }
 
@@ -74,12 +74,12 @@ gs_main_alloc_instance(gs_memory_t *mem)
 {
     gs_main_instance *minst = 0;
     if (mem) {
-	minst = (gs_main_instance *) gs_alloc_bytes_immovable(mem, 
+	minst = (gs_main_instance *) gs_alloc_bytes_immovable(mem,
 							      sizeof(gs_main_instance),
 							      "init_main_instance");
 	memcpy(minst, &gs_main_instance_init_values, sizeof(gs_main_instance_init_values));
 	minst->heap = mem;
-	
+
 #       ifndef PSI_INCLUDED
 	mem->gs_lib_ctx->top_of_system = minst;
         /* else top of system is pl_universe */
@@ -109,11 +109,11 @@ gs_main_init0(gs_main_instance * minst, FILE * in, FILE * out, FILE * err,
     /* on incompatible processors. */
     gp_init();
 
-    /* Initialize the imager. */     
+    /* Initialize the imager. */
 #   ifndef PSI_INCLUDED
        /* Reset debugging flags */
        memset(gs_debug, 0, 128);
-       gs_log_errors = 0;  /* gs_debug['#'] = 0 */ 
+       gs_log_errors = 0;  /* gs_debug['#'] = 0 */
 #   else
        /* plmain settings remain in effect */
 #   endif
@@ -200,7 +200,7 @@ init2_make_string_array(i_ctx_t *i_ctx_p, const ref * srefs, const char *aname)
  * occur within gs_main_init2() and swproc().
  */
 private int
-gs_main_interpret(gs_main_instance *minst, ref * pref, int user_errors, 
+gs_main_interpret(gs_main_instance *minst, ref * pref, int user_errors,
 	int *pexit_code, ref * perror_object)
 {
     i_ctx_t *i_ctx_p;
@@ -211,9 +211,9 @@ gs_main_interpret(gs_main_instance *minst, ref * pref, int user_errors,
     /* set interpreter pointer to lib_path */
     minst->i_ctx_p->lib_path = &minst->lib_path;
 
-    code = gs_interpret(&minst->i_ctx_p, pref, 
+    code = gs_interpret(&minst->i_ctx_p, pref,
 		user_errors, pexit_code, perror_object);
-    while ((code == e_NeedStdin) || (code == e_NeedStdout) || 
+    while ((code == e_NeedStdin) || (code == e_NeedStdout) ||
 	(code == e_NeedStderr)) {
         i_ctx_p = minst->i_ctx_p;
 	if (code == e_NeedStdout) {
@@ -226,7 +226,7 @@ gs_main_interpret(gs_main_instance *minst, ref * pref, int user_errors,
 	     * We print the string then pop these 4 items.
 	     */
 	    if (r_type(&esp[0]) == t_string) {
-		const char *str = (const char *)(esp[0].value.const_bytes); 
+		const char *str = (const char *)(esp[0].value.const_bytes);
 		int count = esp[0].tas.rsize;
 		int rcode = 0;
 		if (str != NULL)
@@ -235,11 +235,11 @@ gs_main_interpret(gs_main_instance *minst, ref * pref, int user_errors,
 		    return_error(e_ioerror);
 	    }
 
-	    /* On return, we need to set 
-	     *  osp[-1] = string buffer, 
+	    /* On return, we need to set
+	     *  osp[-1] = string buffer,
 	     *  osp[0] = file
 	     */
-	    gs_push_string(minst, (byte *)minst->stdout_buf, 
+	    gs_push_string(minst, (byte *)minst->stdout_buf,
 		sizeof(minst->stdout_buf), false);
 	    gs_push_integer(minst, 0);	/* push integer */
 	    osp[0] = esp[-3];		/* then replace with file */
@@ -248,7 +248,7 @@ gs_main_interpret(gs_main_instance *minst, ref * pref, int user_errors,
 	}
 	else if (code == e_NeedStderr) {
 	    if (r_type(&esp[0]) == t_string) {
-		const char *str = (const char *)(esp[0].value.const_bytes); 
+		const char *str = (const char *)(esp[0].value.const_bytes);
 		int count = esp[0].tas.rsize;
 		int rcode = 0;
 		if (str != NULL)
@@ -256,7 +256,7 @@ gs_main_interpret(gs_main_instance *minst, ref * pref, int user_errors,
 		if (rcode < 0)
 		    return_error(e_ioerror);
 	    }
-	    gs_push_string(minst, (byte *)minst->stderr_buf, 
+	    gs_push_string(minst, (byte *)minst->stderr_buf,
 		sizeof(minst->stderr_buf), false);
 	    gs_push_integer(minst, 0);
 	    osp[0] = esp[-3];
@@ -272,17 +272,17 @@ gs_main_interpret(gs_main_instance *minst, ref * pref, int user_errors,
 	     */
 	    if (minst->heap->gs_lib_ctx->stdin_fn)
 		count = (*minst->heap->gs_lib_ctx->stdin_fn)
-		    (minst->heap->gs_lib_ctx->caller_handle, 
+		    (minst->heap->gs_lib_ctx->caller_handle,
 		     minst->stdin_buf, count);
 	    else
-		count = gp_stdin_read(minst->stdin_buf, count, 
+		count = gp_stdin_read(minst->stdin_buf, count,
 				      minst->heap->gs_lib_ctx->stdin_is_interactive,
 				      minst->heap->gs_lib_ctx->fstdin);
 	    if (count < 0)
 	        return_error(e_ioerror);
 
-	    /* On return, we need to set 
-	     *  osp[-1] = string buffer, 
+	    /* On return, we need to set
+	     *  osp[-1] = string buffer,
 	     *  osp[0] = file
 	     */
 	    gs_push_string(minst, (byte *)minst->stdin_buf, count, false);
@@ -297,10 +297,10 @@ gs_main_interpret(gs_main_instance *minst, ref * pref, int user_errors,
 	 * To remove this we push a zpop onto the execution stack.
 	 */
 	make_null(&refnul);
-	make_oper(&refpop, 0, zpop); 
+	make_oper(&refpop, 0, zpop);
 	esp += 1;
 	*esp = refpop;
-	code = gs_interpret(&minst->i_ctx_p, &refnul, 
+	code = gs_interpret(&minst->i_ctx_p, &refnul,
 		    user_errors, pexit_code, perror_object);
     }
     return code;
@@ -476,7 +476,7 @@ gs_main_lib_open(gs_main_instance * minst, const char *file_name, ref * pfile)
     uint len;
 
     return lib_file_open( &minst->lib_path,
-			  NULL /* Don't check permissions here, because permlist 
+			  NULL /* Don't check permissions here, because permlist
 				  isn't ready running init files. */
 			  , file_name, strlen(file_name), fn, maxfn,
 			  &len, pfile, imemory);
@@ -757,10 +757,10 @@ gs_pop_string(gs_main_instance * minst, gs_string * result)
 /* ------ Termination ------ */
 
 /* Get the names of temporary files.
- * Each name is null terminated, and the last name is 
+ * Each name is null terminated, and the last name is
  * terminated by a double null.
  * We retrieve the names of temporary files just before
- * the interpreter finishes, and then delete the files 
+ * the interpreter finishes, and then delete the files
  * after the interpreter has closed all files.
  */
 private char *gs_main_tempnames(gs_main_instance *minst)
@@ -823,7 +823,7 @@ gs_main_finit(gs_main_instance * minst, int exit_status, int code)
      * alloc_restore_all will close dynamically allocated devices.
      */
     tempnames = gs_main_tempnames(minst);
-    /* 
+    /*
      * Close the "main" device, because it may need to write out
      * data before destruction. pdfwrite needs so.
      */
@@ -843,7 +843,7 @@ gs_main_finit(gs_main_instance * minst, int exit_status, int code)
 	    gx_device *pdev = i_ctx_p->pgs->device;
 
 	    /* deactivate the device just before we close it for the last time */
-	    gs_main_run_string(minst, 
+	    gs_main_run_string(minst,
 		".uninstallpagedevice "
 		"serverdict /.jobsavelevel get 0 eq {/quit} {/stop} ifelse .systemvar exec",
 		0 , &exit_code, &error_object);
@@ -856,7 +856,7 @@ gs_main_finit(gs_main_instance * minst, int exit_status, int code)
     }
     /* Flush stdout and stderr */
     if (minst->init_done >= 2)
-      gs_main_run_string(minst, 
+      gs_main_run_string(minst,
 	"(%stdout) (w) file closefile (%stderr) (w) file closefile "
         "serverdict /.jobsavelevel get 0 eq {/quit} {/stop} ifelse .systemvar exec",
 	0 , &exit_code, &error_object);
@@ -872,7 +872,7 @@ gs_main_finit(gs_main_instance * minst, int exit_status, int code)
         i_plugin_finit(mem_raw, h);
     }
     /* clean up redirected stdout */
-    if (minst->heap->gs_lib_ctx->fstdout2 
+    if (minst->heap->gs_lib_ctx->fstdout2
 	&& (minst->heap->gs_lib_ctx->fstdout2 != minst->heap->gs_lib_ctx->fstdout)
 	&& (minst->heap->gs_lib_ctx->fstdout2 != minst->heap->gs_lib_ctx->fstderr)) {
 	fclose(minst->heap->gs_lib_ctx->fstdout2);
@@ -907,7 +907,7 @@ gs_abort(const gs_memory_t *mem)
 {
     gs_to_exit(mem, 1);
     /* it's fatal calling OS independent exit() */
-    gp_do_exit(1);	
+    gp_do_exit(1);
 }
 
 /* ------ Debugging ------ */
@@ -966,4 +966,3 @@ gs_main_dump_stack(gs_main_instance *minst, int code, ref * perror_object)
     debug_dump_stack(minst->heap, &e_stack, "Execution stack");
     debug_dump_stack(minst->heap, &d_stack, "Dictionary stack");
 }
-

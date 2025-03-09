@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -386,7 +386,7 @@ cos_value_equal(const cos_value_t *pcv0, const cos_value_t *pcv1, gx_device_pdf 
     switch (pcv0->value_type) {
 	case COS_VALUE_SCALAR:
 	case COS_VALUE_CONST:
-	    if (bytes_compare(pcv0->contents.chars.data, pcv0->contents.chars.size, 
+	    if (bytes_compare(pcv0->contents.chars.data, pcv0->contents.chars.size,
 			      pcv1->contents.chars.data, pcv1->contents.chars.size))
 		return false;
 	    break;
@@ -539,7 +539,7 @@ cos_array_equal(const cos_object_t *pco0, const cos_object_t *pco1, gx_device_pd
     cos_array_element_t *pcae0, *pcae1;
     int code;
 
-    for (pcae0 = first0, pcae1 = first1; pcae0 && pcae1; 
+    for (pcae0 = first0, pcae1 = first1; pcae0 && pcae1;
 	    pcae0 = pcae0->next, pcae1 = pcae1->next) {
 	if (pcae0->index != pcae1->index)
 	    return false;
@@ -760,9 +760,9 @@ cos_elements_write(stream *s, const cos_dict_element_t *pcde,
 
 	pdev->strm = s;
 	for (;;) {
-	    gs_id object_id1 = (pdev->NoEncrypt.size == 0 || 
+	    gs_id object_id1 = (pdev->NoEncrypt.size == 0 ||
 				bytes_compare(pdev->NoEncrypt.data, pdev->NoEncrypt.size,
-				    pcde->key.data, pcde->key.size) 
+				    pcde->key.data, pcde->key.size)
 				? object_id : (gs_id)-1);
 
 	    pdf_write_value(pdev, pcde->key.data, pcde->key.size, object_id1);
@@ -928,7 +928,7 @@ cos_dict_put_c_key_int(cos_dict_t *pcd, const char *key, int value)
 int
 cos_dict_put_c_key_bool(cos_dict_t *pcd, const char *key, bool value)
 {
-    return cos_dict_put_c_key_string(pcd, key, 
+    return cos_dict_put_c_key_string(pcd, key,
 		(const byte *)(value ? "true" : "false"),
 			      (value ? 4 : 5));
 }
@@ -1290,7 +1290,7 @@ cos_stream_contents_write(const cos_stream_t *pcs, gx_device_pdf *pdev)
     for (pcsp = pcs->pieces, last = NULL; pcsp; pcsp = next)
 	next = pcsp->next, pcsp->next = last, last = pcsp;
     for (pcsp = last, code = 0; pcsp && code >= 0; pcsp = pcsp->next) {
-	if (same_file) 
+	if (same_file)
 	    pdf_copy_data_safe(s, sfile, pcsp->position, pcsp->size);
 	else {
 	    end_pos = ftell(sfile);
@@ -1522,4 +1522,3 @@ cos_write_stream_from_pipeline(stream *s)
 	s = s->strm;
     return s;
 }
-

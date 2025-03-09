@@ -90,7 +90,7 @@ cat > $PCAP << EOF
 # for a PC called artemis, replacing the serial port settings
 #
 # NB/ This is only an example - it is unlikely to be complete or exactly
-# correct for your system, but is designed to illustrate filter names 
+# correct for your system, but is designed to illustrate filter names
 # corresponding to the accompanying bsd-if print filter
 #
 EOF

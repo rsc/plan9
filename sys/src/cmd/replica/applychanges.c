@@ -109,7 +109,7 @@ walk(char *new, char *old, Dir *pd, void*)
 			}
 		}
 		if((douid&&strcmp(od.uid,d.uid)!=0)
-		|| strcmp(od.gid,d.gid)!=0 
+		|| strcmp(od.gid,d.gid)!=0
 		|| od.mode!=d.mode){
 			if(xd==nil){
 				print("%s metaupdate/remove conflict\n", new);
@@ -264,7 +264,7 @@ copyfile(char *from, char *to, Dir *d, int dowstat)
 {
 	Dir nd;
 	int rfd, wfd, didcreate;
-	
+
 	if((rfd = open(from, OREAD)) < 0)
 		return -1;
 

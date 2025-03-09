@@ -13,22 +13,22 @@
 .I service
 .SH DESCRIPTION
 .I 9pcon
-provides a textual interface to 
+provides a textual interface to
 .IR service ,
 a conventional 9P server.
-By default, 
+By default,
 .I 9pcon
 interprets
 .I service
 as a file to be opened.
-The 
+The
 .B -c
 flag causes
 .I 9pcon
 to interpret
 .I service
 as a command to run which will carry out a
-(binary) 9P 
+(binary) 9P
 conversation over file descriptors 0 and 1.
 The
 .B -n
@@ -39,7 +39,7 @@ to interpret
 .I service
 as a network address to dial.
 .PP
-Once the connection is established, 
+Once the connection is established,
 .I 9pcon
 prints R-messages as they arrive from the server,
 and sends T-messages as they are typed on standard input.

@@ -237,11 +237,11 @@ first previous
 .B z
 symbol in the symbol table.
 .SH "SEE ALSO"
-.IR db (1), 
-.IR acid (1), 
-.IR 8a (1), 
-.IR 8l (1), 
-.IR nm (1), 
+.IR db (1),
+.IR acid (1),
+.IR 8a (1),
+.IR 8l (1),
+.IR nm (1),
 .IR strip (1),
 .IR mach (2),
 .IR symbol (2)

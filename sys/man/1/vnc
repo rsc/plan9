@@ -84,7 +84,7 @@ a Plan 9 terminal running
 .I cmd
 .IR args ,
 by default an interactive shell.
-As viewers connect, each is authenticated using a 
+As viewers connect, each is authenticated using a
 (rather breakable) challenge-response protocol using
 the user's Inferno/POP password.
 .PP
@@ -150,7 +150,7 @@ The options are:
 .B -c
 when connecting to 8-bit displays, request
 .B r4g4b4
-pixels rather than 
+pixels rather than
 .B r3g3b2
 pixels.
 This takes up more bandwidth but usually gives
@@ -168,9 +168,9 @@ The encodings should be given as a single space-separated argument
 (quoted when using the shell).
 .TP
 .B -k \fIkeypattern
-add 
+add
 .I keypattern
-to the pattern used to select a key from 
+to the pattern used to select a key from
 .IR factotum (4).
 .TP
 .B -s
@@ -203,7 +203,7 @@ sequences
 .B Alt
 .B Z
 .B A
-(for Alt), 
+(for Alt),
 .B Alt
 .B Z
 .B C

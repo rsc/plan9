@@ -65,7 +65,7 @@ case checkready
 		mountdist=ready
 		export srvmedia mountmedia mountdist
 	}
-		
+
 case go
 	fat=()
 	ext2=()
@@ -166,7 +166,7 @@ case go
 			echo '	cd directory	- change to directory'
 			echo '	lc				- list contents of current directory'
 			echo '	exit			- exit shell'
-			echo 
+			echo
 			echo 'Move to the directory containing the distribution'
 			echo 'and then exit.'
 			echo

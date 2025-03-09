@@ -11,4 +11,3 @@
 % "Disk fonts" are fonts being installed to Ghostscript with 'lib/Fontmap' or with GS_FONTPATH,
 % and CID font resource files.
 % "Embedded fonts" are fonts and CID fonts being embedded into a document.
-

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -70,7 +70,7 @@ gs_fillpage(gs_state * pgs)
     gx_device *dev;
     int code = 0;
     gs_logical_operation_t save_lop;
-    bool hl_color_available = gx_hld_is_hl_color_available((gs_imager_state *)pgs, 
+    bool hl_color_available = gx_hld_is_hl_color_available((gs_imager_state *)pgs,
 						    pgs->dev_color);
     gx_set_dev_color(pgs);
     dev = gs_currentdevice(pgs);
@@ -84,7 +84,7 @@ gs_fillpage(gs_state * pgs)
 	rect.p.x = rect.p.y = 0;
 	rect.q.x = int2fixed(dev->width);
 	rect.q.y = int2fixed(dev->height);
-	code = dev_proc(pgs->device, fill_rectangle_hl_color)(pgs->device, 
+	code = dev_proc(pgs->device, fill_rectangle_hl_color)(pgs->device,
 		&rect, (const gs_imager_state *)pgs, pgs->dev_color, NULL);
     }
     if (!hl_color_available || code == gs_error_rangecheck)

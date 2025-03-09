@@ -15,7 +15,7 @@ puthex(u32int u)
 {
 	static char *dig = "0123456789abcdef";
 	int i;
-	
+
 	for(i = 0; i < 8; i++){
 		putc(dig[u >> 28]);
 		u <<= 4;
@@ -36,7 +36,7 @@ print(char *s, ...)
 	va_list va;
 	int n;
 	u32int u;
-	
+
 	va_start(va, s);
 	while(*s)
 		if(*s == '%'){
@@ -71,7 +71,7 @@ print(char *s, ...)
 			}
 			s++;
 		}else
-			putc(*s++);			
+			putc(*s++);
 	va_end(va);
 }
 
@@ -79,7 +79,7 @@ void
 memset(void *v, char c, int n)
 {
 	char *vc;
-	
+
 	vc = v;
 	while(n--)
 		*vc++ = c;
@@ -89,7 +89,7 @@ void
 memcpy(void *d, void *s, int n)
 {
 	char *cd, *cs;
-	
+
 	cd = d;
 	cs = s;
 	while(n--)
@@ -100,7 +100,7 @@ u32int
 u32get(void *pp)
 {
 	uchar *p;
-	
+
 	p = pp;
 	return p[0] << 24 | p[1] << 16 | p[2] << 8 | p[3];
 }
@@ -155,7 +155,7 @@ void
 timeren(int n)
 {
 	ulong *r;
-	
+
 	r = (ulong *) 0xf8f00200;
 	if(n < 0){
 		r[TIMERSTAT] |= 1;
@@ -175,7 +175,7 @@ int
 timertrig(void)
 {
 	ulong *r;
-	
+
 	r = (ulong *) 0xf8f00200;
 	if((r[TIMERSTAT] & 1) != 0){
 		r[TIMERCTL] = 0;

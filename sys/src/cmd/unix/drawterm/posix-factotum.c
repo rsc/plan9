@@ -79,7 +79,7 @@ dialfactotum(void)
 	int fd;
 	struct sockaddr_un su;
 	char *name;
-	
+
 	name = smprint("%s/factotum", getns());
 
 	if(name == nil || access(name, 0) < 0)
@@ -103,4 +103,3 @@ dialfactotum(void)
 
 	return lfdfd(fd);
 }
-

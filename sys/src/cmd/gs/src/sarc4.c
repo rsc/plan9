@@ -1,12 +1,12 @@
 /* Copyright (C) 2001 Artifex Software, Inc.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -28,7 +28,7 @@
  * cipher commonly known as 'arcfour' based on Bruce Schneier's
  * description of the algorithm in _Applied Cryptography_. Arcfour
  * is believed to be functionally equivalent to the RC4(tm) cipher
- * mentioned in the PDF specification. (RC4 is a registered 
+ * mentioned in the PDF specification. (RC4 is a registered
  * trademark of RSA Data Security, Inc.)
  */
 
@@ -128,4 +128,3 @@ s_arcfour_process_buffer(stream_arcfour_state *ss, byte *buf, int buf_size)
     r.limit = w.limit = buf - 1 + buf_size;
     return s_arcfour_process((stream_state *)ss, &r, &w, unused);
 }
-

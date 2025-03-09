@@ -171,11 +171,11 @@ i8250status(Uart* uart, void* buf, long n, long offset)
 		"berr(%d) serr(%d)%s%s%s%s\n",
 
 		uart->baud,
-		uart->hup_dcd, 
+		uart->hup_dcd,
 		(msr & Dsr) != 0,
 		uart->hup_dsr,
 		(lcr & WlsMASK) + 5,
-		(ier & Ems) != 0, 
+		(ier & Ems) != 0,
 		(lcr & Pen) ? ((lcr & Eps) ? 'e': 'o'): 'n',
 		(mcr & Rts) != 0,
 		(lcr & Stb) ? 2: 1,
@@ -703,7 +703,7 @@ i8250config(char *p)
 		break;
 	case 1:
 		uart = &i8250uart[1];
-		break;	
+		break;
 	}
 
 	if(!uart->enabled)

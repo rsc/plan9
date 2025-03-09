@@ -721,7 +721,7 @@ bootpass(Boot *b, void *vbuf, int nbuf)
 			b->ep = b->wp + GLLONG(hdr->data);
 			print("+%ld", GLLONG(hdr->data));
 			break;
-	
+
 		case READ9DATA:
 			hdr = &b->hdr;
 			bss = GLLONG(hdr->bss);

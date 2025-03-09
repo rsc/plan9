@@ -45,7 +45,7 @@ at MIT:
 % con -l mit!plan9.bell-labs.com!whoami
 connected to mit!plan9.bell-labs.com!whoami on /net/mit/0
 i am 135.104.24.16 sysname achille you are 18.26.4.9 port 1248
-% 
+%
 .EE
 .SH SOURCE
 .B /sys/src/cmd/aux/stub.c

@@ -364,7 +364,7 @@ l l cfCWp-2 lp-2 s.
 .sp
 .ll \\n(LLu
 .KE
-\" .2C	
+\" .2C
 .NH
 Devices file
 .PP

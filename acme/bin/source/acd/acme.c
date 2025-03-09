@@ -43,7 +43,7 @@ findplay(Window *w, char *s, ulong *q0, ulong *q1)
 	seek(w->addr, 0, 0);
 	if(read(w->addr, xbuf, 24) != 24)
 		return 0;
-	
+
 	xbuf[24] = 0;
 	if(q0)
 		*q0 = atoi(xbuf);
@@ -71,7 +71,7 @@ return 1;
 	DPRINT(2, "setaddr %s\n", buf);
 	if(!winsetaddr(w, buf, 1))
 		return 0;
-	
+
 	if(write(w->data, new, strlen(new)) != strlen(new))
 		return 0;
 
@@ -104,7 +104,7 @@ unmarkplay(Window *w, char *buf, int n, ulong *q0, ulong *q1, ulong *qbegin)
 	if(buf) {
 		if((n = read(w->data, buf, n-1)) < 0)
 			return 0;
-	
+
 		buf[n] = '\0';
 	}
 
@@ -285,7 +285,7 @@ acmeevent(Drive *d, Window *w, Event *e)
 				recvp(w->cevent);		/* ignore origin */
 			}else
 				na = 0;
-			
+
 			/* append chorded arguments */
 			if(na){
 				t = emalloc(strlen(s)+1+na+1);

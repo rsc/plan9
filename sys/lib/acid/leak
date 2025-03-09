@@ -118,7 +118,7 @@ defn
 stacktop()
 {
 	local e, m;
-	
+
 	m = map();
 	while m != {} do {
 		e = head m;
@@ -128,14 +128,14 @@ stacktop()
 	}
 	return 0xdffff000;
 }
-			
+
 defn
 dumpmem()
 {
 	local s, top;
 
 	xbloc = *bloc;
-	// assume map()[1] is "data" 
+	// assume map()[1] is "data"
 	dumprange(map()[1][1], end, "bss");	// bss
 	dumprange(end, xbloc, "alloc");	// allocated
 

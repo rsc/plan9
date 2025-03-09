@@ -2,7 +2,7 @@
  *
  * $Revision: 1.3 $
  *
- * create.c - Create a tape archive. 
+ * create.c - Create a tape archive.
  *
  * DESCRIPTION
  *
@@ -13,17 +13,17 @@
  *
  *     	Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice is duplicated in all such 
- * forms and that any documentation, advertising materials, and other 
- * materials related to such distribution and use acknowledge that the 
- * software was developed * by Mark H. Colburn and sponsored by The 
- * USENIX Association. 
+ * provided that the above copyright notice is duplicated in all such
+ * forms and that any documentation, advertising materials, and other
+ * materials related to such distribution and use acknowledge that the
+ * software was developed * by Mark H. Colburn and sponsored by The
+ * USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -32,13 +32,13 @@
  * $Log:	create.c,v $
  * Revision 1.3  89/02/12  10:29:37  mark
  * Fixed misspelling of Replstr
- * 
+ *
  * Revision 1.2  89/02/12  10:04:17  mark
  * 1.2 release fixes
- * 
+ *
  * Revision 1.1  88/12/23  18:02:06  mark
  * Initial revision
- * 
+ *
  */
 
 #ifndef lint
@@ -116,7 +116,7 @@ int create_archive()
 		close(fd);
 	    }
 	    continue;
-	} 
+	}
 
 	if (!f_link && sb.sb_nlink > 1) {
 	    if (islink(name, &sb)) {
@@ -147,7 +147,7 @@ int create_archive()
  *
  * DESCRIPTION
  *
- * 	Make a header block for the file name whose stat info is in st.  
+ * 	Make a header block for the file name whose stat info is in st.
  *	Return header pointer for success, NULL if the name is too long.
  *
  * 	The tar header block is structured as follows:
@@ -183,7 +183,7 @@ int create_archive()
 static void writetar(char *name, Stat *asb)
 
 #else
-    
+
 static void writetar(name, asb)
 char           *name;
 Stat           *asb;
@@ -203,7 +203,7 @@ Stat           *asb;
 	return;
     }
 
-    /* 
+    /*
      * If the pathname is longer than TNAMLEN, but less than 255, then
      * we can split it up into the prefix and the filename.
      */
@@ -271,7 +271,7 @@ Stat           *asb;
  * DESCRIPTION
  *
  *	tartype returns the character which represents the type of file
- *	indicated by "mode". 
+ *	indicated by "mode".
  *
  * PARAMETERS
  *
@@ -279,7 +279,7 @@ Stat           *asb;
  *
  * RETURNS
  *
- *	The character which represents the particular file type in the 
+ *	The character which represents the particular file type in the
  *	ustar standard headers.
  */
 
@@ -288,7 +288,7 @@ Stat           *asb;
 static char tartype(int mode)
 
 #else
-    
+
 static char tartype(mode)
 int	    mode;
 
@@ -347,7 +347,7 @@ int	    mode;
 static void writecpio(char *name, Stat *asb)
 
 #else
-    
+
 static void writecpio(name, asb)
 char           *name;
 Stat           *asb;
@@ -360,7 +360,7 @@ Stat           *asb;
     namelen = (uint) strlen(name) + 1;
     strcpy(header, M_ASCII);
     sprintf(header + M_STRLEN, "%06o%06o%06o%06o%06o",
-	    USH(asb->sb_dev), USH(asb->sb_ino), USH(asb->sb_mode), 
+	    USH(asb->sb_dev), USH(asb->sb_ino), USH(asb->sb_mode),
 	    USH(asb->sb_uid), USH(asb->sb_gid));
     sprintf(header + M_STRLEN + 30, "%06o%06o%011lo%06o%011lo",
 #ifdef _POSIX_SOURCE

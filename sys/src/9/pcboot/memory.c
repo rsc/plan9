@@ -40,7 +40,7 @@ struct RMap {
 	Lock;
 };
 
-/* 
+/*
  * Memory allocation tracking.
  */
 static Map mapupa[16];
@@ -78,7 +78,7 @@ mapprint(RMap *rmap)
 {
 	Map *mp;
 
-	print("%s\n", rmap->name);	
+	print("%s\n", rmap->name);
 	for(mp = rmap->map; mp->size; mp++)
 		print("\t%8.8luX %8.8luX (%lud)\n", mp->addr, mp->addr+mp->size, mp->size);
 }
@@ -390,7 +390,7 @@ static void
 map(ulong base, ulong len, int type)
 {
 	ulong n, flags, maxkpa;
-	
+
 //	iprint("map %.8lux %.8lux %d (", base, base+len, type);
 	/*
 	 * Split any call crossing MemMin to make below simpler.
@@ -401,7 +401,7 @@ map(ulong base, ulong len, int type)
 		map(MemMin, len-n, type);
 		return;
 	}
-	
+
 	switch(type){
 	case MemRAM:
 		mapfree(&rmapram, base, len);
@@ -578,7 +578,7 @@ void
 upareserve(ulong pa, int size)
 {
 	ulong a;
-	
+
 	a = mapalloc(&rmapupa, pa, size, 0);
 	if(a != pa){
 		/*
@@ -597,4 +597,3 @@ memorysummary(void)
 {
 	memdebug();
 }
-

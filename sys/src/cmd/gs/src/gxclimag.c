@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -366,7 +366,7 @@ clist_begin_typed_image(gx_device * dev,
     }
     if (code < 0 ||
 	!USE_HL_IMAGES ||	/* Always use the default. */
-	(cdev->disable_mask & clist_disable_hl_image) || 
+	(cdev->disable_mask & clist_disable_hl_image) ||
 	cdev->image_enum_id != gs_no_id ||  /* Can't handle nested images */
 	/****** CAN'T HANDLE CIE COLOR YET ******/
 	base_index > gs_color_space_index_DeviceCMYK ||
@@ -670,7 +670,7 @@ clist_image_plane_data(gx_image_enum_common_t * info,
 		    set_cmd_put_op(dp, cdev, pcls, image_op, 1 + len);
 	    } HANDLE_RECT(code);
 	    memcpy(dp + 1, pie->begin_image_command, len);
- 
+
 	    /* Mark band's begin_image as known */
 	    pcls->known |= begin_image_known;
 	}
@@ -683,7 +683,7 @@ clist_image_plane_data(gx_image_enum_common_t * info,
 	 */
 	{
 	    /*
-	     * image_band_box ensures that b{x,y}{0,1} fall within 
+	     * image_band_box ensures that b{x,y}{0,1} fall within
 	     * pie->rect.
 	     */
 	    int bx0 = entire_box.p.x, bx1 = entire_box.q.x;
@@ -825,7 +825,7 @@ clist_create_compositor(gx_device * dev,
     }
 
     /* overprint applies to all bands */
-    /* fixme: optimize: the pdf14 compositor could be applied 
+    /* fixme: optimize: the pdf14 compositor could be applied
        only to bands covered by the pcte->params.bbox. */
     code = set_cmd_put_all_op( dp,
                                (gx_device_clist_writer *)dev,

@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -222,7 +222,7 @@ stc_proc_dither(stc_fs2);     /* resides in gdevstc4.c */
 #ifndef   X_DPI
 #define   X_DPI   360
 #endif /* X_DPI */
-#ifndef   Y_DPI 
+#ifndef   Y_DPI
 #define   Y_DPI   360
 #endif /* Y_DPI */
 

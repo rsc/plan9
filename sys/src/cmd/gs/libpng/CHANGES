@@ -1179,7 +1179,7 @@ version 1.2.4beta3 [June 28, 2002]
   Plugged memory leak of row_buf in pngtest.c when there is a png_error().
   Detect buffer overflow in pngpread.c when IDAT is corrupted with extra data.
   Added "test-installed" target to makefile.32sunu, makefile.64sunu,
-    makefile.beos, makefile.darwin, makefile.dec, makefile.macosx, 
+    makefile.beos, makefile.darwin, makefile.dec, makefile.macosx,
     makefile.solaris, makefile.hpux, makefile.hpgcc, and makefile.so9.
 version 1.2.4rc1 and 1.0.14rc1 [July 2, 2002]
   Added "test-installed" target to makefile.cygwin and makefile.sco.
@@ -1386,7 +1386,7 @@ version 1.2.8beta5 [November 20, 2004]
   Use png_ptr->flags instead of png_ptr->transformations to pass
     PNG_STRIP_ALPHA info to png_do_strip_filler(), to preserve ABI
     compatibility.
-  Revised handling of SPECIALBUILD, PRIVATEBUILD, 
+  Revised handling of SPECIALBUILD, PRIVATEBUILD,
     PNG_LIBPNG_BUILD_SPECIAL_STRING and PNG_LIBPNG_BUILD_PRIVATE_STRING.
 version 1.2.8rc1 [November 24, 2004]
   Moved handling of BUILD macros from pngconf.h to png.h

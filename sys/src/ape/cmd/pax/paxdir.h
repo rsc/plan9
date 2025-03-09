@@ -33,9 +33,9 @@ typedef struct {
 } DIR;					/* stream data from opendir() */
 
 
-/* 
+/*
  * The following nonportable ugliness could have been avoided by defining
- * DIRENTSIZ and DIRENTBASESIZ to also have (struct dirent *) arguments. 
+ * DIRENTSIZ and DIRENTBASESIZ to also have (struct dirent *) arguments.
  */
 #define	DIRENTBASESIZ		(((struct dirent *)0)->d_name \
 				- (char *)&((struct dirent *)0)->d_ino)

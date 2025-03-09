@@ -1,12 +1,12 @@
 #    Copyright (C) 1989, 2000 Aladdin Enterprises.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -91,7 +91,7 @@ CONTRIB_MAK=$(GLSRC)contrib.mak
 #	okiibm	Okidata MicroLine IBM-compatible printers
 #	paintjet  alternate H-P PaintJet color printer
 #	photoex  Epson Stylus Color Photo, Photo EX, Photo 700
-#	pj	H-P PaintJet XL driver 
+#	pj	H-P PaintJet XL driver
 #	pjetxl	alternate H-P PaintJet XL driver
 #	pjxl	H-P PaintJet XL color printer
 #	pjxl300  H-P PaintJet XL300 color printer;
@@ -516,7 +516,7 @@ $(DD)paintjet.dev : $(PJET) $(DD)page.dev
 $(DD)pjetxl.dev : $(PJET) $(DD)page.dev
 	$(SETPDEV) $(DD)pjetxl $(PJET)
 
-###--------------------- The Brother HL 7x0 printer --------------------- ### 
+###--------------------- The Brother HL 7x0 printer --------------------- ###
 ### Note: this driver was contributed by users: please contact            ###
 ###       Pierre-Olivier Gaillard (pierre.gaillard@hol.fr)                ###
 ###         for questions about the basic driver;                         ###
@@ -849,4 +849,3 @@ $(DD)sunhmono.dev : $(sunr_) $(DD)page.dev
 
 $(GLOBJ)gdevsunr.$(OBJ) : $(GLSRC)gdevsunr.c $(PDEVH)
 	$(GLCC) $(GLO_)gdevsunr.$(OBJ) $(C_) $(GLSRC)gdevsunr.c
-

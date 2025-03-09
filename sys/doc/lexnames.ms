@@ -69,7 +69,7 @@ Unix system:
 % cd /home/ken
 % cd ../rob
 \&../rob: bad directory
-% 
+%
 .P2
 (The same output results from running
 .CW tcsh ;
@@ -85,7 +85,7 @@ the illusion they share a disk, when in fact their files are scattered over seve
 % ls -ld /home/rob /home/ken
 lrwxr-xr-x  1 root  sys   14 Dec 26  1998 /home/ken -> /n/bopp/v6/ken
 lrwxr-xr-x  1 root  sys   14 Dec 23  1998 /home/rob -> /n/bopp/v7/rob
-% 
+%
 .ps
 .P2
 The introduction of symbolic links has changed the Unix file system from a true
@@ -156,7 +156,7 @@ This transcript begins with a Bourne shell running:
 % ksh
 $ pwd
 /home/rob
-$ 
+$
 .P2
 This result is encouraging.  Another example, again starting from a Bourne shell:
 .P1
@@ -191,7 +191,7 @@ $ exit
 % ksh
 $ pwd
 /n/bopp/v6/ken
-$ 
+$
 .P2
 In these examples,
 .CW ksh 's
@@ -548,7 +548,7 @@ It isn't too hard.
 The Implementation
 .LP
 To operate lexically on file names, we associate a name with each open file in the kernel, that
-is, with each 
+is, with each
 .CW Channel
 data structure.
 The first step is therefore to store a
@@ -997,7 +997,7 @@ Here is the contents of the
 .CW fd
 file for a process in the window system on the machine being used to write this paper:
 .P1
-% cat /proc/125099/fd 
+% cat /proc/125099/fd
 /usr/rob
   0 r  M 5141 00000001.00000000        0 /mnt/term/dev/cons
   1 w  M 5141 00000001.00000000       51 /mnt/term/dev/cons
@@ -1007,7 +1007,7 @@ file for a process in the window system on the machine being used to write this 
   5 rw M 5141 00000036.00000000  4266337 /dev/draw/3/data
   6 r  M 5141 00000037.00000000        0 /dev/draw/3/refresh
   7 r  c    0 00000004.00000000  6199848 /dev/bintime
-% 
+%
 .P2
 (The Linux implementation of
 .CW /proc
@@ -1030,7 +1030,7 @@ provides a description of the name space of each process,
 .P1
 % cat /proc/125099/ns
 bind  / /
-mount -aC #s/boot / 
+mount -aC #s/boot /
 bind  #c /dev
 bind  #d /fd
 bind -c #e /env
@@ -1040,12 +1040,12 @@ bind  /386/bin /bin
 bind -a /rc/bin /bin
 bind  /net /net
 bind -a #l /net
-mount -a #s/cs /net 
-mount -a #s/dns /net 
+mount -a #s/cs /net
+mount -a #s/dns /net
 bind -a #D /net
-mount -c #s/boot /n/emelie 
+mount -c #s/boot /n/emelie
 bind -c /n/emelie/mail /mail
-mount -c /net/il/134/data /mnt/term 
+mount -c /net/il/134/data /mnt/term
 bind -a /usr/rob/bin/rc /bin
 bind -a /usr/rob/bin/386 /bin
 mount  #s/boot /n/emelieother other
@@ -1054,7 +1054,7 @@ mount  #s/boot /n/dump dump
 bind  /mnt/term/dev/cons /dev/cons
 \&...
 cd /usr/rob
-% 
+%
 .P2
 (The
 .CW #
@@ -1083,9 +1083,9 @@ file, decodes the information, and interprets it, translating the network
 addresses and quoting the names when required:
 .P1
 \&...
-mount -a '#s/dns' /net 
+mount -a '#s/dns' /net
 \&...
-mount -c il!135.104.3.100!12884 /mnt/term 
+mount -c il!135.104.3.100!12884 /mnt/term
 \&...
 .P2
 These tools make it possible to capture an accurate description of a process's

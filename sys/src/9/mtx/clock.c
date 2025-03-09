@@ -101,7 +101,7 @@ ulong
 	return fastticks2us(m->ticks);
 }
 
-/*  
+/*
  *  performance measurement ticks.  must be low overhead.
  *  doesn't have to count over a second.
  */

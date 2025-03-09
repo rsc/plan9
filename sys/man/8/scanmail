@@ -248,7 +248,7 @@ than to combine them into a regular expression.
 The
 .I action
 is a keyword terminated by a
-.B : 
+.B :
 and separated from the pattern by optional white-space.
 It must be one of the following:
 .TP 10

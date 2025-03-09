@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -68,7 +68,7 @@ zsetdevicenspace(i_ctx_t *i_ctx_p)
     /* Check tint transform procedure.  Note: Cheap trick to get pointer to it.
        The tint transform procedure is element 3 in the input array */
     check_proc(pcsa[2]);
-    
+
     /* The alternate color space has been selected as the current color space */
     pacs = gs_currentcolorspace(igs);
     cs = *pacs;
@@ -119,7 +119,7 @@ zsetdevicenspace(i_ctx_t *i_ctx_p)
      * which is the tint transform.
      */
     istate->colorspace.procs.special.device_n.layer_names = pcsa[0];
-    istate->colorspace.procs.special.device_n.tint_transform = pcsa[2];    
+    istate->colorspace.procs.special.device_n.tint_transform = pcsa[2];
     pfn = ref_function(pcsa + 2);	/* See comment above */
     if (!pfn)
 	code = gs_note_error(e_rangecheck);

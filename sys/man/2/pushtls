@@ -226,10 +226,10 @@ fd = tlsServer(fd, conn);
 .EE
 .SH FILES
 .TF /sys/lib/tls
-.TP 
+.TP
 .B /sys/lib/tls
 thumbprints of trusted services
-.TP 
+.TP
 .B /sys/lib/ssl
 PEM certificate files
 .SH SOURCE

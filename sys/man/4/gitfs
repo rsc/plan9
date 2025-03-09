@@ -108,5 +108,3 @@ Modifying symlinks is unsupported.
 .PP
 There is no way to inspect the raw objects. This is
 a feature that would be useful for debugging.
-
-

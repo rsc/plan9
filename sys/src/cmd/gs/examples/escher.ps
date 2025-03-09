@@ -3,12 +3,12 @@
 % from disuse, here is another Escher-like contribution to to keep it busy
 % for a while.  It uses PostScript color commands, but will still work on
 % a monochrome printer (but isn't very pretty in black & white).
-% 
+%
 % The butterflies are arranged in a hexagonal grid (wallpaper group p6),
 % and the moveto, lineto, curveto commands used to render the tesselation
 % are redefined so as to impose a nonlinear transform that shrinks the
 % infinite plane to an ellipse.  This is a sleazy way to mimic Escher's
-% "circle limit" sorts of things. 
+% "circle limit" sorts of things.
 %
 % The butterfly permimeter was made by imposing all the symmetry constraints
 % on a path, and then that path was filled in using Adobe Illustrator
@@ -28,7 +28,7 @@
 
 /nlayers 1 def		% 1 takes about 10 minutes on a LW+; 2 takes 4x longer
 /warp 1 def		% 1 -> ellipsoidal distortion; 0 -> flat Euclidean
-/inch {72 mul} def 
+/inch {72 mul} def
 
 /x4 152 def /y4 205.6 def		% 6 fold rotation center of bfly
 /x12 387.20 def /y12 403.84 def		% 3 fold center of bfly
@@ -47,7 +47,7 @@ def					% = |dx,dy| * sqrt(3)
 /Da dy dx atan 30 sub def
 /D2x Dm Da cos mul def			% [D2x, D2y] = basis vector vector #2
 /D2y Dm Da sin mul def			% = [Dm,0] exp(-j30)
- 
+
 /m { moveto} def
 /L {lineto} def
 /S {stroke} def
@@ -92,7 +92,7 @@ def					% = |dx,dy| * sqrt(3)
 	292.7135 258.3004 291.0118 253.8286 291.0118 248.3125 c
 	291.0118 242.7964 292.7135 238.3246 294.8125 238.3246 c
 	closepath gsave 1 g fill grestore 0 g S
-	
+
 	319.5 241.1782 m
 	321.7455 241.1782 323.5659 245.4917 323.5659 250.8125 c
 	323.5659 256.1333 321.7455 260.4468 319.5 260.4468 c
@@ -113,7 +113,7 @@ def					% = |dx,dy| * sqrt(3)
 	317.719 249.6043 317.0858 248.2984 317.0858 246.6875 c
 	317.0858 245.0766 317.719 243.7707 318.5 243.7707 c
 	f
-} def	
+} def
 
 /stripes {
 	292 289 m
@@ -233,7 +233,7 @@ def					% = |dx,dy| * sqrt(3)
 	236.5034 373.7279 226.3726 368.0293 226.3726 361 c
 	226.3726 353.9707 236.5034 348.2721 249 348.2721 c
 	FillStroke
-} def				
+} def
 
 /ncolor 6 def
 /cidx 0 def
@@ -249,7 +249,7 @@ def					% = |dx,dy| * sqrt(3)
 /cidx 0 def
 
 /max_r2 	 	% radius^2 for center of outermost ring of butterflies
- Dm nlayers mul 1.05 mul dup mul 
+ Dm nlayers mul 1.05 mul dup mul
 def
 
 /max_radius max_r2 sqrt def
@@ -290,19 +290,19 @@ def
 } def
 
 
-/Helvetica findfont 8 scalefont setfont 
-4.25 inch 0.5 inch moveto 
+/Helvetica findfont 8 scalefont setfont
+4.25 inch 0.5 inch moveto
 (RHW) stringwidth pop -0.5 mul 0 rmoveto
 (RHW) show				% autograph
 
 warp 1 eq {				% redefine commands to use Xform
 	/moveto { Xform //moveto} def
 	/lineto { Xform //lineto} def
-	/curveto { 
+	/curveto {
 		Xform 6 -2 roll
 		Xform 6 -2 roll
 		Xform 6 -2 roll
-		//curveto 
+		//curveto
 	} def
 }if
 
@@ -320,11 +320,11 @@ warp 1 eq {				% redefine commands to use Xform
 /y0 y4 def
 
 /T1matrix 			% xlate to center of image
-  x0 neg  y0 neg  matrix translate 
+  x0 neg  y0 neg  matrix translate
 def
 
 /Smatrix 			% scale so that 1 basis vector = 1.0
-  Dm_inv dup matrix scale 
+  Dm_inv dup matrix scale
 def
 
 /HexCell {			% 6 butterflys rotated about center of
@@ -336,24 +336,24 @@ def
 		/Rmatrix angle matrix rotate def
 		/Matrix 	% translate, rotate, scale - used by Xform
 		  T1matrix Rmatrix matrix concatmatrix
-		  T2matrix matrix concatmatrix 
-		  Smatrix matrix concatmatrix 
+		  T2matrix matrix concatmatrix
+		  Smatrix matrix concatmatrix
 		def
-		gsave 
+		gsave
 		warp 0 eq 	% then may use usual PostScript machinery
 		{		% else using Xform
-			x0 y0 translate angle rotate 
+			x0 y0 translate angle rotate
 			.5 dup scale
 			dx x0 sub dy y0 sub translate
-		} if		
-		bfly 
+		} if
+		bfly
 		next_color
 		grestore
 	} for
 } def
 
 
-%320 x4 sub 240 y4 sub translate 
+%320 x4 sub 240 y4 sub translate
 4.25 inch x4 sub 5.5 inch y4 sub translate
 
 
@@ -369,7 +369,7 @@ N neg 1 N {
 		/r2 dx dup mul dy dup mul add def	% r^2 = |dx,dy|^2
 		r2 max_r2 lt				% inside radius?
 		{ 					% yes
-		1 r2 max_r2 div sub sqrt 2 div 
+		1 r2 max_r2 div sub sqrt 2 div
 		setlinewidth				% make skinnier lines
 		HexCell					% 6 butterflies
 		}

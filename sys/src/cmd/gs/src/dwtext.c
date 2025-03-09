@@ -1,12 +1,12 @@
 /* Copyright (C) 1996-2001 Ghostgum Software Pty Ltd.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -74,19 +74,19 @@ int nYinc=0;
 int cxCursor;
 int cyCursor;
 	cyCursor = tw->CursorPos.y * tw->CharSize.y;
-	if ( (cyCursor + tw->CharSize.y > tw->ScrollPos.y + tw->ClientSize.y) 
+	if ( (cyCursor + tw->CharSize.y > tw->ScrollPos.y + tw->ClientSize.y)
 /*	  || (cyCursor < tw->ScrollPos.y) ) { */
 /* change to scroll to end of window instead of just making visible */
 /* so that ALL of error message can be seen */
 	  || (cyCursor < tw->ScrollPos.y+tw->ClientSize.y) ) {
-		nYinc = max(0, cyCursor + tw->CharSize.y 
+		nYinc = max(0, cyCursor + tw->CharSize.y
 			- tw->ClientSize.y) - tw->ScrollPos.y;
 		nYinc = min(nYinc, tw->ScrollMax.y - tw->ScrollPos.y);
 	}
 	cxCursor = tw->CursorPos.x * tw->CharSize.x;
 	if ( (cxCursor + tw->CharSize.x > tw->ScrollPos.x + tw->ClientSize.x)
 	  || (cxCursor < tw->ScrollPos.x) ) {
-		nXinc = max(0, cxCursor + tw->CharSize.x 
+		nXinc = max(0, cxCursor + tw->CharSize.x
 			- tw->ClientSize.x/2) - tw->ScrollPos.x;
 		nXinc = min(nXinc, tw->ScrollMax.x - tw->ScrollPos.x);
 	}
@@ -131,7 +131,7 @@ int xpos, ypos;
 	hdc = GetDC(tw->hwnd);
 	SelectFont(hdc, tw->hfont);
 	TextOut(hdc,xpos,ypos,
-		(LPSTR)(tw->ScreenBuffer + tw->CursorPos.y*tw->ScreenSize.x 
+		(LPSTR)(tw->ScreenBuffer + tw->CursorPos.y*tw->ScreenSize.x
 		+ tw->CursorPos.x), count);
 	(void)ReleaseDC(tw->hwnd,hdc);
 	tw->CursorPos.x += count;
@@ -155,7 +155,7 @@ text_font(TW *tw, const char *name, int size)
     TEXTMETRIC tm;
     LPSTR p;
     HDC hdc;
-	
+
     /* reject inappropriate arguments */
     if (name == NULL)
 	return;
@@ -231,7 +231,7 @@ text_drag(TW *tw, const char *pre, const char *post)
 }
 
 /* Set the window position and size */
-void 
+void
 text_setpos(TW *tw, int x, int y, int cx, int cy)
 {
     tw->x = x;
@@ -435,7 +435,7 @@ int n;
     return ch;
 }
 
-void 
+void
 text_write_buf(TW *tw, const char *str, int cnt)
 {
 BYTE *p;
@@ -446,7 +446,7 @@ int n;
     while (cnt>0) {
 	p = tw->ScreenBuffer + tw->CursorPos.y*tw->ScreenSize.x + tw->CursorPos.x;
 	limit = tw->ScreenSize.x - tw->CursorPos.x;
-	for (count=0; (count < limit) && (cnt>0) && 
+	for (count=0; (count < limit) && (cnt>0) &&
 	    (isprint((unsigned char)(*str)) || *str=='\t'); count++) {
 	    if (*str=='\t') {
 		for (n = 8 - ((tw->CursorPos.x+count) % 8); (count < limit) & (n>0); n--, count++ )
@@ -502,7 +502,7 @@ text_getch(TW *tw)
     tw->bGetCh = TRUE;
     if (tw->bFocus) {
 	SetCaretPos(tw->CursorPos.x*tw->CharSize.x - tw->ScrollPos.x,
-	    tw->CursorPos.y*tw->CharSize.y + tw->CharAscent 
+	    tw->CursorPos.y*tw->CharSize.y + tw->CharAscent
 	    - tw->CaretHeight - tw->ScrollPos.y);
 	ShowCaret(tw->hwnd);
     }
@@ -546,7 +546,7 @@ text_getch(TW *tw)
  */
 int
 text_read_line(TW *tw, char *line, int len)
-{	
+{
 int ch;
     if (tw->line_eof)
 	return 0;
@@ -670,7 +670,7 @@ text_drag_drop(TW *tw, HDROP hdrop)
 	for (p=szFile; *p; p++) {
 	    if (*p == '\\')
 		SendMessage(tw->hwnd,WM_CHAR,'/',1L);
-	    else 
+	    else
 		SendMessage(tw->hwnd,WM_CHAR,*p,1L);
 	}
 	for (p=tw->DragPost; *p; p++)
@@ -696,7 +696,7 @@ text_copy_to_clipboard(TW *tw)
     cbuf = cp = (LPSTR)GlobalLock(hGMem);
     if (cp == (LPSTR)NULL)
 	return;
-    
+
     for (i=0; i<tw->ScreenSize.y; i++) {
 	count = tw->ScreenSize.x;
 	memcpy(cp, tw->ScreenBuffer + tw->ScreenSize.x*i, count);
@@ -743,7 +743,7 @@ text_paste_from_clipboard(TW *tw)
 	while (*p) {
 	    /* transfer to keyboard circular buffer */
 	    count = tw->KeyBufIn - tw->KeyBufOut;
-	    if (count < 0) 
+	    if (count < 0)
 		count += tw->KeyBufSize;
 	    if (count < tw->KeyBufSize-1) {
 		*tw->KeyBufIn++ = *p;
@@ -787,7 +787,7 @@ WndTextProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		    return 0;
 	    }
 	    break;
-	case WM_SETFOCUS: 
+	case WM_SETFOCUS:
 	    tw->bFocus = TRUE;
 	    CreateCaret(hwnd, 0, tw->CharSize.x, 2+tw->CaretHeight);
 	    SetCaretPos(tw->CursorPos.x*tw->CharSize.x - tw->ScrollPos.x,
@@ -796,7 +796,7 @@ WndTextProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	    if (tw->bGetCh)
 		    ShowCaret(hwnd);
 	    break;
-	case WM_KILLFOCUS: 
+	case WM_KILLFOCUS:
 	    DestroyCaret();
 	    tw->bFocus = FALSE;
 	    break;
@@ -837,7 +837,7 @@ WndTextProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	    if (tw->bFocus && tw->bGetCh) {
 		SetCaretPos(tw->CursorPos.x*tw->CharSize.x - tw->ScrollPos.x,
-			    tw->CursorPos.y*tw->CharSize.y + tw->CharAscent 
+			    tw->CursorPos.y*tw->CharSize.y + tw->CharAscent
 			    - tw->CaretHeight - tw->ScrollPos.y);
 		ShowCaret(hwnd);
 	    }
@@ -868,7 +868,7 @@ WndTextProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		default:
 		    nYinc = 0;
 	    }
-	    if ( (nYinc = max(-tw->ScrollPos.y, 
+	    if ( (nYinc = max(-tw->ScrollPos.y,
 		    min(nYinc, tw->ScrollMax.y - tw->ScrollPos.y)))
 		    != 0 ) {
 		    tw->ScrollPos.y += nYinc;
@@ -897,7 +897,7 @@ WndTextProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		default:
 		    nXinc = 0;
 	    }
-	    if ( (nXinc = max(-tw->ScrollPos.x, 
+	    if ( (nXinc = max(-tw->ScrollPos.x,
 		    min(nXinc, tw->ScrollMax.x - tw->ScrollPos.x)))
 		    != 0 ) {
 		    tw->ScrollPos.x += nXinc;
@@ -1013,7 +1013,7 @@ WndTextProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	    }
 	    tw->quitnow = TRUE;
 	    /* wait until Ghostscript exits before destroying window */
-	    return 0;	
+	    return 0;
 	case WM_DESTROY:
 	    DragAcceptFiles(hwnd, FALSE);
 	    if (tw->hfont)
@@ -1037,7 +1037,7 @@ HWND text_get_handle(TW *tw)
 /* test program */
 #pragma argsused
 
-int PASCAL 
+int PASCAL
 WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int nCmdShow)
 {
 
@@ -1073,12 +1073,12 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int nCm
 */
 	}
 	else {
-	    
+
 	}
 
 	/* clean up */
 	text_destroy(tw);
-	
+
 	/* end program */
 	return 0;
 }

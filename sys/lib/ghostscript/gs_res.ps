@@ -1,12 +1,12 @@
 %    Copyright (C) 1994, 1996, 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -276,7 +276,7 @@ end
 % Check if GenericResourceDir presents in LIBPATH.
 
 % The value of GenericResourceDir must end with directory separator.
-% We use .file_name_combine to check it. 
+% We use .file_name_combine to check it.
 % Comments use OpenVMS syntax, because it is the most complicated case.
 (x) pssystemparams /GenericResourcePathSep get
 (y) concatstrings concatstrings dup length              % (x]y) l1
@@ -457,7 +457,7 @@ pop pop
         2 index 0 get                                    % args [ (c/) (t)
         dup length 3 1 roll                              % args [ l (c/) (t)
         concatstrings                                    % args [ l (c/t)
-	[ 
+	[
 	  /LIBPATH .systemvar 2 index
 	  .generate_dir_list_templates                   % args (t) [ l [(pt)]
 	    % also add on the Resources as specified by the GenericResourceDir

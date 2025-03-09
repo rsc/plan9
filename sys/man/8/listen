@@ -218,7 +218,7 @@ running
 .I args...
 for each incoming connection;
 the network directory is passed in the environment
-as 
+as
 .BR $net .
 Option
 .B -t

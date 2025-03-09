@@ -126,4 +126,3 @@ echo $ENDSETUP
 $CMD
 
 echo $TRAILER
-

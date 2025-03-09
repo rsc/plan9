@@ -226,7 +226,7 @@ rpcS2M(Rpccall *r, int ndata, void *ap)
 void
 rpcprint(int fd, Rpccall *r)
 {
-	fprint(fd, "%s: host = %I, port = %ld\n", 
+	fprint(fd, "%s: host = %I, port = %ld\n",
 		argv0, r->host, r->port);
 	LONG("xid", xid);
 	LONG("mtype", mtype);

@@ -165,7 +165,7 @@ structure corresponds directly to the Limbo
 adt described in
 .IR stat (2).
 .PP
-Given a channel and assorted other information, 
+Given a channel and assorted other information,
 .I devdir
 initialises a Dir structure at
 .IR dp .

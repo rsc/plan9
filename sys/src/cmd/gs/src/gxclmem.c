@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996, 1997, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -217,7 +217,7 @@ allocateWithReserve(
 	code = gs_note_error(gs_error_VMerror);
     *return_code = code;
     return block;
-}   
+}
 
 /* ---------------- Open/close/unlink ---------------- */
 
@@ -586,7 +586,7 @@ memfile_next_blk(MEMFILE * f)
 	f->pdata = newphys->data;
 	f->pdata_end = newphys->data + MEMFILE_DATA_SIZE;
     }    /* end if NOT compressing                                 */
-    /* File IS being compressed                                       */ 
+    /* File IS being compressed                                       */
     else {
 	int code;
 
@@ -794,7 +794,7 @@ memfile_get_pdata(MEMFILE * f)
 	    }
 	    bp->raw_block = f->raw_head;	/* point to raw block           */
 	}
-	/* end if( raw_block == NULL ) meaning need to decompress data    */ 
+	/* end if( raw_block == NULL ) meaning need to decompress data    */
 	else {
 	    /* data exists in the raw data cache, if not raw_head, move it */
 	    if (bp->raw_block != f->raw_head) {

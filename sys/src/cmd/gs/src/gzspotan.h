@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -18,9 +18,9 @@
 /* State and interface definitions for a spot analyzer device. */
 
 /*
- * A spot analyzer device performs an analyzis while handling an output 
+ * A spot analyzer device performs an analyzis while handling an output
  * of the trapezoid fill algorithm for 2 purposes :
- * a glyph grid fitting, and 
+ * a glyph grid fitting, and
  * a glyph antialiased rendering any number of alpha bits.
  * Currently we only implement a vertical stem recognition for the grid fitting.
  */
@@ -127,7 +127,7 @@ void gx_san_begin(gx_device_spot_analyzer *padev);
 
 /* Store a tarpezoid. */
 /* Assumes an Y-band scanning order with increasing X inside a band. */
-int gx_san_trap_store(gx_device_spot_analyzer *padev, 
+int gx_san_trap_store(gx_device_spot_analyzer *padev,
     fixed ybot, fixed ytop, fixed xlbot, fixed xrbot, fixed xltop, fixed xrtop,
     const segment *l, const segment *r, int dir_l, int dir_r);
 
@@ -135,7 +135,7 @@ int gx_san_trap_store(gx_device_spot_analyzer *padev,
 void gx_san_end(const gx_device_spot_analyzer *padev);
 
 /* Generate stems. */
-int gx_san_generate_stems(gx_device_spot_analyzer *padev, 
+int gx_san_generate_stems(gx_device_spot_analyzer *padev,
 		bool overall_hints, void *client_data,
 		int (*handler)(void *client_data, gx_san_sect *ss));
 

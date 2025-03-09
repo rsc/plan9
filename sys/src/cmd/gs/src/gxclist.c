@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -582,7 +582,7 @@ clist_close(gx_device *dev)
 	&((gx_device_clist *)dev)->writer;
 
     if (cdev->do_not_open_or_close_bandfiles)
-	return 0;	
+	return 0;
     return clist_close_output_file(dev);
 }
 
@@ -733,7 +733,7 @@ clist_VMerror_recover_flush(gx_device_clist_writer *cldev,
     /* If the device has the ability to render partial pages, flush
      * out the bandlist, and reset the writing state. Then, get the
      * device to render this band. When done, see if there's now enough
-     * memory to satisfy the minimum low-memory guarantees. If not, 
+     * memory to satisfy the minimum low-memory guarantees. If not,
      * get the device to render some more. If there's nothing left to
      * render & still insufficient memory, declare an error condition.
      */
@@ -755,7 +755,7 @@ clist_VMerror_recover_flush(gx_device_clist_writer *cldev,
 	cldev->permanent_error = reset_code;
 	cldev->error_is_retryable = 0;
     }
- 
+
     code = (reset_code < 0 ? reset_code : free_code < 0 ? old_error_code : 0);
     if_debug1('L', "[L]hard flush of command list, status: %d\n", code);
     return code;

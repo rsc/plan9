@@ -31,4 +31,3 @@ for (i in \
 	$libreplica/cfg)
 	if(! test -d $i)
 		must mkdir -p $i
-

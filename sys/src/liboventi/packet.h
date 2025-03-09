@@ -31,7 +31,7 @@ enum {
 	FragLocalAlloc,
 	FragGlobal,
 };
-	
+
 struct Frag
 {
 	int state;
@@ -45,12 +45,11 @@ struct Packet
 {
 	int size;
 	int asize;  /* allocated memmory - always greater than size */
-	
+
 	Packet *next;
-	
+
 	Frag *first;
 	Frag *last;
-	
+
 	Frag local[NLocalFrag];
 };
-

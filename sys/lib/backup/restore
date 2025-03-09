@@ -72,7 +72,7 @@ for (track in d[0-9]*) {
 		# copy each track into its slot in the arena partition
 		venti/printarena $track >[2=1] | sed 1q | tr -d '\12'
 		kill printarena | rc	# printarena leaves a process behind
-	
+
 		off = `{arenastart $arena}
 		# echo -n writing $track to $arenas at 8K-block offset $off:
 		sleep 3

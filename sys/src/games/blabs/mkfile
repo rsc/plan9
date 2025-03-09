@@ -19,7 +19,7 @@ FACES=\
 	rob.bits\
 	sean.bits\
 	td.bits\
-	
+
 </sys/src/cmd/mkone
 
 %.bits:

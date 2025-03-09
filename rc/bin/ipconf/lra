@@ -53,7 +53,7 @@ case ''
 	# dial
 	while( ! dialfn $telno )
 		sleep 30
-		
+
 	if( ! dial/expect -it 60 'username:' ){
 		echo lra: can''t connect >[1=2]
 		exit connect

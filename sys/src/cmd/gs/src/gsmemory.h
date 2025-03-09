@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 1996, 1997, 1998, 1999, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -224,7 +224,7 @@ typedef struct gs_memory_status_s {
  */
 typedef struct gs_memory_procs_s {
 
-    gs_raw_memory_procs(gs_memory_t);	
+    gs_raw_memory_procs(gs_memory_t);
 
     /* Redefine inherited procedures with the new allocator type. */
 
@@ -450,14 +450,14 @@ typedef struct pl_mem_node_s pl_mem_node_t;
  * Subclasses may have state as well
  *
  * stable_memory: no save or restore, maybe gc-ed
- *                non-gc allocators stable_memory == this 
+ *                non-gc allocators stable_memory == this
  *
- * gs_lib_ctx: pointer to a library context 
+ * gs_lib_ctx: pointer to a library context
  *
  * head: is only used by pl_alloc in a pcl/pxl only system to track memory
  *
  * non_gc_memory: a garabge collecting allocator requires a "parent" who doesn't gc
- *                non-gc allocators non_gc_memory == this 
+ *                non-gc allocators non_gc_memory == this
  */
 #define gs_memory_common\
 	gs_memory_t *stable_memory;\

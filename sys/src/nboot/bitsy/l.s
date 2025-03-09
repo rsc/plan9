@@ -17,7 +17,7 @@ _main:
 	/* flush caches */
 	MCR	CpMMU, 0, R0, C(CpCacheFlush), C(0x7), 0
 	/* drain prefetch */
-	MOVW	R0,R0						
+	MOVW	R0,R0
 	MOVW	R0,R0
 	MOVW	R0,R0
 	MOVW	R0,R0
@@ -53,13 +53,13 @@ _cfloop:
 	MOVW.P	32(R0),R2
 	CMP.S	R0,R1
 	BNE	_cfloop
-	
+
 	/* drain write buffer and invalidate i&d cache contents */
 	MCR	CpMMU, 0, R0, C(CpCacheFlush), C(0xa), 4
 	MCR	CpMMU, 0, R0, C(CpCacheFlush), C(0x7), 0
 
 	/* drain prefetch */
-	MOVW	R0,R0						
+	MOVW	R0,R0
 	MOVW	R0,R0
 	MOVW	R0,R0
 	MOVW	R0,R0
@@ -75,7 +75,7 @@ _cwbloop:
 	MOVW.P	32(R0),R2
 	CMP.S	R0,R1
 	BNE	_cwbloop
-	
+
 	/* drain write buffer */
 	MCR	CpMMU, 0, R0, C(CpCacheFlush), C(0xa), 4
 	RET
@@ -331,7 +331,7 @@ TEXT _vfiq(SB), $-4			/* FIQ */
  *
  *  Enter with R0 containing the user stack pointer.
  *  UTZERO + 0x20 is always the entry point.
- *  
+ *
  */
 TEXT touser(SB),$-4
 	/* store the user stack pointer into the USR_r13 */
@@ -348,7 +348,7 @@ TEXT touser(SB),$-4
 
 	/* return from interrupt */
 	RFE				/* MOVM.IA.S.W (R13), [R15] */
-	
+
 /*
  *  here to jump to a newly forked process
  */

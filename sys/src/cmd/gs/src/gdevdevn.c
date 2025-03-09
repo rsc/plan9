@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 1995 to 1999 Aladdin Enterprises. 2001 ArtifexSoftware Inc.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -130,7 +130,7 @@ check_process_color_names(fixed_colorant_names_list plist,
 {
     if (plist) {
         uint size = pstring->size;
-    
+
 	while( *plist) {
 	    if (compare_color_names(*plist, strlen(*plist), pstring->data, size)) {
 		return true;
@@ -192,7 +192,7 @@ check_pcm_and_separation_names(const gx_device * dev,
 
 /*
  * This routine will check to see if the color component name  match those
- * that are available amoung the current device's color components.  
+ * that are available amoung the current device's color components.
  *
  * Parameters:
  *   dev - pointer to device data structure.
@@ -231,7 +231,7 @@ devn_get_color_comp_index(const gx_device * dev, gs_devn_params * pdevn_params,
     if (color_component_number >= 0) {
         /* Check if the component is in the separation order map. */
         if (num_order)
-	    color_component_number = 
+	    color_component_number =
 		pdevn_params->separation_order_map[color_component_number];
 	else
 	    /*
@@ -243,7 +243,7 @@ devn_get_color_comp_index(const gx_device * dev, gs_devn_params * pdevn_params,
 	     */
 	    if (color_component_number >= dev->color_info.num_components)
 	        color_component_number = GX_DEVICE_COLOR_MAX_COMPONENTS;
-	
+
         return color_component_number;
     }
     /*
@@ -332,7 +332,7 @@ e:	param_signal_error(plist, param_name, ecode);\
     }\
     END
 
-/* 
+/*
  * Utility routine for handling DeviceN related parameters.  This routine
  * may modify the color_info, devn_params, and the equiv_cmyk_colors fields.
  *
@@ -380,7 +380,7 @@ devn_put_params(gx_device * pdev, gs_param_list * plist,
         if (scna.data != 0) {
 	    int i;
 	    int num_names = scna.size;
-	    fixed_colorant_names_list pcomp_names = 
+	    fixed_colorant_names_list pcomp_names =
 	        pdevn_params->std_colorant_names;
 
 	    for (i = num_spot = 0; i < num_names; i++) {
@@ -458,7 +458,7 @@ devn_put_params(gx_device * pdev, gs_param_list * plist,
                     pdev->color_info.depth = depth;
 	        }
         }
-        /* 
+        /*
          * The DeviceN device can have zero components if nothing has been
 	 * specified.  This causes some problems so force at least one
 	 * component until something is specified.
@@ -482,11 +482,11 @@ devn_put_params(gx_device * pdev, gs_param_list * plist,
 	     * of ProcessColorModel components plus the number of
 	     * SeparationColorNames is used.
 	     */
-            pdev->color_info.num_components = (num_order) ? num_order 
+            pdev->color_info.num_components = (num_order) ? num_order
 		: (pdevn_params->max_separations)
 				? pdevn_params->max_separations
 				: npcmcolors + num_spot;
-            pdev->color_info.depth = bpc_to_depth(pdev->color_info.num_components, 
+            pdev->color_info.depth = bpc_to_depth(pdev->color_info.num_components,
 					pdevn_params->bitspercomponent);
 	}
     }
@@ -574,7 +574,7 @@ typedef struct spotcmyk_device_s {
 
 /* GC procedures */
 
-private 
+private
 ENUM_PTRS_WITH(spotcmyk_device_enum_ptrs, spotcmyk_device *pdev)
 {
     if (index < pdev->devn_params.separations.num_separations)
@@ -705,7 +705,7 @@ fixed_colorant_name DeviceCMYKComponents[] = {
 private const gx_device_procs spot_cmyk_procs = device_procs(get_spotcmyk_color_mapping_procs);
 
 const spotcmyk_device gs_spotcmyk_device =
-{   
+{
     spotcmyk_device_body(spot_cmyk_procs, "spotcmyk", 4, GX_CINFO_POLARITY_SUBTRACTIVE, 4, 1, 1, "DeviceCMYK"),
     /* DeviceN device specific parameters */
     { 1,			/* Bits per color - must match ncomp, depth, etc. above */
@@ -724,7 +724,7 @@ const spotcmyk_device gs_spotcmyk_device =
 private const gx_device_procs devicen_procs = device_procs(get_devicen_color_mapping_procs);
 
 const spotcmyk_device gs_devicen_device =
-{   
+{
     spotcmyk_device_body(devicen_procs, "devicen", 4, GX_CINFO_POLARITY_SUBTRACTIVE, 32, 255, 255, "DeviceCMYK"),
     /* DeviceN device specific parameters */
     { 8,			/* Bits per color - must match ncomp, depth, etc. above */
@@ -854,7 +854,7 @@ spotcmyk_put_params(gx_device * pdev, gs_param_list * plist)
 
 /*
  * This routine will check to see if the color component name  match those
- * that are available amoung the current device's color components.  
+ * that are available amoung the current device's color components.
  *
  * Parameters:
  *   dev - pointer to device data structure.
@@ -955,7 +955,7 @@ repack_data(byte * source, byte * dest, int depth, int first_bit,
 
 private int write_pcx_file(gx_device_printer * pdev, char * filename, int ncomp,
 			    int bpc, int pcmlinelength);
-/* 
+/*
  * This is an example print page routine for a DeviceN device.  This routine
  * will handle a DeviceN, a CMYK with spot colors, or an RGB process color model.
  *
@@ -963,7 +963,7 @@ private int write_pcx_file(gx_device_printer * pdev, char * filename, int ncomp,
  * RGB or CMYK then a bit image file is created which contains the data for the
  * process color model data.  This data is put into the given file stream.
  * I.e. into the output file specified by the user.  This file is not created
- * for the DeviceN process color model.  A separate bit image file is created 
+ * for the DeviceN process color model.  A separate bit image file is created
  * is created for the data for each of the given spot colors.  The names for
  * these files are created by taking the given output file name and appending
  * "sn" (where n is the spot color number 0 to ...) to the output file name.
@@ -1190,7 +1190,7 @@ private bool
 setup_pcx_header(gx_device_printer * pdev, pcx_header * phdr, int num_planes, int bits_per_plane)
 {
     bool planar = true; /* Invalid cases could cause an indeterminizm. */
- 
+
     *phdr = pcx_header_prototype;
     phdr->bpp = bits_per_plane;
     phdr->nplanes = num_planes;
@@ -1206,7 +1206,7 @@ setup_pcx_header(gx_device_printer * pdev, pcx_header * phdr, int num_planes, in
 			break;
 		case 2:				/* Not defined */
 			break;
-		case 4:	
+		case 4:
     			phdr->version = version_2_8_with_palette;
     			memcpy((byte *) phdr->palette, pcx_ega_palette, sizeof(pcx_ega_palette));
 			planar = true;

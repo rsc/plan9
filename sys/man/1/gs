@@ -6,7 +6,7 @@
 .ns
 .TP \\$1
 ..
-.SH NAME 
+.SH NAME
 gs \- Aladdin Ghostscript (PostScript and PDF language interpreter)
 .SH SYNOPSIS
 .B gs
@@ -149,7 +149,7 @@ contain any white space.
 .TP
 .BI -D name
 .TQ
-.BI -d name 
+.BI -d name
 Define a name in systemdict with value=null.
 .TP
 .BI -S name = string
@@ -163,9 +163,9 @@ For example,
 is equivalent to the
 program fragment
 .EX
-	/name 35 def 
+	/name 35 def
 .EE
-whereas 
+whereas
 .B -sname=35
 is equivalent to
 .EX
@@ -179,7 +179,7 @@ equivalent of
 .TP
 .BI -g number1 x number2
 Equivalent to
-.BI -dDEVICEWIDTH= number1 
+.BI -dDEVICEWIDTH= number1
 and
 .BI -dDEVICEHEIGHT= number2\f1.
 This is for the benefit of devices, such as windows,
@@ -189,7 +189,7 @@ that allow width and height to be specified.
 .TQ
 .BI -r number1 x number2
 Equivalent to
-.BI -dDEVICEXRESOLUTION= number1 
+.BI -dDEVICEXRESOLUTION= number1
 and
 \fL-dDEVICE\%YRESOLUTION= \f2\%number2\f1.
 This is for the benefit of devices, such as printers,
@@ -259,10 +259,10 @@ Selects an alternate initial output device, as described above.
 Selects an alternate output file (or pipe) for the initial output
 device, as described above.
 .SH FILES
-.TP 
+.TP
 .B /sys/lib/ghostscript/*
 Startup-files, utilities, examples, and basic font definitions.
-.TP 
+.TP
 .B /sys/lib/ghostscript/fonts/*
 Additional font definitions.
 .SH SOURCE
@@ -271,7 +271,7 @@ Additional font definitions.
 .IR page (1),
 .IR ps2pdf (1)
 .br
-The Ghostscript document files in 
+The Ghostscript document files in
 .B doc
 and
 .B man

@@ -89,7 +89,7 @@ to be written to standard error.
 The wiki holds both the current pages and also
 all versions of all pages that have ever existed.
 All pages have time stamps associated with them.
-When a user wants to edit a page, he reads the 
+When a user wants to edit a page, he reads the
 current page from the wiki, noting the time stamp
 on the page.
 When a user writes changes to a page, he includes the time stamp
@@ -100,7 +100,7 @@ The submission is still saved in the history, so that
 the user can compare the page he submitted with the changes
 that were made while he was editing.
 .PP
-Each version of each page is described by a text file containing 
+Each version of each page is described by a text file containing
 one or more metadata lines followed by the page contents.
 The metadata lines begin with a capital letter specifying the type of data.
 Currently the metadata types are:
@@ -153,7 +153,7 @@ is the title of the page.
 The rest of the file is the metadata and contents of every
 version of the page that has been submitted to the wiki.
 .BI L .n
-is a lock file for the page: it must be 
+is a lock file for the page: it must be
 held while reading or writing
 .I n
 and

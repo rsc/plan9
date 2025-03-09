@@ -611,7 +611,7 @@ doless:
 			fprintf(fd_th, "extern S_F_MAP src_file%d[];\n", p->tn);
 		fprintf(fd_th, "\n");
 
-		fprintf(fd_tc, "uchar reached%d[3];  /* np_ */\n", nrRdy);	
+		fprintf(fd_tc, "uchar reached%d[3];  /* np_ */\n", nrRdy);
 		fprintf(fd_tc, "uchar *loopstate%d;  /* np_ */\n", nrRdy);
 
 		fprintf(fd_tc, "struct {\n");
@@ -629,7 +629,7 @@ doless:
 		}
 		fprintf(fd_tc, "};\n\n");
 	} else
-	{	fprintf(fd_tc, "extern uchar reached%d[3];  /* np_ */\n", nrRdy);	
+	{	fprintf(fd_tc, "extern uchar reached%d[3];  /* np_ */\n", nrRdy);
 	}
 
 	gencodetable(fd_tc);	/* was th */
@@ -761,7 +761,7 @@ doless:
 	ntimes(fd_th, 0, 1, pan_par);	/* BFS_PAR */
 	fclose(fd_th);
 
-	fprintf(fd_tc, "\nTrans *t_id_lkup[%d];\n\n", globmax+1); 
+	fprintf(fd_tc, "\nTrans *t_id_lkup[%d];\n\n", globmax+1);
 
 	if (separate != 2)
 	{	fprintf(fd_tc, "\n#ifdef BFS_PAR\n\t#include \"pan.p\"\n#endif\n");
@@ -1229,7 +1229,7 @@ put_sub(Element *e, int Tt0, int Tt1)
 				fprintf(fd_tm, "+delta_m; delta_m = 0");
 			fprintf(fd_tm, "; goto P999;\n\n");
 		}
-	
+
 		fprintf(fd_tb, "\tcase %d: ", uniq-1);
 		fprintf(fd_tb, "// STATE %d\n", e->seqno);
 		fprintf(fd_tb, "\t\tsv_restor();\n");
@@ -1907,7 +1907,7 @@ put_el(Element *e, int Tt0, int Tt1)
 	case '.':
 	case GOTO:
 	case BREAK:
-		putskip(e->seqno); 
+		putskip(e->seqno);
 		casenr = 1; /* standard goto */
 generic_case:	fprintf(fd_tt, "\ttrans[%d][%d]\t= ", Pid_nr, e->seqno);
 		fprintf(fd_tt, "settr(%d,%d,%d,%d,0,\"",
@@ -2076,7 +2076,7 @@ in_settr--;
 			||  e->n->ntyp == D_STEP
 			||  e->n->ntyp == NON_ATOMIC)
 				put_sub(e, Tt0, Tt1);
-			else 
+			else
 			{
 				if (0) printf("			put_el %d\n", e->seqno);
 				put_el(e, Tt0, Tt1);
@@ -3100,7 +3100,7 @@ putstmnt(FILE *fd, Lextok *now, int m)
 					}
 				} else
 					fprintf(fd, ", 0, 0");
-			}	
+			}
 			for ( ; i < Mpars; i++)
 			{	fprintf(fd, ", 0, 0");
 			}
@@ -3361,7 +3361,7 @@ putname(FILE *fd, char *pre, Lextok *n, int m, char *suff) /* varref */
 	if (!terse && !s->owner && evalindex != 1)
 	{	if (old_priority_rules
 		&&  strcmp(s->name, "_priority") == 0)
-		{	fprintf(fd, "1");	
+		{	fprintf(fd, "1");
 			goto shortcut;
 		} else
 		{	if (s->context

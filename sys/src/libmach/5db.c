@@ -286,7 +286,7 @@ armclass(long w)
 			break;
 		}
 		/* fall through */
-	default:	  
+	default:
 		op = (48+24+4+4+2+2+4+4);
 		break;
 	}
@@ -1081,11 +1081,11 @@ format(char *mnemonic, Instr *i, char *f)
 		case 's':
 			bprint(i, "%d", i->rs & 0xf);
 			break;
-				
+
 		case 'M':
 			bprint(i, "%lud", (i->w>>8) & 0xf);
 			break;
-				
+
 		case 'm':
 			bprint(i, "%lud", (i->w>>7) & 0x1f);
 			break;

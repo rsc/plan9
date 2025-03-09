@@ -712,7 +712,7 @@ retry:
 			drive->sectors = drive->c*drive->h*drive->s;
 		atarwmmode(drive, cmdport, ctlport, dev);
 	}
-	atadmamode(drive);	
+	atadmamode(drive);
 
 	if(DEBUG & DbgCONFIG){
 		print("dev %2.2uX port %uX config %4.4uX capabilities %4.4uX",
@@ -753,7 +753,7 @@ ataprobe(int cmdport, int ctlport, int irq)
 	Drive *drive;
 	int dev, error, rhi, rlo;
 	static int nonlegacy = 'C';
-	
+
 	if(cmdport == 0) {
 		print("ataprobe: cmdport is 0\n");
 		return nil;
@@ -900,7 +900,7 @@ tryedd1:
 	ctlr->irq = irq;
 	ctlr->tbdf = BUSUNKNOWN;
 	ctlr->command = Cedd;		/* debugging */
-	
+
 	switch(cmdport){
 	default:
 		sdev->idno = nonlegacy;
@@ -961,7 +961,7 @@ ataprobew(DevConf *cf)
 {
 	char *p;
 	ISAConf isa;
-	
+
 	if (cf->nports != 2)
 		error(Ebadarg);
 

@@ -44,7 +44,7 @@ threadmain(int argc, char *argv[])
 	fmtinstall('F', vtfcallfmt);
 	fmtinstall('t', mtimefmt);
 	fmtinstall('M', dirmodefmt);
-	
+
 	host = nil;
 	printstats = 0;
 
@@ -102,7 +102,7 @@ threadmain(int argc, char *argv[])
 
 	if((f = vacfsgetroot(fs)) == nil)
 		sysfatal("vacfsgetroot: %r");
-	
+
 	unvac(f, nil, nil);
 	for(i=0; i<nwant; i++){
 		if(want[i] && !found[i]){
@@ -123,7 +123,7 @@ writen(int fd, char *buf, int n)
 {
 	int m;
 	int oldn;
-	
+
 	oldn = n;
 	while(n > 0){
 		m = write(fd, buf, n);
@@ -139,7 +139,7 @@ int
 wantfile(char *name)
 {
 	int i, namelen, n;
-	
+
 	if(nwant == 0)
 		return 1;
 
@@ -215,7 +215,7 @@ unvac(VacFile *f, char *name, VacDir *vdir)
 		fprint(2, "warning: ignoring %s %s\n", what, name);
 		return;
 	}
-	
+
 	if(mode&ModeDir){
 		if((vde = vdeopen(f)) == nil){
 			fprint(2, "vdeopen %s: %r", name);
@@ -328,7 +328,7 @@ int
 mtimefmt(Fmt *f)
 {
 	Tm *tm;
-	
+
 	tm = localtime(va_arg(f->args, ulong));
 	fmtprint(f, "%04d-%02d-%02d %02d:%02d",
 		tm->year+1900, tm->mon+1, tm->mday,

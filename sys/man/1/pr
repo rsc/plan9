@@ -44,7 +44,7 @@ Set the tab stops for input text every
 spaces.
 .TP
 .B  -h
-Take the next argument as a page header 
+Take the next argument as a page header
 .RI ( file
 by default).
 .TP

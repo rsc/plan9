@@ -91,7 +91,7 @@ smbnetserverenum2(SmbClient *c, ulong stype, char *domain, int *entriesp, SmbRap
 		*entriesp = entries;
 	}
 	else
-		rv = -1;	
+		rv = -1;
 done:
 	free(si);
 	smbbufferfree(&opb);

@@ -16,7 +16,7 @@ IPA		COLLINS		EXAMPLE
 [a]		a		H ab
 				P ap
 
-upsilon		348  		H Abbau 
+upsilon		348  		H Abbau
 				P \N'349'apba\fp\N'348'\f1
 
 schwa		343  		H aalen
@@ -28,7 +28,7 @@ schwa		343  		H aalen
 [I]		351  		H Abbild
 				P \N'349'apb\fp\N'351'\f1lt
 
-turned script a 356		H abdominal 
+turned script a 356		H abdominal
 				P \x91b\N'349'd\fp\N'356'\f1m\fp\N'351'\f1nl
 
 open o		341		H abdrosseln
@@ -43,7 +43,7 @@ upsilon		348		H Abbau
 [g]		g
 [h]		h
 [j]		j
-[k]		k	
+[k]		k
 [l]		l
 [m]		m
 [n]		n
@@ -86,7 +86,7 @@ over
   open o	o^~ 		H Salon
 				P za\N'349'lo^~:
 
-script a	
+script a
 lower case a
 epsilon
 o
@@ -116,8 +116,3 @@ small capital y	y 		H abbru^:hen
 
 c cedilla	c^ 		H abbrechen
 				P \N'349'apbr\fp\N'340'\f1c^,\fp\N'343'\f1n
-
-
-
-
-

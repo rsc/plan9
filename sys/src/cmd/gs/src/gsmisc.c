@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -65,8 +65,8 @@ int outprintf(const gs_memory_t *mem, const char *fmt, ...)
     count = vsprintf(buf, fmt, args);
     outwrite(mem, buf, count);
     if (count >= PRINTF_BUF_LENGTH) {
-	count = sprintf(buf, 
-	    "PANIC: printf exceeded %d bytes.  Stack has been corrupted.\n", 
+	count = sprintf(buf,
+	    "PANIC: printf exceeded %d bytes.  Stack has been corrupted.\n",
 	    PRINTF_BUF_LENGTH);
 	outwrite(mem, buf, count);
     }
@@ -85,8 +85,8 @@ int errprintf(const char *fmt, ...)
     count = vsprintf(buf, fmt, args);
     errwrite(buf, count);
     if (count >= PRINTF_BUF_LENGTH) {
-	count = sprintf(buf, 
-	    "PANIC: printf exceeded %d bytes.  Stack has been corrupted.\n", 
+	count = sprintf(buf,
+	    "PANIC: printf exceeded %d bytes.  Stack has been corrupted.\n",
 	    PRINTF_BUF_LENGTH);
 	errwrite(buf, count);
     }
@@ -118,7 +118,7 @@ const char *const dprintf_file_only_format = "%10s(unkn): ";
 /*
  * Define the trace printout procedures.  We always include these, in case
  * other modules were compiled with DEBUG set.  Note that they must use
- * out/errprintf, not fprintf nor fput[cs], because of the way that 
+ * out/errprintf, not fprintf nor fput[cs], because of the way that
  * stdout/stderr are implemented on DLL/shared library builds.
  */
 void
@@ -1139,7 +1139,7 @@ static const int isincos[5] =
 
 /* GCC with -ffast-math compiles ang/90. as ang*(1/90.), losing precission.
  * This doesn't happen when the numeral is replaced with a non-const variable.
- * So we define the variable to work around the GCC problem. 
+ * So we define the variable to work around the GCC problem.
  */
 static double const_90_degrees = 90.;
 

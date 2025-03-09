@@ -13,7 +13,7 @@ pooldump \- general memory management routines
 void*	poolalloc(Pool* pool, ulong size)
 .PP
 .B
-void*	poolallocalign(Pool *pool, ulong size, 
+void*	poolallocalign(Pool *pool, ulong size,
 .br
 .B
                 ulong align, long offset, ulong span)
@@ -40,9 +40,9 @@ void	poolblockcheck(Pool *pool, void *ptr)
 void	pooldump(Pool *pool);
 .SH DESCRIPTION
 These routines provide a general memory management facility.
-Memory is retrieved from a coarser allocator (e.g. 
+Memory is retrieved from a coarser allocator (e.g.
 .I sbrk
-or the kernel's 
+or the kernel's
 .IR xalloc )
 and then allocated to callers.
 The routines are locked and thus may safely be used in
@@ -91,7 +91,7 @@ bytes the block associated with
 .BR ptr ,
 which must have been previously returned by
 .I poolalloc
-or 
+or
 .IR poolrealloc .
 If the block's size can be adjusted, a (possibly different) pointer to the new block is returned.
 The contents up to the lesser of the old and new sizes are unchanged.
@@ -100,7 +100,7 @@ After a successful call to
 the return value should be used rather than
 .B ptr
 to access the block.
-If the request cannot be satisfied, 
+If the request cannot be satisfied,
 .I poolrealloc
 returns nil, and the old pointer remains valid.
 .PP
@@ -109,12 +109,12 @@ that would usually go unused.
 .IR Poolmsize
 grows the block to encompass this extra space and returns the new size.
 .PP
-The 
+The
 .I poolblockcheck
 and
 .I poolcheck
 routines validate a single allocated block or the entire pool, respectively.
-They call 
+They call
 .B panic
 (see below)
 if corruption is detected.
@@ -168,7 +168,7 @@ enum {  /* flags */
 The pool obtains arenas of memory to manage by calling the the given
 .B alloc
 routine.
-The total number of requested bytes will not exceed 
+The total number of requested bytes will not exceed
 .BR maxsize .
 Each allocation request will be for at least
 .B minarena
@@ -176,27 +176,27 @@ bytes.
 .PP
 When a new arena is allocated, the pool routines try to
 merge it with the surrounding arenas, in an attempt to combat fragmentation.
-If 
+If
 .B merge
 is non-nil, it is called with the addresses of two blocks from
 .B alloc
 that the pool routines suspect might be adjacent.
-If they are not mergeable, 
+If they are not mergeable,
 .B merge
 must return zero.
-If they are mergeable, 
+If they are mergeable,
 .B merge
 should merge them into one block in its own bookkeeping
 and return non-zero.
 .PP
-To ease fragmentation and make 
+To ease fragmentation and make
 block reuse easier, the sizes requested of the pool routines are rounded up to a multiple of
 .B quantum
-before 
+before
 the carrying out requests.
 If, after rounding, the block size is still less than
 .B minblock
-bytes, 
+bytes,
 .B minblock
 will be used as the block size.
 .PP
@@ -209,7 +209,7 @@ routine that the contents have moved.
 At the time that
 .B move
 is called, the contents have already moved,
-so 
+so
 .B from
 should never be dereferenced.
 If no
@@ -239,16 +239,16 @@ when finished.
 .PP
 When internal corruption is detected,
 .B panic
-is called with a 
+is called with a
 .IR print (2)
 style argument that specifies what happened.
-It is assumed that 
+It is assumed that
 .B panic
 never returns.
 When the pool routines wish to convey a message
 to the caller (usually because logging is turned on; see below),
 .B print
-is called, also with a 
+is called, also with a
 .IR print (2)
 style argument.
 .PP
@@ -269,17 +269,17 @@ Specifically, each 32-bit word of the memory is marked with a pointer value excl
 with a constant.
 The pointer value is the pointer to the beginning of the allocated block
 and the constant varies in order to distinguish different markings.
-Freed blocks use the constant 
+Freed blocks use the constant
 .BR 0xF7000000 ,
 newly allocated blocks
 .BR 0xF9000000 ,
 and newly created unallocated blocks
 .BR 0xF1000000 .
-For example, if 
-.B POOL_ANTAGONISM 
+For example, if
+.B POOL_ANTAGONISM
 is set and
 .I poolalloc
-returns a block starting at 
+returns a block starting at
 .BR 0x00012345 ,
 each word of the block will contain the value
 .BR 0xF90012345 .
@@ -292,11 +292,11 @@ causes the allocator to walk the entire pool whenever locking or unlocking itsel
 looking for corruption.
 This slows runtime by a few orders of magnitude
 when many blocks are in use.
-If 
+If
 .B POOL_VERBOSITY
-is set, 
+is set,
 the entire pool structure is printed
-(via 
+(via
 .BR print )
 each time the pool is locked or unlocked.
 .B POOL_DEBUGGING
@@ -306,15 +306,15 @@ whose format is unspecified and volatile.
 It should not be used by most programs.
 When
 .B POOL_LOGGING
-is set, a single line is printed via 
+is set, a single line is printed via
 .B print
 at the beginning and end of each pool call.
-If 
+If
 .B logstack
-is not nil, 
+is not nil,
 it will be called as well.
 This provides a mechanism for external programs to search for leaks.
-(See 
+(See
 .IR leak (1)
 for one such program.)
 .PP
@@ -322,7 +322,7 @@ The pool routines are strict about the amount of space callers use.
 If even a single byte is written past the end of the allotted space of a block, they
 will notice when that block is next used in a call to
 .I poolrealloc
-or 
+or
 .I free
 (or at the next entry into the allocator, when
 .B POOL_PARANOIA
@@ -333,7 +333,7 @@ will be called.
 Since forgetting to allocate space for the
 terminating NUL on strings is such a common error,
 if
-.B POOL_TOLERANCE 
+.B POOL_TOLERANCE
 is set and a single NUL is found written past the end of a block,
 .B print
 will be called with a notification, but

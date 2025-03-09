@@ -1,4 +1,4 @@
-.TH AUDIO 3 
+.TH AUDIO 3
 .SH NAME
 audio \- SoundBlaster or ESS1688 audio controller
 .SH SYNOPSIS
@@ -60,7 +60,7 @@ return lines of the form
 .IP
 .I source
 .B in left
-.I value 
+.I value
 .B right
 .I value
 .B out left

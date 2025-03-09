@@ -53,7 +53,7 @@ void *
 emalloc(ulong n)
 {
 	void *v;
-	
+
 	v = mallocz(n, 1);
 	if(v == nil)
 		sysfatal("malloc: %r");
@@ -81,7 +81,7 @@ void *
 erealloc(void *p, ulong n)
 {
 	void *v;
-	
+
 	v = realloc(p, n);
 	if(v == nil)
 		sysfatal("realloc: %r");
@@ -234,7 +234,7 @@ slurpdir(char *p, Dir **d)
 	r = dirreadall(f, d);
 	close(f);
 	return r;
-}	
+}
 
 int
 hassuffix(char *base, char *suf)

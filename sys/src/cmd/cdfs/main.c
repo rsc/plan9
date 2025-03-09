@@ -138,7 +138,7 @@ fscreate(Req *r)
 
 	fid = r->fid;
 	omode = r->ifcall.mode;
-	
+
 	if(omode != OWRITE) {
 		respond(r, "bad mode (use OWRITE)");
 		return;
@@ -192,7 +192,7 @@ fsremove(Req *r)
 	case Qwd:
 		if(drive->fixate(drive) < 0)
 			respond(r, geterrstr());
-// let us see if it can figure this out:	drive->writeok = No;	
+// let us see if it can figure this out:	drive->writeok = No;
 		else
 			respond(r, nil);
 		checktoc(drive);
@@ -304,7 +304,7 @@ fillstat(ulong qid, Dir *d)
 	return 1;
 }
 
-static ulong 
+static ulong
 cddb_sum(int n)
 {
 	int ret;

@@ -29,7 +29,7 @@ allprint(int c)
 	default:
 		if(!printable(c))
 			fprintf(yyout,"\\%-3o",c);
-		else 
+		else
 			c = putc(c,yyout);
 			USED(c);
 		break;

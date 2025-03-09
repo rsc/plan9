@@ -93,7 +93,7 @@
 #define	PTEACCESS	(1<<25)
 #define	PTEMODIFY	(1<<24)
 #define PTEUNCACHED	0
-#define PTEMAPMEM	(1024*1024)	
+#define PTEMAPMEM	(1024*1024)
 #define	PTEPERTAB	(PTEMAPMEM/BY2PG)
 #define SEGMAPSIZE	16
 
@@ -354,7 +354,7 @@ restore:
 	MOVW	(4*(32+3))(R1), R18		/* nPC */
 	MOVW	(4*1)(R1), R1	/* restore R1=SP */
 	RETT	R17, R18
-	
+
 usertrap:
 	/*
 	 * Interrupt or fault from user

@@ -19,7 +19,7 @@ echo 'blocksummary()' | acid -lpool -lleak $p $binary | awk '
 		total[alloc] += size
 		count[alloc]++
 	}
-	$1 == "summary" { 
+	$1 == "summary" {
 		alloc=$2
 		cnt=$3
 		size=$4

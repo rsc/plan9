@@ -24,9 +24,9 @@ prevy.tab.h:	y.tab.h
 	-cmp -s y.tab.h prevy.tab.h || cp y.tab.h prevy.tab.h
 
 bundle:
-	@bundle $(SRCFILES) 
+	@bundle $(SRCFILES)
 
-bowell:	 $(SRCFILES)  pictest.a 
+bowell:	 $(SRCFILES)  pictest.a
 	push bowell $? /usr/src/cmd/pic
 	touch bowell
 

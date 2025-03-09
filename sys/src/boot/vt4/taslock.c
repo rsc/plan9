@@ -106,17 +106,17 @@ ilock(Lock *l)
 		lockstats.glare++;
 		/*
 		 * Cannot also check l->pc and l->m here because
-		 * they might just not be set yet, or the lock might 
+		 * they might just not be set yet, or the lock might
 		 * even have been let go.
 		 */
 		if(!l->isilock){
 			dumplockmem("ilock:", l);
-			print("corrupt ilock %#p pc=%#p m=%#p isilock=%d", 
+			print("corrupt ilock %#p pc=%#p m=%#p isilock=%d",
 				l, l->pc, l->m, l->isilock);
 			assert(0);
 		}
 		if(l->m == MACHP(m->machno)) {
-			print("ilock: deadlock on cpu%d pc=%#p lockpc=%#p\n", 
+			print("ilock: deadlock on cpu%d pc=%#p lockpc=%#p\n",
 				m->machno, pc, l->pc);
 			assert(0);
 		}

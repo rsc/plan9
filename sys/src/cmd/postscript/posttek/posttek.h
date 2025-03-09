@@ -180,4 +180,3 @@ typedef struct {
  */
 
 char	*get_font();
-

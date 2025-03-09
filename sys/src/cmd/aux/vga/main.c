@@ -17,7 +17,7 @@ dump(Vga* vga)
 {
 	Ctlr *ctlr;
 	Attr *attr;
-	
+
 	if(vga->mode)
 		dbdumpmode(vga->mode);
 
@@ -429,7 +429,7 @@ main(int argc, char** argv)
 				vgactlw("size", buf);
 
 			/*
-			 * No fiddling with registers if VESA set 
+			 * No fiddling with registers if VESA set
 			 * things up already.  Sorry.
 			 */
 			if(!vga->vesa){
@@ -437,14 +437,14 @@ main(int argc, char** argv)
 				 * Turn off the display during the load.
 				 */
 				sequencer(vga, 0);
-	
+
 				for(ctlr = vga->link; ctlr; ctlr = ctlr->link){
 					if(ctlr->load == 0 || ctlr == &vesa)
 						continue;
 					trace("%s->load\n", ctlr->name);
 					(*ctlr->load)(vga, ctlr);
 				}
-	
+
 				sequencer(vga, 1);
 			}
 

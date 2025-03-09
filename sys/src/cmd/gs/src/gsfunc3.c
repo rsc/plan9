@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -61,7 +61,7 @@ fn_scale_functions(gs_function_t ***ppsfns, const gs_function_t *const *pfns,
     int code = alloc_function_array(count, &psfns, mem);
     const gs_range_t *ranges = pranges;
     int i;
-    
+
     if (code < 0)
 	return code;
     for (i = 0; i < count; ++i) {
@@ -392,7 +392,7 @@ fn_1ItSg_is_monotonic(const gs_function_t * pfn_common,
     }
     /* v0 is equal to the range end. */
     *mask = 0;
-    return 1; 
+    return 1;
 }
 
 /* Return 1-Input Stitching function information. */
@@ -487,7 +487,7 @@ gs_function_1ItSg_serialize(const gs_function_t * pfn, stream *s)
     if (code < 0)
 	return code;
 
-    for (k = 0; k < p->k && code >= 0; k++) 
+    for (k = 0; k < p->k && code >= 0; k++)
 	code = gs_function_serialize(p->Functions[k], s);
     if (code < 0)
 	return code;
@@ -674,7 +674,7 @@ gs_function_AdOt_serialize(const gs_function_t * pfn, stream *s)
 
     if (code < 0)
 	return code;
-    for (k = 0; k < p->n && code >= 0; k++) 
+    for (k = 0; k < p->n && code >= 0; k++)
 	code = gs_function_serialize(p->Functions[k], s);
     return code;
 }

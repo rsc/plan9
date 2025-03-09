@@ -6,7 +6,7 @@ enum
 	ET_IP		= 0x800,
 
 	IP_VER		= 0x40,
-	IP_HLEN		= 0x05,			
+	IP_HLEN		= 0x05,
  	IP_UDPPROTO	= 17,
 
 	UDP_EHSIZE	= 22,
@@ -43,7 +43,7 @@ enum
 /*
  *  user level udp headers with control message "headers"
  */
-enum 
+enum
 {
 	Udphdrsize=	52,	/* size of a Udphdr */
 };

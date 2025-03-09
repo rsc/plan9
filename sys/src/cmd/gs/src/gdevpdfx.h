@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -433,13 +433,13 @@ struct gx_device_pdf_s {
     bool HavePDFWidths;        /* PS2WRITE only. */
     bool HaveStrokeColor;      /* PS2WRITE only. */
     bool HaveTransparency;
-    bool PatternImagemask; /* The target viewer|printer handles imagemask 
+    bool PatternImagemask; /* The target viewer|printer handles imagemask
 			      with pattern color. */
     bool PDFX;		   /* Generate PDF/X */
     long MaxClipPathSize;  /* The maximal number of elements of a clipping path
 			      that the target viewer|printer can handle. */
     long MaxViewerMemorySize;
-    long MaxShadingBitmapSize; /* The maximal number of bytes in 
+    long MaxShadingBitmapSize; /* The maximal number of bytes in
 			      a bitmap representation of a shading.
 			      (Bigger shadings to be downsampled). */
     long MaxInlineImageSize;
@@ -558,11 +558,11 @@ struct gx_device_pdf_s {
      */
     cos_array_t *Namespace_stack;
     pdf_font_cache_elem_t *font_cache;
-    /* 
-     * char_width is used by pdf_text_set_cache to communicate 
-     * with assign_char_code around gdev_pdf_fill_mask. 
+    /*
+     * char_width is used by pdf_text_set_cache to communicate
+     * with assign_char_code around gdev_pdf_fill_mask.
      */
-    gs_point char_width; 
+    gs_point char_width;
     /*
      * We need a stable copy of clipping path to prevent writing
      * redundant clipping paths when PS document generates such ones.
@@ -583,7 +583,7 @@ struct gx_device_pdf_s {
      * It's life time terminates on garbager invocation.
      */
     gs_text_enum_t *pte;
-    /* 
+    /*
      * The viewer's graphic state stack.
      * We restrict its length with the strongest PDF spec limitation.
      * Usually 5 levels is enough, but patterns and charprocs may be nested recursively.
@@ -607,17 +607,17 @@ struct gx_device_pdf_s {
     pdf_resource_t *font3; /* The owner of the accumulated charstring. */
     pdf_resource_t *accumulating_substream_resource;
     gs_matrix_fixed charproc_ctm;
-    bool charproc_just_accumulated; /* A flag for controlling 
-			the glyph variation recognition. 
+    bool charproc_just_accumulated; /* A flag for controlling
+			the glyph variation recognition.
 			Used only with uncached charprocs. */
     bool accumulating_a_global_object; /* ps2write only.
 			Accumulating a global object (such as a named Form,
-			so that resources used in it must also be global. 
+			so that resources used in it must also be global.
 			Important for viewers with small memory,
 			which drops resources per page. */
-    const pdf_char_glyph_pairs_t *cgp; /* A temporary pointer 
+    const pdf_char_glyph_pairs_t *cgp; /* A temporary pointer
 			for pdf_is_same_charproc1.
-			Must be NULL when the garbager is invoked, 
+			Must be NULL when the garbager is invoked,
 			because it points from global to local memory. */
     int substituted_pattern_count;
     int substituted_pattern_drop_page;
@@ -793,13 +793,13 @@ int pdf_alloc_resource(gx_device_pdf * pdev, pdf_resource_type_t rtype,
 		       gs_id rid, pdf_resource_t **ppres, long id);
 
 /* Find same resource. */
-int pdf_find_same_resource(gx_device_pdf * pdev, 
+int pdf_find_same_resource(gx_device_pdf * pdev,
 	pdf_resource_type_t rtype, pdf_resource_t **ppres,
 	int (*eq)(gx_device_pdf * pdev, pdf_resource_t *pres0, pdf_resource_t *pres1));
 
 
 /* Find resource by resource id. */
-pdf_resource_t *pdf_find_resource_by_resource_id(gx_device_pdf * pdev, 
+pdf_resource_t *pdf_find_resource_by_resource_id(gx_device_pdf * pdev,
 						pdf_resource_type_t rtype, gs_id id);
 
 /* Find a resource of a given type by gs_id. */
@@ -807,7 +807,7 @@ pdf_resource_t *pdf_find_resource_by_gs_id(gx_device_pdf * pdev,
 					   pdf_resource_type_t rtype,
 					   gs_id rid);
 
-void pdf_drop_resources(gx_device_pdf * pdev, pdf_resource_type_t rtype, 
+void pdf_drop_resources(gx_device_pdf * pdev, pdf_resource_type_t rtype,
 	int (*cond)(gx_device_pdf * pdev, pdf_resource_t *pres));
 
 /* Print resource statistics. */
@@ -815,16 +815,16 @@ void pdf_print_resource_statistics(gx_device_pdf * pdev);
 
 
 /* Cancel a resource (do not write it into PDF). */
-int pdf_cancel_resource(gx_device_pdf * pdev, pdf_resource_t *pres, 
+int pdf_cancel_resource(gx_device_pdf * pdev, pdf_resource_t *pres,
 	pdf_resource_type_t rtype);
 
 /* Remove a resource. */
-void pdf_forget_resource(gx_device_pdf * pdev, pdf_resource_t *pres1, 
+void pdf_forget_resource(gx_device_pdf * pdev, pdf_resource_t *pres1,
 	pdf_resource_type_t rtype);
 
 /* Substitute a resource with a same one. */
-int pdf_substitute_resource(gx_device_pdf *pdev, pdf_resource_t **ppres, 
-	    pdf_resource_type_t rtype, 
+int pdf_substitute_resource(gx_device_pdf *pdev, pdf_resource_t **ppres,
+	    pdf_resource_type_t rtype,
 	    int (*eq)(gx_device_pdf *pdev, pdf_resource_t *pres0, pdf_resource_t *pres1),
 	    bool write);
 
@@ -935,7 +935,7 @@ typedef struct pdf_lcvd_s {
 #define pdf_lcvd_t_max_ptrs (gx_device_memory_max_ptrs + 2)
 
 
-int pdf_setup_masked_image_converter(gx_device_pdf *pdev, gs_memory_t *mem, const gs_matrix *m, pdf_lcvd_t **pcvd, 
+int pdf_setup_masked_image_converter(gx_device_pdf *pdev, gs_memory_t *mem, const gs_matrix *m, pdf_lcvd_t **pcvd,
 				 bool need_mask, int x, int y, int w, int h, bool write_on_close);
 int pdf_dump_converted_image(gx_device_pdf *pdev, pdf_lcvd_t *cvd);
 void pdf_remove_masked_image_converter(gx_device_pdf *pdev, pdf_lcvd_t *cvd, bool need_mask);
@@ -1201,18 +1201,18 @@ int pdf_start_charproc_accum(gx_device_pdf *pdev);
 int pdf_set_charproc_attrs(gx_device_pdf *pdev, gs_font *font, const double *pw, int narg,
 		gs_text_cache_control_t control, gs_char ch, gs_const_string *gnstr);
 /* Complete charproc accumulation for aType 3 font. */
-int pdf_end_charproc_accum(gx_device_pdf *pdev, gs_font *font, 
+int pdf_end_charproc_accum(gx_device_pdf *pdev, gs_font *font,
 		const pdf_char_glyph_pairs_t *cgp);
 
 /* Open a stream object in the temporary file. */
-int pdf_open_aside(gx_device_pdf *pdev, pdf_resource_type_t rtype, 
+int pdf_open_aside(gx_device_pdf *pdev, pdf_resource_type_t rtype,
 	gs_id id, pdf_resource_t **ppres, bool reserve_object_id, int options);
 
 /* Close a stream object in the temporary file. */
 int pdf_close_aside(gx_device_pdf *pdev);
 
 /* Enter the substream accumulation mode. */
-int pdf_enter_substream(gx_device_pdf *pdev, pdf_resource_type_t rtype, 
+int pdf_enter_substream(gx_device_pdf *pdev, pdf_resource_type_t rtype,
 		gs_id id, pdf_resource_t **ppres, bool reserve_object_id, bool compress);
 
 /* Exit the substream accumulation mode. */

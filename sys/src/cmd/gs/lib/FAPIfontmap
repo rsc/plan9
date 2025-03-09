@@ -9,9 +9,9 @@
 %
 % where options_dict is a dictionary with the following entries :
 %
-% Key       Type      Description  
+% Key       Type      Description
 % Path      string    Absolute path to font file, or relative path to font file from
-%                     the GS_EXTFONTPATH value.  
+%                     the GS_EXTFONTPATH value.
 % FontType  interger  PostScript type for this font. Only 1 and 42 are currently allowed.
 %                     Note that this is unrelated to the real type of the font file -
 %                     the bridge will perform format conversion.
@@ -30,4 +30,3 @@
 %  /CourierTT   << /Path (F:/WIN2000/Fonts/cour.ttf) /FontType 1 /FAPI /AgfaUFST >> ;
 %  /FCO1        << /Path (F:/AFPL/Agfa/fontdata/MTFONTS/PCLPS3/MT1/PCLP3__G.FCO) /FontType 42 /FAPI /AgfaUFST /SubfontId 10 >> ;
 %
-

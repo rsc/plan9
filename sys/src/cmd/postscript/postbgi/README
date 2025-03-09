@@ -18,4 +18,3 @@ A typical command line for STARE jobs would be,
 while for PRISM jobs use,
 
 	postbgi -P"/prism true def" file >file.ps
-

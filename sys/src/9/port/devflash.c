@@ -118,7 +118,7 @@ flashgen(Chan *c, char*, Dirtab*, int, int s, Dir *dp)
 	}
 	return -1;
 }
-		
+
 static void
 flashreset(void)
 {
@@ -208,12 +208,12 @@ flashopen(Chan *c, int omode)
 	return devopen(c, omode, nil, 0, flashgen);
 }
 
-static void	 
+static void
 flashclose(Chan*)
 {
 }
 
-static long	 
+static long
 flashread(Chan *c, void *buf, long n, vlong offset)
 {
 	Flash *f;
@@ -293,7 +293,7 @@ static Cmdtab flashcmds[] = {
 	{CMprotectboot,	"protectboot",	0},
 };
 
-static long	 
+static long
 flashwrite(Chan *c, void *buf, long n, vlong offset)
 {
 	Cmdbuf *cb;

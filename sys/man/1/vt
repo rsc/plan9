@@ -1,4 +1,4 @@
-.TH VT 1 
+.TH VT 1
 .SH NAME
 vt \- emulate a VT-100 or VT-220 terminal
 .SH SYNOPSIS

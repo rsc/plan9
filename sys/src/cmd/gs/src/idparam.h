@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -102,7 +102,7 @@ int dict_floats_param(const gs_memory_t *mem,
  */
 int dict_proc_param(const ref * pdict, const char *kstr, ref * pproc,
 		    bool defaultval);
-int dict_matrix_param(const gs_memory_t *mem, 
+int dict_matrix_param(const gs_memory_t *mem,
 		      const ref * pdict, const char *kstr,
 		      gs_matrix * pmat);
 int dict_uid_param(const ref * pdict, gs_uid * puid, int defaultval,

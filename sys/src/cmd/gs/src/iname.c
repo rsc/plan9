@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -593,7 +593,7 @@ name_scan_sub(name_table * nt, uint sub_index, bool free_empty)
 }
 
 /* Garbage collector enumeration and relocation procedures. */
-private 
+private
 ENUM_PTRS_BEGIN_PROC(name_table_enum_ptrs)
 {
     EV_CONST name_table *const nt = vptr;

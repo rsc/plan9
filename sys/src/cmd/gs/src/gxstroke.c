@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -141,7 +141,7 @@ not_exact:
 	    expand *= factor;
 	}
     }
-	    
+
     /* Short-cut gs_bbox_transform. */
     {
 	float exx = expand * cx;
@@ -337,7 +337,7 @@ gx_stroke_path_only_aux(gx_path * ppath, gx_path * to_path, gx_device * pdev,
 #endif
     gs_line_join curve_join =
 	(pgs_lp->curve_join >= 0 ? (gs_line_join)pgs_lp->curve_join :
-	 pgs_lp->join == gs_join_none || pgs_lp->join == gs_join_round ? 
+	 pgs_lp->join == gs_join_none || pgs_lp->join == gs_join_round ?
 	    gs_join_bevel : pgs_lp->join);
     float line_width = pgs_lp->half_width;	/* (*half* the line width) */
     bool always_thin;
@@ -349,7 +349,7 @@ gx_stroke_path_only_aux(gx_path * ppath, gx_path * to_path, gx_device * pdev,
     bool initial_matrix_reflected;
 
     (*dev_proc(pdev, get_initial_matrix)) (pdev, &initial_matrix);
-    initial_matrix_reflected = initial_matrix.xy * initial_matrix.yx > 
+    initial_matrix_reflected = initial_matrix.xy * initial_matrix.yx >
 			       initial_matrix.xx * initial_matrix.yy;
 
 #ifdef DEBUG
@@ -573,8 +573,8 @@ gx_stroke_path_only_aux(gx_path * ppath, gx_path * to_path, gx_device * pdev,
 		    break;
 		if (pgs_lp->cap != gs_cap_round) {
 		    /* From PLRM, stroke operator :
-		       If a subpath is degenerate (consists of a single-point closed path 
-		       or of two or more points at the same coordinates), 
+		       If a subpath is degenerate (consists of a single-point closed path
+		       or of two or more points at the same coordinates),
 		       stroke paints it only if round line caps have been specified */
 		    break;
 		}
@@ -738,7 +738,7 @@ gx_stroke_path_only_aux(gx_path * ppath, gx_path * to_path, gx_device * pdev,
 		 (pl_ptr) 0 : (pl_ptr) & pl_first);
 
 	    code = (*line_proc) (to_path, index - 1, &pl_prev, lptr, pdevc,
-				 dev, pis, params, &cbox, uniform, join, 
+				 dev, pis, params, &cbox, uniform, join,
 				 initial_matrix_reflected);
 	    if (code < 0)
 		goto exit;

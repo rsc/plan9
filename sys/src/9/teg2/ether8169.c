@@ -1366,7 +1366,7 @@ restart(Ether *edev, char *why)
 	rtl8169transmit(edev);
 	/* allow time to drain 1024-buffer ring */
 	for (del = 0; del < 13 && ctlr->ntq > 0; del++)
-		delay(1);			
+		delay(1);
 
 	iunlock(&ctlr->reglock);
 	rtl8169reset(ctlr);

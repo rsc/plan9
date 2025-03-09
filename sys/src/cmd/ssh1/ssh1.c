@@ -318,7 +318,7 @@ fromnet(Conn *c)
 		}
 		free(m);
 	}
-}		
+}
 
 /*
  *  turn keyboard raw mode on

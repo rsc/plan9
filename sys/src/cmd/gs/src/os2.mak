@@ -1,12 +1,12 @@
 #    Copyright (C) 1989, 1995, 1996, 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -15,7 +15,7 @@
 
 # $Id: os2.mak,v 1.47 2005/08/31 05:52:32 ray Exp $
 # makefile for MS-DOS or OS/2 GCC/EMX platform.
-# Uses Borland (MSDOS) MAKER or 
+# Uses Borland (MSDOS) MAKER or
 # Uses IBM NMAKE.EXE Version 2.000.000 Mar 27 1992
 
 # ------------------------------- Options ------------------------------- #
@@ -99,7 +99,7 @@ IBMCPP=0
 BUILD_X11=0
 !if $(BUILD_X11)
 X11INCLUDE=-I$(X11ROOT)\XFree86\include
-X11LIBS=$(X11ROOT)\XFree86\lib\Xt.lib $(X11ROOT)\XFree86\lib\X11.lib 
+X11LIBS=$(X11ROOT)\XFree86\lib\Xt.lib $(X11ROOT)\XFree86\lib\X11.lib
 MT_OPT=-Zmtd
 !endif
 
@@ -189,7 +189,7 @@ PSD=$(PSGENDIR)\$(NUL)
 # a full path name if you want.  Normally it will be masm or tasm.
 
 USE_ASM=0
-ASM= 
+ASM=
 
 # Define the drive, directory, and compiler name for the EMX files.
 # COMP is the compiler name (gcc)
@@ -443,7 +443,7 @@ CEXE=-Zomf
 GENOPT=$(CP) $(CD) $(CGDB) $(CDLL) $(CO) $(CPNG)
 
 CCFLAGS0=$(GENOPT) $(PLATOPT) -D__OS2__ $(GCIFLAGS)
-CCFLAGS=$(CCFLAGS0) 
+CCFLAGS=$(CCFLAGS0)
 CC=$(COMPDIR)\$(COMP) $(CCFLAGS0)
 CC_=$(CC)
 CC_D=$(CC) $(CO)
@@ -511,7 +511,7 @@ DEVICE_DEVS14=$(DD)jpeg.dev $(DD)jpeggray.dev $(DD)jpegcmyk.dev
 DEVICE_DEVS15=$(DD)pdfwrite.dev $(DD)pswrite.dev $(DD)ps2write.dev $(DD)epswrite.dev $(DD)pxlmono.dev $(DD)pxlcolor.dev
 DEVICE_DEVS16=$(DD)bbox.dev
 # Overflow for DEVS3,4,5,6,9
-DEVICE_DEVS17=$(DD)ljet3.dev $(DD)ljet3d.dev $(DD)ljet4.dev $(DD)ljet4d.dev 
+DEVICE_DEVS17=$(DD)ljet3.dev $(DD)ljet3d.dev $(DD)ljet4.dev $(DD)ljet4d.dev
 DEVICE_DEVS18=$(DD)pj.dev $(DD)pjxl.dev $(DD)pjxl300.dev $(DD)jetp3852.dev $(DD)r4081.dev
 DEVICE_DEVS19=$(DD)lbp8.dev $(DD)m8510.dev $(DD)necp6.dev $(DD)bjc600.dev $(DD)bjc800.dev
 DEVICE_DEVS20=$(DD)pnm.dev $(DD)pnmraw.dev $(DD)ppm.dev $(DD)ppmraw.dev
@@ -699,7 +699,7 @@ $(GLOBJ)gspmdrv.ico: $(GLSRC)gspmdrv.icx $(ECHOGS_XE)
 
 $(PSOBJ)$(GS).res: $(PSSRC)$(GS).rc $(PSOBJ)gsos2.ico
 	rc -i $(COMPBASE)\include -i $(PSSRCDIR) -i $(PSOBJDIR) -r $(PSSRC)$(GS).rc $(PSOBJ)$(GS).res
-	
+
 
 # PM driver program
 
@@ -710,7 +710,7 @@ $(GLOBJ)gspmdrv.res: $(GLSRC)gspmdrv.rc $(GLSRC)gspmdrv.h $(GLOBJ)gspmdrv.ico
 	rc -i $(COMPBASE)\include -i $(GLSRCDIR) -i $(GLOBJDIR) -r $(GLSRC)gspmdrv.rc $(GLOBJ)gspmdrv.res
 
 $(BINDIR)\gspmdrv.exe: $(GLOBJ)gspmdrv.o $(GLOBJ)gspmdrv.res $(GLSRC)gspmdrv.def
-	$(COMPDIR)\$(COMP) $(CGDB) $(CO) -o $(GLOBJ)gspmdrv $(GLOBJ)gspmdrv.o 
+	$(COMPDIR)\$(COMP) $(CGDB) $(CO) -o $(GLOBJ)gspmdrv $(GLOBJ)gspmdrv.o
 	$(COMPDIR)\emxbind -p -r$(GLOBJ)gspmdrv.res -d$(GLSRC)gspmdrv.def $(COMPDIR)\emxl.exe $(GLOBJ)gspmdrv $(BINDIR)\gspmdrv.exe
 	del $(GLOBJ)gspmdrv
 

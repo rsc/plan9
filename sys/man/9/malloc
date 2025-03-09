@@ -81,7 +81,7 @@ If the memory is not immediately available,
 retries every 100 milliseconds until the memory is acquired.
 .PP
 .I Mallocalign
-allocates a block of at least 
+allocates a block of at least
 .I n
 bytes of memory respecting alignment contraints.
 If
@@ -149,7 +149,7 @@ The memory allocator maintains two word-sized fields
 associated with each block, the ``malloc tag'' and the ``realloc tag''.
 By convention, the malloc tag is the PC that allocated the block,
 and the realloc tag the PC that last reallocated the block.
-These may be set or examined with 
+These may be set or examined with
 .IR setmalloctag ,
 .IR getmalloctag ,
 .IR setrealloctag ,
@@ -163,8 +163,8 @@ these tags will be set properly.
 If a custom allocator wrapper is used,
 the allocator wrapper can set the tags
 itself (usually by passing the result of
-.IR getcallerpc (2) 
-to 
+.IR getcallerpc (2)
+to
 .IR setmalloctag )
 to provide more useful information about
 the source of allocation.

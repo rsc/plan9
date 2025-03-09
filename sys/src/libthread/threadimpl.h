@@ -1,4 +1,4 @@
-/* 
+/*
  * Some notes on locking:
  *
  *	All the locking woes come from implementing
@@ -35,7 +35,7 @@ typedef enum
 	Ready,
 	Rendezvous,
 } State;
-	
+
 typedef enum
 {
 	Channone,

@@ -1,12 +1,12 @@
 /* Copyright (C) 2003-2004 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -31,8 +31,8 @@
 
 /* stream implementation */
 
-/* As with the /JBIG2Decode filter, we let the library do its own 
-   memory management through malloc() etc. and rely on our release() 
+/* As with the /JBIG2Decode filter, we let the library do its own
+   memory management through malloc() etc. and rely on our release()
    proc being called to deallocate state.
 */
 
@@ -56,7 +56,7 @@ s_jpxd_init(stream_state * ss)
     state->image = NULL;
     state->offset = 0;
     state->jpx_memory = ss->memory ? ss->memory->non_gc_memory : gs_lib_ctx_get_non_gc_memory_t();
-            
+
     status = jas_init();
 
     if (!status) {
@@ -95,7 +95,7 @@ dump_jas_image(jas_image_t *image)
 	case JAS_CLRSPC_GENRGB: csname = "generic RGB"; break;
 	case JAS_CLRSPC_GENYCBCR: csname = "generic YCbCr"; break;
     }
-    dprintf3("  colorspace is %s (family %d, member %d)\n", 
+    dprintf3("  colorspace is %s (family %d, member %d)\n",
 	csname, jas_clrspc_fam(clrspc), jas_clrspc_mbr(clrspc));
 
     for (i = 0; i < numcmpts; i++) {
@@ -212,7 +212,7 @@ copy_row_yuv(unsigned char *dest, jas_image_t *image,
 #ifdef JPX_USE_IRT
 	q[1] = p[0] - ((p[1] + p[2])>>2);
 	q[0] = p[1] + q[1];
-	q[2] = p[2] + q[1]; 
+	q[2] = p[2] + q[1];
 #else
 	q[0] = (int)((double)p[0] + 1.402 * p[2]);
 	q[1] = (int)((double)p[0] - 0.34413 * p[1] - 0.71414 * p[2]);
@@ -262,7 +262,7 @@ s_jpxd_buffer_input(stream_jpxd_state *const state, stream_cursor_read *pr,
         unsigned char *newbuf = NULL;
         while (newsize - state->buffill < bytes)
             newsize <<= 1;
-        newbuf = (unsigned char *)gs_malloc(state->jpx_memory, newsize, 1, 
+        newbuf = (unsigned char *)gs_malloc(state->jpx_memory, newsize, 1,
 					    "JPXDecode temp buffer");
         /* TODO: check for allocation failure */
         memcpy(newbuf, state->buffer, state->buffill);
@@ -295,7 +295,7 @@ s_jpxd_decode_image(stream_jpxd_state * state)
 	}
 #ifdef JPX_USE_JASPER_CM
 	/* convert non-rgb multicomponent colorspaces to sRGB */
-	if (jas_image_numcmpts(image) > 1 && 
+	if (jas_image_numcmpts(image) > 1 &&
 	    jas_clrspc_fam(jas_image_clrspc(image)) != JAS_CLRSPC_FAM_RGB) {
 	    jas_cmprof_t *outprof;
 	    jas_image_t *rgbimage = NULL;
@@ -334,16 +334,16 @@ s_jpxd_process(stream_state * ss, stream_cursor_read * pr,
     long in_size = pr->limit - pr->ptr;
     long out_size = pw->limit - pw->ptr;
     int status = 0;
-    
+
     /* note that the gs stream library expects offset-by-one
        indexing of its buffers while we use zero indexing */
-       
+
     /* JasPer has its own stream library, but there's no public
-       api for handing it pieces. We need to add some plumbing 
+       api for handing it pieces. We need to add some plumbing
        to convert between gs and jasper streams. In the meantime
        just buffer the entire stream, since it can handle that
        as input. */
-    
+
     /* pass all available input to the decoder */
     if (in_size > 0) {
 	s_jpxd_buffer_input(state, pr, in_size);
@@ -392,8 +392,8 @@ s_jpxd_process(stream_state * ss, stream_cursor_read * pr,
             state->offset += done;
             status = (state->offset < image_size) ? 1 : 0;
         }
-    }    
-    
+    }
+
     return status;
 }
 
@@ -422,7 +422,7 @@ private void
 s_jpxd_set_defaults(stream_state *ss)
 {
     stream_jpxd_state *const state = (stream_jpxd_state *) ss;
-    
+
     state->stream = NULL;
     state->image = NULL;
     state->offset = 0;
@@ -434,10 +434,10 @@ s_jpxd_set_defaults(stream_state *ss)
 
 /* stream template */
 const stream_template s_jpxd_template = {
-    &st_jpxd_state, 
+    &st_jpxd_state,
     s_jpxd_init,
     s_jpxd_process,
-    1, 1, /* min in and out buffer sizes we can handle 
+    1, 1, /* min in and out buffer sizes we can handle
                      should be ~32k,64k for efficiency? */
     s_jpxd_release,
     s_jpxd_set_defaults

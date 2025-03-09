@@ -138,7 +138,7 @@ options set the scroll mode.
 The
 .B cd
 option sets the working directory.
-The optional command and arguments 
+The optional command and arguments
 define which program to run in the window.
 .PP
 By default,

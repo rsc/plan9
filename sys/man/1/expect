@@ -41,7 +41,7 @@ sends
 .B atcommand
 to the modem prefixed with the string
 .BR at .
-It then reads from the modem expecting an AT response. 
+It then reads from the modem expecting an AT response.
 .I At
 will return success if it gets and
 .B OK
@@ -139,7 +139,7 @@ fn dialfn {
 	# dial
 	while( ! dialfn )
 		sleep 30
-		
+
 	if( ! dial/expect -it 60 'username:' ){
 		echo can''t connect >[1=2]
 		exit connect

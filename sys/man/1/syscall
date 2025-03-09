@@ -1,4 +1,4 @@
-.TH SYSCALL 1 
+.TH SYSCALL 1
 .SH NAME
 syscall \- test a system call
 .SH SYNOPSIS

@@ -98,7 +98,7 @@ push_negation(Node *n)
 		break;
 #endif
 	case  AND:
-		Debug("!(p && q) => !p || !q\n"); 
+		Debug("!(p && q) => !p || !q\n");
 		n->ntyp = OR;
 		goto same;
 	case  OR:
@@ -134,7 +134,7 @@ addcan(int tok, Node *n)
 	}
 
 	N = dupnode(n);
-	if (!can)	
+	if (!can)
 	{	can = N;
 		return;
 	}
@@ -204,7 +204,7 @@ Canonical(Node *n)
 	can = ZN;
 	addcan(tok, n);
 #if 0
-	Debug("\nA0: "); Dump(can); 
+	Debug("\nA0: "); Dump(can);
 	Debug("\nA1: "); Dump(n); Debug("\n");
 #endif
 	releasenode(1, n);

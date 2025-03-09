@@ -34,7 +34,7 @@
  */
 
 #ifndef KEYSYM2UCS_INCLUDED
-  
+
 #include "keysym2ucs.h"
 #define VISIBLE /* */
 

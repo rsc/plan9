@@ -1,12 +1,12 @@
 /* Copyright (C) 2003-2004 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -72,7 +72,7 @@
    typedef u_int64_t               uint64_t;
 #  define STDINT_TYPES_DEFINED
 # endif
-   /* other archs may want to add defines here, 
+   /* other archs may want to add defines here,
       or use the fallbacks in std.h */
 #endif
 

@@ -32,4 +32,3 @@ fn xxx {
 		echo $1 has changed since patch was applied! >[2=1]
 }
 cat files | sed 's/^/xxx /' |rc
-

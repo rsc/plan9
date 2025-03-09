@@ -1,12 +1,12 @@
 /* Copyright (C) 2003 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -22,7 +22,7 @@
  *
  *  ttload.h                                                    1.1
  *
- *    TrueType Tables Loader.                          
+ *    TrueType Tables Loader.
  *
  *  Copyright 1996-1998 by
  *  David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -53,7 +53,7 @@
   Int  LookUp_TrueType_Table( PFace  face,
                               Long   tag  );
 
-  TT_Error  Load_TrueType_Directory        ( PFace  face, 
+  TT_Error  Load_TrueType_Directory        ( PFace  face,
                                              int    faceIndex );
 
   TT_Error  Load_TrueType_MaxProfile       ( PFace  face );
@@ -103,7 +103,7 @@
 #define GET_Short()   ttfReader__Short (r)
 #define GET_Long()    ttfReader__Int (r)
 #define GET_ULong()   ttfReader__UInt(r)
-  
+
 #ifdef TT_CONFIG_REENTRANT  /* re-entrant implementation */
 
 /* The following macros define the necessary local */
@@ -155,7 +155,7 @@
           ( error = TT_Read_File ( stream, buffer, count ) )
 #define FILE_Read_At( pos, buffer, count ) \
           ( error = TT_Read_At_File( stream, pos, buffer, count ) )
-  
+
 #else   /* thread-safe implementation */
 
 /* Define stream locals with frame -- nothing in thread-safe mode */
@@ -188,7 +188,7 @@
           ( error = TT_Forget_Frame() )
 
 #define GET_Tag4()    TT_Get_Long  ()
-  
+
 #define FILE_Pos()    TT_File_Pos()
 
 #define FILE_Seek( _position_ ) \
@@ -199,7 +199,7 @@
           ( error = TT_Read_File ( buffer, count ) )
 #define FILE_Read_At( pos, buffer, count ) \
           ( error = TT_Read_At_File( pos, buffer, count ) )
-  
+
 #endif /* TT_CONFIG_REENTRANT */
 
 #ifdef __cplusplus

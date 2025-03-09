@@ -15,7 +15,7 @@ rtf2txt roget-body.rtf |
 		}
 	' > /lib/dict/roget
 
-mkindex -d roget | 
+mkindex -d roget |
 	sort -u -t'	' +0f -1 +0 -1 +1n -2 |
 	sed '
 		s/[ 	]+$//g

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -381,18 +381,18 @@ struct gx_flattened_iterator_s {
     fixed lx0, ly0, lx1, ly1;
 };
 
-bool gx_flattened_iterator__init(gx_flattened_iterator *this, 
+bool gx_flattened_iterator__init(gx_flattened_iterator *this,
 	    fixed x0, fixed y0, const curve_segment *pc, int k);
-bool gx_flattened_iterator__init_line(gx_flattened_iterator *this, 
+bool gx_flattened_iterator__init_line(gx_flattened_iterator *this,
 	    fixed x0, fixed y0, fixed x1, fixed y1);
 void gx_flattened_iterator__switch_to_backscan(gx_flattened_iterator *this, bool not_first);
 bool gx_flattened_iterator__next(gx_flattened_iterator *this);
 bool gx_flattened_iterator__prev(gx_flattened_iterator *this);
 
-bool curve_coeffs_ranged(fixed x0, fixed x1, fixed x2, fixed x3, 
-		    fixed y0, fixed y1, fixed y2, fixed y3, 
-		    fixed *ax, fixed *bx, fixed *cx, 
-		    fixed *ay, fixed *by, fixed *cy, 
+bool curve_coeffs_ranged(fixed x0, fixed x1, fixed x2, fixed x3,
+		    fixed y0, fixed y1, fixed y2, fixed y3,
+		    fixed *ax, fixed *bx, fixed *cx,
+		    fixed *ay, fixed *by, fixed *cy,
 		    int k);
 
 #endif /* gzpath_INCLUDED */

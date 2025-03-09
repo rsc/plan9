@@ -34,7 +34,7 @@ static void
 hwreset(JMedium *jmed)
 {
 	/* BUG make this medium independant... */
-	if(pushcmd(jmed->mdata, "TmsCsOut EdgeDown LSB B0x7 0x7f") < 0) 
+	if(pushcmd(jmed->mdata, "TmsCsOut EdgeDown LSB B0x7 0x7f") < 0)
 		sysfatal("resetting %r");
 	if(jmed->flush(jmed->mdata))
 		sysfatal("resetting %r");
@@ -111,7 +111,7 @@ testice(JMedium *jmed)
 		fprint(2, "Read data %#8.8ux addr %#8.8ux pc[%d]\n",
 				data, ctxt.r[15]+4*i, i);
 	}
-	
+
 	fprint(2, "---- Write mem (dangerous test) --- \n");
 
 	if(0)
@@ -124,7 +124,7 @@ testice(JMedium *jmed)
 				break;
 			}
 		}
-	
+
 	fprint(2, "---- Unfreeze  --- \n");
 	res = iceexitdebug(jmed, &ctxt);
 	if(res < 0)
@@ -138,7 +138,7 @@ main(int argc, char *argv[])
 	JMedium *jmed;
 	int tsh, rsh, i, jtagfd;
 	char *deb;
-	
+
 	deb = nil;
 	argv0 = "mpssetest";
 	tsh = rsh = 0;
@@ -156,13 +156,13 @@ main(int argc, char *argv[])
 	default:
 		usage();
 	} ARGEND
-	
+
 	if(argc != 1)
 		usage();
 
 	jtagfd = open(argv[0], ORDWR);
 	if(jtagfd < 0)
-		sysfatal("cannot open jtag file"); 
+		sysfatal("cannot open jtag file");
 
 	if(deb  != nil)
 		for(i = 0; i < strlen(deb); i++)
@@ -185,7 +185,7 @@ main(int argc, char *argv[])
 		jmed = initmpsse(jtagfd, Sheeva);
 		if(jmed == nil)
 			sysfatal("initialization %r");
-	
+
 		testice(jmed);
 	}
 	Bterm(&bin);

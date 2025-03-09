@@ -1,12 +1,12 @@
 #    Copyright (C) 1991-2001 Aladdin Enterprises.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -16,7 +16,7 @@
 # $Id: msvclib.mak,v 1.29 2004/12/20 22:17:39 igor Exp $
 # makefile for Microsoft Visual C++ 4.1 or later, Windows NT or Windows 95 LIBRARY.
 #
-# All configurable options are surrounded by !ifndef/!endif to allow 
+# All configurable options are surrounded by !ifndef/!endif to allow
 # preconfiguration from within another makefile.
 
 # ------------------------------- Options ------------------------------- #
@@ -405,7 +405,7 @@ FILE_IMPLEMENTATION=stdio
 # Choose the implementation of stdio: Only '' is allowed for library.
 # See gs.mak and ziodevs.c/ziodevsc.c for more details.
 
-STDIO_IMPLEMENTATION= 
+STDIO_IMPLEMENTATION=
 
 # Choose the device(s) to include.  See devs.mak for details,
 # devs.mak and contrib.mak for the list of available devices.
@@ -459,7 +459,7 @@ TOP_MAKEFILES=$(MAKEFILE) $(GLSRCDIR)\msvccmd.mak $(GLSRCDIR)\msvctail.mak $(GLS
 # nmake expands macros when encountered, not when used,
 # so this must precede the !include statements.
 
-BEGINFILES2=$(GLOBJDIR)\$(GS).ilk $(GLOBJDIR)\$(GS).pdb $(GLOBJDIR)\genarch.ilk $(GLOBJDIR)\genarch.pdb 
+BEGINFILES2=$(GLOBJDIR)\$(GS).ilk $(GLOBJDIR)\$(GS).pdb $(GLOBJDIR)\genarch.ilk $(GLOBJDIR)\genarch.pdb
 
 # Define these right away because they modify the behavior of
 # msvccmd.mak, msvctail.mak & winlib.mak.

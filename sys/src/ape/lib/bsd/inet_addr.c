@@ -18,7 +18,7 @@ inet_addr(char *from)
 	char *p;
 	unsigned char to[4];
 	unsigned long x;
- 
+
 	p = from;
 	memset(to, 0, 4);
 	for(i = 0; i < 4 && *p; i++){

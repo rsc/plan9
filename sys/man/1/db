@@ -70,7 +70,7 @@ The options are
 .TP
 .BI -k
 Use the kernel stack of process
-.IR pid 
+.IR pid
 to debug the executing kernel process.
 If
 .I textfile
@@ -185,7 +185,7 @@ Thus
 .LR 0o20 ,
 .LR 0t16 ,
 and
-.L #10 
+.L #10
 all represent sixteen.
 .TP 7.2n
 .IB integer . fraction
@@ -436,7 +436,7 @@ by the length of the string,
 including the zero terminator.
 .TP
 .B S
-Print a string using 
+Print a string using
 the escape convention (see
 .B C
 above).
@@ -495,7 +495,7 @@ Dot is advanced by the size of a machine address.
 When preceded by an integer, tabs to the next
 appropriate tab stop.
 For example,
-.B 8t 
+.B 8t
 moves to the next 8-space tab stop.
 Dot is unaffected.
 .TP
@@ -571,7 +571,7 @@ in the segment named
 are recorded.  Valid segment names are
 .IR text ,
 .IR data ,
-or 
+or
 .IR ublock .
 If less than three address expressions are given,
 the remaining parameters are left unchanged.
@@ -602,8 +602,8 @@ for execution.
 .TP
 .BI $ modifier
 Miscellaneous commands.
-The available 
-.I modifiers 
+The available
+.I modifiers
 are:
 .RS
 .TP
@@ -844,7 +844,7 @@ Each map contains one or more quadruples
 .RI ( "t, b, e, f" ),
 defining a segment named
 .I t
-(usually, 
+(usually,
 .IR text ,
 .IR data ,
 or
@@ -875,7 +875,7 @@ is then
 .PP
 Usually,
 the text and initialized data of a program
-are mapped by segments called 
+are mapped by segments called
 .I text
 and
 .IR data .
@@ -885,7 +885,7 @@ not mapped by the data segment.
 The text segment is mapped similarly in
 a normal (i.e., non-kernel)
 .IR memfile .
-However, the segment called 
+However, the segment called
 .I data
 maps memory from the beginning of the program's data space to
 the base of the ublock.
@@ -1004,7 +1004,7 @@ passed in a register.
 .PP
 Variables and parameters that have been
 optimized away do not appear in the
-symbol table, returning the error 
+symbol table, returning the error
 .IR "bad local variable"
 when accessed by
 .IR db .

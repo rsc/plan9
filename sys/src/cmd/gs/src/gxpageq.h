@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -96,7 +96,7 @@
 
 	TERMINATE: This entry can appear at any time in the page queue. It
 	will be the last entry to ever appear in the queue. The semantics
-	of this entry require all prior non-zero-count COPY_PAGEs and 
+	of this entry require all prior non-zero-count COPY_PAGEs and
 	FULL_PAGEs to be imaged. Any trailing PARTIAL_PAGEs may optionally
 	be rendered, but should not be imaged.
  */

@@ -1,12 +1,12 @@
 /* Copyright (C) 1996-2003 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -93,7 +93,7 @@ private void esc_strcat(char *, const char *);
 private int runarg(gs_main_instance *, const char *, const char *, const char *, int);
 private int run_string(gs_main_instance *, const char *, int);
 private int run_finish(gs_main_instance *, int, int, ref *);
-private int try_stdout_redirect(gs_main_instance * minst, 
+private int try_stdout_redirect(gs_main_instance * minst,
 				const char *command, const char *filename);
 
 /* Forward references for help printout */
@@ -113,7 +113,7 @@ private FILE *
 gs_main_arg_fopen(const char *fname, void *vminst)
 {
     gs_main_set_lib_paths((gs_main_instance *) vminst);
-    return lib_fopen(&((gs_main_instance *)vminst)->lib_path, 
+    return lib_fopen(&((gs_main_instance *)vminst)->lib_path,
 		     ((gs_main_instance *)vminst)->heap, fname);
 }
 private void
@@ -333,8 +333,8 @@ run_stdin:
 		if (sscanf((const char *)arg, "%u", &bsize) != 1 ||
 		    bsize <= 0 || bsize > MAX_BUFFERED_SIZE
 		    ) {
-		    outprintf(minst->heap, 
-			      "-B must be followed by - or size between 1 and %u\n", 
+		    outprintf(minst->heap,
+			      "-B must be followed by - or size between 1 and %u\n",
 			      MAX_BUFFERED_SIZE);
 		    return e_Fatal;
 		}
@@ -582,7 +582,7 @@ run_stdin:
 			    else if (string_is(nsref, "false", 5))
 				make_false(&value);
 			    else {
-				puts(minst->heap, 
+				puts(minst->heap,
 				     "-dvar=name requires name=null, true, or false");
 				return e_Fatal;
 			    }
@@ -812,8 +812,8 @@ run_finish(gs_main_instance *minst, int code, int exit_code,
  * File is closed at program exit (if not stdout/err)
  * or when -sstdout is used again.
  */
-private int 
-try_stdout_redirect(gs_main_instance * minst, 
+private int
+try_stdout_redirect(gs_main_instance * minst,
     const char *command, const char *filename)
 {
     if (strcmp(command, "stdout") == 0) {
@@ -822,7 +822,7 @@ try_stdout_redirect(gs_main_instance * minst,
 	/* If stdout already being redirected and it is not stdout
 	 * or stderr, close it
 	 */
-	if (minst->heap->gs_lib_ctx->fstdout2 
+	if (minst->heap->gs_lib_ctx->fstdout2
 	    && (minst->heap->gs_lib_ctx->fstdout2 != minst->heap->gs_lib_ctx->fstdout)
 	    && (minst->heap->gs_lib_ctx->fstdout2 != minst->heap->gs_lib_ctx->fstderr)) {
 	    fclose(minst->heap->gs_lib_ctx->fstdout2);
@@ -834,7 +834,7 @@ try_stdout_redirect(gs_main_instance * minst,
 	    if (strcmp(filename, "%stderr") == 0) {
 		minst->heap->gs_lib_ctx->stdout_to_stderr = 1;
 	    }
-	    else if ((minst->heap->gs_lib_ctx->fstdout2 = 
+	    else if ((minst->heap->gs_lib_ctx->fstdout2 =
 		      fopen(filename, "w")) == (FILE *)NULL)
 		return_error(e_invalidfileaccess);
 	    minst->heap->gs_lib_ctx->stdout_is_redirected = 1;
@@ -1036,7 +1036,7 @@ print_help_trailer(const gs_main_instance *minst)
     const char *use_htm = "Use.htm", *p = buffer;
     uint blen = sizeof(buffer);
 
-    if (gp_file_name_combine(gs_doc_directory, strlen(gs_doc_directory), 
+    if (gp_file_name_combine(gs_doc_directory, strlen(gs_doc_directory),
 	    use_htm, strlen(use_htm), false, buffer, &blen) != gp_combine_success)
 	p = use_htm;
     outprintf(minst->heap, help_trailer, p, GS_BUG_MAILBOX);

@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -17,9 +17,9 @@
 /* $Id: gxsamplp.h,v 1.2 2005/06/08 14:38:21 igor Exp $ */
 /* Templates for sample lookup and expansion */
 
-/* This module is allowed to include several times into a single .c file. 
+/* This module is allowed to include several times into a single .c file.
    The following macros to be defined in advance :
-	MULTIPLE_MAPS - 1 if num_components_per_plane > 0 and 
+	MULTIPLE_MAPS - 1 if num_components_per_plane > 0 and
 			components use different maps, 0 otherwise.
 	TEMPLATE_sample_unpack_1 - a name for the function
 	TEMPLATE_sample_unpack_2 - a name for the function

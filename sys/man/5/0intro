@@ -1,4 +1,4 @@
-.TH INTRO 5 
+.TH INTRO 5
 .SH NAME
 intro \- introduction to the Plan 9 File Protocol, 9P
 .SH SYNOPSIS

@@ -1,12 +1,12 @@
 # Copyright (C) 2004-2005 artofcode LLC.  All rights reserved.
-# 
+#
 # This software is provided AS-IS with no warranty, either express or
 # implied.
-# 
+#
 # This software is distributed under license and may not be copied,
 # modified or distributed except as expressly authorized under the terms
 # of the license contained in the file LICENSE in this distribution.
-# 
+#
 # For more information about licensing, please refer to
 # http://www.ghostscript.com/licensing/. For information on
 # commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -141,7 +141,7 @@ jasper.clean-not-config-clean :
 
 jasper.config-clean :
 	$(RMN_) $(JASGEN)$(D)libjasper*.dev
-	
+
 JASDEP=$(AK) $(JASPER_MAK)
 
 # hack: jasper uses EXCLUDE_fmt_SUPPORT defines to turn off unwanted
@@ -286,4 +286,3 @@ $(JASOBJ)jp2_dec.$(OBJ) : $(JASSRC)jp2$(D)jp2_dec.c $(JASDEP) $(libjasper_HDRS)
 
 $(JASOBJ)jp2_enc.$(OBJ) : $(JASSRC)jp2$(D)jp2_enc.c $(JASDEP) $(libjasper_HDRS)
 	$(JAS_CC) $(JASO_)jp2_enc.$(OBJ) $(C_) $(JASSRC)jp2$(D)jp2_enc.c
-

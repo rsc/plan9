@@ -132,12 +132,12 @@ will return to the selection prompt upon connection close.
 .IP
 .EX
 ; cec '#l1/ether1'
- 0       1 003048679b89 
+ 0       1 003048679b89
 [#qp]: 0
 
-SR shelf 1> 
+SR shelf 1>
 SR shelf 1> >>> q
- 0       1 003048679b89 
+ 0       1 003048679b89
 [#qp]: q
 ;
 .EE

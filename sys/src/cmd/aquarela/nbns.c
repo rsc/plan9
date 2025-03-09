@@ -31,7 +31,7 @@ struct {
 
 static void
 udplistener(void *)
-{	
+{
 	for (;;) {
 		uchar msg[Udphdrsize + 576];
 		int len = read(udp.fd, msg, sizeof(msg));
@@ -94,7 +94,7 @@ nbnsnextid(void)
 	unlock(&id);
 	return rv;
 }
-	
+
 NbnsTransaction *
 nbnstransactionnew(NbnsMessage *s, uchar *ipaddr)
 {
@@ -110,7 +110,7 @@ nbnstransactionnew(NbnsMessage *s, uchar *ipaddr)
 	t = mallocz(sizeof(*t), 1);
 	if (t == nil)
 		return nil;
-	t->id = s->id;	
+	t->id = s->id;
 	t->c = chancreate(sizeof(NbnsMessage *), 3);
 	if (t->c == nil) {
 		free(t);

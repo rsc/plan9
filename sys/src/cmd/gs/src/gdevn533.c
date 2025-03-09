@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1990, 1991, 1993, 1996 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -97,7 +97,7 @@ analyze_error(int printer_file)
 	  else {
 	    waiting = FALSE;
 	    retry_after_return = FALSE;
-	    
+
 	    if(status.stat[2] & ST2_FIXER)
 	      detail = "Fixer trouble - quiting";
 	    else if(status.stat[2] & ST2_SCANNER)
@@ -146,7 +146,7 @@ nwp533_close(gx_device *dev)
   if (((gx_device_printer *) dev)->file != NULL)
     {
       int printer_file;
-      
+
       printer_file = fileno(((gx_device_printer *) dev)->file);
     restart2:
       if(ioctl(printer_file, LBIOCSTOP, 0) < 0)
@@ -169,7 +169,7 @@ nwp533_print_page(gx_device_printer *dev, FILE *prn_stream)
   byte *in;
   int printer_file;
   printer_file = fileno(prn_stream);
-  
+
   if (line_size % 4 != 0)
     {
       line_size += 4 - (line_size % 4);
@@ -184,7 +184,7 @@ nwp533_print_page(gx_device_printer *dev, FILE *prn_stream)
       return_error(gs_error_ioerror);
     }
   lseek(printer_file, 0, 0);
-  
+
   for ( lnum = 0; lnum < dev->height; lnum++)
     {
       gdev_prn_copy_scan_lines(prn_dev, lnum, in, line_size);

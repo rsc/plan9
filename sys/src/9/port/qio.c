@@ -807,7 +807,7 @@ qopen(int limit, int msg, void (*kick)(void*), void *arg)
 	q->kick = kick;
 	q->arg = arg;
 	q->state = msg;
-	
+
 	q->state |= Qstarve;
 	q->eof = 0;
 	q->noblock = 0;

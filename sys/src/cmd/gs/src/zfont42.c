@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -163,11 +163,11 @@ font_GlyphDirectory_param(os_ptr op, ref *pGlyphDirectory)
  * Access a given byte offset and length in an array of strings.
  * This is used for sfnts and for CIDMap.  The int argument is 2 for sfnts
  * (because of the strange behavior of odd-length strings), 1 for CIDMap.
- * Return code : 0 - success, <0 - error, 
+ * Return code : 0 - success, <0 - error,
  *               >0 - number of accessible bytes (client must cycle).
  */
 int
-string_array_access_proc(const gs_memory_t *mem, 
+string_array_access_proc(const gs_memory_t *mem,
 			 const ref *psa, int modulus, ulong offset,
 			 uint length, const byte **pdata)
 {
@@ -242,8 +242,8 @@ z42_get_glyph_index(gs_font_type42 *pfont, gs_glyph glyph)
  * the glyph is missing or out of range.
  */
 int
-font_gdir_get_outline(const gs_memory_t *mem, 
-		      const ref *pgdir, 
+font_gdir_get_outline(const gs_memory_t *mem,
+		      const ref *pgdir,
 		      long glyph_index,
 		      gs_glyph_data_t *pgd)
 {
@@ -355,7 +355,7 @@ z42_glyph_info(gs_font *font, gs_glyph glyph, const gs_matrix *pmat,
 }
 
 /* Procedure for accessing the sfnts array.
- * Return code : 0 - success, <0 - error, 
+ * Return code : 0 - success, <0 - error,
  *               >0 - number of accessible bytes (client must cycle).
  */
 private int

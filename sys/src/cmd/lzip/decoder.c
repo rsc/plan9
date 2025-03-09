@@ -291,4 +291,3 @@ LZd_decode_member(LZ_decoder *d, Pretty_print *pp)
 	LZd_flush_data(d);
 	return 2;
 }
-

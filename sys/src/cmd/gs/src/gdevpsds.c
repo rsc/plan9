@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -784,7 +784,7 @@ s_compr_chooser_init(stream_state * st)
 
 /* Set image dimensions. */
 int
-s_compr_chooser_set_dimensions(stream_compr_chooser_state * ss, int width, 
+s_compr_chooser_set_dimensions(stream_compr_chooser_state * ss, int width,
 		    int height, int depth, int bits_per_sample)
 {
     ss->width = width;
@@ -809,7 +809,7 @@ s_compr_chooser_release(stream_state * st)
 /* Estimate a row for photo/lineart recognition. */
 private void
 s_compr_chooser__estimate_row(stream_compr_chooser_state *const ss, byte *p)
-{   
+{
     /*	This function uses a statistical algorithm being not well defined.
 
 	We compute areas covered by gradients,
@@ -861,7 +861,7 @@ s_compr_chooser__estimate_row(stream_compr_chooser_state *const ss, byte *p)
 	    if (w0 > v) {
 		if (!lower)
 		    j1 = i - 1;
-		w0 = v; 
+		w0 = v;
 		lower = true;
 	    } else if (w0 == v && j1 < i - max_gradient_constant)
 		j1 = i - max_gradient_constant; /* inner constant plateaw */
@@ -885,7 +885,7 @@ s_compr_chooser__estimate_row(stream_compr_chooser_state *const ss, byte *p)
     }
     if (plateau_count > ss->width / 6) {
 	/*  Possibly a dithering, can't recognize.
-	    It would be better to estimate frequency histogram rather than 
+	    It would be better to estimate frequency histogram rather than
 	    rough quantity, but we hope that the simpler test can work fine.
 	*/
     } else if (!plateau_count) /* a pseudo-constant color through entire row */
@@ -917,9 +917,9 @@ s_compr_chooser__recognize(stream_compr_chooser_state * ss)
 
 /* Uppack data and recognize photo/lineart. */
 private void
-s_compr_chooser__unpack_and_recognize(stream_compr_chooser_state *const ss, 
+s_compr_chooser__unpack_and_recognize(stream_compr_chooser_state *const ss,
 				      const byte *data, int length)
-{   
+{
     /*
      * Input samples are packed ABCABCABC..., but the sample[] array of
      * unpacked values is stored AAA...BBB...CCC.  i counts samples within
@@ -984,7 +984,7 @@ const stream_template s_compr_chooser_template = {
 };
 
 /* Get choice */
-uint 
+uint
 s_compr_chooser__get_choice(stream_compr_chooser_state *ss, bool force)
 {
     ulong plateaus = min(ss->lower_plateaus, ss->upper_plateaus);
@@ -1032,7 +1032,7 @@ s_image_colors_init(stream_state * st)
     return 0;
 }
 
-private int 
+private int
 s_image_colors_convert_color_to_mask(stream_image_colors_state *ss)
 {
     int i, ii;
@@ -1055,7 +1055,7 @@ s_image_colors_convert_to_device_color(stream_image_colors_state * ss)
     double v1 = (1 << ss->output_bits_per_sample) - 1;
 
     for (i = 0; i < ss->depth; i++)
-	cc.paint.values[i] = ss->input_color[i] * 
+	cc.paint.values[i] = ss->input_color[i] *
 		(ss->Decode[i * 2 + 1] - ss->Decode[i * 2]) / v0 + ss->Decode[i * 2];
 
     code = ss->pcs->type->remap_color(&cc, ss->pcs, &dc, ss->pis,
@@ -1081,7 +1081,7 @@ s_image_colors_set_mask_colors(stream_image_colors_state * ss, uint *MaskColor)
 
 /* Set image dimensions. */
 void
-s_image_colors_set_dimensions(stream_image_colors_state * ss, 
+s_image_colors_set_dimensions(stream_image_colors_state * ss,
 			       int width, int height, int depth, int bits_per_sample)
 {
     ss->width = width;
@@ -1201,4 +1201,3 @@ const stream_template s__image_colors_template = {
     &st_stream_image_colors_state, s_image_colors_init, s_image_colors_process, 1, 1,
     NULL, NULL
 };
-

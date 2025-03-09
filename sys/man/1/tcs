@@ -167,6 +167,6 @@ Print an up to date list of the supported character sets.
 .SH SOURCE
 .B /sys/src/cmd/tcs
 .SH SEE ALSO
-.IR ascii (1), 
-.IR rune (2), 
+.IR ascii (1),
+.IR rune (2),
 .IR utf (6).

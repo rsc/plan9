@@ -62,7 +62,7 @@ ndbnew(char *attr, char *val)
 	if(val != nil)
 		ndbsetval(t, val, strlen(val));
 	ndbsetmalloctag(t, getcallerpc(&attr));
-	return t;	
+	return t;
 }
 
 /*

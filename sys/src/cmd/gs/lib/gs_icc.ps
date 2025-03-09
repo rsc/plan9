@@ -1,12 +1,12 @@
 %    Copyright (C) 2001, 2002 Aladdin Enterprises.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -259,7 +259,7 @@ colorspacedict
       }
     bind
 
-    % for now, the alternative spaces for an ICCBased color space do 
+    % for now, the alternative spaces for an ICCBased color space do
     % not require special preparation
     /cs_prepare_color { dup 1 get /N get //check_num_stack exec pop } bind
     /cs_complete_setcolor //pop_1
@@ -287,7 +287,7 @@ systemdict begin
     % Since .bigstring needs to know the size, we first read an array of
     % strings each 64000 max length.
     %
-    % stack: --file-- (%%BeginICCProfile: ...) 
+    % stack: --file-- (%%BeginICCProfile: ...)
     1 index 0 (%%EndICCProfile) /SubFileDecode filter
     [ { counttomark 1 add index
         64000 string readhexstring
@@ -304,7 +304,7 @@ systemdict begin
     pop				% discard length of bytestring
     % make a seekable -file- out of the bytestring
     mark /AsyncRead true .dicttomark /ReusableStreamDecode filter
-    % stack: --file-- (%%BeginICCProfile: ...) --icc_subfile-- 
+    % stack: --file-- (%%BeginICCProfile: ...) --icc_subfile--
     /DeviceCMYK setcolorspace
     << /DataSource 3 -1 roll
        /N 4		% Try CMYK first
@@ -325,7 +325,7 @@ systemdict begin
 
 % Merge ProcessICCcomment with existing handler
 /.ProcessICCcomment load /exec load
-currentuserparams /ProcessDSCComment get 
+currentuserparams /ProcessDSCComment get
 dup null eq {pop {pop pop}} if /exec load
 4 array astore cvx readonly
 << /ProcessDSCComment 3 -1 roll >> setuserparams

@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -930,7 +930,7 @@ cgm_COLOR_TABLE(cgm_state * st, cgm_int index, const cgm_color * values, int cou
     DONE;
 }
 
-cgm_result 
+cgm_result
 cgm_ASPECT_SOURCE_FLAGS(cgm_state * st, const cgm_aspect_source_flag * flags, int count)
 {
     int i;

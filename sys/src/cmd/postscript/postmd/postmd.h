@@ -66,4 +66,3 @@ typedef struct  {
  */
 
 char	*savestring();
-

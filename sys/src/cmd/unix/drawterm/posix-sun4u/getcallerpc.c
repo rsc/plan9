@@ -6,4 +6,3 @@ getcallerpc(void *a)
 {
 	return ((ulong*)a)[-1];
 }
-

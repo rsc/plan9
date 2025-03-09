@@ -77,7 +77,7 @@ int
 sleepuntil(ulong tm)
 {
 	ulong now = time(0);
-	
+
 	if (now < tm)
 		return sleep((tm - now)*1000);
 	else
@@ -678,7 +678,7 @@ initcap(void)
 }
 
 /*
- *  create a change uid capability 
+ *  create a change uid capability
  */
 char*
 mkcap(char *from, char *to)

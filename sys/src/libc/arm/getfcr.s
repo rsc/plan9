@@ -9,4 +9,3 @@ TEXT	getfsr(SB), $0
 
 TEXT	setfsr(SB), $0
 	RET
-

@@ -10,7 +10,7 @@ typedef struct Lcpopt Lcpopt;
 typedef struct Qualpkt Qualpkt;
 typedef struct Block Block;
 
-typedef uchar Ipaddr[IPaddrlen];	
+typedef uchar Ipaddr[IPaddrlen];
 
 #pragma incomplete Tcpc
 
@@ -66,7 +66,7 @@ enum {
 	PPP_goodfcs=	0xf0b8,
 
 	/* PPP phases */
-	Pdead=		0,	
+	Pdead=		0,
 	Plink,				/* doing LCP */
 	Pauth,				/* doing chap */
 	Pnet,				/* doing IPCP, CCP */
@@ -290,7 +290,7 @@ struct PPP
 	void		*cstate;	/* compression state */
 	Uncomptype	*unctype;	/* uncompression virtual table */
 	void		*uncstate;	/* uncompression state */
-	
+
 	/* encryption key */
 	uchar		key[16];
 	int		sendencrypted;

@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 1996, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -509,7 +509,7 @@ clist_new_tile_params(gx_strip_bitmap * new_tile, const gx_strip_bitmap * tiles,
 				 * as long as we don't exceed a total tile size of 256 bytes,
 				 * or more than 255 repetitions in X or Y, or make the tile so
 				 * large that not all possible tiles will fit in the cache.
-				 * Also, don't attempt Y replication if shifting is required. 
+				 * Also, don't attempt Y replication if shifting is required.
 				 */
 #define max_tile_reps_x 255
 #define max_tile_bytes_x 32

@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -25,8 +25,8 @@
 
 #if 0
 
-/* gsmemraw was an abstract base class.  
- * it is no longer in use, instead use the concrete base class is gs_memory_t 
+/* gsmemraw was an abstract base class.
+ * it is no longer in use, instead use the concrete base class is gs_memory_t
  * since gs_memory_t contains interfaces that must be availiable throughout the system
  * is is unadvisable to have a class below it without these.
  */
@@ -228,7 +228,7 @@ typedef struct gs_raw_memory_procs_s {
 
 struct gs_raw_memory_s {
     gs_raw_memory_t *stable_memory;	/* cache the stable allocator */
-    gs_raw_memory_procs_t procs;        
+    gs_raw_memory_procs_t procs;
 };
 
 #endif /* 0 */

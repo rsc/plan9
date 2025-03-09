@@ -589,7 +589,7 @@ setname(Dosfile *fp, char *from)
 	}
 	while(to - fp->name < 8)
 		*to++ = ' ';
-	
+
 	/* from might be 12345678.123: don't save the '.' in ext */
 	if(*from == '.')
 		from++;

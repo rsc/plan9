@@ -290,7 +290,7 @@ to occur and there is an error,
 a negative value
 .RB ( Beof )
 is returned.
-Otherwise, 
+Otherwise,
 .I Bprint
 returns the number of bytes written.
 .I Bvprint
@@ -338,7 +338,7 @@ written.
 .I Bio
 routines that return integers yield
 .B Beof
-if 
+if
 .I bp
 is not the descriptor of an open file.
 .I Bopen

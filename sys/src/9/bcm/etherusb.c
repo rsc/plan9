@@ -60,7 +60,7 @@ struct Udev {
 	Unpackfn *unpack;
 	Transmitfn *transmit;
 };
-	
+
 static Cmdtab cmds[] = {
 	{ Bind,		"bind",		7, },
 	{ Unbind,	"unbind",	0, },
@@ -156,7 +156,7 @@ unpacksmsc(Ether *edev, Block *b)
 {
 	ulong hd;
 	int m;
-	
+
 	ddump('@', b);
 	if(BLEN(b) < 4)
 		return -1;
@@ -396,7 +396,7 @@ etherusbtransmit(Ether *edev)
 {
 	Ctlr *ctlr;
 	Block *b;
-	
+
 	ctlr = edev->ctlr;
 	while((b = qget(edev->oq)) != nil){
 		ctlr->txpkt++;

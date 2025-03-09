@@ -52,4 +52,3 @@ external: /n/$fileserver/lib/ndb/external
 
 external-cs: /n/$fileserver/lib/ndb/external-cs
 	cp /n/$fileserver/lib/ndb/external-cs /n/kfs/lib/ndb
-

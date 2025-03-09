@@ -24,7 +24,7 @@ Together, the ID and domain name identify the owner of a key.
 When a terminal boots,
 .IR factotum (4)
 prompts for user name and password.
-The user name becomes the terminal's authentication ID. 
+The user name becomes the terminal's authentication ID.
 The password is converted using
 .I passtokey
 (see
@@ -38,7 +38,7 @@ before saving it.
 For Internet machines the correct AS to ask is found using
 .IR dhcpd (8).
 .PP
-When a CPU or file server boots, 
+When a CPU or file server boots,
 .I factotum
 reads the key, ID, and domain name from
 non-volatile RAM.
@@ -223,7 +223,7 @@ The client starts by sending a random challenge to the server.
 .IR \-
 .br
 The server replies with a ticket request giving its
-id and authentication domain along with its own 
+id and authentication domain along with its own
 random challenge.
 .TP
 .IR C \(-> S
@@ -235,14 +235,14 @@ random challenge.
 .IR Kn { AuthAc ,
 .IR CHs }
 .br
-The client adds 
+The client adds
 .I IDc
 and
 .I IDr
 to the ticket request and obtains a ticket pair
 from the AS as described above.
 The client relays the server's ticket along with
-an 
+an
 .IR authenticator ,
 the
 .I AuthAc
@@ -263,16 +263,16 @@ in the authenticator avoids replay attacks.)
 The server replies with its own authenticator,
 proving to the client that it also knows
 .I Kn
-and therefore 
+and therefore
 .I Ks .
 .PD
 .PP
 .I P9sk2
-is an older variant of 
+is an older variant of
 .I p9sk1
 used only when connecting to pre-9P2000 remote
 execution services.
-It omits the first message and last 
+It omits the first message and last
 messages and therefore does not
 authenticate the server to the client.
 .SS "P9any
@@ -316,7 +316,7 @@ no longer used,
 omitted the first message's
 .B v.2
 prefix
-and the 
+and the
 .B OK
 message.
 .PP
@@ -336,7 +336,7 @@ and
 .IR exportfs (4),
 run
 .I p9any
-over the network and then 
+over the network and then
 use
 .I Kn
 to derive an
@@ -384,7 +384,7 @@ containing the old password and the new password.
 If
 .I changesecret
 is set, the AS also changes
-the user's 
+the user's
 .IR secret ,
 the password used for non-Plan 9 authentications.
 .TP
@@ -402,7 +402,7 @@ followed by a 64-byte error message.
 .SS "Authentication Database
 An
 .IR ndb (2)
-database file 
+database file
 .B /lib/ndb/auth
 exists for the AS.
 This database maintains ``speaks for'' relationships, i.e.,
@@ -505,7 +505,7 @@ message may be substituted.
 .IR response
 .Ok AuthChal
 .IP
-This protocol allows the use of 
+This protocol allows the use of
 handheld authenticators such as SecureNet
 keys and SecureID tokens
 in programs such as
@@ -517,7 +517,7 @@ and
 .IP
 .I Challenge
 and
-.I response 
+.I response
 are text strings,
 .SM NUL -padded
 to 16 bytes
@@ -529,7 +529,7 @@ When using a SecureNet key or
 .I netkey
 (see
 .IR passwd (1)),
-the 
+the
 .I response
 is an eight-digit decimal or hexadecimal number
 that is an encryption of the challenge
@@ -575,7 +575,7 @@ AuthApop ,
 .IR challenge
 .sp -\n(PDu
 .TP
-.IR S \(-> A 
+.IR S \(-> A
 AuthApop ,
 .IR IDs ,
 .IR DN ,
@@ -603,7 +603,7 @@ and authenticator.
 If the response is incorrect, the client may repeat the
 ticket request/MD5 checksum message to try again.
 .IP
-The 
+The
 .I AuthCram
 protocol runs identically to the
 .I AuthApop
@@ -641,7 +641,7 @@ The
 is eight random bytes.
 The response is a 16-byte MD5 checksum
 over the packet id, user's secret, and challenge.
-The reply packet is defined as 
+The reply packet is defined as
 .B OChapreply
 in
 .BR <authsrv.h> .
@@ -706,7 +706,7 @@ in
 The challenge is 16 random bytes, and the response
 is a DES ECB encryption of the challenge.
 The method by which VNC converts the user's
-secret into a DES key is weak, 
+secret into a DES key is weak,
 considering only the first eight bytes of the secret.
 .PD
 .SH FILES

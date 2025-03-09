@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -36,7 +36,7 @@
 public_st_gs_text_params();
 public_st_gs_text_enum();
 
-private 
+private
 ENUM_PTRS_WITH(text_params_enum_ptrs, gs_text_params_t *tptr) return 0;
 case 0:
 if (tptr->operation & TEXT_FROM_STRING) {
@@ -133,16 +133,16 @@ gx_device_text_begin(gx_device * dev, gs_imager_state * pis,
 	const gx_clip_path *tcpath =
 	    (text->operation & TEXT_DO_DRAW ? pcpath : 0);
 
-	/* A high level device need to know an initial device color 
+	/* A high level device need to know an initial device color
 	   for accumulates a charstring of a Type 3 font.
-	   Since the accumulation may happen while stringwidth. 
+	   Since the accumulation may happen while stringwidth.
 	   we pass the device color unconditionally. */
 	return dev_proc(dev, text_begin)
 	    (dev, pis, text, font, tpath, pdcolor, tcpath, mem, ppte);
     }
 }
 
-/* 
+/*
  * Initialize a newly created text enumerator.  Implementations of
  * text_begin must call this just after allocating the enumerator.
  */
@@ -229,8 +229,8 @@ gs_text_begin(gs_state * pgs, const gs_text_params_t * text,
 	    return code;
     }
     /* We must load device color even with no TEXT_DO_DRAW,
-       because a high level device accumulates a charstring 
-       of a Type 3 font while stringwidth. 
+       because a high level device accumulates a charstring
+       of a Type 3 font while stringwidth.
        Unfortunately we can't effectively know a leaf font type here,
        so we load the color unconditionally . */
     gx_set_dev_color(pgs);
@@ -513,7 +513,7 @@ gs_text_current_glyph(const gs_text_enum_t *pte)
 {
     return pte->returned.current_glyph;
 }
-int 
+int
 gs_text_total_width(const gs_text_enum_t *pte, gs_point *pwidth)
 {
     *pwidth = pte->returned.total_width;

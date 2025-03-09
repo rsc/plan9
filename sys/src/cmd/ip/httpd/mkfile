@@ -78,4 +78,3 @@ $O.test9down: 9down4e.$O whois.$O classify.$O $LIB
 
 $O.testclassify: testclassify.$O whois.$O classify.$O $LIB
 	$LD -o $target $prereq
-

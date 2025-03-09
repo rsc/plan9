@@ -43,7 +43,7 @@ venti \- archival storage server
 .SH DESCRIPTION
 .I Venti
 is a SHA1-addressed archival storage server.
-See 
+See
 .IR venti (6)
 for a full introduction to the system.
 This page documents the structure and operation of the server.
@@ -51,23 +51,23 @@ This page documents the structure and operation of the server.
 A venti server requires multiple disks or disk partitions,
 each of which must be properly formatted before the server
 can be run.
-.SS Disk 
+.SS Disk
 The venti server maintains three disk structures, typically
 stored on raw disk partitions:
 the append-only
 .IR "data log" ,
 which holds, in sequential order,
 the contents of every block written to the server;
-the 
+the
 .IR index ,
 which helps locate a block in the data log given its score;
-and optionally the 
+and optionally the
 .IR "bloom filter" ,
 a concise summary of which scores are present in the index.
 The data log is the primary storage.
 To improve the robustness, it should be stored on
 a device that provides RAID functionality.
-The index and the bloom filter are optimizations 
+The index and the bloom filter are optimizations
 employed to access the data log efficiently and can be rebuilt
 if lost or damaged.
 .PP
@@ -113,12 +113,12 @@ Each score recorded in the bloom filter is hashed to choose
 .I nhash
 bits to set in the bloom filter.
 A score is definitely not stored in the index of any of its
-.I nhash 
+.I nhash
 bits are not set.
-The bloom filter thus has two parameters: 
+The bloom filter thus has two parameters:
 .I nhash
 (maximum 32)
-and the total bitmap size 
+and the total bitmap size
 (maximum 512MB, 2\s-2\u32\d\s+2 bits).
 .PP
 The bloom filter should be sized so that
@@ -157,7 +157,7 @@ for various caches.
 .PP
 The
 .I "lump cache
-holds recently-accessed venti data blocks, which the server refers to as 
+holds recently-accessed venti data blocks, which the server refers to as
 .IR lumps .
 The lump cache should be at least 1MB but can profitably be much larger.
 The lump cache can be thought of as the level-1 cache:
@@ -215,22 +215,22 @@ as discussed above.
 A reasonable starting allocation is to
 divide memory equally (in thirds) between
 the bloom filter, the index cache, and the lump and block caches;
-the third of memory allocated to the lump and block caches 
+the third of memory allocated to the lump and block caches
 should be split unevenly, with more (say, two thirds)
 going to the block cache.
 .SS Network
-The venti server announces two network services, one 
-(conventionally TCP port 
+The venti server announces two network services, one
+(conventionally TCP port
 .BR venti ,
 17034) serving
 the venti protocol as described in
 .IR venti (6),
 and one serving HTTP
-(conventionally TCP port 
+(conventionally TCP port
 .BR http ,
 80).
 .PP
-The venti web server provides the following 
+The venti web server provides the following
 URLs for accessing status information:
 .TF "\fL/storage"
 .PD
@@ -304,16 +304,16 @@ directory named in the configuration file
 .B webroot
 below).
 .SS Configuration File
-A venti configuration file 
+A venti configuration file
 enumerates the various index sections and
 arenas that constitute a venti system.
 The components are indicated by the name of the file, typically
 a disk partition, in which they reside.  The configuration
 file is the only location that file names are used.  Internally,
 venti uses the names assigned when the components were formatted
-with 
+with
 .I fmtarenas
-or 
+or
 .I fmtisect
 (see
 .IR venti-fmt (8)).
@@ -402,7 +402,7 @@ The
 .I file
 name in the configuration lines above can be of the form
 .IB file : lo - hi
-to specify a range of the file. 
+to specify a range of the file.
 .I Lo
 and
 .I hi
@@ -473,7 +473,7 @@ isect /tmp/disks/isect0
 isect /tmp/disks/isect1
 arenas /tmp/disks/arenas
 bloom /tmp/disks/bloom
-% 
+%
 .EE
 .PP
 Format the index sections, the arena partition,
@@ -487,7 +487,7 @@ finally the main index:
 % venti/fmtbloom /tmp/disks/bloom &
 % wait
 % venti/fmtindex venti.conf
-% 
+%
 .EE
 .PP
 Start the server and check the storage statistics:

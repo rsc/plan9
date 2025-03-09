@@ -217,7 +217,7 @@ set_bit: CARRY { $$ = 0x400; }
 	| ACK { $$ = 0x40; }
 	| ATN { $$ = 0x8; }
 	;
-	
+
 set_list: set_list ',' set_bit { $$ = $1 | $3; }
 	| set_list AND set_bit { $$ = $1 | $3; }
 	| set_bit { $$ = $1; }
@@ -329,7 +329,7 @@ opcode: set_cmd set_list {
 		out.patch[1] = 0;
 	}
 	| RETURN .cond {
-		
+
 		out.len = 2;
 		out.data[0] = 0x90000000L | $2;
 		out.data[1] = 0;
@@ -402,7 +402,7 @@ opcode: set_cmd set_list {
 with_or_when: WITH
 	| WHEN
 	;
-	
+
 jump_or_call: JUMP	 { $$ = 0x80000000L; }
 	| CALL		 { $$ = 0x88000000L; }
 	;
@@ -1040,7 +1040,7 @@ struct expval
 eval(struct expval a, struct expval b, char op)
 {
 	struct expval c;
-	
+
 	if (a.t == Unknown || b.t == Unknown) {
 		c.t = Unknown;
 		c.value = 0;
@@ -1196,4 +1196,3 @@ fixup(void)
 		if (s->t == Const)
 			printf("#define A_%s %ld\n", s->name, s->value);
 }
-

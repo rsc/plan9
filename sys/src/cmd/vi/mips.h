@@ -58,7 +58,7 @@ struct Tlb
 	ulong	tlbent[Nmaxtlb];	/* Virtual address tags */
 	int	hit;			/* Number of successful tag matches */
 	int	miss;			/* Number of failed tag matches */
-};		
+};
 
 struct Icache
 {
@@ -225,7 +225,7 @@ Extern		Biobuf *bioout;
 Extern		Biobuf *bin;
 Extern		ulong *iprof;
 extern		int datasize;
-Extern		Map *symmap;		
+Extern		Map *symmap;
 Extern		int rtrace;
 
 /* Plan9 Kernel constants */

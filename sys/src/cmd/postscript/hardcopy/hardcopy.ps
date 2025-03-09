@@ -151,7 +151,7 @@
       %%default:
 	exch {
 		dup
-		gsave clippath pathbbox pop 3 1 roll pop pop grestore 
+		gsave clippath pathbbox pop 3 1 roll pop pop grestore
 		( ) stringwidth pop currentpoint pop add le {
 			2 index 8#12 write
 		} if
@@ -193,4 +193,3 @@
 /== dup load Unbind def
 /stack dup load Unbind def
 /pstack dup load Unbind def
-

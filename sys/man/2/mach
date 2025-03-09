@@ -131,7 +131,7 @@ to offsets in the file.  Each
 .I map
 comprises one or more
 .BR segments ,
-each associating a non-overlapping range of 
+each associating a non-overlapping range of
 memory addresses with a logical section of
 the executable.
 Other library functions then use a map
@@ -331,7 +331,7 @@ when
 .I n
 is two, four or eight; the former may be byte-swapped, the
 latter reflects the byte order of the target architecture.
-If the file descriptor associated with the applicable segment in 
+If the file descriptor associated with the applicable segment in
 .I map
 is negative, the address itself is placed in the
 return location.  These functions return the number

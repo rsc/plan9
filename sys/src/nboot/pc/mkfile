@@ -7,7 +7,7 @@ TARG=9bootiso 9bootpxe 9bootfat 9boothyb mbr pbs
 HFILES=mem.h fns.h x16.h
 
 all: 9bootiso 9bootpxe 9bootfat 9boothyb mbr pbs
-	
+
 clean:V:
 	rm -rf $TARG *.$O test.* tmp
 
@@ -51,7 +51,7 @@ install:V:
 		mk $MKFLAGS $i.install
 
 %.install:V:	$BIN/%
-	
+
 
 $BIN/%:	%
 	cp $stem $BIN/$stem

@@ -1,4 +1,4 @@
-.TH UART 3 
+.TH UART 3
 .SH NAME
 ptrace \- process scheduling traces
 .SH SYNOPSIS

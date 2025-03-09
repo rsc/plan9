@@ -228,7 +228,7 @@ netshareenum(SmbBuffer *inparam, SmbBuffer *outparam, SmbBuffer *outdata)
 
 	if (!smbbuffergets(inparam, &level))
 		return SmbProcessResultFormat;
-	
+
 	smblogprintif(smbglobals.log.rap2, "netshareenum(%lud, %lud)\n",
 		level, smbbufferwritespace(outdata));
 
@@ -262,7 +262,7 @@ netserverenum2(SmbBuffer *inparam, SmbBuffer *outparam, SmbBuffer *outdata)
 		pr = SmbProcessResultFormat;
 		goto done;
 	}
-	
+
 	smblogprintif(smbglobals.log.rap2, "netserverenum2(%lud, %lud, 0x%.8lux, %s)\n",
 		level, smbbufferwritespace(outdata), servertype, domain);
 
@@ -272,7 +272,7 @@ netserverenum2(SmbBuffer *inparam, SmbBuffer *outparam, SmbBuffer *outdata)
 	if (servertype == 0xffffffff)
 		servertype &= ~(SV_TYPE_DOMAIN_ENUM | SV_TYPE_LOCAL_LIST_ONLY);
 
-	if ((servertype & SV_TYPE_LOCAL_LIST_ONLY) != 0 && (servertype & SV_TYPE_DOMAIN_ENUM) == 0) 
+	if ((servertype & SV_TYPE_LOCAL_LIST_ONLY) != 0 && (servertype & SV_TYPE_DOMAIN_ENUM) == 0)
 		servertype = SV_TYPE_ALL & ~(SV_TYPE_DOMAIN_ENUM);
 
 	entries = 0;
@@ -292,7 +292,7 @@ netserverenum2(SmbBuffer *inparam, SmbBuffer *outparam, SmbBuffer *outdata)
 	si[entries] = 0;
 
 	pr = thingfill(outparam, outdata, &serverinfo, level, si);
-			
+
 done:
 	free(domain);
 	return pr;
@@ -317,7 +317,7 @@ netsharegetinfo(SmbBuffer *inparam, SmbBuffer *outparam, SmbBuffer *outdata)
 		pr = SmbProcessResultFormat;
 		goto done;
 	}
-	
+
 	smblogprintif(smbglobals.log.rap2, "netsharegetinfo(%s, %lud, %lud)\n",
 		netname, level, smbbufferwritespace(outdata));
 
@@ -355,7 +355,7 @@ netservergetinfo(SmbBuffer *inparam, SmbBuffer *outparam, SmbBuffer *outdata)
 		pr = SmbProcessResultFormat;
 		goto done;
 	}
-	
+
 	smblogprintif(smbglobals.log.rap2, "netservergetinfo(%lud, %lud)\n",
 		level, smbbufferwritespace(outdata));
 
@@ -363,7 +363,7 @@ netservergetinfo(SmbBuffer *inparam, SmbBuffer *outparam, SmbBuffer *outdata)
 		goto fmtfail;
 
 	pr = onethingfill(outparam, outdata, &shareinfo, level, &smbglobals.serverinfo);
-			
+
 done:
 	return pr;
 }
@@ -385,7 +385,7 @@ netwkstagetinfo(SmbBuffer *inparam, SmbBuffer *outparam, SmbBuffer *outdata)
 		pr = SmbProcessResultFormat;
 		goto done;
 	}
-	
+
 	smblogprintif(smbglobals.log.rap2, "netwkstagetinfo(%lud, %lud)\n",
 		level, smbbufferwritespace(outdata));
 
@@ -421,9 +421,9 @@ netwkstagetinfo(SmbBuffer *inparam, SmbBuffer *outparam, SmbBuffer *outdata)
 		pr = SmbProcessResultFormat;
 		goto done;
 	}
-	
+
 	pr = SmbProcessResultReply;
-			
+
 done:
 	return pr;
 }

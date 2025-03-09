@@ -176,7 +176,7 @@ sendecho(void)
 {
 	uchar out[16];
 
-	ctlechotime = now;	
+	ctlechotime = now;
 	memset(out, 0, sizeof out);
 	hnputs(out, sizeof out);
 	hnputs(out+2, 1);
@@ -379,7 +379,7 @@ schedack(int n, uchar *dat, int len)
 	}
 
 	if(n-rseq > 1){
-		if(slen && srseq == n-1){	
+		if(slen && srseq == n-1){
 			fprint(2, "reswapped pkts %d and %d\n", srseq, n);
 			write(topppfd, sdat, slen);
 			slen = 0;
@@ -610,7 +610,7 @@ pptp(char *addr)
 	close(topppfd);
 	return pppfd;
 }
-	
+
 void
 pushppp(int fd)
 {
@@ -756,7 +756,7 @@ dumpctlpkt(uchar *pkt)
 		fprint(2, "\tbearer 0x%x framing 0x%x recvwin %d delay %d\n",
 			nhgetl(pkt+24), nhgetl(pkt+28),
 			nhgets(pkt+32), nhgets(pkt+34));
-		fprint(2, "\tphone len %d num %.64s\n", 
+		fprint(2, "\tphone len %d num %.64s\n",
 			nhgets(pkt+36), (char*)pkt+40);
 		fprint(2, "\tsubaddr %.64s\n", (char*)pkt+104);
 		break;

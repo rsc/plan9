@@ -474,7 +474,7 @@ fsyswalk(Xfid *x, Fid *f)
 			qunlock(&row);
 			dir = dirtabw;
 			goto Accept;
-	
+
     Regular:
 //			if(FILE(f->qid) == Qacme)	/* empty directory */
 //				break;

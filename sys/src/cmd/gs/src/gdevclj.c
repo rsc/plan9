@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -196,7 +196,7 @@ clj_get_initial_matrix( gx_device *pdev, gs_matrix *pmat)
 	pmat->ty = pdev->MediaSize[1] * ss_res;
 	return;
     }
-  
+
     if (pclj->rotated) {
         pmat->xx = 0.0;
         pmat->xy = ss_res;
@@ -259,7 +259,7 @@ clj_media_size(float mediasize[2], gs_param_list *plist)
     int have_pagesize = 0;
 
     if ( (param_read_float_array(plist, "HWResolution", &fres) == 0) &&
-          !is_supported_resolution(fres.data) ) 
+          !is_supported_resolution(fres.data) )
         return_error(gs_error_rangecheck);
 
     if ( (param_read_float_array(plist, "PageSize", &fsize) == 0) ||
@@ -661,7 +661,7 @@ clj_pr_put_params(
 	    if ((code = gdev_prn_put_params(pdev, plist)) >= 0)
 		pclj->rotated = false;
 	}
-    } else 
+    } else
 	code = gdev_prn_put_params(pdev, plist);
 
     return code;

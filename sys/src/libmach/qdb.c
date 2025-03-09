@@ -1020,7 +1020,7 @@ static	Spr	sprname[] = {
 	{26, "SRR0"},
 	{27, "SRR1"},
 	{284, "TBLW"},
-	{285, "TBUW"},	
+	{285, "TBUW"},
 	{22, "DEC"},
 	{282, "EAR"},
 	{1008, "HID0"},
@@ -1340,7 +1340,7 @@ powerfoll(Map *map, uvlong pc, Rgetter rget, uvlong *foll)
 		if(!i.aa)
 			foll[0] += pc;
 		break;
-			
+
 	case 16:	/* conditional branch */
 		foll[0] = i.bd;
 		if(!i.aa)

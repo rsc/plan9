@@ -1,12 +1,12 @@
 /* Copyright (C) 1989-1994, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -24,7 +24,7 @@
  * interleaved in multiple passes to produce high vertical resolution at
  * the expense of several passes of the print head.  'eps9mid' is a special
  * mode for 9 pin printers too, scan lines are interleaved but with next
- * vertical line. 'ibmpro' is for the IBM ProPrinter, which has slightly 
+ * vertical line. 'ibmpro' is for the IBM ProPrinter, which has slightly
  * (but only slightly) different control codes.
  *
  * Thanks to:
@@ -96,7 +96,7 @@
 
 /* The device descriptors */
 private dev_proc_print_page(epson_print_page);
-private dev_proc_print_page(eps9mid_print_page); 
+private dev_proc_print_page(eps9mid_print_page);
 private dev_proc_print_page(eps9high_print_page);
 private dev_proc_print_page(ibmpro_print_page);
 
@@ -109,7 +109,7 @@ const gx_device_printer far_data gs_epson_device =
 	1, epson_print_page);
 
 /* Mid-res (interleaved, 1 pass per line) 9-pin device */
-const gx_device_printer far_data gs_eps9mid_device = 
+const gx_device_printer far_data gs_eps9mid_device =
   prn_device(prn_std_procs, "eps9mid",
 	DEFAULT_WIDTH_10THS, DEFAULT_HEIGHT_10THS,
 	X_DPI, 3*Y_BASERES,
@@ -118,7 +118,7 @@ const gx_device_printer far_data gs_eps9mid_device =
 
 
 /* High-res (interleaved) 9-pin device */
-const gx_device_printer far_data gs_eps9high_device = 
+const gx_device_printer far_data gs_eps9high_device =
   prn_device(prn_std_procs, "eps9high",
 	DEFAULT_WIDTH_10THS, DEFAULT_HEIGHT_10THS,
 	X_DPI, 3*Y_BASERES,
@@ -144,14 +144,14 @@ private int
 eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
   const char *init_string, int init_length, const char *end_string,
   int archaic, int tab_hiccup)
-{	
+{
 	static const char graphics_modes_9[5] =
-	{	
+	{
 	-1, 0 /*60*/, 1	/*120*/, 7 /*180*/, DD+3 /*240*/
 	};
 
 	static const char graphics_modes_24[7] =
-	{	
+	{
     	-1, 32 /*60*/, 33 /*120*/, 39 /*180*/,
 	DD+35 /*240*/, -1, DD+40 /*360*/
 	};
@@ -170,7 +170,7 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 	char start_graphics =
 		(y_24pin ? graphics_modes_24 : graphics_modes_9)[x_dpi / 60];
 	int first_pass = (start_graphics & DD ? 1 : 0);
-	int last_pass = first_pass * (y_9pin_high == 2 ? 1 : 2); 
+	int last_pass = first_pass * (y_9pin_high == 2 ? 1 : 2);
 	int y_passes = (y_9pin_high ? 3 : 1);
 	int dots_per_space = x_dpi / 10;	/* pica space = 1/10" */
 	int bytes_per_space = dots_per_space * out_y_mult;
@@ -179,9 +179,9 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 
 	/* Check allocations */
 	if ( buf1 == 0 || buf2 == 0 )
-	{	if ( buf1 ) 
+	{	if ( buf1 )
 		  gs_free(pdev->memory, (char *)buf1, in_size, 1, "eps_print_page(buf1)");
-		if ( buf2 ) 
+		if ( buf2 )
 		  gs_free(pdev->memory, (char *)buf2, in_size, 1, "eps_print_page(buf2)");
 		return_error(gs_error_VMerror);
 	}
@@ -199,7 +199,7 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 
 	/* Print lines of graphics */
 	while ( lnum < pdev->height )
-	{	
+	{
 		byte *in_data;
 		byte *inp;
 		byte *in_end;
@@ -213,7 +213,7 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 		if ( in_data[0] == 0 &&
 		     !memcmp((char *)in_data, (char *)in_data + 1, line_size - 1)
 		   )
-	    	{	
+	    	{
 			lnum++;
 			skip += 3 / in_y_mult;
 			continue;
@@ -221,7 +221,7 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 
 		/* Vertical tab to the appropriate position. */
 		while ( skip > 255 )
-		{	
+		{
 			fputs("\033J\377", prn_stream);
 			skip -= 255;
 		}
@@ -238,7 +238,7 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 			       in_size - lcnt * line_size);
 		}
 
-		if ( y_9pin_high == 2 ) 
+		if ( y_9pin_high == 2 )
 		{	/* Force printing of every dot in one pass */
 			/* by reducing vertical resolution */
 		        /* (ORing with the next line of data). */
@@ -254,7 +254,7 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 			byte *p;
 			int i;
 			static const char index[] =
-			{  0,  8, 16,  1,  9, 17,  
+			{  0,  8, 16,  1,  9, 17,
 			   2, 10, 18,  3, 11, 19,
 			   4, 12, 20,  5, 13, 21,
 			   6, 14, 22,  7, 15, 23
@@ -284,15 +284,15 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 		    out_end = out;
 		    inp = in;
 		    in_end = inp + line_size;
-    
+
 		    if ( y_24pin )
-    	            { 
+    	            {
     			for ( ; inp < in_end; inp++, out_end += 24 )
-    			{ 
+    			{
     	    	            gdev_prn_transpose_8x8(inp, line_size, out_end, 3);
-    	                    gdev_prn_transpose_8x8(inp + line_size * 8, 
+    	                    gdev_prn_transpose_8x8(inp + line_size * 8,
 					           line_size, out_end + 1, 3);
-    	                    gdev_prn_transpose_8x8(inp + line_size * 16, 
+    	                    gdev_prn_transpose_8x8(inp + line_size * 16,
 					           line_size, out_end + 2, 3);
 			}
 			/* Remove trailing 0s. */
@@ -303,10 +303,10 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 			}
     	            }
 		    else
-    	            { 
+    	            {
     			for ( ; inp < in_end; inp++, out_end += 8 )
-    			{ 
-    		            gdev_prn_transpose_8x8(inp + (ypass * 8*line_size), 
+    			{
+    		            gdev_prn_transpose_8x8(inp + (ypass * 8*line_size),
 					           line_size, out_end, 1);
 		    	}
 			/* Remove trailing 0s. */
@@ -318,7 +318,7 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 		}
 
 		for ( out_blk = outp = out; outp < out_end; )
-    		{ 
+    		{
     	 	    /* Skip a run of leading 0s.  At least */
     	            /* tab_min_pixels are needed to make tabbing */
     		    /* worth it.  We do everything by 3's to */
@@ -334,9 +334,9 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
     			byte *zp = outp;
 			int tpos;
 			byte *newp;
-           
+
 			outp += tab_min_pixels;
-    			while ( outp + 3 <= out_end && 
+    			while ( outp + 3 <= out_end &&
     		     		*outp == 0 &&
     				outp[1] == 0 && outp[2] == 0 )
     			{
@@ -345,13 +345,13 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 			tpos = (outp - out) / bytes_per_space;
 			newp = out + tpos * bytes_per_space;
 			if ( newp > zp + 10 )
-    			{ 
+    			{
     			    /* Output preceding bit data.*/
-    		   	    if ( zp > out_blk )	
+    		   	    if ( zp > out_blk )
     			    {
     				/* only false at beginning of line */
 			     	eps_output_run(out_blk, (int)(zp - out_blk),
-    				    	       out_y_mult, start_graphics, 
+    				    	       out_y_mult, start_graphics,
 					       prn_stream,
 					       (y_9pin_high == 2 ?
 					        (1 + ypass) & 1 : pass));
@@ -403,16 +403,16 @@ eps_print_page(gx_device_printer *pdev, FILE *prn_stream, int y_9pin_high,
 private void
 eps_output_run(byte *data, int count, int y_mult,
   char start_graphics, FILE *prn_stream, int pass)
-{	
+{
 	int xcount = count / y_mult;
 
 	fputc(033, prn_stream);
 	if ( !(start_graphics & ~3) )
-	{	
+	{
 		fputc("KLYZ"[(int)start_graphics], prn_stream);
 	}
 	else
-	{	
+	{
 		fputc('*', prn_stream);
 		fputc(start_graphics & ~DD, prn_stream);
 	}
@@ -423,7 +423,7 @@ eps_output_run(byte *data, int count, int y_mult,
 		fwrite(data, 1, count, prn_stream);
 	}
 	else
-	{	
+	{
 		/* Only write every other column of y_mult bytes. */
 		int which = pass;
 		register byte *dp = data;
@@ -476,7 +476,7 @@ private int
 eps9mid_print_page(gx_device_printer *pdev, FILE *prn_stream)
 {
 	return eps_print_page(pdev, prn_stream, 2, eps_init_string,
-			      sizeof(eps_init_string), "\f\033@", 
+			      sizeof(eps_init_string), "\f\033@",
 			      ARCHAIC, TAB_HICCUP);
 }
 

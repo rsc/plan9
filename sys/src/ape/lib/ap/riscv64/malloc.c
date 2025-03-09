@@ -24,7 +24,7 @@ struct Bucket
 typedef struct Arena Arena;
 struct Arena
 {
-	Bucket	*btab[MAX2SIZE];	
+	Bucket	*btab[MAX2SIZE];
 };
 static Arena arena;
 
@@ -84,7 +84,7 @@ good:
 		if((intptr_t)bp == -1)
 			return nil;
 	}
-		
+
 	bp->size = pow;
 	bp->magic = MAGIC;
 

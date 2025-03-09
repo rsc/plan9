@@ -21,7 +21,7 @@ typedef struct Scsi {
 .B
 Scsi* openscsi(char *devdir)
 .PP
-.B 
+.B
 void  closescsi(Scsi *s)
 .PP
 .B
@@ -40,7 +40,7 @@ int   scsicmd(Scsi *s, uchar *cmd, int ncmd,
 .B
 char* scsierror(int asc, int ascq)
 .PP
-.B 
+.B
 int   scsiverbose;
 .SH DESCRIPTION
 These routines provide an interface
@@ -80,14 +80,14 @@ the next call to
 and
 .I scsicmd
 execute a single SCSI command on the named device.
-There should be 
+There should be
 .I ncmd
 bytes of
-command data in 
+command data in
 .IR cmd ;
 if
 .I dir
-is 
+is
 .BR Sread ,
 a successful operation
 will store up to
@@ -99,7 +99,7 @@ If
 .I dir
 is
 .BR Swrite ,
-the 
+the
 .I ndata
 bytes beginning at
 .I data
@@ -114,7 +114,7 @@ is
 and
 .I ndata
 are ignored.
-On error, 
+On error,
 .I scsi
 and
 .I scsicmd
@@ -127,12 +127,12 @@ works a bit harder and
 is the more commonly used routine.
 .I Scsi
 attempts to send the command;
-if it is successful, 
+if it is successful,
 .I scsi
 returns what
 .I scsicmd
 returned.
-Otherwise, 
+Otherwise,
 .I scsi
 sends a request sense command to
 obtain the reason for the failure,
@@ -140,7 +140,7 @@ sends a unit ready command in
 an attempt to bring the unit out of any
 inconsistent states, and tries again.
 If the second try fails,
-.I scsi 
+.I scsi
 sends the request
 sense and unit ready commands
 again
@@ -150,7 +150,7 @@ to set
 .I errstr
 with a reason for failure.
 .PP
-The 
+The
 .B nchange
 and
 .B changetime
@@ -164,7 +164,7 @@ time when the current media was
 inserted into the drive (really the
 first time a SCSI command was issued
 after it was inserted).
-They are maintained by 
+They are maintained by
 .IR scsi .
 .PP
 If

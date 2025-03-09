@@ -30,7 +30,7 @@ defn
 remapdata()
 {
 	mps = map();
-	
+
 	while mps do {
 		m = head mps;
 		name = head m;
@@ -242,4 +242,3 @@ paddr(vaddr)
 	complex MMURegs mmu;
 	return ttbpaddr(mmu.ttb, vaddr);
 }
-

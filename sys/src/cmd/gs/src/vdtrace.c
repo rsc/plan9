@@ -1,12 +1,12 @@
 /* Copyright (C) 2002 artofcode LLC. All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -49,7 +49,7 @@ private inline double bezier_point(double p0, double p1, double p2, double p3, d
 }
 
 private void vd_flatten(double p0x, double p0y, double p1x, double p1y, double p2x, double p2y, double p3x, double p3y)
-{   
+{
 #ifdef DEBUG
     double flat = 0.5;
     double d2x0 = (p0x - 2 * p1x + p2x), d2y0 = (p0y - 2 * p1y + p2y);

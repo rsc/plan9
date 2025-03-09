@@ -34,7 +34,7 @@ cputime(void)
 	 */
 	ret_val *= sysconf(_SC_CLK_TCK);
 	return ret_val;
-	
+
 }
 
 int

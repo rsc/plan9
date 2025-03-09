@@ -32,7 +32,7 @@ void
 flash(void)
 {
 	ulong *r;
-	
+
 	r = QSPI0;
 	r[QSPI_CFG] = 1<<31 | 1<<19 | 3<<6 | 1<<15 | 1<<14 | 1<<10 | 1<<3 | 1;
 	r[QSPI_CFG] &= ~(1<<10);
@@ -41,5 +41,5 @@ flash(void)
 //	cmd(r, 3, 0xD8);
 	for(;;)
 		print("%x\n", cmd(r, 2, 0x05));
-	
+
 }

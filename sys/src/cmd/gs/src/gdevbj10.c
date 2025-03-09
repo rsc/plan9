@@ -1,12 +1,12 @@
 /* Copyright (C) 1990, 1995, 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -27,7 +27,7 @@
  * for A4 paper, both are 3.4mm (0.13").
  *
  * The bottom margin requires a bit of care.  The image is printed
- * as strips, each about 3.4mm wide.  We can only attain the bottom 
+ * as strips, each about 3.4mm wide.  We can only attain the bottom
  * margin if the final strip coincides with it.  Note that each strip
  * is generated using only 48 of the available 64 jets, and the absence
  * of those bottom 16 jets makes our bottom margin, in effect, about
@@ -303,7 +303,7 @@ bj10e_print_page(gx_device_printer *pdev, FILE *prn_stream)
 	   above the bottom margin.  Once it reaches this limit, we make our
 	   final printing pass of a full "bits_per_column" rows. */
 	while ( lnum < last_row )
-	   {	
+	   {
 		byte *in_data;
 		byte *in_end = in + line_size;
 		byte *out_beg = out;

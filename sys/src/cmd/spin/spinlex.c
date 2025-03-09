@@ -162,7 +162,7 @@ static int
 isalpha_(int c)
 {	return isalpha(c);	/* could be macro */
 }
-       
+
 static int
 isdigit_(int c)
 {	return isdigit(c);	/* could be macro */
@@ -754,7 +754,7 @@ c_add_def(FILE *fd)	/* 3 - called in plunk_c_fcts() */
 		fprintf(fd, "#endif\n");
 		for (r = c_tracked; r; r = r->nxt)
 		{	if (r->ival == ZS) continue;
-	
+
 			fprintf(fd, "\tif(%s)\n", r->s->name);
 			fprintf(fd, "\t\tmemcpy(p_t_r, %s, %s);\n",
 				r->s->name, r->t->name);
@@ -1261,7 +1261,7 @@ more:
 		{	*p = '\0';
 			if (s->type == CODE_FRAG)
 			{	*--p = '\0';	/* remove trailing '}' */
-			}	
+			}
 			def_inline(s, dln, &Buf1[0], &Buf2[0], nms);
 			if (firstchar)
 			{	printf("%3d: %s, warning: empty inline definition (%s)\n",
@@ -1554,7 +1554,7 @@ again:
 		getword('\"', notdollar);
 		if (Getchar() != '$')
 			fatal("ltl definition not terminated", yytext);
-		strcat(yytext, "\""); 
+		strcat(yytext, "\"");
 		SymToken(lookup(yytext), STRING)
 
 	case '\'':	/* new 3.0.9 */

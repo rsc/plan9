@@ -46,4 +46,3 @@ mv foo fns.h
 
 sed 's/^void \*setbrk/char *setbrk/' n3.c >foo
 mv foo n3.c
-

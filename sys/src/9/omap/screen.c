@@ -206,7 +206,7 @@ static	void	screenputc(char *buf);
 static	void	screenwin(void);
 
 /*
- * Software cursor. 
+ * Software cursor.
  */
 int	swvisible;	/* is the cursor visible? */
 int	swenabled;	/* is the cursor supposed to be on the screen? */
@@ -424,7 +424,7 @@ swload(Cursor *curs)
 	 * Build cursor image and mask.
 	 * Image is just the usual cursor image
 	 * but mask is a transparent alpha mask.
-	 * 
+	 *
 	 * The 16x16x8 memimages do not have
 	 * padding at the end of their scan lines.
 	 */

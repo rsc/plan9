@@ -43,7 +43,7 @@
 #define	KZERO		0x80000000		/* base of kernel address space */
 #define	KTZERO		KZERO			/* first address in kernel text */
 #define	USERADDR	0xC0000000		/* struct User */
-#define	UREGADDR	(USERADDR+BY2PG-4*19)	
+#define	UREGADDR	(USERADDR+BY2PG-4*19)
 #define	TSTKTOP		USERADDR		/* end of new stack in sysexec */
 #define TSTKSIZ 10
 #define	USTKTOP		(TSTKTOP-TSTKSIZ*BY2PG)	/* byte just beyond user stack */
@@ -59,7 +59,7 @@
  */
 #define	NULLSEG	0	/* null segment */
 #define	KDSEG	1	/* kernel data/stack */
-#define	KESEG	2	/* kernel executable */	
+#define	KESEG	2	/* kernel executable */
 #define	UDSEG	3	/* user data/stack */
 #define	UESEG	4	/* user executable */
 #define TSSSEG	5	/* task segment */
@@ -99,7 +99,7 @@
 /*
  *  virtual MMU
  */
-#define PTEMAPMEM	(1024*1024)	/* ??? */	
+#define PTEMAPMEM	(1024*1024)	/* ??? */
 #define SEGMAPSIZE	16		/* ??? */
 #define	PTEPERTAB	(PTEMAPMEM/BY2PG)	/* ??? */
 #define PPN(x)		((x)&~(BY2PG-1))
@@ -416,7 +416,7 @@ TEXT	getcr2(SB),$0		/* fault address */
 	MOVL	CR0,AX;\
 	ANDL	$~0x4,AX	/* EM=0 */;\
 	MOVL	AX,CR0
-	
+
 TEXT	fpoff(SB),$0		/* turn off floating point */
 	FPOFF
 	RET

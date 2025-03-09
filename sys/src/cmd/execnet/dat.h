@@ -60,4 +60,3 @@ enum	/* Client.status */
 	Established,
 	Hangup,
 };
-

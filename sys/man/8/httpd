@@ -115,24 +115,24 @@ pattern wins, and is applied once (there is no rescanning),
 except for the following exceptions.
 .I Httpd
 matches only the prefix and not subordinate pages
-if a replacement is prefixed with 
+if a replacement is prefixed with
 .LR > .
 .I Httpd
 omits the unmatched part of the original URI
-from the rewritten URI if the replacement is prefixed with 
+from the rewritten URI if the replacement is prefixed with
 .LR * .
 This permits many-to-one mappings; for example,
 to send all references to an old subtree to a single error page.
 .PP
 .I Httpd
-handles replacements prefixed with 
-.L @ 
+handles replacements prefixed with
+.L @
 internally,
 treating the request as if it were for the replacement
 (without the
 .BR @ )
 but not informing the client of the rewritten name.
-Replacement URLs prefixed with 
+Replacement URLs prefixed with
 .L =
 generate a permanent redirection instead of a temporary one.
 .I Httpd
@@ -205,7 +205,7 @@ It is used to record form submissions.
 processes an HTML imagemap query.
 It looks up the point
 .I search
-in the image map file given by 
+in the image map file given by
 .IR uri ,
 and returns a redirection to the appropriate page.
 The map file defaults to NCSA format.
@@ -240,7 +240,7 @@ denied list (like
 .BR .* ),
 yet still allow exceptions.  If
 .B webls.denied
-does not exist or is unreadable, 
+does not exist or is unreadable,
 all accesses are assumed to be denied unless
 explicitly allowed in
 .B webls.allowed.

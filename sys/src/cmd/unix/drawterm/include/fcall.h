@@ -18,7 +18,7 @@ struct	Fcall
 	u32int	afid;		/* Tauth, Tattach */
 	char	*uname;		/* Tauth, Tattach */
 	char	*aname;		/* Tauth, Tattach */
-	u32int	perm;		/* Tcreate */ 
+	u32int	perm;		/* Tcreate */
 	char	*name;		/* Tcreate */
 	uchar	mode;		/* Tcreate, Topen */
 	u32int	newfid;		/* Twalk */
@@ -107,4 +107,3 @@ int	dirfmt(Fmt*);
 int	dirmodefmt(Fmt*);
 
 int	read9pmsg(int, void*, uint);
-

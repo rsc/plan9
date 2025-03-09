@@ -10,7 +10,7 @@ authdial(char *netroot, char *dom)
 	char server[Ndbvlen];
 	Ndbtuple *nt;
 
-	
+
 	if(dom != nil){
 		/* look up an auth server in an authentication domain */
 		nt = csgetval(netroot, "authdom", dom, "auth", server);

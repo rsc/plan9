@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -154,7 +154,7 @@ struct gx_device_color_type_s {
      * the routine sets *psize to 0 and returns 1. Otherwise, if *psize
      * is large enough, the procedure sets *psize to the amount actually
      * used and returns 0. If *psize is too small and no other problem
-     * is detected, *psize is set to the amount required and 
+     * is detected, *psize is set to the amount required and
      * gs_error_rangecheck is returned. If some other error is detected,
      * *psize is left unchanged and the error code is returned.
      *

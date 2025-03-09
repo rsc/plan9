@@ -28,7 +28,7 @@ struct Heap {
 #define SIZE(d)	D2H(d)->size
 
 static char *spacename[] = {
-	"Mem", 
+	"Mem",
 	"Io",
 	"Pcicfg",
 	"Ebctl",
@@ -139,14 +139,14 @@ enum {
 	Obad, Onop, Odebug,
 	Ostr, Obyte, Oword, Odword, Oqword, Oconst,
 	Onamec, Oname, Oscope, Oalias,
-	Oreg, Ofld, Oxfld, Opkg, Ovpkg, Oenv, Obuf, Omet, 
+	Oreg, Ofld, Oxfld, Opkg, Ovpkg, Oenv, Obuf, Omet,
 	Odev, Ocpu, Othz, Oprc,
 	Oadd, Osub, Omod, Omul, Odiv, Oshl, Oshr, Oand, Onand, Oor,
 	Onor, Oxor, Onot, Olbit, Orbit, Oinc, Odec,
 	Oland, Olor, Olnot, Oleq, Olgt, Ollt,
 	Oindex, Omutex, Oevent,
 	Ocfld, Ocfld0, Ocfld1, Ocfld2, Ocfld4, Ocfld8,
-	Oif, Oelse, Owhile, Obreak, Oret, Ocall, 
+	Oif, Oelse, Owhile, Obreak, Oret, Ocall,
 	Ostore, Oderef, Osize, Oref, Ocref, Ocat,
 	Oacq, Orel, Ostall, Osleep, Oload, Ounload,
 };
@@ -255,7 +255,7 @@ gc(void)
 			Region *r = (void*)H2D(h);
 			if(r->mapped > 0){
 				if(amldebug)
-					print("\namlunmapio(%N): %-8s %llux - %llux\n", 
+					print("\namlunmapio(%N): %-8s %llux - %llux\n",
 						(Name*)r->name, spacename[r->space],
 						r->off, r->off + r->len);
 				amlunmapio(r);
@@ -501,7 +501,7 @@ rwreg(void *reg, int off, int len, uvlong v, int write)
 			break;
 		if(r->mapped == 0){
 			if(amldebug)
-				print("\namlmapio(%N): %-8s %llux - %llux\n", 
+				print("\namlmapio(%N): %-8s %llux - %llux\n",
 					(Name*)r->name, spacename[r->space],
 					r->off, r->off + r->len);
 			r->mapped = 1;
@@ -521,7 +521,7 @@ rwreg(void *reg, int off, int len, uvlong v, int write)
 
 		if(write){
 			if(amldebug)
-				print("\nrwreg(%N): %-8s [%llux+%x]/%d <- %llux\n", 
+				print("\nrwreg(%N): %-8s [%llux+%x]/%d <- %llux\n",
 					(Name*)r->name, spacename[r->space],
 					r->off, off, len, v);
 			putle(p, len, v);
@@ -538,7 +538,7 @@ rwreg(void *reg, int off, int len, uvlong v, int write)
 				break;
 			v = getle(p, len);
 			if(amldebug)
-				print("\nrwreg(%N): %-8s [%llux+%x]/%d -> %llux\n", 
+				print("\nrwreg(%N): %-8s [%llux+%x]/%d -> %llux\n",
 					(Name*)r->name, spacename[r->space],
 					r->off, off, len, v);
 		}
@@ -1705,7 +1705,7 @@ evalarith(void)
 		if((FP->op - optab) != Odiv)
 			return r;
 		r = mki(v / d);
-		store(r, FP->arg[3]); 
+		store(r, FP->arg[3]);
 		return r;
 	case Oshl:
 		r = mki(ival(FP->arg[0]) << ival(FP->arg[1]));
@@ -2055,7 +2055,7 @@ amlnew(char tag, int len)
 static void*
 evalosi(void)
 {
-	static char *w[] = { 
+	static char *w[] = {
 		"Windows 2001",
 		"Windows 2001 SP1",
 		"Windows 2001 SP2",

@@ -22,4 +22,3 @@ OFILES=\
 </sys/src/cmd/mksyslib
 
 CFLAGS=$CFLAGS -c -D_POSIX_SOURCE -D_PLAN9_SOURCE
-

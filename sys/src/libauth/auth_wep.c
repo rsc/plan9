@@ -45,6 +45,6 @@ auth_wep(char *dev, char *fmt, ...)
 		auth_freerpc(rpc);
 	}
 	close(fd);
-		
+
 	return rv;
 }

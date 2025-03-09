@@ -60,9 +60,9 @@ zero (described below).
 recognizes an optional string of tabs and spaces,
 then an optional sign, then
 a string of digits optionally containing a decimal
-point, then an optional 
+point, then an optional
 .L e
-or 
+or
 .L E
 followed
 by an optionally signed integer.
@@ -80,7 +80,7 @@ decimal digits.
 .IR strtoul ,
 and
 .I strtoull
-behave similarly to 
+behave similarly to
 .I atof
 and
 .I atol

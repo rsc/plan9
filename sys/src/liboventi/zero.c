@@ -40,7 +40,7 @@ vtZeroExtend(int type, uchar *buf, int n, int nn)
 	return 1;
 }
 
-int 
+int
 vtZeroTruncate(int type, uchar *buf, int n)
 {
 	uchar *p;

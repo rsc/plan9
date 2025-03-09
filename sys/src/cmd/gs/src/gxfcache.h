@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1995, 1997, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -307,14 +307,14 @@ int gx_char_cache_alloc(gs_memory_t * struct_mem, gs_memory_t * bits_mem,
 			gs_font_dir * pdir, uint bmax, uint mmax,
 			uint cmax, uint upper);
 void gx_char_cache_init(gs_font_dir *);
-void gx_purge_selected_cached_chars(gs_font_dir *, 
+void gx_purge_selected_cached_chars(gs_font_dir *,
 				    bool(*)(const gs_memory_t *, cached_char *, void *), void *);
-void gx_compute_char_matrix(const gs_matrix *char_tm, const gs_log2_scale_point *log2_scale, 
+void gx_compute_char_matrix(const gs_matrix *char_tm, const gs_log2_scale_point *log2_scale,
     float *mxx, float *mxy, float *myx, float *myy);
-void gx_compute_ccache_key(gs_font * pfont, const gs_matrix *char_tm, 
+void gx_compute_ccache_key(gs_font * pfont, const gs_matrix *char_tm,
     const gs_log2_scale_point *log2_scale, bool design_grid,
     float *mxx, float *mxy, float *myx, float *myy);
-int gx_lookup_fm_pair(gs_font * pfont, const gs_matrix *char_tm, 
+int gx_lookup_fm_pair(gs_font * pfont, const gs_matrix *char_tm,
     const gs_log2_scale_point *log2_scale, bool design_grid, cached_fm_pair **ppair);
 int gx_add_fm_pair(register gs_font_dir * dir, gs_font * font, const gs_uid * puid,
 	       const gs_matrix * char_tm, const gs_log2_scale_point *log2_scale,

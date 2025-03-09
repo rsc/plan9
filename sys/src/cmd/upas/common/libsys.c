@@ -205,7 +205,7 @@ trylock(char *path)
 		free(l);
 		return 0;
 	}
-	
+
 	/* fork process to keep lock alive */
 	switch(l->pid = rfork(RFPROC)){
 	default:
@@ -631,7 +631,7 @@ stomp(int pid, char *file)
 	}
 	close(fd);
 	return 0;
-	
+
 }
 
 /*
@@ -641,7 +641,7 @@ extern int
 syskill(int pid)
 {
 	return stomp(pid, "note");
-	
+
 }
 
 /*
@@ -887,7 +887,7 @@ remoteaddr(int fd, char *dir)
 	return "";
 }
 
-//  create a file and 
+//  create a file and
 //	1) ensure the modes we asked for
 //	2) make gid == uid
 static int

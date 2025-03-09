@@ -46,7 +46,7 @@ OFILES=\
 	socketpair.$O\
 	pty.$O\
 	writev.$O\
-	
+
 HFILES=priv.h
 
 </sys/src/cmd/mksyslib

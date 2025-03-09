@@ -1,4 +1,4 @@
-/* 
+/*
  * Ralink RT2860 driver
  *
  * Written without any documentation but Damien Bergaminis
@@ -623,7 +623,7 @@ enum {
 #define BcnBase(vap) (0x7800 + (vap) * 512)
 };
 
-/* 
+/*
  *	RT2860 TX descriptor
  *	--------------------
  *	u32int	sdp0 		Segment Data Pointer 0
@@ -649,7 +649,7 @@ enum {
 	TxWiv = (1 << 0),
 };
 
-/* 
+/*
  *	TX Wireless Information
  *	-----------------------
  *	u8int	flags
@@ -693,7 +693,7 @@ enum {
 	TxPidShift = 12,
 };
 
-/* 
+/*
  *	RT2860 RX descriptor
  *	--------------------
  *	u32int	sdp0
@@ -727,7 +727,7 @@ enum {
 	RxBa = (1 << 0),
 };
 
-/* 
+/*
  *	RX Wireless Information
  *	-----------------------
  *	u8int	wcid
@@ -783,7 +783,7 @@ enum {
 	Rf3053 = 13 /* dual-band 3T3R */,
 };
 
-enum {	
+enum {
 	Rt3070RfBlock = (1 << 0),
 	Rt3070Rx0Pd = (1 << 2),
 	Rt3070Tx0Pd = (1 << 3),
@@ -1032,33 +1032,33 @@ static const struct {
 	u32int	reg;
 	u32int	val;
 } rt2860_def_mac[] = {
-	{ BcnOffset0,	 	 0xf8f0e8e0 }, 
-	{ LegacyBasicRate,	 0x0000013f }, 
-	{ HtBasicRate,		 0x00008003 }, 
-	{ MacSysCtrl,	 	 0x00000000 }, 
-	{ BkoffSlotCfg,		 0x00000209 }, 
-	{ TxSwCfg0,			 0x00000000 }, 
-	{ TxSwCfg1,			 0x00080606 }, 
-	{ TxLinkCfg,		 0x00001020 }, 
-	{ TxTimeoutCfg,		 0x000a2090 }, 
-	{ LedCfg,			 0x7f031e46 }, 
-	{ WmmAifsnCfg,		 0x00002273 }, 
-	{ WmmCwminCfg,		 0x00002344 }, 
-	{ WmmCwmaxCfg,		 0x000034aa }, 
-	{ MaxPcnt,			 0x1f3fbf9f }, 
-	{ TxRtyCfg,			 0x47d01f0f }, 
-	{ AutoRspCfg,		 0x00000013 }, 
-	{ CckProtCfg,		 0x05740003 }, 
-	{ OfdmProtCfg,		 0x05740003 }, 
-	{ Gf20ProtCfg,		 0x01744004 }, 
-	{ Gf40ProtCfg,		 0x03f44084 }, 
-	{ Mm20ProtCfg,		 0x01744004 }, 
-	{ Mm40ProtCfg,		 0x03f54084 }, 
-	{ TxopCtrlCfg,		 0x0000583f }, 
-	{ TxopHldrEt,		 0x00000002 }, 
-	{ TxRtsCfg,			 0x00092b20 }, 
-	{ ExpAckTime,		 0x002400ca }, 
-	{ XifsTimeCfg,		 0x33a41010 }, 
+	{ BcnOffset0,	 	 0xf8f0e8e0 },
+	{ LegacyBasicRate,	 0x0000013f },
+	{ HtBasicRate,		 0x00008003 },
+	{ MacSysCtrl,	 	 0x00000000 },
+	{ BkoffSlotCfg,		 0x00000209 },
+	{ TxSwCfg0,			 0x00000000 },
+	{ TxSwCfg1,			 0x00080606 },
+	{ TxLinkCfg,		 0x00001020 },
+	{ TxTimeoutCfg,		 0x000a2090 },
+	{ LedCfg,			 0x7f031e46 },
+	{ WmmAifsnCfg,		 0x00002273 },
+	{ WmmCwminCfg,		 0x00002344 },
+	{ WmmCwmaxCfg,		 0x000034aa },
+	{ MaxPcnt,			 0x1f3fbf9f },
+	{ TxRtyCfg,			 0x47d01f0f },
+	{ AutoRspCfg,		 0x00000013 },
+	{ CckProtCfg,		 0x05740003 },
+	{ OfdmProtCfg,		 0x05740003 },
+	{ Gf20ProtCfg,		 0x01744004 },
+	{ Gf40ProtCfg,		 0x03f44084 },
+	{ Mm20ProtCfg,		 0x01744004 },
+	{ Mm40ProtCfg,		 0x03f54084 },
+	{ TxopCtrlCfg,		 0x0000583f },
+	{ TxopHldrEt,		 0x00000002 },
+	{ TxRtsCfg,			 0x00092b20 },
+	{ ExpAckTime,		 0x002400ca },
+	{ XifsTimeCfg,		 0x33a41010 },
 	{ PwrPinCfg,		 0x00000003 },
 };
 
@@ -1069,20 +1069,20 @@ static const struct {
 	u8int	reg;
 	u8int	val;
 } rt2860_def_bbp[] = {
-	{  65, 0x2c },	
-	{  66, 0x38 },	
-	{  69, 0x12 },	
-	{  70, 0x0a },	
-	{  73, 0x10 },	
-	{  81, 0x37 },	
-	{  82, 0x62 },	
-	{  83, 0x6a },	
-	{  84, 0x99 },	
-	{  86, 0x00 },	
-	{  91, 0x04 },	
-	{  92, 0x00 },	
-	{ 103, 0x00 },	
-	{ 105, 0x05 },	
+	{  65, 0x2c },
+	{  66, 0x38 },
+	{  69, 0x12 },
+	{  70, 0x0a },
+	{  73, 0x10 },
+	{  81, 0x37 },
+	{  82, 0x62 },
+	{  83, 0x6a },
+	{  84, 0x99 },
+	{  86, 0x00 },
+	{  91, 0x04 },
+	{  92, 0x00 },
+	{ 103, 0x00 },
+	{ 105, 0x05 },
 	{ 106, 0x35 },
 };
 
@@ -1093,58 +1093,58 @@ static const struct rfprog {
 	u8int		chan;
 	u32int		r1, r2, r3, r4;
 } rt2860_rf2850[] = {
-	{   1, 0x100bb3, 0x1301e1, 0x05a014, 0x001402 },	
-	{   2, 0x100bb3, 0x1301e1, 0x05a014, 0x001407 },	
-	{   3, 0x100bb3, 0x1301e2, 0x05a014, 0x001402 },	
-	{   4, 0x100bb3, 0x1301e2, 0x05a014, 0x001407 },	
-	{   5, 0x100bb3, 0x1301e3, 0x05a014, 0x001402 },	
-	{   6, 0x100bb3, 0x1301e3, 0x05a014, 0x001407 },	
-	{   7, 0x100bb3, 0x1301e4, 0x05a014, 0x001402 },	
-	{   8, 0x100bb3, 0x1301e4, 0x05a014, 0x001407 },	
-	{   9, 0x100bb3, 0x1301e5, 0x05a014, 0x001402 },	
-	{  10, 0x100bb3, 0x1301e5, 0x05a014, 0x001407 },	
-	{  11, 0x100bb3, 0x1301e6, 0x05a014, 0x001402 },	
-	{  12, 0x100bb3, 0x1301e6, 0x05a014, 0x001407 },	
-	{  13, 0x100bb3, 0x1301e7, 0x05a014, 0x001402 },	
-	{  14, 0x100bb3, 0x1301e8, 0x05a014, 0x001404 },	
-	{  36, 0x100bb3, 0x130266, 0x056014, 0x001408 },	
-	{  38, 0x100bb3, 0x130267, 0x056014, 0x001404 },	
-	{  40, 0x100bb2, 0x1301a0, 0x056014, 0x001400 },	
-	{  44, 0x100bb2, 0x1301a0, 0x056014, 0x001408 },	
-	{  46, 0x100bb2, 0x1301a1, 0x056014, 0x001402 },	
-	{  48, 0x100bb2, 0x1301a1, 0x056014, 0x001406 },	
-	{  52, 0x100bb2, 0x1301a2, 0x056014, 0x001404 },	
-	{  54, 0x100bb2, 0x1301a2, 0x056014, 0x001408 },	
-	{  56, 0x100bb2, 0x1301a3, 0x056014, 0x001402 },	
-	{  60, 0x100bb2, 0x1301a4, 0x056014, 0x001400 },	
-	{  62, 0x100bb2, 0x1301a4, 0x056014, 0x001404 },	
-	{  64, 0x100bb2, 0x1301a4, 0x056014, 0x001408 },	
-	{ 100, 0x100bb2, 0x1301ac, 0x05e014, 0x001400 },	
-	{ 102, 0x100bb2, 0x1701ac, 0x15e014, 0x001404 },	
-	{ 104, 0x100bb2, 0x1701ac, 0x15e014, 0x001408 },	
-	{ 108, 0x100bb3, 0x17028c, 0x15e014, 0x001404 },	
-	{ 110, 0x100bb3, 0x13028d, 0x05e014, 0x001400 },	
-	{ 112, 0x100bb3, 0x13028d, 0x05e014, 0x001406 },	
-	{ 116, 0x100bb3, 0x13028e, 0x05e014, 0x001408 },	
-	{ 118, 0x100bb3, 0x13028f, 0x05e014, 0x001404 },	
-	{ 120, 0x100bb1, 0x1300e0, 0x05e014, 0x001400 },	
-	{ 124, 0x100bb1, 0x1300e0, 0x05e014, 0x001404 },	
-	{ 126, 0x100bb1, 0x1300e0, 0x05e014, 0x001406 },	
-	{ 128, 0x100bb1, 0x1300e0, 0x05e014, 0x001408 },	
-	{ 132, 0x100bb1, 0x1300e1, 0x05e014, 0x001402 },	
-	{ 134, 0x100bb1, 0x1300e1, 0x05e014, 0x001404 },	
-	{ 136, 0x100bb1, 0x1300e1, 0x05e014, 0x001406 },	
-	{ 140, 0x100bb1, 0x1300e2, 0x05e014, 0x001400 },	
-	{ 149, 0x100bb1, 0x1300e2, 0x05e014, 0x001409 },	
-	{ 151, 0x100bb1, 0x1300e3, 0x05e014, 0x001401 },	
-	{ 153, 0x100bb1, 0x1300e3, 0x05e014, 0x001403 },	
-	{ 157, 0x100bb1, 0x1300e3, 0x05e014, 0x001407 },	
-	{ 159, 0x100bb1, 0x1300e3, 0x05e014, 0x001409 },	
-	{ 161, 0x100bb1, 0x1300e4, 0x05e014, 0x001401 },	
-	{ 165, 0x100bb1, 0x1300e4, 0x05e014, 0x001405 },	
-	{ 167, 0x100bb1, 0x1300f4, 0x05e014, 0x001407 },	
-	{ 169, 0x100bb1, 0x1300f4, 0x05e014, 0x001409 },	
-	{ 171, 0x100bb1, 0x1300f5, 0x05e014, 0x001401 },	
+	{   1, 0x100bb3, 0x1301e1, 0x05a014, 0x001402 },
+	{   2, 0x100bb3, 0x1301e1, 0x05a014, 0x001407 },
+	{   3, 0x100bb3, 0x1301e2, 0x05a014, 0x001402 },
+	{   4, 0x100bb3, 0x1301e2, 0x05a014, 0x001407 },
+	{   5, 0x100bb3, 0x1301e3, 0x05a014, 0x001402 },
+	{   6, 0x100bb3, 0x1301e3, 0x05a014, 0x001407 },
+	{   7, 0x100bb3, 0x1301e4, 0x05a014, 0x001402 },
+	{   8, 0x100bb3, 0x1301e4, 0x05a014, 0x001407 },
+	{   9, 0x100bb3, 0x1301e5, 0x05a014, 0x001402 },
+	{  10, 0x100bb3, 0x1301e5, 0x05a014, 0x001407 },
+	{  11, 0x100bb3, 0x1301e6, 0x05a014, 0x001402 },
+	{  12, 0x100bb3, 0x1301e6, 0x05a014, 0x001407 },
+	{  13, 0x100bb3, 0x1301e7, 0x05a014, 0x001402 },
+	{  14, 0x100bb3, 0x1301e8, 0x05a014, 0x001404 },
+	{  36, 0x100bb3, 0x130266, 0x056014, 0x001408 },
+	{  38, 0x100bb3, 0x130267, 0x056014, 0x001404 },
+	{  40, 0x100bb2, 0x1301a0, 0x056014, 0x001400 },
+	{  44, 0x100bb2, 0x1301a0, 0x056014, 0x001408 },
+	{  46, 0x100bb2, 0x1301a1, 0x056014, 0x001402 },
+	{  48, 0x100bb2, 0x1301a1, 0x056014, 0x001406 },
+	{  52, 0x100bb2, 0x1301a2, 0x056014, 0x001404 },
+	{  54, 0x100bb2, 0x1301a2, 0x056014, 0x001408 },
+	{  56, 0x100bb2, 0x1301a3, 0x056014, 0x001402 },
+	{  60, 0x100bb2, 0x1301a4, 0x056014, 0x001400 },
+	{  62, 0x100bb2, 0x1301a4, 0x056014, 0x001404 },
+	{  64, 0x100bb2, 0x1301a4, 0x056014, 0x001408 },
+	{ 100, 0x100bb2, 0x1301ac, 0x05e014, 0x001400 },
+	{ 102, 0x100bb2, 0x1701ac, 0x15e014, 0x001404 },
+	{ 104, 0x100bb2, 0x1701ac, 0x15e014, 0x001408 },
+	{ 108, 0x100bb3, 0x17028c, 0x15e014, 0x001404 },
+	{ 110, 0x100bb3, 0x13028d, 0x05e014, 0x001400 },
+	{ 112, 0x100bb3, 0x13028d, 0x05e014, 0x001406 },
+	{ 116, 0x100bb3, 0x13028e, 0x05e014, 0x001408 },
+	{ 118, 0x100bb3, 0x13028f, 0x05e014, 0x001404 },
+	{ 120, 0x100bb1, 0x1300e0, 0x05e014, 0x001400 },
+	{ 124, 0x100bb1, 0x1300e0, 0x05e014, 0x001404 },
+	{ 126, 0x100bb1, 0x1300e0, 0x05e014, 0x001406 },
+	{ 128, 0x100bb1, 0x1300e0, 0x05e014, 0x001408 },
+	{ 132, 0x100bb1, 0x1300e1, 0x05e014, 0x001402 },
+	{ 134, 0x100bb1, 0x1300e1, 0x05e014, 0x001404 },
+	{ 136, 0x100bb1, 0x1300e1, 0x05e014, 0x001406 },
+	{ 140, 0x100bb1, 0x1300e2, 0x05e014, 0x001400 },
+	{ 149, 0x100bb1, 0x1300e2, 0x05e014, 0x001409 },
+	{ 151, 0x100bb1, 0x1300e3, 0x05e014, 0x001401 },
+	{ 153, 0x100bb1, 0x1300e3, 0x05e014, 0x001403 },
+	{ 157, 0x100bb1, 0x1300e3, 0x05e014, 0x001407 },
+	{ 159, 0x100bb1, 0x1300e3, 0x05e014, 0x001409 },
+	{ 161, 0x100bb1, 0x1300e4, 0x05e014, 0x001401 },
+	{ 165, 0x100bb1, 0x1300e4, 0x05e014, 0x001405 },
+	{ 167, 0x100bb1, 0x1300f4, 0x05e014, 0x001407 },
+	{ 169, 0x100bb1, 0x1300f4, 0x05e014, 0x001409 },
+	{ 171, 0x100bb1, 0x1300f5, 0x05e014, 0x001401 },
 	{ 173, 0x100bb1, 0x1300f5, 0x05e014, 0x001403 },
 };
 
@@ -1382,11 +1382,11 @@ rxon(Ether *edev, Wnode *bss)
 	tmp &= ~0xff;
 	tmp |= (cap & (1<<10)) ? 9 : 20;
 	csr32w(ctlr, BkoffSlotCfg, tmp);
-	
+
 	/* set TX preamble */
 	tmp = csr32r(ctlr, AutoRspCfg);
 	tmp &= ~CckShortEn;
-	if(cap & (1<<5)) tmp |= CckShortEn;	
+	if(cap & (1<<5)) tmp |= CckShortEn;
 	csr32w(ctlr, AutoRspCfg, tmp);
 
 	/* set basic rates */
@@ -1704,7 +1704,7 @@ txrxon(Ctlr *ctlr)
 		    DropVerErr | DropCtrlRsv |
 		    DropCfack | DropCfend;
 		tmp |= DropRts | DropPspoll;
-	} 
+	}
 	csr32w(ctlr, RxFiltrCfg, tmp);
 
 	csr32w(ctlr, MacSysCtrl, MacRxEn | MacTxEn);
@@ -2596,7 +2596,7 @@ transmit(Wifi *wifi, Wnode *wn, Block *b)
 
 	pool = &ctlr->pool;
 	qid = 0; /* for now */
-	ridx = 0; 
+	ridx = 0;
 	tx = &ctlr->tx[qid];
 
 	nodeid = ctlr->bcastnodeid;
@@ -2608,7 +2608,7 @@ transmit(Wifi *wifi, Wnode *wn, Block *b)
 		*(p+4) = TxAck; /* xflags */
 
 		if(BLEN(b) > 512-4)
-			*(p+1) = TxTxopBackoff; /* txop */ 
+			*(p+1) = TxTxopBackoff; /* txop */
 
 		if((w->fc[0] & 0x0c) == 0x08 &&	ctlr->bssnodeid != -1){
 			nodeid = ctlr->bssnodeid;
@@ -2632,7 +2632,7 @@ transmit(Wifi *wifi, Wnode *wn, Block *b)
 
  	/* copy packet header */
 	memmove(p + Txwisize, b->rp, hdrlen);
-	
+
 	/* setup tx descriptor */
 	/* first segment is TXWI + 802.11 header */
 	p = (uchar*)tx->d + Tdscsize * tx->i;
@@ -2701,7 +2701,7 @@ rt2860attach(Ether *edev)
 		}
 		if((err = rt2860start(edev)) != nil){
 			error(err);
-		} 
+		}
 
 		ctlr->bcastnodeid = -1;
 		ctlr->bssnodeid = -1;
@@ -2746,14 +2746,14 @@ receive(Ctlr *ctlr)
 		flags = get32(p + 12);
 		if(flags & (RxCrcerr | RxIcverr)){
 		/*	print("crc | icv err\n"); */
-			goto skip; 
+			goto skip;
 		}
 
 		b = rx->b[rx->i];
 		if(b == nil){
 			print("no buf\n");
 			goto skip;
-		}	
+		}
 		d = b->rp;
 		if(ctlr->wifi == nil)
 			goto skip;
@@ -2872,7 +2872,7 @@ rt2860interrupt(Ureg*, void *arg)
 	}
 	if(r & MacInt2)
 		stats(ctlr);
-	
+
 	if(r & TxDoneInt5)
 		rt2860tx(ctlr, 5);
 
@@ -2902,7 +2902,7 @@ eepromctl(Ctlr *ctlr, u32int val)
 {
 	csr32w(ctlr, PciEectrl, val);
 	coherence();
-	microdelay(EepromDelay);	
+	microdelay(EepromDelay);
 }
 
 /*
@@ -3298,11 +3298,11 @@ rbplant(Ctlr *ctlr, int i)
 	ctlr->rx.b[i] = b;
 	p = (uchar*)&ctlr->rx.p[i * 4]; /* sdp0 */
 	memset(p, 0, Rdscsize);
-	put32(p, PCIWADDR(b->rp)); 
+	put32(p, PCIWADDR(b->rp));
 	p = (uchar*)&ctlr->rx.p[i * 4 + 1]; /* sdl0 */
 	p += 2; /* sdl1 */
 	put16(p, Rbufsize);;
-	
+
 	return 0;
 }
 
@@ -3330,7 +3330,7 @@ allocrx(Ctlr *ctlr, RXQ *rx)
 	return nil;
 }
 
-static void 
+static void
 freerx(Ctlr *, RXQ *rx)
 {
 	int i;
@@ -3474,12 +3474,12 @@ static void
 rt2860pci(void)
 {
 	Pcidev *pdev;
-	
+
 	pdev = nil;
 	while(pdev = pcimatch(pdev, 0, 0)){
 		Ctlr *ctlr;
 		void *mem;
-		
+
 		if(pdev->ccrb != 2 || pdev->ccru != 0x80)
 			continue;
 		if(pdev->vid != 0x1814) /* Ralink */
@@ -3523,7 +3523,7 @@ static int
 rt2860pnp(Ether* edev)
 {
 	Ctlr *ctlr;
-	
+
 	if(rt2860head == nil)
 		rt2860pci();
 again:

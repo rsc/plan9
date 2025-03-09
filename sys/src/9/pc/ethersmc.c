@@ -87,7 +87,7 @@ enum {	/* Tcr values */
 enum {	/* Eph values */
 	EphTxOk		= 0x0001,
 	Eph1Col		= 0x0002,	/* single collision */
-	EphMCol		= 0x0004,	/* multiple collisions */  
+	EphMCol		= 0x0004,	/* multiple collisions */
 	EphTxMcast	= 0x0008,	/* multicast transmit */
 	Eph16Col	= 0x0010,	/* 16 collisions, tx disabled */
 	EphSqet		= 0x0020,	/* SQE test failed, tx disabled */
@@ -164,7 +164,7 @@ enum {	/* MmuCmd values */
 enum { /* AllocRes values */
 	ArFailed	= 0x80,
 };
-	  
+
 enum {	/* FifoPorts values */
 	FpTxEmpty	= 0x0080,
 	FpRxEmpty	= 0x8000,
@@ -292,7 +292,7 @@ attach(Ether *ether)
 
 	ctlr = ether->ctlr;
 	ilock(ctlr);
-	
+
 	if (ctlr->attached) {
 		iunlock(ctlr);
 		return;
@@ -379,10 +379,10 @@ receive(Ether* ether)
 	outs(port + Pointer, PtrRead | PtrRcv | PtrAutoInc);
 	status = ins(port + Data1);
 	len = ins(port + Data1) & RxLenMask - HdrSize;
-	
+
 	if (status & RsOddFrame)
 		len++;
-	
+
 	if ((status & RsError) || (bp = iallocb(len)) == 0) {
 
 		if (status & RsAlgnErr)
@@ -399,12 +399,12 @@ receive(Ether* ether)
 	/* packet length is padded to word */
 	inss(port + Data1, bp->rp, len / 2);
 	bp->wp = bp->rp + (len & ~1);
-	
+
 	if (len & 1) {
 		*bp->wp = inb(port + Data1);
 		bp->wp++;
 	}
-	  
+
 	etheriq(ether, bp, 1);
 	ether->inpackets++;
 	outs(port + MmuCmd, McRelease);
@@ -429,7 +429,7 @@ txerror(Ether* ether)
 	outb(port + PktNo, pktno);
 	outs(port + Pointer, PtrAutoInc | PtrRead);
 	status = ins(port + Data1);
-	
+
 	if (status & TsLostCar)
 		ctlr->lcar++;
 
@@ -440,10 +440,10 @@ txerror(Ether* ether)
 		ctlr->scol++;
 
 	ether->oerrs++;
-	
+
 	SELECT_BANK(0);
 	outs(port + Tcr, ins(port + Tcr) | TcrEnable);
-	
+
 	SELECT_BANK(2);
 	outs(port + MmuCmd, McFreePkt);
 
@@ -526,12 +526,12 @@ interrupt(Ureg*, void *arg)
 	ether = arg;
 	port = ether->port;
 	ctlr = ether->ctlr;
-	
+
 	ilock(ctlr);
 	save_bank = ins(port + BankSelect);
 	SELECT_BANK(2);
 	save_pointer = ins(port + Pointer);
-	
+
 	mask = inb(port + IntrMask);
 	outb(port + IntrMask, 0);
 
@@ -566,7 +566,7 @@ interrupt(Ureg*, void *arg)
 		if (status & IntEph)
 			eph_irq(ether);
 	}
-	
+
 	outb(port + IntrMask, mask);
 	outs(port + Pointer, save_pointer);
 	outs(port + BankSelect, save_bank);
@@ -592,7 +592,7 @@ promiscuous(void* arg, int on)
 		x |= RcrPromisc;
 	else
 		x &= ~RcrPromisc;
-	
+
 	outs(port + Rcr, x);
 	iunlock(ctlr);
 }
@@ -604,22 +604,22 @@ multicast(void* arg, uchar *addr, int on)
 	Smc91xx*ctlr;
 	Ether *ether;
 	ushort x;
-	
+
 	USED(addr, on);
 
 	ether = arg;
 	port = ether->port;
 	ctlr = ether->ctlr;
 	ilock(ctlr);
-	
+
 	SELECT_BANK(0);
 	x = ins(port + Rcr);
-	
+
 	if (ether->nmaddr)
 		x |= RcrAllMcast;
 	else
 		x &= ~RcrAllMcast;
-	
+
 	outs(port + Rcr, x);
 	iunlock(ctlr);
 }
@@ -637,7 +637,7 @@ ifstat(Ether* ether, void* a, long n, ulong offset)
 	Smc91xx* ctlr;
 	char *p, *s;
 	int r, len;
-	
+
 	if (n == 0)
 		return 0;
 
@@ -672,7 +672,7 @@ ifstat(Ether* ether, void* a, long n, ulong offset)
 
 	n = readstr(offset, a, n, p);
 	free(p);
-	
+
 	return n;
 }
 

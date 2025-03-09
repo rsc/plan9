@@ -34,4 +34,3 @@ vseprint(char *buf, char *e, char *fmt, va_list args)
 	*(char*)f.to = '\0';
 	return (char*)f.to;
 }
-

@@ -32,7 +32,7 @@ using
 can be any length.  The generator can be run forward using
 .IR rc4 ,
 skip over bytes using
-.I rc4skip 
+.I rc4skip
 to account lost transmissions,
 or run backwards using
 .I rc4back

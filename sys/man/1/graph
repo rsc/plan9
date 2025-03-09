@@ -144,7 +144,7 @@ is reversed.
 .SH SOURCE
 .B /sys/src/cmd/graph
 .SH "SEE ALSO"
-.IR plot (1), 
+.IR plot (1),
 .IR grap (1)
 .SH BUGS
 Segments that run out of bounds are dropped, not windowed.

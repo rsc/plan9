@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 1994, 1996, 1997 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -18,13 +18,13 @@
 /* Canon LBP-8II and LIPS III driver */
 #include "gdevprn.h"
 
-/* 
+/*
   Modifications:
     2.2.97  Lauri Paatero
             Changed CSI command into ESC [. DCS commands may still need to be changed
             (to ESC P).
     4.9.96  Lauri Paatero
-	    Corrected LBP-8II margins again. Real problem was that (0,0) is NOT 
+	    Corrected LBP-8II margins again. Real problem was that (0,0) is NOT
                 in upper left corner.
 	    Now using relative addressing for vertical addressing. This avoids
 problems
@@ -77,7 +77,7 @@ static const char lbp8_init[] = {
   ESC, '[', '1', '4', 'p',	/* select page type (A4) */
   ESC, '[', '1', '1', 'h',	/* set mode */
   ESC, '[', '7', ' ', 'I',	/* select unit size (300dpi)*/
-  ESC, '[', '6', '3', 'k', 	/* Move 63 dots up (to top of printable area) */ 
+  ESC, '[', '6', '3', 'k', 	/* Move 63 dots up (to top of printable area) */
 };
 
 static const char *lbp8_end = NULL;
@@ -103,7 +103,7 @@ static const char lips3_end[] = {
 private int
 can_print_page(gx_device_printer *pdev, FILE *prn_stream,
   const char *init, int init_size, const char *end, int end_size)
-{	
+{
 	char data[LINE_SIZE*2];
 	char *out_data;
 	int last_line_nro = 0;
@@ -111,7 +111,7 @@ can_print_page(gx_device_printer *pdev, FILE *prn_stream,
 	fwrite(init, init_size, 1, prn_stream);		/* initialize */
 
 	/* Send each scan line in turn */
-	{	
+	{
 	    int lnum;
 	    int line_size = gdev_mem_bytes_per_scan_line((gx_device *)pdev);
 	    byte rmask = (byte)(0xff << (-pdev->width & 7));
@@ -132,20 +132,20 @@ can_print_page(gx_device_printer *pdev, FILE *prn_stream,
 		    out_data = data;
 
 		    /* move down */
-		    fprintf(prn_stream, "%c[%de", 
+		    fprintf(prn_stream, "%c[%de",
 			    ESC, lnum-last_line_nro );
 		    last_line_nro = lnum;
 
 		    while (out_data < end_data) {
 			/* Remove leading 0s*/
-			while(out_data < end_data && *out_data == 0) {	
+			while(out_data < end_data && *out_data == 0) {
 		            num_cols += 8;
                             out_data++;
                         }
 
 			out_count = end_data - out_data;
 			zero_count = 0;
-			
+
 			/* if there is a lot data, find if there is sequence of zeros */
 			if (out_count>22) {
 
@@ -164,12 +164,12 @@ can_print_page(gx_device_printer *pdev, FILE *prn_stream,
 				}
 
 			}
-	
+
 			if (out_count==0)
 				break;
 
 			/* move down and across*/
-			fprintf(prn_stream, "%c[%d`", 
+			fprintf(prn_stream, "%c[%d`",
 				ESC, num_cols );
 			/* transfer raster graphic command */
 			fprintf(prn_stream, "%c[%d;%d;300;.r",

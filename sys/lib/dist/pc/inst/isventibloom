@@ -10,4 +10,3 @@ if(! cmp -s <{dd -quiet 1 -if $arg -bs 1024 |
 	dd -quiet 1 -bs 4 -count 1 | xd -b | sed 1q} <{echo '0000000  b1 00 4e ad'})
 	exit notbloom
 exit 0
-

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1990, 1991, 1994, 1996 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -65,7 +65,7 @@ private gx_device_procs pe_procs =
 	NULL			/* copy_color */
 };
 
-gx_device_pe far_data gs_pe_device = 
+gx_device_pe far_data gs_pe_device =
 {	std_device_std_body(gx_device_pe, &pe_procs, "pe",
 	  XSIZE, YSIZE, XPPI, YPPI),
 	 { 0 },		/* std_procs */
@@ -168,19 +168,19 @@ int pe_fill_rectangle(gx_device *dev, int x1, int y1, int w, int h,
 	if (color)
 	{
 		/* here to set pixels */
-		
+
 		if (xlen == -1)
 		{
 			/* special for rectangles that fit in a byte */
-			
+
 			d = led & red;
 			for(; h >= 0; h--, ptr += BPL)
 				*ptr |= d;
 			return 0;
 		}
-		
+
 		/* normal fill */
-		
+
 		for(; h >= 0; h--, ptr += BPL)
 		{	register int x = xlen;
 			register byte *p = ptr;
@@ -198,7 +198,7 @@ int pe_fill_rectangle(gx_device *dev, int x1, int y1, int w, int h,
 	if (xlen == -1)
 	{
 		/* special for rectangles that fit in a byte */
-		
+
 		d = led | red;
 		for(; h >= 0; h--, ptr += BPL)
 			*ptr &= d;
@@ -206,7 +206,7 @@ int pe_fill_rectangle(gx_device *dev, int x1, int y1, int w, int h,
 	}
 
 	/* normal fill */
-		
+
 	for(; h >= 0; h--, ptr += BPL)
 	{	register int x = xlen;
 		register byte *p = ptr;
@@ -219,7 +219,7 @@ int pe_fill_rectangle(gx_device *dev, int x1, int y1, int w, int h,
 
 int pe_copy_mono(gx_device *dev,
 		 const byte *base, int sourcex, int raster, gx_bitmap_id id,
-                 int x, int y, int w, int h, 
+                 int x, int y, int w, int h,
 		 gx_color_index zero, gx_color_index one)
 {
 	const byte *line;
@@ -281,20 +281,20 @@ if ( ione == izero )		/* vacuous case */
 			int count = w;
 			register byte *optr = dest;
 			register int bits = *bptr ^ invert;	/* first partial byte */
-			
+
 			write_byte_masked(optr, bits, mask);
-			
+
 			/* Do full bytes. */
-			
+
 			while ((count -= 8) >= 0)
 			{
 				bits = *++bptr ^ invert;
 				++optr;
 				write_byte(optr, bits);
 			}
-			
+
 			/* Do last byte */
-			
+
 			if (count > -8)
 			{
 				bits = *++bptr ^ invert;
@@ -309,20 +309,20 @@ if ( ione == izero )		/* vacuous case */
 	{
 		int skew = (sleft - dleft) & 7;
 		int cskew = 8 - skew;
-		
+
 		while (--h >= 0)
 		{
 			const byte *bptr = line;
 			int count = w;
 			byte *optr = dest;
 			register int bits;
-			
+
 			/* Do the first partial byte */
-			
+
 			if (sleft >= dleft)
 			{
 				bits = *bptr >> skew;
-			}	
+			}
 			else /* ( sleft < dleft ) */
 			{
 				bits = *bptr++ << cskew;
@@ -333,9 +333,9 @@ if ( ione == izero )		/* vacuous case */
 			write_byte_masked(optr, bits, mask);
 			count -= dleft;
 			optr++;
-			
+
 			/* Do full bytes. */
-			
+
 			while ( count >= 8 )
 			{
 				bits = *bptr++ << cskew;
@@ -345,9 +345,9 @@ if ( ione == izero )		/* vacuous case */
 				count -= 8;
 				optr++;
 			}
-			
+
 			/* Do last byte */
-			
+
 			if (count > 0)
 			{
 				bits = *bptr++ << cskew;

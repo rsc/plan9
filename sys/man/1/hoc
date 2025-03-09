@@ -43,9 +43,9 @@ Statements, typically assignments and function or procedure
 definitions, produce no output unless they explicitly call
 .IR print .
 .PP
-Variable names have the usual syntax, including 
+Variable names have the usual syntax, including
 .LR _ ;
-the name 
+the name
 .L _
 by itself contains the value of the last expression evaluated.
 The variables
@@ -54,7 +54,7 @@ The variables
 .BR PHI ,
 .BR GAMMA
 and
-.B DEG 
+.B DEG
 are predefined; the last is 59.25..., degrees per radian.
 .PP
 Expressions are formed with these C-like operators, listed by

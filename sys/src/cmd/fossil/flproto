@@ -3,7 +3,7 @@
 #
 fsys main config /tmp/fossil
 fsys main open
-fsys main 
+fsys main
 uname geoff :geoff
 uname sys +geoff
 uname jmk :jmk

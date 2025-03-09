@@ -145,7 +145,7 @@ system use attribute in the DOS file system.
 Such files are not actually restricted to exclusive use,
 but do merit special treatment that
 helps in the creation of boot disks:
-when 
+when
 .I dossrv
 allocates a new block for such a file
 (caused, say, by a write that fills the file's
@@ -159,7 +159,7 @@ out contiguously, the DMAPPEND mode
 bit is set in file stat information
 only when the file is currently contiguous.
 Attempts to set the DMAPPEND mode bit
-explicitly will cause 
+explicitly will cause
 .I dossrv
 to try to make the file contiguous,
 succeeding only if this is possible.

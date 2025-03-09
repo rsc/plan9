@@ -66,7 +66,7 @@ is the reverse of
 it dials
 .IR address ,
 starts TLS,
-and then relays 
+and then relays
 between the network connection
 and standard input and output.
 If the

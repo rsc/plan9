@@ -1,12 +1,12 @@
 /* Copyright (C) 1995, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -258,7 +258,7 @@ private gx_color_index
 map_rgb_to_color_via_cmyk(gx_device * dev, const gx_color_value rgbcv[])
 {
     gx_color_value cmykcv[4];
-    
+
     cmykcv[0] = gx_max_color_value - rgbcv[0];
     cmykcv[1] = gx_max_color_value - rgbcv[1];
     cmykcv[2] = gx_max_color_value - rgbcv[2];

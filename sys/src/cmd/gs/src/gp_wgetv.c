@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -24,13 +24,13 @@
 #include "gscdefs.h"		/* for gs_productfamily and gs_revision */
 
 /* prototypes */
-int gp_getenv_registry(HKEY hkeyroot, const char *key, const char *name, 
+int gp_getenv_registry(HKEY hkeyroot, const char *key, const char *name,
     char *ptr, int *plen);
 
 /* ------ Environment variables ------ */
 
 /* Get the value of an environment variable.  See gp.h for details. */
-int 
+int
 gp_getenv(const char *name, char *ptr, int *plen)
 {
     const char *str = getenv(name);
@@ -68,7 +68,7 @@ gp_getenv(const char *name, char *ptr, int *plen)
 	    int code;
 	    char key[256];
 	    char dotversion[16];
-	    
+
 	    sprintf(dotversion, "%d.%02d", (int)(gs_revision / 100),
 		    (int)(gs_revision % 100));
 	    sprintf(key, "Software\\%s\\%s", gs_productfamily, dotversion);
@@ -99,8 +99,8 @@ gp_getenv(const char *name, char *ptr, int *plen)
  * name, ptr, plen and return values are the same as in gp_getenv();
  */
 
-int 
-gp_getenv_registry(HKEY hkeyroot, const char *key, const char *name, 
+int
+gp_getenv_registry(HKEY hkeyroot, const char *key, const char *name,
     char *ptr, int *plen)
 {
     HKEY hkey;

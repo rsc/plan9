@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 2000-2003 artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -248,7 +248,7 @@ private int gp_printfile_gs16spl(const char *filename, const char *port);
  *      action: translate to port name using win.ini [Devices]
  *              then use gs16spl.exe (Win32s).
  *   "\\spool"
- *      action: prompt for queue name then send to printer using 
+ *      action: prompt for queue name then send to printer using
  *              WritePrinter (WinNT and Win95).
  *      action: prompt for port then use gs16spl.exe (Win32s).
  */
@@ -573,7 +573,7 @@ gp_printfile_gs16spl(const char *filename, const char *port)
 
 /******************************************************************/
 /* MS Windows has popen and pclose in stdio.h, but under different names.
- * Unfortunately MSVC5 and 6 have a broken implementation of _popen, 
+ * Unfortunately MSVC5 and 6 have a broken implementation of _popen,
  * so we use own.  Our implementation only supports mode "wb".
  */
 FILE *mswin_popen(const char *cmd, const char *mode)
@@ -599,15 +599,15 @@ FILE *mswin_popen(const char *cmd, const char *mode)
     saAttr.bInheritHandle = TRUE;
     saAttr.lpSecurityDescriptor = NULL;
 
-    /* Create anonymous inheritable pipes for STDIN for child. 
-     * First create a noninheritable duplicate handle of our end of 
+    /* Create anonymous inheritable pipes for STDIN for child.
+     * First create a noninheritable duplicate handle of our end of
      * the pipe, then close the inheritable handle.
      */
     if (handle == 0)
         if (!CreatePipe(&hChildStdinRd, &hPipeTemp, &saAttr, 0))
 	    handle = -1;
     if (handle == 0) {
-	if (!DuplicateHandle(hProcess, hPipeTemp, 
+	if (!DuplicateHandle(hProcess, hPipeTemp,
 	    hProcess, &hChildStdinWr, 0, FALSE /* not inherited */,
 	    DUPLICATE_SAME_ACCESS))
 	    handle = -1;
@@ -621,7 +621,7 @@ FILE *mswin_popen(const char *cmd, const char *mode)
 	    handle = -1;
     if (handle == 0)
         if (!DuplicateHandle(hProcess, GetStdHandle(STD_ERROR_HANDLE),
-            hProcess, &hChildStderrWr, 0, TRUE /* inherited */, 
+            hProcess, &hChildStderrWr, 0, TRUE /* inherited */,
 	    DUPLICATE_SAME_ACCESS))
 	    handle = -1;
 
@@ -651,7 +651,7 @@ FILE *mswin_popen(const char *cmd, const char *mode)
 	    NULL,          /* environment                        */
 	    NULL,          /* use parent's current directory     */
 	    &siStartInfo,  /* STARTUPINFO pointer                */
-	    &piProcInfo))  /* receives PROCESS_INFORMATION  */ 
+	    &piProcInfo))  /* receives PROCESS_INFORMATION  */
 	{
 	    handle = -1;
 	}
@@ -725,7 +725,7 @@ gp_open_scratch_file(const char *prefix, char *fname, const char *mode)
 		uint slen = gs_file_name_check_separator(sTempDir + i, l, sTempDir + l);
 
 		if (slen > 0) {
-		    sTempDir[i] = 0;   
+		    sTempDir[i] = 0;
 		    i += slen;
 		    break;
 		}
@@ -734,13 +734,13 @@ gp_open_scratch_file(const char *prefix, char *fname, const char *mode)
 		n = GetTempFileName(sTempDir, sTempDir + i, 0, sTempFileName);
 	}
 	if (n != 0) {
-	    hfile = CreateFile(sTempFileName, 
+	    hfile = CreateFile(sTempFileName,
 		GENERIC_READ | GENERIC_WRITE | DELETE,
 		FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CREATE_ALWAYS,
-		FILE_ATTRIBUTE_NORMAL /* | FILE_FLAG_DELETE_ON_CLOSE */, 
+		FILE_ATTRIBUTE_NORMAL /* | FILE_FLAG_DELETE_ON_CLOSE */,
 		NULL);
 	    /*
-	     * Can't apply FILE_FLAG_DELETE_ON_CLOSE due to 
+	     * Can't apply FILE_FLAG_DELETE_ON_CLOSE due to
 	     * the logics of clist_fclose. Also note that
 	     * gdev_prn_render_pages requires multiple temporary files
 	     * to exist simultaneousely, so that keeping all them opened
@@ -782,22 +782,22 @@ gp_fopen(const char *fname, const char *mode)
 }
 
 /* ------ Font enumeration ------ */
- 
+
  /* This is used to query the native os for a list of font names and
   * corresponding paths. The general idea is to save the hassle of
   * building a custom fontmap file.
   */
- 
+
 void *gp_enumerate_fonts_init(gs_memory_t *mem)
 {
     return NULL;
 }
-         
+
 int gp_enumerate_fonts_next(void *enum_state, char **fontname, char **path)
 {
     return 0;
 }
-                         
+
 void gp_enumerate_fonts_free(void *enum_state)
 {
-}           
+}

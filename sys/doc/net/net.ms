@@ -70,7 +70,7 @@ a slow network, users tend to do most work on the CPU server to minimize
 traffic on the slow links.
 The goal of the network organization is to provide the same
 environment to the user wherever resources are used.
-.NH 
+.NH
 Kernel Network Support
 .PP
 Networks play a central role in any distributed system. This is particularly
@@ -83,7 +83,7 @@ devoted to communications
 is growing.
 Moreover, the network code is complex.
 Protocol implementations consist almost entirely of
-synchronization and dynamic memory management, areas demanding 
+synchronization and dynamic memory management, areas demanding
 subtle error recovery
 strategies.
 The kernel currently supports Datakit, point-to-point fiber links,
@@ -234,13 +234,13 @@ and opens its
 .CW ctl
 file.
 Reading the control file returns the ASCII connection number; the user
-process can use this value to construct the name of the proper 
+process can use this value to construct the name of the proper
 connection directory.
 In each connection directory files named
-.CW ctl , 
-.CW data , 
+.CW ctl ,
+.CW data ,
 .CW stats ,
-and 
+and
 .CW type
 provide access to the connection.
 Writing the string
@@ -403,7 +403,7 @@ are referenced or until a close is received from the network.
 Streams
 .PP
 A
-.I stream 
+.I stream
 [Rit84a][Presotto] is a bidirectional channel connecting a
 physical or pseudo-device to user processes.
 The user processes insert and remove data at one end of the stream.
@@ -458,7 +458,7 @@ Blocks and block buffers are dynamically allocated from kernel memory.
 .NH 3
 User Interface
 .PP
-A stream is represented at user level as two files, 
+A stream is represented at user level as two files,
 .CW ctl
 and
 .CW data .
@@ -494,7 +494,7 @@ Plan 9 streams can be dynamically configured.
 The stream system intercepts and interprets
 the following control blocks:
 .IP "\f(CWpush\fP \fIname\fR" 15
-adds an instance of the processing module 
+adds an instance of the processing module
 .I name
 to the top of the stream.
 .IP \f(CWpop\fP 15
@@ -627,7 +627,7 @@ Connection setup uses a two way handshake to generate
 initial sequence numbers at each end of the connection;
 subsequent data messages increment the
 sequence numbers allowing
-the receiver to resequence out of order messages. 
+the receiver to resequence out of order messages.
 In contrast to other protocols, IL does not do blind retransmission.
 If a message is lost and a timeout occurs, a query message is sent.
 The query message is a small control message containing the current
@@ -662,7 +662,7 @@ This is obviously unacceptable.
 Several possible solutions were considered and rejected; one deserves
 more discussion.
 We could have used a user-level file server
-to represent the network name space as a Plan 9 file tree. 
+to represent the network name space as a Plan 9 file tree.
 This global naming scheme has been implemented in other distributed systems.
 The file hierarchy provides paths to
 directories representing network domains.
@@ -754,7 +754,7 @@ sys=helix
 If several systems share entries such as
 network mask and gateway, we specify that information
 with the network or subnetwork instead of the system.
-The following entries define a Class B IP network and 
+The following entries define a Class B IP network and
 a few subnets derived from it.
 The entry for the network specifies the IP mask,
 file system, and authentication server for all systems
@@ -869,7 +869,7 @@ is a domain name service resource record type.
 DNS performs a recursive query through the
 Internet domain name system producing one line
 per resource record found.  The client reads
-.CW /net/dns 
+.CW /net/dns
 to retrieve the records.
 Like other domain name servers, DNS caches information
 learned from the network.
@@ -1144,7 +1144,7 @@ must be multithreaded since the system calls
 and
 .CW write
 may block.
-Plan 9 does not implement the 
+Plan 9 does not implement the
 .CW select
 system call but does allow processes to share file descriptors,
 memory and other resources.
@@ -1190,7 +1190,7 @@ Local entries supersede remote ones of the same name so
 networks on the local machine are chosen in preference
 to those supplied remotely.
 However, unique entries in the remote directory are now visible in the local
-.CW /net 
+.CW /net
 directory.
 All the networks connected to
 .CW helix ,
@@ -1317,7 +1317,7 @@ CSL-80-2,
 XEROX Palo Alto Research Center, February 1980.
 .LP
 [Fra80] A. G. Fraser, ``Datakit - A Modular Network for Synchronous
-and Asynchronous Traffic'', 
+and Asynchronous Traffic'',
 .I
 Proc. Int'l Conf. on Communication,
 .R

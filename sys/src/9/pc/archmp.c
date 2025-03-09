@@ -21,7 +21,7 @@ mpresetothers(void)
 static int identify(void);
 
 PCArch archmp = {
-.id=		"_MP_",	
+.id=		"_MP_",
 .ident=		identify,
 .reset=		mpshutdown,
 .intrinit=	mpinit,

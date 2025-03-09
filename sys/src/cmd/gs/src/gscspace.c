@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -462,7 +462,7 @@ gx_no_adjust_cspace_count(const gs_color_space * pcs, int delta)
 /* A stub for a color mapping linearity check, when it is inapplicable. */
 int
 gx_cspace_no_linear(gs_direct_color_space *cs, const gs_imager_state * pis,
-		gx_device * dev, 
+		gx_device * dev,
 		const gs_client_color *c0, const gs_client_color *c1,
 		const gs_client_color *c2, const gs_client_color *c3,
 		float smoothness)
@@ -478,7 +478,7 @@ cc2dc(gs_direct_color_space *cs, const gs_imager_state * pis, gx_device *dev,
 }
 
 private inline void
-interpolate_cc(gs_client_color *c, 
+interpolate_cc(gs_client_color *c,
 	const gs_client_color *c0, const gs_client_color *c1, double t, int n)
 {
     int i;
@@ -488,8 +488,8 @@ interpolate_cc(gs_client_color *c,
 }
 
 private inline bool
-is_dc_nearly_linear(const gx_device *dev, const gx_device_color *c, 
-	const gx_device_color *c0, const gx_device_color *c1, 
+is_dc_nearly_linear(const gx_device *dev, const gx_device_color *c,
+	const gx_device_color *c0, const gx_device_color *c1,
 	double t, int n, float smoothness)
 {
     if (c0->type == &gx_dc_type_data_pure) {
@@ -501,9 +501,9 @@ is_dc_nearly_linear(const gx_device *dev, const gx_device_color *c,
 	for (i = 0; i < n; i++) {
 	    int shift = dev->color_info.comp_shift[i];
 	    int mask = (1 << dev->color_info.comp_bits[i]) - 1;
-	    int max_color = (i == dev->color_info.gray_index ? dev->color_info.max_gray 
+	    int max_color = (i == dev->color_info.gray_index ? dev->color_info.max_gray
 							     : dev->color_info.max_color);
-	    int b0 = (pure0 >> shift) & mask, b1 = (pure1 >> shift) & mask; 
+	    int b0 = (pure0 >> shift) & mask, b1 = (pure1 >> shift) & mask;
 	    int b = (pure >> shift) & mask;
 	    double bb = b0 * t + b1 * (1 - t);
 
@@ -520,7 +520,7 @@ is_dc_nearly_linear(const gx_device *dev, const gx_device_color *c,
 /* Default color mapping linearity check, a 2-points case. */
 private int
 gx_cspace_is_linear_in_line(gs_direct_color_space *cs, const gs_imager_state * pis,
-		gx_device *dev, 
+		gx_device *dev,
 		const gs_client_color *c0, const gs_client_color *c1,
 		float smoothness)
 {
@@ -553,12 +553,12 @@ gx_cspace_is_linear_in_line(gs_direct_color_space *cs, const gs_imager_state * p
 /* Default color mapping linearity check, a triangle case. */
 private int
 gx_cspace_is_linear_in_triangle(gs_direct_color_space *cs, const gs_imager_state * pis,
-		gx_device *dev, 
+		gx_device *dev,
 		const gs_client_color *c0, const gs_client_color *c1,
 		const gs_client_color *c2, float smoothness)
 {
-    /* We check 4 points - the median center, and middle points of 3 sides. 
-       Hopely this is enough for reasonable color spaces and color renderings. 
+    /* We check 4 points - the median center, and middle points of 3 sides.
+       Hopely this is enough for reasonable color spaces and color renderings.
        Note it gives 7 points for a quadrangle. */
     gs_client_color c01, c12, c20, c012;
     gx_device_color d[3], d01, d12, d20, d012;
@@ -608,7 +608,7 @@ gx_cspace_is_linear_in_triangle(gs_direct_color_space *cs, const gs_imager_state
 /* Default color mapping linearity check. */
 int
 gx_cspace_is_linear_default(gs_direct_color_space *cs, const gs_imager_state * pis,
-		gx_device *dev, 
+		gx_device *dev,
 		const gs_client_color *c0, const gs_client_color *c1,
 		const gs_client_color *c2, const gs_client_color *c3,
 		float smoothness)
@@ -630,7 +630,7 @@ gx_cspace_is_linear_default(gs_direct_color_space *cs, const gs_imager_state * p
 }
 
 /* Serialization. */
-int 
+int
 gx_serialize_cspace_type(const gs_color_space * pcs, stream * s)
 {
     const gs_color_space_type * type = pcs->type;
@@ -640,7 +640,7 @@ gx_serialize_cspace_type(const gs_color_space * pcs, stream * s)
 
 /* GC procedures */
 
-private 
+private
 ENUM_PTRS_BEGIN_PROC(color_space_enum_ptrs)
 {
     EV_CONST gs_color_space *pcs = vptr;
@@ -648,7 +648,7 @@ ENUM_PTRS_BEGIN_PROC(color_space_enum_ptrs)
     return ENUM_USING(*pcs->type->stype, vptr, size, index);
     ENUM_PTRS_END_PROC
 }
-private 
+private
 RELOC_PTRS_WITH(color_space_reloc_ptrs, gs_color_space *pcs)
 {
     RELOC_USING(*pcs->type->stype, vptr, size);

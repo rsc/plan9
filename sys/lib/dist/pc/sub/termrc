@@ -56,7 +56,7 @@ aux/vmware
 # configure loopback device without touching /net/ndb
 {
 	echo bind loopback /dev/null
-	echo add 127.0.0.1 255.255.255.0 
+	echo add 127.0.0.1 255.255.255.0
 } >/net/ipifc/clone
 
 if(~ $#dmamode 0)
@@ -85,7 +85,7 @@ if(~ $installmode text){
 }
 if not
 	installmode=graphics
-	
+
 if(~ $mouseport ask){
 	echo -n 'mouseport is (ps2, ps2intellimouse, 0, 1, 2)[ps2]: '
 	mouseport=`{read}

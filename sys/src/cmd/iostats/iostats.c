@@ -210,15 +210,15 @@ main(int argc, char **argv)
 	fprint(2, "protocol  %lud bytes, %g Kb/sec\n", stats->nproto, bppsec/1024.0);
 	fprint(2, "rpc       %lud count\n\n", stats->nrpc);
 
-	fprint(2, "%-10s %5s %5s %5s %5s %5s          T       R\n", 
+	fprint(2, "%-10s %5s %5s %5s %5s %5s          T       R\n",
 	      "Message", "Count", "Low", "High", "Time", "Averg");
 
 	for(n = 0; n < Maxrpc; n++) {
 		rpc = &stats->rpc[n];
 		if(rpc->count == 0)
 			continue;
-		fprint(2, "%-10s %5lud %5llud %5llud %5llud %5llud ms %8lud %8lud bytes\n", 
-			rpc->name, 
+		fprint(2, "%-10s %5lud %5llud %5llud %5llud %5llud ms %8lud %8lud bytes\n",
+			rpc->name,
 			rpc->count,
 			rpc->lo/1000000,
 			rpc->hi/1000000,
@@ -270,7 +270,7 @@ reply(Fcall *r, Fcall *t, char *err)
 		t->type = Rerror;
 		t->ename = err;
 	}
-	else 
+	else
 		t->type = r->type + 1;
 
 	DEBUG(2, "\t%F\n", t);
@@ -310,7 +310,7 @@ freefid(int nr)
 		l = &f->next;
 	}
 
-	return 0;	
+	return 0;
 }
 
 Fid *
@@ -348,7 +348,7 @@ newfid(int nr)
 	new->bread = 0;
 	new->bwrite = 0;
 
-	return new;	
+	return new;
 }
 
 Fsrpc *

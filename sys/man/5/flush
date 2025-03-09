@@ -69,7 +69,7 @@ implies an answer for all previous ones.  Therefore, should
 a server receive a request and then multiple flushes for that
 request, it need respond only to the last flush.
 .PP
-When the client sends a 
+When the client sends a
 .BR Tflush ,
 it must wait to receive the corresponding
 .B Rflush

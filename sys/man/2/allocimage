@@ -13,7 +13,7 @@ allocimage, allocimagemix, freeimage, nameimage, namedimage, setalpha, loadimage
 .PP
 .ta \w'\fLImage 'u
 .B
-Image	*allocimage(Display *d, Rectangle r, 
+Image	*allocimage(Display *d, Rectangle r,
 .br
 .B
 	ulong chan, int repl, int col)
@@ -90,7 +90,7 @@ enum
 
 	DNotacolor	= 0xFFFFFF00,
 	DNofill		= DNotacolor,
-	
+
 };
 .fi
 .SH DESCRIPTION
@@ -111,13 +111,13 @@ Convenient pixel channels like
 .BR RGB16 ,
 .BR RGB24 ,
 and
-.BR RGBA32 
+.BR RGBA32
 are predefined.
 All the new image's pixels will have initial value
 .IR col .
 If
 .I col
-is 
+is
 .BR DNofill ,
 no initialization is done.
 Representative useful values of color are predefined:
@@ -143,7 +143,7 @@ If
 .I repl
 is true, the clip rectangle is set to a very large region; if false, it is set to
 .IR r .
-The 
+The
 .I depth
 field will be set to the number of bits per pixel specified
 by the channel descriptor
@@ -155,15 +155,15 @@ returns 0 if the server has run out of image memory.
 .I Allocimagemix
 is used to allocate background colors.
 On 8-bit color-mapped displays, it
-returns a 2×2 replicated image with one pixel colored 
+returns a 2×2 replicated image with one pixel colored
 the color
 .I one
 and the other three with
 .IR three .
 (This simulates a wider range of tones than can be represented by a single pixel
 value on a color-mapped display.)
-On true color displays, it returns a 1×1 replicated image 
-whose pixel is the result of mixing the two colors in 
+On true color displays, it returns a 1×1 replicated image
+whose pixel is the result of mixing the two colors in
 a one to three ratio.
 .PP
 .I Freeimage
@@ -279,7 +279,7 @@ the
 must be at the beginning of a compressed data block, in particular,
 it should start with the
 .B y
-coordinate and data length for the block. 
+coordinate and data length for the block.
 .PP
 .IR Loadimage ,
 .IR cloadimage ,

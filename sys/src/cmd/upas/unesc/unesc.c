@@ -44,7 +44,7 @@ main(void)
 				Bputc(&bout, c);
 			}
 			c = Bgetc(&bin);		/* consume '=' */
-			if (c != '=')	
+			if (c != '=')
 				Bungetc(&bin);
 		}
 	Bterm(&bout);

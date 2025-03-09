@@ -1,12 +1,12 @@
 /* Copyright (C) 1991, 1992, 1994, 1996, 1997, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -152,8 +152,8 @@ gs_rectfill(gs_state * pgs, const gs_rect * pr, uint count)
     const gs_imager_state *pis = (const gs_imager_state *)pgs;
     bool hl_color_available = gx_hld_is_hl_color_available(pis, pdc);
     gs_fixed_rect empty = {{0, 0}, {0, 0}};
-    bool hl_color = (hl_color_available && 
-		dev_proc(pdev, fill_rectangle_hl_color)(pdev, 
+    bool hl_color = (hl_color_available &&
+		dev_proc(pdev, fill_rectangle_hl_color)(pdev,
 		    	    &empty, pis, pdc, NULL) == 0);
 
     gx_set_dev_color(pgs);
@@ -178,7 +178,7 @@ gs_rectfill(gs_state * pgs, const gs_rect * pr, uint count)
 	for (i = 0; i < count; ++i) {
 	    gs_fixed_point p, q;
 	    gs_fixed_rect draw_rect;
-	    
+
 	    if (gs_point_transform2fixed(&pgs->ctm, pr[i].p.x, pr[i].p.y, &p) < 0 ||
 		gs_point_transform2fixed(&pgs->ctm, pr[i].q.x, pr[i].q.y, &q) < 0
 		) {		/* Switch to the slow algorithm. */

@@ -133,7 +133,7 @@ greg(int f, ulong off)
 	int n;
 	ulong l;
 	uchar wd[BY2WD];
-	
+
 	seek(f, off, 0);
 	n = read(f, wd, BY2WD);
 	if(n != BY2WD)
@@ -222,7 +222,7 @@ procinit(int pid)
 		s->table = malloc(((s->end-s->base)/BY2PG)*sizeof(uchar*));
 	}
 	seginit(m, s, 0, vastart, vaend);
-	
+
 	p = strstr(sfile, "Bss");
 	if(p == 0)
 		fatal(0, "no bss");
@@ -253,7 +253,7 @@ procinit(int pid)
 	vastart = reg.r[29] & ~(BY2PG-1);
 	seginit(m, s, (vastart-s->base)/BY2PG, vastart, STACKTOP);
 	close(m);
-	Bprint(bioout, "vi\n"); 
+	Bprint(bioout, "vi\n");
 }
 
 void
@@ -310,7 +310,7 @@ initstk(int argc, char *argv[])
 	putmem_w(tos + 4*4 + 2*sizeof(ulong) + 3*sizeof(uvlong), getpid());
 
 	/* Build exec stack */
-	size = strlen(file)+1+BY2WD+BY2WD+BY2WD;	
+	size = strlen(file)+1+BY2WD+BY2WD+BY2WD;
 	for(i = 0; i < argc; i++)
 		size += strlen(argv[i])+BY2WD+1;
 
@@ -327,7 +327,7 @@ initstk(int argc, char *argv[])
 	ap = sp+((argc+1)*BY2WD)+BY2WD;
 	putmem_w(sp, ap);
 	sp += BY2WD;
-	
+
 	/* Build argv[0] string into stack */
 	for(p = file; *p; p++)
 		putmem_b(ap++, *p);
@@ -372,7 +372,7 @@ itrace(char *fmt, ...)
 	va_start(arg, fmt);
 	vseprint(buf, buf+sizeof(buf), fmt, arg);
 	va_end(arg);
-	Bprint(bioout, "%8lux %.8lux %s\n", reg.pc, reg.ir, buf);	
+	Bprint(bioout, "%8lux %.8lux %s\n", reg.pc, reg.ir, buf);
 }
 
 void
@@ -515,4 +515,3 @@ mul(long l1, long l2)
 	}
 	return (Mul){lo, hi};
 }
-

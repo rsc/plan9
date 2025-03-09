@@ -690,7 +690,7 @@ mpintrcpu(void)
 	 * a round-robin basis. Some idea of the packages/cores/thread
 	 * topology would be useful here, e.g. to not assign interrupts
 	 * to more than one thread in a core, or to use a "noise" core.
-	 * But, as usual, Intel make that an onerous task. 
+	 * But, as usual, Intel make that an onerous task.
 	 */
 
 	/*
@@ -873,7 +873,7 @@ mpintrenable(Vctl* v)
 
 	/*
 	 * Either didn't find it or have to try the default buses
-	 * (ISA and EISA). This hack is due to either over-zealousness 
+	 * (ISA and EISA). This hack is due to either over-zealousness
 	 * or laziness on the part of some manufacturers.
 	 *
 	 * The MP configuration table on some older systems

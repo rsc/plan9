@@ -38,13 +38,13 @@ The meanings of the
 characters are:
 .TP
 .B d
-Delete 
-.I files 
+Delete
+.I files
 from the archive file.
 .TP
 .B r
 Replace
-.I files 
+.I files
 in the archive file, or add them if missing.
 Optional modifiers are
 .RS
@@ -69,7 +69,7 @@ in the archive.
 .TP
 .B q
 Quick.  Append
-.I files 
+.I files
 to the end of the archive without checking for duplicates.
 Avoids quadratic behavior in
 .LR "for (i in *.v) ar r lib.a $i" .
@@ -83,7 +83,7 @@ Print the named files in the archive.
 .TP
 .B m
 Move the named files to the end or elsewhere,
-specified as with 
+specified as with
 .LR r .
 .TP
 .B o
@@ -127,7 +127,7 @@ showing
 .\" will create a new archive when
 .\" .I afile
 .\" does not exist, and give a warning.
-.\" Option 
+.\" Option
 .\" .B c
 .\" discards any old contents and suppresses the warning.
 .TP
@@ -172,7 +172,7 @@ temporaries
 .SH SOURCE
 .B /sys/src/cmd/ar.c
 .SH "SEE ALSO"
-.IR 8l (1), 
+.IR 8l (1),
 .IR ar (6)
 .SH BUGS
 If the same file is mentioned twice in an argument list,

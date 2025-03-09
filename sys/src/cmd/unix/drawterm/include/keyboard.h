@@ -32,13 +32,12 @@ enum {
     Kleft=  KF|0x11,
     Kright= KF|0x12,
     Kdown=  Spec|0x00,
-    Kview=  Spec|0x00,  
+    Kview=  Spec|0x00,
     Kpgdown=    KF|0x13,
     Kins=   KF|0x14,
     Kend=   KF|0x18,
 
     Kalt=       KF|0x15,
-    Kshift= KF|0x16,    
+    Kshift= KF|0x16,
     Kctl=       KF|0x17,
 };
-

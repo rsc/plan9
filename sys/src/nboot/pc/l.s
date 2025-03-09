@@ -88,7 +88,7 @@ TEXT rmode16flush(SB), $0
 	CLR(rCX)
 	JMP _segret
 
-TEXT tgdt(SB), $0 
+TEXT tgdt(SB), $0
 	/* null descriptor */
 	LONG $0
 	LONG $0
@@ -109,8 +109,8 @@ TEXT tgdt(SB), $0
 	LONG $(0xFFFF)
 	LONG $((0xF<<16)|SEGP|SEGPL(0)|SEGEXEC|SEGR)
 
-TEXT tgdtptr(SB), $0 
-         WORD $(5*8) 
+TEXT tgdtptr(SB), $0
+         WORD $(5*8)
          LONG $tgdt(SB)
 
 TEXT jump(SB), $0
@@ -133,7 +133,7 @@ _gotkey:
 	CLR(rAX)
 	BIOSCALL(0x16)
 	JMP _pret32
-	
+
 TEXT cgaputc(SB), $0
 	MOVL 4(SP),AX
 	CALL rmode16(SB)
@@ -269,7 +269,7 @@ TEXT readsect(SB), $0
 	MOVL 4(SP), DX
 	MOVW 8(SP), AX
 	MOVW 10(SP), BX
-	MOVL 12(SP), SI 
+	MOVL 12(SP), SI
 	CALL rmode16(SB)
 	STI
 	CALL16(readsect16(SB))

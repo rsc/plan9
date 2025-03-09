@@ -301,7 +301,7 @@ sleep(Rendezvous *r, int (*condition)(void*), void *arg)
 	/*
 	 * if condition happened, never mind
 	 */
-	if((*condition)(arg)){	
+	if((*condition)(arg)){
 		unlock(&r->l);
 		allow();	/* interrupts */
 		return;
@@ -514,7 +514,7 @@ Englewood Cliffs,
 [Dij72] Edsger W. Dijkstra,
 ``The Humble Programmer \- 1972 Turing Award Lecture'',
 .I "Comm. ACM,
-15(10), pp. 859-866, 
+15(10), pp. 859-866,
 October 1972.
 .LP
 [Hol91] Gerard J. Holzmann,

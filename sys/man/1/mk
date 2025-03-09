@@ -121,7 +121,7 @@ and a
 .IR tail .
 A target is a literal string
 and is normally a file name.
-The tail contains zero or more 
+The tail contains zero or more
 .I prerequisites
 and an optional
 .IR recipe ,
@@ -144,7 +144,7 @@ After the colon on the target line, a rule may specify
 described below.
 .PP
 A
-.I meta-rule 
+.I meta-rule
 has a target of the form
 .IB A % B
 where
@@ -641,7 +641,7 @@ Identical recipes for regular expression meta-rules only have one target.
 Seemingly appropriate input like
 .B CFLAGS=-DHZ=60
 is parsed as an erroneous attribute; correct it by inserting
-a space after the first 
+a space after the first
 .LR = .
 .PP
 The recipes printed by

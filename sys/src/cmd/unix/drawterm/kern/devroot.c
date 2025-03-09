@@ -32,7 +32,7 @@ static Dirtab rootdir[Nrootfiles] = {
 	"mnt",	{Qmnt, 0, QTDIR},	0,		DMDIR|0555,
 };
 static uchar *rootdata[Nrootfiles];
-static Dirlist rootlist = 
+static Dirlist rootlist =
 {
 	0,
 	rootdir,
@@ -296,4 +296,3 @@ Dev rootdevtab = {
 	devremove,
 	devwstat,
 };
-

@@ -22,7 +22,7 @@ defn gpr()
 	print("BX    ", *BX, "\n");
 	print("CX    ", *CX, "\n");
 	print("DX    ", *DX, "\n");
-	print("DI    ", *DI, "\n"); 
+	print("DI    ", *DI, "\n");
 	print("SI    ", *SI, "\n");
 	print("BP    ", *BP, "\n");
 	print("R8    ", *R8, "\n");

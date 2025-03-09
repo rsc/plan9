@@ -1,4 +1,4 @@
-.TH CAP 3 
+.TH CAP 3
 .SH NAME
 cap \- capabilities for setting the user id of processes
 .SH SYNOPSIS

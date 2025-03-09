@@ -30,11 +30,11 @@ enum {
 Rune* tagnames[] = {
 	L" ",
 	L"!",
-	L"a", 
+	L"a",
 	L"abbr",
 	L"acronym",
 	L"address",
-	L"applet", 
+	L"applet",
 	L"area",
 	L"b",
 	L"base",

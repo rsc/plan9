@@ -19,7 +19,7 @@ reads the named files, default
 .BR /usr/$user/lib/calendar ,
 and writes to standard output any lines
 containing today's or tomorrow's date.
-Examples of recognized date formats are 
+Examples of recognized date formats are
 "4/11",
 "April 11",
 "Apr 11",

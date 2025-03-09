@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1992, 1995 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -33,7 +33,7 @@
  *
  * The values of X_DPI and Y_DPI may be set at compile time:
  * see gdevs.mak.
- * 
+ *
  * At some time in the future, we could simulate 24-bit output on
  * 9-pin printers by using fractional vertical positioning;
  * we could even implement an X_DPI=360 mode by using the
@@ -67,7 +67,7 @@
 **	the ESC-r n value
 */
 static char rgb_color[2][2][2] =	{
-	{{BLACK, VIOLET}, {GREEN, CYAN}}, 
+	{{BLACK, VIOLET}, {GREEN, CYAN}},
 	{{RED, MAGENTA}, {YELLOW, WHITE}}
 	};
 
@@ -80,10 +80,10 @@ epson_map_rgb_color(gx_device *dev, const gx_color_value cv[])
     gx_color_value r = cv[0];
     gx_color_value g = cv[1];
     gx_color_value b = cv[2];
-    
+
     if (gx_device_has_color(dev))
 /* use ^7 so WHITE is 0 for internal calculations */
-        return (gx_color_index)rgb_color[r >> cv_shift][g >> cv_shift][b >> cv_shift] ^ 7;	
+        return (gx_color_index)rgb_color[r >> cv_shift][g >> cv_shift][b >> cv_shift] ^ 7;
     else
 	return gx_default_map_rgb_color(dev, cv);
 }
@@ -124,7 +124,7 @@ private dev_proc_print_page(epsc_print_page);
 
 private gx_device_procs epson_procs =
   prn_color_procs(gdev_prn_open, gdev_prn_output_page, gdev_prn_close,
-    epson_map_rgb_color, epson_map_color_rgb); 
+    epson_map_rgb_color, epson_map_color_rgb);
 
 const gx_device_printer far_data gs_epsonc_device =
   prn_device(epson_procs, "epsonc",
@@ -227,7 +227,7 @@ epsc_print_page(gx_device_printer *pdev, FILE *prn_stream)
 			fprintf(prn_stream, "\033J%c", skip);
 
 		/* Copy the rest of the scan lines. */
-		lcnt = 1 + gdev_prn_copy_scan_lines(pdev, lnum + 1, 
+		lcnt = 1 + gdev_prn_copy_scan_lines(pdev, lnum + 1,
 			color_in + color_line_size, color_in_size - color_line_size);
 
 		if ( lcnt < 8 * y_mult )
@@ -238,7 +238,7 @@ epsc_print_page(gx_device_printer *pdev, FILE *prn_stream)
 				memset((char *)(in + lcnt * line_size), 0,
 					in_size - lcnt * line_size);
 			}
-			
+
 /*
 **	We need to create a normal epson scan line from our color scan line
 **	We do this by setting a bit in the "in" buffer if the pixel byte is set
@@ -263,7 +263,7 @@ epsc_print_page(gx_device_printer *pdev, FILE *prn_stream)
 			byte current_color;
 			int end_next_bits = whole_bits;
 			int lastbits;
-			
+
 /*	Move to the point in the scanline that has a new color */
 			if (nextcolor)
 				{
@@ -319,7 +319,7 @@ epsc_print_page(gx_device_printer *pdev, FILE *prn_stream)
 								nextmono = outbuf;
 								}
 							}
-						else 
+						else
 							{
 							*outbuf |= 1 << j;
 							current_color = *realbuf;	/* set color */

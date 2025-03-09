@@ -23,7 +23,7 @@ strings are sent with 2 byte length without nulls and in utf-8 max size of 1K
 
 RPC protocol
 
-header 
+header
 	op[1]	byte op
 	tid[2]	transation id
 
@@ -158,7 +158,7 @@ QTagRead
 RTagRead
 	length[2]
 	data[length]
-	
+
 QTagWalkRead
 	tag[2]
 	ntag[2]		can reuse a tag to do an implict clunk
@@ -190,12 +190,12 @@ Pointer
 DirBlock
 	DirEntry[32]*
 
-DirEntry	
+DirEntry
 	pointersize[2]	- pointer block size
 	datasize[2]	- data blocks size
 	flag[1]		directory
 	size[7]		in bytes - determines pointer depth - intermidate truncated block count as full
-	score[20]	root of pointer blocks or data block 
+	score[20]	root of pointer blocks or data block
 
 ============================
 
@@ -232,7 +232,7 @@ extraType
 	createTime[8];
 	modifyTime[8];
 	accessTime[8]
-	
+
 
 MetaEntry
 	name: string	/* must be first */
@@ -245,9 +245,9 @@ MetaEntry
 	mtime[4]
 	ctime[4]
 	atime[4]
-	
-	mode[4] 
-	
+
+	mode[4]
+
 	extratype;
 	extrasize[2]
 	extra:[nextra]
@@ -263,5 +263,3 @@ MetaEntry Block
 per OS directory entries?
 
 inode...
-
-

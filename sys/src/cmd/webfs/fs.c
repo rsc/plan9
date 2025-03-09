@@ -242,7 +242,7 @@ fsread(Req *r)
 		readbuf(r, c->postbody, c->npostbody);
 		respond(r, nil);
 		break;
-		
+
 	case Qbody:
 	case Qbodyext:
 		c = client[NUM(path)];
@@ -601,7 +601,7 @@ takedown(Srv*)
 	threadexitsall("done");
 }
 
-Srv fs = 
+Srv fs =
 {
 .attach=		fssend,
 .destroyfid=	fsdestroyfid,
@@ -613,4 +613,3 @@ Srv fs =
 .flush=		fssend,
 .end=		takedown,
 };
-

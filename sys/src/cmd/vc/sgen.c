@@ -224,4 +224,3 @@ xcom(Node *n)
 		break;
 	}
 }
-

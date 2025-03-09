@@ -601,7 +601,7 @@ c_brkcont(wp)
 		 */
 		if (n == quit) {
 			warningf(TRUE, "%s: cannot %s", wp[0], wp[0]);
-			return 0; 
+			return 0;
 		}
 		/* POSIX says if n is too big, the last enclosing loop
 		 * shall be used.  Doesn't say to print an error but we
@@ -849,7 +849,7 @@ c_exec(wp)
 				fd_clexec(i);
 #endif /* KSH */
 		}
-		e->savefd = NULL; 
+		e->savefd = NULL;
 	}
 	return 0;
 }

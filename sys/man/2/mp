@@ -480,7 +480,7 @@ The mathematical functions are:
 .BR "sum = b1 + b2" .
 .TP
 .I mpmagadd
-.BR "sum = abs(b1) + abs(b2)" . 
+.BR "sum = abs(b1) + abs(b2)" .
 .TP
 .I mpsub
 .BR "diff = b1 - b2" .
@@ -587,7 +587,7 @@ For example, for 0x14,
 returns 5 and
 .I mplowbits0
 returns 2.
-For 0, 
+For 0,
 .I mpsignif
 and
 .I mplowbits0
@@ -650,7 +650,7 @@ safe operation. The result of a timing safe operation will also have the
 flag set and is not normalized.
 .SS "Chinese remainder theorem
 .PP
-When computing in a non-prime modulus, 
+When computing in a non-prime modulus,
 .IR n,
 it is possible to perform the computations on the residues modulo the prime
 factors of
@@ -664,7 +664,7 @@ computes the residues of
 and returns them in a newly allocated structure:
 .IP
 .EX
-typedef struct CRTres	CRTres;	
+typedef struct CRTres	CRTres;
 {
 	int	n;	/* number of residues */
 	mpint	*r[n];	/* residues */

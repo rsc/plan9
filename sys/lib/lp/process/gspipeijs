@@ -27,7 +27,7 @@ case 2500
 	GSOPT=(-q -sDEVICE'='ijs -sIjsServer'='hpijs -sDeviceManufacturer'='HP '-sDeviceModel='"$MODEL^' '^$NUMBER" -r600 -sOutputFile'='^$GSTMPFILE -dDuplex'='true -sPAPERSIZE'='a4 -dIjsUseOutputFD -dSAFER -dNOPAUSE -DBATCH)
 }
 
-gs $GSOPT  - 
+gs $GSOPT  -
 
 cat $GSTMPFILE
 rm $GSTMPFILE

@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1995, 1996, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -49,7 +49,7 @@ typedef enum {
 } build_font_options_t;
 
 /* In zbfont.c */
-int build_proc_name_refs(const gs_memory_t *mem, 
+int build_proc_name_refs(const gs_memory_t *mem,
 			 build_proc_refs * pbuild,
 			 const char *bcstr, const char *bgstr);
 int build_gs_font_procs(os_ptr, build_proc_refs *);

@@ -161,7 +161,7 @@ extern Point	memsubfontwidth(Memsubfont*, char*);
 extern Memsubfont*	getmemdefont(void);
 
 /*
- * Predefined 
+ * Predefined
  */
 extern	Memimage*	memwhite;
 extern	Memimage*	memblack;
@@ -192,4 +192,3 @@ extern int		drawdebug;
 #pragma varargck type "lb" ulong
 #pragma varargck type "b" int
 #pragma varargck type "b" uint
-

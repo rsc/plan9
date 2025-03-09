@@ -180,13 +180,13 @@ xpitftdraw(void *)
 						spibuf[i*2] = p[1];
 						break;
 					case 24:		// BGR24
-						spibuf[i*2] = (p[2] & 0xf8) | 
+						spibuf[i*2] = (p[2] & 0xf8) |
 							(p[1] >> 5);
 						spibuf[i*2+1] = (p[0] >> 3) |
 							(p[1] << 3);
 						break;
 					case 32:		// ARGB32
-						spibuf[i*2] = (p[0] & 0xf8) | 
+						spibuf[i*2] = (p[0] & 0xf8) |
 							(p[1] >> 5);
 						spibuf[i*2+1] = (p[1] >> 3) |
 							(p[1] << 3);

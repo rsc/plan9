@@ -4,7 +4,7 @@ void
 swit1(C1 *q, int nc, long def, Node *n)
 {
 	Node tn;
-	
+
 	if(typev[n->type->etype])
 		regalloc(&tn, &vregnode, Z);
 	else

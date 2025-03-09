@@ -47,12 +47,12 @@ tdfxenable(VGAscr* scr)
 	}
 	else
 		return;
-	
+
 	scr->mmio = vmap(p->mem[0].bar&~0x0F, p->mem[0].size);
 	if(scr->mmio == nil)
 		return;
 	scr->pci = p;
-	
+
 	addvgaseg("3dfxmmio", p->mem[0].bar&~0x0F, p->mem[0].size);
 	vgalinearpci(scr);
 	if(scr->apsize)

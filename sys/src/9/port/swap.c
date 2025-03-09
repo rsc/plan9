@@ -138,7 +138,7 @@ loop:
 			p++;
 			if(p >= ep){
 				p = proctab(0);
-				gentick();			
+				gentick();
 			}
 
 			if(p->state == Dead || p->noswap)

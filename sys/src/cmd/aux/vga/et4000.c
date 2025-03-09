@@ -82,7 +82,7 @@ options(Vga* vga, Ctlr* ctlr)
 
 	if(strncmp(ctlr->name, "et4000-w32", 10) == 0)
 		ctlr->flag |= Hpclk2x8;
-	
+
 	ctlr->flag |= Hclkdiv|Foptions;
 }
 
@@ -100,7 +100,7 @@ init(Vga* vga, Ctlr* ctlr)
 		vga->crt[0x00] = ((mode->ht/2)>>3)-5;
 		vga->crt[0x01] = ((mode->x/2)>>3)-1;
 		vga->crt[0x02] = ((mode->shb/2)>>3)-1;
-	
+
 		x = (mode->ehb/2)>>3;
 		vga->crt[0x03] = 0x80|(x & 0x1F);
 		vga->crt[0x04] = (mode->shs/2)>>3;

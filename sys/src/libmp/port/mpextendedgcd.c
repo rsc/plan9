@@ -8,7 +8,7 @@
 // For a anv b it solves, v = gcd(a,b) and finds x and y s.t.
 // ax + by = v
 //
-// Handbook of Applied Cryptography, Menezes et al, 1997, pg 608.  
+// Handbook of Applied Cryptography, Menezes et al, 1997, pg 608.
 void
 mpextendedgcd(mpint *a, mpint *b, mpint *v, mpint *x, mpint *y)
 {
@@ -66,7 +66,7 @@ mpextendedgcd(mpint *a, mpint *b, mpint *v, mpint *x, mpint *y)
 			mpright(A, 1, A);
 			mpright(B, 1, B);
 		}
-	
+
 //		print("%B %B %B %B %B %B\n", u, v, A, B, C, D);
 		while(iseven(v)){
 			mpright(v, 1, v);
@@ -77,7 +77,7 @@ mpextendedgcd(mpint *a, mpint *b, mpint *v, mpint *x, mpint *y)
 			mpright(C, 1, C);
 			mpright(D, 1, D);
 		}
-	
+
 //		print("%B %B %B %B %B %B\n", u, v, A, B, C, D);
 		if(mpcmp(u, v) >= 0){
 			mpsub(u, v, u);

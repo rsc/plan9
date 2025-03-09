@@ -121,7 +121,7 @@ unionread(Chan *c, void *va, long n)
 				c->umc = cclone(mount->to);
 				c->umc = devtab[c->umc->type]->open(c->umc, OREAD);
 			}
-	
+
 			nr = devtab[c->umc->type]->read(c->umc, va, n, c->umc->offset);
 			c->umc->offset += nr;
 			poperror();
@@ -306,7 +306,7 @@ mountrewind(Chan *c)
 }
 
 /*
- * Rewrite the results of a directory read to reflect current 
+ * Rewrite the results of a directory read to reflect current
  * name space bindings and mounts.  Specifically, replace
  * directory entries for bind and mount points with the results
  * of statting what is mounted there.  Except leave the old names.

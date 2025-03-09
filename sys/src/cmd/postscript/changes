@@ -17,7 +17,7 @@ move #include <sys/types.h> before #include <fcntl.h> for off_t in download.c.
 
 dpost:
 insert #include <sys/types.h> before #include <fcntl.h> for off_t in dpost.c.
-added 
+added
 	#ifdef plan9
 	#define	isascii(c)	((unsigned char)(c)<=0177)
 	#endif
@@ -31,7 +31,7 @@ add hardcopy.rc to hardcopy.
 
 postbgi:
 insert #include <sys/types.h> before #include <fcntl.h> for off_t in postbgi.c.
-added 
+added
 	#ifdef plan9
 	#define	isascii(c)	((unsigned char)(c)<=0177)
 	#endif
@@ -39,7 +39,7 @@ after #include <ctype.h> in postbgi.c.
 
 postdaisy:
 insert #include <sys/types.h> before #include <fcntl.h> for off_t in postdaisy.c.
-added 
+added
 	#ifdef plan9
 	#define	isascii(c)	((unsigned char)(c)<=0177)
 	#endif
@@ -47,7 +47,7 @@ after #include <ctype.h> in postdaisy.c.
 
 postdmd:
 insert #include <sys/types.h> before #include <fcntl.h> for off_t in postdmd.c.
-added 
+added
 	#ifdef plan9
 	#define	isascii(c)	((unsigned char)(c)<=0177)
 	#endif
@@ -55,7 +55,7 @@ after #include <ctype.h> in postdmd.c.
 
 postgif:
 insert #include <sys/types.h> before #include <fcntl.h> for off_t in postgif.c.
-added 
+added
 	#ifdef plan9
 	#define	isascii(c)	((unsigned char)(c)<=0177)
 	#endif
@@ -72,7 +72,7 @@ added #include <string.h> in picpack.c.
 
 postmd:
 insert #include <sys/types.h> before #include <fcntl.h> for off_t in postmd.c.
-added 
+added
 	#ifdef plan9
 	#define	isascii(c)	((unsigned char)(c)<=0177)
 	#endif
@@ -81,7 +81,7 @@ added #include <string.h> in picpack.c.
 
 postprint:
 insert #include <sys/types.h> before #include <fcntl.h> for off_t in postprint.c.
-added 
+added
 	#ifdef plan9
 	#define	isascii(c)	((unsigned char)(c)<=0177)
 	#endif
@@ -92,4 +92,3 @@ insert #include <sys/types.h> before #include <fcntl.h> for off_t in postreverse
 
 posttek:
 insert #include <sys/types.h> before #include <fcntl.h> for off_t in posttek.c.
-

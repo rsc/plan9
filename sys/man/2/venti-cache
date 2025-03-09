@@ -1,6 +1,6 @@
 .TH VENTI-CACHE 2
 .SH NAME
-VtBlock, VtCache, 
+VtBlock, VtCache,
 vtblockcopy,
 vtblockduplock,
 vtblockput,
@@ -81,7 +81,7 @@ These functions provide access to a simple in-memory
 cache of blocks already stored on a Venti server
 and blocks that will eventually be stored on a Venti server.
 .PP
-A 
+A
 .B VtBlock
 represents a venti data block.
 Blocks stored on a venti server,
@@ -184,7 +184,7 @@ It is occasionally convenient to have multiple variables
 refer to the same block.
 .I Vtblockduplock
 increments the block's reference count so that
-an extra 
+an extra
 .I vtblockput
 will be required in order to release the block.
 .PP
@@ -197,20 +197,20 @@ function
 to write the block to the server.
 The default
 .I write
-function is 
+function is
 .I vtwrite
 (see
 .IR venti-client (2));
 .I vtsetcachewrite
 sets it.
 .I Vtsetcachewrite
-is used by clients to install replacement functions 
+is used by clients to install replacement functions
 that run writes in the background or perform other
 additional processing.
 .PP
 .I Vtblockcopy
 copies a block in preparation for modifying its contents.
-The old block may be a local or global block, 
+The old block may be a local or global block,
 but the new block will be a local block.
 .PP
 The cache only evicts global blocks.

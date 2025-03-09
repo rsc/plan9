@@ -613,8 +613,8 @@ pciprobe(int typ)
 			free(c);
 			continue;
 		}
-		c->nqueue = i;		
-	
+		c->nqueue = i;
+
 		if(h == nil)
 			h = c;
 		else
@@ -685,4 +685,3 @@ ethervirtiolink(void)
 {
 	addethercard("virtio", reset);
 }
-

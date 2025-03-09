@@ -132,7 +132,7 @@ dodata(void)
 			if(!strcmp(s->name, "setR30"))
 				continue;
 			/* size should be 19 max */
-			if(strlen(s->name) >= 10)	/* has loader address */ 
+			if(strlen(s->name) >= 10)	/* has loader address */
 				sprint(literal, "$%p.%lux", s, p->from.offset);
 			else
 				sprint(literal, "$%s.%d.%lux", s->name,

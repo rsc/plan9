@@ -18,7 +18,7 @@ enum {
 	Yellow = Bright|Brown,
 	White = Bright|Grey,
 };
-	
+
 enum {
 	Width = 80*2,
 	Height = 25,

@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -187,7 +187,7 @@ psdf_adjust_color_index(gx_device_vector *vdev, gx_color_index color)
 }
 
 /* Round a double value to a specified precision. */
-double 
+double
 psdf_round(double v, int precision, int radix)
 {
     double mul = 1;

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -170,14 +170,14 @@ dynamic_make_string(i_ctx_t *i_ctx_p, ref * pref, da_ptr pda, byte * next)
 
 /* GC procedures */
 #define ssarray ssptr->s_ss.binary.bin_array
-private 
+private
 CLEAR_MARKS_PROC(scanner_clear_marks)
 {
     scanner_state *const ssptr = vptr;
 
     r_clear_attrs(&ssarray, l_mark);
 }
-private 
+private
 ENUM_PTRS_WITH(scanner_enum_ptrs, scanner_state *ssptr) return 0;
 case 0:
     if (ssptr->s_scan_type == scanning_none ||

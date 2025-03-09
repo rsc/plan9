@@ -1,12 +1,12 @@
 /* Copyright (C) 1996, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -715,7 +715,7 @@ gx_forward_get_color_comp_index(gx_device * dev, const char * pname,
     const gx_device_forward * fdev = (const gx_device_forward *)dev;
     gx_device *tdev = fdev->target;
 
-    return (tdev == 0 
+    return (tdev == 0
 	? gx_error_get_color_comp_index(dev, pname,
 				name_size, component_type)
 	: dev_proc(tdev, get_color_comp_index)(tdev, pname,
@@ -752,7 +752,7 @@ gx_forward_pattern_manage(gx_device * dev, gx_bitmap_id id,
     gx_device_forward * const fdev = (gx_device_forward *)dev;
     gx_device *tdev = fdev->target;
 
-    /* Note that clist sets fdev->target == fdev, 
+    /* Note that clist sets fdev->target == fdev,
        so this function is unapplicable to clist. */
     if (tdev == 0)
 	return 0;
@@ -761,31 +761,31 @@ gx_forward_pattern_manage(gx_device * dev, gx_bitmap_id id,
 }
 
 int
-gx_forward_fill_rectangle_hl_color(gx_device *dev, 
-    const gs_fixed_rect *rect, 
+gx_forward_fill_rectangle_hl_color(gx_device *dev,
+    const gs_fixed_rect *rect,
     const gs_imager_state *pis, const gx_drawing_color *pdcolor,
     const gx_clip_path *pcpath)
 {
     gx_device_forward * const fdev = (gx_device_forward *)dev;
     gx_device *tdev = fdev->target;
 
-    /* Note that clist sets fdev->target == fdev, 
+    /* Note that clist sets fdev->target == fdev,
        so this function is unapplicable to clist. */
     if (tdev == 0)
 	return_error(gs_error_rangecheck);
     else
-	return dev_proc(tdev, fill_rectangle_hl_color)(tdev, rect, 
+	return dev_proc(tdev, fill_rectangle_hl_color)(tdev, rect,
 						pis, pdcolor, NULL);
 }
 
 int
-gx_forward_include_color_space(gx_device *dev, gs_color_space *cspace, 
+gx_forward_include_color_space(gx_device *dev, gs_color_space *cspace,
 	    const byte *res_name, int name_length)
 {
     gx_device_forward * const fdev = (gx_device_forward *)dev;
     gx_device *tdev = fdev->target;
 
-    /* Note that clist sets fdev->target == fdev, 
+    /* Note that clist sets fdev->target == fdev,
        so this function is unapplicable to clist. */
     if (tdev == 0)
 	return 0;
@@ -793,7 +793,7 @@ gx_forward_include_color_space(gx_device *dev, gs_color_space *cspace,
 	return dev_proc(tdev, include_color_space)(tdev, cspace, res_name, name_length);
 }
 
-int 
+int
 gx_forward_fill_linear_color_scanline(gx_device *dev, const gs_fill_attributes *fa,
 	int i, int j, int w,
 	const frac31 *c, const int32_t *addx, const int32_t *mulx, int32_t divx)
@@ -806,7 +806,7 @@ gx_forward_fill_linear_color_scanline(gx_device *dev, const gs_fill_attributes *
     return proc(tdev, fa, i, j, w, c, addx, mulx, divx);
 }
 
-int 
+int
 gx_forward_fill_linear_color_trapezoid(gx_device *dev, const gs_fill_attributes *fa,
 	const gs_fixed_point *p0, const gs_fixed_point *p1,
 	const gs_fixed_point *p2, const gs_fixed_point *p3,
@@ -821,7 +821,7 @@ gx_forward_fill_linear_color_trapezoid(gx_device *dev, const gs_fill_attributes 
     return proc(tdev, fa, p0, p1, p2, p3, c0, c1, c2, c3);
 }
 
-int 
+int
 gx_forward_fill_linear_color_triangle(gx_device *dev, const gs_fill_attributes *fa,
 	const gs_fixed_point *p0, const gs_fixed_point *p1,
 	const gs_fixed_point *p2,
@@ -835,7 +835,7 @@ gx_forward_fill_linear_color_triangle(gx_device *dev, const gs_fill_attributes *
     return proc(tdev, fa, p0, p1, p2, c0, c1, c2);
 }
 
-int 
+int
 gx_forward_update_spot_equivalent_colors(gx_device *dev, const gs_state * pgs)
 {
     gx_device_forward * const fdev = (gx_device_forward *)dev;

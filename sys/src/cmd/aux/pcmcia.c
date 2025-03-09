@@ -71,7 +71,7 @@ tuple(int next, int expect)
 print("type %.2uX\n", type & 0xff);
 
 	if(expect && expect != type){
-		print("expected %.2uX found %.2uX\n", 
+		print("expected %.2uX found %.2uX\n",
 			expect, type);
 		return -1;
 	}
@@ -279,7 +279,7 @@ tfuncid(int, int)
 	uchar func;
 
 	readc(&func);
-	print("Function %s\n", 
+	print("Function %s\n",
 		(func >= nelem(funcids))? "unknown function": funcids[func]);
 }
 

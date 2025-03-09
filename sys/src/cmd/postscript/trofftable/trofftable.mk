@@ -71,4 +71,3 @@ changes :
 	    -e "s'^.ds dQ.*'.ds dQ $(POSTLIB)'" \
 	trofftable.1 >XXX.1; \
 	mv XXX.1 trofftable.1
-

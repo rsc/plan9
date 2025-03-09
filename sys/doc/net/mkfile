@@ -18,4 +18,3 @@ net.html:D:	$DEPS
 
 clean:V:
 	rm -f net.ps tree.pout net.trout
-

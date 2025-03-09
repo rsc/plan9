@@ -8,11 +8,11 @@ enum {
 	UDPLEN = 576,
 	NRX = 64,
 	RXBASE = 128 * 1024 * 1024,
-	
+
 	ETHHEAD = 14,
 	IPHEAD = 20,
 	UDPHEAD = 8,
-	
+
 	BOOTREQ = 1,
 	DHCPDISCOVER = 1,
 	DHCPOFFER,
@@ -159,7 +159,7 @@ ethinit(ulong *r)
 	p[-2] |= 2;
 	rxact = rxdesc;
 	r[RX_QBAR] = (ulong) rxdesc;
-	
+
 	r[NET_CTRL] = MDEN;
 //	mdwrite(r, MDCTRL, MDRESET);
 	mdwrite(r, MDCTRL, AUTONEG);
@@ -217,7 +217,7 @@ udptx(ulong *r, udp *u)
 {
 	uchar *p, *q;
 	int n;
-	
+
 	p = q = txbuf;
 	memcpy(p, u->edest, 6);
 	memcpy(p + 6, u->esrc, 6);
@@ -242,7 +242,7 @@ udptx(ulong *r, udp *u)
 	*q++ = 0;
 	q = u32put(q, u->isrc);
 	q = u32put(q, u->idest);
-	
+
 	*q++ = u->sport >> 8;
 	*q++ = u->sport;
 	*q++ = u->dport >> 8;
@@ -252,7 +252,7 @@ udptx(ulong *r, udp *u)
 	*q++ = n;
 	*q++ = 0;
 	*q++ = 0;
-	
+
 	memcpy(q, u->data, u->len);
 	ethtx(r, p, ETHHEAD + IPHEAD + UDPHEAD + u->len);
 }
@@ -262,7 +262,7 @@ dhcppkg(ulong *r, int t)
 {
 	uchar *p;
 	udp *u;
-	
+
 	u = &ubuf;
 	p = u->data;
 	*p++ = BOOTREQ;
@@ -294,7 +294,7 @@ dhcppkg(ulong *r, int t)
 		*p++ = 4;
 		p = u32put(p, dhcpip);
 	}
-	
+
 	*p++ = 0xff;
 
 	memset(u->edest, 0xff, 6);
@@ -487,7 +487,7 @@ udp *
 tftppkg(void)
 {
 	udp *u;
-	
+
 	u = &ubuf;
 	memcpy(u->edest, tmac, 6);
 	memcpy(u->esrc, mac, 6);
@@ -518,7 +518,7 @@ restart:
 	u->len = p - u->data;
 	udptx(r, u);
 	timeren(TFTPTIMEOUT);
-	
+
 	for(;;){
 		v = udprx();
 		if(v == nil){

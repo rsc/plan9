@@ -59,4 +59,3 @@ pubfiles=`{ls}
 
 dist:V: /usr/paurea/src/jtag/jtag.tgz
 	mk all && mk clean && 9fs sources  && cp ../jtag.tgz /n/sources/contrib/paurea
-	

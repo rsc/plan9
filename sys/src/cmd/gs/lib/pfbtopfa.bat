@@ -1,4 +1,4 @@
-@echo off 
+@echo off
 @rem $Id: pfbtopfa.bat,v 1.1 2003/02/06 06:09:52 alexcher Exp $
 @rem Convert .pfb fonts to .pfa format
 

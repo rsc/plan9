@@ -108,6 +108,6 @@ to print the arguments for the process.  Newlines in arguments will be translate
 .SH "SEE ALSO"
 .IR acid (1),
 .IR db (1),
-.IR kill (1), 
+.IR kill (1),
 .IR ns (1),
 .IR proc (3)

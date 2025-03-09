@@ -1,4 +1,4 @@
-.TH SEGMENT 3 
+.TH SEGMENT 3
 .SH NAME
 segment \- long lived memory segments
 .SH SYNOPSIS
@@ -49,7 +49,7 @@ and
 Reading and writing
 .B data
 affects the contents of the segment.
-Reading and writing 
+Reading and writing
 .B ctl
 retrieves and sets the segment's properties.
 .PP

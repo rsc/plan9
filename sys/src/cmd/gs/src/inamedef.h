@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995, 1997, 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -37,7 +37,7 @@
 #  undef EXTEND_NAMES
 #  define EXTEND_NAMES max_name_extension_bits
 #endif
-/*       
+/*
  * We capture the small algorithmic differences between these two
  * configurations entirely in this header file;
  * the implementation doesn't need any conditionals on EXTEND_NAMES.

@@ -19,7 +19,7 @@ xfile(Qid *qid, void *s, int new)
 
 	lock(&xlocks[k]);
 	for(f=*hp, pf=0; f; pf=f, f=f->next)
-		if(f->qid.path == qid->path 
+		if(f->qid.path == qid->path
 		&& (u32int)(uintptr)f->s == (u32int)(uintptr)s)
 			break;
 	if(f && pf){

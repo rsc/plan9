@@ -27,11 +27,11 @@ The options are:
 .TP
 .B -j
 Join split lines.
-.TP 
+.TP
 .B -s
 Print code in the so-called K&R style used in
 .IR "The C Programming Language" .
-.TP 
+.TP
 .B -l
 Split lines that are longer than
 .IR length .

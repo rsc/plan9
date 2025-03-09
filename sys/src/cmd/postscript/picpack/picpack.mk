@@ -72,4 +72,3 @@ changes :
 	    -e "s'^POSTBIN=.*'POSTBIN=$(POSTBIN)'" \
 	$(MAKEFILE) >XXX.mk; \
 	mv XXX.mk $(MAKEFILE)
-

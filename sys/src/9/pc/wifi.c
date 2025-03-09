@@ -370,8 +370,8 @@ setstatus(Wifi *wifi, Wnode *wn, char *new)
 	wn->status = new;
 	if(wifi->debug && new != old)
 		print("#l%d: status %E: %.12ld %.12ld: %s -> %s (from pc=%#p)\n",
-			wifi->ether->ctlrno, 
-			wn->bssid, 
+			wifi->ether->ctlrno,
+			wn->bssid,
 			TK2MS(MACHP(0)->ticks), TK2MS(MACHP(0)->ticks - wn->lastsend),
 			old, new,
 			getcallerpc(&wifi));
@@ -423,7 +423,7 @@ recvbeacon(Wifi *wifi, Wnode *wn, uchar *d, int len)
 	for(e = d + len; d+2 <= e; d = x){
 		d += 2;
 		x = d + d[-1];
-		if(x > e)			
+		if(x > e)
 			break;	/* truncated */
 		t = d[-2];
 		switch(t){
@@ -841,7 +841,7 @@ parsekey(char *s)
 		break;
 	case TKIP:
 		if(n != 32)
-			return nil;	
+			return nil;
 		k = malloc(sizeof(Wkey) + n);
 		memmove(k->key, key, n);
 		break;
@@ -1533,7 +1533,7 @@ xblock(int L, int M, uchar *N, uchar *a, int la, int lm, uchar t[16], AESstate *
 	memmove(&t[1], N, 15-L);
 	putbe(&t[16-L], L, lm);
 	aes_encrypt(s->ekey, s->rounds, t, t);
-	
+
 	if(la > 0){
 		assert(la < 0xFF00);
 		for(p = l, e = putbe(l, 2, la), x = t; p < e; x++, p++)

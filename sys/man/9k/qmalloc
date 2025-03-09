@@ -81,7 +81,7 @@ If the memory is not immediately available,
 retries every 100 milliseconds until the memory is acquired.
 .PP
 .I Mallocalign
-allocates a block of at least 
+allocates a block of at least
 .I n
 bytes of memory respecting alignment contraints.
 If
@@ -146,12 +146,12 @@ grows the block to encompass this unused space and returns the new number
 of bytes that may be used.
 .PP
 The memory allocator does not maintain ``malloc tag'' and the ``realloc tag'',
-but the functions 
+but the functions
 .IR setmalloctag ,
 .IR getmalloctag ,
 .IR setrealloctag ,
 and
-.IR getrealloctag 
+.IR getrealloctag
 are provided for compaibility with the
 .IR pool (2)
 library.
@@ -177,7 +177,7 @@ chapter 8 §7: Example—Storage Allocator.
 .br
 .I "Quickfit: An efficient algorithm"
 .I for heap storage allocation" ,
-Charles B. Weinstock and William A. Wulf. 
+Charles B. Weinstock and William A. Wulf.
 ACM SIGPLAN Notices, 23(10):141—144, October 1988.
 .br
 .IR pool (2),

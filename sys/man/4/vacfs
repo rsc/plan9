@@ -38,7 +38,7 @@ clients are not authenticated, and groups are assumed to
 contain a single member with the same name.
 These restrictions should eventually be removed.
 .PP
-Options to 
+Options to
 .I vacfs
 are:
 .TF "-c\fI cachesize"
@@ -55,7 +55,7 @@ The network address of the Venti server.
 The default is taken from the environment variable
 .BR venti .
 If this variable does not exist, then the default is the
-metaname 
+metaname
 .BR $venti ,
 which can be configured via
 .IR ndb (6).

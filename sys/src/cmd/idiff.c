@@ -82,7 +82,7 @@ int
 opentemp(char *template, int mode, long perm)
 {
 	int fd, i;
-	char *p;	
+	char *p;
 
 	p = strdup(template);
 	if(p == nil)

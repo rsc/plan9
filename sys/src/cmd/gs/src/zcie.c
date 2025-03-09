@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -93,7 +93,7 @@ dict_proc_array_param(const gs_memory_t *mem,
 /* Get 3 ranges from a dictionary. */
 int
 dict_range3_param(const gs_memory_t *mem,
-		  const ref *pdref, const char *kstr, 
+		  const ref *pdref, const char *kstr,
 		  gs_range3 *prange3)
 {
     return dict_ranges_param(mem, pdref, kstr, 3, prange3->ranges);
@@ -134,7 +134,7 @@ dict_proc3_param(const gs_memory_t *mem, const ref *pdref, const char *kstr, ref
 
 /* Get WhitePoint and BlackPoint values. */
 int
-cie_points_param(const gs_memory_t *mem, 
+cie_points_param(const gs_memory_t *mem,
 		 const ref * pdref, gs_cie_wb * pwb)
 {
     int code;

@@ -1000,7 +1000,7 @@ PP = p;
 		o6 |= (1<<6);	/* ROL 8 */
 
 		break;
-		
+
 	case 34:	/* mov $lacon,R */
 		o1 = omvl(p, &p->from, REGTMP);
 		if(!o1)
@@ -1307,7 +1307,7 @@ PP = p;
 		if(r == NREG)
 			r = o->param;
 		o1 = oshr(p->from.reg, instoffset, r, p->scond);
-		break;	
+		break;
 	case 71:	/* movb/movh/movhu O(R),R -> ldrsb/ldrsh/ldrh */
 		aclass(&p->from);
 		r = p->from.reg;
@@ -1327,7 +1327,7 @@ PP = p;
 		if(r == NREG)
 			r = o->param;
 		o2 = oshrr(p->from.reg, REGTMP,r, p->scond);
-		break;	
+		break;
 	case 73:	/* movb/movh/movhu L(R),R -> ldrsb/ldrsh/ldrh */
 		o1 = omvl(p, &p->from, REGTMP);
 		if(!o1)
@@ -1656,7 +1656,7 @@ oshr(int r, long v, int b, int sc)
 	o = olhr(v, b, r, sc) ^ (1<<20);
 	return o;
 }
-	
+
 
 long
 osrr(int r, int i, int b, int sc)
@@ -1758,7 +1758,7 @@ ofsr(int a, int r, long v, int b, int sc, Prog *p)
 
 long
 omvl(Prog *p, Adr *a, int dr)
-{	
+{
 	long v, o1;
 	if(!p->cond) {
 		aclass(a);

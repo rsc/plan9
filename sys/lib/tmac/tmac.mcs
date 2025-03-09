@@ -1,4 +1,4 @@
-'''\"	@(#)dcs:csmacros	2.3	5/2/89	
+'''\"	@(#)dcs:csmacros	2.3	5/2/89
 '''\" registers
 '''\"	a - abstract continuation flag - 0 (no), >0 (yes - number of overflow pages)
 '''\"	b - mercury selections counter
@@ -173,7 +173,7 @@
 '''\"	ML - marked list
 '''\"	LI - list item
 '''\"	LE - list end
-'''\"	hD - header 
+'''\"	hD - header
 '''\"	fO - footer
 '''\"	yY - abstract overflow
 '''\"	aT - abstract overflow trap
@@ -827,7 +827,7 @@
 .if n .if \\n(ra=2 .nr e \\ne-4
 '''\" increment number on next two lines to drop text lower on page 2
 .if t .nr e \\ne+23
-.if n .nr e \\ne+21 
+.if n .nr e \\ne+21
 .if n \{\
 '''\"					if page 2 text changes, change values in next 3 lines
 .if \\ne<4 \{\
@@ -1028,7 +1028,7 @@
 .ie \w\(ts\\$1\(ts \{\
 .ie 0\\$1-99 .nr ts \\n(ps
 .el .nr ts \\$1 \}
-.el .nr ts \\n(.s 
+.el .nr ts \\n(.s
 .ps \\n(ts
 .if \\n(.$=1 .if t \{\
 .nr tv \\n(.s+2
@@ -1037,7 +1037,7 @@
 .ie \w\(ts\\$2\(ts \{\
 .ie 0\\$2-99 .nr tv \\n(.s+2
 .el .nr tv \\$2 \}
-.el .nr tv \\n(.v 
+.el .nr tv \\n(.v
 .vs \\n(tvp \} \}
 ..
 .de sP				\" space 1 blank line (vertical space)
@@ -1945,7 +1945,7 @@ For Use by Recipient of Cover Sheet:
 .rn fo xx
   Otherwise:
    Enter PAN if Alcatel-Lucent-BL (or SS# if non-Alcatel-Lucent-BL). \l'1.5i'
-   Return this sheet to any ITDS location. 
+   Return this sheet to any ITDS location.
 .sp|\\nzu
 .in 4.0i
 Internal Technical Document Service
@@ -1958,7 +1958,7 @@ Internal Technical Document Service
 .br \}
 .if n \{\
   Computing network users may order copies via the \f2library -1\f1 command;
-  for information, type \f2man library\f1 after the UNIX system prompt. 
+  for information, type \f2man library\f1 after the UNIX system prompt.
   Otherwise:
 .sp1
 .mk z
@@ -1967,7 +1967,7 @@ Internal Technical Document Service
   non-Alcatel-Lucent-BL).
                \l'2.0i'
 2 Return this sheet to any
-  ITDS location. 
+  ITDS location.
 .sp|\\nzu
 .in 4.0i
 Internal Technical Document Service

@@ -192,7 +192,7 @@ ne2000reset(Ether* edev)
 	delay(2);
 	outb(port+Reset, buf[0]);
 	delay(2);
-	
+
 	/*
 	 * Init the (possible) chip, then use the (possible)
 	 * chip to read the (possible) PROM for ethernet address

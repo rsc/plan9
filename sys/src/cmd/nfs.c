@@ -171,7 +171,7 @@ nfsGetattr(Auth *a, ulong tag, Nfs3Handle *h, Nfs3Attr *attr)
 
 	memset(&tx, 0, sizeof tx);
 	nfs3Call(a, &tx.call, Nfs3CallTGetattr);
-	tx.handle = *h;	
+	tx.handle = *h;
 
 	memset(&rx, 0, sizeof rx);
 	nfs3Call(a, &rx.call, Nfs3CallRGetattr);
@@ -679,9 +679,9 @@ idtostr(User **u, int nu, u32int id)
 		else
 			hi = mid;
 	}
-	snprint(buf, sizeof buf, "%ud", id);	
+	snprint(buf, sizeof buf, "%ud", id);
 	return estrdup9p(buf);
-}		
+}
 char*
 uidtostr(u32int uid)
 {
@@ -1171,7 +1171,7 @@ fsreaddir(Req *r)
 	r->ofcall.count = p9 - (uchar*)r->ofcall.data;
 	respond(r, nil);
 }
-	
+
 void
 fsread(Req *r)
 {
@@ -1618,7 +1618,7 @@ dialproc(void*)
 	sunClientProg(mntcli, &nfsMount3Prog);
 	if(mountNull(0) < 0)
 		sysfatal("execute nop with mnt server at %s: %r", mountaddr);
-	
+
 	if((nfscli = sunDial(nfsaddr)) == nil)
 		sysfatal("dial nfs program at %s: %r", nfsaddr);
 	nfscli->chatty = chattyrpc;

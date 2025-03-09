@@ -55,7 +55,7 @@ io(void)
 {
 	Fcall	rhdr;
 	int n;
-	
+
 	for(;;){
 		n = read9pmsg(srvfd, rbuf, sizeof rbuf-1);
 		if(n <= 0)
@@ -65,7 +65,7 @@ io(void)
 				fprint(2, "%s: malformed message\n", argv0);
 			continue;
 		}
-		
+
 		if(debugfd >= 0)
 			fprint(debugfd, "<-%F\n", &rhdr);/**/
 
@@ -226,7 +226,7 @@ rwalk(Fcall *f)
 			break;
 		r.wqid[i] = nf->node->d.qid;
 	}
-	
+
 
 	if(i < f->nwname && f->fid != f->newfid){
 		nf->busy = 0;
@@ -269,7 +269,7 @@ ropen(Fcall *f)
 
 	mode = f->mode&(OREAD|OWRITE|ORDWR);
 	if(fidp->node->d.type == Ctlfile) {
-		if(mode != OWRITE) {	
+		if(mode != OWRITE) {
 			reply(f, "permission denied");
 			return;
 		}
@@ -456,7 +456,7 @@ rremove(Fcall *f)
 	Node *dir, *np;
 
 	fidp = newfid(f->fid);
-	
+
 	/*
 	 * only trusted temporary files can be removed
 	 * and only by their owner.
@@ -509,4 +509,3 @@ rwstat(Fcall *f)
 {
 	reply(f, "wstat not implemented");
 }
-

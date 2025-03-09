@@ -12,7 +12,7 @@
  *	getc		getchar		gets		putc		putchar
  *	puts		ungetc		fread		fwrite		fgetpos
  *	fseek		fsetpos		ftell		rewind		clearerr
- *	feof		ferror		perror	
+ *	feof		ferror		perror
  */
 #ifndef _SUSV2_SOURCE
 #define _SUSV2_SOURCE	/* for *intptr_t types */

@@ -49,7 +49,7 @@
 #define FRAMES_AND_BYTES (FRAMES_FLAG | BYTES_FLAG)
 
 
- 
+
 /*structure to receive extracted header */
 /* toc may be NULL*/
 typedef struct

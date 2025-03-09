@@ -86,6 +86,6 @@ fsys main open '^$v^' -c '^$m^'
 '^$snap^'
 '		| fossil/conf -w $f
 	}
-	
+
 	echo Done.
 }

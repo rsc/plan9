@@ -596,7 +596,7 @@ files.
 < The Named is the mother of all things.
 ---
 > The named is the mother of all things.
-> 
+>
 11a11,13
 > They both may be called deep and profound.
 > Deeper and more profound,
@@ -731,7 +731,7 @@ hunks have run together, because their contents overlap.
 --- 1,6 ----
   The Nameless is the origin of Heaven and Earth;
 ! The named is the mother of all things.
-! 
+!
   Therefore let there always be non-being,
     so we may see their subtlety,
   And let there always be being,
@@ -766,7 +766,7 @@ at most one context line is reported here.
 --- 1,4 ----
   The Nameless is the origin of Heaven and Earth;
 ! The named is the mother of all things.
-! 
+!
   Therefore let there always be non-being,
 ***************
 *** 11 ****
@@ -1925,7 +1925,7 @@ files.
 2:2,3c
 3:4,5c
   The named is the mother of all things.
-  
+
 ====3
 1:8c
 2:7c
@@ -1939,7 +1939,7 @@ files.
   Deeper and more profound,
   The door of all subtleties!
 3:13,14c
-  
+
     -- The Way of Lao-Tzu, tr. Wing-tsit Chan
 @end example
 

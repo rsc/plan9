@@ -64,7 +64,7 @@ Breadnumber(Biobuf *b, char *buf)
 	int i;
 	int c;
 	int havedigits;
-	
+
 	havedigits = 0;
 	for(i=0; i<22; i++){
 		if((c = Bgetc(b)) == Beof)
@@ -93,7 +93,7 @@ static int
 Breadulong(Biobuf *b, ulong *x)
 {
 	char buf[32];
-	
+
 	if(Breadnumber(b, buf) < 0)
 		return -1;
 	*x = strtoul(buf, 0, 0);
@@ -104,7 +104,7 @@ static int
 Breaduvlong(Biobuf *b, uvlong *x)
 {
 	char buf[32];
-	
+
 	if(Breadnumber(b, buf) < 0)
 		return -1;
 	*x = strtoull(buf, 0, 0);
@@ -170,7 +170,7 @@ readseg(Seg **ps, Biobuf *b, Proc *plist)
 			break;
 		case 'm':
 		case 't':
-			if(Breadulong(b, &pid) < 0 
+			if(Breadulong(b, &pid) < 0
 			|| Breaduvlong(b, &off) < 0)
 				panic("error reading segment x");
 			pp[i] = findpage(plist, pid, t, off);
@@ -230,7 +230,7 @@ readsnap(Biobuf *b)
 		if(i != Npfile)
 			continue;
 		if(strcmp(q, "mem") == 0) {
-			if(Bread(b, buf, 12) != 12) 
+			if(Bread(b, buf, 12) != 12)
 				panic("can't read memory section");
 			n = atoi(buf);
 			p->nseg = n;

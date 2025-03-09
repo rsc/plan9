@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -389,7 +389,7 @@ gx_serialize_cie_cache(const cie_cache_floats *c, stream * s)
     return sputs(s, (const byte *)c->values, sizeof(c->values), &n);
 }
 
-int 
+int
 gx_serialize_cie_common_elements(const gs_color_space * pcs, stream * s)
 {
     const gs_cie_a * p = pcs->params.a;
@@ -398,7 +398,7 @@ gx_serialize_cie_common_elements(const gs_color_space * pcs, stream * s)
 
     if (code < 0)
 	return code;
-    code = sputs(s, (const byte *)&p->common.RangeLMN, 
+    code = sputs(s, (const byte *)&p->common.RangeLMN,
 			sizeof(p->common.RangeLMN), &n);
     if (code < 0)
 	return code;
@@ -406,15 +406,15 @@ gx_serialize_cie_common_elements(const gs_color_space * pcs, stream * s)
 	code = gx_serialize_cie_cache(&p->common.caches.DecodeLMN[k].floats, s);
     if (code < 0)
 	return code;
-    code = sputs(s, (const byte *)&p->common.MatrixLMN, 
+    code = sputs(s, (const byte *)&p->common.MatrixLMN,
 			sizeof(p->common.MatrixLMN), &n);
     if (code < 0)
 	return code;
-    return sputs(s, (const byte *)&p->common.points, 
+    return sputs(s, (const byte *)&p->common.points,
 			sizeof(p->common.points), &n);
 }
 
-private int 
+private int
 gx_serialize_CIEA(const gs_color_space * pcs, stream * s)
 {
     const gs_cie_a * p = pcs->params.a;
@@ -432,7 +432,7 @@ gx_serialize_CIEA(const gs_color_space * pcs, stream * s)
     return sputs(s, (const byte *)&p->MatrixA, sizeof(p->MatrixA), &n);
 }
 
-private int 
+private int
 gx_serialize_CIEABC(const gs_color_space * pcs, stream * s)
 {
     const gs_cie_abc * p = pcs->params.abc;
@@ -456,7 +456,7 @@ gx_serialize_CIEABC(const gs_color_space * pcs, stream * s)
     return sputs(s, (const byte *)&p->MatrixABC, sizeof(p->MatrixABC), &n);
 }
 
-private int 
+private int
 gx_serialize_lookup_table(const gx_color_lookup_table * t, stream * s)
 {
     uint n;
@@ -476,7 +476,7 @@ gx_serialize_lookup_table(const gx_color_lookup_table * t, stream * s)
     return sputs(s, (const byte *)&t->table->data, t->table->size, &n);
 }
 
-private int 
+private int
 gx_serialize_CIEDEF(const gs_color_space * pcs, stream * s)
 {
     const gs_cie_def * p = pcs->params.def;
@@ -498,7 +498,7 @@ gx_serialize_CIEDEF(const gs_color_space * pcs, stream * s)
     return gx_serialize_lookup_table(&p->Table, s);
 }
 
-private int 
+private int
 gx_serialize_CIEDEFG(const gs_color_space * pcs, stream * s)
 {
     const gs_cie_defg * p = pcs->params.defg;

@@ -249,7 +249,7 @@ extern char dbgflg[256];
  *  hardware info about a device
  */
 typedef struct {
-	ulong	port;	
+	ulong	port;
 	int	size;
 } Devport;
 

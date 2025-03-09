@@ -373,7 +373,7 @@ This extension allows inclusion of
 and
 .CW <draw.h> .
 These are pieces of Plan 9 source code ported into APE,
-mostly from 
+mostly from
 .CW <libc.h> .
 .XX
 .CW _REGEXP_EXTENSION .

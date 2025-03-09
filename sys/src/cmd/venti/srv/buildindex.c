@@ -47,7 +47,7 @@ threadmain(int argc, char *argv[])
 	u32int bcmem, imem;
 	Config conf;
 	Part *p;
-	
+
 	maxdisks = 100000;
 	ventifmtinstall();
 	imem = 256*1024*1024;
@@ -102,18 +102,18 @@ threadmain(int argc, char *argv[])
 			close(fd);
 		}
 	}
-	
+
 	/*
 	 * need a block for every arena
 	 */
 	bcmem = maxblocksize * (mainindex->narenas + 16);
 	if(0) fprint(2, "initialize %d bytes of disk block cache\n", bcmem);
 	initdcache(bcmem);
-	
+
 	totalclumps = 0;
 	for(i=0; i<ix->narenas; i++)
 		totalclumps += ix->arenas[i]->diskstats.clumps;
-	
+
 	totalbuckets = 0;
 	for(i=0; i<ix->nsects; i++)
 		totalbuckets += ix->sects[i]->blocks;
@@ -128,7 +128,7 @@ threadmain(int argc, char *argv[])
 			vtproc(isectproc, ix->sects[i]);
 		}
 	}
-	
+
 	for(i=0; i<nisect; i++)
 		if(isect[i])
 			fprint(2, "warning: did not find index section %s\n", isect[i]);
@@ -166,7 +166,7 @@ threadmain(int argc, char *argv[])
 	if(ix->bloom && writebloom(ix->bloom) < 0)
 		fprint(2, "writing bloom filter: %r\n");
 
-	fprint(2, "%T done arenaentries=%,lld indexed=%,lld (nskip=%,lld)\n", 
+	fprint(2, "%T done arenaentries=%,lld indexed=%,lld (nskip=%,lld)\n",
 		arenaentries, indexentries, skipentries);
 	threadexitsall(nil);
 }
@@ -175,7 +175,7 @@ static int
 shouldprocess(ISect *is)
 {
 	int i;
-	
+
 	if(nisect == 0)
 		return 1;
 
@@ -191,7 +191,7 @@ static void
 add(u64int *a, u64int n)
 {
 	static Lock l;
-	
+
 	lock(&l);
 	*a += n;
 	unlock(&l);
@@ -216,7 +216,7 @@ arenapartproc(void *v)
 	ClumpInfo *ci, *cis;
 	IEntry ie;
 	Part *p;
-	
+
 	p = v;
 	threadsetname("arenaproc %s", p->name);
 
@@ -228,10 +228,10 @@ arenapartproc(void *v)
 		if(a->part != p)
 			continue;
 		if(a->memstats.clumps)
-			fprint(2, "%T arena %s: %d entries\n", 
+			fprint(2, "%T arena %s: %d entries\n",
 				a->name, a->memstats.clumps);
 		/*
-		 * Running the loop backwards accesses the 
+		 * Running the loop backwards accesses the
 		 * clump info blocks forwards, since they are
 		 * stored in reverse order at the end of the arena.
 		 * This speeds things slightly.
@@ -283,7 +283,7 @@ static u32int
 score2bucket(ISect *is, uchar *score)
 {
 	u32int b;
-	
+
 	b = hashbits(score, 32)/ix->div;
 	if(b < is->start || b >= is->stop){
 		fprint(2, "score2bucket: score=%V div=%d b=%ud start=%ud stop=%ud\n",
@@ -300,7 +300,7 @@ static u32int
 offset2bucket(ISect *is, u64int offset)
 {
 	u32int b;
-	
+
 	assert(is->blockbase <= offset);
 	offset -= is->blockbase;
 	b = offset/is->blocksize;
@@ -318,7 +318,7 @@ bucket2offset(ISect *is, u32int b)
 	return is->blockbase + (u64int)b*is->blocksize;
 }
 
-/* 
+/*
  * IEntry buffers to hold initial round of spraying.
  */
 typedef struct Buf Buf;
@@ -338,7 +338,7 @@ static void
 bflush(Buf *buf)
 {
 	u32int bufsize;
-	
+
 	if(buf->woffset >= buf->eoffset)
 		sysfatal("buf index chunk overflow - need bigger index");
 	bufsize = buf->ep - buf->bp;
@@ -380,11 +380,11 @@ struct Minibuf
 };
 
 /*
- * Index entry pool.  Used when trying to shuffle around 
+ * Index entry pool.  Used when trying to shuffle around
  * the entries in a big buffer into the corresponding M minibuffers.
  * Sized to hold M*EntriesPerBlock entries, so that there will always
  * either be room in the pool for another block worth of entries
- * or there will be an entire block worth of sorted entries to 
+ * or there will be an entire block worth of sorted entries to
  * write out.
  */
 typedef struct IEntryLink IEntryLink;
@@ -421,7 +421,7 @@ countsokay(IPool *p)
 {
 	int i;
 	u64int n;
-	
+
 	n = 0;
 	for(i=0; i<p->nmbuf; i++)
 		n += p->mcount[i];
@@ -437,21 +437,21 @@ countsokay(IPool *p)
 */
 
 static IPool*
-mkipool(ISect *isect, Minibuf *mbuf, u32int nmbuf, 
+mkipool(ISect *isect, Minibuf *mbuf, u32int nmbuf,
 	u32int mbufbuckets, u32int bufsize)
 {
 	u32int i, nentry;
 	uchar *data;
 	IPool *p;
 	IEntryLink *l;
-	
+
 	nentry = (nmbuf+1)*bufsize / IEntrySize;
 	p = ezmalloc(sizeof(IPool)
 		+nentry*sizeof(IEntry)
 		+nmbuf*sizeof(IEntryLink*)
 		+nmbuf*sizeof(u32int)
 		+3*bufsize);
-	
+
 	p->isect = isect;
 	p->mbufbuckets = mbufbuckets;
 	p->bufsize = bufsize;
@@ -476,7 +476,7 @@ mkipool(ISect *isect, Minibuf *mbuf, u32int nmbuf,
 	return p;
 }
 
-/* 
+/*
  * Add the index entry ie to the pool p.
  * Caller must know there is room.
  */
@@ -503,7 +503,7 @@ ipoolinsert(IPool *p, uchar *ie)
 	l->next = p->mlist[x];
 	p->mlist[x] = l;
 	p->mcount[x]++;
-}	
+}
 
 /*
  * Pull out a block containing as many
@@ -515,7 +515,7 @@ ipoolgetbuf(IPool *p, u32int x)
 	uchar *bp, *ep, *wp;
 	IEntryLink *l;
 	u32int n;
-	
+
 	bp = p->wbuf;
 	ep = p->wbuf + p->bufsize;
 	n = 0;
@@ -542,7 +542,7 @@ static void
 ipoolloadblock(IPool *p, Minibuf *mb)
 {
 	u32int i, n;
-	
+
 	assert(mb->nentry > 0);
 	assert(mb->roffset >= mb->woffset);
 	assert(mb->roffset < mb->eoffset);
@@ -569,14 +569,14 @@ ipoolflush0(IPool *pool, u32int x)
 {
 	u32int bufsize;
 	Minibuf *mb;
-	
+
 	mb = pool->mbuf+x;
 	bufsize = pool->bufsize;
 	mb->nwentry += ipoolgetbuf(pool, x);
 	if(mb->nentry > 0 && mb->roffset == mb->woffset){
 		assert(pool->nfree >= pool->bufsize/IEntrySize);
 		/*
-		 * There will be room in the pool -- we just 
+		 * There will be room in the pool -- we just
 		 * removed a block worth.
 		 */
 		ipoolloadblock(pool, mb);
@@ -615,7 +615,7 @@ static void
 ipoolflush(IPool *pool)
 {
 	u32int i;
-	
+
 	for(i=0; i<pool->nmbuf; i++)
 		while(pool->mlist[i])
 			ipoolflush0(pool, i);
@@ -628,7 +628,7 @@ ipoolflush(IPool *pool)
  */
 
 /*
- * Compare two packed index entries.  
+ * Compare two packed index entries.
  * Usual ordering except break ties by putting higher
  * index addresses first (assumes have duplicates
  * due to corruption in the lower addresses).
@@ -638,7 +638,7 @@ ientrycmpaddr(const void *va, const void *vb)
 {
 	int i;
 	uchar *a, *b;
-	
+
 	a = (uchar*)va;
 	b = (uchar*)vb;
 	i = ientrycmp(a, b);
@@ -652,7 +652,7 @@ zerorange(Part *p, u64int o, u64int e)
 {
 	static uchar zero[MaxIoSize];
 	u32int n;
-	
+
 	for(; o<e; o+=n){
 		n = sizeof zero;
 		if(o+n > e)
@@ -663,7 +663,7 @@ zerorange(Part *p, u64int o, u64int e)
 }
 
 /*
- * Load a minibuffer into memory and write out the 
+ * Load a minibuffer into memory and write out the
  * corresponding buckets.
  */
 static void
@@ -674,10 +674,10 @@ sortminibuffer(ISect *is, Minibuf *mb, uchar *buf, u32int nbuf, u32int bufsize)
 	u64int o;
 	IBucket ib;
 	Part *part;
-	
+
 	part = is->part;
 	buckdata = emalloc(is->blocksize);
-	
+
 	if(mb->nwentry == 0)
 		return;
 
@@ -692,7 +692,7 @@ sortminibuffer(ISect *is, Minibuf *mb, uchar *buf, u32int nbuf, u32int bufsize)
 		return;
 	}
 	assert(*(uint*)buf != 0xa5a5a5a5);
-	
+
 	/*
 	 * remove fragmentation due to IEntrySize
 	 * not evenly dividing Bufsize
@@ -706,7 +706,7 @@ sortminibuffer(ISect *is, Minibuf *mb, uchar *buf, u32int nbuf, u32int bufsize)
 	ep = buf + mb->nwentry*IEntrySize;
 	assert(ep <= buf+nbuf);
 
-	/* 
+	/*
 	 * sort entries
 	 */
 	qsort(buf, mb->nwentry, IEntrySize, ientrycmpaddr);
@@ -754,14 +754,14 @@ isectproc(void *v)
 	IPool *ipool;
 	ISect *is;
 	Minibuf *mbuf, *mb;
-	
+
 	is = v;
 	blocksize = is->blocksize;
 	nbucket = is->stop - is->start;
 
 	/*
 	 * Three passes:
-	 *	pass 1 - write index entries from arenas into 
+	 *	pass 1 - write index entries from arenas into
 	 *		large sequential sections on index disk.
 	 *		requires nbuf * bufsize memory.
 	 *
@@ -769,36 +769,36 @@ isectproc(void *v)
 	 *		requires nminibuf * bufsize memory.
 	 *
 	 *	pass 3 - read each minibuf into memory and
-	 *		write buckets out. 
+	 *		write buckets out.
 	 *		requires entries/minibuf * IEntrySize memory.
-	 * 
+	 *
 	 * The larger we set bufsize the less seeking hurts us.
-	 * 
+	 *
 	 * The fewer sections and minibufs we have, the less
 	 * seeking hurts us.
-	 * 
-	 * The fewer sections and minibufs we have, the 
+	 *
+	 * The fewer sections and minibufs we have, the
 	 * more entries we end up with in each minibuf
-	 * at the end.  
+	 * at the end.
 	 *
 	 * Shoot for using half our memory to hold each
-	 * minibuf.  The chance of a random distribution 
-	 * getting off by 2x is quite low.  
+	 * minibuf.  The chance of a random distribution
+	 * getting off by 2x is quite low.
 	 *
-	 * Once that is decided, figure out the smallest 
+	 * Once that is decided, figure out the smallest
 	 * nminibuf and nsection/biggest bufsize we can use
 	 * and still fit in the memory constraints.
 	 */
-	
+
 	/* expected number of clump index entries we'll see */
 	xclump = nbucket * (double)totalclumps/totalbuckets;
-	
+
 	/* number of clumps we want to see in a minibuf */
 	xminiclump = isectmem/2/IEntrySize;
-	
+
 	/* total number of minibufs we need */
 	prod = (xclump+xminiclump-1) / xminiclump;
-	
+
 	/* if possible, skip second pass */
 	if(!dumb && prod*MinBufSize < isectmem){
 		nbuf = prod;
@@ -860,7 +860,7 @@ isectproc(void *v)
 		n++;
 	}
 	add(&indexentries, n);
-	
+
 	nn = 0;
 	for(i=0; i<nbuf; i++){
 		bflush(&buf[i]);
@@ -871,15 +871,15 @@ isectproc(void *v)
 	}
 	if(n != nn)
 		fprint(2, "isectproc bug: n=%ud nn=%ud\n", n, nn);
-		
+
 	free(data);
 
 	fprint(2, "%T %s: reordering\n", is->part->name);
-	
+
 	/*
 	 * Rearrange entries into minibuffers and then
 	 * split each minibuffer into buckets.
-	 * The minibuffer must be sized so that it is 
+	 * The minibuffer must be sized so that it is
 	 * a multiple of blocksize -- ipoolloadblock assumes
 	 * that each minibuf starts aligned on a blocksize
 	 * boundary.
@@ -927,7 +927,7 @@ isectproc(void *v)
 				while(mb->nentry > 0){
 					if(ipool->nfree < epbuf){
 						ipoolflush1(ipool);
-						/* ipoolflush1 might change mb->nentry */	
+						/* ipoolflush1 might change mb->nentry */
 						continue;
 					}
 					assert(ipool->nfree >= epbuf);
@@ -958,9 +958,6 @@ isectproc(void *v)
 		}
 		free(data);
 	}
-		
+
 	sendp(isectdonechan, is);
 }
-
-
-

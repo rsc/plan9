@@ -90,4 +90,3 @@ _sizeD2M(Dir *d)
 
 	return STATFIXLEN + ns;
 }
-

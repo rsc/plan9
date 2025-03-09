@@ -145,7 +145,7 @@ high with this command.
 .PD 0
 .TP
 .BI A " args
-Like 
+Like
 .B a
 but with the message
 appended to the reply.
@@ -158,7 +158,7 @@ Mark message to be deleted upon exiting
 .IR nedmail .
 .TP
 .B f
-Append the message to the file 
+Append the message to the file
 .BI /mail/box/ username / sendername
 where
 .I sendername
@@ -197,7 +197,7 @@ are specified, they are added to the command line to
 .I marshal
 before the recipient's address.
 .TP
-.B R " args 
+.B R " args
 Like
 .B r
 but with the original message included as an attachment.
@@ -205,16 +205,16 @@ but with the original message included as an attachment.
 .B rf
 Like
 .B r
-but append the message and the reply to the file 
+but append the message and the reply to the file
 .BI /mail/box/ username / sendername
 where
 .I sendername
 is the account name of the sender.
 .TP
 .B Rf
-Like 
+Like
 .B R
-but append the message and the reply to the file 
+but append the message and the reply to the file
 .BI /mail/box/ username / sendername
 where
 .I sendername
@@ -238,7 +238,7 @@ and the string
 Put undeleted mail back in the mailbox and stop.
 .TP
 EOT (control-D)
-Same as 
+Same as
 .BR q .
 .TP
 .BI w " file
@@ -293,14 +293,14 @@ attachment to a message and then deletes the message:
 7       798	09/02  2000  howard
 : 1H
 1       multipart/mixed             2129   from=noone@madeup.net
- 1.1      text/plain                115    
+ 1.1      text/plain                115
  1.2      text/html                 1705   filename=northwest.htm
 : 1.2w /tmp/northwest.html
 !saved in /tmp/northwest.html
 1.2: d
 1: q
 !1 message deleted
-% 
+%
 .EE
 .PP
 Notice that the delete of message 1.2 deleted the entire message and

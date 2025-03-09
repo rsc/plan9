@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1992, 1994, 1996 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -183,7 +183,7 @@ gx_device_sun far_data gs_sunview_device = {
 #if (RGB_COLS > CMS_SIZE)		/* one is reserved for the scrollbar */
 CMS_SIZE_too_small_for_color_cube
 #endif
-#if (RGB_BITS < 0) || (RGB_BITS > DEPTH) 
+#if (RGB_BITS < 0) || (RGB_BITS > DEPTH)
 Display_does_not_support_this_many_colors
 #endif
 
@@ -293,13 +293,13 @@ if ( gs_debug['X'] )
 	              xdev->pw->pw_pixrect->pr_depth);
 	     return -1;
 	}
-		
+
 	if ( gx_device_has_color(xdev)
 #ifndef FAKE_TRUE_COLOR
 	     && !xdev->truecolor
 #endif
 	   )
-	   {	
+	   {
 		int j;
 		int color;
 
@@ -406,9 +406,9 @@ if ( gs_debug['X'] )
 	}
 
 	/*
-	 * Reset to retained after colormap length is changed 
+	 * Reset to retained after colormap length is changed
 	 */
-	window_set(xdev->canvas, 
+	window_set(xdev->canvas,
 		CANVAS_RETAINED, 		TRUE,
 		WIN_VERTICAL_SCROLLBAR,		scrollbar_create(0),
 		WIN_HORIZONTAL_SCROLLBAR,	scrollbar_create(0),
@@ -492,7 +492,7 @@ sun_map_rgb_color(gx_device *dev, unsigned short red,
 				return i;
 			}
 		}
-		
+
 		/*
 		 * If we run out of space in the color map, let gs know.
 		 * It will call us again to request colors to do the
@@ -507,7 +507,7 @@ sun_map_rgb_color(gx_device *dev, unsigned short red,
 			eprintf("gs: last spare color map entry allocated\n");
 			warn = 0;
 		    }
-		    return gx_no_color_index; 
+		    return gx_no_color_index;
 		}
 
 		/*
@@ -519,7 +519,7 @@ sun_map_rgb_color(gx_device *dev, unsigned short red,
 		pw_setcmsname(xdev->pw, xdev->cmsname);
 		pw_putcolormap(xdev->pw, i, 1,
 		               &xdev->red[i], &xdev->green[i], &xdev->blue[i]);
-		
+
 		xdev->freecols = i;
 		return i;
 	}

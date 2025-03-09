@@ -73,7 +73,7 @@ Clear the name space with
 .BR rfork(RFCNAMEG) .
 .TP
 .BI . \ path
-Execute the namespace file 
+Execute the namespace file
 .IR path .
 Note that
 .I path

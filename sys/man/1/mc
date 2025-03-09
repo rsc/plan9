@@ -29,7 +29,7 @@ otherwise the default
 is 80.
 Under option
 .B -
-each input line ending in a colon 
+each input line ending in a colon
 .L :
 is printed separately.
 .SH SOURCE

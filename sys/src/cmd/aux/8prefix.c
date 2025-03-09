@@ -79,10 +79,10 @@ main(int argc, char **argv)
 	default:
 		usage();
 	}ARGEND
-	
+
 	if(argc < 2)
 		usage();
-	
+
 	prefix = argv[0];
 	argv++;
 	argc--;
@@ -96,7 +96,7 @@ main(int argc, char **argv)
 	if(verbose)
 		walkobjs(dump);
 	walkobjs(renamesyms);
-	
+
 	for(i=0; i<nobj; i++){
 		o = obj[i];
 		seek(o->fd, 0, 0);
@@ -120,7 +120,7 @@ renamesyms(int op, Sym *sym, uchar*, int)
 			break;
 		sym->newname = smprint("%s%s", prefix, sym->name);
 		break;
-	}	
+	}
 }
 
 void
@@ -134,7 +134,7 @@ dump(int op, Sym *sym, uchar*, int)
 	case ATEXT:
 		print("%s\n", sym->name);
 		break;
-	}	
+	}
 }
 
 void
@@ -166,7 +166,7 @@ int
 zaddr(uchar *p, Sym **symp)
 {
 	int c, t;
-	
+
 	t = p[0];
 	c = 1;
 	if(t & T_INDEX)
@@ -191,7 +191,7 @@ void*
 emalloc(ulong n)
 {
 	void *v;
-	
+
 	v = mallocz(n, 1);
 	if(v == nil)
 		sysfatal("out of memory");
@@ -235,7 +235,7 @@ openobj(char *name)
 {
 	Dir *d;
 	Obj *obj;
-	
+
 	obj = emalloc(sizeof *obj);
 	obj->name = name;
 	obj->version = version++;
@@ -254,7 +254,7 @@ void
 walkobjs(void (*fn)(int, Sym*, uchar*, int))
 {
 	int i;
-	
+
 	for(i=0; i<nobj; i++)
 		walkobj(obj[i], fn);
 }
@@ -281,7 +281,7 @@ walkobj(Obj *obj, void (*fn)(int, Sym*, uchar*, int))
 			p += 4+strlen(sym->name)+1;
 			fn(op, sym, p0, p-p0);
 			break;
-		
+
 		default:
 			p += 6;
 			p += zaddr(p, &sym);
@@ -291,4 +291,3 @@ walkobj(Obj *obj, void (*fn)(int, Sym*, uchar*, int))
 		}
 	}
 }
-

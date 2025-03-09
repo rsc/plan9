@@ -43,4 +43,3 @@ Cipher cipherrc4 = {
 	encryptrc4,
 	decryptrc4,
 };
-

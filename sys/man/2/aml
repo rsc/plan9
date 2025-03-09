@@ -48,7 +48,7 @@ is the root of that namespace.
 .BI amlload( data , len )
 .I Amlload
 populates the namespace with objects parsed from the
-definition block of 
+definition block of
 .I len
 byte size read from
 .IR data .
@@ -133,7 +133,7 @@ Integers just return their value. Any other object types yield zero.
 .BI amlnew( tag , len )
 Integer, buffer, string and package objects can be created with the
 .I amlnew
-function. The 
+function. The
 .I tag
 specific definition of the
 .I len
@@ -275,7 +275,7 @@ to sleep.
 .I Amlalloc
 and
 .I amlfree
-can be optionally defined to control dynamic memory allocation 
+can be optionally defined to control dynamic memory allocation
 providing a way to limit or pool the memory allocated by acpi.
 If not provided, the library will use the functions
 defined in

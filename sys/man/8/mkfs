@@ -86,7 +86,7 @@ rather than producing an archive file.
 .TP
 .BI "d " root
 Copy files into the tree rooted at
-.I root 
+.I root
 (default
 .BR /n/kfs ).
 This option suppresses setting the
@@ -96,7 +96,7 @@ and
 fields when copying files.
 Use
 .B -U
-to reenable it. 
+to reenable it.
 .TP
 .BI "n " name
 Use

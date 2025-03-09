@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1996, 1997 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -20,7 +20,7 @@
 /* $Id: gdevdm24.c,v 1.8 2004/08/04 23:33:29 stefan Exp $*/
 /* High-res 24Dot-matrix printer driver */
 
-/* Supported printers 
+/* Supported printers
  *  NEC P6 and similar, implemented by Andreas Schwab (schwab@ls5.informatik.uni-dortmund.de)
  *  Epson LQ850, implemented by Christian Felsch (felsch@tu-harburg.d400.de)
  */
@@ -272,7 +272,7 @@ private int
 necp6_print_page(gx_device_printer *pdev, FILE *prn_stream)
 {
   char necp6_init_string [] = "\033@\033P\033l\000\r\034\063\001\033Q";
-  
+
   return dot24_print_page(pdev, prn_stream, necp6_init_string, sizeof(necp6_init_string));
 }
 
@@ -281,7 +281,6 @@ private int
 lq850_print_page(gx_device_printer *pdev, FILE *prn_stream)
 {
   char lq850_init_string [] = "\033@\033P\033l\000\r\033\053\001\033Q";
-  
+
   return dot24_print_page(pdev, prn_stream, lq850_init_string, sizeof(lq850_init_string));
 }
-

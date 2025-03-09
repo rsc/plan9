@@ -4,7 +4,7 @@ if (! ~ $DEBUG '') flag x +
 cd $LPSPOOL
 if (~ $#* 0) KILLARGS=`{sed 1q};
 if not	KILLARGS=$*;
-	
+
 if (test -d $LPDEST) {
 	for (i in $KILLARGS) {
 		for (j in `{bind -b $LPLIB/sched /bin;$SCHED $LPDEST}) {

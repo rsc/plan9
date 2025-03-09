@@ -52,7 +52,7 @@ cdstatusthread(void *v)
 	Cdstatus s;
 
 	d = v;
-	
+
 	for(;;)
 		recv(d->cstat, &s);
 

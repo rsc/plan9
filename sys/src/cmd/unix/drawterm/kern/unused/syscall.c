@@ -279,7 +279,7 @@ sysunmount(char *old, char *new)
 		cmounted = namec(old, Aopen, OREAD, 0);
 
 	cunmount(cmount, cmounted);
-	poperror();	
+	poperror();
 	cclose(cmount);
 	cclose(cmounted);
 	return 0;
@@ -327,7 +327,7 @@ unionread(Chan *c, void *va, long n)
 		}
 
 		/* Error causes component of union to be skipped */
-		if(waserror()) {	
+		if(waserror()) {
 			cclose(nc);
 			goto next;
 		}
@@ -336,7 +336,7 @@ unionread(Chan *c, void *va, long n)
 		nc->offset = c->offset;
 		nr = (*devtab[nc->type].read)((Chan*)nc, va, n, nc->offset);
 		/* devdirread e.g. changes it */
-		c->offset = nc->offset;	
+		c->offset = nc->offset;
 		poperror();
 
 		cclose(nc);

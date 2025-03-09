@@ -19,7 +19,7 @@ typedef struct VtServerVtbl	VtServerVtbl;
 enum {
 	VtScoreSize	= 20, /* Venti */
 	VtMaxLumpSize	= 56*1024,
-	VtPointerDepth	= 7,	
+	VtPointerDepth	= 7,
 	VtEntrySize	= 40,
 	VtRootSize 	= 300,
 	VtMaxStringSize	= 1000,
@@ -121,7 +121,7 @@ enum {
 };
 
 /* score of zero length block */
-extern uchar vtZeroScore[VtScoreSize];	
+extern uchar vtZeroScore[VtScoreSize];
 
 /* both sides */
 void vtAttach(void);
@@ -268,4 +268,3 @@ int vtFdWrite(int, uchar*, int);
 #pragma	varargck	type	"R"		void
 
 #pragma	varargck	argpos	vtSetError	1
-

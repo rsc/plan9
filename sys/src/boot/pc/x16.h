@@ -2,7 +2,7 @@
  * Can't write 16-bit code for 8a without getting into
  * lots of bother, so define some simple commands and
  * output the code directly.
- * 
+ *
  * N.B. CALL16(x) kills DI, so don't expect it to be
  * saved across calls.
  */
@@ -156,4 +156,3 @@
 
 /* operand size switch. */
 #define OPSIZE		BYTE $0x66
-

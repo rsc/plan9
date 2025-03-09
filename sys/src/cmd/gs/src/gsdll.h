@@ -1,13 +1,13 @@
 /* Copyright (C) 1994-2001, Ghostgum Software Pty Ltd.  All rights reserved.
   Portions Copyright (C) 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -86,7 +86,7 @@ GSDLLEXPORT int GSDLLAPI gsdll_lock_device(unsigned char *device, int flag);
 
 /* Function pointer typedefs */
 /* for run time dynamic linking */
-typedef int (GSDLLAPIPTR PFN_gsdll_revision)(const char ** product, 
+typedef int (GSDLLAPIPTR PFN_gsdll_revision)(const char ** product,
     const char ** copyright, long * revision, long * revisiondate);
 typedef int (GSDLLAPIPTR PFN_gsdll_init) (GSDLL_CALLBACK, HWND, int argc, char * * argv);
 typedef int (GSDLLAPIPTR PFN_gsdll_execute_begin) (void);

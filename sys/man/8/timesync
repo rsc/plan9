@@ -44,7 +44,7 @@ used with
 .B -r
 to indicate the real time clock is in
 local time rather than GMT.  This is
-useful on PCs that also run the 
+useful on PCs that also run the
 Windows OS.
 .TP
 .B -n

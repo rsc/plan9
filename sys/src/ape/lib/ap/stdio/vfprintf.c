@@ -371,7 +371,7 @@ ocvt_fixed(FILE *f, va_list *args, int flags, int width, int precision,
 			--npad;
 		}
 	}
-	return nout;	
+	return nout;
 }
 
 static int

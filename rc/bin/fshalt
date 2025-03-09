@@ -110,7 +110,7 @@ if (ls /srv | grep -s fossil) {
 }
 
 for (i in $k){
-	echo -n $i... 
+	echo -n $i...
 	switch($i){
 	case /srv/kfs.cmd
 		disk/kfscmd sync
@@ -143,9 +143,9 @@ fn x {
 				echo -n 'not halted...' > /dev/cons
 		} < $i >> $i
 	}
-	
+
 	for (i in $k){
-		echo -n $i... 
+		echo -n $i...
 		switch($i){
 		case /srv/kfs.cmd
 			kfscmd halt

@@ -83,7 +83,7 @@ the default is
 .BI /srv/ addr1 \fR.
 .TP
 .B -u \fIpasswd\fR \fIgroup
-translate user and group names using the 
+translate user and group names using the
 .I passwd
 and
 .I group
@@ -108,10 +108,10 @@ and
 are test programs to perform port mapper and NFS mount RPCs.
 They
 are useful mainly to help debug problems with
-starting 
+starting
 .I nfs
 itself.
-The 
+The
 .B -R
 option causes them to print all RPC messages sent and received.
 .PP
@@ -142,7 +142,7 @@ The default command is
 .BR dump .
 For running NFS over UDP, there must be an entry
 for the NFS v3 mount daemon (100005, 3, 17) and the
-NFS v3 server itself (100003, 3, 17).  
+NFS v3 server itself (100003, 3, 17).
 .PP
 .I Nfsmount
 queries a Sun NFS mount server, which authenticates (ha!)
@@ -174,7 +174,7 @@ notify the mount daemon that all paths mounted by the
 requesting system are being unmounted
 .TP
 .B dump
-should also dump an export table, but typically 
+should also dump an export table, but typically
 does nothing
 .PD
 .SH EXAMPLE

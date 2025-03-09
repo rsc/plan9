@@ -50,7 +50,7 @@ struct Res
 Res *res;
 int nres;
 
-void 
+void
 addresolve(int c, char *name)
 {
 	if(name[0] == '/')
@@ -156,7 +156,7 @@ notexists(char *path)
 
 	if(access(path, AEXIST) >= 0)
 		return 0;
-	
+
 	rerrstr(buf, sizeof buf);
 	if(strstr(buf, "entry not found") || strstr(buf, "not exist"))
 		return 1;
@@ -178,10 +178,10 @@ prstopped(int skip, char *name)
 
 void
 main(int argc, char **argv)
-{ 
+{
 	char *f[10], *local, *name, *remote, *s, *t, verb;
 	int fd, havedb, havelocal, i, k, n, nf, resolve1, skip;
-	int checkedmatch1, checkedmatch2, 
+	int checkedmatch1, checkedmatch2,
 		checkedmatch3, checkedmatch4;
 	ulong now;
 	Biobuf bin;
@@ -241,7 +241,7 @@ main(int argc, char **argv)
 
 	if((clientdb = opendb(argv[0])) == nil)
 		sysfatal("opendb %q: %r", argv[2]);
-	
+
 	copyerr = opendb(nil);
 
 	skip = 0;
@@ -282,7 +282,7 @@ main(int argc, char **argv)
 		 *	skip = 1;
 		 *	continue;
 		 * }
-		 * 
+		 *
 		 * This check used to be right here, but we want
 		 * the time to be able to move forward past entries
 		 * that don't match and have already been applied.
@@ -450,7 +450,7 @@ main(int argc, char **argv)
 			assert(ismatch(name));
 			insertdb(clientdb, name, &rd);
 			break;
-			
+
 		case 'c':	/* change contents */
 			if(!havedb){
 				if(notexists(remote)){
@@ -547,7 +547,7 @@ main(int argc, char **argv)
 			dbd.mtime = rd.mtime;
 			dbd.length = rd.length;
 			insertdb(clientdb, name, &dbd);
-			break;			
+			break;
 
 		case 'm':	/* change metadata */
 			if(!havedb){
@@ -620,7 +620,7 @@ main(int argc, char **argv)
 					break;
 				conflict(name, "contents locally modified (%s); will not update metadata to %s %s %luo",
 					dbd.mtime != ld.mtime ? "mtime" :
-					dbd.length != ld.length ? "length" : 
+					dbd.length != ld.length ? "length" :
 					"unknown",
 					rd.uid, rd.gid, rd.mode);
 				skip = 1;
@@ -803,7 +803,7 @@ cmp1(int fd1, int fd2)
 	char buf1[DEFB];
 	char buf2[DEFB];
 	int n1, n2;
-	
+
 	for(;;){
 		n1 = readn(fd1, buf1, DEFB);
 		n2 = readn(fd2, buf2, DEFB);
@@ -1006,7 +1006,7 @@ DoCopy:
 	 */
 	p = strchr(name, '/');
 	if(safeinstall && p && strncmp(p, "/bin/", 5) == 0 && access(local, AEXIST) >= 0){
-		/* 
+		/*
 		 * remove bin/_targ
 		 */
 		safe = emalloc(strlen(local)+2);
@@ -1061,7 +1061,7 @@ DoCopy:
 			fprint(2, "warning: set mode on %s to %luo to open; open failed; cannot set mode back to %luo: %r\n", local, nd.mode|0660, nd.mode);
 		goto err;
 	}
-		
+
 err:
 	close(tfd);
 	free(d0);
@@ -1151,7 +1151,7 @@ samecontents(char *local, char *remote)
 		close(tfd);
 		return -1;
 	}
-	
+
 	ret = cmp1(lfd, tfd);
 	close(lfd);
 	close(tfd);
@@ -1175,7 +1175,7 @@ static int
 genopentemp(char *template, int mode, int perm)
 {
 	int fd, i;
-	char *p;	
+	char *p;
 
 	p = estrdup(template);
 	fd = -1;

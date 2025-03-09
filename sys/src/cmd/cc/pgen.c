@@ -47,7 +47,7 @@ codgen(Node *n, Node *nn)
 	/*
 	 * isolate first argument
 	 */
-	if(REGARG >= 0) {	
+	if(REGARG >= 0) {
 		if(typecmplx[thisfn->link->etype]) {
 			nod1 = *nodret->left;
 			nodreg(&nod, &nod1, REGARG);
@@ -81,7 +81,7 @@ codgen(Node *n, Node *nn)
 
 	if(!debug['N'] || debug['R'] || debug['P'])
 		regopt(sp);
-	
+
 	if(thechar=='6' || thechar=='7' || thechar=='9' || hasdoubled)	/* [sic] */
 		maxargsafe = round(maxargsafe, 8);
 	sp->to.offset += maxargsafe;
@@ -384,8 +384,8 @@ loop:
 		gbranch(OGOTO);		/* entry */
 		sp = p;
 
-		/* 
-		 * if there are no incoming labels in the 
+		/*
+		 * if there are no incoming labels in the
 		 * body and the top's not reachable, warn
 		 */
 		if(!canreach && warnreach && deadheads(n)) {
@@ -409,7 +409,7 @@ loop:
 
 		patch(spc, pc);
 		gen(l->right->right);	/* inc */
-		patch(sp, pc);	
+		patch(sp, pc);
 		if(l->left != Z) {	/* test */
 			bcomplex(l->left, Z);
 			patch(p, breakpc);
@@ -459,7 +459,7 @@ loop:
 		 * Don't complain about unreachable break statements.
 		 * There are breaks hidden in yacc's output and some people
 		 * write return; break; in their switch statements out of habit.
-		 * However, don't confuse the analysis by inserting an 
+		 * However, don't confuse the analysis by inserting an
 		 * unreachable reference to breakpc either.
 		 */
 		if(!canreach)
@@ -487,7 +487,7 @@ loop:
 				canreach = 1;
 				gen(n->right->right);
 				/*
-				 * treat constant ifs as regular ifs for 
+				 * treat constant ifs as regular ifs for
 				 * reachability warnings.
 				 */
 				if(!canreach && oldreach && debug['w'] < 2)
@@ -500,7 +500,7 @@ loop:
 				canreach = 1;
 				supgen(n->right->right);
 				/*
-				 * treat constant ifs as regular ifs for 
+				 * treat constant ifs as regular ifs for
 				 * reachability warnings.
 				 */
 				if(!oldreach && canreach && debug['w'] < 2)

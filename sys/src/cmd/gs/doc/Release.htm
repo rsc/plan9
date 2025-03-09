@@ -140,7 +140,7 @@ class="offsite">cvs.ghostscript.com</a>.
 <p>
 It may also be helpful to
 read the SourceForge AFPL Ghostscript home page (<a
-href="http://sourceforge.net/projects/ghostscript/" 
+href="http://sourceforge.net/projects/ghostscript/"
 class="offsite">http://sourceforge.net/projects/ghostscript/</a>).
 
 <h3><a name="Distribution"></a>Distribution</h3>
@@ -149,7 +149,7 @@ class="offsite">http://sourceforge.net/projects/ghostscript/</a>).
 Stable, beta, and development releases are all available from
 <blockquote>
 <a
-href="http://sourceforge.net/project/showfiles.php?group_id=1897" 
+href="http://sourceforge.net/project/showfiles.php?group_id=1897"
 class="offsite">http://sourceforge.net/project/showfiles.php?group_id=1897</a>
 </blockquote>
 
@@ -158,11 +158,11 @@ Stable releases are also distributed from
 
 <blockquote>
 <a
-href="ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/AFPL/" 
+href="ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/AFPL/"
 class="offsite">ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/AFPL/</a> or
 <br>
 <a
-href="ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/gpl/" 
+href="ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/gpl/"
 class="offsite">ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/gpl/</a>
 </blockquote>
 
@@ -170,7 +170,7 @@ class="offsite">ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/gpl/</a>
 Development releases are also distributed from
 
 <blockquote>
-<a href="ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/AFPL/test/" 
+<a href="ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/AFPL/test/"
 class="offsite">ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/AFPL/test/</a>
 </blockquote>
 
@@ -184,7 +184,7 @@ of the release number is a 2-digit decimal fraction: it counts 00,
 <ul>
 
 <li>Release numbers N.0x and N.5x indicate stable versions.
-<li>Successive increments generally indicate bug fixes and minor enhancements. 
+<li>Successive increments generally indicate bug fixes and minor enhancements.
 <li>Development, testing and beta releases generally begin with a minor release number that is
 a multiple of ten and increment from there.
 </ul>
@@ -222,7 +222,7 @@ After making a release the release number in CVS is incremented. Thus versions b
 from cvs are always marked with a future (or unused) release number to avoid confusion.
 
 <p>
-Additionally, After an N.00 or N.50 stable release, a branch is made in cvs so that development 
+Additionally, After an N.00 or N.50 stable release, a branch is made in cvs so that development
 can continue independently of changes to the stable series. When this happens, the minor release
 number is incremented by 10 (or 20) on the development branch (and by 1 on the new stable branch,
 as above) to avoid collisions.
@@ -249,11 +249,11 @@ href="mailto:mac-gs@ghostscript.com"><tt>mac-gs@ghostscript.com</tt></a>.
 <p>
 To make a source distribution, you will need the scripts and data files in
 the <b><tt>toolbin/</tt></b> directory. The instructions below generally
-assume that you're invoking the relative to the top level of the source 
+assume that you're invoking the relative to the top level of the source
 tree.
 
 To run the scripts, you will need reasonably current versions of Tcl,
-freely available from Scriptics 
+freely available from Scriptics
 (<a class="offsite" href="http://www.scriptics.com"><tt>http://www.scriptics.com</tt></a>), and
 Python, freely available from <a class="offsite"
 href="http://www.python.org"><tt>http://www.python.org</tt></a>.
@@ -523,20 +523,20 @@ Generate the text versions of the README and PUBLIC documents:
 </blockquote>
 
 <p>
-Add copies of third-party libraries. Versions of the ijs and icc 
+Add copies of third-party libraries. Versions of the ijs and icc
 libraries are included in Ghostscript cvs, so these are provided
 by the export. Source for zlib, libjpeg, and zlib are usually provided
 in the Windows and MacOS source releases, but not the unix tarballs.
 
 <p>
-Download and unpack the latest source release of 
-<a href="http://jbig2dec.sourceforge.net/">jbig2dec</a>, renaming the 
-directory to just <tt>jbig2dec</tt> on the top level of ghostscript 
+Download and unpack the latest source release of
+<a href="http://jbig2dec.sourceforge.net/">jbig2dec</a>, renaming the
+directory to just <tt>jbig2dec</tt> on the top level of ghostscript
 source directory.
 
 <p>
 For the unix source distributions only, generate the configure
-scripts. From the top level directory, run 
+scripts. From the top level directory, run
 
 <blockquote><pre><tt>./autogen.sh</tt>
 <tt>make distclean</tt>
@@ -663,8 +663,8 @@ href="#Preparing_source">"Preparing the source code."</a>
 Extract the sources from <b><tt>ghostscript-N.NN.tar.gz</tt></b>
 then repackage in a zip file as follows:
 <blockquote>
-<b><tt>zip -r temp.zip gsN.NN/LICENSE gsN.NN/doc gsN.NN/examples 
-  gsN.NN/icclib gsN.NN/ijs gsN.NN/jasper gsN.NN/jbig2dec gsN.NN/lib 
+<b><tt>zip -r temp.zip gsN.NN/LICENSE gsN.NN/doc gsN.NN/examples
+  gsN.NN/icclib gsN.NN/ijs gsN.NN/jasper gsN.NN/jbig2dec gsN.NN/lib
   gsN.NN/src gsN.NN/Resource</tt></b>
 </blockquote>
 Unzip converting the line endings to CRLF:
@@ -680,28 +680,28 @@ This method is reasonably portable, and does not convert binary
 files such as
 <b><tt><a href="../examples/annots.pdf">examples/annots.pdf</a></tt></b>.
 <p>
-Unzip <b><tt>gsNNNsrc.zip</tt></b>.  
+Unzip <b><tt>gsNNNsrc.zip</tt></b>.
 The directory must be named <b><tt>gsN.NN</tt></b>.
 <p>
 Extract the AFPL fonts <b><tt>ghostscript-fonts-std-6.0.tar.gz</tt></b>
 or GNU fonts <b><tt>gnu-gs-fonts-std-6.0.tar.gz</tt></b>
-into a directory <b><tt>fonts</tt></b> adjacent to the 
-<b><tt>gsN.NN</tt></b> directory.  
-The fonts are needed in this location for building 
+into a directory <b><tt>fonts</tt></b> adjacent to the
+<b><tt>gsN.NN</tt></b> directory.
+The fonts are needed in this location for building
 the distribution archive later.
 <p>
 You will need the command line Info-Zip zip program available from
 <a href="http://www.info-zip.org/pub/infozip/">
-http://www.info-zip.org/pub/infozip/</a> 
-Alternatively, the command line version of WinZip 
-(<b><tt>wzzip.exe</tt></b>) can be used by replacing the 
+http://www.info-zip.org/pub/infozip/</a>
+Alternatively, the command line version of WinZip
+(<b><tt>wzzip.exe</tt></b>) can be used by replacing the
 Info-Zip command line options <b><tt>-9 -r</tt></b>
 with <b><tt>-ex -P</tt></b> in
 <b><tt><a href="../src/winint.mak">winint.mak</a></tt></b>.
 <p>
 You will need WinZip Self-Extractor for building the
 self extracting archive.  This is commercial software.
-You may need to update the path <b><tt>WINZIPSE_XE</tt></b> in 
+You may need to update the path <b><tt>WINZIPSE_XE</tt></b> in
 <b><tt><a href="../src/winint.mak">winint.mak</a></tt></b>.
 <p>
 Unzip the jpeg, libpng and zlib libraries, then make ghostscript
@@ -711,7 +711,7 @@ Run the command <b><tt>nmake archive</tt></b>.  This builds the distribution
 archive <b><tt>gsNNNw32.exe</tt></b> and an ordinary zip file
 <b><tt>gsNNNw32.zip</tt></b> in the parent directory.
 If you do not have WinZip Self-Extractor, you can use
-<b><tt>nmake zip</tt></b> to make <b><tt>gsNNNw32.zip</tt></b> only. 
+<b><tt>nmake zip</tt></b> to make <b><tt>gsNNNw32.zip</tt></b> only.
 
 <h3><a name="Finishing_up"></a>Finishing up</h3>
 
@@ -724,7 +724,7 @@ release put it in the <b><tt>ghostscript</tt></b> module.
 If this is a GPL release, put it in the <b><tt>gs-gpl</tt></b> module.
 If this is a test release or beta release, put
 it in the <b><tt>gs-devel</tt></b> or <b><tt>gs-beta</tt></b> module,
-respectively. 
+respectively.
 If you are adding executable builds or source archives for other
 platforms to an existing source release, please use the same release
 date as the source release, not the current date.
@@ -775,7 +775,7 @@ directory, store the following files:
 
 <li>Third-party libraries, as links (upload these if not installed), where
 <b><tt>$$$</tt></b> et al. refer to the version number of the library, which
-should be the latest compatible release of the library and should be 
+should be the latest compatible release of the library and should be
 consistent with the values of and version numbers specifically listed in
 the makefiles.
 
@@ -857,7 +857,7 @@ updated to satifaction, follow the release process as described for AFPL
 Ghostscript above to test and package the new version. The distribution
 methods are parallel to those for the AFPL, with the GPL releases
 generally going under a separate header. For example, on the wisc
-ftp site upload the file to 
+ftp site upload the file to
 <tt>ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/gpl/gs###/</tt>.
 
 
@@ -901,7 +901,7 @@ release, also see <a href="#GPL_after_releasing">"After releasing
 <hr>
 
 <p>
-<small>Copyright &copy; 1999-2003 artofcode LLC. All rights 
+<small>Copyright &copy; 1999-2003 artofcode LLC. All rights
 reserved.</small>
 
 <p>

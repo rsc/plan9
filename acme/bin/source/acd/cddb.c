@@ -2,7 +2,7 @@
 #include <ctype.h>
 
 /* see CDDBPROTO */
-static ulong 
+static ulong
 cddb_sum(int n)
 {
 	int ret;
@@ -173,7 +173,7 @@ DPRINT(2, "cddb %s\n", p);
 					t->track[i].title = estrdup(p);
 				gottrack[i] = 1;
 			}
-		} 
+		}
 	} while(*p != '.');
 
 	fprint(fd, "quit\r\n");

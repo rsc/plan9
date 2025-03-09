@@ -309,7 +309,7 @@
 % Kevin Hartig
 % 1126 Collyer Street
 % Longmont, CO 80501 USA
-% 
+%
 % copyright 1993.
 
 % Hiragana and Katakana fonts.  The character names are inappropriate,
@@ -370,7 +370,7 @@
 
 /Hershey-Gothic-English		(hrger.pfa)	;	% 5066533
 /Hershey-Gothic-German		(hrgrr.pfa)	;
-/Hershey-Gothic-Italian		(hritr.pfa)	; 
+/Hershey-Gothic-Italian		(hritr.pfa)	;
 
 /Hershey-Plain-Duplex		(hrpld.pfa)	;
 /Hershey-Plain-Duplex-Italic	(hrpldi.pfa)	;

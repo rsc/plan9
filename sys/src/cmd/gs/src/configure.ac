@@ -1,12 +1,12 @@
 dnl Copyright (C) 2002-2004 artofcode LLC. All rights reserved.
-  
+
 dnl This software is provided AS-IS with no warranty, either express or
 dnl implied.
-  
+
 dnl This software is distributed under license and may not be copied,
 dnl modified or distributed except as expressly authorized under the terms
 dnl of the license contained in the file LICENSE in this distribution.
-  
+
 dnl For more information about licensing, please refer to
 dnl http://www.ghostscript.com/licensing/. For information on
 dnl commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -25,9 +25,9 @@ AC_INIT
 AC_PREREQ(2.52)
 AC_CONFIG_SRCDIR(src/gs.c)
 
-dnl --------------------------------------------------  
+dnl --------------------------------------------------
 dnl Check for programs
-dnl --------------------------------------------------  
+dnl --------------------------------------------------
 
 dnl AC_PROG_CC likes to add '-g -O2' to CFLAGS. however,
 dnl we ignore those flags and construct our own.
@@ -101,7 +101,7 @@ AC_STRUCT_ST_BLOCKS
 AC_HEADER_TIME
 AC_STRUCT_TM
 
-dnl see if we're on a system that puts the *int*_t types 
+dnl see if we're on a system that puts the *int*_t types
 dnl from stdint.h in sys/types.h
 if test "x$ac_cv_header_stdint_h" != xyes; then
     AC_CHECK_TYPES([int8_t, int16_t, int32_t, uint8_t, uint16_t, uint32_t],,,[#include <sys/types.h>])
@@ -192,7 +192,7 @@ if test -r $LIBJPEGDIR/jmemsys.h; then
   AC_MSG_RESULT([yes])
 else
   AC_MSG_RESULT([no])
-  AC_DEFINE([DONT_HAVE_JMEMSYS_H], 1, 
+  AC_DEFINE([DONT_HAVE_JMEMSYS_H], 1,
     [define if the libjpeg memory system prototypes aren't available])
 fi
 

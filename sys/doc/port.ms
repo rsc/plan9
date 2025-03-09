@@ -203,7 +203,7 @@ page.
 .PP
 For audio, Plan 9 supports the Sound Blaster 16 and compatibles.
 (Note that audio doesn't work under Plan 9 with 8-bit Sound Blasters.)
-There is also user-level support for USB audio devices; see 
+There is also user-level support for USB audio devices; see
 .I usb (4).
 .PP
 Finally, it's important to have a three-button mouse with Plan 9.

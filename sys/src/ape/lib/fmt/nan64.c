@@ -1,6 +1,6 @@
 /*
  * 64-bit IEEE not-a-number routines.
- * This is big/little-endian portable assuming that 
+ * This is big/little-endian portable assuming that
  * the 64-bit doubles and 64-bit integers have the
  * same byte ordering.
  */
@@ -62,5 +62,3 @@ __isInf(double d, int sign)
 	else
 		return x==uvneginf;
 }
-
-

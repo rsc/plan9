@@ -317,7 +317,7 @@ rx deepthought chess
 (see
 .IR con (1)).
 .PP
-.I 9fs 
+.I 9fs
 connects to file systems of remote systems
 (see
 .IR srv (4)).

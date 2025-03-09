@@ -759,7 +759,7 @@ vt6102interrupt(Ureg*, void* arg)
 			csr16w(ctlr, Isr, isr);
 		if((isr & ctlr->imr) == 0)
 			break;
-			
+
 		if(isr & Srci){
 			imr &= ~Srci;
 			ctlr->lwakeup = isr & Srci;

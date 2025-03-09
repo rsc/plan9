@@ -257,7 +257,7 @@ input is being read.
 Concatenation
 .PP
 .I Rc
-has a string concatenation operator, the caret 
+has a string concatenation operator, the caret
 .CW ^ ,
 to build arguments out of pieces.
 .P1
@@ -803,7 +803,7 @@ is matched against each
 in turn.  On a match,
 .CW $status
 is set to true.
-Otherwise, it is set to 
+Otherwise, it is set to
 .CW "'no match'" .
 Patterns are the same as for filename matching.
 The
@@ -1231,7 +1231,7 @@ fn sigexit sigint sigquit sighup{
 	exit
 }
 cat <<'!' >$t
-Allentown 
+Allentown
 Atlanta
 Cedar Crest
 Chester
@@ -1386,7 +1386,7 @@ a string, but a command.  Properly, it ought to
 be parsed when the enclosing command is, but this makes
 it difficult to
 handle nested command substitutions, like this:
-.P1				
+.P1
 size=`wc -l \e`ls -t|sed 1q\e``
 .P2
 The inner back-quotes must be escaped

@@ -48,4 +48,3 @@ fpathconf(int, int name)
 {
 	return pathconf(0, name);
 }
-

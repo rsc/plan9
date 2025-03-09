@@ -1,12 +1,12 @@
 /* Copyright (C) 1993, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -302,8 +302,8 @@ typedef struct gs_param_list_procs_s {
 	 (*(plist)->procs->end_xmit_collection)(plist, pkey, pvalue)
 #define param_end_write_dict(l, k, v) param_end_write_collection(l, k, v)
 
-	 /* 
-	  * Get the next key in sequence. 
+	 /*
+	  * Get the next key in sequence.
 	  * (Only used when reading.)
 	  * Use param_init_enumerator(...) to reset to first key.
 	  */

@@ -141,7 +141,7 @@ Analogous to
 the data read from the connection must start with
 a two-byte length, but the returned packet will omit them.
 .PP
-By default, 
+By default,
 .I vtsend
 and
 .I vtrecv

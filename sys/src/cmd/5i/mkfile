@@ -22,5 +22,5 @@ UPDATE=\
 
 </sys/src/cmd/mkone
 
-acid:	
+acid:
 	$CC -a run.c > acid.def

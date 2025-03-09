@@ -305,7 +305,7 @@ main(void)
 
 	optionsinit("/boot/boot boot");
 	quotefmtinstall();
-	
+
 	ataginit((Atag*)BOOTARGS);
 	confinit();		/* figures out amount of memory */
 	xinit();

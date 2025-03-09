@@ -29,7 +29,7 @@ and presents at
 (default
 .BR /mnt/news )
 a file system corresponding to the
-news articles stored on 
+news articles stored on
 .IR system .
 .PP
 If the
@@ -65,13 +65,13 @@ and
 The
 .B article
 file contains the full text of the article,
-while 
+while
 .B header
-and 
+and
 .B body
 contain only the header or body.
 .PP
-Each newsgroup directory contains a 
+Each newsgroup directory contains a
 write-only
 .B post
 file that may be used to post news articles.
@@ -89,7 +89,7 @@ The groups to which articles are eventually posted
 are determined by the
 .B newsgroups:
 header lines in the posted article,
-not by the location of the 
+not by the location of the
 .B post
 file in the file system.
 .PP
@@ -99,8 +99,8 @@ contains (~0, if there are no articles).
 .PP
 The modification time on a newsgroup
 directory is the last time a new article was recorded
-during this 
-.I nntpfs 
+during this
+.I nntpfs
 session.
 To force a check for new articles,
 .IR stat (2)

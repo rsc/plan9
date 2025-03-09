@@ -39,7 +39,7 @@ send_ssh_cmsg_session_key(Conn *c)
 		kbig = c->serverkey;
 	}else
 		error("server session and host keys do not differ by at least 128 bits");
-	
+
 	buflen = (mpsignif(kbig->n)+7)/8;
 	buf = emalloc(buflen);
 
@@ -147,7 +147,7 @@ checkkey(Conn *c)
 		fprint(2, "server %s not on keyring; will not continue.\n", c->host);
 		error("bad server key");
 	}
-	
+
 	keyfile = smprint("%s/lib/keyring", home);
 	if(keyfile == nil)
 		error("out of memory");
@@ -232,7 +232,7 @@ sshclienthandshake(Conn *c)
 	c->cstate = (*c->cipher->init)(c, 0);		/* turns on encryption */
 	m = recvmsg(c, SSH_SMSG_SUCCESS);
 	free(m);
-	
+
 	if(authuser(c) < 0)
 		error("client authentication failed");
 }
@@ -305,7 +305,7 @@ static uchar ptyopt[] =
 	0x00,		/* end options */
 };
 
-static uchar rawptyopt[] = 
+static uchar rawptyopt[] =
 {
 	30,	0,		/* ignpar */
 	31,	0,		/* parmrk */
@@ -373,4 +373,3 @@ requestpty(Conn *c)
 	}
 	free(m);
 }
-

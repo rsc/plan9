@@ -1,4 +1,4 @@
-/* 
+/*
  * NFS mounter V3;  see RFC 1813
  */
 
@@ -151,7 +151,7 @@ enum {
 	Nfs3FsHomogeneous = 8,
 	Nfs3FsCanSetTime = 16,
 
-	Nfs3Version = 3,	
+	Nfs3Version = 3,
 	Nfs3Program = 100003,
 };
 typedef enum
@@ -808,4 +808,3 @@ void nfs3EntryPlusPrint(Fmt*, Nfs3Entry*);
 u32int nfs3EntryPlusSize(Nfs3Entry*);
 int nfs3EntryPlusPack(uchar*, uchar*, uchar**, Nfs3Entry*);
 int nfs3EntryPlusUnpack(uchar*, uchar*, uchar**, Nfs3Entry*);
-

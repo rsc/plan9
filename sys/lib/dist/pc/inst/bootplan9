@@ -14,14 +14,14 @@ if(! ~ $#p9offset 1) {
 }
 
 if(test $p9offset -gt 4128695) {	# 65536 * 63 - 10
-	echo 
+	echo
 	echo 'Your Plan 9 partition is more than 2GB into your disk,'
 	echo 'and the master boot records used by Windows 9x/ME'
 	echo 'cannot access it (and thus cannot boot it).'
 	echo
 	echo 'You can install the Plan 9 master boot record, which can load'
 	echo 'partitions far into the disk.'
-	echo 
+	echo
 }
 
 echo 'If you use the Windows NT/2000/XP master boot record'
@@ -29,7 +29,7 @@ echo 'or a master boot record from a Unix clone (e.g., LILO or'
 echo 'FreeBSD bootmgr), it is probably safe to continue using'
 echo 'that boot record rather than install the Plan 9 boot record.'
 echo
-prompt 'Install the Plan 9 master boot record' y n 
+prompt 'Install the Plan 9 master boot record' y n
 switch($rd) {
 case n
 	;
@@ -38,7 +38,7 @@ case y
 }
 
 log Setting Plan 9 partition active.
-p9part=`{disk/fdisk /dev/$disk/data >[2]/dev/null </dev/null | 
+p9part=`{disk/fdisk /dev/$disk/data >[2]/dev/null </dev/null |
 		grep PLAN9 | sed 1q | sed 's/ *(p.) .*/\1/'}
 if(~ $#p9part 0){
 	echo 'You have no Plan 9 partitions (How could this happen?)' >[1=2]

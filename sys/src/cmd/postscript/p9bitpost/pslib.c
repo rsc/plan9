@@ -5,33 +5,33 @@
 #include <bio.h>
 #include "pslib.h"
 /* implement PsLib;
-/* 
+/*
 /* include "sys.m";
 /* 	sys: Sys;
-/* 
+/*
 /* include "draw.m";
 /* 	draw : Draw;
 /* Image, Display,Rect,Point : import draw;
-/* 
+/*
 /* include "bufio.m";
 /* 	bufmod : Bufio;
-/* 
+/*
 /* include "tk.m";
 /* 	tk: Tk;
 /* 	Toplevel: import tk;
-/* 
+/*
 /* Iobuf : import bufmod;
-/* 
+/*
 /* include "string.m";
 /* 	str : String;
-/* 
+/*
 /* include "daytime.m";
 /* 	time : Daytime;
-/* 
+/*
 /* include "pslib.m";
-/* 
+/*
 /* ASCII,RUNE,IMAGE : con iota;
-/* 
+/*
 */
 struct iteminfo {
 	int itype;
@@ -40,7 +40,7 @@ struct iteminfo {
 	int ascent;		/* ascent of the item */
 	int font;		/* font */
 	int line;		/* line its on */
-	char *buf;	
+	char *buf;
 };
 
 struct lineinfo {
@@ -54,13 +54,13 @@ struct lineinfo {
 
 /* font_arr := array[256] of {* => (-1,"")};
 /* remap := array[20] of (string,string);
-/* 
+/*
 /* PXPI : con 100;
 /* PTPI : con 100;
-/* 
+/*
 */
 char *noinit = "pslib not properly initialized";
-/* 
+/*
 */
 static int boxes;
 static int debug;
@@ -109,7 +109,7 @@ psinit(int box, int deb) { /* d: ref Toplevel, */
 /* {
 /* 	return 	(totitems,totlines,curfont);
 /* }
-/* 
+/*
 /* loadfonts() : string
 /* {
 /* 	input : string;
@@ -125,7 +125,7 @@ psinit(int box, int deb) { /* d: ref Toplevel, */
 /* 	}
 /* 	return "";
 /* }
-/* 
+/*
 */
 static char *username;
 
@@ -222,7 +222,7 @@ preamble(Biobuf *ioutb, Rectangle bb) {
 	Bprint(ioutb, "%%%%EndProlog\n");
 	if (Patch != nil)
 		Bprint(ioutb, "%s\n", Patch);
-	return 0;	
+	return 0;
 }
 
 int
@@ -237,20 +237,20 @@ void
 printnewpage(int pagenum, int end, Biobuf *ioutb)
 {
 	if (!started) return;
-	if (end){			
+	if (end){
 /*		# bounding box */
 		if (boxes){
 			Bprint(ioutb, "18 18 moveto 594 18 lineto 594 774 lineto 18 774 lineto closepath stroke\n");
 		}
 		Bprint(ioutb, "showpage\n%%%%EndPage %d %d\n", pagenum, pagenum);
-	} else 
+	} else
 		Bprint(ioutb, "%%%%Page: %d %d\n", pagenum, pagenum);
 }
 
 /* int
 /* printimage(FILE *ioutb, struct lineinfo line, struct iteminfo imag) {
 /* 	int RM;
-/* 
+/*
 /* 	RM=612-18;
 /* 	class:=tk->cmd(t,"winfo class "+imag.buf);
 /* #sys->print("Looking for [%s] of type [%s]\n",imag.buf,class);
@@ -288,11 +288,11 @@ printnewpage(int pagenum, int end, Biobuf *ioutb)
 /* 		* =>
 /* 			sys->print("Unhandled class [%s]\n",class);
 /* 			return (class,"Error");
-/* 		
+/*
 /* 	}
-/* 	return ("","");	
+/* 	return ("","");
 /* }
-/* 
+/*
 /* printline(ioutb: ref Iobuf,line : lineinfo,items : array of iteminfo)
 /* {
 /* 	xstart:=line.xorg;
@@ -306,7 +306,7 @@ printnewpage(int pagenum, int end, Biobuf *ioutb)
 /* 			(class,msg)=printimage(ioutb,line,items[j]);
 /* 		if (items[j].itype!=IMAGE || class=="button"|| class=="menubutton"){
 /* 			setfont(ioutb,items[j].font);
-/* 			if (msg!=""){ 
+/* 			if (msg!=""){
 /* 				# position the text in the center of the label
 /* 				# moveto curpoint
 /* 				# (msg) stringwidth pop xstart sub 2 div
@@ -329,7 +329,7 @@ printnewpage(int pagenum, int end, Biobuf *ioutb)
 /* 		ioutb.puts(sys->sprint("%d %d %d %d rectstroke\n",line.xorg,line.yorg,
 /* 									wid,line.height));
 /* }
-/* 
+/*
 /* setfont(ioutb: ref Iobuf,font : int){
 /* 	ftype : int;
 /* 	fname : string;
@@ -347,12 +347,12 @@ printnewpage(int pagenum, int end, Biobuf *ioutb)
 /* 		curfonttype=ftype;
 /* 	}
 /* }
-/* 	
+/*
 /* parseTkline(ioutb: ref Iobuf,input : string) : string
 /* {
 /* 	if (!started) return noinit;
 /* 	thisline : lineinfo;
-/* 	PS:=792-18-18;	# page size in points	
+/* 	PS:=792-18-18;	# page size in points
 /* 	TM:=792-18;	# top margin in points
 /* 	LM:=18;		# left margin 1/4 in. in
 /* 	BM:=18;		# bottom margin 1/4 in. in
@@ -386,8 +386,8 @@ printnewpage(int pagenum, int end, Biobuf *ioutb)
 /* 	printline(ioutb,thisline,items);
 /* 	return "";
 /* }
-/* 	
-/* 
+/*
+/*
 /* getfonts(input: string) : string
 /* {
 /* 	if (!started) return "Error";
@@ -396,11 +396,11 @@ printnewpage(int pagenum, int end, Biobuf *ioutb)
 /* 	retval := "";
 /* 	if (input[0]=='%')
 /* 			return "";
-/* 	# get a line of the form 
+/* 	# get a line of the form
 /* 	# 5::/fonts/lucida/moo.16.font
 /* 	# translate it to...
 /* 	# 32 f32.16
-/* 	# where 32==1<<5 and f32.16 is a postscript function that loads the 
+/* 	# where 32==1<<5 and f32.16 is a postscript function that loads the
 /* 	# appropriate postscript font (from remap)
 /* 	# and writes it to fonts....
 /* 	(bits,font):=str->toint(input,10);
@@ -440,15 +440,15 @@ printnewpage(int pagenum, int end, Biobuf *ioutb)
 /* 		def_font=enc_font;
 /* 	curfont++;
 /* 	retval+= ps_func;
-/* 	retval+= xtra_func;	
+/* 	retval+= xtra_func;
 /* 	return retval;
 /* }
-/* 
+/*
 /* deffont() : string
 /* {
 /* 	return def_font;
 /* }
-/* 	
+/*
 /* getline(k : int,  input : string) : (array of iteminfo, string)
 /* {
 /* 	lineval,args : string;
@@ -496,7 +496,7 @@ printnewpage(int pagenum, int end, Biobuf *ioutb)
 /* 					if (input[j]==']')
 /* 						if (nb==0)
 /* 							break;
-/* 						else 
+/* 						else
 /* 							nb--;
 /* 					lineval[len lineval]=input[j];
 /* 				}
@@ -533,14 +533,14 @@ printnewpage(int pagenum, int end, Biobuf *ioutb)
 /* 					if (input[j]==']')
 /* 						if (nb==0)
 /* 							break;
-/* 						else 
+/* 						else
 /* 							nb--;
 /* 					case input[j] {
 /* 						8226 => # bullet
 /* 							lineval+="\\267 ";
 /* 						169 =>  # copyright
 /* 							lineval+="\\251 ";
-/* 							curitem++;			
+/* 							curitem++;
 /* 						* =>
 /* 							lineval[len lineval]=input[j];
 /* 					}
@@ -602,10 +602,10 @@ printnewpage(int pagenum, int end, Biobuf *ioutb)
 /* 						break;
 /* 				if (j>len input)
 /* 					input=input[j:];
-/* 				
+/*
 /* 		}
 /* 	}
-/* 	return (item_arr[0:curitem], "");	
+/* 	return (item_arr[0:curitem], "");
 /* }
 */
 

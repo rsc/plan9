@@ -273,7 +273,7 @@ wport(void *, ulong p, ulong w, int len)
 	case 0xA0:	/* PIC 2 */
 	case 0xA1:
 		break;
-	
+
 	default:
 		pw[len](data, w);
 		if(pwrite(portfd[len], data, len, p) != len){
@@ -520,7 +520,7 @@ static struct Qtab {
 		0,
 
 	"realmodemem",
-		0666,	
+		0666,
 		0,
 		MEMSIZE,
 };
@@ -592,7 +592,7 @@ fswalk1(Fid *fid, char *name, Qid *qid)
 			return nil;
 		}
 		return Enonexist;
-		
+
 	default:
 		return Ewalk;
 	}

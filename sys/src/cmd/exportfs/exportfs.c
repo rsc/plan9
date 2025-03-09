@@ -204,7 +204,7 @@ main(int argc, char **argv)
 		remote = na;
 		if((fd = dial(netmkaddr(na, 0, "importfs"), 0, 0, 0)) < 0)
 			fatal("can't dial %s: %r", na);
-	
+
 		ai = auth_proxy(fd, auth_getkey, "proto=p9any role=client %s", keyspec);
 		if(ai == nil)
 			fatal("%r: %s", na);
@@ -301,14 +301,14 @@ main(int argc, char **argv)
 				fatal("can't read impo arguments: %r");
 			if(n == 0)
 				fatal("connection closed while reading arguments");
-			if(*p == '\n') 
+			if(*p == '\n')
 				*p = '\0';
 			if(*p++ == '\0')
 				break;
 			if(p >= buf + sizeof(buf))
 				fatal("import parameters too long");
 		}
-		
+
 		if(tokenize(buf, args, nelem(args)) != 2)
 			fatal("impo arguments invalid: impo%s...", buf);
 
@@ -343,7 +343,7 @@ main(int argc, char **argv)
 		for(i = 0; i < 4; i++)
 			key[i+12] = rand();
 
-		if(ini != nil) 
+		if(ini != nil)
 			fatal("Protocol botch: old import");
 		if(readn(0, key, 4) != 4)
 			fatal("can't read key part; %r");
@@ -403,7 +403,7 @@ main(int argc, char **argv)
 }
 
 /*
- * WARNING: Replace this with the original version as soon as all 
+ * WARNING: Replace this with the original version as soon as all
  * _old_ imports have been replaced with negotiating imports.  Also
  * cpu relies on this (which needs to be fixed!) -- pb.
  */
@@ -450,7 +450,7 @@ reply(Fcall *r, Fcall *t, char *err)
 		t->type = Rerror;
 		t->ename = err;
 	}
-	else 
+	else
 		t->type = r->type + 1;
 
 	DEBUG(DFD, "\t%F\n", t);
@@ -508,7 +508,7 @@ freefid(int nr)
 		l = &f->next;
 	}
 
-	return 0;	
+	return 0;
 }
 
 Fid *
@@ -541,7 +541,7 @@ newfid(int nr)
 	new->fid = -1;
 	new->mid = 0;
 
-	return new;	
+	return new;
 }
 
 static struct {
@@ -890,7 +890,7 @@ filter(int fd, char *cmd, char *host)
 		buf[len] = '\0';
 		if ((s = strchr(buf, '\n')) != nil)
 			len = s - buf;
-		if (write(fd, buf, len) != len) 
+		if (write(fd, buf, len) != len)
 			fatal("filter: cannot write port; %r");
 	} else {
 		/* Read address string from connection */

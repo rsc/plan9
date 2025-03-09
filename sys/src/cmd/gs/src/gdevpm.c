@@ -1,12 +1,12 @@
 /* Copyright (C) 1992, 1993, 1994, 1996, 1997, 1998, 1999, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -24,7 +24,7 @@
  * provided and so no text window is available.
  * If Ghostscript is a windowed text application, a message queue
  * can't be created so a PM window for graphics can't be created.
- * The solution used here is to have two programs - gsos2.exe is a 
+ * The solution used here is to have two programs - gsos2.exe is a
  * text application and the outboard PM driver is gspmdrv.exe.
  * Another solution may be to make Ghostscript a PM application
  * and use VIO calls to provide a text window.
@@ -34,7 +34,7 @@
  *
  * Since Ghostscript is not a PM application, this driver creates a
  * BMP bitmap in a named shared memory block and a second process
- * gspmdrv.exe reads this memory block and provides the PM window.  
+ * gspmdrv.exe reads this memory block and provides the PM window.
  * Communication to gspmdrv.exe is via the shared memory block
  * and semaphores.
  */
@@ -953,7 +953,7 @@ pm_run_gspmdrv(gx_device_pm * pmdev)
     /*  (2) id string */
     sprintf(arg, "-d %s", id);
 
-    /* because gspmdrv.exe is a different EXE type to gs.exe, 
+    /* because gspmdrv.exe is a different EXE type to gs.exe,
      * we must use start session not DosExecPgm() */
     sdata.Length = sizeof(sdata);
     sdata.Related = SSF_RELATED_CHILD;	/* to be a child  */
@@ -1162,7 +1162,7 @@ set_color_info(gx_device_color_info * pdci, int nc, int depth, int maxgray, int 
  * device.  The display device can change its setup.
  */
 private void
-set_color_procs(gx_device * pdev, 
+set_color_procs(gx_device * pdev,
 	dev_t_proc_encode_color((*encode_color), gx_device),
 	dev_t_proc_decode_color((*decode_color), gx_device),
 	dev_t_proc_get_color_mapping_procs((*get_color_mapping_procs), gx_device),
@@ -1183,7 +1183,7 @@ set_color_procs(gx_device * pdev,
  * device.  This routine is used when the display device is Gray.
  */
 private void
-set_gray_color_procs(gx_device * pdev, 
+set_gray_color_procs(gx_device * pdev,
 	dev_t_proc_encode_color((*encode_color), gx_device),
 	dev_t_proc_decode_color((*decode_color), gx_device))
 {
@@ -1197,7 +1197,7 @@ set_gray_color_procs(gx_device * pdev,
  * device.  This routine is used when the display device is RGB.
  */
 private void
-set_rgb_color_procs(gx_device * pdev, 
+set_rgb_color_procs(gx_device * pdev,
 	dev_t_proc_encode_color((*encode_color), gx_device),
 	dev_t_proc_decode_color((*decode_color), gx_device))
 {

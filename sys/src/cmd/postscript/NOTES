@@ -29,4 +29,3 @@
  4.0. The -r option accomplishes something similiar but needs a full path.
 
  postio.mk is very different and not tested on V9.
-

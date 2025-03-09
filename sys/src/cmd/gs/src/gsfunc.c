@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -208,7 +208,6 @@ fn_common_serialize(const gs_function_t * pfn, stream *s)
 	return code;
     if (p->Range == NULL && p->n * 2 > count_of(dummy))
 	return_error(gs_error_unregistered); /* Unimplemented. */
-    return sputs(s, (const byte *)(p->Range != NULL ? &p->Range[0] : dummy), 
+    return sputs(s, (const byte *)(p->Range != NULL ? &p->Range[0] : dummy),
 	    sizeof(p->Range[0]) * p->n * 2, &n);
 }
-

@@ -370,7 +370,7 @@ acmeevent(Wiki *wiki, Event *e)
 				recvp(w->cevent);		/* ignore origin */
 			}else
 				na = 0;
-			
+
 			/* append chorded arguments */
 			if(na){
 				t = emalloc(strlen(s)+1+na+1);
@@ -445,7 +445,7 @@ wikithread(void *v)
 	fprint(w->win->ctl, "menu\n");
 	wintagwrite(w->win, "Get History Diff New", 4+8+4+4);
 	winclean(w->win);
-		
+
 	while(!w->dead && (e = recvp(w->win->cevent)))
 		acmeevent(w, e);
 
@@ -567,7 +567,7 @@ execdiff(void *v)
 	open(buf, OWRITE);
 	sprint(buf, "/mnt/wsys/%d", a->w->win->id);
 	bind(buf, "/dev", MBEFORE);
-	
+
 	procexecl(nil, "/acme/wiki/wiki.diff", "wiki.diff", a->dir, nil);
 }
 
@@ -599,4 +599,3 @@ wikidiff(Wiki *w)
 	threadcreate(wikithread, nw, STACK);
 	return 1;
 }
-

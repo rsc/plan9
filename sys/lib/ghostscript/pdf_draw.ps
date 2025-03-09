@@ -1,12 +1,12 @@
 %    Copyright (C) 1994, 2000 Aladdin Enterprises.  All rights reserved.
-% 
+%
 % This software is provided AS-IS with no warranty, either express or
 % implied.
-% 
+%
 % This software is distributed under license and may not be copied,
 % modified or distributed except as expressly authorized under the terms
 % of the license contained in the file LICENSE in this distribution.
-% 
+%
 % For more information about licensing, please refer to
 % http://www.ghostscript.com/licensing/. For information on
 % commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -51,7 +51,7 @@ pdfdict begin
   dup /Order 2 copy knownoget { put } { pop pop } ifelse
   dup /Encode 2 copy knownoget { put } { pop pop } ifelse
   dup /Decode 2 copy knownoget { put } { pop pop } ifelse
-  
+
 		% Don't lose our place in PDFfile.
   PDFfile fileposition exch
   dup true resolvestream
@@ -164,7 +164,7 @@ pdfdict begin
 /spotfunctions mark
   /Round {
     abs exch abs 2 copy add 1 le {
-      dup mul exch dup mul add 1 exch sub 
+      dup mul exch dup mul add 1 exch sub
     } {
       1 sub dup mul exch 1 sub dup mul add 1 sub
     } ifelse
@@ -266,7 +266,7 @@ drawopdict begin
 	} {
 	  % update the CTM, then uappend.
 	  7 1 roll //cmmatrix astore concat
-	  newpath { mark exch uappend } stopped 
+	  newpath { mark exch uappend } stopped
 	  cleartomark
 	} ifelse
       } def
@@ -387,7 +387,7 @@ end
     } if
     dup /TR knownoget {
       resolveidfnproc /TransferFunction exch 3 2 roll
-    } if    
+    } if
     dup /G oget dup /BBox oget /BBox exch 4 2 roll
     /.execmaskgroup cvx 2 packedarray cvx /Draw exch 3 2 roll
     pop .dicttomark
@@ -410,7 +410,7 @@ end
   } stopped {
     .discardtransparencymask stop
   } if
-  PDFfile exch setfileposition 
+  PDFfile exch setfileposition
   setcolorspace
 } bdef
 % Paint a Form+Group XObject, either for a transparency mask or for a Do.
@@ -1043,7 +1043,7 @@ drawopdict begin
   /Do {
     setfillblend
     PDFfile fileposition exch
-    dup Page /XObject rget { 
+    dup Page /XObject rget {
       exch pop dup /Subtype get xobjectprocs exch get
 		% Don't leave extra objects on the stack while executing
 		% the definition of the form.
@@ -1051,7 +1051,7 @@ drawopdict begin
     } {
 		% This should cause an error, but Acrobat Reader can
 		% continue, so we do too.
-      (   **** Undefined XObject resource: ) 
+      (   **** Undefined XObject resource: )
       exch =string cvs concatstrings (\n) concatstrings
       pdfformaterror
     } ifelse
@@ -1098,14 +1098,14 @@ drawopdict begin
     } repeat pop
     /IDFlag true def  % flag for stream processing.
     /File PDFsource def
-    currentdict makeimagekeys doimage	
+    currentdict makeimagekeys doimage
 	% The Adobe documentation says that the data following ID
 	% consists of "lines", and some PDF files (specifically, some files
 	% produced by PCL2PDF from Visual Software) contain garbage bytes
 	% between the last byte of valid data and an EOL.
         % Some files (PDFOUT v3.8d by GenText) have EI immediately following
         % the stream. Some have no EOL and garbage bytes.
-        % Therefore, we skip all bytes before EI or EOL 
+        % Therefore, we skip all bytes before EI or EOL
     0
       { PDFsource read not { //true exit } if
         dup 10 eq 1 index 13 eq or
@@ -1227,7 +1227,7 @@ end
     [/N /R /D] {
 	% stack: scale annot appearance false key
       dup 3 index exch known {
-	exch pop true exit 
+	exch pop true exit
       } if
       pop
     } forall
@@ -1248,7 +1248,7 @@ end
         1 index /AS knownoget not {
       		% If we do not have AS then use any appearance
   	  { exch pop oforce exit } forall true
-        } { 
+        } {
 		% Stack: annot Ndict AS
 		% Get the specified appearance.  If no appearance, then
 		% display nothing - set stack = false.

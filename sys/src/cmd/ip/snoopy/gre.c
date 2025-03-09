@@ -43,7 +43,7 @@ enum
 	Oproto,
 };
 
-static Field p_fields[] = 
+static Field p_fields[] =
 {
 	{"proto",		Fnum,	Oproto,	"encapsulated protocol",	} ,
 	{0}
@@ -70,7 +70,7 @@ static Mux p_mux[] =
 int
 parthdrlen(ushort flags)
 {
-	return 4 + 
+	return 4 +
 		(flags&GRE_chksum || flags&GRE_routing) ? 4 : 0 +
 		flags&GRE_key ? 4 : 0 +
 		flags&GRE_seq ? 4 : 0 +
@@ -191,7 +191,7 @@ p_seprint(Msg *m)
 		m->p = seprint(m->p, m->e, " offset=%#ux haverouting", h.offset);
 	if(h.version == 0)
 		m->p = seprint(m->p, m->e, " recursion=%ud", (h.flags&GRE_recur)>>8);
-	
+
 	return 0;
 }
 

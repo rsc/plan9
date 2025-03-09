@@ -4,7 +4,7 @@ TEXT uartinit(SB), $0
 	MOVL c+8(SP), AX
 	MOVB $0x00, AH
 	JMP _uartbios
-	
+
 TEXT uartputc(SB), $0
 	MOVL c+8(SP), AX
 	MOVB $0x01, AH

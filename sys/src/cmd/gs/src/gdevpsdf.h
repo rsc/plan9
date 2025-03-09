@@ -1,12 +1,12 @@
 /* Copyright (C) 1997, 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -333,7 +333,7 @@ int psdf_DCT_filter(gs_param_list *plist /* may be NULL */,
 		    psdf_binary_writer *pbw /* may be NULL */);
 
 /* Decive whether to convert an image to RGB. */
-bool psdf_is_converting_image_to_RGB(const gx_device_psdf * pdev, 
+bool psdf_is_converting_image_to_RGB(const gx_device_psdf * pdev,
 		const gs_imager_state * pis, const gs_pixel_image_t * pim);
 
 /* Set up compression and downsampling filters for an image. */
@@ -364,7 +364,7 @@ int psdf_setup_image_to_mask_filter(psdf_binary_writer *pbw, gx_device_psdf *pde
 	    int width, int height, int depth, int bits_per_sample, uint *MaskColor);
 
 /* Set up an image colors filter. */
-int psdf_setup_image_colors_filter(psdf_binary_writer *pbw, 
+int psdf_setup_image_colors_filter(psdf_binary_writer *pbw,
 	gx_device_psdf *pdev, gs_pixel_image_t * pim,
 	const gs_imager_state *pis,
 	gs_color_space_index output_cspace_index);

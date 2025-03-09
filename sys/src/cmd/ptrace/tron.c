@@ -95,7 +95,7 @@ main(int argc, char *argv[])
 			rendezvous(usage, 0);
 			sysfatal("can't trace");
 		}
-	
+
 		if(out == nil){
 			rendezvous(usage, usage);
 			waitpid();

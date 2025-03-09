@@ -2,11 +2,11 @@
 
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -138,7 +138,7 @@ atx_compress(const byte *in_buf, int in_size, byte *out_buf, int out_size)
     out += 2;
     ++pair_count;
     goto Scan_Uncompressed;
-  
+
 }
 
 /* Send the page to the printer. */
@@ -147,7 +147,7 @@ atx_print_page(gx_device_printer *pdev, FILE *f, int max_width_bytes)
 {
     /*
      * The page length command uses 16 bits to represent the length in
-     * units of 0.01", so the maximum representable page length is 
+     * units of 0.01", so the maximum representable page length is
      * 655.35", including the unprintable top and bottom margins.
      * Compute the maximum height of the printable area in pixels.
      */

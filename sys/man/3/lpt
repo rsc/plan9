@@ -1,4 +1,4 @@
-.TH LPT 3 
+.TH LPT 3
 .SH NAME
 lpt \- parallel port interface for PC's
 .SH SYNOPSIS

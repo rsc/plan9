@@ -3,7 +3,7 @@
 
 extern int debug;
 
-/* 
+/*
  *	Routines for dealing with the rewrite rules.
  */
 
@@ -222,7 +222,7 @@ substitute(String *source, Resub *subexp, message *mp)
 	char *s;
 	char *sp;
 	String *stp;
-	
+
 	if(source == 0)
 		return 0;
 	sp = s_to_c(source);
@@ -265,7 +265,7 @@ substitute(String *source, Resub *subexp, message *mp)
 				s_putc(stp, *sp);
 				break;
 			}
-		} else if(*sp == '&') {				
+		} else if(*sp == '&') {
 			if(subexp[0].sp != 0)
 				for (s = subexp[0].sp;
 				     s < subexp[0].ep; s++)
@@ -315,4 +315,3 @@ dumprules(void)
 		fprint(2, " '%s'\n", rp->repl2 ? rp->repl2->base:"...");
 	}
 }
-

@@ -16,4 +16,3 @@ vtStrDup(char *s)
 	setmalloctag(ss, getcallerpc(&s));
 	return ss;
 }
-

@@ -32,7 +32,7 @@ Bfilelen(void *vb)
 	return n;
 }
 
-static uint 
+static uint
 hashstr(char* key)
 {
 	/* asu works better than pjw for urls */
@@ -294,4 +294,3 @@ continuei: ;
 	if(newhint)
 		hprint(hout, "Fresh: have/%d\r\n", j);
 }
-

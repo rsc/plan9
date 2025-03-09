@@ -103,7 +103,7 @@ dp9ikinit(Proto *p, Fsstate *fss)
 		safecpy(s->tr.authid, _strfindattr(k->attr, "user"), sizeof(s->tr.authid));
 		safecpy(s->tr.authdom, _strfindattr(k->attr, "dom"), sizeof(s->tr.authdom));
 		s->key = k;
-		memcpy(s->k.aes, k->priv, AESKEYLEN);	
+		memcpy(s->k.aes, k->priv, AESKEYLEN);
 //		memmove(&s->k, k->priv, sizeof(Authkey)); // todo, is an AuthKey struct required?
 		authpak_hash(&s->k, s->tr.authid);
 		memrandom(s->tr.chal, sizeof s->tr.chal);

@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -51,7 +51,7 @@ zfile_name_combine(i_ctx_t *i_ctx_p)
     prefix = op[-2].value.const_bytes;
     fname =  op[-1].value.const_bytes;
     no_sibling = op[0].value.boolval;
-    if (gp_file_name_combine((const char *)prefix, plen, 
+    if (gp_file_name_combine((const char *)prefix, plen,
 			     (const char *)fname, flen, no_sibling,
 		             (char *)buffer, &blen) != gp_combine_success) {
 	make_bool(op, false);
@@ -76,7 +76,7 @@ zfile_name_is_absolute(i_ctx_t *i_ctx_p)
 {   os_ptr op = osp;
 
     check_type(op[0], t_string);
-    make_bool(op, (gp_file_name_root((const char *)op->value.const_bytes, 
+    make_bool(op, (gp_file_name_root((const char *)op->value.const_bytes,
 					r_size(op)) > 0));
     return 0;
 }
@@ -126,4 +126,3 @@ const op_def zfile1_op_defs[] =
     {"0.file_name_parent", zfile_name_parent},
     op_def_end(0)
 };
-

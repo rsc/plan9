@@ -164,7 +164,7 @@ liteinterrupt(ulong bit)
 	Uartregs *urp;
 
 	uart = liteuart;
-	if (uart == nil) 
+	if (uart == nil)
 		return 0;
 	ctlr = uart->regs;
 	urp = ctlr->regs;

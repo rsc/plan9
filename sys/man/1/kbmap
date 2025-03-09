@@ -9,9 +9,9 @@ kbmap \- show a list of available keyboard maps and switch between them.
 .SH DESCRIPTION
 .I Kbmap
 shows a single column consisting of the names of keyboard maps for different
-alphabets available on the system. With no arguments 
+alphabets available on the system. With no arguments
 .B kbmap
-will look for files in 
+will look for files in
 .BR /sys/lib/kbmap .
 .PP
 Clicking the right mouse button will highlight the entry and force the
@@ -21,7 +21,7 @@ for the system; typing 'q' quits.
 .I Kbmap
 requires that the file
 .B /dev/kbmap
-served by 
+served by
 .IR kbmap (3)
 exists and is writable.
 ..SH FILES

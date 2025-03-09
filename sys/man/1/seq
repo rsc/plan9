@@ -20,7 +20,7 @@ seq \- print sequences of numbers
 .I Seq
 prints a sequence of numbers, one per line, from
 .I first
-(default 1) to as near 
+(default 1) to as near
 .I last
 as possible, in increments of
 .I incr
@@ -37,12 +37,12 @@ Normally integer values are printed as decimal integers.
 The options are
 .TP "\w'\fL-f \fIformat\fLXX'u"
 .BI -f format
-Use the 
+Use the
 .IR print (2)-style
 .I format
 .IR print
 for printing each (floating point) number.
-The default is 
+The default is
 .LR %g .
 .TP
 .B -w
@@ -56,7 +56,7 @@ nor with numbers in exponential notation.
 .L
 seq 0 .05 .1
 Print
-.BR "0 0.05 0.1" 
+.BR "0 0.05 0.1"
 (on separate lines).
 .TP
 .L

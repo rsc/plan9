@@ -117,7 +117,7 @@ destination	: TO ':'
 			{ newfield(link2($1, $2), 0); }
 		| BCC ':' address_list
 			{ newfield(link3($1, $2, $3), 0); }
-		| RESENT_BCC ':' 
+		| RESENT_BCC ':'
 			{ newfield(link2($1, $2), 0); }
 		| RESENT_BCC ':' address_list
 			{ newfield(link3($1, $2, $3), 0); }

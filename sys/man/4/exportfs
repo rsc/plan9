@@ -60,7 +60,7 @@ Authenticate the user with the
 .I p9any
 protocol before running the regular
 .I exportfs
-session; used when 
+session; used when
 .I exportfs
 is invoked to handle an incoming network connection.
 .I Exportfs
@@ -76,7 +76,7 @@ authenticate as a
 .I p9any
 client, and then
 serve that network connection.
-Requires setting the root of the name space with 
+Requires setting the root of the name space with
 .B -r
 or
 .BR -s .
@@ -104,7 +104,7 @@ and
 .BR sha1 .
 .TP
 .B -m \fImsize
-Set the maximum message size that 
+Set the maximum message size that
 .I exportfs
 should offer to send (see
 .IR version (5));
@@ -186,7 +186,7 @@ Because the kernel disallows reads and writes on mounted pipes
 calls itself (with appropriate
 .B -m
 and
-.B -S 
+.B -S
 options) to simulate reads and writes on such files.
 .PP
 .I Srvfs
@@ -200,7 +200,7 @@ and posts it at
 which is created with mode
 .I perm
 (default 0600).
-The name space is the directory tree rooted at 
+The name space is the directory tree rooted at
 .IR path .
 The
 .BR -d ,
@@ -223,7 +223,7 @@ Use
 .I srvfs
 to enable mounting of an FTP file system (see
 .IR ftpfs (4))
-in several windows, 
+in several windows,
 or to publish a
 .B /proc
 (see
@@ -235,7 +235,7 @@ srvfs ftp /n/ftp
 srvfs broke /mnt/term/proc
 .EE
 .LP
-Use 
+Use
 .I srvfs
 to obtain a copy of a service to be manipulated directly
 by a user program like

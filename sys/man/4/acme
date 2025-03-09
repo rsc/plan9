@@ -31,7 +31,7 @@ serves a variety of files for reading, writing, and controlling
 windows.
 Some of them are virtual versions of system files for dealing
 with the virtual console; others control operations
-of 
+of
 .I acme
 itself.
 When a command is run under
@@ -156,10 +156,10 @@ each formatted in 11 characters plus a blank.
 and
 .I n
 are the character (not byte) offsets of the
-beginning and end of the address, 
+beginning and end of the address,
 which would be expressed in
 .I acme 's
-input language as 
+input language as
 .BI # m ,# n \fR.
 Thus a regular expression may be evaluated by writing it to
 .B addr

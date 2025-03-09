@@ -152,7 +152,7 @@ conv:
 
 char*	regstr[] =
 {
-	"AL",	/*[D_AL]*/	
+	"AL",	/*[D_AL]*/
 	"CL",
 	"DL",
 	"BL",

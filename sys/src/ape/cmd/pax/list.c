@@ -13,17 +13,17 @@
  *
  *	Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice is duplicated in all such 
- * forms and that any documentation, advertising materials, and other 
- * materials related to such distribution and use acknowledge that the 
- * software was developed * by Mark H. Colburn and sponsored by The 
- * USENIX Association. 
+ * provided that the above copyright notice is duplicated in all such
+ * forms and that any documentation, advertising materials, and other
+ * materials related to such distribution and use acknowledge that the
+ * software was developed * by Mark H. Colburn and sponsored by The
+ * USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -32,10 +32,10 @@
  * $Log:	list.c,v $
  * Revision 1.2  89/02/12  10:04:43  mark
  * 1.2 release fixes
- * 
+ *
  * Revision 1.1  88/12/23  18:02:14  mark
  * Initial revision
- * 
+ *
  */
 
 #ifndef lint
@@ -90,11 +90,11 @@ static char       *monnames[] = {
  *
  * DESCRIPTION
  *
- * 	Read a record that's supposed to be a header record. Return its 
- *	address in "head", and if it is good, the file's size in 
- *	asb->sb_size.  Decode things from a file header record into a "Stat". 
- *	Also set "head_standard" to !=0 or ==0 depending whether header record 
- *	is "Unix Standard" tar format or regular old tar format. 
+ * 	Read a record that's supposed to be a header record. Return its
+ *	address in "head", and if it is good, the file's size in
+ *	asb->sb_size.  Decode things from a file header record into a "Stat".
+ *	Also set "head_standard" to !=0 or ==0 depending whether header record
+ *	is "Unix Standard" tar format or regular old tar format.
  *
  * PARAMETERS
  *
@@ -103,8 +103,8 @@ static char       *monnames[] = {
  *
  * RETURNS
  *
- * 	Return 1 for success, 0 if the checksum is bad, EOF on eof, 2 for a 
- * 	record full of zeros (EOF marker). 
+ * 	Return 1 for success, 0 if the checksum is bad, EOF on eof, 2 for a
+ * 	record full of zeros (EOF marker).
  */
 
 #ifdef __STDC__
@@ -112,7 +112,7 @@ static char       *monnames[] = {
 int read_header(char *name, Stat *asb)
 
 #else
-    
+
 int read_header(name, asb)
 char           *name;
 Stat           *asb;
@@ -140,7 +140,7 @@ Stat           *asb;
     for (i = 0 ; i < 500; i++) {
 
 	/*
-	 * We can't use unsigned char here because of old compilers, e.g. V7. 
+	 * We can't use unsigned char here because of old compilers, e.g. V7.
 	 */
 	sum += 0xFF & *p++;
     }
@@ -155,13 +155,13 @@ Stat           *asb;
 
 	/*
 	 * This is a zeroed record...whole record is 0's except for the 8
-	 * blanks we faked for the checksum field. 
+	 * blanks we faked for the checksum field.
 	 */
 	return (2);
     }
     if (sum == recsum) {
 	/*
-	 * Good record.  Decode file size and return. 
+	 * Good record.  Decode file size and return.
 	 */
 	if (hdrbuf[156] != LNKTYPE) {
 	    asb->sb_size = from_oct(1 + 12, &hdrbuf[124]);
@@ -253,7 +253,7 @@ Stat           *asb;
 /* print_entry - print a single table-of-contents entry
  *
  * DESCRIPTION
- * 
+ *
  *	Print_entry prints a single line of file information.  The format
  *	of the line is the same as that used by the LS command.  For some
  *	archive formats, various fields may not make any sense, such as
@@ -271,7 +271,7 @@ Stat           *asb;
 void print_entry(char *name, Stat *asb)
 
 #else
-    
+
 void print_entry(name, asb)
 char		*name;
 Stat	        *asb;
@@ -296,7 +296,7 @@ Stat	        *asb;
  * DESCRIPTION
  *
  *	Print_entry prints a single line of file information.  The format
- *	of the line is the same as that used by the traditional cpio 
+ *	of the line is the same as that used by the traditional cpio
  *	command.  No error checking is done for bad or invalid data.
  *
  * PARAMETERS
@@ -310,7 +310,7 @@ Stat	        *asb;
 static void cpio_entry(char *name, Stat *asb)
 
 #else
-    
+
 static void cpio_entry(name, asb)
 char	       *name;
 Stat	       *asb;
@@ -331,8 +331,8 @@ Stat	       *asb;
 	    fprintf(msgfile, "%-6u", USH(asb->sb_uid));
 	}
 	fprintf(msgfile,"%7ld  %3s %2d %02d:%02d:%02d %4d  ",
-	               asb->sb_size, monnames[atm->tm_mon], 
-		       atm->tm_mday, atm->tm_hour, atm->tm_min, 
+	               asb->sb_size, monnames[atm->tm_mon],
+		       atm->tm_mday, atm->tm_hour, atm->tm_min,
 		       atm->tm_sec, atm->tm_year + 1900);
     }
     fprintf(msgfile, "%s", name);
@@ -353,7 +353,7 @@ Stat	       *asb;
  * DESCRIPTION
  *
  *	Print_entry prints a single line of tar file information.  The format
- *	of the line is the same as that produced by the traditional tar 
+ *	of the line is the same as that produced by the traditional tar
  *	command.  No error checking is done for bad or invalid data.
  *
  * PARAMETERS
@@ -367,7 +367,7 @@ Stat	       *asb;
 static void tar_entry(char *name, Stat *asb)
 
 #else
-    
+
 static void tar_entry(name, asb)
 char		*name;
 Stat            *asb;
@@ -398,10 +398,10 @@ Stat            *asb;
 #endif
 	case S_IFREG: 	/* It is a link or a file */
 	    if ((asb->sb_nlink > 1) && (link = islink(name, asb))) {
-		fprintf(msgfile, "%s linked to %s\n", name, link->l_name); 
+		fprintf(msgfile, "%s linked to %s\n", name, link->l_name);
 	    } else {
-		fprintf(msgfile, "x %s, %ld bytes, %d tape blocks\n", 
-			name, asb->sb_size, ROUNDUP(asb->sb_size, 
+		fprintf(msgfile, "x %s, %ld bytes, %d tape blocks\n",
+			name, asb->sb_size, ROUNDUP(asb->sb_size,
 			BLOCKSIZE) / BLOCKSIZE);
 	    }
 	}
@@ -421,9 +421,9 @@ Stat            *asb;
 	case S_IFREG: 	/* It is a link or a file */
 	    fprintf(msgfile, "a %s ", name);
 	    if ((asb->sb_nlink > 1) && (link = islink(name, asb))) {
-		fprintf(msgfile, "link to %s\n", link->l_name); 
+		fprintf(msgfile, "link to %s\n", link->l_name);
 	    } else {
-		fprintf(msgfile, "%ld Blocks\n", 
+		fprintf(msgfile, "%ld Blocks\n",
 			ROUNDUP(asb->sb_size, BLOCKSIZE) / BLOCKSIZE);
 	    }
 	    break;
@@ -434,7 +434,7 @@ Stat            *asb;
 	    print_mode(asb->sb_mode);
 	    fprintf(msgfile," %d/%d %6d %3s %2d %02d:%02d %4d %s",
 		    asb->sb_uid, asb->sb_gid, asb->sb_size,
-		    monnames[atm->tm_mon], atm->tm_mday, atm->tm_hour, 
+		    monnames[atm->tm_mon], atm->tm_mday, atm->tm_hour,
 		    atm->tm_min, atm->tm_year + 1900, name);
 	} else {
 	    fprintf(msgfile, "%s", name);
@@ -470,7 +470,7 @@ Stat            *asb;
  * DESCRIPTION
  *
  *	Print_entry prints a single line of file information.  The format
- *	of the line is the same as that used by the LS command.  
+ *	of the line is the same as that used by the LS command.
  *	No error checking is done for bad or invalid data.
  *
  * PARAMETERS
@@ -484,7 +484,7 @@ Stat            *asb;
 static void pax_entry(char *name, Stat *asb)
 
 #else
-    
+
 static void pax_entry(name, asb)
 char	       *name;
 Stat	       *asb;
@@ -523,7 +523,7 @@ Stat	       *asb;
 	    fprintf(msgfile, "\t        ");
 	}
 	fprintf(msgfile," %3s %2d %02d:%02d ",
-	        monnames[atm->tm_mon], atm->tm_mday, 
+	        monnames[atm->tm_mon], atm->tm_mday,
 		atm->tm_hour, atm->tm_min);
     }
     fprintf(msgfile, "%s", name);
@@ -559,7 +559,7 @@ Stat	       *asb;
 static void print_mode(ushort mode)
 
 #else
-    
+
 static void print_mode(mode)
 ushort	mode;
 
@@ -568,28 +568,28 @@ ushort	mode;
     /* Tar does not print the leading identifier... */
     if (ar_interface != TAR) {
 	switch (mode & S_IFMT) {
-	case S_IFDIR: 
-	    putc('d', msgfile); 
+	case S_IFDIR:
+	    putc('d', msgfile);
 	    break;
 #ifdef	S_IFLNK
-	case S_IFLNK: 
-	    putc('l', msgfile); 
+	case S_IFLNK:
+	    putc('l', msgfile);
 	    break;
 #endif	/* S_IFLNK */
-	case S_IFBLK: 
-	    putc('b', msgfile); 
+	case S_IFBLK:
+	    putc('b', msgfile);
 	    break;
-	case S_IFCHR: 
-	    putc('c', msgfile); 
+	case S_IFCHR:
+	    putc('c', msgfile);
 	    break;
 #ifdef	S_IFIFO
-	case S_IFIFO: 
-	    putc('p', msgfile); 
-	    break; 
-#endif	/* S_IFIFO */ 
-	case S_IFREG: 
+	case S_IFIFO:
+	    putc('p', msgfile);
+	    break;
+#endif	/* S_IFIFO */
+	case S_IFREG:
 	default:
-	    putc('-', msgfile); 
+	    putc('-', msgfile);
 	    break;
 	}
     }
@@ -622,14 +622,14 @@ ushort	mode;
  *
  * PARAMETERS
  *
- *	int digs	- Number to of digits to convert 
+ *	int digs	- Number to of digits to convert
  *	char *where	- Character representation of octal number
  *
  * RETURNS
  *
  *	The value of the octal number represented by the first digs
- *	characters of the string where.  Result is -1 if the field 
- *	is invalid (all blank, or nonoctal). 
+ *	characters of the string where.  Result is -1 if the field
+ *	is invalid (all blank, or nonoctal).
  *
  * ERRORS
  *

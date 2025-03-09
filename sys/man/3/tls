@@ -1,4 +1,4 @@
-.TH TLS 3 
+.TH TLS 3
 .SH NAME
 tls \- TLS1 and SSL3 record layer
 .SH SYNOPSIS
@@ -8,7 +8,7 @@ tls \- TLS1 and SSL3 record layer
 .B /net/tls/clone
 .B /net/tls/encalgs
 .B /net/tls/hashalgs
-.BI /net/tls/ n 
+.BI /net/tls/ n
 .BI /net/tls/ n /ctl
 .BI /net/tls/ n /data
 .BI /net/tls/ n /hand
@@ -258,7 +258,7 @@ or ready to be used, if any.
 .PP
 Reading
 .I encalgs
-and 
+and
 .I hashalgs
 will give the space-separated list of algorithms implemented.
 This will always include

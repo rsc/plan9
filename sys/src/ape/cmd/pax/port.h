@@ -16,7 +16,7 @@
  *	Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *	John Gilmore (gnu@hoptoad)
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
@@ -26,7 +26,7 @@
  * duplicated in all such forms and that any documentation,
  * advertising materials, and other materials related to such
  * distribution and use acknowledge that the software was developed
- * by Mark H. Colburn and sponsored by The USENIX Association. 
+ * by Mark H. Colburn and sponsored by The USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -40,9 +40,9 @@
  * Everybody does wait() differently.  There seem to be no definitions for
  * this in V7 (e.g. you are supposed to shift and mask things out using
  * constant shifts and masks.)  In order to provide the functionality, here
- * are some non standard but portable macros.  Don't change to a "union wait" 
- * based approach -- the ordering of the elements of the struct depends on the 
- * byte-sex of the machine. 
+ * are some non standard but portable macros.  Don't change to a "union wait"
+ * based approach -- the ordering of the elements of the struct depends on the
+ * byte-sex of the machine.
  */
 
 #define	TERM_SIGNAL(status)	((status) & 0x7F)
@@ -53,7 +53,7 @@
  * String library emulation definitions for the different variants of UNIX
  */
 
-#if defined(USG) 
+#if defined(USG)
 
 #   include <string.h>
 #ifndef _POSIX_SOURCE

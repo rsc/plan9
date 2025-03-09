@@ -1,12 +1,12 @@
 /* Copyright (C) 1998, 1999 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -114,7 +114,7 @@ gdev_cmap_set_method(gx_device_cmap * cmdev,
 	case device_cmap_monochrome:
 	    cmdev->color_info.max_gray = target->color_info.max_gray;
 	    cmdev->color_info.max_color = target->color_info.max_color;
-	    cmdev->color_info.max_components = 
+	    cmdev->color_info.max_components =
 	        cmdev->color_info.num_components = 1;
 	    cmdev->color_info.cm_name = "DeviceGray";
 	    break;
@@ -126,7 +126,7 @@ gdev_cmap_set_method(gx_device_cmap * cmdev,
 	     * We have to be an RGB device, otherwise "primaries" doesn't
 	     * have the proper meaning.
 	     */
-	    cmdev->color_info.max_components = 
+	    cmdev->color_info.max_components =
 	        cmdev->color_info.num_components = 3;
 	    cmdev->color_info.cm_name = "DeviceRGB";
 	    break;
@@ -250,11 +250,11 @@ cmap_gray_cs_to_cm(gx_device * dev, frac gray, frac out[])
 private void
 cmap_rgb_cs_to_cm(gx_device * dev, const gs_imager_state * pis, frac r, frac g, frac b, frac out[])
 {
-    
+
     gx_device_cmap *    cmdev = (gx_device_cmap *)dev;
     frac gx_max_color_frac   = cv2frac(gx_max_color_value);
     switch (cmdev->mapping_method) {
-        
+
     case device_cmap_snap_to_primaries:
         r = (r <= gx_max_color_frac / 2 ? 0 : gx_max_color_frac);
         g = (g <= gx_max_color_frac / 2 ? 0 : gx_max_color_frac);
@@ -322,4 +322,3 @@ cmap_get_color_mapping_procs(const gx_device * dev)
 {
     return &cmap_cm_procs;
 }
-

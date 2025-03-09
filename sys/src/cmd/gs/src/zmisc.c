@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1995-2004 artofcode LLC. All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -366,7 +366,7 @@ zsetdebug(i_ctx_t *i_ctx_p)
  *   (value) (key) .pcacheinsert
  *   (key) .pcachequery { (\n) concatstrings print } if
  */
- 
+
 #ifdef DEBUG_CACHE
 
 /* <string> <string> .pcacheinsert */
@@ -377,20 +377,20 @@ zpcacheinsert(i_ctx_t *i_ctx_p)
     char *key, *buffer;
     int keylen, buflen;
     int code = 0;
-	
+
     check_read_type(*op, t_string);
     keylen = r_size(op);
     key = op->value.bytes;
     check_read_type(*(op - 1), t_string);
     buflen = r_size(op - 1);
     buffer = (op - 1)->value.bytes;
-    
+
     code = gp_cache_insert(0, key, keylen, buffer, buflen);
     if (code < 0)
 		return code;
-	
+
 	pop(2);
-	
+
     return code;
 }
 
@@ -398,7 +398,7 @@ zpcacheinsert(i_ctx_t *i_ctx_p)
 private void *
 pcache_alloc_callback(void *userdata, int bytes)
 {
-    i_ctx_t *i_ctx_p = (i_ctx_t*)userdata;    
+    i_ctx_t *i_ctx_p = (i_ctx_t*)userdata;
     return ialloc_string(bytes, "pcache buffer");
 }
 
@@ -412,7 +412,7 @@ zpcachequery(i_ctx_t *i_ctx_p)
 	char *key;
 	byte *string;
 	int code = 0;
-	
+
 	check_read_type(*op, t_string);
 	len = r_size(op);
 	key = op->value.bytes;
@@ -424,10 +424,10 @@ zpcachequery(i_ctx_t *i_ctx_p)
 	if (string == NULL)
 		return_error(e_VMerror);
 	make_string(op, a_all | icurrent_space, len, string);
-	
+
 	push(1);
 	make_true(op);
-	
+
 	return code;
 }
 

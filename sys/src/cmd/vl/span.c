@@ -128,7 +128,7 @@ span(void)
 	}
 
 	if(debug['t']) {
-		/* 
+		/*
 		 * add strings to text segment
 		 */
 		c = rnd(c, 8);
@@ -157,7 +157,7 @@ span(void)
 		Bprint(&bso, "tsize = %llux\n", textsize);
 	Bflush(&bso);
 }
-		
+
 void
 xdefine(char *p, int t, long v)
 {
@@ -495,7 +495,7 @@ buildop(void)
 			i++;
 		oprange[r].stop = optab+i;
 		i--;
-		
+
 		switch(r)
 		{
 		default:

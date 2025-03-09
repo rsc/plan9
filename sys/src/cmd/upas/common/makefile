@@ -15,4 +15,3 @@ mail.h:		sys.h
 
 clean:
 	-rm -f *.[oO] core a.out *.a *.sL common.a
-

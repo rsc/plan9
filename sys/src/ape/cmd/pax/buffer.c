@@ -7,26 +7,26 @@
  * DESCRIPTION
  *
  *	These functions handle buffer manipulations for the archiving
- *	formats.  Functions are provided to get memory for buffers, 
- *	flush buffers, read and write buffers and de-allocate buffers.  
- *	Several housekeeping functions are provided as well to get some 
+ *	formats.  Functions are provided to get memory for buffers,
+ *	flush buffers, read and write buffers and de-allocate buffers.
+ *	Several housekeeping functions are provided as well to get some
  *	information about how full buffers are, etc.
  *
  * AUTHOR
  *
  *	Mark H. Colburn, NAPS International (mark@jhereg.mn.org)
  *
- * Sponsored by The USENIX Association for public distribution. 
+ * Sponsored by The USENIX Association for public distribution.
  *
  * Copyright (c) 1989 Mark H. Colburn.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice is duplicated in all such 
- * forms and that any documentation, advertising materials, and other 
- * materials related to such distribution and use acknowledge that the 
- * software was developed * by Mark H. Colburn and sponsored by The 
- * USENIX Association. 
+ * provided that the above copyright notice is duplicated in all such
+ * forms and that any documentation, advertising materials, and other
+ * materials related to such distribution and use acknowledge that the
+ * software was developed * by Mark H. Colburn and sponsored by The
+ * USENIX Association.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
@@ -35,10 +35,10 @@
  * $Log:	buffer.c,v $
  * Revision 1.2  89/02/12  10:04:02  mark
  * 1.2 release fixes
- * 
+ *
  * Revision 1.1  88/12/23  18:02:01  mark
  * Initial revision
- * 
+ *
  */
 
 #ifndef lint
@@ -97,7 +97,7 @@ static uint buf_out_avail();
  *
  * RETURNS
  *
- * 	Returns zero if successful, -1 otherwise. 
+ * 	Returns zero if successful, -1 otherwise.
  */
 
 #ifdef __STDC__
@@ -143,8 +143,8 @@ Stat           *asb;
  *
  *	Outdata transfers data from the named file to the archive buffer.
  *	It knows about the file padding which is required by tar, but no
- *	by cpio.  Outdata continues after file read errors, padding with 
- *	null characters if neccessary.   Closes the input file descriptor 
+ *	by cpio.  Outdata continues after file read errors, padding with
+ *	null characters if neccessary.   Closes the input file descriptor
  *	when finished.
  *
  * PARAMETERS
@@ -209,8 +209,8 @@ OFFSET          size;
  *
  * DESCRIPTION
  *
- *	Write out an End-Of-Tape record.  We actually zero at least one 
- *	record, through the end of the block.  Old tar writes garbage after 
+ *	Write out an End-Of-Tape record.  We actually zero at least one
+ *	record, through the end of the block.  Old tar writes garbage after
  *	two zeroed records -- and PDtar used to.
  */
 
@@ -244,7 +244,7 @@ void write_eot()
     outflush();
 }
 
- 
+
 /* outwrite -  write archive data
  *
  * DESCRIPTION
@@ -254,7 +254,7 @@ void write_eot()
  *	of data bytes written.
  *
  * PARAMETERS
- *	
+ *
  *	char   *idx	- pointer to data to write
  *	uint	len	- length of the data to write
  */
@@ -298,9 +298,9 @@ uint            len;	/* length of data to write */
  *
  * DESCRIPTION
  *
- *	Copies a file from one place to another.  Doesn't believe in input 
- *	file descriptor zero (see description of kludge in openin() comments). 
- *	Closes the provided output file descriptor. 
+ *	Copies a file from one place to another.  Doesn't believe in input
+ *	file descriptor zero (see description of kludge in openin() comments).
+ *	Closes the provided output file descriptor.
  *
  * PARAMETERS
  *
@@ -347,7 +347,7 @@ int             ofd;
 }
 
 
-/* buf_allocate - get space for the I/O buffer 
+/* buf_allocate - get space for the I/O buffer
  *
  * DESCRIPTION
  *
@@ -362,9 +362,9 @@ int             ofd;
  *
  * ERRORS
  *
- *	If an invalid size is given for a buffer or if a buffer of the 
- *	required size cannot be allocated, then the function prints out an 
- *	error message and returns a non-zero exit status to the calling 
+ *	If an invalid size is given for a buffer or if a buffer of the
+ *	required size cannot be allocated, then the function prints out an
+ *	error message and returns a non-zero exit status to the calling
  *	process, terminating the program.
  *
  */
@@ -404,8 +404,8 @@ OFFSET            size;
  *
  * RETURNS
  *
- * 	Returns zero under normal circumstances, -1 if unreadable data is 
- * 	encountered. 
+ * 	Returns zero under normal circumstances, -1 if unreadable data is
+ * 	encountered.
  */
 
 #ifdef __STDC__
@@ -454,8 +454,8 @@ OFFSET           len;
  *
  * RETURNS
  *
- * 	Returns zero with valid data, -1 if unreadable portions were 
- *	replaced by null characters. 
+ * 	Returns zero with valid data, -1 if unreadable portions were
+ *	replaced by null characters.
  */
 
 #ifdef __STDC__
@@ -499,7 +499,7 @@ uint            len;
  *
  * DESCRIPTION
  *
- *	Indata writes size bytes of data from the archive buffer to the output 
+ *	Indata writes size bytes of data from the archive buffer to the output
  *	file specified by fd.  The filename which is being written, pointed
  *	to by name is provided only for diagnostics.
  *
@@ -511,7 +511,7 @@ uint            len;
  *
  * RETURNS
  *
- * 	Returns given file descriptor. 
+ * 	Returns given file descriptor.
  */
 
 #ifdef __STDC__
@@ -595,13 +595,13 @@ static void outflush()
  *
  * DESCRIPTION
  *
- * 	Remembers mid-buffer read failures and reports them the next time 
+ * 	Remembers mid-buffer read failures and reports them the next time
  *	through.  Replaces unreadable data with null characters.   Resets
  *	the buffer pointers as appropriate.
  *
  * RETURNS
  *
- *	Returns zero with valid data, -1 otherwise. 
+ *	Returns zero with valid data, -1 otherwise.
  */
 
 #ifdef __STDC__
@@ -652,8 +652,8 @@ int ar_read()
  *
  * DESCRIPTION
  *
- * 	Writes len bytes of data data from the specified buffer to the 
- *	specified file.   Seeks past sparse blocks. 
+ * 	Writes len bytes of data data from the specified buffer to the
+ *	specified file.   Seeks past sparse blocks.
  *
  * PARAMETERS
  *
@@ -663,8 +663,8 @@ int ar_read()
  *
  * RETURNS
  *
- *	Returns 0 if the block was written, the given length for a sparse 
- *	block or -1 if unsuccessful. 
+ *	Returns 0 if the block was written, the given length for a sparse
+ *	block or -1 if unsuccessful.
  */
 
 #ifdef __STDC__
@@ -697,7 +697,7 @@ uint            len;
  *
  * DESCRIPTION
  *
- *	Buf_pad writes len zero bytes to the archive buffer in order to 
+ *	Buf_pad writes len zero bytes to the archive buffer in order to
  *	pad it.
  *
  * PARAMETERS
@@ -780,9 +780,9 @@ uint            len;
  *
  * RETURNS
  *
- * 	Stores a pointer to the data and its length in given locations. 
- *	Returns zero with valid data, -1 if unreadable portions were 
- *	replaced with nulls. 
+ * 	Stores a pointer to the data and its length in given locations.
+ *	Returns zero with valid data, -1 if unreadable portions were
+ *	replaced with nulls.
  *
  * ERRORS
  *
@@ -819,8 +819,8 @@ uint           *lenp;
  *
  * DESCRIPTION
  *
- * 	Stores a buffer pointer at a given location. Returns the number 
- *	of bytes available. 
+ * 	Stores a buffer pointer at a given location. Returns the number
+ *	of bytes available.
  *
  * PARAMETERS
  *

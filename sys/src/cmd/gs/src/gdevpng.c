@@ -1,12 +1,12 @@
 /* Copyright (C) 1995-2003, artofcode LLC.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -150,7 +150,7 @@ prn_device(png48_procs, "png48",
 
 /* 32-bit RGBA */
 /* pngalpha device is 32-bit RGBA, with the alpha channel
- * indicating pixel coverage, not true transparency.  
+ * indicating pixel coverage, not true transparency.
  * Anti-aliasing is enabled by default.
  * An erasepage will erase to transparent, not white.
  * It is intended to be used for creating web graphics with
@@ -215,7 +215,7 @@ private const gx_device_procs pngalpha_procs =
 	NULL, 	/* end_transparency_mask */
 	NULL, 	/* discard_transparency_layer */
 	gx_default_DevRGB_get_color_mapping_procs,
-	gx_default_DevRGB_get_color_comp_index, 
+	gx_default_DevRGB_get_color_comp_index,
 	pngalpha_encode_color,
 	pngalpha_decode_color
 };
@@ -223,7 +223,7 @@ private const gx_device_procs pngalpha_procs =
 const gx_device_pngalpha gs_pngalpha_device = {
 	std_device_part1_(gx_device_pngalpha, &pngalpha_procs, "pngalpha",
 		&st_device_printer, open_init_closed),
-	/* color_info */ 
+	/* color_info */
 	{3 /* max components */,
 	 3 /* number components */,
 	 GX_CINFO_POLARITY_ADDITIVE /* polarity */,
@@ -249,7 +249,7 @@ const gx_device_pngalpha gs_pngalpha_device = {
 	offset_margin_values(0, 0, 0, 0, 0, 0),
 	std_device_part3_(),
 	prn_device_body_rest_(png_print_page),
-	NULL, 
+	NULL,
 	0xffffff	/* white background */
 };
 
@@ -320,7 +320,7 @@ png_print_page(gx_device_printer * pdev, FILE * file)
 	case 48:
 	    info_ptr->bit_depth = 16;
 	    info_ptr->color_type = PNG_COLOR_TYPE_RGB;
-#if defined(ARCH_IS_BIG_ENDIAN) && (!ARCH_IS_BIG_ENDIAN) 
+#if defined(ARCH_IS_BIG_ENDIAN) && (!ARCH_IS_BIG_ENDIAN)
 	    png_set_swap(png_ptr);
 #endif
 	    break;
@@ -431,10 +431,10 @@ pngalpha_open(gx_device * pdev)
 {
     gx_device_pngalpha *ppdev = (gx_device_pngalpha *)pdev;
     int code;
-    /* We replace create_buf_device so we can replace copy_alpha 
+    /* We replace create_buf_device so we can replace copy_alpha
      * for memory device, but not clist.
      */
-    ppdev->printer_procs.buf_procs.create_buf_device = 
+    ppdev->printer_procs.buf_procs.create_buf_device =
 	pngalpha_create_buf_device;
     code = gdev_prn_open(pdev);
     /* We intercept fill_rectangle to translate "fill page with white"
@@ -449,13 +449,13 @@ pngalpha_open(gx_device * pdev)
     return code;
 }
 
-private int 
+private int
 pngalpha_create_buf_device(gx_device **pbdev, gx_device *target,
    const gx_render_plane_t *render_plane, gs_memory_t *mem,
    bool for_band)
 {
     gx_device_printer *ptarget = (gx_device_printer *)target;
-    int code = gx_default_create_buf_device(pbdev, target, 
+    int code = gx_default_create_buf_device(pbdev, target,
 	render_plane, mem, for_band);
     /* Now set copy_alpha to one that handles RGBA */
     set_dev_proc(*pbdev, copy_alpha, ptarget->orig_procs.copy_alpha);
@@ -487,7 +487,7 @@ pngalpha_put_params(gx_device * pdev, gs_param_list * plist)
 	if ((ppdev->procs.fill_rectangle != pngalpha_fill_rectangle) &&
 	    (ppdev->procs.fill_rectangle != NULL)) {
 	    /* Get current implementation of fill_rectangle and restore ours.
-	     * Implementation is either clist or memory and can change 
+	     * Implementation is either clist or memory and can change
 	     * during put_params.
 	     */
 	    ppdev->orig_fill_rectangle = ppdev->procs.fill_rectangle;
@@ -515,7 +515,7 @@ pngalpha_get_params(gx_device * pdev, gs_param_list * plist)
 private gx_color_index
 pngalpha_encode_color(gx_device * dev, const gx_color_value cv[])
 {
-    /* bits 0-7 are alpha, stored inverted to avoid white/opaque 
+    /* bits 0-7 are alpha, stored inverted to avoid white/opaque
      * being 0xffffffff which is also gx_no_color_index.
      * So 0xff is transparent and 0x00 is opaque.
      * We always return opaque colors (bits 0-7 = 0).
@@ -543,7 +543,7 @@ pngalpha_fill_rectangle(gx_device * dev, int x, int y, int w, int h,
 		  gx_color_index color)
 {
     gx_device_pngalpha *pdev = (gx_device_pngalpha *)dev;
-    if ((color == 0xffffff00) && (x==0) && (y==0) 
+    if ((color == 0xffffff00) && (x==0) && (y==0)
 	&& (w==dev->width) && (h==dev->height)) {
 	/* If filling whole page with white, make it transparent */
         return pdev->orig_fill_rectangle(dev, x, y, w, h, 0xfefefeff);
@@ -631,17 +631,17 @@ pngalpha_copy_alpha(gx_device * dev, const byte * data, int data_x,
 			/* decode color doesn't give us coverage */
 			cv[3] = previous & 0xff;
 			old_coverage = 255 - cv[3];
-			new_coverage = 
+			new_coverage =
 			    (255 * alpha + old_coverage * (15 - alpha)) / 15;
 			for (i=0; i<ncomps; i++)
-			    cv[i] = min(((255 * alpha * color_cv[i]) + 
+			    cv[i] = min(((255 * alpha * color_cv[i]) +
 				(old_coverage * (15 - alpha ) * cv[i]))
 				/ (new_coverage * 15), gx_max_color_value);
 			composite =
 			    (*dev_proc(dev, encode_color)) (dev, cv);
 			/* encode color doesn't include coverage */
 			composite |= (255 - new_coverage) & 0xff;
-			
+
 			/* composite can never be gx_no_color_index
 			 * because pixel is never completely transparent
 			 * (low byte != 0xff).
@@ -657,4 +657,3 @@ pngalpha_copy_alpha(gx_device * dev, const byte * data, int data_x,
 	return code;
     }
 }
-

@@ -148,7 +148,7 @@ takes two additional options.
 The first,
 .B -k
 .IR keypattern ,
-constrains the set of 
+constrains the set of
 .IR factotum (4)
 keys used for an authenticated mount.
 The second,

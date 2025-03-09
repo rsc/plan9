@@ -173,7 +173,7 @@ extern Point	memsubfontwidth(Memsubfont*, char*);
 extern Memsubfont*	getmemdefont(void);
 
 /*
- * Predefined 
+ * Predefined
  */
 extern	Memimage*	memwhite;
 extern	Memimage*	memblack;

@@ -1,4 +1,4 @@
-.TH PIPE 3 
+.TH PIPE 3
 .SH NAME
 pipe \- two-way interprocess communication
 .SH SYNOPSIS

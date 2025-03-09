@@ -1,12 +1,12 @@
 /* Copyright (C) 1989, 1990, 1991, 1996, 1998 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -86,7 +86,7 @@ sonyfb_output_page(gx_device *dev, int num_copies, int flush)
   prect.refPoint.x = 0;
   prect.refPoint.y = 0;
   prect.ptnRect = prect.rect;
-  
+
   prect.ptnBM.type  = BM_MEM;
   prect.ptnBM.depth = 1;
   prect.ptnBM.width = (byte_width + 1) / 2;
@@ -95,7 +95,7 @@ sonyfb_output_page(gx_device *dev, int num_copies, int flush)
   prect.ptnBM.rect.extent.x = byte_width * 8; /* width in 16bit words */
   prect.ptnBM.rect.extent.y = height;
   prect.ptnBM.base = (typeof(prect.ptnBM.base))bm;
-  
+
   prect.fore_color = 1;
   prect.aux_color = 0;
   prect.planemask = FB_PLANEALL;
@@ -107,7 +107,7 @@ sonyfb_output_page(gx_device *dev, int num_copies, int flush)
   prect.drawBM.width = (prect.rect.extent.x + 15) / 16;
   prect.drawBM.rect = prect.rect;
   prect.drawBM.base = 0;
-  
+
   if(ioctl(fb_file, FBIOCRECTANGLE, &prect) < 0)
     perror("rect ioctl failed");
 

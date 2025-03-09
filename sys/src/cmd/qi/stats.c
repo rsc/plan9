@@ -52,7 +52,7 @@ isum(void)
 				else
 					Bprint(bioout, "%-8ud      %s\n",
 					i->count, i->name);
-	
+
 				switch(i->type) {
 				default:
 					fatal(0, "isum bad stype %d\n", i->type);
@@ -100,7 +100,7 @@ isum(void)
 				total, Percent(total, loads+stores+total));
 
 	Bprint(bioout, "%-8ud %3d%% Data cycles\n\n",
-				loads+stores, Percent(loads+stores, loads+stores+total));	
+				loads+stores, Percent(loads+stores, loads+stores+total));
 
 	Bprint(bioout, "%-8ud %3d%% Stores\n", stores, Percent(stores, total));
 

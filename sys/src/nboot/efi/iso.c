@@ -203,7 +203,7 @@ isoinit(void **fp)
 		if(eficall(ST->BootServices->HandleProtocol,
 			Handles[i], &EFI_BLOCK_IO_PROTOCOL_GUID, &bio))
 			continue;
-	
+
 		media = bio->Media;
 		if(media != nil
 		&& media->MediaPresent

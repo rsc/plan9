@@ -1,12 +1,12 @@
 /* Copyright (C) 1999, 2000, 2001 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -72,7 +72,7 @@ pdf_save_viewer_state(gx_device_pdf *pdev, stream *s)
     pdev->vgstack[i].saved_stroke_color = pdev->saved_stroke_color;
     pdev->vgstack[i].line_params = pdev->state.line_params;
     pdev->vgstack[i].line_params.dash.pattern = 0; /* Use pdev->dash_pattern instead. */
-    memcpy(pdev->vgstack[i].dash_pattern, pdev->dash_pattern, 
+    memcpy(pdev->vgstack[i].dash_pattern, pdev->dash_pattern,
 		sizeof(pdev->vgstack[i].dash_pattern));
     pdev->vgstack_depth++;
     if (s)
@@ -83,7 +83,7 @@ pdf_save_viewer_state(gx_device_pdf *pdev, stream *s)
 /* Load the viewer's graphic state. */
 private void
 pdf_load_viewer_state(gx_device_pdf *pdev, pdf_viewer_state *s)
-{   
+{
     pdev->transfer_ids[0] = s->transfer_ids[0];
     pdev->transfer_ids[1] = s->transfer_ids[1];
     pdev->transfer_ids[2] = s->transfer_ids[2];
@@ -146,7 +146,7 @@ pdf_set_initial_color(gx_device_pdf * pdev, gx_hl_saved_color *saved_fill_color,
 private void
 pdf_viewer_state_from_imager_state_aux(pdf_viewer_state *pvs, const gs_imager_state *pis)
 {
-    pvs->transfer_not_identity = 
+    pvs->transfer_not_identity =
 	    (pis->set_transfer.red   != NULL ? pis->set_transfer.red->proc   != gs_identity_transfer : 0) * 1 +
 	    (pis->set_transfer.green != NULL ? pis->set_transfer.green->proc != gs_identity_transfer : 0) * 2 +
 	    (pis->set_transfer.blue  != NULL ? pis->set_transfer.blue->proc  != gs_identity_transfer : 0) * 4 +
@@ -182,7 +182,7 @@ pdf_viewer_state_from_imager_state_aux(pdf_viewer_state *pvs, const gs_imager_st
 
 /* Copy viewer state from images state. */
 void
-pdf_viewer_state_from_imager_state(gx_device_pdf * pdev, 
+pdf_viewer_state_from_imager_state(gx_device_pdf * pdev,
 	const gs_imager_state *pis, const gx_device_color *pdevc)
 {
     pdf_viewer_state vs;
@@ -221,7 +221,7 @@ private void
 pdf_reset_graphics_old(gx_device_pdf * pdev)
 {
 
-    pdf_set_initial_color(pdev, &pdev->saved_fill_color, &pdev->saved_stroke_color, 
+    pdf_set_initial_color(pdev, &pdev->saved_fill_color, &pdev->saved_stroke_color,
 				&pdev->fill_used_process_color, &pdev->stroke_used_process_color);
     pdev->state.flatness = -1;
     {
@@ -249,9 +249,9 @@ pdf_reset_graphics(gx_device_pdf * pdev)
 
 /* Write client color. */
 private int
-pdf_write_ccolor(gx_device_pdf * pdev, const gs_imager_state * pis, 
+pdf_write_ccolor(gx_device_pdf * pdev, const gs_imager_state * pis,
 	        const gs_client_color *pcc)
-{   
+{
     int i, n = gx_hld_get_number_color_components(pis);
 
     pprintg1(pdev->strm, "%g", psdf_round(pcc->paint.values[0], 255, 8));
@@ -264,7 +264,7 @@ pdf_write_ccolor(gx_device_pdf * pdev, const gs_imager_state * pis,
 
 /* Set the fill or stroke color. */
 private int
-pdf_reset_color(gx_device_pdf * pdev, const gs_imager_state * pis, 
+pdf_reset_color(gx_device_pdf * pdev, const gs_imager_state * pis,
 	        const gx_drawing_color *pdc, gx_hl_saved_color * psc,
 		bool *used_process_color,
 		const psdf_set_color_commands_t *ppscc)
@@ -302,13 +302,13 @@ pdf_reset_color(gx_device_pdf * pdev, const gs_imager_state * pis,
 	case non_pattern_color_space:
 	    switch (gs_color_space_get_index(pcs)) {
 		case gs_color_space_index_DeviceGray:
-		    command = ppscc->setgray; 
+		    command = ppscc->setgray;
 		    break;
 		case gs_color_space_index_DeviceRGB:
-		    command = ppscc->setrgbcolor; 
+		    command = ppscc->setrgbcolor;
 		    break;
 		case gs_color_space_index_DeviceCMYK:
-		    command = ppscc->setcmykcolor; 
+		    command = ppscc->setcmykcolor;
 		    break;
 		case gs_color_space_index_Indexed:
 		    if (pdev->CompatibilityLevel <= 1.2) {
@@ -331,7 +331,7 @@ pdf_reset_color(gx_device_pdf * pdev, const gs_imager_state * pis,
 			    case gs_color_space_index_DeviceN:
 			    case gs_color_space_index_CIEICC:
 				goto write_process_color;
-			    default: 
+			    default:
 				DO_NOTHING;
 			}
 		    }
@@ -376,7 +376,7 @@ pdf_reset_color(gx_device_pdf * pdev, const gs_imager_state * pis,
 		    code = pdf_put_colored_pattern(pdev, pdc, pcs,
 				ppscc, pis->have_pattern_streams, &pres);
 		else if (pdc->type == &gx_dc_pure_masked) {
-		    code = pdf_put_uncolored_pattern(pdev, pdc, pcs, 
+		    code = pdf_put_uncolored_pattern(pdev, pdc, pcs,
 				ppscc, pis->have_pattern_streams, &pres);
 		    if (code < 0 || pres == 0)
 			return code;
@@ -434,10 +434,10 @@ pdf_set_pure_color(gx_device_pdf * pdev, gx_color_index color,
  * Convert a string into cos name.
  */
 int
-pdf_string_to_cos_name(gx_device_pdf *pdev, const byte *str, uint len, 
+pdf_string_to_cos_name(gx_device_pdf *pdev, const byte *str, uint len,
 		       cos_value_t *pvalue)
 {
-    byte *chars = gs_alloc_string(pdev->pdf_memory, len + 1, 
+    byte *chars = gs_alloc_string(pdev->pdf_memory, len + 1,
                                   "pdf_string_to_cos_name");
 
     if (chars == 0)
@@ -481,7 +481,7 @@ transfer_map_access_signed(const gs_data_source_t *psrc,
 			   ulong start, uint length,
 			   byte *buf, const byte **ptr)
 {
-    /* To prevent numeric errors, we need to map 0 to an integer. 
+    /* To prevent numeric errors, we need to map 0 to an integer.
      * We can't apply a general expression, because Decode isn't accessible here.
      * Assuming this works for UCR only.
      * Assuming the range of UCR is always [-1, 1].
@@ -546,16 +546,16 @@ pdf_write_transfer_map(gx_device_pdf *pdev, const gx_transfer_map *map,
     params.Encode = 0;
     if (range01[0] < 0 && range01[1] > 0) {
 	/* This works for UCR only.
-	 * Map 0 to an integer. 
-	 * Rather the range of UCR is always [-1, 1], 
-	 * we prefer a general expression. 
+	 * Map 0 to an integer.
+	 * Rather the range of UCR is always [-1, 1],
+	 * we prefer a general expression.
 	 */
-	int r0 = (int)( -range01[0] * ((1 << params.BitsPerSample) - 1) 
+	int r0 = (int)( -range01[0] * ((1 << params.BitsPerSample) - 1)
 			/ (range01[1] - range01[0]) ); /* Round down. */
 	float r1 = r0 * range01[1] / -range01[0]; /* r0 + r1 <= (1 << params.BitsPerSample) - 1 */
 
 	decode[0] = range01[0];
-	decode[1] = range01[0] + (range01[1] - range01[0]) * ((1 << params.BitsPerSample) - 1) 
+	decode[1] = range01[0] + (range01[1] - range01[0]) * ((1 << params.BitsPerSample) - 1)
 				    / (r0 + r1);
 	params.Decode = decode;
     } else
@@ -830,7 +830,7 @@ pdf_write_spot_halftone(gx_device_pdf *pdev, const gs_spot_halftone *psht,
     if (i == countof(ht_functions)) {
 	/* Create and write a Function for the spot function. */
 	pdf_write_spot_function(pdev, porder, &spot_id);
-    }	
+    }
     *pid = id = pdf_begin_separate(pdev);
     s = pdev->strm;
     /* Use the original, requested frequency and angle. */
@@ -905,7 +905,7 @@ pdf_write_threshold_halftone(gx_device_pdf *pdev,
 
     if (code < 0)
 	return code;
-    CHECK(pdf_begin_data(pdev, &writer)); 
+    CHECK(pdf_begin_data(pdev, &writer));
     s = pdev->strm;
     *pid = writer.pres->object->id;
     CHECK(cos_dict_put_c_strings((cos_dict_t *)writer.pres->object,
@@ -935,7 +935,7 @@ pdf_write_threshold2_halftone(gx_device_pdf *pdev,
 
     if (code < 0)
 	return code;
-    CHECK(pdf_begin_data(pdev, &writer)); 
+    CHECK(pdf_begin_data(pdev, &writer));
     s = pdev->strm;
     *pid = writer.pres->object->id;
     CHECK(cos_dict_put_c_strings((cos_dict_t *)writer.pres->object,
@@ -971,7 +971,7 @@ pdf_write_threshold2_halftone(gx_device_pdf *pdev,
     }
     return pdf_end_data(&writer);
 }
-private int 
+private int
 pdf_get_halftone_component_index(const gs_multiple_halftone *pmht,
 				 const gx_device_halftone *pdht,
 				 int dht_index)
@@ -981,7 +981,7 @@ pdf_get_halftone_component_index(const gs_multiple_halftone *pmht,
     for (j = 0; j < pmht->num_comp; j++)
 	if (pmht->components[j].comp_number == dht_index)
 	    break;
-    if (j == pmht->num_comp) { 
+    if (j == pmht->num_comp) {
 	/* Look for Default. */
 	for (j = 0; j < pmht->num_comp; j++)
 	    if (pmht->components[j].comp_number == GX_DEVICE_COLOR_MAX_COMPONENTS)
@@ -1176,7 +1176,7 @@ pdf_end_gstate(gx_device_pdf *pdev, pdf_resource_t *pres)
 {
     if (pres) {
 	int code = pdf_substitute_resource(pdev, &pres, resourceExtGState, NULL, true);
-	
+
 	if (code < 0)
 	    return code;
 	code = pdf_open_page(pdev, PDF_IN_STREAM);
@@ -1209,7 +1209,7 @@ pdf_update_transfer(gx_device_pdf *pdev, const gs_imager_state *pis,
     tm[1] = pis->set_transfer.green;
     tm[2] = pis->set_transfer.blue;
     tm[3] = pis->set_transfer.gray;
-    for (i = 0; i < 4; ++i) 
+    for (i = 0; i < 4; ++i)
 	if (tm[i] != NULL) {
 	    transfer_ids[i] = tm[i]->id;
 	    if (pdev->transfer_ids[i] != tm[i]->id)
@@ -1217,7 +1217,7 @@ pdf_update_transfer(gx_device_pdf *pdev, const gs_imager_state *pis,
 	    if (pi != -1 && transfer_ids[i] != transfer_ids[pi])
 		multiple = true;
 	    pi = i;
-	} else 
+	} else
 	    transfer_ids[i] = -1;
     if (update) {
 	int mask;
@@ -1230,7 +1230,7 @@ pdf_update_transfer(gx_device_pdf *pdev, const gs_imager_state *pis,
 	} else {
 	    strcpy(trs, "[");
 	    mask = 0;
-	    for (i = 0; i < 4; ++i) 
+	    for (i = 0; i < 4; ++i)
 		if (tm[i] != NULL) {
 		    code = pdf_write_transfer_map(pdev,
 						  tm[i],
@@ -1267,7 +1267,7 @@ pdf_update_alpha(gx_device_pdf *pdev, const gs_imager_state *pis,
 	code = pdf_open_gstate(pdev, ppres);
 	if (code < 0)
 	    return code;
-	code = cos_dict_put_c_key_string(resource_dict(*ppres), 
+	code = cos_dict_put_c_key_string(resource_dict(*ppres),
 		    "/SMask", (byte *)buf, strlen(buf));
 	if (code < 0)
 	    return code;
@@ -1346,7 +1346,7 @@ pdf_prepare_drawing(gx_device_pdf *pdev, const gs_imager_state *pis,
      * knockout.
      */
     bottom = (pdev->ResourcesBeforeUsage ? 1 : 0);
-    /* When ResourcesBeforeUsage != 0, one sbstack element 
+    /* When ResourcesBeforeUsage != 0, one sbstack element
        appears from the page contents stream. */
     if (pdev->sbstack_depth == bottom) {
 	gs_int_point phase, dev_phase;
@@ -1538,7 +1538,7 @@ pdf_try_prepare_stroke(gx_device_pdf *pdev, const gs_imager_state *pis)
 	    pdev->fill_overprint = pis->overprint;
 	} else {
 	    /* According to PDF>=1.3 spec, OP also sets op,
-	       if there is no /op in same garphic state object. 
+	       if there is no /op in same garphic state object.
 	       We don't write /op, so monitor the viewer's state here : */
 	    pdev->fill_overprint = pis->overprint;
 	}
@@ -1594,4 +1594,3 @@ pdf_prepare_imagemask(gx_device_pdf *pdev, const gs_imager_state *pis,
 				 &pdev->fill_used_process_color,
 				 &psdf_set_fill_color_commands);
 }
-

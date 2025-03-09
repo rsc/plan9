@@ -49,7 +49,7 @@ if not {
 		['^$GSPGLIST^']
 		{
 			dup dup
-				1 ge exch npage le and 
+				1 ge exch npage le and
 				{ DoPDFPage }
 				{ pop }
 			ifelse

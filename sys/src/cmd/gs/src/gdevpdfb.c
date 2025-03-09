@@ -1,12 +1,12 @@
 /* Copyright (C) 2000 Aladdin Enterprises.  All rights reserved.
-  
+
   This software is provided AS-IS with no warranty, either express or
   implied.
-  
+
   This software is distributed under license and may not be copied,
   modified or distributed except as expressly authorized under the terms
   of the license contained in the file LICENSE in this distribution.
-  
+
   For more information about licensing, please refer to
   http://www.ghostscript.com/licensing/. For information on
   commercial licensing, go to http://www.artifex.com/licensing/ or
@@ -105,7 +105,7 @@ pdf_copy_mask_data(gx_device_pdf * pdev, const byte * base, int sourcex,
     return pdf_end_write_image(pdev, piw);
 }
 
-private void 
+private void
 set_image_color(gx_device_pdf *pdev, gx_color_index c)
 {
     pdf_set_pure_color(pdev, c, &pdev->saved_fill_color,
@@ -170,8 +170,8 @@ pdf_copy_mono(gx_device_pdf *pdev,
 		if (code < 0)
 		    return code;
 		y_offset = -y_offset;
-		x_offset = psdf_round(pdev->char_width.x, 100, 10); /* See 
-			pdf_write_Widths about rounding. We need to provide 
+		x_offset = psdf_round(pdev->char_width.x, 100, 10); /* See
+			pdf_write_Widths about rounding. We need to provide
 			a compatible data for Tj. */
 		pprintg1(pdev->strm, "%g ", x_offset);
 		pprintd3(pdev->strm, "0 0 %d %d %d d1\n", y_offset, w, h + y_offset);
@@ -431,7 +431,7 @@ gdev_pdf_copy_color(gx_device * dev, const byte * base, int sourcex,
     gs_image_t image;
     pdf_image_writer writer;
     int code;
-    
+
     if (w <= 0 || h <= 0)
 	return 0;
     code = pdf_open_page(pdev, PDF_IN_STREAM);

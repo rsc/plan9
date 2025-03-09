@@ -127,16 +127,16 @@ doubop(int dst, int s1, int s2)
 		if(reg.ft[s1] == FPs && s1 != 24)
 			ifmt(s1);
 		l = reg.di[s1];
-		reg.di[s1] = reg.di[s1+1]; 
-		reg.di[s1+1] = l; 
+		reg.di[s1] = reg.di[s1+1];
+		reg.di[s1+1] = l;
 		reg.ft[s1] = FPd;
 	}
 	if(reg.ft[s2] != FPd) {
 		if(reg.ft[s2] == FPs && s2 != 24)
 			ifmt(s2);
 		l = reg.di[s2];
-		reg.di[s2] = reg.di[s2+1]; 
-		reg.di[s2+1] = l; 
+		reg.di[s2] = reg.di[s2+1];
+		reg.di[s2+1] = l;
 		reg.ft[s2] = FPd;
 	}
 	reg.ft[dst] = FPd;
@@ -158,8 +158,8 @@ Iswc1(ulong inst)
 	ert = rt&~1;
 	if(reg.ft[ert] == FPd) {
 		l = reg.di[ert];
-		reg.di[ert] = reg.di[ert+1]; 
-		reg.di[ert+1] = l; 
+		reg.di[ert] = reg.di[ert+1];
+		reg.di[ert+1] = l;
 		reg.ft[ert] = FPmemory;
 	}
 	putmem_w(reg.r[rb]+off, reg.di[rt]);
@@ -180,12 +180,12 @@ Ifsub(ulong ir)
 		fmt = 's';
 		floatop(fd, fs, ft);
 		reg.fl[fd] = reg.fl[fs] - reg.fl[ft];
-		break;	
+		break;
 	case 1: /* double */
 		fmt = 'd';
 		doubop(fd, fs, ft);
 		reg.fd[fd>>1] = reg.fd[fs>>1] - reg.fd[ft>>1];
-		break;	
+		break;
 	case 4:
 		fmt = 'w';
 		reg.di[fd] = reg.di[fs] - reg.di[ft];
@@ -210,12 +210,12 @@ Ifmov(ulong ir)
 		fmt = 's';
 		reg.fl[fd] = reg.fl[fs];
 		reg.ft[fd] = reg.ft[fs];
-		break;	
+		break;
 	case 1: /* double */
 		fmt = 'd';
 		reg.fd[fd>>1] = reg.fd[fs>>1];
 		reg.ft[fd] = reg.ft[fs];
-		break;	
+		break;
 	case 4:
 		fmt = 'w';
 		reg.di[fd] = reg.di[fs];
@@ -244,7 +244,7 @@ Ifabs(ulong ir)
 			reg.fl[fd] = -reg.fl[fs];
 		else
 			reg.fl[fd] = reg.fl[fs];
-		break;	
+		break;
 	case 1: /* double */
 		fmt = 'd';
 		doubop(fd, fs, fs);
@@ -252,7 +252,7 @@ Ifabs(ulong ir)
 			reg.fd[fd>>1] = -reg.fd[fs>>1];
 		else
 			reg.fd[fd>>1] = reg.fd[fs>>1];
-		break;	
+		break;
 	case 4:
 		fmt = 'w';
 		if((long)reg.di[fs] < 0)
@@ -280,12 +280,12 @@ Ifneg(ulong ir)
 		fmt = 's';
 		floatop(fd, fs, fs);
 		reg.fl[fd] = -reg.fl[fs];
-		break;	
+		break;
 	case 1: /* double */
 		fmt = 'd';
 		doubop(fd, fs, fs);
 		reg.fd[fd>>1] = -reg.fd[fs>>1];
-		break;	
+		break;
 	case 4:
 		fmt = 'w';
 		reg.di[fd] = -reg.di[fs];
@@ -311,12 +311,12 @@ Icvtd(ulong ir)
 		floatop(fs, fs, fs);
 		reg.fd[fd>>1] = reg.fl[fs];
 		reg.ft[fd] = FPd;
-		break;	
+		break;
 	case 1: /* double */
 		fmt = 'd';
 		doubop(fd, fs, fs);
 		reg.fd[fd>>1] = reg.fd[fs>>1];
-		break;	
+		break;
 	case 4:
 		fmt = 'w';
 		reg.fd[fd>>1] = (long)reg.di[fs];
@@ -342,13 +342,13 @@ Icvts(ulong ir)
 		fmt = 's';
 		floatop(fd, fs, fs);
 		reg.fl[fd] = reg.fl[fs];
-		break;	
+		break;
 	case 1: /* double */
 		fmt = 'd';
 		doubop(fs, fs, fs);
 		reg.fl[fd] = reg.fd[fs>>1];
 		reg.ft[fd] = FPs;
-		break;	
+		break;
 	case 4:
 		fmt = 'w';
 		reg.fl[fd] = (long)reg.di[fs];
@@ -375,12 +375,12 @@ Icvtw(ulong ir)
 		fmt = 's';
 		floatop(fs, fs, fs);
 		v = reg.fl[fs];
-		break;	
+		break;
 	case 1: /* double */
 		fmt = 'd';
 		doubop(fs, fs, fs);
 		v = reg.fd[fs>>1];
-		break;	
+		break;
 	case 4:
 		fmt = 'w';
 		v = reg.di[fs];
@@ -407,12 +407,12 @@ Ifadd(ulong ir)
 		fmt = 's';
 		floatop(fd, fs, ft);
 		reg.fl[fd] = reg.fl[fs] + reg.fl[ft];
-		break;	
+		break;
 	case 1: /* double */
 		fmt = 'd';
 		doubop(fd, fs, ft);
 		reg.fd[fd>>1] = reg.fd[fs>>1] + reg.fd[ft>>1];
-		break;	
+		break;
 	case 4:
 		fmt = 'w';
 		reg.di[fd] = reg.di[fs] + reg.di[ft];
@@ -437,12 +437,12 @@ Ifmul(ulong ir)
 		fmt = 's';
 		floatop(fd, fs, ft);
 		reg.fl[fd] = reg.fl[fs] * reg.fl[ft];
-		break;	
+		break;
 	case 1: /* double */
 		fmt = 'd';
 		doubop(fd, fs, ft);
 		reg.fd[fd>>1] = reg.fd[fs>>1] * reg.fd[ft>>1];
-		break;	
+		break;
 	case 4:
 		fmt = 'w';
 		reg.di[fd] = reg.di[fs] * reg.di[ft];
@@ -467,12 +467,12 @@ Ifdiv(ulong ir)
 		fmt = 's';
 		floatop(fd, fs, ft);
 		reg.fl[fd] = reg.fl[fs] / reg.fl[ft];
-		break;	
+		break;
 	case 1: /* double */
 		fmt = 'd';
 		doubop(fd, fs, ft);
 		reg.fd[fd>>1] = reg.fd[fs>>1] / reg.fd[ft>>1];
-		break;	
+		break;
 	case 4:
 		fmt = 'w';
 		reg.di[fd] = reg.di[fs] / reg.di[ft];
@@ -629,7 +629,7 @@ Ifcmp(ulong ir)
 			break;
 		}
 		print("vi: bad in fcmp");
-		break;	
+		break;
 	case 1: /* double */
 		fmt = 'd';
 		doubop(fs, fs, ft);
@@ -650,7 +650,7 @@ Ifcmp(ulong ir)
 			break;
 		}
 		print("vi: bad in fcmp");
-		break;	
+		break;
 	case 4:
 		fmt = 'w';
 		if(reg.di[fs] == reg.di[ft]) {
@@ -678,43 +678,43 @@ Ifcmp(ulong ir)
 		if(trace)
 			itrace("c.un.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_U)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		break;
 	case 2:
 		if(trace)
 			itrace("c.eq.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_E)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		break;
 	case 3:
 		if(trace)
 			itrace("c.ueq.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_E || fc == FP_U)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		break;
  	case 4:
 		if(trace)
 			itrace("c.lt.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_L)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		break;
 	case 5:
 		if(trace)
 			itrace("c.ult.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_L || fc == FP_U)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		break;
 	case 6:
 		if(trace)
 			itrace("c.le.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_E || fc == FP_L)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		break;
 	case 7:
 		if(trace)
 			itrace("c.ule.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_E || fc == FP_L || fc == FP_U)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		break;
 	case 8:
 		if(trace)
@@ -734,7 +734,7 @@ Ifcmp(ulong ir)
 		if(trace)
 			itrace("c.seq.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_E)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		if(fc == FP_U)
 			inval(ir);
 		break;
@@ -742,7 +742,7 @@ Ifcmp(ulong ir)
 		if(trace)
 			itrace("c.ngl.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_E || fc == FP_U)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		if(fc == FP_U)
 			inval(ir);
 		break;
@@ -750,7 +750,7 @@ Ifcmp(ulong ir)
 		if(trace)
 			itrace("c.lt.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_L)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		if(fc == FP_U)
 			inval(ir);
 		break;
@@ -758,7 +758,7 @@ Ifcmp(ulong ir)
 		if(trace)
 			itrace("c.nge.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_L || fc == FP_U)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		if(fc == FP_U)
 			inval(ir);
 		break;
@@ -766,7 +766,7 @@ Ifcmp(ulong ir)
 		if(trace)
 			itrace("c.le.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_E || fc == FP_L)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		if(fc == FP_U)
 			inval(ir);
 		break;
@@ -774,7 +774,7 @@ Ifcmp(ulong ir)
 		if(trace)
 			itrace("c.ngt.%c\tf%d,f%d", fmt, fs, ft);
 		if(fc == FP_E || fc == FP_L || fc == FP_U)
-			reg.fpsr |= FP_CBIT;	
+			reg.fpsr |= FP_CBIT;
 		if(fc == FP_U)
 			inval(ir);
 		break;

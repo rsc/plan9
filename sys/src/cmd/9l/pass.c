@@ -126,7 +126,7 @@ dodata(void)
 			if(!strcmp(s->name, "setSB"))
 				continue;
 			/* size should be 19 max */
-			if(strlen(s->name) >= 10)	/* has loader address */ 
+			if(strlen(s->name) >= 10)	/* has loader address */
 				sprint(literal, "$%p.%llux", s, p->from.offset);
 			else
 				sprint(literal, "$%s.%d.%llux", s->name, s->version, p->from.offset);

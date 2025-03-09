@@ -1547,4 +1547,3 @@ accounttime(void)
 	n = (nrdy+n)*1000;
 	m->load = (m->load*(HZ-1)+n)/HZ;
 }
-
