@@ -560,7 +560,7 @@ loopoput(Loop *lb, Link *link, Block *volatile bp)
 	if(BLEN(bp) < lb->minmtu)
 		bp = adjustblock(bp, lb->minmtu);
 	poperror();
-	ptime(bp->rp, todget(nil));
+	ptime(bp->rp, todget(nil, nil));
 
 	link->packets++;
 	link->bytes += n;
@@ -577,7 +577,7 @@ looper(Loop *lb)
 	vlong t;
 	int chan;
 
-	t = todget(nil);
+	t = todget(nil, nil);
 	for(chan = 0; chan < 2; chan++)
 		pushlink(&lb->link[chan], t);
 }

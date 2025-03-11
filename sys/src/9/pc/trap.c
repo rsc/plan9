@@ -696,7 +696,7 @@ syscall(Ureg* ureg)
 		if(up->syscalltrace)
 			free(up->syscalltrace);
 		up->syscalltrace = nil;
-		startns = todget(nil);
+		startns = todget(nil, nil);
 	}
 
  	if(scallnr == RFORK){
@@ -753,7 +753,7 @@ syscall(Ureg* ureg)
 	ureg->ax = ret;
 
 	if(up->procctl == Proc_tracesyscall){
-		stopns = todget(nil);
+		stopns = todget(nil, nil);
 		up->procctl = Proc_stopme;
 		sysretfmt(scallnr, (va_list)(sp+BY2WD), ret, startns, stopns);
 		s = splhi();

@@ -279,7 +279,7 @@ _proctrace(Proc* p, Tevent etype, vlong ts)
 	te->pid = p->pid;
 	te->etype = etype;
 	if (ts == 0)
-		te->time = todget(nil);
+		te->time = todget(nil, nil);
 	else
 		te->time = ts;
 	tproduced++;

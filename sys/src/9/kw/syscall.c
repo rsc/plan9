@@ -229,7 +229,7 @@ syscall(Ureg* ureg)
 
 	up->nerrlab = 0;
 	ret = -1;
-	startns = todget(nil);
+	startns = todget(nil, nil);
 	if(!waserror()){
 		if(scallnr >= nsyscall){
 			pprint("bad sys call number %d pc %#lux\n",
@@ -271,7 +271,7 @@ syscall(Ureg* ureg)
 	ureg->r0 = ret;
 
 	if(up->procctl == Proc_tracesyscall){
-		stopns = todget(nil);
+		stopns = todget(nil, nil);
 		up->procctl = Proc_stopme;
 		sysretfmt(scallnr, (va_list)(sp+BY2WD), ret, startns, stopns);
 		s = splhi();

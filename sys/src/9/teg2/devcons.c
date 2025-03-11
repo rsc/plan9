@@ -1193,7 +1193,7 @@ rand(void)
 static uvlong uvorder = 0x0001020304050607ULL;
 
 static uchar*
-le2vlong(vlong *to, uchar *f)
+be2vlong(vlong *to, uchar *f)
 {
 	uchar *t, *o;
 	int i;
@@ -1206,7 +1206,7 @@ le2vlong(vlong *to, uchar *f)
 }
 
 static uchar*
-vlong2le(uchar *t, vlong from)
+vlong2be(uchar *t, vlong from)
 {
 	uchar *f, *o;
 	int i;
@@ -1221,7 +1221,7 @@ vlong2le(uchar *t, vlong from)
 static long order = 0x00010203;
 
 static uchar*
-le2long(long *to, uchar *f)
+be2long(long *to, uchar *f)
 {
 	uchar *t, *o;
 	int i;
@@ -1231,19 +1231,6 @@ le2long(long *to, uchar *f)
 	for(i = 0; i < sizeof(long); i++)
 		t[o[i]] = f[i];
 	return f+sizeof(long);
-}
-
-static uchar*
-long2le(uchar *t, long from)
-{
-	uchar *f, *o;
-	int i;
-
-	f = (uchar*)&from;
-	o = (uchar*)&order;
-	for(i = 0; i < sizeof(long); i++)
-		t[i] = f[o[i]];
-	return t+sizeof(long);
 }
 
 char *Ebadtimectl = "bad time control";
@@ -1256,19 +1243,20 @@ char *Ebadtimectl = "bad time control";
 static int
 readtime(ulong off, char *buf, int n)
 {
-	vlong	nsec, ticks;
+	vlong	nsec, ticks, mono;
 	long sec;
-	char str[7*NUMSIZE];
+	char str[9*NUMSIZE];
 
-	nsec = todget(&ticks);
+	nsec = todget(&ticks, &mono);
 	if(fasthz == 0LL)
 		fastticks((uvlong*)&fasthz);
 	sec = nsec/1000000000ULL;
-	snprint(str, sizeof(str), "%*lud %*llud %*llud %*llud ",
+	snprint(str, sizeof(str), "%*lud %*llud %*llud %*llud %*llud ",
 		NUMSIZE-1, sec,
 		VLNUMSIZE-1, nsec,
 		VLNUMSIZE-1, ticks,
-		VLNUMSIZE-1, fasthz);
+		VLNUMSIZE-1, fasthz,
+		VLNUMSIZE-1, mono);
 	return readstr(off, buf, n, str);
 }
 
@@ -1302,23 +1290,27 @@ static int
 readbintime(char *buf, int n)
 {
 	int i;
-	vlong nsec, ticks;
+	vlong nsec, ticks, mono;
 	uchar *b = (uchar*)buf;
 
 	i = 0;
 	if(fasthz == 0LL)
 		fastticks((uvlong*)&fasthz);
-	nsec = todget(&ticks);
+	nsec = todget(&ticks, &mono);
+	if(n >= 4*sizeof(uvlong)){
+		vlong2be(b+3*sizeof(uvlong), mono);
+		i += sizeof(uvlong);
+	}
 	if(n >= 3*sizeof(uvlong)){
-		vlong2le(b+2*sizeof(uvlong), fasthz);
+		vlong2be(b+2*sizeof(uvlong), fasthz);
 		i += sizeof(uvlong);
 	}
 	if(n >= 2*sizeof(uvlong)){
-		vlong2le(b+sizeof(uvlong), ticks);
+		vlong2be(b+sizeof(uvlong), ticks);
 		i += sizeof(uvlong);
 	}
 	if(n >= 8){
-		vlong2le(b, nsec);
+		vlong2be(b, nsec);
 		i += sizeof(vlong);
 	}
 	return i;
@@ -1343,20 +1335,20 @@ writebintime(char *buf, int n)
 	case 'n':
 		if(n < sizeof(vlong))
 			error(Ebadtimectl);
-		le2vlong(&delta, p);
+		be2vlong(&delta, p);
 		todset(delta, 0, 0);
 		break;
 	case 'd':
 		if(n < sizeof(vlong)+sizeof(long))
 			error(Ebadtimectl);
-		p = le2vlong(&delta, p);
-		le2long(&period, p);
+		p = be2vlong(&delta, p);
+		be2long(&period, p);
 		todset(-1, delta, period);
 		break;
 	case 'f':
 		if(n < sizeof(uvlong))
 			error(Ebadtimectl);
-		le2vlong(&fasthz, p);
+		be2vlong(&fasthz, p);
 		if(fasthz <= 0)
 			error(Ebadtimectl);
 		todsetfreq(fasthz);

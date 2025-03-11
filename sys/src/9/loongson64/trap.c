@@ -870,7 +870,7 @@ sctracesetup(ulong scallnr, uintptr sp, uintptr pc, vlong *startnsp)
 		if(up->syscalltrace)
 			free(up->syscalltrace);
 		up->syscalltrace = nil;
-		*startnsp = todget(nil);
+		*startnsp = todget(nil, nil);
 	}
 }
 
@@ -882,7 +882,7 @@ sctracefinish(ulong scallnr, uintptr sp, uintptr ret, vlong startns)
 	if(up->procctl == Proc_tracesyscall){
 		up->procctl = Proc_stopme;
 		sysretfmt(scallnr, (va_list)sp, ret,
-			startns, todget(nil));
+			startns, todget(nil, nil));
 		s = splhi();
 		procctl(up);
 		splx(s);

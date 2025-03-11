@@ -349,7 +349,7 @@ contindma(void)
 	b = audio.current;
 	if(b){
 		audio.totcount += Bufsize;
-		audio.tottime = todget(nil);
+		audio.tottime = todget(nil, nil);
 	}
 	if(audio.amode == Aread) {
 		if(b){

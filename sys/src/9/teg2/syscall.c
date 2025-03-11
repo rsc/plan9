@@ -237,7 +237,7 @@ syscall(Ureg* ureg)
 
 	up->nerrlab = 0;
 	ret = -1;
-	startns = todget(nil);
+	startns = todget(nil, nil);
 
 	l1cache->wb();			/* system is more stable with this */
 	if(!waserror()){
@@ -281,7 +281,7 @@ syscall(Ureg* ureg)
 	ureg->r0 = ret;
 
 	if(up->procctl == Proc_tracesyscall){
-		stopns = todget(nil);
+		stopns = todget(nil, nil);
 		up->procctl = Proc_stopme;
 		sysretfmt(scallnr, (va_list)(sp+BY2WD), ret, startns, stopns);
 		s = splhi();

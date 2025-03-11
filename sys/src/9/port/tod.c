@@ -44,7 +44,9 @@ struct {
 	uvlong	udivider;	/* ticks = (µdivider*µs)>>31 */
 	vlong	hz;		/* frequency of fast clock */
 	vlong	last;		/* last reading of fast clock */
-	vlong	off;		/* offset from epoch to last */
+	vlong	off;		/* offset from epoch to last (ns) */
+	vlong	monolast;	/* last reading of fast clocks for monotonic time */
+	vlong	monooff;	/* offset from 0 to monolast (ns) */
 	vlong	lasttime;	/* last return value from todget */
 	vlong	delta;	/* add 'delta' each slow clock tick from sstart to send */
 	ulong	sstart;		/* ... */
@@ -61,9 +63,27 @@ todinit(void)
 	ilock(&tod);
 	tod.init = 1;			/* prevent reentry via fastticks */
 	tod.last = fastticks((uvlong *)&tod.hz);
+	tod.monolast = tod.last;
 	iunlock(&tod);
 	todsetfreq(tod.hz);
 	addclock0link(todfix, 100);
+}
+
+/*
+ *  return monotonic ns; tod must be locked
+ */
+static vlong
+todmono(vlong ticks)
+{
+	uvlong x;
+	vlong diff;
+
+	if(tod.hz == 0) /* called from first todsetfreq */
+		return 0;
+	diff = ticks - tod.monolast;
+	mul64fract(&x, diff, tod.multiplier);
+	x += tod.monooff;
+	return x;
 }
 
 /*
@@ -72,9 +92,14 @@ todinit(void)
 void
 todsetfreq(vlong f)
 {
+	vlong ticks;
+
 	if (f <= 0)
 		panic("todsetfreq: freq %lld <= 0", f);
 	ilock(&tod);
+	ticks = fastticks(nil);
+	tod.monooff = todmono(ticks);
+	tod.monolast = ticks;
 	tod.hz = f;
 
 	/* calculate multiplier for time conversion */
@@ -125,10 +150,10 @@ todset(vlong t, vlong delta, int n)
  *  get time of day
  */
 vlong
-todget(vlong *ticksp)
+todget(vlong *ticksp, vlong *monop)
 {
 	uvlong x;
-	vlong ticks, diff;
+	vlong ticks, diff, mono;
 	ulong t;
 
 	if(!tod.init)
@@ -159,16 +184,21 @@ todget(vlong *ticksp)
 	mul64fract(&x, diff, tod.multiplier);
 	x += tod.off;
 
-	/* time can't go backwards */
+	/* time can't go backwards (except when /dev/[bin]time is written) */
 	if(x < tod.lasttime)
 		x = tod.lasttime;
 	else
 		tod.lasttime = x;
 
+	mono = 0;
+	if(monop != nil)
+		mono = todmono(ticks);
 	iunlock(&tod);
 
 	if(ticksp != nil)
 		*ticksp = ticks;
+	if(monop != nil)
+		*monop = mono;
 
 	return x;
 }
@@ -219,7 +249,7 @@ if(x > 30000000000ULL) iprint("todfix %llud\n", x);
 long
 seconds(void)
 {
-	return (vlong)todget(nil) / TODFREQ;
+	return (vlong)todget(nil, nil) / TODFREQ;
 }
 
 uvlong
