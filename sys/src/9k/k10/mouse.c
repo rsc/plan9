@@ -22,8 +22,6 @@ enum
 	MousePS2=	2,
 };
 
-extern int mouseshifted;
-
 static QLock mousectlqlock;
 static int mousetype;
 static int intellimouse;
@@ -90,16 +88,13 @@ ps2mouseputc(int c, int shift)
 {
 	static short msg[4];
 	static int nb;
-	static uchar b[] = {0, 1, 4, 5, 2, 3, 6, 7, 0, 1, 2, 3, 2, 3, 6, 7 };
+	static uchar b[] = {0, 1, 4, 5, 2, 3, 6, 7};
 	static ulong lasttick;
 	ulong m;
 	int buttons, dx, dy;
 
-	/*
-	 * non-ps2 keyboards might not set shift
-	 * but still set mouseshifted.
-	 */
-	shift |= mouseshifted;
+	USED(shift);
+
 	/*
 	 * Resynchronize in stream with timing; see comment above.
 	 */
@@ -126,7 +121,7 @@ ps2mouseputc(int c, int shift)
 		if(msg[0] & 0x20)
 			msg[2] |= 0xFF00;
 
-		buttons = b[(msg[0]&7) | (shift ? 8 : 0)];
+		buttons = b[msg[0]&7];
 		if(intellimouse && packetsize==4){
 			if((msg[3]&0xc8) == 0x08){
 				/* first byte of 3-byte packet */
