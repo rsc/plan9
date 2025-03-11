@@ -226,7 +226,7 @@ syscall(int scallnr, Ureg* ureg)
 	startns = 0;
 
 	if(up->trace && (pt = proctrace) != nil)
-		pt(up, STrap, todget(nil), STrapSC|scallnr);
+		pt(up, STrap, todget(nil, nil), STrapSC|scallnr);
 
 	if(up->procctl == Proc_tracesyscall){
 		/*
@@ -245,7 +245,7 @@ syscall(int scallnr, Ureg* ureg)
 		if(up->syscalltrace)
 			free(up->syscalltrace);
 		up->syscalltrace = nil;
-		startns = todget(nil);
+		startns = todget(nil, nil);
 	}
 
 	if(scallnr == RFORK)
@@ -297,7 +297,7 @@ syscall(int scallnr, Ureg* ureg)
 	ureg->ax = ar0.p;
 
 	if(up->procctl == Proc_tracesyscall){
-		stopns = todget(nil);
+		stopns = todget(nil, nil);
 		up->procctl = Proc_stopme;
 		sysretfmt(scallnr, (va_list)(sp+BY2V), &ar0, startns, stopns);
 		s = splhi();

@@ -82,7 +82,7 @@ lock(Lock *l)
 				 */
 				print("inversion %#p pc %#p proc %d held by pc %#p proc %d\n",
 					l, pc, up ? up->pid : 0, l->pc, l->p ? l->p->pid : 0);
-				up->edf->d = todget(nil);	/* yield to process with lock */
+				up->edf->d = todget(nil, nil);	/* yield to process with lock */
 			}
 			if(i++ > 100000000){
 				i = 0;

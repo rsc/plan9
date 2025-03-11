@@ -65,7 +65,7 @@ _ptrace(Proc *p, int etype, vlong ts, vlong arg)
 		return;
 	}
 	if(ts == 0)
-		ts = todget(nil);
+		ts = todget(nil, nil);
 	i = (tproduced&ntmask) * PTsize;
 	te = &tevents[i];
 	PBIT32(te, (int)p->pid);
