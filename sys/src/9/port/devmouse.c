@@ -645,7 +645,7 @@ int ob;
 	 */
 	if(!mouse.qfull && lastb != b) {	/* add to ring */
 		if(kdebug)
-			print("mousequeue %d %d %d %d\n", mouse.xy.x, mouse.xy.y, mouse.buttons, mouse.msec);
+			print("mousequeue %d %d %d %lud\n", mouse.xy.x, mouse.xy.y, mouse.buttons, mouse.msec);
 		mouse.queue[mouse.wi] = mouse.Mousestate;
 		if(++mouse.wi == nelem(mouse.queue))
 			mouse.wi = 0;
