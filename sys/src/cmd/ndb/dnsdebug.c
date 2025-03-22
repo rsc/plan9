@@ -16,6 +16,7 @@ static char *servername;
 static RR *serverrr;
 static RR *serveraddrs;
 
+int	customserver;
 char	*dbfile;
 int	debug;
 uchar	ipaddr[IPaddrlen];	/* my ip address */
@@ -34,8 +35,8 @@ void	docmd(int, char**);
 void	doquery(char*, char*);
 void	preloadserveraddrs(void);
 int	prettyrrfmt(Fmt*);
-int	setserver(char*);
-void	squirrelserveraddrs(void);
+int	setserver(char*, char*);
+void	squirrelserveraddrs(char*);
 
 void
 usage(void)
@@ -79,7 +80,7 @@ main(int argc, char *argv[])
 	opendatabase();
 
 	if(cfg.resolver)
-		squirrelserveraddrs();
+		squirrelserveraddrs("");
 
 	debug = 1;
 
@@ -298,7 +299,7 @@ getdnsservers(char *name, int class)
 }
 
 void
-squirrelserveraddrs(void)
+squirrelserveraddrs(char *name)
 {
 	int v4;
 	char *attr;
@@ -311,7 +312,7 @@ squirrelserveraddrs(void)
 	if(serveraddrs)
 		rrfreelist(serveraddrs);
 	serveraddrs = nil;
-	rr = getdnsservers("", Cin);
+	rr = getdnsservers(name, Cin);
 	l = &serveraddrs;
 	for(rp = rr; rp != nil; rp = rp->next){
 		attr = ipattr(rp->host->name);
@@ -352,7 +353,7 @@ preloadserveraddrs(void)
 }
 
 int
-setserver(char *server)
+setserver(char *server, char *name)
 {
 	if(servername != nil){
 		free(servername);
@@ -362,7 +363,7 @@ setserver(char *server)
 	if(server == nil || *server == 0)
 		return 0;
 	servername = strdup(server);
-	squirrelserveraddrs();
+	squirrelserveraddrs(name);
 	if(serveraddrs == nil){
 		print("can't resolve %s\n", servername);
 		cfg.resolver = 0;
@@ -454,10 +455,13 @@ docmd(int n, char **f)
 	tmpsrv = 0;
 
 	if(*f[0] == '@') {
-		if(setserver(f[0]+1) < 0)
+		if(setserver(f[0]+1, "") < 0)
 			return;
 
 		switch(n){
+		default:
+			customserver = *(f[0]+1) != '\0';
+			break;
 		case 3:
 			type = f[2];
 			/* fall through */
@@ -479,8 +483,10 @@ docmd(int n, char **f)
 	if(name == nil)
 		return;
 
+	if(!customserver && !tmpsrv)
+		squirrelserveraddrs(name);
 	doquery(name, type);
 
 	if(tmpsrv)
-		setserver("");
+		setserver("", "");
 }
