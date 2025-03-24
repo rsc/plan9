@@ -737,10 +737,12 @@ db2cache(int doit)
 
 			/* remove old entries */
 			dnageall(1);
-		} else
+		} else {
+			dnpurge();
 			/* read all the soa's to get database defaults */
 			for(ndb = db; ndb; ndb = ndb->next)
 				dbfile2area(ndb);
+		}
 
 		doit = 0;
 		lastyoungest = youngest;
