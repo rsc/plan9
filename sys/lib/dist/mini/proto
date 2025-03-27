@@ -1,0 +1,354 @@
+LICENSE
+LICENSE.afpl
+LICENSE.gpl
+LICENSE.lucida
+LICENSE.old
+NOTICE
+NOTICE.old
+README
+README.md
+$cputype
+	bin
+		8a
+		8c
+		8l
+		acid
+		acme
+		ar
+		ascii
+		auth
+			factotum
+			login
+			newns
+			none
+			secstore
+		aux
+#			clog
+			isvmware
+			listen
+			listen1
+			mouse
+			realemu
+			reboot
+			samterm
+			timesync
+			usage
+			vga
+			vmware
+			vmwarefs
+			write
+			zerotrunc
+		awd
+		awk
+		basename
+		bc
+		bind
+		bmp
+		bunzip2
+		bzip2
+		cal
+		calendar
+		cat
+		cfs
+		chgrp
+		chmod
+		cleanname
+		clock
+		col
+		colors
+		comm
+		compress
+		con
+		cp
+		cpp
+		cpu
+		date
+		db
+		dc
+		dd
+		diff
+		du
+		echo
+		ed
+		exportfs
+		faces
+		factor
+		file
+		fmt
+		fortune
+		freq
+		ftpfs
+		games
+			4s
+			5s
+		grep
+		gunzip
+		gzip
+		hget
+		hoc
+		idiff
+		ip
+#			6in4
+			dhcpclient
+#			gping
+#			httpd
+#				httpd
+#			httpfile
+			ipconfig
+			ping
+			traceroute
+		join
+		jpg
+		lock
+		look
+		ls
+		mc
+		md5sum
+		mk
+		mkdir
+		mntgen
+		mount
+		mtime
+		mug
+		mv
+		ndb
+			cs
+			csquery
+			dns
+			dnsquery
+			dnstcp
+			inform
+			ipquery
+			mkdb
+			mkhash
+			mkhosts
+			query
+		netstat
+		news
+		nm
+		nntpfs
+		ns
+		p
+		page
+		pbd
+		pipefile
+		plumb
+		plumber
+		png
+		pr
+		primes
+		ps
+		pwd
+		ramfs
+		rc
+		read
+		rio
+		rm
+		rx
+		sam
+		seconds
+		sed
+		seq
+		sha1sum
+		size
+		sleep
+		snoopy
+		sort
+		split
+		srv
+		srvfs
+		srvold9p
+		stats
+		strings
+		strip
+		sum
+		syscall
+		tail
+		tar
+		tee
+		test
+		time
+		tlsclient
+		touch
+		tr
+		unicode
+		uniq
+		units
+		unmount
+		unvac
+		unzip
+		upas
+			fs
+			nedmail
+		vac
+		vacfs
+		vncs
+		vncv
+		wc
+		xd
+		yacc
+		zip
+	include
+		u.h
+		ureg.h
+	init
+	lib
+	mkfile
+acme
+	acid
+		+
+	bin
+		386
+			+
+		Battery
+		Mail
+		README
+		adiff
+		agrep
+		aspell
+		guide
+		ind
+		new
+		quote
+#			source
+#				+
+		unind
+		wnew
+	mail
+		+
+	mkfile
+adm
+	timezone
+		+
+bin
+boot
+dev
+env
+fd
+lib
+	areacodes
+	bunny.bit
+	constitution
+	dicewords
+	face
+		+
+	namespace
+	font
+		bit
+#			lucida
+#				+
+			lucidasans
+				+
+#			lucm
+#				+
+#			misc
+#				+
+			pelm
+				+
+	keyboard
+	ndb
+		local
+		common
+	units
+	vgadb
+mail
+	box
+		glenda
+			mbox
+	fs
+	tmp
+mnt
+	acme
+	apm
+	cd
+	cons
+		cons
+		consctl
+	consoles
+	doc
+	exportfs
+		*
+	factotum
+	lp
+	plumb
+	rdb
+	temp
+	term
+	vmware
+	web
+	webcookies
+	wiki
+	wsys
+n
+net
+net.alt
+proc
+rc
+	+
+root
+srv
+sys
+	include
+		*
+	lib
+		acid
+			*
+		man
+		mimetype
+		newuser
+		plumb
+			+
+		samsave
+	log
+		cs	666 sys sys	/sys/lib/dist/pc/emptyfile
+		dns	666 sys sys	/sys/lib/dist/pc/emptyfile
+		mail	666 sys sys	/sys/lib/dist/pc/emptyfile
+		smtp	666 sys sys	/sys/lib/dist/pc/emptyfile
+		smtpd	666 sys sys	/sys/lib/dist/pc/emptyfile
+		listen	666 sys sys	/sys/lib/dist/pc/emptyfile
+		ipboot	666 sys sys	/sys/lib/dist/pc/emptyfile
+	man
+		fonts
+		1
+			*
+		2
+			*
+		3
+			*
+		4
+			*
+		5
+			*
+		6
+			*
+		7
+			*
+		8
+			*
+	src
+		mkfile
+		mkfile.proto
+		cmd
+			mkfile
+			mklib
+			mkmany
+			mkone
+			mksyslib
+tmp
+usr
+	glenda
+		bin
+			$cputype
+			rc
+				riostart
+				screensize
+		lib
+			acme.dump
+			acme.dump.small
+			first.window
+			newstime
+			profile
+			plumbing
+		readme.acme
+		readme.rio
+		tmp

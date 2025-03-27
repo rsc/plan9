@@ -1,0 +1,78 @@
+all:V: /root/boot/mini.raw
+
+boot.raw:DQ: proto
+	rfork n
+	bind -b  /sys/lib/dist/bin/$objtype /bin
+	rm -rf boot
+	mkdir boot
+	bind /dev/null /sys/log/timesync
+	# make files writable for now.
+	sed 's!d000!d775!;s!000!664!;s!555!775!;s!444!664!' proto >proto.cp
+	disk/mkfs -a proto.cp | disk/mkext -d boot
+	@{
+		cd boot/386
+		strip init
+		cd bin
+		strip * */* >[2]/dev/null || status=''
+	}
+	sed 's!/.*!!' proto >proto.cp
+	disk/mkfs -a -s boot proto.cp | tee >{wc -c >[1=2]} |
+		touchfs 9229824000 >$target
+
+boot.bflz:DQ: boot.raw
+	rfork n
+	bind -b  /sys/lib/dist/bin/$objtype /bin
+	ls -l boot.raw
+	time bflz -n 32 <boot.raw >boot.bflz
+	ls -l boot.bflz
+
+boot.gz:DQ: boot.bflz
+	rfork n
+	bind -b  /sys/lib/dist/bin/$objtype /bin
+	time gzip -9 <boot.bflz >$target
+	ls -l $target
+
+root.gz:DQ: boot.gz
+	{
+		sz=`{ls -l boot.gz | awk '{print $6}'}
+		echo gzfilesystem $sz
+		cat boot.gz
+		dd -if /dev/zero -bs 1024 -count 1 >[2]/dev/null
+	} >$target
+	ls -l $target
+
+9pcgz.gz: /386/9pcgz
+	cp /386/9pcgz 9pcgz
+	strip 9pcgz
+	gzip -9 < 9pcgz > 9pcgz.gz
+	rm 9pcgz
+
+9load: /386/9load
+	cp $prereq $target
+
+/root/boot/mini.raw:D: 9load plan9.ini 9pcgz.gz root.gz
+	rfork n
+	sz=`{ls -l root.gz | awk '{print $6}'}
+	mb=`{hoc -e 'int('$sz'/1000000)+4'}
+	echo mb $mb
+	dd -bs 1000000 -if /dev/zero -of $target -count $mb
+	disk/partfs $target
+	disk/mbr -m /386/mbr /dev/sdXX/data
+	echo 'a p1 0 $
+	t p1 plan9
+	A p1
+	w
+	' | disk/fdisk /dev/sdXX/data
+	cat /dev/sdXX/ctl
+	ls -l /dev/sdXX
+	echo 'a 9fat 0 2m
+	a gzroot . $
+	w
+	' | disk/prep /dev/sdXX/plan9
+	ls -l /dev/sdXX
+	disk/format -b /386/pbslba -d -r 2 /dev/sdXX/9fat 9load plan9.ini 9pcgz.gz
+	ls -l /dev/sdXX/gzroot root.gz
+	cp root.gz /dev/sdXX/gzroot
+
+clean:V:
+	rm -rf boot boot.raw boot.bflz boot.gz root.gz 9load 9loaddebug proto.cp
