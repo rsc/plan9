@@ -713,6 +713,8 @@ stat2dir(char *path, struct stat *st, Dir *d)
 	d->atime = st->st_atime;
 	d->mtime = st->st_mtime;
 	d->length = st->st_size;
+	if(d->mode&DMDIR)
+		d->length = 0;
 
 	d->uid = (u = uid2user(st->st_uid)) ? u->name : "???";
 	d->gid = (u = gid2user(st->st_gid)) ? u->name : "???";
