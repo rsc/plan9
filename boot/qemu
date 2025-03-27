@@ -4,9 +4,14 @@ set -e
 cd $(dirname $0)
 
 pxe=pxeboot.raw
+vmdisk=false
 case "$1" in
 -pxenew)
 	pxe=pxeboot.raw.new
+	shift
+	;;
+-mini)
+	pxe=mini.raw
 	shift
 esac
 
@@ -18,10 +23,8 @@ case "$#" in
 	exit 1
 esac
 
-if [ ! -x ../sys/src/cmd/unix/u9fs/u9fs ]; then
-	echo '# building u9fs' >&2
-	make -C ../sys/src/cmd/unix/u9fs
-fi
+echo '# building u9fs' >&2
+make -C ../sys/src/cmd/unix/u9fs
 
 u9fs="guestfwd=tcp:10.0.2.1:564-cmd:../sys/src/cmd/unix/u9fs/u9fs -a none -u $USER .."
 tftp='tftp=..'
