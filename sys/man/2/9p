@@ -46,6 +46,8 @@ typedef struct Srv {
 	char*	(*walk1)(Fid *fid, char *name, Qid *qid);
 	char*	(*clone)(Fid *oldfid, Fid *newfid);
 
+	int		(*hasperm)(File *file, char *user, int access);
+
 	void		(*destroyfid)(Fid *fid);
 	void		(*destroyreq)(Req *r);
 	void		(*end)(Srv *s);
@@ -685,6 +687,7 @@ has been sent.
 .PP
 .IR Destroyfid ,
 .IR destroyreq ,
+.IR hasperm ,
 and
 .I end
 are auxiliary functions, not called in direct response to 9P requests.
@@ -714,6 +717,23 @@ and other outstanding pointers to it have been closed),
 is called to allow the program to dispose of the
 .IB r -> aux
 pointer.
+.TP
+.I Hasperm
+When using file trees, the 9P service loop checks permission for various requests
+before invoking the provided request handlers.
+By default, it uses the global function
+.IR hasperm ,
+which assumes that each group contains only the 
+user of the same name.
+If the 
+.BR Srv 's
+.I hasperm
+field is non-nil, the 9P service loop calls that function instead.
+It should return 1 if permission is granted, 0 otherwise.
+The 
+.B access
+parameter is a bit field as in
+.IR access (2).
 .TP
 .I End
 Once the 9P service loop has finished

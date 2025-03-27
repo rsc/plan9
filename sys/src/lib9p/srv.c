@@ -27,6 +27,14 @@ static char Eunknownfid[] = "unknown fid";
 static char Ebaddir[] = "bad directory in wstat";
 static char Ewalknodir[] = "walk in non-directory";
 
+static int
+srvhasperm(Srv *srv, File *f, char *user, int access)
+{
+	if(srv->hasperm)
+		return srv->hasperm(f, user, access);
+	return hasperm(f, user, access);
+}
+
 static void
 setfcallerror(Fcall *f, char *err)
 {
@@ -393,13 +401,13 @@ sopen(Srv *srv, Req *r)
 		return;
 	}
 	if(r->fid->file){
-		if(!hasperm(r->fid->file, r->fid->uid, p)){
+		if(!srvhasperm(srv, r->fid->file, r->fid->uid, p)){
 			respond(r, Eperm);
 			return;
 		}
 	/* BUG RACE */
 		if((r->ifcall.mode&ORCLOSE)
-		&& !hasperm(r->fid->file->parent, r->fid->uid, AWRITE)){
+		&& !srvhasperm(srv, r->fid->file->parent, r->fid->uid, AWRITE)){
 			respond(r, Eperm);
 			return;
 		}
@@ -440,7 +448,7 @@ screate(Srv *srv, Req *r)
 		respond(r, Ebotch);
 	else if(!(r->fid->qid.type&QTDIR))
 		respond(r, Ecreatenondir);
-	else if(r->fid->file && !hasperm(r->fid->file, r->fid->uid, AWRITE))
+	else if(r->fid->file && !srvhasperm(srv, r->fid->file, r->fid->uid, AWRITE))
 		respond(r, Eperm);
 	else if(srv->create)
 		srv->create(r);
@@ -562,7 +570,7 @@ sremove(Srv *srv, Req *r)
 		return;
 	}
 	/* BUG RACE */
-	if(r->fid->file && !hasperm(r->fid->file->parent, r->fid->uid, AWRITE)){
+	if(r->fid->file && !srvhasperm(srv, r->fid->file->parent, r->fid->uid, AWRITE)){
 		respond(r, Eperm);
 		return;
 	}

@@ -192,6 +192,7 @@ struct Srv {
 	void		(*walk)(Req*);
 	char*	(*clone)(Fid*, Fid*);
 	char*	(*walk1)(Fid*, char*, Qid*);
+	int		(*hasperm)(File*, char*, int);
 
 	int		infd;
 	int		outfd;
