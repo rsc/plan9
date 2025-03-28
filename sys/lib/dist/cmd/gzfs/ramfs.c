@@ -123,12 +123,23 @@ fsdestroyfile(File *f)
 void
 fswstat(Req *r)
 {
-	File *f;
+	File *f, *f1;
 	Ramfile *rf;
 	void *v;
 
 	f = r->fid->file;
 	rf = f->aux;
+	if(r->d.name && r->d.name[0] && strcmp(r->d.name, f->name) != 0){
+		incref(f->parent);
+		f1 = walkfile(f->parent, r->d.name);
+		if(f1 != nil) {
+			closefile(f1);
+			respond(r, "name already exists");
+			return;
+		}
+		free(f->name);
+		f->name = estrdup9p(r->d.name);
+	}
 	if((ulong)~r->d.mode)
 		f->mode = r->d.mode;
 	if((ulong)~r->d.atime)
@@ -144,10 +155,6 @@ fswstat(Req *r)
 		rf->data = v;
 		rf->ndata = r->d.length;
 		f->length = rf->ndata;
-	}
-	if(r->d.name && r->d.name[0] && strcmp(r->d.name, f->name) != 0){
-		respond(r, "rename not implemented");
-		return;
 	}
 	if(r->d.uid && r->d.uid[0]){
 		free(f->uid);
