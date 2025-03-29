@@ -396,5 +396,5 @@ checkpages(void)
 		}
 		qunlock(&s->lk);
 	}
-	print("%ld %s: checked %d page table entries\n", up->pid, up->text, checked);
+	//print("%ld %s: checked %d page table entries\n", up->pid, up->text, checked);
 }
