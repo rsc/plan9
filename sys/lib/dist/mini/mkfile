@@ -17,7 +17,7 @@ boot.raw:DQ: proto
 	}
 	sed 's!/.*!!' proto >proto.cp
 	disk/mkfs -a -s boot proto.cp | tee >{wc -c >[1=2]} |
-		touchfs 9229824000 >$target
+		touchfs 922982400 >$target
 
 boot.bflz:DQ: boot.raw
 	rfork n
